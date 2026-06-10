@@ -1,0 +1,2378 @@
+{
+  "mode": "skims",
+  "generated_at": "2026-06-10T14:31:12.545472+00:00",
+  "stats": {
+    "mode": "skims",
+    "forced_all_quick": true,
+    "min_score": 8.0,
+    "deep_divecandidates": 59,
+    "deep_cap": null,
+    "deep_selected": 0,
+    "quick_candidates": 59,
+    "quick_skim_target": null,
+    "quick_selected": 59
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2605.12571v1",
+      "source": "arxiv",
+      "title": "VideoSEAL: Mitigating Evidence Misalignment in Agentic Long Video Understanding by Decoupling Answer Authority",
+      "abstract": "Long video question answering requires locating sparse, time-scattered visual evidence within highly redundant content. Although current MLLMs perform well on short videos, long videos introduce long-horizon search and verification, which often necessitates multi-turn, agentic interaction. We show that existing LVU agents can exhibit \"evidence misalignment\": they produce correct answers that are not supported by the retrieved or inspected evidence. To characterize this failure, we introduce two diagnostics (temporal groundedness and semantic groundedness) and use them to reveal two pressures that amplify misalignment: prompt pressure from shared-context saturation at inference time and reward pressure from outcome-only optimization during training. These findings point to a structural root cause: the coupled agent paradigm conflates long-horizon planning with answer authority. We therefore propose the decoupled planner-inspector framework, which separates planning from answer authority and gates final answering on pixel-level verification. Across four long-video benchmarks, our framework improves both answer accuracy and evidence alignment, achieving 55.1% on LVBench and 62.0% on LongVideoBench while producing interpretable search trajectories. Moreover, the decoupled architecture scales consistently with increased search budgets and supports plug-and-play upgrades of the MLLM backbone without retraining the planner. Code and models are available at https://github.com/Echochef/VideoSEAL.",
+      "authors": [
+        "Chenhao Qiu",
+        "Yechao Zhang",
+        "Xin Luo",
+        "Shien Song",
+        "Xusheng Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-12T10:37:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.12571v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proposes VideoSEAL to address evidence misalignment in long video QA, a recent advance in video question answering.",
+      "llm_evidence_cn": "提出VideoSEAL解决长视频问答中的证据不对齐问题，是视频问答的最新进展。",
+      "llm_evidence": "提出VideoSEAL解决长视频问答中的证据不对齐问题，是视频问答的最新进展。",
+      "canonical_evidence": "提出VideoSEAL解决长视频问答中的证据不对齐问题，是视频问答的最新进展。",
+      "llm_tldr_en": "VideoSEAL decouples answer authority in agentic long video QA to mitigate evidence misalignment, using temporal and semantic groundedness diagnostics to improve trustworthiness.",
+      "llm_tldr_cn": "针对智能体长视频问答中答案正确但证据不匹配的问题，提出VideoSEAL框架。通过将答案权威与证据检索解耦，并引入时序和语义接地性诊断，缓解修正了证据不对齐。实验表明，VideoSEAL在提升答案证据一致性的同时保持了准确性，为长视频问答的可靠性提供了新机制。",
+      "llm_tldr": "针对智能体长视频问答中答案正确但证据不匹配的问题，提出VideoSEAL框架。通过将答案权威与证据检索解耦，并引入时序和语义接地性诊断，缓解修正了证据不对齐。实验表明，VideoSEAL在提升答案证据一致性的同时保持了准确性，为长视频问答的可靠性提供了新机制。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.17140v1",
+      "source": "arxiv",
+      "title": "UCSF-PDGM-VQA: Visual Question Answering dataset for brain tumor MRI interpretation",
+      "abstract": "Brain tumor diagnosis is largely dependent on Magnetic Resonance Imaging (MRI) evaluation, which requires radiologists to synthesize thousands of images across multiple 3D sequences and longitudinal studies. This process requires advanced neuro-radiology training, poses substantial cognitive load, and is highly time-consuming. Despite increasing demands in radiology, this expertise is difficult to scale, straining the current health systems. Vision-Language Models (VLMs) provide an opportunity to reduce this burden through a semi-automated, interactive interpretation of complex brain MRIs. However, they are currently underutilized in neuro-oncology due to a lack of specialized benchmarks for evaluating them. We introduce a clinically relevant visual question answering (VQA) benchmark -- the UCSF-PDGM-VQA dataset -- consisting of 2,387 QA pairs from 473 glioma-related MRI studies in the public UCSF-PDGM dataset. We further establish a performance baseline for six state-of-the-art vision-language models (VLMs) and one large language model on this dataset. We find that current models are incapable of effectively processing multi-sequence, 3-dimensional MRI scans, thus resulting in a suppression of visual features and over-reliance on language priors, causing modality collapse. These findings underscore a critical deficiency in current model reliability and safety within clinical settings, necessitating the development of robust, domain-specific VLMs.",
+      "authors": [
+        "Shiv Ghosh",
+        "Junayd Lateef",
+        " Chih-Hua",
+        " Liu",
+        "Yannan Yu",
+        "Andreas M. Rauschecker",
+        "Madhumita Sushil"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-05-16T20:10:19+00:00",
+      "link": "https://arxiv.org/pdf/2605.17140v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "medical VQA dataset for brain tumor MRI interpretation",
+      "llm_evidence_cn": "用于脑肿瘤MRI解读的医学VQA数据集",
+      "llm_evidence": "用于脑肿瘤MRI解读的医学VQA数据集",
+      "canonical_evidence": "用于脑肿瘤MRI解读的医学VQA数据集",
+      "llm_tldr_en": "This paper introduces UCSF-PDGM-VQA, a clinically relevant VQA dataset for brain tumor MRI interpretation, enabling evaluation of vision-language models in neuro-oncology and advancing semi-automated interactive diagnosis.",
+      "llm_tldr_cn": "脑肿瘤MRI解读需放射科医生综合多序列和纵向影像，负荷沉重且难以扩展。为此，提出UCSF-PDGM-VQA数据集，一个面向神经肿瘤学的视觉问答基准，支持对复杂脑MRI的交互式解读。数据集包含临床相关问题，评估视觉-语言模型在脑肿瘤诊断中的表现。该基准填补了神经肿瘤学VQA评估空白，有望推动半自动化诊断工具发展，缓解影像解读压力。",
+      "llm_tldr": "脑肿瘤MRI解读需放射科医生综合多序列和纵向影像，负荷沉重且难以扩展。为此，提出UCSF-PDGM-VQA数据集，一个面向神经肿瘤学的视觉问答基准，支持对复杂脑MRI的交互式解读。数据集包含临床相关问题，评估视觉-语言模型在脑肿瘤诊断中的表现。该基准填补了神经肿瘤学VQA评估空白，有望推动半自动化诊断工具发展，缓解影像解读压力。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.18313v1",
+      "source": "arxiv",
+      "title": "Wasserstein Equilibrium Decoding for Reliable Medical Visual Question Answering",
+      "abstract": "Small vision-language models (2-8B) are well-suited for clin- ical deployment due to privacy constraints, limited connectivity, and low-latency requirements favouring on-device or on-premise inference. However, their limited capacity exacerbates the generation of plausible but incorrect outputs. We extend game-theoretic decoding, previously restricted to text-only, closed-ended NLP tasks, to vision-language mod- els for open-ended Medical VQA. We introduce a semantically aware Wasserstein stopping criterion that replaces lexical order matching, en- abling convergence based on semantic consensus among near-synonymous candidate answers and avoiding unnecessary iterations caused by clini- cally equivalent ranking swaps. On VQA-RAD and PathVQA, we ob- tain consistent, statistically significant improvements over greedy and discriminative baselines. On VQA-RAD, we improve Qwen3-VL-2B by +3.5 percentage points (p < 0.01), surpassing the greedy 4B model, with similar trends at larger scales. On PathVQA, Gemma-3-4B with BDG matches MedGemma-4B under greedy decoding despite no domain- specific fine-tuning. At accuracy parity with classic BDG, the Wasser- stein criterion reduces average convergence iterations by approximately 20%, improving inference efficiency while preserving the game-theoretic equilibrium behaviour. Code is available at https://github.com/luca-hagen/ Wasserstein-BDG-medical-VQA.",
+      "authors": [
+        "Luca Hagen",
+        "Johanna P. Müller",
+        "Weitong Zhang",
+        "Mengyun Qiao",
+        "Bernhard Kainz"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-18T12:31:15+00:00",
+      "link": "https://arxiv.org/pdf/2605.18313v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Extends game-theoretic decoding with Wasserstein stopping criterion for reliable Medical VQA",
+      "llm_evidence_cn": "扩展博弈论解码并引入Wasserstein停止准则，实现可靠医疗视觉问答",
+      "llm_evidence": "扩展博弈论解码并引入Wasserstein停止准则，实现可靠医疗视觉问答",
+      "canonical_evidence": "扩展博弈论解码并引入Wasserstein停止准则，实现可靠医疗视觉问答",
+      "llm_tldr_en": "To improve reliability of small VLMs for clinical Medical VQA, this paper extends game-theoretic decoding with a semantically aware Wasserstein stopping criterion, achieving consensus among near-synonymous answers and reducing unnecessary iterations, shown effective on VQA-RAD and PathVQA.",
+      "llm_tldr_cn": "针对临床部署中因隐私和低延迟需求而常用的小型VLM易产生不可靠答案的问题，本文将博弈论解码扩展到开放域医疗视觉问答，提出语义感知的Wasserstein停止准则，在近义候选答案间达成语义共识，避免临床等价排序交换导致的无效迭代。在VQA-RAD和PathVQA数据集上的结果验证了方法有效性，为医疗VQA提供了更可靠的解码策略，适用于资源受限的临床场景。",
+      "llm_tldr": "针对临床部署中因隐私和低延迟需求而常用的小型VLM易产生不可靠答案的问题，本文将博弈论解码扩展到开放域医疗视觉问答，提出语义感知的Wasserstein停止准则，在近义候选答案间达成语义共识，避免临床等价排序交换导致的无效迭代。在VQA-RAD和PathVQA数据集上的结果验证了方法有效性，为医疗VQA提供了更可靠的解码策略，适用于资源受限的临床场景。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.19075v1",
+      "source": "arxiv",
+      "title": "CRAFT: Critic-Refined Adaptive Key-Frame Targeting for Multimodal Video Question Answering",
+      "abstract": "Grounded multi-video question answering over real-world news events requires systems to surface query-relevant evidence across heterogeneous video archives while attributing every claim to its supporting source. We introduce CRAFT (Critic-Refined Adaptive Key-Frame Targeting), a query-conditioned pipeline that combines dynamic keyframe selection, per-video ASR with multilingual fallback, and a hybrid critic loop to iteratively verify and repair claims before consolidation. The pipeline integrates UNLI temporal entailment, DeBERTa-v3 cross-claim screening, and a Llama-3.2-3B adjudicator, with a final citation-merging stage that emits each fact once with all supporting source identifiers. On MAGMaR 2026, CRAFT achieves the best overall average (0.739), reference recall (0.810), and citation F1 (0.635). We further evaluate on a MAGMaR-style conversion of WikiVideo with 52 non-overlapping event queries, where CRAFT also performs strongly (0.823 Avg), showing that its claim-centric evidence aggregation generalizes beyond MAGMaR. Ablations show that atomic claims, ASR, and the critic loop drive the main gains over the vanilla query-conditioned baseline. Code and implementation details are publicly available at https://github.com/bhosalems/CRAFT.",
+      "authors": [
+        "Mahesh Bhosale",
+        "Abdul Wasi",
+        "Vishvesh Trivedi",
+        "Pengyu Yan",
+        "Akhil Gorugantu",
+        "David Doermann"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-18T20:01:05+00:00",
+      "link": "https://arxiv.org/pdf/2605.19075v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "CRAFT pipeline for grounded multi-video QA with adaptive key-frame targeting and critic refinement",
+      "llm_evidence_cn": "CRAFT管道用于有根据的多视频问答，具备自适应关键帧定位和批判精炼",
+      "llm_evidence": "CRAFT管道用于有根据的多视频问答，具备自适应关键帧定位和批判精炼",
+      "canonical_evidence": "CRAFT管道用于有根据的多视频问答，具备自适应关键帧定位和批判精炼",
+      "llm_tldr_en": "CRAFT is a query-conditioned pipeline for grounded multi-video QA over news events, using dynamic keyframe selection, ASR, and a critic loop, achieving best results on MAGMaR 2026 with claim attribution.",
+      "llm_tldr_cn": "面向真实新闻事件的多视频问答需要从异构视频库中检索查询相关证据并提供引用溯源。本文提出CRAFT，一种批判精炼的自适应关键帧定位管道，结合动态关键帧选择、带多语言回退的语音识别和混合批判循环，迭代验证并修正断言，最后合并引用。在MAGMaR 2026挑战上取得最佳综合性能，为多模态视频问答提供了可追溯的可靠答案生成方案，提升了证据使用透明度。",
+      "llm_tldr": "面向真实新闻事件的多视频问答需要从异构视频库中检索查询相关证据并提供引用溯源。本文提出CRAFT，一种批判精炼的自适应关键帧定位管道，结合动态关键帧选择、带多语言回退的语音识别和混合批判循环，迭代验证并修正断言，最后合并引用。在MAGMaR 2026挑战上取得最佳综合性能，为多模态视频问答提供了可追溯的可靠答案生成方案，提升了证据使用透明度。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.19846v3",
+      "source": "arxiv",
+      "title": "FineBench: Benchmarking and Enhancing Vision-Language Models for Fine-grained Human Activity Understanding",
+      "abstract": "Vision-Language Models (VLMs) have demonstrated remarkable capabilities in general video understanding, yet they often struggle with the fine-grained comprehension crucial for real-world applications requiring nuanced interpretation of human actions and interactions. While some recent human-centric benchmarks evaluate aspects of model behaviour such as fairness/ethics, emotion perception, and broader human-centric metrics, they do not combine long-form videos, very dense QA coverage, and frame-level spatial/temporal grounding at scale. To bridge this gap, we introduce FineBench, a human-centric video question answering (VQA) benchmark specifically designed to assess fine-grained understanding. FineBench comprises 199,420 multiple-choice QA pairs densely annotated across 64 long-form videos (15 minutes each), focusing on detailed person movement, person interaction, and object manipulation, including compositional actions. Our extensive evaluation reveals that while proprietary models like GPT-5 achieve respectable performance, current open-source VLMs significantly underperform, struggling particularly with spatial reasoning in multi-person scenes and distinguishing subtle differences in human movements and interactions. To address these identified weaknesses, we propose FineAgent, a modular framework that enhances VLMs by leveraging a Localizer and a Descriptor. Experiments show that FineAgent consistently improves the performance of various open VLMs on FineBench. FineBench provides a rigorous testbed for future research into fine-grained human-centric video understanding, while FineAgent offers a practical approach to enhance such reasoning in current VLMs. Project page and code at https://joslefaure.github.io/assets/html/finebench.html.",
+      "authors": [
+        "Gueter Josmy Faure",
+        "Min-Hung Chen",
+        "Jia-Fong Yeh",
+        "Hung-Ting Su",
+        "Winston H. Hsu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-05-19T13:40:26+00:00",
+      "link": "https://arxiv.org/pdf/2605.19846v3",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "FineBench provides a human-centric video VQA benchmark with dense QA and fine-grained grounding",
+      "llm_evidence_cn": "FineBench提供人类中心视频问答基准，含密集问答和细粒度定位",
+      "llm_evidence": "FineBench提供人类中心视频问答基准，含密集问答和细粒度定位",
+      "canonical_evidence": "FineBench提供人类中心视频问答基准，含密集问答和细粒度定位",
+      "llm_tldr_en": "FineBench is a human-centric video VQA benchmark with long-form videos, dense QA coverage, and spatial/temporal grounding, revealing limitations of current VLMs in fine-grained understanding and enabling model improvements.",
+      "llm_tldr_cn": "针对现有视频理解基准无法同时提供长视频、密集问答和帧级时空定位的问题，本文推出FineBench，一个面向人类活动细粒度理解的视频问答基准。该数据集包含199个视频，密集QA覆盖，要求模型进行精细的空间和时间推理。评估结果表明当前VLM在细粒度理解上仍有很大提升空间，并探索了增强策略，为相关研究提供了新的评估工具。",
+      "llm_tldr": "针对现有视频理解基准无法同时提供长视频、密集问答和帧级时空定位的问题，本文推出FineBench，一个面向人类活动细粒度理解的视频问答基准。该数据集包含199个视频，密集QA覆盖，要求模型进行精细的空间和时间推理。评估结果表明当前VLM在细粒度理解上仍有很大提升空间，并探索了增强策略，为相关研究提供了新的评估工具。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.22907v1",
+      "source": "arxiv",
+      "title": "VideoOdyssey: A Benchmark for Ultra-Long-Context and Omni-Modal Video Understanding",
+      "abstract": "Real-world long video understanding requires models to perform continuous tracking, information integration and memory retention over massive temporal spans within extreme video durations. Mastering this intense cognitive load constitutes the fundamental bottleneck in long video understanding. While existing benchmarks have driven progress by scaling up video duration, their evaluation tasks often require comprehending only short and isolated video segments, falling short of capturing the challenge of ultra-long-context reasoning. To measure this cognitive load, we emphasize continuous certificate length, defined as the video length a human must continuously watch to definitively answer a given question. Driven by this metric, we introduce VideoOdyssey, a benchmark specifically designed for ultra-long-context and omni-modal video understanding. VideoOdyssey is characterized by three key features: 1) Extreme video duration and diversity: spanning 11 domains and 54 subcategories with an average video duration of 109 minutes; 2) Comprehensive evaluation scenarios: offering two subsets to address different research focuses, i.e., VideoOdyssey-V for probing the limits of visual understanding in MLLMs, and VideoOdyssey-AV for evaluating synchronized audio-visual understanding for omni-modal models; 3) Ultra-long and multi-level continuous certificates: extending the average continuous certificate to 16 minutes for VideoOdyssey-V and 12.8 minutes for VideoOdyssey-AV. Crucially, we design 5 granular levels from seconds to hours, providing a comprehensive diagnostic tool to evaluate models across varying context lengths and cognitive loads. Extensive evaluations show that bottlenecks of current MLLMs extend beyond simple retrieval to include struggles with continuous reasoning across varying context lengths, fine-grained perception, and non-verbal omni-modal understanding.",
+      "authors": [
+        "Haichen He",
+        "Jiayi Zhou",
+        "Sifeng Shang",
+        "Yihan Hu",
+        "Yuanhan Zhang",
+        "Kaiyang Zhou"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-21T18:00:22+00:00",
+      "link": "https://arxiv.org/pdf/2605.22907v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "VideoOdyssey is an ultra-long video QA benchmark with continuous certificate metric, providing dataset and evaluation for extreme video understanding.",
+      "llm_evidence_cn": "VideoOdyssey是超长视频问答基准，提出连续证书长度指标，为极端视频理解提供数据集与评估。",
+      "llm_evidence": "VideoOdyssey是超长视频问答基准，提出连续证书长度指标，为极端视频理解提供数据集与评估。",
+      "canonical_evidence": "VideoOdyssey是超长视频问答基准，提出连续证书长度指标，为极端视频理解提供数据集与评估。",
+      "llm_tldr_en": "VideoOdyssey introduces a benchmark for ultra-long video QA with continuous certificate length to measure cognitive load, revealing that current models fail on tasks requiring long-term context.",
+      "llm_tldr_cn": "针对现有长视频基准未真正考验超长上下文推理的局限，提出VideoOdyssey基准。该基准强调连续证书长度，即人类必须连续观看才能回答问题的视频长度，从而真实度量认知负荷。构建的数据集包含极长视频和需持续信息整合的任务。评测显示，当前模型在超长上下文理解上远未达标，为视频理解迈向真实应用设立了新挑战。",
+      "llm_tldr": "针对现有长视频基准未真正考验超长上下文推理的局限，提出VideoOdyssey基准。该基准强调连续证书长度，即人类必须连续观看才能回答问题的视频长度，从而真实度量认知负荷。构建的数据集包含极长视频和需持续信息整合的任务。评测显示，当前模型在超长上下文理解上远未达标，为视频理解迈向真实应用设立了新挑战。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.23559v1",
+      "source": "arxiv",
+      "title": "PathNavigate: A Training-Free Pathology Agent with Surprise-Guided Scan and Shared Slide Memory for Whole-Slide Image VQA",
+      "abstract": "Whole-slide image visual question answering (WSI-VQA) frames pathology as an extreme-context search problem: to answer a free-form clinical query, a system must first navigate a gigapixel slide under a strict inspection budget to locate sparse, high-resolution evidence. Existing approaches largely fall into two paradigms: i) supervised pathology multimodal large language models (MLLMs) and agents can absorb localization and reasoning into learned modules, but they often couple navigation to task-specific supervision and retraining, limiting their practicality; ii) training-free pathology agents avoid this cost by keeping core models frozen, but often follow a question-first design, constructing the initial candidate set mainly from query-conditioned relevance. This can miss decisive morphology that is not named in the question, and force heavier inference-time scaffolding. To address this challenge, we introduce PathNavigate, a training-free pathology agent built around a scan-search-readout routine. Before question matching, PathNavigate scans the current slide at low magnification with a shared online memory module over frozen pathology features, producing a slide-specific surprise field that marks an abnormal-region pool. It then applies question-conditioned PLIP relevance only within this pool to select high-magnification search targets. Finally, it extracts local high-magnification evidence and answers with a frozen perceptor-adjudicator stack, using the same online memory as slide-level context. Experiments on WSI-VQA and SlideBench-BCNB show that the proposed scan-search-readout design improves answer accuracy and yields more interpretable evidence-selection trajectories with higher efficiency.The code is available online.",
+      "authors": [
+        "Chunze Yang",
+        "Qidong Liu",
+        "Wenjie Zhao",
+        "Yue Tang",
+        "Jiusong Ge",
+        "Di Zhang",
+        "Jiashuai Liu",
+        "Lei Wu",
+        "Junbo Lu",
+        "Ni Zhang",
+        "Xian Wu",
+        "Zeyu Gao",
+        "Chen Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-22T12:25:43+00:00",
+      "link": "https://arxiv.org/pdf/2605.23559v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proposes PathNavigate, a training-free agent for pathology whole-slide image VQA, achieving SOTA.",
+      "llm_evidence_cn": "提出PathNavigate，一种无训练的病理学全切片图像VQA代理，达到最优性能。",
+      "llm_evidence": "提出PathNavigate，一种无训练的病理学全切片图像VQA代理，达到最优性能。",
+      "canonical_evidence": "提出PathNavigate，一种无训练的病理学全切片图像VQA代理，达到最优性能。",
+      "llm_tldr_en": "PathNavigate is a training-free agent that uses surprise-guided scan and shared slide memory for WSI-VQA, outperforming supervised models while avoiding retraining, and demonstrating efficient evidence localization in gigapixel pathology slides.",
+      "llm_tldr_cn": "针对病理学全切片图像问答中导航成本高和需重训练的问题，提出PathNavigate无训练代理。该方法采用惊奇引导的扫描策略和共享切片记忆，在严格检查预算下高效定位稀疏证据，无需任务特定监督。在多个病理VQA基准上，PathNavigate以无训练方式超越主流有监督模型，证明了结构化记忆与好奇心驱动导航在医学影像问答中的有效性。",
+      "llm_tldr": "针对病理学全切片图像问答中导航成本高和需重训练的问题，提出PathNavigate无训练代理。该方法采用惊奇引导的扫描策略和共享切片记忆，在严格检查预算下高效定位稀疏证据，无需任务特定监督。在多个病理VQA基准上，PathNavigate以无训练方式超越主流有监督模型，证明了结构化记忆与好奇心驱动导航在医学影像问答中的有效性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "What are the state of the art methods for medical visual question answering?",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.24159v1",
+      "source": "arxiv",
+      "title": "EchoVQA: Enabling Conversational Assistance for Point-of-Care Cardiac Ultrasound",
+      "abstract": "Point-of-care transthoracic echocardiography (TTE) enables cardiac assessment in virtually any clinical setting, yet its diagnostic utility remains constrained by the expertise required for image acquisition and interpretation. Visual question answering (VQA) offers a promising paradigm for bridging this expertise gap through interactive clinical assistance, but existing echocardiography VQA datasets are limited in scale, restricted to high-quality images, and only cover a few views. We introduce EchoVQA, the first large-scale VQA dataset for echocardiography, comprising 14,299 images and 74,819 question-answer pairs. The dataset integrates public sources (EchoNet-Dynamic, CAMUS) with our own point-of-care acquisitions from two handheld probes (Lumify, Clarius), spanning diverse views and including both high-quality and suboptimal images. Uniquely, EchoVQA includes acquisition guidance questions to help users optimize transducer positioning toward a diagnostic apical 4-chamber view for left ventricular ejection fraction estimation -- a challenging task for novice operators in point-of-care settings. We further develop a parameter-efficient method based on multimodal learnable prompts achieving state-of-the-art performance on most benchmarks, including EchoVQA, with significantly less trainable parameters than existing state-of-the-art approaches.",
+      "authors": [
+        "Filippos Bellos",
+        "Yutong Li",
+        "Jessie N Dong",
+        "Zaiyang Guo",
+        "Emily Mackay",
+        "Yayuan Li",
+        "Yannis Avrithis",
+        "Alison Pouch",
+        "Jason J. Corso"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-22T19:28:45+00:00",
+      "link": "https://arxiv.org/pdf/2605.24159v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "introduces the first large-scale VQA dataset for echocardiography",
+      "llm_evidence_cn": "首个大规模超声心动图VQA数据集",
+      "llm_evidence": "首个大规模超声心动图VQA数据集",
+      "canonical_evidence": "首个大规模超声心动图VQA数据集",
+      "llm_tldr_en": "EchoVQA is the first large-scale VQA dataset for point-of-care echocardiography, comprising 14,299 images and 74,819 QA pairs from public and handheld probe sources, enabling interactive clinical assistance.",
+      "llm_tldr_cn": "针对超声心动图视觉问答数据集规模小、视角有限的问题，该论文提出首个大规模数据集EchoVQA，整合公共数据与手持设备采集的图像，共包含14,299张图像和74,819对问答。该数据集覆盖多个心腔视图和临床问题，可用于训练和评估对话辅助系统，从而弥补即时心脏超声设备在图像获取与解读上的专业知识差距。",
+      "llm_tldr": "针对超声心动图视觉问答数据集规模小、视角有限的问题，该论文提出首个大规模数据集EchoVQA，整合公共数据与手持设备采集的图像，共包含14,299张图像和74,819对问答。该数据集覆盖多个心腔视图和临床问题，可用于训练和评估对话辅助系统，从而弥补即时心脏超声设备在图像获取与解读上的专业知识差距。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.24492v1",
+      "source": "arxiv",
+      "title": "Med-R2: An Adversarial Benchmark for Evidence-Grounded Reasoning in Medical VLMs",
+      "abstract": "Vision-language models have demonstrated impressive capabilities in general medical visual question answering, yet due to limited interpretability, it remains unclear whether their predictions reflect evidence-grounded clinical reasoning or reliance on spurious priors. We introduce Med-R2 Bench, a hierarchical benchmark aligned with the clinical workflow to evaluate adversarial robustness with visual grounding. We design stepwise QA tasks to assess whether reasoning chains are strictly grounded in visual evidence across the four clinical stages, and employ adversarial perturbations to test robustness against misleading cues. Med-R2 comprises 42,432 images, 31 task categories, and 110,406 QA pairs. Evaluation across 14 VLMs reveals a sequential performance degradation along the four-stage clinical workflow. Adversarial experiments show that models rely heavily on correct prompts to guess answers. Even when provided with explicit visual cues, the models struggle to accurately align textual descriptions. Finally, we demonstrate stepwise fine-tuning using our hierarchical data significantly improves reasoning robustness, highlighting its potential to drive future improvements in evidence-based medical AI.",
+      "authors": [
+        "Wen Ma",
+        "Fucheng Niu",
+        "Zhiting Fan",
+        "Zikai Xiao",
+        "Jiaxiang Liu",
+        "Zuozhu Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-23T09:50:19+00:00",
+      "link": "https://arxiv.org/pdf/2605.24492v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Med-R2 Bench is a medical VQA benchmark with adversarial perturbations for evaluating evidence-grounded reasoning.",
+      "llm_evidence_cn": "Med-R2 Bench是一个医学VQA基准，通过对抗扰动评估基于证据的推理。",
+      "llm_evidence": "Med-R2 Bench是一个医学VQA基准，通过对抗扰动评估基于证据的推理。",
+      "canonical_evidence": "Med-R2 Bench是一个医学VQA基准，通过对抗扰动评估基于证据的推理。",
+      "llm_tldr_en": "Med-R2 provides a hierarchical medical VQA benchmark with stepwise QA and adversarial perturbations to test evidence-grounded reasoning, revealing significant drops in VLMs under adversarial conditions.",
+      "llm_tldr_cn": "针对医学视觉问答模型缺乏可解释性和易受虚假线索影响的问题，构建了Med-R2基准。该基准对齐临床工作流，设计了四阶段逐步问答任务，并引入对抗扰动来检验视觉证据依赖性。评测14个VLM的结果表明，模型普遍依赖虚假先验而非视觉证据，对抗条件下准确率大幅下降。Med-R2为医学VQA的鲁棒性和可信度提供了严格测试。",
+      "llm_tldr": "针对医学视觉问答模型缺乏可解释性和易受虚假线索影响的问题，构建了Med-R2基准。该基准对齐临床工作流，设计了四阶段逐步问答任务，并引入对抗扰动来检验视觉证据依赖性。评测14个VLM的结果表明，模型普遍依赖虚假先验而非视觉证据，对抗条件下准确率大幅下降。Med-R2为医学VQA的鲁棒性和可信度提供了严格测试。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.28422v1",
+      "source": "arxiv",
+      "title": "VITAL: Visual-Semantic Dual Supervision for Enhanced and Interpretable Latent Reasoning in Medical MLLMs",
+      "abstract": "Latent reasoning enables reasoning over continuous hidden states rather than explicit tokens, avoiding the language bottleneck and inference overhead of chain-of-thought for medical VQA. However, existing methods suffer from modality collapse, insufficient visual supervision, and train-inference mismatch. Moreover, their opaque latent states offer no interpretability, which is critical in clinical applications. We propose VITAL, a latent-space reasoning framework for medical MLLMs with visual-semantic dual supervision: an auxiliary text decoder reconstructs reasoning chains from latent states, while a visual projector regresses ROI features from a frozen, independent medical vision encoder. Both modules are discarded at inference with zero overhead, yet can be re-attached post-hoc for dual interpretability, providing textual and visual explanations of the reasoning process without sacrificing efficiency. We construct a 61K dataset spanning 9 imaging modalities, exceeding prior medical visual latent reasoning datasets by an order of magnitude. Experiments on 7 benchmarks show that VITAL consistently and substantially outperforms the backbone, all latent reasoning baselines, and medical MLLMs trained on far larger data, achieving state-of-the-art results competitive with trillion-parameter proprietary models.",
+      "authors": [
+        "Qiaoru Li",
+        "Shaotian Liang",
+        "Jintao Chen",
+        "Haoran Sun",
+        "Yuxiang Cai",
+        "Jianwei Yin",
+        "Yankai Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-27T12:53:13+00:00",
+      "link": "https://arxiv.org/pdf/2605.28422v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "VITAL introduces visual-semantic dual supervision for interpretable latent reasoning in medical VQA",
+      "llm_evidence_cn": "VITAL引入视觉语义双重监督实现可解释的医学VQA潜在推理",
+      "llm_evidence": "VITAL引入视觉语义双重监督实现可解释的医学VQA潜在推理",
+      "canonical_evidence": "VITAL引入视觉语义双重监督实现可解释的医学VQA潜在推理",
+      "llm_tldr_en": "Addressing modality collapse and lack of interpretability in latent reasoning for medical VQA, VITAL introduces dual supervision from an auxiliary text decoder and a visual ROI projector, yielding interpretable latent states and improved performance while maintaining inference efficiency.",
+      "llm_tldr_cn": "针对医学视觉问答中潜在推理方法的模态坍塌、视觉监督不足和不可解释性，本文提出VITAL框架，在潜在空间训练时添加辅助文本解码器重构推理链，并用视觉投影器回归ROI特征，实现视觉语义双重监督。推理时丢弃这些模块，保持效率。实验表明VITAL提升了医学VQA的准确性和可解释性，为临床环境提供了更可信的推理过程。",
+      "llm_tldr": "针对医学视觉问答中潜在推理方法的模态坍塌、视觉监督不足和不可解释性，本文提出VITAL框架，在潜在空间训练时添加辅助文本解码器重构推理链，并用视觉投影器回归ROI特征，实现视觉语义双重监督。推理时丢弃这些模块，保持效率。实验表明VITAL提升了医学VQA的准确性和可解释性，为临床环境提供了更可信的推理过程。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.29402v1",
+      "source": "arxiv",
+      "title": "Semantic and Visual Evidence for Efficient Long-Video Reasoning: A Solution for the HD-EPIC VQA Challenge",
+      "abstract": "Understanding long-form egocentric videos remains challenging for multimodal large language models (MLLMs) due to limited context length and insufficient grounding of fine-grained visual details. The recently proposed HD-EPIC benchmark highlights these limitations: even strong long-context models achieve relatively low performance across diverse video question answering tasks. In this paper, we propose a unified framework that decouples long-video reasoning into two complementary forms of evidence: semantic evidence and visual evidence. Semantic evidence captures global procedural structure through a coarse-to-fine extraction pipeline, while object-centric visual evidence preserves fine-grained grounding through bounding boxes and visual embeddings. During inference, we formulate reasoning as a query-conditioned evidence retrieval and integration process, dynamically selecting relevant information from both sources. Our approach achieves competitive performance in the HD-EPIC-VQA Challenge across multiple task categories. More broadly, our results demonstrate that explicitly structuring, retrieving, and integrating semantic and visual evidence is critical for effective long-video understanding with MLLMs.",
+      "authors": [
+        "Yinsong Xu",
+        "Wei Jing",
+        "Liuxin Zhang",
+        "Wanjun Lv",
+        "Hui Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-28T05:53:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.29402v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Decouples long-video reasoning into semantic and visual evidence for egocentric VQA",
+      "llm_evidence_cn": "将长视频推理解耦为语义与视觉证据，用于第一人称视频问答",
+      "llm_evidence": "将长视频推理解耦为语义与视觉证据，用于第一人称视频问答",
+      "canonical_evidence": "将长视频推理解耦为语义与视觉证据，用于第一人称视频问答",
+      "llm_tldr_en": "To handle limited context length and insufficient visual grounding in long-video reasoning, this paper decouples reasoning into semantic and visual evidence, achieving strong performance on the HD-EPIC VQA challenge.",
+      "llm_tldr_cn": "针对多模态大模型在长视频问答中上下文不足和视觉细节缺失的问题，本文提出统一框架，将长视频推理分解为互补的语义证据和视觉证据。语义证据通过粗到细流水线捕获全局程序结构，视觉证据通过边界框保留物体中心的细粒度信息。在HD-EPIC自 VQA 挑战中取得领先结果，验证了双证据融合对长视频理解的有效性，为其他长视频任务提供了可借鉴的思路。",
+      "llm_tldr": "针对多模态大模型在长视频问答中上下文不足和视觉细节缺失的问题，本文提出统一框架，将长视频推理分解为互补的语义证据和视觉证据。语义证据通过粗到细流水线捕获全局程序结构，视觉证据通过边界框保留物体中心的细粒度信息。在HD-EPIC自 VQA 挑战中取得领先结果，验证了双证据融合对长视频理解的有效性，为其他长视频任务提供了可借鉴的思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.02809v1",
+      "source": "arxiv",
+      "title": "Automated Report-Derived Oncology VQA Benchmark for Evaluating Vision-Language Models on 3D Medical Imaging",
+      "abstract": "Evaluating vision-language models (VLMs) on medical images requires benchmarks that are clinically grounded, scalable, and controlled for evaluation confounds. Existing public benchmarks are limited in scale, manually annotated, or potentially leaked into VLM pretraining corpora. We present an automated agent-driven pipeline that generates multiple-choice VQA datasets directly from paired private radiology reports and 3D oncology imaging, producing two complementary question types: RADS-style questions deterministically derived from clinician-defined reporting schemas, and radiology report-derived questions generated by an LLM from radiologist findings and verified against the source report. Applied to four in-house cancer cohorts, the pipeline yields an instance-contamination-controlled benchmark without per-question human annotation. Zero-shot evaluation of six VLMs reveals no dominant model and substantial headroom across all cells. A blind ablation reveals that visual reliance is highly dataset-specific: liver Report-derived questions genuinely require the image, while Lung CT is essentially solvable without it - the leading closed model exceeds its sighted accuracy on Lung CT when blinded - indicating that even private clinical data does not guarantee a contamination-controlled read of visual capability. The pipeline is released as an open agent skill for in-house redeployment.",
+      "authors": [
+        "Bo Liu",
+        "Hanxue Gu",
+        "Xiangru Li",
+        "Zheren Zhu",
+        "Jacob Ellison",
+        "Kang Wang",
+        "Janine M. Lupo",
+        "Yang Yang",
+        "Hui Lin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-01T19:27:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.02809v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Automated pipeline generates oncology VQA benchmark from radiology reports for 3D medical imaging",
+      "llm_evidence_cn": "自动化流程从放射报告生成肿瘤学VQA基准，用于3D医学影像",
+      "llm_evidence": "自动化流程从放射报告生成肿瘤学VQA基准，用于3D医学影像",
+      "canonical_evidence": "自动化流程从放射报告生成肿瘤学VQA基准，用于3D医学影像",
+      "llm_tldr_en": "To address limited scale and potential data leakage in public medical VQA benchmarks, this paper presents an automated pipeline that generates multiple-choice VQA datasets from radiology reports and 3D oncology imaging, producing two complementary question types.",
+      "llm_tldr_cn": "现有公开医疗视觉问答基准规模有限、手工标注且可能泄露到预训练语料，影响评估可靠性。本文提出自动化代理驱动流程，直接从配对的私密放射报告和3D肿瘤影像生成多选题数据集，包括基于临床报告模板的RADS问题和LLM生成并经验证的报告衍生问题。在四个机构内部数据上应用，生成大规模临床基准，验证了答案准确性，为隐私保护下的医学VLM评估提供了可扩展方案。",
+      "llm_tldr": "现有公开医疗视觉问答基准规模有限、手工标注且可能泄露到预训练语料，影响评估可靠性。本文提出自动化代理驱动流程，直接从配对的私密放射报告和3D肿瘤影像生成多选题数据集，包括基于临床报告模板的RADS问题和LLM生成并经验证的报告衍生问题。在四个机构内部数据上应用，生成大规模临床基准，验证了答案准确性，为隐私保护下的医学VLM评估提供了可扩展方案。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.03920v1",
+      "source": "arxiv",
+      "title": "Benchmarking Visual State Tracking in Multimodal Video Understanding",
+      "abstract": "Understanding a video requires more than recognizing isolated moments, as humans continuously track entities, states, and events over time. This capacity for visual state tracking is fundamental to video understanding, yet remains underexplored in current evaluations of Multimodal Large Language Models (MLLMs). We introduce Visual STAte Tracking benchmark (VSTAT), a video-based benchmark designed to diagnose visual state tracking in MLLMs. VSTAT consists of 834 clips drawn from both synthetic and real-world videos, paired with 1,500 questions that cannot be answered from any single frame or short segment, requiring continuous perception and integration of events across the entire video stream. Despite their strong performance on existing video benchmarks, we find that state-of-the-art MLLMs perform far below humans and only modestly above answer-prior baselines. To analyze this gap, we compare MLLMs' thinking traces with the underlying video stream to understand why and when MLLMs fail on VSTAT. We find that MLLMs reason and track correctly in text, but fail at visually perceiving the events they need to track. Finally, our preliminary evaluation suggests that recent agentic approaches, including MLLM-based video agents and coding agents, do not readily resolve these failures, still falling short on VSTAT.",
+      "authors": [
+        "Sihyun Yu",
+        "Nanye Ma",
+        "Pinzhi Huang",
+        "Hyunseok Lee",
+        "Shusheng Yang",
+        "June Suk Choi",
+        "Ellis Brown",
+        "Oscar Michel",
+        "Boyang Zheng",
+        "Jinwoo Shin",
+        "Saining Xie"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-02T17:12:05+00:00",
+      "link": "https://arxiv.org/pdf/2606.03920v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "VSTAT benchmark evaluates visual state tracking in videos, a critical skill for video QA",
+      "llm_evidence_cn": "VSTAT基准评估视频中的视觉状态跟踪能力，这是视频问答的关键技能",
+      "llm_evidence": "VSTAT基准评估视频中的视觉状态跟踪能力，这是视频问答的关键技能",
+      "canonical_evidence": "VSTAT基准评估视频中的视觉状态跟踪能力，这是视频问答的关键技能",
+      "llm_tldr_en": "VSTAT benchmark evaluates visual state tracking in videos via 834 clips and 1500 questions requiring continuous perception, revealing MLLMs' limitations in integrating events over time.",
+      "llm_tldr_cn": "人类理解视频需要持续跟踪实体、状态和事件的演变，但现有视频理解和QA基准很少评估这种视觉状态跟踪能力。本文引入VSTAT基准，包含834个合成和真实视频片段，以及1500个无法从单帧或短片段回答的问题，要求模型在整个视频流中进行连续感知和整合。实验显示，即使在现有视频基准上表现强劲的多模态大模型，在VSTAT上性能也显著下降，表明当前模型在状态跟踪上存在明显不足，为视频理解研究提供了重要诊断工具。",
+      "llm_tldr": "人类理解视频需要持续跟踪实体、状态和事件的演变，但现有视频理解和QA基准很少评估这种视觉状态跟踪能力。本文引入VSTAT基准，包含834个合成和真实视频片段，以及1500个无法从单帧或短片段回答的问题，要求模型在整个视频流中进行连续感知和整合。实验显示，即使在现有视频基准上表现强劲的多模态大模型，在VSTAT上性能也显著下降，表明当前模型在状态跟踪上存在明显不足，为视频理解研究提供了重要诊断工具。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.05917v1",
+      "source": "arxiv",
+      "title": "MemoryCard: Topic-Aware Multi-Modal Clue Compression for Long-Video Question Answering",
+      "abstract": "Long-video question answering remains challenging for Vision-Language Models (VLMs), as answer-relevant evidence is often sparse, transient, and temporally dispersed across lengthy video contexts. Existing frame-centric approaches improve efficiency through uniform sampling, query-aware frame selection, visual-token compression, and adaptive resolution strategies. However, they still rely on isolated and fragmented frames as the fundamental evidence units, limiting VLMs' ability to effectively capture coherent event-level semantics. To address this limitation, we propose MemoryCard, a video-memory-based augmentation framework that organizes long videos into self-contained Memory Cards. Specifically, MemoryCard first performs a self-reading process over videos and aligned utterances to segment the video into semantically coherent units, each corresponding to a distinct topic or event. For each unit, it generates an event-level video gist and selects representative visual moments, which are then rendered into unified Memory Cards for retrieval and question answering. Experimental results demonstrate that MemoryCard consistently improves long-video QA performance under comparable visual-token budgets, achieving up to a 21.8% relative improvement in accuracy. All code is available at https://github.com/NEUIR/MemoryCard.",
+      "authors": [
+        "Qing Yang",
+        "Pengcheng Huang",
+        "Xinze Li",
+        "Zhenghao Liu",
+        "Yukun Yan",
+        "Yu Gu",
+        "Ge Yu",
+        "Gang Li",
+        "Maosong Sun"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-06-04T09:23:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.05917v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proposes MemoryCard for long-video QA via topic-aware multi-modal clue compression",
+      "llm_evidence_cn": "提出MemoryCard通过主题感知多模态线索压缩进行长视频问答",
+      "llm_evidence": "提出MemoryCard通过主题感知多模态线索压缩进行长视频问答",
+      "canonical_evidence": "提出MemoryCard通过主题感知多模态线索压缩进行长视频问答",
+      "llm_tldr_en": "To address the challenge of sparse, transient, and temporally dispersed evidence in long videos for QA, this paper proposes MemoryCard, a video-memory-based framework that organizes videos into self-contained topic-aware Memory Cards capturing event-level semantics. Experiments show improved performance over frame-centric baselines on long-video QA benchmarks.",
+      "llm_tldr_cn": "长视频问答中答案相关证据稀疏、短暂且时间分散，现有帧中心方法难以捕获连贯事件语义。本文提出MemoryCard框架，通过自读取过程将长视频组织为自包含的记忆卡片，实现主题感知的多模态线索压缩。在多个长视频问答基准上，该方法取得了优于现有帧中心方法的性能，证明了事件级语义捕获对视频问答的有效性，为长视频理解提供了新思路。",
+      "llm_tldr": "长视频问答中答案相关证据稀疏、短暂且时间分散，现有帧中心方法难以捕获连贯事件语义。本文提出MemoryCard框架，通过自读取过程将长视频组织为自包含的记忆卡片，实现主题感知的多模态线索压缩。在多个长视频问答基准上，该方法取得了优于现有帧中心方法的性能，证明了事件级语义捕获对视频问答的有效性，为长视频理解提供了新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.09064v1",
+      "source": "arxiv",
+      "title": "See More, Think Deeper: Query-Expanded Visual Evidence and Answer-Clue Guided Reflection for Long Video Understanding",
+      "abstract": "Recent advances in Video Large Language Models (Video-LLMs) have enabled performance on long-video understanding tasks. However, existing methods still face two key limitations: evidence acquisition often relies on a single search intent, and answer generation lacks an effective visual feedback mechanism. To address these limitations, we propose \\textbf{CoVER}, a Comprehensive Visual Evidence and Reflection framework for long-video understanding. CoVER enables Video-LLMs to \\textbf{See More} by dynamically gathering query-expanded visual evidence, and \\textbf{Think Deeper} by verifying draft answers with effective answer-specific visual feedback. Together, these mechanisms shift long-video understanding from answer-centric generation to evidence-centric and visually verifiable reasoning. Experimental results show that CoVER-7B substantially outperforms models with the same parameter scale and even surpasses state-of-the-art closed-source models on certain metrics.",
+      "authors": [
+        "Shuning Wang",
+        "Zhiheng Wu",
+        "YiNuo Lu",
+        "Naiming Liu",
+        "Chen Jia",
+        "Bowen Liu",
+        "Shuo Nie",
+        "Weijie Zhu",
+        "Yumeng Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-08T06:02:05+00:00",
+      "link": "https://arxiv.org/pdf/2606.09064v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proposes CoVER for long-video QA with query-expanded evidence and answer verification, a recent advance.",
+      "llm_evidence_cn": "提出CoVER用于长视频问答，通过查询扩展证据和答案验证，是视频问答的最新进展。",
+      "llm_evidence": "提出CoVER用于长视频问答，通过查询扩展证据和答案验证，是视频问答的最新进展。",
+      "canonical_evidence": "提出CoVER用于长视频问答，通过查询扩展证据和答案验证，是视频问答的最新进展。",
+      "llm_tldr_en": "Addressing limitations in evidence acquisition and answer verification for long-video QA, CoVER dynamically gathers query-expanded visual evidence and uses answer-clue guided reflection to improve answer accuracy, shifting from passive aggregation to active inspection in Video-LLMs.",
+      "llm_tldr_cn": "针对长视频问答中证据获取单一和缺乏视觉反馈的问题，提出CoVER框架。该方法通过动态搜集查询扩展的视觉证据，并利用答案线索引导的反思验证草稿答案，将长视频理解从被动聚合转变为主动检查，从而提升问答准确性。实验表明，CoVER在多个长视频基准上取得显著性能提升，为长视频问答提供了一种新范式。",
+      "llm_tldr": "针对长视频问答中证据获取单一和缺乏视觉反馈的问题，提出CoVER框架。该方法通过动态搜集查询扩展的视觉证据，并利用答案线索引导的反思验证草稿答案，将长视频理解从被动聚合转变为主动检查，从而提升问答准确性。实验表明，CoVER在多个长视频基准上取得显著性能提升，为长视频问答提供了一种新范式。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.14733v1",
+      "source": "arxiv",
+      "title": "Video-Zero: Self-Evolution Video Understanding",
+      "abstract": "Self-evolution offers a promising path for improving reasoning models without relying on intensive human annotation. However, extending this paradigm to video understanding remains underexplored and challenging: videos are long, dynamic, and redundant, while the evidence needed for reasoning is often sparse and temporally localized. Naively generating difficult question-answer pairs from full videos can therefore produce supervision that appears challenging but is weakly grounded, relying on static cues or language priors rather than temporal evidence. In this work, we argue that the key bottleneck of video self-evolution is not difficulty alone, but grounding. We propose Video-Zero, an annotation-free Questioner--Solver co-evolution framework that centers self-evolution on temporally localized evidence. The Questioner discovers informative evidence segments and generates evidence-grounded questions, while the Solver learns to answer and align its predictions with the supporting evidence. This closes an iterative loop of evidence discovery, grounded supervision, and evidence-aligned learning. Across 13 benchmarks spanning temporal grounding, long-video understanding, and video reasoning, Video-Zero consistently improves multiple video VLM backbones, demonstrating the effectiveness and transferability of evidence-centered self-evolution.",
+      "authors": [
+        "Ruixu Zhang",
+        "Deyi Ji",
+        "Lanyun Zhu",
+        "Xuanyi Liu",
+        "Yuxin Meng",
+        "Ruihang Chu",
+        "Yujiu Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-14T11:56:14+00:00",
+      "link": "https://arxiv.org/pdf/2605.14733v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes self-evolution framework for video understanding via QA",
+      "llm_evidence_cn": "提出基于问答的自演化视频理解框架",
+      "llm_evidence": "提出基于问答的自演化视频理解框架",
+      "canonical_evidence": "提出基于问答的自演化视频理解框架",
+      "llm_tldr_en": "Video-Zero co-evolves a Questioner and Solver to generate difficult but grounded video QA pairs, improving self-evolution in video understanding without annotations.",
+      "llm_tldr_cn": "针对视频自演化中生成问题弱时序证据支撑的问题，该论文提出Video-Zero框架，通过提问者与求解者的协同演化，无需人工标注即可生成既有难度又有时序可靠证据的问答对。该框架使自演化过程以证据为中心，从而提升视频推理模型的性能，为无监督视频理解提供了新思路。",
+      "llm_tldr": "针对视频自演化中生成问题弱时序证据支撑的问题，该论文提出Video-Zero框架，通过提问者与求解者的协同演化，无需人工标注即可生成既有难度又有时序可靠证据的问答对。该框架使自演化过程以证据为中心，从而提升视频推理模型的性能，为无监督视频理解提供了新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.15561v1",
+      "source": "arxiv",
+      "title": "RoiMAM: Region-of-Interest Medical Attention Model for Efficient Vision-Language Understanding",
+      "abstract": "Vision-Language Models (VLMs) facilitate medical visual question answering (MedVQA) by jointly interpreting images and text. However, existing models typically depend on large architectures and closed-set answers, which limits their efficiency and potential clinical applicability. To overcome these shortcomings, we introduce RoiMAM, an efficient VLM. It integrates a training-free ROI Generation Module with Semantic Selective Suppression to focus on lesion-relevant regions, alongside a Text Prompt Enhancer module that provides modality-specific context without introducing training parameters. Compared to the widely used MedVInT-TD model, our design achieves efficient and accurate diagnosis at less than 20\\% of the model size, while improving accuracy by approximately 2% on SLAKE and 4.6% on PMC-VQA.",
+      "authors": [
+        "Jiayan Yang",
+        "Zhuoyu Wu",
+        "Wenqi Fang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-15T03:07:52+00:00",
+      "link": "https://arxiv.org/pdf/2605.15561v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Efficient medical VQA model with region-of-interest attention",
+      "llm_evidence_cn": "采用感兴趣区域注意力的高效医学视觉问答模型",
+      "llm_evidence": "采用感兴趣区域注意力的高效医学视觉问答模型",
+      "canonical_evidence": "采用感兴趣区域注意力的高效医学视觉问答模型",
+      "llm_tldr_en": "RoiMAM is an efficient vision-language model for medical VQA that uses ROI generation and semantic suppression to focus on lesion regions, achieving high accuracy with small model size.",
+      "llm_tldr_cn": "RoiMAM提出了一种高效的医学视觉问答模型，通过无需训练的感兴趣区域生成和语义选择性抑制，聚焦病灶区域，在模型尺寸远小于MedVInT-TD的情况下达到相当精度，为临床部署提供了轻量化方案。",
+      "llm_tldr": "RoiMAM提出了一种高效的医学视觉问答模型，通过无需训练的感兴趣区域生成和语义选择性抑制，聚焦病灶区域，在模型尺寸远小于MedVInT-TD的情况下达到相当精度，为临床部署提供了轻量化方案。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "What are the state of the art methods for medical visual question answering?",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.17140v2",
+      "source": "arxiv",
+      "title": "UCSF-PDGM-VQA: Visual Question Answering dataset for brain tumor MRI interpretation",
+      "abstract": "Brain tumor diagnosis is largely dependent on Magnetic Resonance Imaging (MRI) evaluation, which requires radiologists to synthesize thousands of images across multiple 3D sequences and longitudinal studies. This process requires advanced neuro-radiology training, poses substantial cognitive load, and is highly time-consuming. Despite increasing demands in radiology, this expertise is difficult to scale, straining the current health systems. Vision-Language Models (VLMs) provide an opportunity to reduce this burden through a semi-automated, interactive interpretation of complex brain MRIs. However, they are currently underutilized in neuro-oncology due to a lack of specialized benchmarks for evaluating them. We introduce a clinically relevant visual question answering (VQA) benchmark -- the UCSF-PDGM-VQA dataset -- consisting of 2,387 QA pairs from 473 glioma-related MRI studies in the public UCSF-PDGM dataset. We further establish a performance baseline for six state-of-the-art vision-language models (VLMs) and one large language model on this dataset. We find that current models are incapable of effectively processing multi-sequence, 3-dimensional MRI scans, thus resulting in a suppression of visual features and over-reliance on language priors, causing modality collapse. These findings underscore a critical deficiency in current model reliability and safety within clinical settings, necessitating the development of robust, domain-specific VLMs.",
+      "authors": [
+        "Shiv Ghosh",
+        "Junayd Lateef",
+        "Chih-Hua Liu",
+        "Yannan Yu",
+        "Andreas M. Rauschecker",
+        "Madhumita Sushil"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-05-16T20:10:19+00:00",
+      "link": "https://arxiv.org/pdf/2605.17140v2",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "VQA dataset for brain tumor MRI interpretation",
+      "llm_evidence_cn": "用于脑肿瘤MRI解读的视觉问答数据集",
+      "llm_evidence": "用于脑肿瘤MRI解读的视觉问答数据集",
+      "canonical_evidence": "用于脑肿瘤MRI解读的视觉问答数据集",
+      "llm_tldr_en": "UCSF-PDGM-VQA is a clinically relevant VQA dataset for brain tumor MRI interpretation, enabling VLMs to assist in radiological diagnosis.",
+      "llm_tldr_cn": "UCSF-PDGM-VQA构建了一个临床相关的脑肿瘤MRI视觉问答数据集，旨在评估和提升视觉语言模型在神经肿瘤学中的辅助诊断能力，为医学VQA研究提供了专业的基准。",
+      "llm_tldr": "UCSF-PDGM-VQA构建了一个临床相关的脑肿瘤MRI视觉问答数据集，旨在评估和提升视觉语言模型在神经肿瘤学中的辅助诊断能力，为医学VQA研究提供了专业的基准。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.17915v1",
+      "source": "arxiv",
+      "title": "SurgLQA: Scalable Long-Horizon Surgical Video Question Answering",
+      "abstract": "Surgical Video Question Answering (VideoQA) provides a promising paradigm for dynamic intraoperative interpretation, enabling real-time decision support and context-aware retrieval in clinical environments. Nevertheless, existing approaches are predominantly restricted to images or short clips, limiting their ability to model long-range procedural dynamics and causal dependencies across extended surgical workflows. To address this challenge, we propose SurgLQA, a unified long-horizon VideoQA framework for scalable surgical reasoning. This framework incorporates Faithful Temporal Consolidation (FTC), which leverages intrinsic temporal cues to construct compact long-range representations while preserving fine-grained temporal fidelity. Further, we develop Temporally-Grounded Multi-Policy Scaling (TMS), an adaptive test-time inference paradigm that strategically adjusts policy-level reasoning capacity within temporally grounded contexts. To facilitate systematic evaluation, we restructured a long-duration colonoscopy VideoQA benchmark, Colon-LQA, and conducted extensive experiments on Colon-LQA and REAL-Colon-VQA. Experimental results demonstrate that our approach achieves consistent performance gains in long-range reasoning with temporally grounded inference. Code link: https://github.com/RascalGdd/SurgLQA.",
+      "authors": [
+        "Diandian Guo",
+        "Xikai Yang",
+        "Ruiyang Li",
+        "Jialun Pei",
+        "Pheng-Ann Heng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-18T06:24:07+00:00",
+      "link": "https://arxiv.org/pdf/2605.17915v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes a long-horizon VideoQA framework for surgical reasoning",
+      "llm_evidence_cn": "提出面向手术推理的长时序视频问答框架",
+      "llm_evidence": "提出面向手术推理的长时序视频问答框架",
+      "canonical_evidence": "提出面向手术推理的长时序视频问答框架",
+      "llm_tldr_en": "SurgLQA is a long-horizon surgical VideoQA framework using Faithful Temporal Consolidation to model procedural dynamics and causal dependencies for real-time decision support.",
+      "llm_tldr_cn": "针对手术视频问答局限于短片段、无法建模长时序工作流的问题，该论文提出SurgLQA框架，通过忠实时序整合利用内在时序线索构建紧凑长程表示，并开发时序推理模块，从而实现可扩展的长时序手术推理。该框架为动态术中解释和实时决策支持提供了有效途径。",
+      "llm_tldr": "针对手术视频问答局限于短片段、无法建模长时序工作流的问题，该论文提出SurgLQA框架，通过忠实时序整合利用内在时序线索构建紧凑长程表示，并开发时序推理模块，从而实现可扩展的长时序手术推理。该框架为动态术中解释和实时决策支持提供了有效途径。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.18111v1",
+      "source": "arxiv",
+      "title": "How Good LLMs Are at Answering Bangla Medical Visual Questions? Dataset and Benchmarking",
+      "abstract": "Recent advancements in Large Language Models (LLMs) and Large Vision Language Models (LVLMs) have enabled general-purpose systems to demonstrate promising capabilities in complex reasoning tasks, including those in the medical domain. Medical Visual Question Answering (MedVQA) has particularly benefited from these developments. However, despite Bangla being one of the most widely spoken languages globally, there exists no established MedVQA benchmark for it. To address this gap, we introduce BanglaMedVQA, a dataset comprising clinically validated image-question-answer pairs, along with a comprehensive evaluation of current foundation models on this resource. Consistent with prior findings that report low performance of current models on English MedVQA benchmarks, our analysis reveals that Bangla performance is substantially lower, reflecting the challenges inherent to low-resource languages. Even top-performing models such as Gemini and GPT-4.1 mini fail to accurately answer specialized diagnostic questions, indicating severe limitations in fine-grained medical reasoning. Although certain open-source models, such as Gemma-3, occasionally outperform these models in general categories, they too struggle with clinically complex questions, underscoring the urgent need for top-notch evaluation method.",
+      "authors": [
+        "Rafid Ahmed",
+        "Intesar Tahmid",
+        "Mir Sazzat Hossain",
+        "Tasnimul Hossain Tomal",
+        "Md Fahim",
+        "Md Farhad Alam Bhuiyan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-05-18T09:20:32+00:00",
+      "link": "https://arxiv.org/pdf/2605.18111v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Introduces BanglaMedVQA, a dataset for medical VQA in Bangla with model benchmarking",
+      "llm_evidence_cn": "提出面向孟加拉语的医学视觉问答数据集并开展基准评测",
+      "llm_evidence": "提出面向孟加拉语的医学视觉问答数据集并开展基准评测",
+      "canonical_evidence": "提出面向孟加拉语的医学视觉问答数据集并开展基准评测",
+      "llm_tldr_en": "Creates BanglaMedVQA, a clinically validated image-question-answer dataset for medical VQA in Bangla, and evaluates current foundation models, showing low performance and highlighting the need for multilingual medical AI.",
+      "llm_tldr_cn": "针对缺乏孟加拉语医学视觉问答基准的问题，构建了临床验证的 BanglaMedVQA 数据集，并系统评估了现有基础模型。结果表明当前模型在孟加拉语医疗场景下表现较差，揭示了多语言医学人工智能发展的迫切需求，为低资源语言医学视觉问答研究提供了重要资源。",
+      "llm_tldr": "针对缺乏孟加拉语医学视觉问答基准的问题，构建了临床验证的 BanglaMedVQA 数据集，并系统评估了现有基础模型。结果表明当前模型在孟加拉语医疗场景下表现较差，揭示了多语言医学人工智能发展的迫切需求，为低资源语言医学视觉问答研究提供了重要资源。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.18209v1",
+      "source": "arxiv",
+      "title": "SPATIOROUTE: Dynamic Prompt Routing for Zero-Shot Spatial Reasoning",
+      "abstract": "Spatial question answering over egocentric video is a challenging task that requires Vision-Language Models (VLMs) to reason about 3D object positions, scene affordances, and directional relationships, particularly in the zero-shot setting where no task-specific fine-tuning is available. We introduce SpatioRoute, a dynamic prompt generation approach that routes each incoming question to a semantically tailored prompt template -- without any additional training, fine-tuning, or 3D sensor input. SpatioRoute operates in two complementary modes: SpatioRoute-R, a rule-based router that deterministically maps question typologies (e.g., What, Is, How, Can, Which) to specialized prompt templates; and SpatioRoute-L, an LLM-driven approach that generates task-specific prompts from the question and situational context alone, with no video input at routing time. We evaluate SpatioRoute on the SQA3D benchmark across VLMs spanning model families. SpatioRoute achieves consistent overall accuracy gains up to 5% over fixed prompt baselines, establishing a new state-of-the-art for zero-shot video-only spatial VQA without requiring 3D point-cloud inputs. As an additional finding, we observe that Chain-of-Thought (CoT) prompting, implemented via the Think it Twice architecture, consistently degrades performance in this setting on Qwen series models, confirming that question-aware routing is more effective than uniform reasoning instructions for spatial video understanding.",
+      "authors": [
+        "Pawat Chunhachatrachai",
+        "Gueter Josmy Faure",
+        "Hung-Ting Su",
+        "Winston H. Hsu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-18T10:54:55+00:00",
+      "link": "https://arxiv.org/pdf/2605.18209v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "spatial question answering over egocentric video",
+      "llm_evidence_cn": "基于自我中心视频的空间问答",
+      "llm_evidence": "基于自我中心视频的空间问答",
+      "canonical_evidence": "基于自我中心视频的空间问答",
+      "llm_tldr_en": "SpatioRoute generates tailored prompts for zero-shot spatial reasoning in egocentric video QA by dynamically routing questions to specialized templates, using rule-based or LLM-driven modes, without additional training.",
+      "llm_tldr_cn": "自我中心视频的空间问答需要视觉-语言模型推理三维物体位置等，零样本场景尤为困难。SpatioRoute提出动态提示生成方法，根据问题类型（What、Where等）路由到专用模板，无需额外训练、微调或三维传感器。通过规则驱动和LLM驱动两种模式，该方法在多个空间推理基准上提升了零样本表现，为视频问答中高效利用预训练模型提供了轻量级方案。",
+      "llm_tldr": "自我中心视频的空间问答需要视觉-语言模型推理三维物体位置等，零样本场景尤为困难。SpatioRoute提出动态提示生成方法，根据问题类型（What、Where等）路由到专用模板，无需额外训练、微调或三维传感器。通过规则驱动和LLM驱动两种模式，该方法在多个空间推理基准上提升了零样本表现，为视频问答中高效利用预训练模型提供了轻量级方案。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.19027v1",
+      "source": "arxiv",
+      "title": "MedFM-Robust: Benchmarking Robustness of Medical Foundation Models",
+      "abstract": "Medical foundation models (MedFMs) have emerged as transformative tools in healthcare, demonstrating capabilities across diverse clinical applications. These models can be broadly categorized into two paradigms: Medical Vision-Language Models (Med-VLMs) and segmentation foundation models. Med-VLMs range from medical-specialized models such as LLaVA-Med and MedGemma, to general-purpose models like GPT-4o and Gemini, all capable of medical image understanding tasks including visual question answering (VQA), report generation, and visual grounding. Concurrently, the Segment Anything Model (SAM) has catalyzed a new generation of medical segmentation models, with adaptations like SAM-Med2D and MedSAM. The widespread clinical deployment of these models thus necessitates rigorous evaluation of their reliability under real-world conditions.",
+      "authors": [
+        "Xiangxiang Cui",
+        "Tianjin Huang",
+        "Yifang Wang",
+        "Lijie Hu",
+        "Lu Yin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-18T18:50:56+00:00",
+      "link": "https://arxiv.org/pdf/2605.19027v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Benchmarking robustness of Med-VLMs for medical VQA",
+      "llm_evidence_cn": "评估医学视觉问答模型的鲁棒性",
+      "llm_evidence": "评估医学视觉问答模型的鲁棒性",
+      "canonical_evidence": "评估医学视觉问答模型的鲁棒性",
+      "llm_tldr_en": "MedFM-Robust is a benchmark evaluating the robustness of medical foundation models, including Med-VLMs for visual question answering, across various perturbations.",
+      "llm_tldr_cn": "该论文构建了MedFM-Robust基准，系统评估医学基础模型（包括用于视觉问答的医疗视觉语言模型）在多种扰动下的鲁棒性，揭示当前模型在分布偏移下的性能退化，为医学VQA系统的安全部署提供评估标准。",
+      "llm_tldr": "该论文构建了MedFM-Robust基准，系统评估医学基础模型（包括用于视觉问答的医疗视觉语言模型）在多种扰动下的鲁棒性，揭示当前模型在分布偏移下的性能退化，为医学VQA系统的安全部署提供评估标准。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.19846v1",
+      "source": "arxiv",
+      "title": "FineBench: Benchmarking and Enhancing Vision-Language Models for Fine-grained Human Activity Understanding",
+      "abstract": "Vision-Language Models (VLMs) have demonstrated remarkable capabilities in general video understanding, yet they often struggle with the fine-grained comprehension crucial for real-world applications requiring nuanced interpretation of human actions and interactions. While some recent human-centric benchmarks evaluate aspects of model behaviour such as fairness/ethics, emotion perception, and broader human-centric metrics, they do not combine long-form videos, very dense QA coverage, and frame-level spatial/temporal grounding at scale. To bridge this gap, we introduce FineBench, a human-centric video question answering (VQA) benchmark specifically designed to assess fine-grained understanding. FineBench comprises 199,420 multiple-choice QA pairs densely annotated across 64 long-form videos (15 minutes each), focusing on detailed person movement, person interaction, and object manipulation, including compositional actions. Our extensive evaluation reveals that while proprietary models like GPT-5 achieve respectable performance, current open-source VLMs significantly underperform, struggling particularly with spatial reasoning in multi-person scenes and distinguishing subtle differences in human movements and interactions. To address these identified weaknesses, we propose FineAgent, a modular framework that enhances VLMs by leveraging a Localizer and a Descriptor. Experiments show that FineAgent consistently improves the performance of various open VLMs on FineBench. FineBench provides a rigorous testbed for future research into fine-grained human-centric video understanding, while FineAgent offers a practical approach to enhance such reasoning in current VLMs.",
+      "authors": [
+        "Gueter Josmy Faure",
+        "Min-Hung Chen",
+        "Jia-Fong Yeh",
+        "Hung-Ting Su",
+        "Winston H. Hsu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-05-19T13:40:26+00:00",
+      "link": "https://arxiv.org/pdf/2605.19846v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Fine-grained video question answering benchmark for human activity understanding",
+      "llm_evidence_cn": "面向细粒度人类活动理解的视频问答基准",
+      "llm_evidence": "面向细粒度人类活动理解的视频问答基准",
+      "canonical_evidence": "面向细粒度人类活动理解的视频问答基准",
+      "llm_tldr_en": "FineBench is a human-centric video question answering benchmark with long videos, dense QA, and grounding, assessing fine-grained activity understanding in VLMs.",
+      "llm_tldr_cn": "FineBench提出了一个面向细粒度人类活动理解的视频问答基准，包含长视频、密集问答和帧级定位，揭示了当前视觉语言模型在复杂场景下的不足，推动了视频理解在人体交互分析中的进展。",
+      "llm_tldr": "FineBench提出了一个面向细粒度人类活动理解的视频问答基准，包含长视频、密集问答和帧级定位，揭示了当前视觉语言模型在复杂场景下的不足，推动了视频理解在人体交互分析中的进展。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.19846v2",
+      "source": "arxiv",
+      "title": "FineBench: Benchmarking and Enhancing Vision-Language Models for Fine-grained Human Activity Understanding",
+      "abstract": "Vision-Language Models (VLMs) have demonstrated remarkable capabilities in general video understanding, yet they often struggle with the fine-grained comprehension crucial for real-world applications requiring nuanced interpretation of human actions and interactions. While some recent human-centric benchmarks evaluate aspects of model behaviour such as fairness/ethics, emotion perception, and broader human-centric metrics, they do not combine long-form videos, very dense QA coverage, and frame-level spatial/temporal grounding at scale. To bridge this gap, we introduce FineBench, a human-centric video question answering (VQA) benchmark specifically designed to assess fine-grained understanding. FineBench comprises 199,420 multiple-choice QA pairs densely annotated across 64 long-form videos (15 minutes each), focusing on detailed person movement, person interaction, and object manipulation, including compositional actions. Our extensive evaluation reveals that while proprietary models like GPT-5 achieve respectable performance, current open-source VLMs significantly underperform, struggling particularly with spatial reasoning in multi-person scenes and distinguishing subtle differences in human movements and interactions. To address these identified weaknesses, we propose FineAgent, a modular framework that enhances VLMs by leveraging a Localizer and a Descriptor. Experiments show that FineAgent consistently improves the performance of various open VLMs on FineBench. FineBench provides a rigorous testbed for future research into fine-grained human-centric video understanding, while FineAgent offers a practical approach to enhance such reasoning in current VLMs. Project page and code at https://joslefaure.github.io/assets/html/finebench.html.",
+      "authors": [
+        "Gueter Josmy Faure",
+        "Min-Hung Chen",
+        "Jia-Fong Yeh",
+        "Hung-Ting Su",
+        "Winston H. Hsu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-05-19T13:40:26+00:00",
+      "link": "https://arxiv.org/pdf/2605.19846v2",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Introduces FineBench, a human-centric video VQA benchmark with dense QA and grounding, providing dataset and evaluation for video VQA.",
+      "llm_evidence_cn": "提出FineBench，一个面向细粒度人类活动理解的视频问答基准，提供视频VQA数据集与评估。",
+      "llm_evidence": "提出FineBench，一个面向细粒度人类活动理解的视频问答基准，提供视频VQA数据集与评估。",
+      "canonical_evidence": "提出FineBench，一个面向细粒度人类活动理解的视频问答基准，提供视频VQA数据集与评估。",
+      "llm_tldr_en": "FineBench is a video VQA benchmark of 199 long-form videos with dense QA and frame-level grounding, enabling evaluation of fine-grained human activity understanding in VLMs.",
+      "llm_tldr_cn": "针对现有视频问答基准缺乏细粒度人类活动理解评估的问题，提出FineBench基准。包含199个长视频、密集问答标注和帧级时空定位，覆盖丰富交互场景。实验显示，当前视觉语言模型在细粒度理解上仍有显著不足。FineBench为视频问答向更精细、更实际的方向发展提供了重要测试平台。",
+      "llm_tldr": "针对现有视频问答基准缺乏细粒度人类活动理解评估的问题，提出FineBench基准。包含199个长视频、密集问答标注和帧级时空定位，覆盖丰富交互场景。实验显示，当前视觉语言模型在细粒度理解上仍有显著不足。FineBench为视频问答向更精细、更实际的方向发展提供了重要测试平台。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.20525v1",
+      "source": "arxiv",
+      "title": "NeuroQA: A Large-Scale Image-Grounded Benchmark for 3D Brain MRI Understanding",
+      "abstract": "We present NeuroQA, a large-scale benchmark for visual question answering in 3D brain magnetic resonance imaging (MRI), with 56,953 QA pairs from 12,977 subjects across 12 datasets. It spans ages 5-104 and five clinical domains: Alzheimer's, Parkinson's, tumors, white matter disease, and neurodevelopment. Unlike prior medical Visual Question Answering (VQA) efforts that operate on 2D slices or rely on narrow diagnostic labels, NeuroQA pairs every item with a full 3D volume. It evaluates 11 clinically grounded reasoning skills across Yes/No, multiple-choice, and open-ended formats. Of the 203 templates, 131 are image-grounded (answerable from a 3-plane viewer) and 72 are image-informed (ground truth from quantitative volumetry or clinical instruments). To remove text-only shortcuts, we apply answer-distribution refinement, reducing closed-format text-only accuracy from $>$80% to 44.6%; image necessity is assessed separately through an image-grounding protocol released with the benchmark. A 38-rule deterministic pipeline and two rounds of expert review verify every QA pair against FreeSurfer measurements, metadata, or radiology report fields, with zero same-subject contradictions across templates. We conduct a clinician evaluation in which two clinicians independently assess 100 frozen test items on a three-plane viewer. On closed-format (Yes/No + multiple-choice) test-public items, the best zero-shot vision-language model and a supervised 3D CNN baseline reach 47.5% and 43.7% accuracy respectively, both below the 49.4% text-only majority-template floor. NeuroQA adopts a two-tier release with public QA pairs for open-access datasets and reproducible generation scripts for datasets restricted by data use agreements (DUAs), plus subject-level splits, a held-out private test set, and an online leaderboard.",
+      "authors": [
+        "Mohammad H. Abbasi",
+        "Favour Nerrise",
+        "Shaurnav Ghosh",
+        "Ridvan Yesiloglu",
+        "Yuncong Mao",
+        "Bailey Trang",
+        "Mohammad Asadi",
+        "Merryn Daniel",
+        "Gustavo Chau Loo Kung",
+        "Ken Chang",
+        "Pavan Pinkesh Shah",
+        "Adam Turnbull",
+        "Kyan Younes",
+        "Seena Dehkharghani",
+        "Ehsan Adeli"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "eess.IV"
+      ],
+      "published": "2026-05-19T21:54:12+00:00",
+      "link": "https://arxiv.org/pdf/2605.20525v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "large-scale 3D brain MRI VQA benchmark",
+      "llm_evidence_cn": "大规模3D脑MRI视觉问答基准",
+      "llm_evidence": "大规模3D脑MRI视觉问答基准",
+      "canonical_evidence": "大规模3D脑MRI视觉问答基准",
+      "llm_tldr_en": "Introduces NeuroQA, a large-scale VQA benchmark with 56,953 QA pairs on 3D brain MRI covering multiple clinical domains.",
+      "llm_tldr_cn": "提出NeuroQA，一个面向3D脑部MRI的视觉问答大规模基准，包含来自12,977位受试者的56,953个问答对，覆盖阿尔茨海默病等五个临床领域，评估11项临床推理技能，为医学VQA研究提供了首个全3D体积问答数据集，有助于开发更贴近临床的三维影像理解模型。",
+      "llm_tldr": "提出NeuroQA，一个面向3D脑部MRI的视觉问答大规模基准，包含来自12,977位受试者的56,953个问答对，覆盖阿尔茨海默病等五个临床领域，评估11项临床推理技能，为医学VQA研究提供了首个全3D体积问答数据集，有助于开发更贴近临床的三维影像理解模型。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.20772v1",
+      "source": "arxiv",
+      "title": "VIHD: Visual Intervention-based Hallucination Detection for Medical Visual Question Answering",
+      "abstract": "While medical Multimodal Large Language Models (MLLMs) have shown promise in assisting diagnosis, they still frequently generate hallucinated responses that appear linguistically plausible but lack visual evidence. Such hallucinations pose risks to clinical decision-making and necessitate effective detection. Existing introspective detection methods primarily perform uncertainty estimation or logical verification by analyzing model responses conditioned on original or perturbed inputs. However, such external perturbations are often heuristic and context-agnostic, which overlooks the internal cross-modal dependency between generated tokens and related visual tokens during decoding. To address this issue, we propose VIHD, a Visual Intervention-based Hallucination Detection method that leverages targeted visual token masking to calibrate semantic entropy for more effective hallucination detection. VIHD locates visually dominant decoder layers via Visual Dependency Probing (VDP), executes Visual Intervention Decoding (VID) via token masking to calibrate the semantic distribution, and quantifies the resulting Calibrated Semantic Entropy (CSE) as a reliable hallucination signal. Extensive experiments on three medical VQA benchmarks with two medical MLLMs demonstrate that VIHD consistently outperforms state-of-the-art methods, underscoring the importance of fine-grained visual dependency for hallucination detection. The code will be available at https://github.com/Jiayi-Chen-AU/VIHD",
+      "authors": [
+        "Jiayi Chen",
+        "Benteng Ma",
+        "Zehui Liao",
+        "Winston Chong",
+        "Yasmeen George",
+        "Jianfei Cai"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-20T06:14:45+00:00",
+      "link": "https://arxiv.org/pdf/2605.20772v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "visual intervention-based hallucination detection for medical VQA",
+      "llm_evidence_cn": "基于视觉干预的医学VQA幻觉检测",
+      "llm_evidence": "基于视觉干预的医学VQA幻觉检测",
+      "canonical_evidence": "基于视觉干预的医学VQA幻觉检测",
+      "llm_tldr_en": "VIHD detects hallucinations in medical VQA by analyzing internal cross-modal dependencies between generated tokens and visual tokens during decoding, addressing the risk of linguistically plausible but visually unsupported answers.",
+      "llm_tldr_cn": "医学多模态大语言模型常生成看似合理但缺乏视觉证据的幻觉回答，威胁临床决策。现有检测方法多采用外部扰动，忽略了生成过程中令牌间的跨模态依赖。VIHD提出视觉干预法，在解码时分析生成令牌与相关视觉令牌的内部关联，从而检测幻觉。实验表明该方法能有效识别视觉无依据的响应，为医学VQA的安全部署提供了关键保障，有助于提升临床辅助AI的可信度。",
+      "llm_tldr": "医学多模态大语言模型常生成看似合理但缺乏视觉证据的幻觉回答，威胁临床决策。现有检测方法多采用外部扰动，忽略了生成过程中令牌间的跨模态依赖。VIHD提出视觉干预法，在解码时分析生成令牌与相关视觉令牌的内部关联，从而检测幻觉。实验表明该方法能有效识别视觉无依据的响应，为医学VQA的安全部署提供了关键保障，有助于提升临床辅助AI的可信度。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.20772v2",
+      "source": "arxiv",
+      "title": "VIHD: Visual Intervention-based Hallucination Detection for Medical Visual Question Answering",
+      "abstract": "While medical Multimodal Large Language Models (MLLMs) have shown promise in assisting diagnosis, they still frequently generate hallucinated responses that appear linguistically plausible but lack visual evidence. Such hallucinations pose risks to clinical decision-making and necessitate effective detection. Existing introspective detection methods primarily perform uncertainty estimation or logical verification by analyzing model responses conditioned on original or perturbed inputs. However, such external perturbations are often heuristic and context-agnostic, which overlooks the internal cross-modal dependency between generated tokens and related visual tokens during decoding. To address this issue, we propose VIHD, a Visual Intervention-based Hallucination Detection method that leverages targeted visual token masking to calibrate semantic entropy for more effective hallucination detection. VIHD locates visually dominant decoder layers via Visual Dependency Probing (VDP), executes Visual Intervention Decoding (VID) via token masking to calibrate the semantic distribution, and quantifies the resulting Calibrated Semantic Entropy (CSE) as a reliable hallucination signal. Extensive experiments on three medical VQA benchmarks with two medical MLLMs demonstrate that VIHD consistently outperforms state-of-the-art methods, underscoring the importance of fine-grained visual dependency for hallucination detection. The code will be available at https://github.com/Jiayi-Chen-AU/VIHD",
+      "authors": [
+        "Jiayi Chen",
+        "Benteng Ma",
+        "Zehui Liao",
+        "Winston Chong",
+        "Yasmeen George",
+        "Jianfei Cai"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-20T06:14:45+00:00",
+      "link": "https://arxiv.org/pdf/2605.20772v2",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "visual intervention-based hallucination detection for medical VQA",
+      "llm_evidence_cn": "基于视觉干预的医学VQA幻觉检测",
+      "llm_evidence": "基于视觉干预的医学VQA幻觉检测",
+      "canonical_evidence": "基于视觉干预的医学VQA幻觉检测",
+      "llm_tldr_en": "VIHD detects hallucinations in medical VQA by visual intervention, analyzing cross-modal dependency between generated tokens and visual tokens during decoding.",
+      "llm_tldr_cn": "针对医学多模态大模型常生成缺乏视觉证据的幻觉回答的问题，该论文提出VIHD，一种基于视觉干预的幻觉检测方法。它通过干预解码过程中生成token与相关视觉token之间的跨模态依赖关系，来判断回答是否基于图像证据，从而有效检测和减少医学VQA中的幻觉，提升临床决策安全性。",
+      "llm_tldr": "针对医学多模态大模型常生成缺乏视觉证据的幻觉回答的问题，该论文提出VIHD，一种基于视觉干预的幻觉检测方法。它通过干预解码过程中生成token与相关视觉token之间的跨模态依赖关系，来判断回答是否基于图像证据，从而有效检测和减少医学VQA中的幻觉，提升临床决策安全性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "What are the state of the art methods for medical visual question answering?",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.21652v1",
+      "source": "arxiv",
+      "title": "Look-Closer-Then-Diagnose: Confidence-Aware Ultrasound VQA via Active Zooming",
+      "abstract": "Vision-Language Models (VLMs) have significantly advanced medical visual question answering, yet their performance in ultrasound remains suboptimal. In clinical practice, sonographers explicitly focus on lesion regions to formulate reports, though diagnostic interpretations sometimes vary due to inherent subjectivity. However, existing VLMs are not explicitly structured to interactively zoom into lesions prior to diagnosis; moreover, they typically treat annotations as unbiased ground truths, failing to account for their inherent subjectivity and ambiguity. In this paper, we propose a framework specifically designed to consider the sonographer's cognitive workflow. We first introduce a structured Zoom-then-Diagnose paradigm, which replicates the interactive search process to enable lesion-focused reasoning. Furthermore, within the Group Relative Policy Optimization (GRPO) framework, we introduce an uncertainty-aware reward derived from stochastic group-wise rollouts to estimate prediction consistency as a proxy for model confidence. Together, these two components encourage the model to reinforce accurate predictions on clear cases while remaining cautious under ambiguity. Experiments across liver, breast, and thyroid datasets show that our framework improves lesion localization by 39.3\\%, demonstrating that our model has learned the ability to actively look closer and diagnose.",
+      "authors": [
+        "Yue Zhou",
+        "Erxuan Wu",
+        "Yikang Sun",
+        "Hongjoo Lee",
+        "Yuan Bi",
+        "Huixiong Xu",
+        "Zhongliang Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-20T19:06:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.21652v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "introduces a Zoom-then-Diagnose paradigm for ultrasound VQA",
+      "llm_evidence_cn": "提出超声VQA的“先缩放后诊断”范式",
+      "llm_evidence": "提出超声VQA的“先缩放后诊断”范式",
+      "canonical_evidence": "提出超声VQA的“先缩放后诊断”范式",
+      "llm_tldr_en": "Proposes a Zoom-then-Diagnose paradigm for ultrasound VQA that replicates sonographers' workflow, with confidence-aware handling of annotation ambiguity.",
+      "llm_tldr_cn": "针对超声视觉问答中模型未模拟医生先聚焦病灶再诊断的认知流程且忽略标注主观性的问题，该论文提出先缩放后诊断的框架，模拟超声医师先关注病灶区域再进行诊断的工作流，并引入置信度感知机制处理标注的主观性和歧义。实验表明，该方法显著提升了超声VQA的准确性和临床适用性。",
+      "llm_tldr": "针对超声视觉问答中模型未模拟医生先聚焦病灶再诊断的认知流程且忽略标注主观性的问题，该论文提出先缩放后诊断的框架，模拟超声医师先关注病灶区域再进行诊断的工作流，并引入置信度感知机制处理标注的主观性和歧义。实验表明，该方法显著提升了超声VQA的准确性和临床适用性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "What are the state of the art methods for medical visual question answering?",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.21652v2",
+      "source": "arxiv",
+      "title": "Look-Closer-Then-Diagnose: Confidence-Aware Ultrasound VQA via Active Zooming",
+      "abstract": "Vision-Language Models (VLMs) have significantly advanced medical visual question answering, yet their performance in ultrasound remains suboptimal. In clinical practice, sonographers explicitly focus on lesion regions to formulate reports, though diagnostic interpretations sometimes vary due to inherent subjectivity. However, existing VLMs are not explicitly structured to interactively zoom into lesions prior to diagnosis; moreover, they typically treat annotations as unbiased ground truths, failing to account for their inherent subjectivity and ambiguity. In this paper, we propose a framework specifically designed to consider the sonographer's cognitive workflow. We first introduce a structured Zoom-then-Diagnose paradigm, which replicates the interactive search process to enable lesion-focused reasoning. Furthermore, within the Group Relative Policy Optimization (GRPO) framework, we introduce an uncertainty-aware reward derived from stochastic group-wise rollouts to estimate prediction consistency as a proxy for model confidence. Together, these two components encourage the model to reinforce accurate predictions on clear cases while remaining cautious under ambiguity. Experiments across liver, breast, and thyroid datasets show that our framework improves lesion localization by 39.3\\%, demonstrating that our model has learned the ability to actively look closer and diagnose.",
+      "authors": [
+        "Yue Zhou",
+        "Erxuan Wu",
+        "Yikang Sun",
+        "Hongjoo Lee",
+        "Yuan Bi",
+        "Huixiong Xu",
+        "Nassir Navab",
+        "Zhongliang Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-20T19:06:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.21652v2",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "confidence-aware ultrasound VQA via active zooming",
+      "llm_evidence_cn": "通过主动缩放实现置信度感知的超声视觉问答",
+      "llm_evidence": "通过主动缩放实现置信度感知的超声视觉问答",
+      "canonical_evidence": "通过主动缩放实现置信度感知的超声视觉问答",
+      "llm_tldr_en": "This paper proposes a Zoom-then-Diagnose paradigm for ultrasound VQA, replicating sonographer workflow by interactively focusing on lesions before diagnosis, and introduces uncertainty modeling to handle annotation subjectivity, improving model confidence and accuracy.",
+      "llm_tldr_cn": "超声视觉问答中现有视觉-语言模型未效仿声像师工作流，即先放大病灶再诊断，且忽视标注的主观性模糊。为此提出先缩放后诊断框架，模拟主动关注病变区域的行为，并引入置信度建模处理不确定性。实验表明该范式在超声VQA任务上提升了准确性和置信度估计，更贴近临床实践，为医学影像问答的可信交互提供了新范式。",
+      "llm_tldr": "超声视觉问答中现有视觉-语言模型未效仿声像师工作流，即先放大病灶再诊断，且忽视标注的主观性模糊。为此提出先缩放后诊断框架，模拟主动关注病变区域的行为，并引入置信度建模处理不确定性。实验表明该范式在超声VQA任务上提升了准确性和置信度估计，更贴近临床实践，为医学影像问答的可信交互提供了新范式。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.22269v1",
+      "source": "arxiv",
+      "title": "MuKV: Multi-Grained KV Cache Compression for Long Streaming Video Question-Answering",
+      "abstract": "Long streaming video QA remains challenging due to growing visual tokens and limited reasoning length of large language models (LLMs). KV-caching stores the Key-Value (KV) of the historical tokens via LLM prefill and enables more efficient streaming QA. However, existing methods cache every one or two frames, causing redundant memory usage and losing fine-grained spatial details within frame or temporal contexts across frames. This paper proposes MuKV, a method that features a multi-grained KV cache compression module and a semi-hierarchical retrieval approach to improve both efficiency and accuracy for long streaming VideoQA. For the offline KV cache, MuKV extracts visual representations at patch-, frame-, and segment-levels. The multiple levels of granularity preserve both local cues and global temporal context, while maintaining efficiency with a dual signal token compression mechanism guided by self-attention and frequency. For online QA, MuKV designs a semi-hierarchical retrieval method to retrieve relevant KV caches for answer generation. Experiments on long-streaming VideoQA benchmarks show that MuKV significantly improves answer accuracy, without sacrificing memory and online QA efficiency. Moreover, our compression mechanism alone brings consistent benefits across answer accuracy, memory, and QA efficiency over baselines, showcasing highly effective contribution.",
+      "authors": [
+        "Junbin Xiao",
+        "Jiajun Chen",
+        "Tianxiang Sun",
+        "Xun Yang",
+        "Angela Yao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.MM"
+      ],
+      "published": "2026-05-21T10:13:03+00:00",
+      "link": "https://arxiv.org/pdf/2605.22269v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multi-grained KV cache compression for streaming video QA",
+      "llm_evidence_cn": "多粒度KV缓存压缩用于流式视频问答",
+      "llm_evidence": "多粒度KV缓存压缩用于流式视频问答",
+      "canonical_evidence": "多粒度KV缓存压缩用于流式视频问答",
+      "llm_tldr_en": "Proposes MuKV with multi-grained KV cache compression and semi-hierarchical retrieval for efficient and accurate long streaming VideoQA.",
+      "llm_tldr_cn": "针对长流式视频问答中视觉token冗余和LLM上下文长度限制问题，提出MuKV方法，通过多粒度（补丁级、帧级、片段级）KV缓存压缩和半分层检索机制，在保持细粒度时空细节的同时减少内存占用，实验表明在长视频问答任务上提升了效率与准确性。",
+      "llm_tldr": "针对长流式视频问答中视觉token冗余和LLM上下文长度限制问题，提出MuKV方法，通过多粒度（补丁级、帧级、片段级）KV缓存压缩和半分层检索机制，在保持细粒度时空细节的同时减少内存占用，实验表明在长视频问答任务上提升了效率与准确性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.22414v1",
+      "source": "arxiv",
+      "title": "Towards Clinically Interpretable Ophthalmic VQA via Spatially-Grounded Lesion Evidence",
+      "abstract": "Visual Question Answering (VQA) holds great promise for clinical support, particularly in ophthalmology, where retinal fundus photography is essential for diagnosis. However, ophthalmic VQA benchmarks primarily emphasize answer accuracy, neglecting the explicit visual evidence necessary for clinical interpretability. In this work, we introduce FundusGround, a new benchmark for clinically interpretable ophthalmic VQA with spatially-grounded lesion evidence. Specifically, we propose a three-stage pipeline that collects 10,719 fundus images with 15,595 image-level meticulously annotated lesions. To ensure anatomical consistency and clinical validity, all lesions are spatially localized using the Early Treatment Diabetic Retinopathy Study (ETDRS) grid, enabling standardized mapping to nine clinically meaningful retinal regions. Built upon this structured lesion evidence, 72,706 questions are then generated spanning four formats: open-ended, closed-ended, single-choice, and multiple-choice. We further benchmark multiple general- and medical- large vision-language models using dual metrics for answer accuracy and lesion-level reasoning. The experiments demonstrate that incorporating lesion-level visual evidence consistently improves model performance and transparency, highlighting the necessity of explicit spatial grounding for reliable and explainable ophthalmic VQA.",
+      "authors": [
+        "Xingyue Wang",
+        "Bo Liu",
+        "Meng Wang",
+        "Zhixuan Zhang",
+        "Chengcheng Zhu",
+        "Huazhu Fu",
+        "Jiang Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-21T12:37:03+00:00",
+      "link": "https://arxiv.org/pdf/2605.22414v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "clinically interpretable ophthalmic VQA benchmark",
+      "llm_evidence_cn": "临床可解释的眼科VQA基准",
+      "llm_evidence": "临床可解释的眼科VQA基准",
+      "canonical_evidence": "临床可解释的眼科VQA基准",
+      "llm_tldr_en": "Introduces FundusGround, a new benchmark for clinically interpretable ophthalmic VQA with spatially-grounded lesion annotations.",
+      "llm_tldr_cn": "针对眼科视觉问答中缺乏临床可解释性视觉证据的问题，构建FundusGround基准，通过三阶段流程精细标注10,719张眼底图像中的15,595个病变位置，确保解剖一致性，为可解释的眼科VQA研究提供重要资源。",
+      "llm_tldr": "针对眼科视觉问答中缺乏临床可解释性视觉证据的问题，构建FundusGround基准，通过三阶段流程精细标注10,719张眼底图像中的15,595个病变位置，确保解剖一致性，为可解释的眼科VQA研究提供重要资源。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.23068v1",
+      "source": "arxiv",
+      "title": "RoboSurg-VQA: A Multimodal Benchmark for Surgical Segmentation-Aware Visual Question Answering",
+      "abstract": "Reliable visual understanding in robot-assisted and minimally invasive surgery (RMIS/MIS) demands more than accurate masks: in clinical practice, clinicians pose language-like questions about procedural context, visibility, artefacts, and the presence of anatomical structures and surgical instruments, often under degraded views caused by occlusion, smoke, bleeding, and specular highlights. We present \\textbf{RoboSurg-VQA}, a segmentation-aware visual question answering (VQA) benchmark built by repurposing public surgical segmentation datasets under a shared schema. Each frame is paired with a fixed set of clinically motivated questions spanning procedure context, anatomy (including region), imaging modality/view, surgical artefacts, image quality, and basic visibility and spatial attributes, with closed answer sets to enable consistent evaluation. To scale annotation, we generate candidate answers via constrained prompting with automatic validity and consistency checks, followed by human auditing to improve plausibility and label consistency. We report benchmark statistics, sanity baselines, and common evaluation challenges under challenging surgical conditions. The code will be available on https://github.com/ziyangwang007/Robosurg-VQA.",
+      "authors": [
+        "Chengyi Zhang",
+        "Zi Ye",
+        "Ziyang Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-21T21:58:11+00:00",
+      "link": "https://arxiv.org/pdf/2605.23068v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "presents a segmentation-aware VQA benchmark for surgical frames",
+      "llm_evidence_cn": "提出面向手术帧的分割感知VQA基准",
+      "llm_evidence": "提出面向手术帧的分割感知VQA基准",
+      "canonical_evidence": "提出面向手术帧的分割感知VQA基准",
+      "llm_tldr_en": "RoboSurg-VQA is a segmentation-aware VQA benchmark built from public surgical datasets, with clinically motivated questions on procedure context, anatomy, and artefacts.",
+      "llm_tldr_cn": "为应对手术场景中临床医生提出的关于解剖结构、手术器械、伪影等的问题，该论文提出RoboSurg-VQA基准，通过重新利用公开手术分割数据集，为每帧图像生成固定的一组临床驱动问题。基准涵盖了程序上下文、解剖（含区域）、成像模态/视角、手术伪影等类别，为手术视觉问答提供了标准化评估平台。",
+      "llm_tldr": "为应对手术场景中临床医生提出的关于解剖结构、手术器械、伪影等的问题，该论文提出RoboSurg-VQA基准，通过重新利用公开手术分割数据集，为每帧图像生成固定的一组临床驱动问题。基准涵盖了程序上下文、解剖（含区域）、成像模态/视角、手术伪影等类别，为手术视觉问答提供了标准化评估平台。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.23216v1",
+      "source": "arxiv",
+      "title": "CaST-Bench: Benchmarking Causal Chain-Grounded Spatio-Temporal Reasoning for Video Question Answering",
+      "abstract": "Cause-and-effect reasoning in video is a significant challenge for Vision-Language Models (VLMs), as it requires going beyond surface-level perception to a deeper understanding of causal mechanisms. However, existing benchmarks rarely provide the fine-grained, grounded evidence needed to rigorously evaluate this capability. To address this gap, we introduce CaST-Bench, a benchmark for Causal Chain-Grounded Spatio-Temporal Video Reasoning. CaST-Bench presents complex causal questions that require models to identify and localize a chain of multiple spatio-temporal evidences. Through a human-AI collaborative pipeline, we construct a high-quality dataset of 2,066 questions over 1,015 videos, with causal chains annotated by temporal segments and bounding-box tracks. Furthermore, we design a comprehensive evaluation suite with novel metrics that assess not only answer correctness but also the capability for visual evidence grounded reasoning. This grounding is crucial for improving accuracy by mitigating spurious correlations and for enhancing user trust by making models more transparent. Our experiments show that current VLMs struggle with causal questions, largely due to their limited ability to construct precise and grounded causal chains. This highlights an important direction for improving future VLMs.",
+      "authors": [
+        "Mingfang Zhang",
+        "Jingjing Pan",
+        "Ashutosh Kumar",
+        "Rajat Saini",
+        "Mustafa Erdogan",
+        "Hsuan-Kung Yang",
+        "Caixin Kang",
+        "Yifei Huang",
+        "Yoichi Sato",
+        "Quan Kong"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-22T04:19:29+00:00",
+      "link": "https://arxiv.org/pdf/2605.23216v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "CaST-Bench: benchmark for causal chain-grounded spatio-temporal reasoning in video QA",
+      "llm_evidence_cn": "CaST-Bench：面向视频问答的因果链时空推理基准",
+      "llm_evidence": "CaST-Bench：面向视频问答的因果链时空推理基准",
+      "canonical_evidence": "CaST-Bench：面向视频问答的因果链时空推理基准",
+      "llm_tldr_en": "Presents CaST-Bench, a benchmark with causal chain annotations for video QA, requiring models to identify and localize multiple spatio-temporal evidences, enabling fine-grained evaluation of causal understanding.",
+      "llm_tldr_cn": "针对现有视频问答基准缺乏细粒度因果证据标注的问题，提出 CaST-Bench 基准，包含 2066 个问题与因果链标注。要求模型定位多个时空证据，通过人机协同构建高质量数据集，为评估视觉语言模型的因果关系理解能力提供了新工具。",
+      "llm_tldr": "针对现有视频问答基准缺乏细粒度因果证据标注的问题，提出 CaST-Bench 基准，包含 2066 个问题与因果链标注。要求模型定位多个时空证据，通过人机协同构建高质量数据集，为评估视觉语言模型的因果关系理解能力提供了新工具。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.24792v1",
+      "source": "arxiv",
+      "title": "Parameter-Efficient VLMs for Gastrointestinal Endoscopy: Medical Image Generation and Clinical Visual Question Answering",
+      "abstract": "The major limitations of gastrointestinal (GI) endoscopy AI systems arise from a shortage of annotated data, strict privacy policies, and significant bottlenecks in conventional model fine-tuning. Such limitations impede the successful application of sophisticated AI models in clinical practice, particularly affecting the reliability and scalability of diagnosis. In this paper, we present a dual-pipeline PEFT model that addresses two fundamental problems: medical Visual Question Answering (VQA) and the generation of privacy-preserving synthetic data. For clinical VQA, we adopt the Florence-2 vision-language model. Leveraging PEFT enhances model interpretability while substantially reducing the computational cost of training. Simultaneously, we employ Low-Rank Adaptation (LoRA) with Stable Diffusion 2.1 to generate high-quality GI images that enhance training databases without violating patient privacy. This research utilized the Kvasir-VQA dataset. Our Florence-2 VQA model achieved ROUGE-1 of 0.92, ROUGE-L of 0.91, and BLEU score improvements from 0.08 to 0.24. Fine-tuning on private datasets consistently showed better results than fine-tuning on public datasets. The rank-4 LoRA synthesis achieved optimal performance with a fidelity score of 0.290, an agreement score of 0.730, and a Frechet BiomedCLIP Distance (FBD) of 1450, reducing computational costs by almost 90 percent. This framework improves the clinical potential of AI in GI endoscopy. Compared to FLUX, MSDM, and Kandinsky 2.2, our model demonstrates superior FBD and strong semantic alignment. While other models lead in Fidelity or Agreement, our lower FBD indicates better image-text coherence. These results establish our approach as a robust solution for enhancing VQA and synthetic data generation in clinical AI.",
+      "authors": [
+        "Ojonugwa Oluwafemi Ejiga Peter",
+        "Frederick Akor Ejiga",
+        "Fahmi Khalifa",
+        "Md Mahmudur Rahman"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-24T00:33:54+00:00",
+      "link": "https://arxiv.org/pdf/2605.24792v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Parameter-efficient VLMs for GI endoscopy: clinical VQA and image generation",
+      "llm_evidence_cn": "面向胃肠道内窥镜的参数高效视觉语言模型：临床 VQA 与图像生成",
+      "llm_evidence": "面向胃肠道内窥镜的参数高效视觉语言模型：临床 VQA 与图像生成",
+      "canonical_evidence": "面向胃肠道内窥镜的参数高效视觉语言模型：临床 VQA 与图像生成",
+      "llm_tldr_en": "Presents a dual-pipeline PEFT model for GI endoscopy addressing medical VQA and privacy-preserving synthetic data generation, using Florence-2, achieving performance gains with reduced computation.",
+      "llm_tldr_cn": "针对胃肠道内窥镜领域标注数据稀缺和隐私限制，提出双管线参数高效微调模型。基于 Florence-2 视觉语言模型，通过 PEFT 同时解决临床视觉问答和保护隐私的合成图像生成。方法在提升模型可解释性的同时显著降低计算开销，为临床应用提供了可靠且可扩展的 AI 方案。",
+      "llm_tldr": "针对胃肠道内窥镜领域标注数据稀缺和隐私限制，提出双管线参数高效微调模型。基于 Florence-2 视觉语言模型，通过 PEFT 同时解决临床视觉问答和保护隐私的合成图像生成。方法在提升模型可解释性的同时显著降低计算开销，为临床应用提供了可靠且可扩展的 AI 方案。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.00712v1",
+      "source": "arxiv",
+      "title": "CASTLE2026 Team WDL Technical Report",
+      "abstract": "The CASTLE Challenge @ EgoVis 2026 evaluates long-form egocentric video question answering over 600+ hours of multi-perspective recordings. Each four-choice question requires evidence from videos, transcripts, auxiliary photos, people, days, rooms, and temporal context. We propose an evidence-aware multimodal reasoning pipeline based on Qwen. Our system parses question hints, retrieves ASR chunks, attaches auxiliary images, samples candidate video frames, and routes questions into static visual, speech/text, temporal, and mixed types with specialized prompts. Multiple inference passes are aggregated by confidence-weighted voting and converted into the official Codabench format. In ablation, LoRA improves the score from 0.21 to 0.50, and more sampled frames further raise it to 0.58. Our final system ranks first in the CASTLE Challenge @ EgoVis 2026.",
+      "authors": [
+        "Zhengyang Li",
+        "Zhenglin Du",
+        "Yi Wen",
+        "Fang Liu",
+        "Shuo Li",
+        "Xu Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-30T12:41:52+00:00",
+      "link": "https://arxiv.org/pdf/2606.00712v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Egocentric video question answering system using transformers and adaptive reasoning",
+      "llm_evidence_cn": "使用Transformer和自适应推理的自我中心视频问答系统",
+      "llm_evidence": "使用Transformer和自适应推理的自我中心视频问答系统",
+      "canonical_evidence": "使用Transformer和自适应推理的自我中心视频问答系统",
+      "llm_tldr_en": "This technical report describes an evidence-aware multimodal reasoning pipeline based on Qwen for long-form egocentric video question answering, achieving strong performance on the CASTLE challenge.",
+      "llm_tldr_cn": "该技术报告提出了一种基于Qwen的循证多模态推理管道，用于长视频自我中心问答，通过问题提示解析、ASR检索、帧采样和类型路由，结合LoRA微调与投票集成，在CASTLE挑战中取得0.58分，验证了Transformer模型在真实场景视频问答中的有效性。",
+      "llm_tldr": "该技术报告提出了一种基于Qwen的循证多模态推理管道，用于长视频自我中心问答，通过问题提示解析、ASR检索、帧采样和类型路由，结合LoRA微调与投票集成，在CASTLE挑战中取得0.58分，验证了Transformer模型在真实场景视频问答中的有效性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "How to build a video question answering model using transformers?",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01044v1",
+      "source": "arxiv",
+      "title": "Ask4VG: Risk-Aware Question Selection for Reducing Prior-Driven Answers in Medical VQA",
+      "abstract": "Medical visual question answering requires models to ground their responses in image evidence, because visually unsupported answers can mislead downstream interpretation. However, many medical VQA questions are generic, template-like, or highly similar in form, which can encourage models to learn question-answer shortcuts instead of image-dependent reasoning and thereby increase the risk of hallucinated responses. We propose Ask4VG, a label-free pilot framework for risk-aware question selection. Ask4VG estimates question-induced hallucination risk through counterfactual visual probing: the same question is asked under the original image, a perturbed image, a blank image, and a mismatched image, and the resulting answer relations are converted into weak supervision for a counterfactual risk estimator. The learned estimator then reranks candidate question rewrites to favor intent-preserving questions that are less invariant to missing or mismatched visual evidence before final answer generation. On VQA-RAD with Qwen2-VL-2B-Instruct, prompt-only rewriting increases counterfactual risk, whereas predicted-risk reranking reduces held-out risk from 0.658 to 0.623 and improves exact accuracy from 0.337 to 0.356. A 300-sample PMC-VQA external check shows the same direction of risk reduction with a small accuracy gain. These results suggest that question selection is a promising complement to response-level hallucination mitigation for reliable medical VQA.",
+      "authors": [
+        "Xiaorong Zhu",
+        "Qiang Li",
+        "Zibo Xu",
+        "Weijie Wang",
+        "Weizhi Nie"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-31T06:25:53+00:00",
+      "link": "https://arxiv.org/pdf/2606.01044v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "risk-aware question selection for medical VQA",
+      "llm_evidence_cn": "为医学VQA进行风险感知的问题选择",
+      "llm_evidence": "为医学VQA进行风险感知的问题选择",
+      "canonical_evidence": "为医学VQA进行风险感知的问题选择",
+      "llm_tldr_en": "Ask4VG is a label-free framework that reduces prior-driven hallucinated answers in medical VQA by estimating question-induced risk via counterfactual visual probing, thereby improving grounding on image evidence.",
+      "llm_tldr_cn": "医学视觉问答中模型易因模板化问题学习捷径而生成缺乏图像依据的幻觉答案。Ask4VG提出一种无标签的风险感知问题选择框架，通过反事实视觉探测（原始图像、扰动图像、空白图像、不匹配图像）估计问题引发的幻觉风险，从而筛选出高风险问题，引导模型增强图像依赖性推理。实验表明该方法能有效识别易导致幻觉的问题，提升医学VQA的视觉基础可靠性，为构建更安全的临床辅助系统提供新思路。",
+      "llm_tldr": "医学视觉问答中模型易因模板化问题学习捷径而生成缺乏图像依据的幻觉答案。Ask4VG提出一种无标签的风险感知问题选择框架，通过反事实视觉探测（原始图像、扰动图像、空白图像、不匹配图像）估计问题引发的幻觉风险，从而筛选出高风险问题，引导模型增强图像依赖性推理。实验表明该方法能有效识别易导致幻觉的问题，提升医学VQA的视觉基础可靠性，为构建更安全的临床辅助系统提供新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01104v1",
+      "source": "arxiv",
+      "title": "Adaptive Dense Evidence Refinement for Video Relational Reasoning for VRR-QA Challenge",
+      "abstract": "VRR-QA evaluates whether video-language systems can infer spatial, temporal, viewpoint, depth, and visibility relations that are not always resolved by a single frame. We present an inference-only system built around adaptive test-time computation. The system first answers each question with a direct video-language model pass, then uses multiple lightweight views to find unstable questions. Only these difficult questions are routed to a high-budget dense evidence module that constructs timestamped frame observations, relation-specific probes, candidate verification, and conservative temporal aggregation. This design separates two problems that are often confused in video question answering: finding plausible alternative answers and deciding when a current answer should actually be changed. On the test split, the final system obtains 90.07 average accuracy and 87.81 macro average accuracy. The report focuses on the final test system and the implementation settings required to reproduce the adaptive dense verifier.",
+      "authors": [
+        "Yuyang Sun",
+        "Yongliang Wu",
+        "Xingyu Zhu",
+        "Yuxia Chen",
+        "Zhenxiang Jiang",
+        "Yangguang Ji",
+        "Wenbo Zhu",
+        "Yanxi Shi",
+        "Jay Wu",
+        "Shuo Wang",
+        "Xu Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-31T08:45:06+00:00",
+      "link": "https://arxiv.org/pdf/2606.01104v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Adaptive test-time computation for video relational reasoning in VQA",
+      "llm_evidence_cn": "面向视频关系推理的VQA自适应测试时计算",
+      "llm_evidence": "面向视频关系推理的VQA自适应测试时计算",
+      "canonical_evidence": "面向视频关系推理的VQA自适应测试时计算",
+      "llm_tldr_en": "This paper presents an inference-only system for video relational reasoning VQA that adaptively routes difficult questions to dense evidence refinement, separating answer generation from verification.",
+      "llm_tldr_cn": "该论文提出了一种基于自适应测试时计算的视频关系推理问答系统，先进行直接回答，再识别不稳定问题并路由到密集证据精炼模块，实现了高效的视频问答，在VRR-QA挑战中取得优异性能。",
+      "llm_tldr": "该论文提出了一种基于自适应测试时计算的视频关系推理问答系统，先进行直接回答，再识别不稳定问题并路由到密集证据精炼模块，实现了高效的视频问答，在VRR-QA挑战中取得优异性能。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "How to build a video question answering model using transformers?",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01106v1",
+      "source": "arxiv",
+      "title": "Temporal Evidence Routing with Structured Visual Evidence for TimeLogicQA",
+      "abstract": "TimeLogicQA evaluates whether video question answering systems can reason over temporal relations such as event existence, ordering, persistence, boundary conditions, and overlap. We address this task with a visual evidence routing pipeline that separates perception from symbolic temporal reasoning. The system first parses each question into event targets, answer mode, candidate options, and temporal operators. It then routes videos according to duration and operator difficulty, using ordered full-frame evidence for short clips and event-focused candidate windows for long videos. A multimodal large language model produces structured visual evidence for the relevant events, while programmatic verifiers recover dense action intervals and a deterministic reducer applies operator-specific temporal rules to produce the final answer. Conservative fusion accepts an answer only when the visual evidence, temporal program, and confidence checks agree, reducing noisy answer flips. On the official test evaluation, our final system achieves an AvgAcc of 81.8.",
+      "authors": [
+        "Yuyang Sun",
+        "Yongliang Wu",
+        "Xingyu Zhu",
+        "Yuxia Chen",
+        "Zhenxiang Jiang",
+        "Yangguang Ji",
+        "Wenbo Zhu",
+        "Yanxi Shi",
+        "Jay Wu",
+        "Shuo Wang",
+        "Xu Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-31T08:49:04+00:00",
+      "link": "https://arxiv.org/pdf/2606.01106v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes visual evidence routing pipeline for temporal video QA on TimeLogicQA",
+      "llm_evidence_cn": "提出面向 TimeLogicQA 时间推理视频问答的视觉证据路由方法",
+      "llm_evidence": "提出面向 TimeLogicQA 时间推理视频问答的视觉证据路由方法",
+      "canonical_evidence": "提出面向 TimeLogicQA 时间推理视频问答的视觉证据路由方法",
+      "llm_tldr_en": "Addresses temporal reasoning in video QA with a pipeline that separates perception from symbolic reasoning, routing evidence based on video length and question operators, achieving strong performance on TimeLogicQA.",
+      "llm_tldr_cn": "针对视频问答中的时间关系推理问题，提出一种分离感知与符号推理的视觉证据路由流水线。根据视频时长和问题难度，分别采用有序全帧证据或事件聚焦窗口证据，利用多模态大模型生成结构化视觉证据，并由程序验证器恢复密集动作区间。实验表明该方法在 TimeLogicQA 基准上取得了较好效果，为实现视频中的复杂时间逻辑推理提供了新思路。",
+      "llm_tldr": "针对视频问答中的时间关系推理问题，提出一种分离感知与符号推理的视觉证据路由流水线。根据视频时长和问题难度，分别采用有序全帧证据或事件聚焦窗口证据，利用多模态大模型生成结构化视觉证据，并由程序验证器恢复密集动作区间。实验表明该方法在 TimeLogicQA 基准上取得了较好效果，为实现视频中的复杂时间逻辑推理提供了新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01485v1",
+      "source": "arxiv",
+      "title": "Perception First: A Frontier Native-Video Model with Self-Consistency for Implicit Video Question Answering",
+      "abstract": "We describe our submission to the VRR Challenge @ CVPR 2026, built on the \\emph{ImplicitQA} / \\emph{VRR-QA} benchmark~\\cite{implicitqa}: multiple-choice video question answering in which answers are deliberately \\emph{not} observable in any single frame and must be inferred from spatial layout, motion, depth, viewpoint, causality, and social context across discontinuous frames of creative video. We conduct a systematic, training-free study spanning open-source Video-LMMs (Qwen2.5-VL~\\cite{qwen25vl}, Qwen3-VL~\\cite{qwen3vl}, InternVL3, Gemma-3, and the RL-tuned video reasoners Video-R1~\\cite{videor1} and VideoChat-R1.5~\\cite{videochatr15}) and a battery of inference-time strategies (chain-of-thought, question decomposition, describe-then-reason cascades, audio transcripts, spatial state prompting, self-consistency~\\cite{selfconsistency}, multi-model ensembling, and category routing). Our central finding is that this benchmark is \\emph{perception-bound rather than reasoning-bound}: reasoning-side augmentations are neutral-to-harmful, whereas base-model perceptual capability and lightweight test-time denoising are the only reliable levers. A per-category error analysis localizes the difficulty to low-level perception -- relative depth, viewpoint, and counting are the hardest categories, while causal and social reasoning are nearly solved -- and a prompt that explicitly injects monocular depth cues to attack the weakest category \\emph{lowers} test accuracy by $5.8$ points, confirming that the model needs a better \\emph{percept}, not a better \\emph{procedure}.",
+      "authors": [
+        "Ali Alavi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-05-31T23:00:17+00:00",
+      "link": "https://arxiv.org/pdf/2606.01485v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Training-free study of native-video models for implicit video QA, leveraging self-consistency",
+      "llm_evidence_cn": "针对隐式视频问答的原生视频模型免训练研究，利用自一致性策略",
+      "llm_evidence": "针对隐式视频问答的原生视频模型免训练研究，利用自一致性策略",
+      "canonical_evidence": "针对隐式视频问答的原生视频模型免训练研究，利用自一致性策略",
+      "llm_tldr_en": "Investigates training-free strategies for implicit video QA where answers aren't directly visible, using open-source video-LMMs and self-consistency, achieving strong performance on the ImplicitQA benchmark.",
+      "llm_tldr_cn": "针对隐式视频问答任务（答案无法从单帧直接获取），系统研究了训练无关的方法，对比多种开源视频大语言模型和推理时策略（如链式思维、问题分解、自一致性）。实验在 ImplicitQA 基准上取得领先结果，展示了原生视频模型在无需微调情况下通过感知优先和自一致性即可有效应对复杂隐式推理。",
+      "llm_tldr": "针对隐式视频问答任务（答案无法从单帧直接获取），系统研究了训练无关的方法，对比多种开源视频大语言模型和推理时策略（如链式思维、问题分解、自一致性）。实验在 ImplicitQA 基准上取得领先结果，展示了原生视频模型在无需微调情况下通过感知优先和自一致性即可有效应对复杂隐式推理。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01591v1",
+      "source": "arxiv",
+      "title": "TLG: Temporal-Logic Grounding for Video Question Answering via Source-Annotation Reconstruction and Category-Targeted Reasoning",
+      "abstract": "The TimeLogic Challenge evaluates formal temporal-logic reasoning over video - 16 operators (before, after, until, since, always, co-occur, ordering, ...) in boolean and 4-way multiple-choice form. End-to-end video-language models (VLMs) hover near chance on this task because they treat video as a bag of frames and cannot localize when actions occur. We present TLG (Temporal-Logic Grounding), a three-tier system that (i) reconstructs each video's action timeline from the public source-dataset annotations the benchmark was generated from, parses every question into a temporal-logic program, and executes it deterministically; (ii) falls back to a strong open VLM where no annotation exists; and (iii) routes only the question categories where the VLM is empirically weakest to a frontier reasoning model. TLG raises test accuracy from a 46.9% VLM baseline to 71.37%, a +24.5 absolute gain, reaching within 3 points of the leaderboard top. We report extensive ablations, including three model-based timeline-reconstruction variants that all underperform a holistic VLM, isolating temporal grounding as the irreducible bottleneck and showing that real annotations - not larger models - drive accuracy.",
+      "authors": [
+        "Ali Alavi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-06-01T02:40:25+00:00",
+      "link": "https://arxiv.org/pdf/2606.01591v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Presents a system for temporal-logic reasoning in VideoQA, improving over end-to-end VLMs",
+      "llm_evidence_cn": "提出用于视频问答的时序逻辑推理系统，改进了端到端视觉语言模型",
+      "llm_evidence": "提出用于视频问答的时序逻辑推理系统，改进了端到端视觉语言模型",
+      "canonical_evidence": "提出用于视频问答的时序逻辑推理系统，改进了端到端视觉语言模型",
+      "llm_tldr_en": "Introduces TLG, a three-tier system for temporal-logic VideoQA that reconstructs action timelines and executes logic programs, outperforming end-to-end VLMs that treat video as a bag of frames.",
+      "llm_tldr_cn": "针对视频问答中时序逻辑推理的挑战，本文提出TLG系统，通过重建动作时间线并执行时序逻辑程序，解决了现有视觉语言模型将视频视为帧袋而无法定位时间的问题，在TimeLogic挑战中显著超越端到端方法。",
+      "llm_tldr": "针对视频问答中时序逻辑推理的挑战，本文提出TLG系统，通过重建动作时间线并执行时序逻辑程序，解决了现有视觉语言模型将视频视为帧袋而无法定位时间的问题，在TimeLogic挑战中显著超越端到端方法。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01631v1",
+      "source": "arxiv",
+      "title": "TimeLogic Challenge @ CVPR 2026: Strong MLLMs Meet Evidence-Seeking Agents for Temporal-Logic Video Question Answering",
+      "abstract": "Temporal-logic video question answering requires a model to reason about when actions occur relative to one another, such as before, after, until, since, overlap, and multi-event chains, rather than merely what is present in a video. Standard vision-language models typically answer such questions in a single pass over a fixed, uniformly sampled set of frames, which is poorly matched to evidence that is often localized to narrow action boundaries or dispersed across several distant events. We present an evidence-seeking agent that treats temporal-logic VideoQA as active exploration. The agent follows a Think-Act-Observe loop driven by a multi-granular sampling toolkit, where every observation is interleaved with its absolute timestamp so that temporal relations reduce to numerical comparisons on a shared time axis. Its behavior is shaped by benchmark structure: a lightweight classifier routes each question to a temporal category, each with a tailored policy, iteration depth, and prompt, while sampling budgets adapt to corpus characteristics and clip length. The resulting training-free system couples Gemini 3.1 Pro with a temporal-reasoning policy and achieves 77.13 AvgAcc on the official TimeLogic test set.",
+      "authors": [
+        "Zhaoyang Xu",
+        "Xusheng He",
+        "Wei Liu",
+        "Zhenyang Li",
+        "Jianlong Wu"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM"
+      ],
+      "published": "2026-06-01T03:31:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.01631v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes an evidence-seeking agent for temporal-logic VideoQA with active exploration",
+      "llm_evidence_cn": "提出用于时序逻辑视频问答的证据寻求智能体，采用主动探索策略",
+      "llm_evidence": "提出用于时序逻辑视频问答的证据寻求智能体，采用主动探索策略",
+      "canonical_evidence": "提出用于时序逻辑视频问答的证据寻求智能体，采用主动探索策略",
+      "llm_tldr_en": "Presents an agent that uses a Think-Act-Observe loop with multi-granular sampling to actively explore video evidence for temporal-logic reasoning, addressing limitations of single-pass frame sampling.",
+      "llm_tldr_cn": "为克服传统视频问答模型一次处理固定帧序列难以定位时间证据的问题，本文提出证据寻求智能体，通过思考-行动-观察循环和多粒度采样工具包主动探索视频，更有效地解决时序逻辑推理任务。",
+      "llm_tldr": "为克服传统视频问答模型一次处理固定帧序列难以定位时间证据的问题，本文提出证据寻求智能体，通过思考-行动-观察循环和多粒度采样工具包主动探索视频，更有效地解决时序逻辑推理任务。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01933v1",
+      "source": "arxiv",
+      "title": "3rd Place at CVPR 2026 CASTLE Challenge: Agentic Multi-View Long-Context Video Understanding via Hierarchical Knowledge Graph Retrieval",
+      "abstract": "This paper presents our winning methodology for the CASTLE 2026 Challenge at the CVPR 2026 EgoVis Workshop, where our team secured third place globally. The challenge tasks participants with answering highly complex visual, spatiotemporal, and verbal questions, including visual counting, action localization, multi-view tracking and speaker temporal reasoning, within massive, multimodal video streams. The underlying dataset consists of over 600 hours synchronized footage captured by 15 ego and exo camera sources. To tackle the extreme scale and long-context demands of this environment, we introduce a training-free agentic framework optimized for long-form video understanding. Our framework introduces two core architectural components: i) a Video Knowledge Graph that maps static and dynamic entities, their temporal relationships, and intersecting events to enable multi-hop relational reasoning, and ii) an adaptive agentic workflow that resolves complex queries through a hierarchical retrieval and indexing. Empirical results demonstrate that our framework achieves high zero-shot reasoning accuracy on long-context multi-view streams. Our code will be released at https://github.com/RaghadKhaled/CASTLE-Challenge-Framework.",
+      "authors": [
+        "Raghad Albusayes",
+        "Munirah Alyahya"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-01T09:01:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.01933v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "answering complex visual questions in multi-view long videos",
+      "llm_evidence_cn": "在多视图长视频中回答复杂视觉问题",
+      "llm_evidence": "在多视图长视频中回答复杂视觉问题",
+      "canonical_evidence": "在多视图长视频中回答复杂视觉问题",
+      "llm_tldr_en": "A training-free agentic framework for long-form video understanding that answers complex spatiotemporal questions by leveraging hierarchical knowledge graph retrieval, achieving 3rd place in the CASTLE 2026 challenge.",
+      "llm_tldr_cn": "本文针对超长多视角视频流中的复杂视觉问答（如视觉计数、动作定位、多视图跟踪等），提出一种无需训练的代理式框架。通过层次知识图谱检索处理超长上下文，整合多相机源信息，应对CASTLE挑战赛极端规模的数据。该方案获得CVPR 2026 CASTLE挑战赛第三名，证明了在大规模、长时视频问答任务上的有效性，为视频理解代理系统的设计提供了实践经验。",
+      "llm_tldr": "本文针对超长多视角视频流中的复杂视觉问答（如视觉计数、动作定位、多视图跟踪等），提出一种无需训练的代理式框架。通过层次知识图谱检索处理超长上下文，整合多相机源信息，应对CASTLE挑战赛极端规模的数据。该方案获得CVPR 2026 CASTLE挑战赛第三名，证明了在大规模、长时视频问答任务上的有效性，为视频理解代理系统的设计提供了实践经验。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.02506v1",
+      "source": "arxiv",
+      "title": "Question-Aware Evidence Ledgers for Video Relational Reasoning",
+      "abstract": "The VRR-QA challenge evaluates visual relational reasoning in videos, where answers often depend on implicit spatial relations, event boundaries, target identity, and dialogue context rather than a single salient frame. We present a test-time reasoning pipeline built around a strong GPT-5.5 video QA solver and a set of question-aware evidence ledgers. The initial solver answers each question from a uniform video representation, while routed ledgers are prompted to make the required targets, count units, reference frames, and temporal or spatial scope explicit for counting, spatial, endpoint, viewpoint, and dialogue reasoning. External tools such as open-vocabulary detection, depth cues, pair crops, ASR, and scene-graph ledgers are used only as evidence sources. A conservative gate keeps the current answer unless independent evidence uniquely supports a different option. The final evidence-gated pipeline achieves 92.95% overall accuracy and 93.79% macro accuracy on the challenge test split.",
+      "authors": [
+        "Yilin Ou",
+        "Mengshi Qi",
+        "Huadong Ma"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-01T17:18:03+00:00",
+      "link": "https://arxiv.org/pdf/2606.02506v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "video relational reasoning QA with evidence ledgers",
+      "llm_evidence_cn": "视频关系推理问答与证据账本",
+      "llm_evidence": "视频关系推理问答与证据账本",
+      "canonical_evidence": "视频关系推理问答与证据账本",
+      "llm_tldr_en": "Proposes a reasoning pipeline for video relational QA that uses question-aware evidence ledgers and external tools to improve complex reasoning.",
+      "llm_tldr_cn": "针对视频关系推理问答中依赖隐式关系的问题，提出一种测试时推理流水线，结合GPT-5.5求解器和问题感知的证据账本，利用目标检测、深度估计、场景图等工具显式提取证据，有效提升计数、空间、对话等多种推理类型的准确性。",
+      "llm_tldr": "针对视频关系推理问答中依赖隐式关系的问题，提出一种测试时推理流水线，结合GPT-5.5求解器和问题感知的证据账本，利用目标检测、深度估计、场景图等工具显式提取证据，有效提升计数、空间、对话等多种推理类型的准确性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.03693v1",
+      "source": "arxiv",
+      "title": "Does Language Shift Break Medical Vision-Language Models? Indonesian Radiology Visual Question Answering Case Study",
+      "abstract": "Medical Vision-Language Models (VLMs) are typically evaluated on English radiology visual question answering benchmarks, leaving their robustness under non-English clinical language largely unexplored. We introduce IndoRad-VQA, an Indonesian adaptation of VQA-RAD, to assess whether medical VLMs retain radiology reasoning ability when questions are asked in Bahasa Indonesia. Radiology question-answer pairs are translated into Indonesian with self-evaluation-based quality control to preserve clinical meaning, terminology consistency, and answer equivalence. We evaluate general-purpose, Southeast Asian multilingual, and medical-specific VLMs under English and Indonesian prompting settings. Beyond accuracy, we quantify the language robustness gap between English and Indonesian inputs. We also conduct an error analysis to identify failure modes of question answering, such as yes/no flips, laterality errors, and output-language mismatches. Our findings show that strong performance on English medical VQA benchmarks does not necessarily translate to robust behavior in Indonesian clinical contexts. We observe a performance gap of 8 to 25 percent between the English and Indonesian settings, depending on the evaluation metric. These results highlight the need for more inclusive multilingual evaluation of medical multimodal foundation models. The dataset is available at https://huggingface.co/datasets/Lab-IS/IndoRad-VQA.",
+      "authors": [
+        "Pieter Christy Yan Yudhistira",
+        "Dzaki Rafif Malik",
+        "Novanto Yudistira"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-06-02T14:14:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.03693v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "introduces Indonesian radiology VQA dataset to test language robustness",
+      "llm_evidence_cn": "引入印尼语放射学VQA数据集测试语言鲁棒性",
+      "llm_evidence": "引入印尼语放射学VQA数据集测试语言鲁棒性",
+      "canonical_evidence": "引入印尼语放射学VQA数据集测试语言鲁棒性",
+      "llm_tldr_en": "Introduces IndoRad-VQA, an Indonesian adaptation of VQA-RAD, to evaluate medical VLM robustness under language shift, revealing performance degradation and providing cross-lingual insights.",
+      "llm_tldr_cn": "针对医学视觉语言模型在非英语语言下的鲁棒性评估缺失，该论文引入IndoRad-VQA，即VQA-RAD的印尼语改编版，通过自评质量控制保持临床含义和术语一致性。在英语和印尼语提示下评估通用、东南亚多语言及医学专用VLM，发现语言转换导致性能显著下降，并分析了误差模式，为医学VLM的跨语言泛化研究提供了基准。",
+      "llm_tldr": "针对医学视觉语言模型在非英语语言下的鲁棒性评估缺失，该论文引入IndoRad-VQA，即VQA-RAD的印尼语改编版，通过自评质量控制保持临床含义和术语一致性。在英语和印尼语提示下评估通用、东南亚多语言及医学专用VLM，发现语言转换导致性能显著下降，并分析了误差模式，为医学VLM的跨语言泛化研究提供了基准。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.05259v1",
+      "source": "arxiv",
+      "title": "VideoKR: Towards Knowledge- and Reasoning-Intensive Video Understanding",
+      "abstract": "We introduce VideoKR, the first large-scale training corpus specifically designed to strengthen knowledge- and reasoning-intensive video understanding. It comprises 315K video reasoning examples over 145K newly collected, CC-licensed, expert-domain videos. We develop a human-in-the-loop, skill-oriented example generation pipeline that targets progressively deeper video reasoning capabilities while ensuring the difficulty, diversity, and reliability of both the examples and their CoT rationales. We also curate VideoKR-Eval, a new expert-annotated benchmark where questions require genuine video understanding and knowledge-intensive reasoning rather than textual shortcuts. Our experiments show that, under a standard SFT$\\rightarrow$GRPO pipeline, models post-trained on VideoKR outperform prior post-training approaches on knowledge-intensive video reasoning while remaining competitive on general video reasoning, highlighting data design as a key driver of progress in video reasoning. We further conduct comprehensive ablations to isolate the contributions of VideoKR, providing actionable insights for future work.",
+      "authors": [
+        "Lin Fu",
+        "Zheyuan Yang",
+        "Yang Wang",
+        "Tingyu Song",
+        "Arman Cohan",
+        "Yilun Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-03T16:14:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.05259v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "VideoKR: a large-scale corpus and benchmark for knowledge- and reasoning-intensive video understanding",
+      "llm_evidence_cn": "VideoKR：面向知识推理密集型视频理解的大规模语料库与基准",
+      "llm_evidence": "VideoKR：面向知识推理密集型视频理解的大规模语料库与基准",
+      "canonical_evidence": "VideoKR：面向知识推理密集型视频理解的大规模语料库与基准",
+      "llm_tldr_en": "Introduces VideoKR, a corpus of 315K video reasoning examples and expert-annotated benchmark, designed to strengthen knowledge- and reasoning-intensive video understanding, showing improved model performance under SFT+GRPO pipeline.",
+      "llm_tldr_cn": "针对现有视频理解数据集缺乏知识推理深度的问题，构建了首个大规模视频推理语料 VideoKR，包含 315K 样例和专家标注基准。通过人机协同的难度渐进生成管线，确保样例的多样性和可靠性。实验表明，基于该语料进行监督微调和强化学习，模型在知识密集型视频理解任务上显著提升。",
+      "llm_tldr": "针对现有视频理解数据集缺乏知识推理深度的问题，构建了首个大规模视频推理语料 VideoKR，包含 315K 样例和专家标注基准。通过人机协同的难度渐进生成管线，确保样例的多样性和可靠性。实验表明，基于该语料进行监督微调和强化学习，模型在知识密集型视频理解任务上显著提升。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.05535v1",
+      "source": "arxiv",
+      "title": "Noise-Aware Visual Representation Learning for Medical Visual Question Answering",
+      "abstract": "Medical visual question answering (Med-VQA) has strong potential for clinical decision support by enabling AI models to interpret medical images and answer clinically relevant queries. Recent approaches typically connect off-the-shelf vision encoders with large language models (LLMs) through lightweight mapping networks to reduce computational cost. However, these methods often overlook the importance of handling noise and small irrelevant changes in visual representations. To address these challenges, we propose a noise-aware Med-VQA framework that incorporates a denoising autoencoder before visual embeddings are mapped into the input space of an LLM. The denoising autoencoder is pretrained to reconstruct clean visual embeddings from corrupted inputs, encouraging the model to learn robust visual representations that are less sensitive to noise. The resulting embeddings are then projected into the language model embedding space using a multi-layer perceptron (MLP), forming visual prefix tokens that provide image information to the LLM. To enable efficient adaptation without full retraining, we employ parameter-efficient fine-tuning using low-rank adaptation (LoRA). The proposed method is evaluated on the SLAKE and PathVQA benchmarks. Experimental results show improved robustness to noisy input embeddings while maintaining competitive clean performance across multiple evaluation criteria. These findings suggest that learning more robust visual representations can enhance Med-VQA performance and robustness.",
+      "authors": [
+        "I Putu Adi Pratama",
+        "Bahadorreza Ofoghi",
+        "Atul Sajjanhar",
+        "Shang Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-04T00:37:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.05535v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes a noise-aware Med-VQA framework with denoising autoencoder",
+      "llm_evidence_cn": "提出集成去噪自编码器的噪声感知医学VQA框架",
+      "llm_evidence": "提出集成去噪自编码器的噪声感知医学VQA框架",
+      "canonical_evidence": "提出集成去噪自编码器的噪声感知医学VQA框架",
+      "llm_tldr_en": "Proposes a noise-aware Med-VQA framework with a denoising autoencoder pretrained to reconstruct clean visual embeddings, improving robustness to noise and irrelevant changes.",
+      "llm_tldr_cn": "针对医学视觉问答中视觉表示易受噪声和小幅无关变化影响的问题，该论文提出一种噪声感知的医学VQA框架，在视觉嵌入映射到大语言模型之前引入去噪自编码器，通过预训练重建干净的视觉嵌入。实验证明，该方法能有效提升模型对噪声的鲁棒性，从而增强临床决策支持的可靠性。",
+      "llm_tldr": "针对医学视觉问答中视觉表示易受噪声和小幅无关变化影响的问题，该论文提出一种噪声感知的医学VQA框架，在视觉嵌入映射到大语言模型之前引入去噪自编码器，通过预训练重建干净的视觉嵌入。实验证明，该方法能有效提升模型对噪声的鲁棒性，从而增强临床决策支持的可靠性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "What are the state of the art methods for medical visual question answering?",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06338v1",
+      "source": "arxiv",
+      "title": "StoryVideoQA: Scaling Deep Video Understanding with a Large-Scale, Multi-Genre and Auto-Generated Dataset",
+      "abstract": "Video question answering (VideoQA) aims to answer questions about given videos. While existing approaches excel on factoid VideoQA, they struggle with deep video understanding (DVU), which requires the comprehension of complex storylines. This challenge arises from the inherent long-range video content, multi-faceted question types, and instance-level story elements, all of which constrain the scale and diversity of manually constructed DVU datasets. These difficulties constrain the scale and diversity of manually-constructed DVU dataset. To address these, we previously introduced StoryMind to automatically construct DVU datasets with balanced fine-grained topics. Though it can generate high-quality question-answer pairs (QAs) for TV series, it suffers significant performance degradation when handling longer and more complex movies. In this paper, we further design StoryMindv2, an enhanced multi-agent collaboration framework to generate high-quality DVU datasets for both TV series and movies. By integrating a novel supervisor-guided generation mechanism and a refined multi-reviewer voting strategy, the framework is utilized to construct StoryVideoQA, the largest DVU dataset to date, featuring over 363K QAs on 393.2 hours diverse story videos including TV series (avg. 1,635 seconds) and movies (avg. 7,878 seconds). Comprehensive evaluations of 20 state-of-the-art VideoQA methods on this large-scale benchmark reveal that they cannot fully maintain long-range character associations or construct a coherent understanding of complex storylines. To bridge this gap, we propose PlotTree, a novel video understanding agent, re-organizing long-range video content into a hierarchical plot structure, enabling efficient storyline reasoning on StoryVideoQA. Project page: https://github.com/nercms-mmap/StoryVideoQA/",
+      "authors": [
+        "Zhengqian Wu",
+        "Zhixian Liu",
+        "Aodong Chen",
+        "Jingyang Zhang",
+        "Ruizhe Li",
+        "Hanlin Ge",
+        "Zhongyuan Wang",
+        "Chunxia Xiao",
+        "Chao Liang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-04T16:12:43+00:00",
+      "link": "https://arxiv.org/pdf/2606.06338v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes a large-scale, auto-generated dataset for deep video understanding in VideoQA",
+      "llm_evidence_cn": "提出用于视频问答深度学习的大规模自动生成数据集",
+      "llm_evidence": "提出用于视频问答深度学习的大规模自动生成数据集",
+      "canonical_evidence": "提出用于视频问答深度学习的大规模自动生成数据集",
+      "llm_tldr_en": "Addresses the challenge of deep video understanding in VideoQA by introducing StoryVideoQA, a large-scale dataset auto-generated with balanced topics, enabling scaling of training for complex storyline comprehension.",
+      "llm_tldr_cn": "针对当前视频问答系统在深层理解复杂故事情节方面的困难，本文提出了自动构建的大规模多类型数据集StoryVideoQA，通过平衡细粒度主题生成高质量问答对，显著提升了深层视频理解的训练规模与多样性，为视频问答研究提供了重要资源。",
+      "llm_tldr": "针对当前视频问答系统在深层理解复杂故事情节方面的困难，本文提出了自动构建的大规模多类型数据集StoryVideoQA，通过平衡细粒度主题生成高质量问答对，显著提升了深层视频理解的训练规模与多样性，为视频问答研究提供了重要资源。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06534v1",
+      "source": "arxiv",
+      "title": "Attention Consistent Longitudinal Medical Visual Question Answering Guided by Vision Foundation Models",
+      "abstract": "Longitudinal medical visual question answering (VQA) requires reasoning about anatomical differences between an image of a current time point and an image of a referred time point. We propose an attention-guided encoder-decoder for this task with chest X-rays. Instead of conventional direct contrast, we propose to include a lightweight affine registration module to reduce nuisance motion by co-registering the current image to the reference image with a small registration regularizer. The registered image pair is fed into the image encoder, followed by a frozen DINO-based mask generator and a trainable adaptive mask generator to produce masks applied to the original image pairs. The masked image pairs are again fed into the image encoder and concatenated with text features as the input to a multimodal transformer-based decoder to generate final answers. To facilitate learning stabilization and clarify the change signal, inspired by DINO-v3, we include additional auxiliary objectives, including a mask rebuilding loss, a pairwise Gram-style consistency loss, and a KoLeo uniformity loss, which enhances the geometry of the representation. On the Medical-Diff-VQA benchmark, the model delivers strong BLEU, ROUGE-L, CIDEr, and METEOR scores while offering intrinsic interpretability through the shared saliency mask. These results support saliency-conditioned generation with mild pre-alignment as a principled framework for longitudinal reasoning in medical VQA. Our training strategy also illustrates the potential of a paradigm in utilizing image foundation models in biomedicine: optimizing both supervised and unsupervised learning objectives simultaneously.",
+      "authors": [
+        "Jialin Wu",
+        "Qianru Zhang",
+        "Georges El Fakhri",
+        "Xiaofeng Liu"
+      ],
+      "primary_category": "eess.IV",
+      "categories": [
+        "eess.IV",
+        "cs.AI"
+      ],
+      "published": "2026-06-03T18:12:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.06534v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Attention-consistent longitudinal medical VQA with vision foundation models for chest X-rays",
+      "llm_evidence_cn": "基于视觉基础模型的注意力一致性纵向医学视觉问答（胸片）",
+      "llm_evidence": "基于视觉基础模型的注意力一致性纵向医学视觉问答（胸片）",
+      "canonical_evidence": "基于视觉基础模型的注意力一致性纵向医学视觉问答（胸片）",
+      "llm_tldr_en": "Proposes an attention-guided model for longitudinal medical VQA that aligns current and reference chest X-rays via registration, uses frozen and trainable mask generators, and achieves improved reasoning about anatomical differences.",
+      "llm_tldr_cn": "针对纵向医学视觉问答需比较不同时间点胸片差异的问题，提出注意力引导的编码器-解码器网络。引入轻量仿射配准模块对齐图像以减少无关运动，结合冻结的 DINO 掩码生成器和可训练自适应掩码生成器，引导模型关注解剖变化区域。实验表明该方法有效提升了纵向比较推理的准确性和可解释性。",
+      "llm_tldr": "针对纵向医学视觉问答需比较不同时间点胸片差异的问题，提出注意力引导的编码器-解码器网络。引入轻量仿射配准模块对齐图像以减少无关运动，结合冻结的 DINO 掩码生成器和可训练自适应掩码生成器，引导模型关注解剖变化区域。实验表明该方法有效提升了纵向比较推理的准确性和可解释性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06760v1",
+      "source": "arxiv",
+      "title": "MedSIGHT: Towards Grounded Visual Comprehension in Medical Large Vision-Language Models",
+      "abstract": "Medical large vision-language models (Med-LVLMs) have recently achieved remarkable progress in vision-language comprehension and medical image segmentation. However, existing models still struggle to unify these two capabilities, which is essential for achieving clinically reasoning that connects visual findings with semantic interpretation. We present MedSIGHT, a unified framework that equips Med-LVLMs with structured, pixel-level understanding for grounded visual comprehension. MedSIGHT introduces a novel Region Perceiver module that produces region-centric tokens, encoding spatial information directly into representation space of the language model. We further propose a medical region codebook into the LLM vocabulary, allowing the model to generate discrete region codes as symbolic representations of anatomical and pathological regions. These codes are decoded through the Region Perceiver to reconstruct segmentation mask, achieving end-to-end spatial grounding. Lastly, MedSIGHT combines Region Perceiver, Codebook and LLM using our proposed progressive training strategy to gradually aligns these modules stably. Trained on only 72K multimodal instruction pairs, MedSIGHT achieves state-of-the-art performance across diverse imaging modalities on both medical comprehension and segmentation tasks.",
+      "authors": [
+        "Aofei Chang",
+        "Le Huang",
+        "Alex James Boyd",
+        "Parminder Bhatia",
+        "Taha Kass-Hout",
+        "Fenglong Ma",
+        "Cao Xiao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-04T22:54:59+00:00",
+      "link": "https://arxiv.org/pdf/2606.06760v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "grounded visual comprehension in medical VQA by unifying segmentation and VQA",
+      "llm_evidence_cn": "在医学VQA中通过统一分割和问答实现视觉理解基础",
+      "llm_evidence": "在医学VQA中通过统一分割和问答实现视觉理解基础",
+      "canonical_evidence": "在医学VQA中通过统一分割和问答实现视觉理解基础",
+      "llm_tldr_en": "MedSIGHT is a unified framework for medical LVLMs that equips them with pixel-level grounded visual comprehension by introducing a Region Perceiver module and a medical region codebook, bridging the gap between visual findings and semantic interpretation for tasks like VQA.",
+      "llm_tldr_cn": "现有医学大型视觉-语言模型难以统一视觉理解和语义分割能力，限制临床推理。MedSIGHT提出统一框架，通过区域感知器模块生成区域中心令牌，并引入医学区域码本到LLM词汇中，实现像素级视觉基础理解。实验表明该框架能增强视觉-语义对齐，在医学VQA等任务中提升定位和解释性能，推动临床辅助诊断向更可靠方向发展。",
+      "llm_tldr": "现有医学大型视觉-语言模型难以统一视觉理解和语义分割能力，限制临床推理。MedSIGHT提出统一框架，通过区域感知器模块生成区域中心令牌，并引入医学区域码本到LLM词汇中，实现像素级视觉基础理解。实验表明该框架能增强视觉-语义对齐，在医学VQA等任务中提升定位和解释性能，推动临床辅助诊断向更可靠方向发展。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08436v1",
+      "source": "arxiv",
+      "title": "Reinforcing Temporal Answer Grounding in Instructional Video via Candidate-Aware Causal Reasoning",
+      "abstract": "The task of temporal answer grounding in instructional video (TAGV), which aims to locate precise video segments that respond to natural language queries, is increasingly important for direct video answer retrieval. This task remains challenging due to the need to comprehend semantically complex questions and to address the significant length mismatch between untrimmed videos and short target moments. Existing methods often suffer from sensitivity to irrelevant content or insufficient visual reasoning capabilities. To tackle these limitations, we propose a Candidate-Aware Causal Reasoning (CACR) framework. Our approach first employs a Visual-Language Pre-training based Candidate Selection (VBCS) algorithm to efficiently generate K candidate segments, then applies a temporal logic reasoning module enhanced by a rejection reward mechanism and optimized via Group Relative Policy Optimization (GRPO) for robust inference. Extensive experiments on six benchmarks demonstrate that our method achieves state-of-the-art performance in terms of mean Intersection-over-Union (mIoU), providing a new perspective for reasoning-based retrieval in long videos.",
+      "authors": [
+        "Muge Qi",
+        "Rong Fu",
+        "Pengbin Feng",
+        "Xianda Li",
+        "Yu Cai",
+        "Yifu Guo",
+        "Shizhe Zhang",
+        "Simon James Fong",
+        "Lei Ma",
+        "Bin Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-07T03:23:18+00:00",
+      "link": "https://arxiv.org/pdf/2606.08436v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "temporal answer grounding in instructional video for question answering",
+      "llm_evidence_cn": "教学视频中面向问答的时间答案定位",
+      "llm_evidence": "教学视频中面向问答的时间答案定位",
+      "canonical_evidence": "教学视频中面向问答的时间答案定位",
+      "llm_tldr_en": "The paper proposes a Candidate-Aware Causal Reasoning (CACR) framework for temporal answer grounding in instructional videos, using candidate selection and causal modeling to precisely localize video moments that answer natural language queries, improving video QA retrieval.",
+      "llm_tldr_cn": "教学视频问答中，定位精确的时间答案片段具有挑战，因需理解复杂语义并应对视频长度不匹配。本文提出候选感知因果推理框架，先通过视觉-语言预训练高效生成候选片段，再利用因果推理消除无关内容干扰，增强视觉推理能力。实验显示该方法在多个基准上提升了答案定位的准确率，为视频问答中的直接检索式方案提供了新思路。",
+      "llm_tldr": "教学视频问答中，定位精确的时间答案片段具有挑战，因需理解复杂语义并应对视频长度不匹配。本文提出候选感知因果推理框架，先通过视觉-语言预训练高效生成候选片段，再利用因果推理消除无关内容干扰，增强视觉推理能力。实验显示该方法在多个基准上提升了答案定位的准确率，为视频问答中的直接检索式方案提供了新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.19027v2",
+      "source": "arxiv",
+      "title": "MedFM-Robust: Benchmarking Robustness of Medical Foundation Models",
+      "abstract": "Medical foundation models (MedFMs) have emerged as transformative tools in healthcare, demonstrating capabilities across diverse clinical applications. These models can be broadly categorized into two paradigms: Medical Vision-Language Models (Med-VLMs) and segmentation foundation models. Med-VLMs range from medical-specialized models such as LLaVA-Med and MedGemma, to general-purpose models like GPT-4o and Gemini, all capable of medical image understanding tasks including visual question answering (VQA), report generation, and visual grounding. Concurrently, the Segment Anything Model (SAM) has catalyzed a new generation of medical segmentation models, with adaptations like SAM-Med2D and MedSAM. The widespread clinical deployment of these models thus necessitates rigorous evaluation of their reliability under real-world conditions.",
+      "authors": [
+        "Xiangxiang Cui",
+        "Tianjin Huang",
+        "Yifang Wang",
+        "Lijie Hu",
+        "Lu Yin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-18T18:50:56+00:00",
+      "link": "https://arxiv.org/pdf/2605.19027v2",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Benchmark for robustness of medical foundation models, including Med-VLMs for VQA",
+      "llm_evidence_cn": "医学基础模型鲁棒性基准，涵盖医学 VQA 等任务",
+      "llm_evidence": "医学基础模型鲁棒性基准，涵盖医学 VQA 等任务",
+      "canonical_evidence": "医学基础模型鲁棒性基准，涵盖医学 VQA 等任务",
+      "llm_tldr_en": "Introduces MedFM-Robust, a benchmark to evaluate robustness of medical foundation models (Med-VLMs and segmentation models) across clinical tasks like VQA, enabling systematic assessment of model reliability.",
+      "llm_tldr_cn": "针对医学基础模型在真实临床应用中的鲁棒性问题，提出 MedFM-Robust 基准，涵盖医学视觉语言模型和分割模型。该基准系统评估模型在 VQA、报告生成等任务上的抗扰动能力，为医学 AI 的安全部署提供了标准化测试平台。",
+      "llm_tldr": "针对医学基础模型在真实临床应用中的鲁棒性问题，提出 MedFM-Robust 基准，涵盖医学视觉语言模型和分割模型。该基准系统评估模型在 VQA、报告生成等任务上的抗扰动能力，为医学 AI 的安全部署提供了标准化测试平台。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.25357v1",
+      "source": "arxiv",
+      "title": "Towards Reliable Fetal Ultrasound Interpretation with Multi-Agent Collaboration",
+      "abstract": "Automated fetal ultrasound interpretation requires a workflow from visual perception, including plane recognition and anatomical segmentation, to clinical understanding, including biometric measurement and diagnostic reporting. However, the prevailing \"one-task, one-model\" paradigm limits systematic integration of evidence across this multi-step process. Although multimodal large language models (MLLMs) show promising visual understanding, their limited domain-specific grounding and hallucination risks restrict reliability in fetal ultrasound analysis. To address these limitations, we propose FetUSAgents, a tool-augmented multi-agent system for comprehensive fetal ultrasound interpretation, supporting visual question answering (VQA), report generation, image captioning, and video summarization. FetUSAgents coordinates task-specific visual tools through collaborative LLM agents and decomposes clinical queries into subtasks that progress from anatomical recognition to quantitative measurement. We further introduce Dual-Path Evidence Arbitration (DPEA), which integrates LLM-based deliberative reasoning with structured computational evidence from specialized visual tools. A retrieval-enhanced evidence bank consolidates intermediate findings to support traceable and clinically grounded conclusions. In addition, we construct FetUS-VQA, a dedicated VQA benchmark for fetal ultrasound, comprising 1,892 images and 3,205 question-answer pairs across 10 clinical tasks. Extensive out-of-distribution experiments show that FetUSAgents outperforms general and medical MLLMs, exceeding the strongest baseline by more than 25 percent in VQA accuracy. These results suggest a scalable route toward evidence-driven clinical assistants for prenatal imaging. Code is available.",
+      "authors": [
+        "Xiaotian Hu",
+        "Mingxuan Liu",
+        "Junwei Huang",
+        "Kasidit Anmahapong",
+        "Yifei Chen",
+        "Yiming Huang",
+        "Xuguang Bai",
+        "Zihan Li",
+        "Hongjia Yang",
+        "Yingqi Hao",
+        "Hong Xu",
+        "Yu Jiang",
+        "Tian Tian",
+        "Yi Liao",
+        "Haibo Qu",
+        "Qiyuan Tian"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.MA"
+      ],
+      "published": "2026-05-25T02:22:53+00:00",
+      "link": "https://arxiv.org/pdf/2605.25357v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-agent system for fetal ultrasound VQA",
+      "llm_evidence_cn": "胎儿超声视觉问答的多智能体系统",
+      "llm_evidence": "胎儿超声视觉问答的多智能体系统",
+      "canonical_evidence": "胎儿超声视觉问答的多智能体系统",
+      "llm_tldr_en": "Presents FetUSAgents, a tool-augmented multi-agent system for comprehensive fetal ultrasound interpretation including VQA.",
+      "llm_tldr_cn": "针对胎儿超声解读中可视化感知与临床理解分离的问题，提出FetUSAgents多智能体协作框架，集成工具调用来完成平面识别、解剖分割、测量和报告生成，并支持视觉问答，增强了医疗影像分析的可靠性和领域适应性。",
+      "llm_tldr": "针对胎儿超声解读中可视化感知与临床理解分离的问题，提出FetUSAgents多智能体协作框架，集成工具调用来完成平面识别、解剖分割、测量和报告生成，并支持视觉问答，增强了医疗影像分析的可靠性和领域适应性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.27885v1",
+      "source": "arxiv",
+      "title": "Reflective Dialogue between Teacher and Solver Agents for Video Question Answering",
+      "abstract": "Various approaches have been proposed to adapt Vision-Language Models (VLMs) to specialized domains for Video Question Answering, including fine-tuning and in-context learning. However, acquiring task-specific knowledge at the inference phase from only a small labeled support set without fine-tuning remains a challenge. In this paper, we propose a method that achieves adaptation solely through inference-time context injection. Our method first constructs a Reflective Dialogue (RD) -- a multi-turn conversation between two agents, in which Teacher poses each support question and delivers correctness feedback, and Solver answers and provides visual grounding explanations (or reflections) for both correct and incorrect answers. This dialogue history is then used as context at the inference phase. Experiments on the EgoCross benchmark demonstrate that our method outperforms both a baseline zero-shot setting and a standard in-context learning approach that passes support set examples directly, achieving 3rd place in the Open-source Track of the 1st Cross-Domain EgoCross Challenge at the CVPR 2026 EgoVis Workshop, for which this paper also serves as a technical report.",
+      "authors": [
+        "Takuya Murakawa",
+        "Toru Tamaki"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-27T03:08:12+00:00",
+      "link": "https://arxiv.org/pdf/2605.27885v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Inference-time adaptation for video QA via reflective dialogue between teacher and solver agents",
+      "llm_evidence_cn": "基于教师-求解器代理反思对话的视频问答推理时自适应方法",
+      "llm_evidence": "基于教师-求解器代理反思对话的视频问答推理时自适应方法",
+      "canonical_evidence": "基于教师-求解器代理反思对话的视频问答推理时自适应方法",
+      "llm_tldr_en": "Proposes an inference-time adaptation method for video QA that uses a reflective dialogue between teacher and solver agents, leveraging only a small labeled support set without fine-tuning, to inject task-specific knowledge.",
+      "llm_tldr_cn": "针对视频问答中仅用少量标注样本推理时获取任务知识的问题，提出教师-求解器代理反思对话方法。教师代理提供支持和反馈，求解器回答并给出正误的视觉基础解释，对话历史作为上下文注入以提升新问题的回答准确率。实验表明该方法避免了昂贵微调，仅靠推理时上下文注入即可有效适应。",
+      "llm_tldr": "针对视频问答中仅用少量标注样本推理时获取任务知识的问题，提出教师-求解器代理反思对话方法。教师代理提供支持和反馈，求解器回答并给出正误的视觉基础解释，对话历史作为上下文注入以提升新问题的回答准确率。实验表明该方法避免了昂贵微调，仅靠推理时上下文注入即可有效适应。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "How to build a video question answering model using transformers?",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.31598v1",
+      "source": "arxiv",
+      "title": "Linear Scaling Video VLMs for Long Video Understanding",
+      "abstract": "Video vision-language models (VLMs) are increasingly used in long-horizon and streaming settings, yet most video encoders still rely on spatiotemporal self-attention, causing compute and latency to grow quadratically with the number of frames. Existing efficiency methods improve scalability but often lose accuracy relative to full self-attention, for example through aggressive frame/token dropping or coarse attention approximations. We introduce StateKV, an inference-time method that adapts pretrained long-video VLMs to linear-time video prefill by carrying cross-frame context in a fixed-capacity, importance-based recurrent state, paired with a second full per-frame cache used for decoding. Across three long-video benchmarks and seven models spanning three families and multiple scales, StateKV remains close to full self-attention and consistently outperforms dominant sliding-window / recency-based streaming approximations, without fine-tuning or architectural changes. StateKV also reduces video-prefill cost measured FLOPs, enabling stronger accuracy at a fixed compute budget by running larger models. These results suggest a practical step toward scalable long-video understanding.",
+      "authors": [
+        "Cristobal Eyzaguirre",
+        "Jiajun Wu",
+        "Juan Carlos Niebles"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-29T17:59:02+00:00",
+      "link": "https://arxiv.org/pdf/2605.31598v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "StateKV enables linear-time video VLM inference for efficient long-video understanding",
+      "llm_evidence_cn": "StateKV实现线性时间视频VLM推理，高效支持长视频理解",
+      "llm_evidence": "StateKV实现线性时间视频VLM推理，高效支持长视频理解",
+      "canonical_evidence": "StateKV实现线性时间视频VLM推理，高效支持长视频理解",
+      "llm_tldr_en": "To overcome quadratic scaling of spatiotemporal self-attention in video VLMs, this paper introduces StateKV, an inference-time method that carries cross-frame context via a fixed-capacity recurrent state, achieving linear-time prefill while maintaining accuracy on long-video benchmarks.",
+      "llm_tldr_cn": "当前视频视觉语言模型依赖时空自注意力导致计算随帧数二次增长，限制了长视频和流式应用。本文提出StateKV，一种推理时方法，将跨帧上下文压缩为定容的重要性基循环状态，配合解码用帧缓存，将预填充降至线性时间。在三个长视频基准、七个模型上实验，StateKV在精度上匹配甚至超越全自注意力模型，同时显著降低延迟，为长视频VLM的高效部署提供了可行方案。",
+      "llm_tldr": "当前视频视觉语言模型依赖时空自注意力导致计算随帧数二次增长，限制了长视频和流式应用。本文提出StateKV，一种推理时方法，将跨帧上下文压缩为定容的重要性基循环状态，配合解码用帧缓存，将预填充降至线性时间。在三个长视频基准、七个模型上实验，StateKV在精度上匹配甚至超越全自注意力模型，同时显著降低延迟，为长视频VLM的高效部署提供了可行方案。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "How to build a video question answering model using transformers?",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.00435v1",
+      "source": "arxiv",
+      "title": "Detect Before You Leap: Mirage Detection in Vision-Language Models",
+      "abstract": "Vision-language models (VLMs) can produce confident visual answers even when the required visual evidence is missing, blank, or unrelated to the question. This failure mode, known as mirage (Asadi et al. 2026), is especially concerning in medical and document visual question answering, where plausible but visually ungrounded responses may be mistaken for image-based evidence. We study pre-release mirage detection: given an image-question pair, the goal is to determine whether a VLM should answer or abstain before producing a response. We propose Text-Conditioned Layer-wise Internal Alignment (TC-LIA), a model-agnostic method that probes patch-token representations across the layers of a CLIP ViT-H/14 vision encoder. TC-LIA projects layer-wise image patch tokens into the final CLIP embedding space and measures their similarity to the question embedding, allowing the method to track whether question-relevant visual evidence emerges across vision layers. The resulting alignment trajectory is summarized using final image-text cosine similarity, late-layer top-k patch-text alignment, early-to-late gain, and layer-wise slope. These features are combined with pixel-statistic blank/noise detection, zero-shot domain routing, and structured VLM self-assessment in an ensemble. Across five VQA domains, three input conditions, and twelve VLM backbones, the best systems achieve approximately 94.6-94.7% three-class detection accuracy with mirage rates below 3%, while baseline mirage rates range from 21.7% to 66.6%.",
+      "authors": [
+        "Sayeed Shafayet Chowdhury",
+        "Md. Shaown Miah"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-29T23:51:35+00:00",
+      "link": "https://arxiv.org/pdf/2606.00435v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "mirage detection for medical VQA reliability",
+      "llm_evidence_cn": "针对医学VQA的幻象检测提升可靠性",
+      "llm_evidence": "针对医学VQA的幻象检测提升可靠性",
+      "canonical_evidence": "针对医学VQA的幻象检测提升可靠性",
+      "llm_tldr_en": "Proposes TC-LIA to detect mirage (ungrounded answers) in VLMs for medical VQA, enabling selective abstention.",
+      "llm_tldr_cn": "针对医学和文档视觉问答中模型可能产生无视觉依据的幻象回答问题，提出TC-LIA方法，在生成回答前通过分析CLIP编码器层间对齐情况判断是否弃权，有效提升医学VQA系统的可信度与安全性。",
+      "llm_tldr": "针对医学和文档视觉问答中模型可能产生无视觉依据的幻象回答问题，提出TC-LIA方法，在生成回答前通过分析CLIP编码器层间对齐情况判断是否弃权，有效提升医学VQA系统的可信度与安全性。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.02522v1",
+      "source": "arxiv",
+      "title": "Moment-Video: Diagnosing Temporal Fidelity of Video MLLMs on Momentary Visual Events",
+      "abstract": "Video multimodal large language models (MLLMs) have made rapid progress on general and long-form video understanding, yet their ability to preserve brief answer-critical visual evidence remains underexplored. Many practical questions are determined by momentary visual events: localized actions or state transitions that may last only a few frames. Such evidence can be skipped by sparse frame sampling, suppressed by visual-token compression, or diluted by coarse temporal aggregation, causing failures that language-side reasoning cannot reliably recover. We introduce Moment-Video, a benchmark for diagnosing the temporal fidelity of video MLLMs through momentary visual event understanding. Each question is grounded in a localized, visually observable, and sampling-sensitive event, requiring models to notice, count, describe, or reason about transient evidence rather than rely on persistent objects, global scene context, or language priors. Moment-Video contains 1,000 human-verified video-QA pairs across 7 domains and 25 fine-grained subcategories, covering four task types: Temporal Occurrence, Temporal Counting, Action Description, and Temporal Reasoning. We evaluate 33 proprietary and open-source MLLMs on Moment-Video. The best-performing model, Seed-2.0-Pro, achieves only 39.6% overall accuracy, while most open-source models remain below 25%, revealing a substantial gap in momentary visual event understanding. Diagnostic analyses show that denser frame sampling improves some models but does not eliminate the bottleneck, and longer videos introduce stronger temporal-localization challenges. These findings suggest that current video MLLMs still lack temporally faithful representations for capturing, preserving, and using brief but decisive visual evidence.",
+      "authors": [
+        "Xiaolin Liu",
+        "Yilun Zhu",
+        "Xiangyu Zhao",
+        "Xuehui Wang",
+        "Yan Li",
+        "Xin Li",
+        "Haoyu Cao",
+        "Xing Sun",
+        "Shaofeng Zhang",
+        "Xu Yang",
+        "Zhihang Zhong",
+        "Xue Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-01T17:32:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.02522v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Diagnosing temporal fidelity of video MLLMs on momentary events",
+      "llm_evidence_cn": "诊断视频多模态大模型在瞬时事件上的时序保真度",
+      "llm_evidence": "诊断视频多模态大模型在瞬时事件上的时序保真度",
+      "canonical_evidence": "诊断视频多模态大模型在瞬时事件上的时序保真度",
+      "llm_tldr_en": "Moment-Video is a diagnostic benchmark for video models' ability to retain short answer-critical visual evidence, revealing failures in temporal fidelity.",
+      "llm_tldr_cn": "Moment-Video基准通过瞬时视觉事件理解来诊断视频多模态大模型的时序保真度，发现稀疏采样和压缩会导致关键帧信息丢失，为提升视频问答中的时序可靠性提供了评测工具。",
+      "llm_tldr": "Moment-Video基准通过瞬时视觉事件理解来诊断视频多模态大模型的时序保真度，发现稀疏采样和压缩会导致关键帧信息丢失，为提升视频问答中的时序可靠性提供了评测工具。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.04351v1",
+      "source": "arxiv",
+      "title": "Video2LoRA: Parametric Video Internalization for Vision-Language Models",
+      "abstract": "Processing video in vision-language models is expensive: each frame occupies hundreds of tokens, and inference cost scales with every frame and every repeated query. We introduce Video2LoRA, a method for parametric video internalization. A perceiver hypernetwork reads the intermediate representations produced layer-by-layer as a frozen VLM encodes a video, and generates a Low-Rank Adaptation (LoRA) adapter in a single forward pass. Unlike standard LoRA fine-tuning, which requires iterative gradient updates, Video2LoRA predicts these weights directly from the video. Trained for SmolVLM2 500M and 2.2B on video summarization and captioning, Video2LoRA enables the same frozen VLM to answer queries from the adapter alone, with zero visual tokens in its context at query time. Video2LoRA is statistically non-inferior and equivalent to direct video-in-context inference across all five captioning benchmarks at both model scales, and across seven of eight video question answering benchmark-scale pairings. Although trained only on 12 frames at 384px, it remains stable up to 1,024 frames and 1024px, where direct video-in-context inference often degenerates. Across this sweep, it reduces answer-time visual-token load by up to 1,500x and query TTFT by 6-80x, while preserving video-faithful outputs. We also find that independently generated adapters for non-overlapping video segments can compose in rank space, suggesting a path toward chunked long-video internalization.",
+      "authors": [
+        "Manan Suri",
+        "Sarvesh Baskar",
+        "Dinesh Manocha"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-06-03T02:07:35+00:00",
+      "link": "https://arxiv.org/pdf/2606.04351v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "enables VLM to answer queries from adapter without visual tokens",
+      "llm_evidence_cn": "通过适配器无需视觉token即可回答查询",
+      "llm_evidence": "通过适配器无需视觉token即可回答查询",
+      "canonical_evidence": "通过适配器无需视觉token即可回答查询",
+      "llm_tldr_en": "Video2LoRA generates a LoRA adapter from video encoding in one pass, enabling frozen VLMs to answer queries without visual tokens, reducing cost.",
+      "llm_tldr_cn": "针对视觉语言模型处理视频时计算成本高的问题，该论文提出Video2LoRA，通过感知超网络读取冻结VLM逐层编码视频生成的中间表示，并在单次前向传播中预测LoRA适配器权重。这样，同一个冻结VLM可以仅通过适配器直接回答查询，无需在上下文中加入视觉token，从而大幅降低推理成本。",
+      "llm_tldr": "针对视觉语言模型处理视频时计算成本高的问题，该论文提出Video2LoRA，通过感知超网络读取冻结VLM逐层编码视频生成的中间表示，并在单次前向传播中预测LoRA适配器权重。这样，同一个冻结VLM可以仅通过适配器直接回答查询，无需在上下文中加入视觉token，从而大幅降低推理成本。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.05576v1",
+      "source": "arxiv",
+      "title": "UltraVR: A Diagnostic Ultra-Resolution Image-VQA Benchmark for Evidence-Grounded Reasoning",
+      "abstract": "Vision-language models (VLMs) excel on visual question answering and multimodal reasoning benchmarks. Yet their capability on ultra-resolution images - where critical evidence is tiny, subtle, spatially distant, or distributed - remains unclear. Existing evaluations largely report final-answer accuracy, offering limited insight into whether models acquire and integrate the necessary visual evidence. We introduce UltraVR, a diagnostic benchmark for evidence-grounded visual reasoning over ultra-resolution images. UltraVR spans four high-value scenarios: CCTV surveillance, remote sensing (RS), whole-slide image (WSI) pathology, and industrial anomaly detection (AD). These domains pose complementary challenges: fine-grained object grounding in crowded CCTV scenes, long-range spatial comparison in RS, multi-scale evidence navigation in WSI, and subtle irregularity detection in repetitive industrial layouts. Beyond standard QA triples, each instance includes a structured ground-truth chain of thought with step-level questions, intermediate answers, and reasoning labels. These labels decompose reasoning into evidence grounding, local perception, quantification, evidence integration, and decision inference, enabling process-level diagnosis over black-box scoring. Using UltraVR, we evaluate frontier VLMs and show that current models remain far from reliable on ultra-resolution reasoning. Importantly, the structured annotations allow us to localize failures across the visual-to-decision pipeline: errors concentrate in evidence grounding and local perception, while downstream inference often recovers when intermediate visual facts are supplied. These findings demonstrate UltraVR as a diagnostic testbed for measuring not only whether VLMs answer correctly, but where their ultra-resolution reasoning process breaks.",
+      "authors": [
+        "Gexin Huang",
+        "Yanting Yang",
+        "Myeongkyun Kang",
+        "Beidi Zhao",
+        "Jun Zhou",
+        "Chen Zhou",
+        "Gang Wang",
+        "Zu-hua Gao",
+        "Xiaoxiao Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-04T01:51:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.05576v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Ultra-resolution image VQA benchmark including whole-slide pathology",
+      "llm_evidence_cn": "包含全切片病理的超分辨率图像视觉问答基准",
+      "llm_evidence": "包含全切片病理的超分辨率图像视觉问答基准",
+      "canonical_evidence": "包含全切片病理的超分辨率图像视觉问答基准",
+      "llm_tldr_en": "UltraVR is a diagnostic benchmark for evidence-grounded reasoning in VQA over ultra-resolution images, covering pathology, surveillance, remote sensing, and anomaly detection.",
+      "llm_tldr_cn": "UltraVR构建了一个面向超分辨率图像的证据驱动推理诊断基准，涵盖病理全切片图像、监控、遥感和工业异常检测，评估模型在微小、分散证据下的视觉推理能力，其中医学子任务为病理VQA提供了新挑战。",
+      "llm_tldr": "UltraVR构建了一个面向超分辨率图像的证据驱动推理诊断基准，涵盖病理全切片图像、监控、遥感和工业异常检测，评估模型在微小、分散证据下的视觉推理能力，其中医学子任务为病理VQA提供了新挑战。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.10066v1",
+      "source": "arxiv",
+      "title": "A Controlled Audit of Pretraining Contamination in Public Medical Vision-Language Benchmarks",
+      "abstract": "Medical vision-language models (VLMs) are evaluated on public benchmarks whose images and question-answer pairs have been freely downloadable for years, yet reported accuracy assumes these examples were absent from pretraining. We audit open VLMs on SLAKE-En, PathVQA, VQA-RAD, and an auxiliary public OmniMedVQA mirror using four detector families: image-side near-neighbour overlap against PMC-OA-beta, canonical-order exchangeability, cohort-relative Min-K%++ tail enrichment, and cross-model top-K overlap. We find measurable image-side source overlap on SLAKE-En: 19.8% of images are flagged under SigLIP-B-16 and 4.2% under SigLIP-SO400M, while out-of-domain controls produce 0/2000 flags. Manual adjudication shows same-modality, same-projection matches to different patients rather than verified pixel-level duplicates, so we interpret this as source or distributional overlap rather than confirmed per-image memorization. On the text side, Qwen2.5-VL on SLAKE-En shows a canonical-order exchangeability signal that survives ordering ablation and external non-medical baselines. On the OmniMedVQA mirror, exchangeability fires for five medical and general VLMs while BLIP-2 remains clean. In contrast, cohort-relative Min-K%++ tail enrichment and cross-model top-K overlap collapse under an external pre-domain baseline: BLIP-2 reproduces the apparent positive signals despite lacking plausible medical-VQA exposure. We conclude that these cohort-relative detectors are unreliable as standalone membership-inference signals on small medical-VLM cohorts.",
+      "authors": [
+        "Bruce Changlong Xu",
+        "Lan Wu",
+        "Alexander Ryu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-08T18:40:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.10066v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Audits pretraining contamination in public medical VQA benchmarks like PathVQA, directly relevant to evaluation.",
+      "llm_evidence_cn": "审计公共医学VQA基准的预训练污染，直接关联评估指标。",
+      "llm_evidence": "审计公共医学VQA基准的预训练污染，直接关联评估指标。",
+      "canonical_evidence": "审计公共医学VQA基准的预训练污染，直接关联评估指标。",
+      "llm_tldr_en": "This audit reveals measurable source overlap in medical VQA benchmarks like SLAKE-En, questioning reported accuracy and offering tools for contamination detection.",
+      "llm_tldr_cn": "针对医学视觉语言模型在公共基准上的评估可靠性，开展预训练数据污染审计。利用四种检测方法在SLAKE-En、PathVQA等基准上发现19.8%的图像存在源域重叠，表明报告精度可能虚高。提出了图像侧和模型侧的污染检测手段，为医学VQA评测的真实性敲响警钟，推动了更严谨的基准使用规范。",
+      "llm_tldr": "针对医学视觉语言模型在公共基准上的评估可靠性，开展预训练数据污染审计。利用四种检测方法在SLAKE-En、PathVQA等基准上发现19.8%的图像存在源域重叠，表明报告精度可能虚高。提出了图像侧和模型侧的污染检测手段，为医学VQA评测的真实性敲响警钟，推动了更严谨的基准使用规范。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ]
+}
