@@ -25,5 +25,56 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
-  intent_profiles: []
-source_backends: {}
+  intent_profiles:
+    - tag: video-med-qa
+      description: 视频问答；医学视觉问答
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: video question answering
+          keyword_cn: 视频问答
+          query: recent advances in video question answering
+        - keyword: medical visual question answering
+          keyword_cn: 医学视觉问答
+          query: medical visual question answering systems
+        - keyword: video understanding
+          keyword_cn: 视频理解
+          query: video understanding for question answering tasks
+      intent_queries:
+        - query: How to build a video question answering model using transformers?
+          query_cn: 如何使用Transformer构建视频问答模型？
+          enabled: true
+          source: manual
+          note: ''
+        - query: What are the state of the art methods for medical visual question answering?
+          query_cn: 医学视觉问答的最新方法是什么？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Datasets and evaluation metrics for video and medical VQA
+          query_cn: 视频和医学视觉问答的数据集和评估指标
+          enabled: true
+          source: manual
+          note: ''
+        - query: Challenges in combining video understanding with medical image analysis for VQA
+          query_cn: 将视频理解与医学图像分析结合用于视觉问答的挑战
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-10T14:18:53.520Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
