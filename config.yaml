@@ -164,6 +164,49 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-06-11T03:54:12.467Z'
+    - tag: MM-Hall
+      description: 多模态大模型；幻觉问题
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: multimodal large language model
+          keyword_cn: 多模态大语言模型
+          query: multimodal large language model hallucination
+        - keyword: hallucination detection
+          keyword_cn: 幻觉检测
+          query: methods for detecting hallucination in multimodal models
+        - keyword: hallucination mitigation
+          keyword_cn: 幻觉缓解
+          query: techniques to mitigate hallucination in large multimodal models
+        - keyword: factual consistency
+          keyword_cn: 事实一致性
+          query: factual consistency evaluation of multimodal models
+        - keyword: model interpretability
+          keyword_cn: 模型可解释性
+          query: interpretability of multimodal large language models to reduce hallucination
+      intent_queries:
+        - query: causes of hallucination in multimodal large language models
+          query_cn: 多模态大语言模型中幻觉的原因
+          enabled: true
+          source: manual
+          note: ''
+        - query: methods to reduce hallucination in vision language models
+          query_cn: 减少视觉语言模型中幻觉的方法
+          enabled: true
+          source: manual
+          note: ''
+        - query: evaluation metrics for hallucination in multimodal AI
+          query_cn: 多模态AI中幻觉的评估指标
+          enabled: true
+          source: manual
+          note: ''
+        - query: comparing hallucination rates across different multimodal architectures
+          query_cn: 比较不同多模态架构的幻觉率
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-11T03:55:52.655Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
