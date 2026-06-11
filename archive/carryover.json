@@ -1,10 +1,191 @@
 {
-  "generated_at": "2026-06-11T03:18:29.117634+00:00",
-  "updated_date": "20260602-20260611",
+  "generated_at": "2026-06-11T21:06:32.253098+00:00",
+  "updated_date": "20260611",
   "carryover_days": 9,
   "tag_states": {
     "video-med-qa": {
-      "updated_date": "20260602-20260611",
+      "updated_date": "20260611",
+      "carryover_days": 9,
+      "items": [
+        {
+          "id": "2606.11913v1",
+          "source": "arxiv",
+          "title": "From Content to Knowledge: Lightning Fast Long-Video Understanding with Neural Knowledge Representations",
+          "abstract": "We propose a new paradigm for long video understanding by treating a long video as a Neural Knowledge Representation (NKR). NKR represents video contents neither as a stream of tokens nor pre-organized databases, but as an individual small portion of network weights attached to the VLM backbone. The NKR weights are optimized to encapsulate the video's semantic content via a novel Agentic Knowledge Distillation (AKD) process, where an agent automatically synthesizes dense descriptions and question-answer pairs to distill the video's knowledge into the NKR. While AKD serves as a comprehensive, one-time encoding phase, the resulting NKR transforms the video into a portable, reusable asset. At inference, the lightweight NKR is mounted onto a frozen Vision-Language Model (VLM), enabling direct, query-based understanding without reloading or re-encoding the original video. This approach decouples video length from inference cost, offering high amortized efficiency for multi-turn video understanding. Experiments on the LVBench benchmark show our method achieves performance comparable to state-of-the-art approaches while reducing end-to-end latency by over two orders of magnitude, opening new possibilities for interactive long-video understanding.",
+          "authors": [
+            "Yuchen Guan",
+            "Xiao Li",
+            "Zongyu Guo",
+            "Xiaoyi Zhang",
+            "Xiulian Peng",
+            "Chun Yuan",
+            "Yan Lu"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-06-10T10:43:35+00:00",
+          "link": "https://arxiv.org/pdf/2606.11913v1",
+          "tags": [
+            "keyword:MM-Hall",
+            "keyword:ego-video",
+            "keyword:med-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:MM-Hall",
+            "query:ego-video",
+            "query:med-video",
+            "query:video-med-qa",
+            "query:video-stream",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "long video understanding for QA",
+          "llm_evidence_cn": "长视频理解用于问答任务",
+          "llm_evidence": "长视频理解用于问答任务",
+          "canonical_evidence": "长视频理解用于问答任务",
+          "llm_tldr_en": "Proposes Neural Knowledge Representation (NKR) for long video understanding, encoding video into network weights via agentic knowledge distillation with QA pairs.",
+          "llm_tldr_cn": "该文提出神经知识表示（NKR）范式，将长视频内容编码为VLM骨干网络的一小部分权重。通过代理知识蒸馏自动生成描述和问答对，将视频知识蒸馏到NKR中。推理时仅需轻量级权重即可实现高效视频理解，解决了长视频处理中token流过大和检索成本高的问题。实验表明该方法在长视频问答任务上显著提升效率。",
+          "llm_tldr": "该文提出神经知识表示（NKR）范式，将长视频内容编码为VLM骨干网络的一小部分权重。通过代理知识蒸馏自动生成描述和问答对，将视频知识蒸馏到NKR中。推理时仅需轻量级权重即可实现高效视频理解，解决了长视频处理中token流过大和检索成本高的问题。实验表明该方法在长视频问答任务上显著提升效率。",
+          "llm_tags": [
+            "query:video-med-qa"
+          ],
+          "matched_query_tag": "query:video-med-qa",
+          "matched_query_text": "video understanding for question answering tasks",
+          "matched_requirement_id": "req-3",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.11913v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2606.11568v1",
+          "source": "arxiv",
+          "title": "4DP-QA: Scalable QA for 4D Perception in Vision Language Models",
+          "abstract": "Despite recent advances, Vision Language Models (VLMs) still struggle to grasp the dynamics of the world. We note that the ability to reason about a 4D scene, challenging in itself, is further complicated by two factors. First, VLMs observe motion indirectly via its projection onto 2D images. Second, existing datasets fail to disentangle object and camera motion. To address these challenges, we present a QA generation pipeline that focuses on motion-related scene understanding. We take particular care of the entanglement of camera and object motion by casting tracking in both the traditional way and in a novel, fixed reference system, dubbed True-Motion Tracking, which provides an intuitive description of motion. From this pipeline, we generate a large-scale training dataset of 400K samples, 4DP-QA (4D Perception QA), and a 2.2K-sample benchmark, 4DP-QA-Bench. Training existing models on our dataset yields performance improvements on an external benchmark, validating the effectiveness of our method.",
+          "authors": [
+            "Seokju Cho",
+            "Abhishek Badki",
+            "Hang Su",
+            "Jindong Jiang",
+            "Ziyao Zeng",
+            "Seungryong Kim",
+            "Sifei Liu",
+            "Orazio Gallo"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-06-10T01:49:55+00:00",
+          "link": "https://arxiv.org/pdf/2606.11568v1",
+          "tags": [
+            "keyword:MM-Hall",
+            "keyword:ego-video",
+            "keyword:med-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:MM-Hall",
+            "query:ego-video",
+            "query:med-video",
+            "query:video-med-qa",
+            "query:video-stream",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "QA for 4D perception in VLMs",
+          "llm_evidence_cn": "面向VLM的4D感知问答",
+          "llm_evidence": "面向VLM的4D感知问答",
+          "canonical_evidence": "面向VLM的4D感知问答",
+          "llm_tldr_en": "Proposes 4DP-QA, a scalable QA pipeline for 4D scene understanding, disentangling camera and object motion for VLM evaluation.",
+          "llm_tldr_cn": "该文针对VLM难以理解4D场景动态的问题，提出4DP-QA数据生成流水线。通过真运动跟踪区分相机与物体运动，生成大规模运动相关问答数据集。解决了现有数据中运动纠缠的难题，为VLM的4D感知能力提供了可扩展的评测基准，实验证明该数据集能有效提升模型对运动的理解。",
+          "llm_tldr": "该文针对VLM难以理解4D场景动态的问题，提出4DP-QA数据生成流水线。通过真运动跟踪区分相机与物体运动，生成大规模运动相关问答数据集。解决了现有数据中运动纠缠的难题，为VLM的4D感知能力提供了可扩展的评测基准，实验证明该数据集能有效提升模型对运动的理解。",
+          "llm_tags": [
+            "query:video-med-qa"
+          ],
+          "matched_query_tag": "query:video-med-qa",
+          "matched_query_text": "video understanding for question answering tasks",
+          "matched_requirement_id": "req-3",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.11568v1",
+          "carry_days": 1
+        }
+      ]
+    },
+    "vlm-vg": {
+      "updated_date": "20260611",
+      "carryover_days": 9,
+      "items": [
+        {
+          "id": "2606.12047v1",
+          "source": "arxiv",
+          "title": "Metadata-Aware Multi-Prompt Reasoning for Zero-Shot Accident Understanding",
+          "abstract": "In this paper, we address the problem of zero-shot understanding of accidents from surveillance videos by identifying when an impact event occurs, what type of impact it is, and where in the frame it occurs using natural language. We propose a three-stage pipeline that decomposes the accident understanding into when, what, and where. The first stage extracts a short temporal window around the impact using vision-language similarity. In the second stage, we perform metadata-driven multi-prompt reasoning with five complementary views (baseline, motion, geometry, contrast, and tiebreaker) and resolve disagreement via an entropy-gated pairwise adjudicator. Finally, we localize the impact of an open-vocabulary detector queried on the predicted accident type and scene layout, and aggregate detections across keyframes using a score-weighted centroid. Our pipeline achieves a substantial improvement in the harmonic-mean score over a centre-of-frame baseline on the zero-shot ACCIDENT @ CVPR benchmark. We show that decomposing zero-shot video understanding into temporal localization, semantic classification, and spatial grounding enable more reliable reasoning with vision-language models than direct prompting alone.",
+          "authors": [
+            "Tarandeep Singh",
+            "Soumyanetra Pal",
+            "Soham Biswas",
+            "Nishanth Chandran"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "stat.ML"
+          ],
+          "published": "2026-06-10T13:12:40+00:00",
+          "link": "https://arxiv.org/pdf/2606.12047v1",
+          "tags": [
+            "keyword:ego-video",
+            "keyword:med-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:ego-video",
+            "query:med-video",
+            "query:video-med-qa",
+            "query:video-stream",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "zero-shot temporal grounding of accidents in surveillance videos using natural language",
+          "llm_evidence_cn": "利用自然语言对监控视频中的事故进行零样本时间定位",
+          "llm_evidence": "利用自然语言对监控视频中的事故进行零样本时间定位",
+          "canonical_evidence": "利用自然语言对监控视频中的事故进行零样本时间定位",
+          "llm_tldr_en": "Proposes metadata-aware multi-prompt reasoning for zero-shot accident understanding, decomposing into when, what, where with temporal window extraction.",
+          "llm_tldr_cn": "该论文针对监控视频中事故的零样本理解，提出元数据感知的多提示推理管道，将任务分解为事故发生时间、类型和位置。第一阶段通过视觉-语言相似性提取冲击事件的时间窗口，后续阶段利用多种视角的提示推理并校准，实现了准确的开放词汇时间定位。",
+          "llm_tldr": "该论文针对监控视频中事故的零样本理解，提出元数据感知的多提示推理管道，将任务分解为事故发生时间、类型和位置。第一阶段通过视觉-语言相似性提取冲击事件的时间窗口，后续阶段利用多种视角的提示推理并校准，实现了准确的开放词汇时间定位。",
+          "llm_tags": [
+            "query:vlm-vg"
+          ],
+          "matched_query_tag": "query:vlm-vg",
+          "matched_query_text": "temporal grounding",
+          "matched_requirement_id": "req-10",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.12047v1",
+          "carry_days": 1
+        }
+      ]
+    },
+    "MM-Hall": {
+      "updated_date": "20260611",
+      "carryover_days": 9,
+      "items": []
+    },
+    "video-stream": {
+      "updated_date": "20260611",
+      "carryover_days": 9,
+      "items": []
+    },
+    "ego-video": {
+      "updated_date": "20260611",
+      "carryover_days": 9,
+      "items": []
+    },
+    "med-video": {
+      "updated_date": "20260611",
       "carryover_days": 9,
       "items": []
     }

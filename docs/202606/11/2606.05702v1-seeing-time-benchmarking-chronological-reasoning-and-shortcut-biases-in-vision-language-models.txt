@@ -1,0 +1,685 @@
+Title: Seeing Time: Benchmarking Chronological Reasoning and Shortcut Biases in Vision-Language Models
+
+URL Source: https://arxiv.org/pdf/2606.05702v1
+
+Published Time: Fri, 05 Jun 2026 00:37:52 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+> 1
+
+# Seeing Time: Benchmarking Chronological Reasoning and Shortcut Biases in Vision-Language Models 
+
+Haoyu Zhou, Qing Qing, Caichong Li, Qixin Zhang, Graduate Student Member, IEEE, Yongcheng Jing, Ziqi Xu, Member, IEEE, Juncheng Hu, Xikun Zhang, Renqiang Luo, Member, IEEE, 
+
+Abstract —Recent advancements in Vision-Language Models (VLMs) have significantly enhanced their ability to interpret complex visual semantics, yet their capacity for chronological reasoning remains under-explored. In this paper, we introduce a novel benchmark specifically designed to evaluate how VLMs perceive and reason about chronological information within and across images. Unlike existing video-based benchmarks that focus on frame sequencing, our work delves into the underlying logic of chronological judgment and the expansion toward multimodal integration. To facilitate this, we construct three specialized datasets: one containing visually similar objects spanning long historical durations, another categorized by diverse event and object types, and a third pairing images with time-sensitive news text for cross-modal alignment. Through extensive experiments, we analyze whether models exhibit performance disparities across categories and, crucially, explore whether they rely on “incorrect shortcuts”, such as image color rather than genuine chronological features. Our results reveal that while VLMs show promise, they frequently exploit superficial cues like grayscale versus color filters to bypass authentic chronological reason-ing. By providing these high-quality datasets and a rigorous evaluation framework, we offer a diagnostic tool to identify current limitations and guide the development of more robust, logically grounded multimodal models. The source code is shown in https://github.com/LuoRenqiang/ChronoVision. 
+
+Index Terms —Vision-language models, Chronological reason-ing, Benchmark, Shortcut bias. 
+
+I. I NTRODUCTION 
+
+The rapid advancement of Large Language Models has fundamentally transformed the landscape of visual information processing, ushering in the era of powerful Vision-Language Models (VLMs) [1]. Unlike traditional computer vision tech-niques that often rely on narrow, task-specific labels, modern VLMs demonstrate a remarkable ability to interpret complex semantic relationships within images [2], [3]. These models now play a pivotal role in bridging the gap between raw 
+
+Haoyu Zhou, Qing Qing, Caichong Li, Juncheng Hu and Ren-qiang Luo are with College of Computer Science and Technology, Jilin University, Changchun 130012, China ({zhouhy2223, qingqing25, licc1123 }@mails.jlu.edu.cn, {jchu, lrenqiang }@jlu.edu.cn). Qixin Zhang is with College of Computing and Data Science, Nanyang Technological University, 639798, Singapore (e-mail: qixin.zhang2026@gmail.com). Yongcheng Jing is with School of Computer Science, Wuhan University, China (e-mail:ycjing@zju.edu.cn) Ziqi Xu, Xikun Zhang, and Feng Xia are with the School of Computing Technologies, RMIT University, Melbourne, VIC 3000, Australia (e-mail: 
+
+{ziqi.xu, xikun.zhang }@rmit.edu.au, f.xia@ieee.org). Corresponding author: Xikun Zhang, Renqiang Luo. 
+
+pixels and high-level human reasoning across a multitude of industries [4]. Consequently, the capacity of VLMs to perceive and analyze nuanced information has become a cornerstone of current artificial intelligence research [5], [6]. As these models move toward deployment in sensitive real-world applications, it is essential to scrutinize their internal logic and decision-making evidence [7]. Understanding how a model arrives at a specific judgment, especially when dealing with multidimensional information like time, is a prerequisite for building trust and reliability [8]. We must determine if these models can extend their reasoning beyond simple recognition to handle complex, multimodal temporal cues [9], [10]. Evaluating this capability is a vital step in ensuring that VLMs can function effectively in dynamic environments where chronological context is key [11]. Despite the proliferation of general benchmarks, existing evaluations of temporal reasoning in VLMs remain largely insufficient and narrow in scope [12]. Most current tests are confined to sequencing frames within a single video clip, which fails to explore the deeper reasoning foundations or cross-modal expansion of the models [13], [14]. Specifi-cally, it remains unclear whether the genuine chronological reasoning dictates model output or if the models rely on incorrect shortcuts, such as mistakenly associating black-and-white photography with older eras regardless of the actual content. Furthermore, there is a significant lack of research into whether models can truly synchronize visual evidence with chronological information found in unstructured text. To address these gaps, we have constructed three specialized datasets to systematically probe the limits of chronological reasoning in VLMs. The first dataset contains a vast library of images featuring similar objects that span significant historical periods to challenge the model’s fine-grained recognition of design evolution. The second dataset categorizes images by distinct event and object types to facilitate a rigorous analysis of performance consistency across different domains. Finally, the third dataset integrates contemporary news data corre-sponding to specific events to evaluate the model’s ability to align textual chronological markers with visual content. Utilizing these datasets, we conducted extensive experi-ments centered on three primary research dimensions (as shown in Fig. 1). Our analysis first investigates whether VLMs exhibit significant performance disparities when inferring time across different categories of objects or events. We then delve into whether the models rely on spurious visual shortcuts, such       
+
+> arXiv:2606.05702v1 [cs.AI] 4 Jun 2026 2Gemini GPT Qwen MiniCPM -VGLM InternVL
+> 80
+> 60
+> 40
+> 20
+> Overall Performance (%)
+> Fig. 1. Overall performance of six VLMs across the proposed benchmark. Scores are integrated from the Artifacts, Shortcut, and News tasks.
+
+as image color, to bypass genuine chronological reasoning. Lastly, we assess the capability of these models to accurately align and fuse chronological information across both textual and visual modalities. In summary, our contributions are as follows:  
+
+> •
+
+We propose a novel evaluation framework that shifts the focus from simple video frame sequencing to a deeper exploration of chronological reasoning and multimodal expansion in VLMs. This framework establishes a standard for assessing whether models truly understand chronolog-ical evidence or merely perform surface-level recognition.  
+
+> •
+
+We construct three datasets featuring long-span object evo-lution, categorized event types, and news-aligned image-text pairs. These datasets are engineered to expose per-formance disparities across domains and test the model’s ability to synchronize visual cues with textual metadata.  
+
+> •
+
+Our extensive empirical analysis identifies critical “in-correct shortcuts”, such as the model’s over-reliance on image color rather than genuine chronological features. These insights quantify current limitations in multimodal alignment and provide a clear roadmap for developing more authentic reasoning capabilities in future models. II. R ELATED WORK 
+
+A. Chronology Reasoning 
+
+Chronological reasoning, the ability to understand and se-quence events or objects over time, is a fundamental aspect of human intelligence and has recently attracted increasing attention in LLM research [15], [16]. Existing studies mainly focus on temporal knowledge memorization and internal reasoning mechanisms. For example, ChroKnowBench [17] evaluates chronologically accumulated knowledge across dif-ferent temporal states and shows that LLMs often fail to correctly recall knowledge evolution over time. Similarly, MedChangeQA [18] reveals that LLMs frequently rely on outdated medical consensus when handling rapidly evolving healthcare knowledge. Mechanistic studies further identify Temporal Heads [19], specialized attention circuits responsible for temporal knowledge processing. Despite these advances, chronological reasoning in the visual domain remains under-explored. Existing video-based benchmarks mainly focus on frame sequencing and fail to capture the deeper logic of chronological judgment across static images. To address this limitation, we introduce a bench-mark specifically designed to evaluate chronological reasoning abilities in VLMs. 
+
+B. VLMs Evaluation Benchmarks 
+
+With the rapid development of VLMs, numerous bench-marks have been proposed to evaluate multimodal perception and reasoning abilities [20], [21]. Early benchmarks mainly focused on perception tasks such as image captioning and object recognition, while recent works emphasize more com-plex reasoning capabilities [22]. For example, MMBench [23] introduces a bilingual evaluation pipeline with CircularEval to provide stable and objective assessments. To improve evalua-tion reliability, MMStar [24] constructs visually indispensable datasets that reduce reliance on language priors, while Sim-pleVQA [25] evaluates factuality across diverse scenarios. In addition, CAPTURE [26] improves detailed image captioning evaluation through expert annotations and fine-grained metrics. Recent benchmarks further extend to multi-image under-standing and temporal relations [27]. For instance, Muir-Bench [28] evaluates diverse multi-image relations, including temporal ordering, through pairwise unanswerable variants. However, existing benchmarks mainly focus on perception or simple frame relations, often overlooking knowledge-intensive chronological reasoning and long-term object evolution [29]. Our work addresses this gap by introducing a benchmark for chronological reasoning in VLMs. Unlike prior video-based evaluations that mainly test frame ordering, our benchmark emphasizes long-span historical evolution and cross-modal news alignment. Moreover, we design a diagnostic framework to identify whether models rely on superficial shortcuts, such as color, rather than genuine chronological understanding. III. D ATA CONSTRUCTION AND PROCESSING 
+
+In this section, we provide a description of the data col-lection and processing pipelines used to construct our multi-faceted benchmark for chronological reasoning. Example in-stances from each dataset are illustrated in Fig. 2. We meticu-lously curated three distinct sub-datasets to ensure a rigorous evaluation of how VLMs handle chronological cues across various contexts and modalities. The construction process involved large-scale data harvesting, automated cleaning to remove low-quality samples, and manual verification to ensure high chronological fidelity and categorical accuracy. By inte-grating long-span object evolutions, diverse event types, and paired news-text metadata, we establish a robust foundation for diagnosing model performance and identifying reliance on visual shortcuts. This systematic approach ensures that our test provides a challenging and diverse environment for assessing state-of-the-art VLMs in multimodal chronological reasoning. 
+
+A. The Chinese Historical Artifacts (CHA) Dataset 
+
+The CHA dataset is a specialized collection designed for the Artifacts Task, which serves as the cornerstone for evalu-ating deep historical chronology reasoning. As illustrated in Table I, this dataset comprises 887 high-resolution images meticulously selected to span five pivotal Chinese dynasties: the Tang, Song, Yuan, Ming, and Qing, capturing the varying prevalence of specific crafts throughout history. To challenge the model’s fine-grained recognition of design evolution, the data is categorized into six distinct types of artifacts, each 3Sports  Politics  Electronics  Emergency  Diversity                                                         
+
+> Carving Fan China
+> Coin Jade Lacquerware
+> Year: 2011
+> Description: “Singer Amy
+> Winehouse dies at age 27 due to
+> alcohol poisoning”.
+> SPEED
+> CHA HistNews
+> Fig. 2. Sample images and data structures from the proposed benchmark, including the Artifacts (CHA), Shortcut (SHEEP), and News tasks (HistNews). TABLE I COMPOSITION OF THE CHA DATASET .Category Tang Song Yuan Ming Qing Total carving 11 10 335 50 109
+> Jade 22 50 50 50 50 222
+> china 21 50 50 50 50 221
+> coin 50 50 0316 119
+> fan 0012 50 50 112
+> lacquerware 04050 50 104
+> Total 104 164 115 238 266 887
+
+reflecting the gradual aesthetic and technological shifts of its respective era. These categories include Fans, characterized by flat surfaces often adorned with landscape paintings; Jade, rep-resenting the symbolic “beautiful stones” of Chinese culture; and China, consisting of porcelain fired at high temperatures with vitreous glazes. Additionally, the dataset includes Coins, defined by their iconic square-holed round geometry; Lac-querware, featuring intricate protective raw lacquer coatings; and Carvings, which represent the visual artistry of material removal using wood. The integrity of the CHA dataset is rooted in its rigorous sourcing and authentication process, which ensures that subtle stylistic transitions are preserved for model testing. All data were harvested from official government open platforms 1,providing a reliable foundation of primary historical evi-dence. Crucially, to meet the high standards of academic and professional accuracy required for ancient chronological studies, every image and its associated metadata underwent a secondary round of verification and annotation by museum experts 2. This expert involvement ensures that the dataset accurately captures the chronological markers, such as the evolution of porcelain glaze patterns or the shifting geometry of jade carvings, that distinguish one dynasty from the next. By providing a clean, expert-verified corpus, the CHA dataset poses a significant challenge for VLMs to move beyond superficial recognition and engage in authentic, fine-grained reasoning across centuries of cultural development. To further validate the quality of the proposed datasets                        
+
+> 1https://data.gov.tw/
+> 2https://www.npm.gov.tw/ TABLE II PERFORMANCE COMPARISON BETWEEN ZERO -SHOT INFERENCE AND SUPERVISED FINE -TUNING (SFT) USING QWEN 2.5-VL-7B ON CHA. Method Tang Song Yuan Ming Qing Avg Zero-Shot 47 .62 57 .58 0.00 42 .22 52 .83 43 .43
+> SFT-Test 57 .14 66 .67 8.70 60 .00 67 .92 56 .57
+
+and examine whether they contain a meaningful learnable signal beyond memorization, we additionally establish a su-pervised fine-tuning (SFT) baseline using the open-source model Qwen 2.5-VL-7B. Specifically, we fine-tune the model on the training split and evaluate it on the held-out test set. As shown in Table II, the fine-tuned model consistently outperforms the zero-shot baseline across nearly all dynasties, improving the average accuracy from 43 .43 % to 56 .57 %. Overall, these results confirm that the benchmark contains a substantial learning signal and is suitable for evaluating temporal reasoning and chronological understanding in VLMs. 
+
+B. The Sports, Politics, Electronics, Emergency, and Diversity (SPEED) Dataset 
+
+The SPEED dataset is a meticulously curated chronolog-ical collection designed to facilitate a rigorous analysis of performance consistency across different domains. Each data instance in this dataset is composed of a high-quality color image containing implicit chronological cues, an associated ground-truth timestamp, and a concise textual title summa-rizing the visual content. To ensure both authenticity and modern relevance, we utilized an automated crawler to collect 
+
+2, 077 camera-captured photos from Wikimedia Commons 3,spanning a broad temporal range from 1952 to 2025 . This extensive timeframe allows the benchmark to evaluate amodel’s sensitivity to evolving visual styles and technological advancements over more than seven decades. To maintain the integrity of the chronology reasoning task, we manually filtered the dataset to retain 1, 028 high-quality images. During this process, we purposefully excluded non-photographic content such as maps and charts, as well as ambiguous samples like generic cityscapes that lack sufficient  
+
+> 3https://commons.wikimedia.org 4
+> Fig. 3. A photo of cityscapes excluded from the Politics.
+
+indirect cues for chronological localization. Most importantly, we removed any images containing explicit chronological leaks, such as visible year digits on billboards or signs, to ensure the model relies on genuine visual reasoning rather than shortcuts based on Optical Character Recognition (OCR). This rigorous selection process yielded a retention rate of 
+
+49 .49% , ensuring that SPEED serves as a challenging and robust environment for evaluating chronological localization capabilities. Fig. 3 serves as a representative example of a generic cityscape that was excluded during our manual filtering pro-cess to ensure the robustness of the SPEED benchmark. While the image provides a clear view of urban density and architectural styles, it lacks sufficient indirect cues necessary for precise chronological localization. Specifically:  
+
+> •
+
+Chronological Ambiguity: The scene depicts a densely populated favela that has maintained a consistent appear-ance over several decades, making it difficult to distinguish between the late 20 th century and the present day.  
+
+> •
+
+Absence of Diagnostic Markers: There are no visible diagnostic artifacts, such as specific vehicle models, con-temporary technological infrastructure, or unique fashion styles, that would allow a model to perform rigorous chronological reasoning.  
+
+> •
+
+Inherent Noise: The inclusion of such samples would likely encourage models to rely on spurious guesses or statistical priors rather than legitimate visual deduction. Consequently, we removed this and similar ambiguous cityscapes, ensuring that every image in the final set contains verifiable, albeit indirect, chronological evidence. We also strictly excluded images containing explicit chrono-logical leaks that would allow a model to bypass reasoning through simple OCR. As shown in Fig. 4, the provided example:  
+
+> •
+
+Direct Year Labeling: The image contains clear, large-scale text explicitly stating “Beijing 2008 ”.  
+
+> •
+
+Elimination of OCR Shortcuts: Such visible year digits on banners, billboards, or signs act as a ”shortcut” for mul-timodal models. Including them would evaluate a model’s OCR capabilities rather than its ability to infer chronology from visual context.  
+
+> •
+
+Task Integrity: By removing these instances, we ensure the model must rely on authentic chronological reasoning (such as analyzing the jerseys, the event atmosphere, or the technological era of the camera equipment), rather than simply reading the answer from the background.  
+
+> Fig. 4. A photo with OCR excluded from the Sports.
+
+The dataset is organized into five distinct subsets that represent various facets of human history and modern life. The Sports and Politics categories capture major global milestones, ranging from the FIFA World Cup to APEC summits, while the Electronics subset features iconic consumer products, includ-ing recent releases like the iPhone 17 , to test contemporary chronological awareness. The Emergency subset documents significant natural disasters, such as the Wenchuan earthquake, providing high-stakes visual contexts for time-stamping. Fi-nally, the Diversity subset includes a broad collection of varied, timestamp-verified images that further challenge the model’s ability to generalize its chronological reasoning across heterogeneous visual domains. 
+
+C. HistNews 
+
+To further investigate the integration of multi-modal infor-mation, we present HistNews, a curated textual dataset com-prising 400 significant historical events spanning the period from 1946 to 2025 . This dataset is designed to evaluate a model’s ability to align contemporary news data and textual chronological markers with corresponding visual content. For each year within this eight-decade range, we meticulously selected five representative events from Wikipedia, ensuring they are evenly distributed across different months to maintain a high degree of chronological diversity and granularity. Every entry in the collection underwent rigorous manual verification to guarantee factual accuracy and historical relevance, provid-ing a reliable ground truth for cross-modal testing. The data is structured in a standardized JSON format, with each instance containing four key attributes: the specific year, the full date, a detailed description of the event, and the source URL for verification. Within our broader evaluation framework, HistNews serves as the foundational data for the News Task, a critical subtask that challenges VLMs to bridge the gap between linguistic time indicators and visual evidence. By requiring the model to map descriptive historical narratives to their correct chronological windows, this dataset probes whether VLMs possess a true understanding of how global events unfold over time. Ultimately, HistNews provides the necessary context to determine if models can go beyond sim-ple image recognition and achieve sophisticated, text-driven chronological alignment. IV. M ETHODOLOGY 
+
+In this section, we introduce a series of benchmark tests de-signed to comprehensively evaluate the chronological reason-5Q: In which dynasty did this artifact first appear?     
+
+> Chinese Historical Artifacts
+> Localization
+> Options
+> A. 唐(Tang) B. 宋(Song) C. 元(Yuan) D. 明(Ming) E. 清(Qing)
+> Artifacts -Chronological Localization Task
+> Fig. 5. An Example of the Artifacts-Chronological Localization Task.
+
+ing, chronological localization, and multimodal comprehen-sion capabilities of current VLMs. Our evaluation framework is structured around three distinct subtasks that directly map to our core research questions: the Artifacts Task, the Shortcut Task, and the News Task. To eliminate any potential inter-ference from external metadata or file-naming conventions, we implemented a strict randomization protocol where all image files were renamed with arbitrary numerical identifiers. Furthermore, we ensured that the ground-truth answers were randomly and evenly distributed across all tasks to prevent models from exploiting frequency biases or positional patterns. This rigorous experimental setup guarantees that the resulting performance metrics reflect the models’ genuine ability to process chronological information rather than their capacity for superficial pattern matching. 
+
+A. Artifacts Task 
+
+The Artifacts Task is designed to evaluate the proficiency of VLMs in chronological reasoning and dynasty estimation, specifically focusing on the evolutionary trajectory of ancient Chinese artifacts. As established in the CHA dataset, the eval-uation space is constrained to five dynasties: the Tang, Song, Yuan, Ming, and Qing. This task investigates the performance consistency of models across different historical eras and material categories through two distinct experimental setups. The first subtask, Artifacts–Chronological Localization, as-sesses the model’s ability to identify the specific historical period of an individual artifact. Formally, let A denote the image collection from the CHA dataset and P represent a standardized prompt inquiring about the dynasty of origin. Given an image I ∈ A , the model must select the correct dynasty from five candidate options in a multi-choice format. This setup serves as a direct measure of the model’s dis-criminative power in recognizing subtle stylistic and material features, such as glaze patterns or carving techniques, that are indicative of specific dynastic transitions. An illustrative sample of the task interface and the localization requirements is provided in Fig. 5. The second subtask, Artifacts-Sort, examines the model’s chronological relational reasoning by requiring it to infer the relative chronological order of a set of artifacts (as shown in Fig. 6). Given a set of images {I1, I 2, . . . , I n} ⊆ A , where Q: Sort the images according to                  
+
+> the appearance time of the artifact?
+> CHA
+> Sort
+> (4) (2) (3) (1) (5)
+> Artifacts -Sort Task
+> (1) (2)
+> (3) (4) (5)
+> Correct Answer
+> (3) (4) (2) (1) (5) Model Answer
+> (4) (3) (2) (1) (5)
+> Fig. 6. An Example of the Artifacts-Sort Task.
+
+each artifact originates from a unique dynasty, the model is tasked with sorting the set from the earliest to the latest period. To evaluate the depth of this reasoning, we define two distinct difficulty levels: the Intra-category level ( n = 4) and the Cross-category level ( n = 5 ). The Intra-category level restricts images to a single craft, such as Jade or China, forcing the model to distinguish fine-grained chronological differences within a narrow visual domain. In contrast, the Cross-category level utilizes im-ages randomly sampled from the entire CHA dataset; since 
+
+n = 5 covers the complete chronological range of our benchmark, this level serves as a comprehensive test of a model’s global chronological understanding. By comparing performance across these levels, we can determine whether a model’s reasoning is robust across diverse artifacts or limited to specific, well-defined categories. 
+
+B. Shortcut Task 
+
+The Shortcut Task is designed to evaluate whether VLMs rely on superficial visual features, specifically color bias, rather than genuine semantic content when performing chronological reasoning (as shown in Fig. 7). Formally, let S denote the collection of images from the SPEED dataset, and P represent a standardized prompt inquiring which of two images was captured at an earlier point in time. For each test instance, we select two original color images, I1, I 2 ∈ S , where I1 is chronologically prior to I2. To isolate the influence of color as a shortcut, we generate their grayscale counterparts, I′ 
+
+> 1
+
+and 
+
+I′
+
+> 2
+
+, using the OpenCV library [30]. To ensure consistency in feature extraction and satisfy the input requirements of our downstream models, all raw color images undergo a grayscale transformation process. This procedure is implemented in two primary stages: 6
+
+Algorithm 1: Grayscale Transformation Algorithm.                                                
+
+> Input: inDir
+> // Input color image directory
+> Output: outDir
+> // Output grayscale image directory
+> 1For each f ile in input f older
+> 2src ←inDir +f ile ;
+> 3dst ←outDir +f ile ;
+> // Stage 1: read image
+> 4Icolor ←ReadImage( src );
+> // Stage 2: convert image
+> 5Igray ←cv2.cvtColor (Icolor , cv2.COLOR BGR2GRAY);
+> 6Iout ←cv2.cvtColor (Igray , cv2.COLOR GRAY2BGR);
+> // Stage 3: save image
+> 7WriteImage( dst, I out );
+
+(a) Color-to-Grayscale Conversion . The transformation from the original BGR color space to a single-channel grayscale representation is based on the ITU-R 601 luma transform. This method accounts for the human eye’s varying sensitivity to different wavelengths by computing a weighted combination of the image channels. For each pixel, the lumi-nance value Y is computed as follows: 
+
+Y = 0 .114 B + 0 .587 G + 0 .299 R. (1) This weighting ensures that the structural information and perceived brightness of the image are preserved while elimi-nating redundant chromatic noise. 
+
+(b) Three-Channel Reconstruction. Given that many deep learning architectures are pre-trained on 3-channel inputs, we map the single-channel grayscale value back into a 3-channel BGR space. Specifically, for a calculated luminance Y , the resulting pixel vector P is defined as: 
+
+P = [ B′, G ′, R ′] = [ Y, Y, Y ]. (2) This step ensures that the image is visually achromatic and grayscale while maintaining a data structure compatible with standard vision encoders. All transformations are performed using the cv 2.cvtColor module to ensure numerical precision and computational efficiency. To systematically isolate the impact of color, each exper-imental group is structured into three consecutive triplets: 
+
+(I1, I 2, P ), (I′
+
+> 1
+
+, I 2, P ), and (I1, I ′
+
+> 2
+
+, P ). The task comprises 
+
+1, 200 such controlled tests, with the constraint that each image pair must originate from the same sub-category, Sports, Politics, Electronics, Emergency, or Diversity, to ensure con-sistency in content and context. In this framework, the visual content remains identical across triplets while the color infor-mation is selectively removed, establishing color as the sole independent variable. This controlled setup provides a rigorous mechanism to determine if a model’s chronological judgment is compromised by the “grayscale equals old” shortcut, thereby revealing the extent to which VLMs bypass authentic chrono-logical reasoning in favor of superficial digital artifacts. 
+
+C. News Task 
+
+The News Task evaluates the proficiency of VLMs in chronological reasoning and chronological localization for im-ages capturing real-world historical and contemporary events. Q: Which image first           
+
+> appeared in time?
+> SPEED
+> Grayscale is old
+> Answer
+> Nintendo Switch
+> Qwen3-8B
+> Nintendo
+> Switch 2017
+> Apple Vision Pro 2023
+> Q: Which image first
+> appeared in time?
+> Grayscale is new
+> Answer
+> Apple Vision Pro
+> Qwen3-8B
+> Shortcut Task
+> Fig. 7. An Example of the Shortcut Task. SPEED Question
+> Q: In which year did
+> this image first appear?
+> News -Year
+> Task
+> Fig. 8. An Example of the News-Year Task.
+
+This task investigates the depth of a model’s chronological awareness through two complementary subtasks: News-Year and News-Multimodal. By bridging the gap between raw visual perception and structured historical knowledge, this task provides a comprehensive measure of how models interpret time in a global, event-driven context. The first subtask, News-Year, evaluates the model’s capacity for zero-shot chronological estimation based on a single visual input. Let S denote the image collection derived from the SPEED dataset. In each experimental instance, an image I ∈ S 
+
+is presented alongside a standardized prompt P that queries the specific year of capture. The model is required to generate a precise four-digit integer representing the year of origin, testing its internal knowledge of historical visual markers without the aid of comparative samples. As shown in Fig. 8, which features a prominent scene from the Olympic opening ceremony, the model must recognize specific events and their associated timelines without auxiliary textual hints. This requires the model to synthesize high-level visual recognition with precise chronological knowledge, further investigating whether it can distinguish between similar recurring events (e.g., different Olympic years) or if it defaults to generic chronological estimates. The second subtask, News-Multimodal, investigates whether VLMs can effectively align chronological information across disparate modalities. Each test case is structured as a quadru-plet of images {I1, I 2, I 3, I 4} ⊆ S captured in distinct years, a textual description T sourced from the HistNews dataset, and a query prompt. The objective is to identify which specific image 7Q: Which image was taken in the same year as the event?    
+
+> SPEED
+> Question
+> HistNews
+> Event: NASA's
+> Dawn mission
+> concludes after
+> it runs out of
+> hydrazine fuel
+> News -Multi modal Ta sk
+> Fig. 9. An Example of the News-Multimodal Task.
+
+Ii was captured in the same year as the event described in text 
+
+T . This requires the model to not only understand the visual cues within the images but also to synchronize them with the chronological markers embedded in historical narratives. To ensure that the News-Multimodal task demands genuine chronological reasoning rather than simple semantic matching, we implemented a rigorous human-in-the-loop verification protocol. Independent annotators verified that the specific event described in T does not appear directly in any of the candidate images {I1, . . . , I 4}, thereby forcing the model to infer the era through broader historical context rather than direct recognition. Each instance underwent cross-verification by three independent annotators and is included in the final benchmark only when a unanimous consensus is reached, confirming that the image-text pair is chronologically distin-guishable and free from direct chronological cue leakage. As shown in the sample provided in Fig. 9, the model must determine which visual depiction corresponds to the year NASA’s Dawn mission concluded. This challenge moves beyond simple recognition, forcing the model to synchronize disparate modal inputs, textual historical facts, and visual event markers within a unified chronological framework. This setup is designed to expose failures in multimodal grounding, particularly where a model might correctly identify individual components but fail to reconcile their temporal intersection. V. E XPERIMENT 
+
+A. Evaluation Setup 
+
+To comprehensively assess existing models, we evaluate a diverse suite of state-of-the-art VLMs, encompassing both leading proprietary and open-source architectures.  
+
+> •
+
+Closed-source Models: Gemini [31]: Google’s multi-modal model series, optimized for high-speed multimodal reasoning and long-context processing with state-of-the-art chronological perception. GPT: OpenAI’s advanced multimodal model series, representing the benchmark for complex logical deduction and zero-shot alignment across disparate visual domains.  
+
+> •
+
+Open-source Models: Qwen [32]: A powerful vision-language series from Alibaba that utilizes a specialized ViT architecture to achieve exceptional performance in fine-grained visual understanding and document parsing. 
+
+InternVL [33]: An expansive open-source project that bridges the gap between vision and language through a massive-scale modular design, tailored for high-resolution image perception. MiniCPM [34]: A compact yet robust multimodal model designed for efficient deployment, de-livering competitive reasoning performance through opti-mized cross-modal feature compression. GLM [35]: An innovative model from Zhipu AI that integrates deep bilin-gual capabilities with a specialized “Thinking” mechanism for enhanced step-by-step visual reasoning. To maintain a rigorous and unbiased environment, all models are evaluated under a strict zero-shot setting using standardized prompt templates across all tasks. We implement several safeguards to ensure the integrity of the results:  
+
+> •
+
+Mitigating Positional Bias: Following recent findings on order sensitivity, we randomize both the sequence of image inputs and the arrangement of multiple-choice options. This prevents models from inflating scores through opportunistic exploits of positional frequency.  
+
+> •
+
+Prompt Consistency: A unified system prompt is applied to all models to ensure that performance variances stem from the models’ inherent reasoning capabilities rather than prompt engineering nuances.  
+
+> •
+
+Deterministic Output: Where applicable, we set the de-coding temperature to 0 (greedy search) to ensure the reproducibility of our benchmark results. 
+
+B. Evaluation Metrics 
+
+To rigorously quantify model performance across diverse reasoning challenges, we employ three distinct metrics tailored to the specific requirements of each subtask. Let N denote the total number of test instances within a given task. 
+
+Multiple Choice Questions (MCQs): For tasks requiring the selection of a specific dynasty or event (e.g., Artifacts-Chronological Localization, News-Multimodal), we utilize Ac-curacy (ACC) as the primary metric. It is formulated as: ACC = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+I(yi = ˆ yi), (3) where I(·) is the indicator function, yi represents the model’s predicted choice, and ˆyi denotes the ground-truth label. 
+
+Sorting Questions: To evaluate the ordinal reasoning ca-pability in the Artifacts-Sort task, we employ Kendall’s Tau (τ ) [36]. This measures the rank correlation between the predicted sequence and the chronological ground truth: 
+
+τ = 2 C − Dk(k − 1) , (4) where k is the number of items to be sorted, while C
+
+and D represent the number of concordant and discordant pairs, respectively. The metric ranges from [−1, 1] , where 1
+
+indicates a perfect chronological alignment and 0 represents the expected performance of a random permutation. 
+
+Year Prediction: For the News-Year subtask, which re-quires point-estimation of specific timestamps, we use Mean 8                                                                                                                                                                 
+
+> TABLE III EVALUATION RESULTS OF VLM S ON THE BENCHMARK . V ALUES IN PARENTHESES DENOTE THE TOTAL NUMBER OF TEST INSTANCES FOR EACH SPECIFIC TASK .Model or Task Artifacts ( 887 + 1000 )Shortcut ( 1200 )News ( 1028 + 1500 )Overall ACC A50 ×(1 + τ)ACC BACC 1ACC 2∆ACC ACC YMAE ACC MScore Rank
+> Closed-Source
+> Gemini-2.5-Pro 44 .23 64 .05 86 .25 88 .17 78 .75 9.42 55 .58 1.91 84 .27 67 .17 1
+> GPT-5.240 .14 62 .21 77 .00 86 .33 56 .83 29 .50 40 .98 3.62 49 .73 49 .96 2
+> Closed-Source Average 42 .19 63 .01 81 .63 87 .25 67 .79 19 .46 48 .28 2.77 67 .00 58 .57 -
+> Open-Source
+> InternVL 3.5-8B24 .86 54 .56 64 .92 90 .58 24 .92 65 .66 13 .43 12 .43 39 .00 29 .06 10
+> MiniCPM-V-4.544 .93 55 .57 71 .42 86 .67 40 .08 46 .57 31 .53 3.34 25 .07 38 .68 6
+> GLM-4.1V-9B-Thinking 36 .53 59 .37 67 .67 89 .33 32 .08 57 .25 34 .26 5.10 38 .27 37 .35 7
+> Qwen 2.5-VL-7B-Instruct 44 .01 56 .78 66 .08 83 .67 40 .83 42 .84 34 .12 3.35 12 .47 36 .91 8
+> Qwen 3-VL-2B-Instruct 25 .88 53 .27 52 .42 63 .58 39 .17 24 .41 28 .22 3.43 25 .27 35 .11 9
+> Qwen 3-VL-4B-Instruct 40 .14 58 .23 68 .92 81 .67 47 .58 34 .09 32 .86 3.06 26 .33 41 .19 5
+> Qwen 3-VL-8B-Instruct 38 .43 61 .32 76 .42 87 .00 56 .75 30 .25 35 .80 3.34 26 .13 44 .47 4
+> Qwen 3-VL-235 B-A 22 B-Instruct 49 .94 62 .36 77 .83 87 .50 55 .75 31 .75 48 .48 2.16 33 .80 49 .92 3
+> Open-Source Average 38 .09 57 .68 68 .21 83 .75 42 .15 41 .60 32 .34 4.53 28 .29 39 .09 -
+> Total Average Performance
+> 38 .91 58 .75 70 .89 84 .45 47 .28 37 .18 35 .53 4.17 36 .03 42 .98 -
+
+Absolute Error (MAE) [37]. This metric quantifies the average temporal distance between the predicted and actual year: MAE = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+|yi − ˆyi|. (5) In this context, yi is the four-digit year predicted by the model and ˆyi is the true timestamp. A lower MAE indicates superior chronological localization precision and a more re-fined internal chronological world model. 
+
+C. Overall Performance Index 
+
+To provide a holistic assessment of VLMs across diverse chronological reasoning dimensions, we define a composite score, S. This index aggregates performance across the Short-cut, News, and Artifacts tasks by normalizing heterogeneous metrics into a unified range of [0 , 1] and assigning equal weights to each domain. The individual task scores ( SA, SS ,
+
+SN ) and the global composite score S are defined as follows: 
+
+S = SA + SS + SN
+
+3 . (6) The Artifacts Score ( SA) measures deep-history reasoning. 
+
+SA = 12
+
+
+
+ACC A + (1 + τ )2
+
+
+
+. (7) It combines the accuracy of dynasty localization (ACC A)with the rank correlation coefficient ( τ ) from the sorting subtask. Since Kendall’s Tau ( τ ) ranges from [−1, 1] , we apply a linear transformation (1+ τ )2 to map it onto the [0 , 1] interval, ensuring consistency with the other accuracy-based metrics. The Shortcut Score ( SS ) evaluates the model’s resilience against deceptive visual cues. 
+
+SS = ACC S · (1 − | ∆ACC |). (8) Here, ACC S denotes the baseline accuracy on the origi-nal color image pairs, while ∆ACC represents the accuracy degradation observed when processing grayscale variants. By incorporating (1 − | ∆ACC |), we penalize models that exhibit high variance when color is removed, effectively distinguish-ing between genuine chronological logic and a reliance on superficial color shortcuts. The News Score ( SN ) reflects the model’s proficiency in contemporary chronological localization. 
+
+SN = 12
+
+
+
+ACC Y ·
+
+
+
+1 − MAE MAE max 
+
+
+
++ ACC M
+
+
+
+. (9) It averages the accuracy of exact year identification (ACC Y )and multimodal event alignment (ACC M ), then scales the result by a chronological precision factor. The MAE max is a normalization constant set to 80 , corresponding to the total chronological span ( 1946 –2025 ) of the dataset. This ensures that even if a model identifies the correct era, significant year-level deviations will lower the final score. Ultimately, the Global Composite Score ( S) serves as a unified benchmark for ranking VLMs, reflecting their ability to synthesize visual evidence, textual context, and historical knowledge without succumbing to dataset-specific biases. VI. R ESULT AND ANALYSIS 
+
+A. Overall Performance and Analysis 
+
+Table III summarizes the performance of evaluated VLMs, revealing substantial limitations in multimodal chronological reasoning. The overall average score is only 42 .98 , indicating that the benchmark remains highly challenging. Although Gemini-2.5-Pro achieves the best performance ( 67 .17 ), it still falls far from perfect reasoning ability. Meanwhile, InternVL 3.5-8B obtains the lowest score of 29 .06 , further highlighting the difficulty of combining historical knowledge with visual understanding. Larger models generally achieve stronger chronological reasoning performance. For example, within the Qwen 3-VL family, performance steadily improves from 35 .11 (2B) to 9
+
+49 .92 (235 B), suggesting that scaling enhances historical knowledge acquisition and temporal reasoning capabilities. Closed-source models currently maintain a clear advantage, with Gemini-2.5-Pro and GPT-5.2 ranking highest overall. However, advanced open-source models such as Qwen 3-VL-
+
+235 B show increasingly competitive results, indicating that the performance gap is gradually narrowing. 
+
+B. Specific Task Results and Analysis 
+
+VLMs show limited capability in fine-grained historical reasoning, with sorting tasks being substantially more diffi-cult than localization tasks. Models can occasionally identify isolated dynastic cues, but often fail to capture the relational reasoning required for chronological ordering. This suggests that current VLMs still lack robust temporal understanding for professional-level historical analysis. Unlike general multimodal benchmarks, closed-source mod-els do not consistently outperform open-source models in this task. Strong open-source systems achieve highly competitive results, indicating that performance is closely related to cul-turally specific visual-textual knowledge acquired during pre-training. These findings suggest that domain-specific data can be as important as model scale for historical reasoning. Our experiments reveal that VLMs heavily depend on shallow visual heuristics rather than genuine chronological reasoning. When grayscale cues align with chronological order, models perform well; however, performance drops dra-matically once the shortcut conflicts with the ground truth. This indicates that many models primarily associate grayscale images with older time periods instead of reasoning from historical semantics. The large performance degradation under shortcut con-flict demonstrates poor robustness to distribution shifts. Even when models contain sufficient chronological knowledge, their predictions are easily overridden by stylistic biases learned during training. This highlights the urgent need for de-biased training strategies that disentangle visual style from temporal reasoning. Shortcut sensitivity varies across domains. Categories with strong technological evolution, such as electronics, are rela-tively robust because distinctive visual iteration patterns pro-vide reliable temporal anchors. In contrast, abstract domains such as politics and sports show much higher sensitivity, where models tend to rely more heavily on grayscale heuristics. The News Task demonstrates that current VLMs still strug-gle with realistic chronological localization and cross-modal alignment. Overall results reveal a substantial gap between surface-level recognition and true temporal understanding. In the News-Year task, models exhibit limited accuracy and unstable year estimation, indicating that recovering precise timestamps from visual evidence remains difficult. Meanwhile, the News-Multimodal task exposes weaknesses in aligning textual temporal cues with historical images, particularly for open-source models, many of which perform close to random guessing. Open-source models generally struggle more with cross-modal alignment, suggesting insufficient chronological super-vision during training. By contrast, closed-source models show Q: Which historical period does the style of the item in this                                        
+
+> image belong to, among the following options?
+> CHA
+> Localization
+> Options
+> A. 唐(Tang) B. 宋(Song) C. 元(Yuan) D. 明(Ming) E. 清(Qing)
+> Gemini -2.5 -Pro
+> Pot with scrolling foliage
+> decoration in underglaze
+> blue Qing Dynasty
+> This is aclassic imperial reign mark used during the Ming Dynasty .This
+> specific style of underglaze cobalt blue on white porcelain reached a
+> peak of technical and artistic refinement during the early Ming Dynasty,
+> particularly the Xuande period (1426 –1435 ).
+> Fig. 10. An Example of the Artifact Case Study.
+
+relatively stronger alignment ability but still face difficulties in precise absolute dating, where subtle temporal cues must be inferred from a single image. Additional experimental details and complete results are available in the public repository 4.
+
+C. Deficiency in Fine-grained Perception for Artifacts 
+
+A critical challenge for VLMs is the fine-grained perception of cultural artifacts, where minute visual details, such as reign marks or specific decorative motifs, determine the historical provenance. As shown in Fig. 10, the model demonstrates a failure to integrate localized visual evidence with its internal knowledge base, resulting in a chronological misclassification. This failure is characterized by the following dimensions: 
+
+Sub-optimal Localization and Feature Extraction: The artifact is a blue-and-white porcelain pot with scrolling fo-liage decoration from the Qing Dynasty. However, the model erroneously identifies the visual evidence as a “classic imperial reign mark used during the Ming Dynasty”. This suggests a failure in fine-grained localization, where the model misses the specific stylistic nuances that distinguish Qing-era craftsman-ship from its predecessors. Knowledge Over-generalization :The model justifies its incorrect choice by stating that under-glaze cobalt blue reached its “peak of technical and artistic refinement during the early Ming Dynasty”. Here, the model relies on a generalized historical heuristic rather than per-forming a precise, instance-based analysis of the object in the image. Conflict between Perception and Logic : Even when presented with multiple-choice options ranging from the Tang to the Qing Dynasty, the model’s “internalized preference” for the Ming Dynasty’s association with blue-and-white porcelain overrides the actual visual data. This case study highlights that “spurious reasoning” in the multimodal domain is not limited to text but extends to visual shortcuts. When a model lacks fine-grained resolution to distinguish highly similar cultural styles, it defaults to the most “probable” or “famous” historical category, bypassing authentic visual deduction.                                                         
+
+> 4https://github.com/LuoRenqiang/ChronoVision 10 Greyscale is new
+> State funeral of Elizabeth II in
+> 2022.
+> Donald Trump, Kim Jong -un,
+> and Moon Jae -in met in 2019.
+> Q: Compare these two images and determine which one appeared
+> earlier in history.
+> ChatGPT
+> Answer
+> “Image 1is amodern color press photograph with …… strongly
+> 21 st century .Image 2,while also amodern photograph, depicts a
+> ceremonial guard scene with traditional uniforms (e .g.,bearskin -
+> style hats) and ablack -and -white presentation suggesting an older
+> or archival -style event ;it reads as earlier in historical context than
+> the contemporary diplomatic photo in Image 1.“
+
+Fig. 11. An Example of the Shortcut Case Study. 
+
+D. Stylistic Color Bias and Chronological Heuristics 
+
+To investigate whether VLMs rely on superficial stylistic cues rather than authentic chronological reasoning, we de-signed a controlled experiment where visual content remains constant across image pairs while color information is selec-tively removed. By isolating color as the sole independent vari-able, this setup provides a rigorous mechanism to determine if chronological judgments are compromised by the “grayscale-as-antiquity” shortcut. Our analysis reveals a Stylistic Color Bias. In one represen-tative case, GPT-5.2 was presented with two images (Fig. 11): 
+
+Left Image : A modern color press photograph containing clear 
+
+21 st-century visual markers. Right Image : A black-and-white photograph capturing ceremonial guards at the late Queen’s resting place. Note that the model’s automated caption focuses strictly on the visual elements of the traditional uniforms and bearskin hats, rather than the specific location. Despite the modern origin of both images, the model incorrectly identified 
+
+Right Image as chronologically earlier. The model bypassed the semantic content of the scene, which depicts a modern ceremonial event, and instead relied on the black-and-white presentation as a spurious chronological anchor. This confirms that VLMs frequently prioritize superficial artifacts over a genuine deductive analysis of historical context, leading to “spurious reasoning” in chronological tasks. 
+
+E. Multimodal Alignment and Chronological Hallucination 
+
+Our framework reveals Multimodal Alignment Failures, where models fail to synchronize chronological information across modalities. As shown in Fig. 12, the model cannot identify the image corresponding to the event text. The failure involves two stages: Chronological Knowledge Hallucination : The model incorrectly dates the Bokassa coup to 1976 instead of the actual date (January 1, 1966 ). This internal factual error acts as a “distractor”, overriding subse-quent visual evidence and misdirecting the entire reasoning trajectory. Failed Cross-Modal Mapping : Despite correctly identifying Image 1 as England’s 1966 World Cup, the model fails to align this visual token with the textual prompt. An-chored to its own erroneous “ 1976 ” timestamp, the alignment Q: Which image was taken in the same year as the event?                                                                                         
+
+> SPEED
+> Question
+> HistNews
+> Event :“In acoup, Colonel
+> Jean -Bé del Bokassa takes over
+> as military ruler of the Central
+> African Republic, ousting
+> President David Dacko .”
+> Qwen3 -VL -8B -Instruct
+> The event, the coup by Colonel Jean -Bé del Bokassa in the Central African
+> Republic, occurred in 1976 .
+> -Image 1:England winning the 1966 FIFA World Cup .
+> -Image 2:Ahockey game, likely from the 1990 sor 2000 s.
+> -Image 3:Liverpool winning the 2019 UEFA Champions League .
+> -Image 4:Paris Saint -Germain winning the 2025 UEFA Champions League
+> (a future event) .
+> None of these events occurred in 1976 .Therefore, no image was taken in the
+> same year as the event .
+> Answer
+
+Fig. 12. An Example of the News-Multimodel Case Study. 
+
+layer prioritizes internal parametric memory over external visual ground truth, leading to a false negative. This case highlights a “weakest link” principle: even with accurate independent recognition, models struggle to reconcile disparate inputs under a consistent timeline. Performance de-pends on resilience to internal contradictions during alignment, not just recognition accuracy. VII. B ENCHMARK ROBUSTNESS AND VALIDITY ANALYSIS 
+
+A. Trivial Baseline Analysis 
+
+We further evaluate trivial constant-answer baselines to examine whether the benchmark can be solved by exploiting dominant labels or temporal priors. For year prediction on all 1, 028 News images, always predicting the mode year ( 2010 ), mean year ( 2008 ), or median year ( 2012 ) results in MAEs of 10 .03 , 10 .57 , and 9.85 respec-tively, all substantially worse than the average model MAE of 
+
+4.17 . For dynasty localization, always predicting Tang , Song ,
+
+Yuan , Ming , or Qing yields accuracies of 11 .72 , 18 .49 , 12 .97 ,
+
+26 .83 , and 29 .99 , respectively, all significantly lower than the 10 -model average performance of 38 .91 obtained using the models’ actual predictions. These results suggest that the benchmark cannot be solved by regressing toward the temporal mean or by predicting dominant categories. 
+
+B. Confidence Analysis 
+
+We further analyze the relationship between model confi-dence and temporal prediction accuracy. For each image in News-Year subtask, we require Qwen 3-8B to output both a predicted year and an integer confidence score between 0 and 
+
+100 . Predictions are then grouped into confidence bins for evaluation. Table V shows that higher-confidence predictions consis-tently achieve higher exact-match accuracy as well as higher within-1-year and within-3-year accuracy. For example, pre-dictions with confidence 95 –99 achieve 58 .19 % exact accuracy 11                                                                                                                                                                      
+
+> TABLE IV DETAILED PERFORMANCE ON SHORTCUT TASK WITH COT
+> Model Sports Politics Emergency Electronics Diversity
+> ACC 1ACC 2∆ACC ACC 1ACC 2∆ACC ACC 1ACC 2∆ACC ACC 1ACC 2∆ACC ACC 1ACC 2∆ACC
+> InternVL 3.576 .50 24 .00 52 .50 81 .00 41 .00 40 .00 71 .00 33 .50 37 .50 78 .50 68 .50 10 .00 74 .25 44 .50 29 .75
+> MiniCPM 76 .00 40 .00 36 .00 82 .50 39 .50 43 .00 80 .00 31 .50 48 .50 88 .50 74 .50 14 .00 86 .75 54 .75 32 .00
+> GLM 76 .50 27 .00 49 .50 78 .00 34 .50 43 .50 70 .00 33 .50 36 .50 79 .50 73 .50 6.00 77 .50 47 .25 30 .25
+> Qwen 2.571 .50 38 .00 33 .50 68 .00 44 .50 23 .50 67 .50 50 .00 17 .50 80 .00 74 .50 5.50 73 .50 50 .00 23 .50
+> Qwen 3-8B66 .50 50 .00 16 .50 65 .00 49 .00 16 .00 59 .50 39 .50 20 .00 87 .00 82 .00 5.00 77 .25 57 .00 20 .25
+> Average 73 .40 35 .80 37 .60 74 .90 41 .70 33 .20 69 .60 37 .60 32 .00 82 .70 74 .60 8.10 77 .85 50 .70 27 .15
+> TABLE V PREDICTION ACCURACY UNDER DIFFERENT CONFIDENCE INTERVALS .Confidence Num Acc ≤1y ≤3y 0–59 0---60–69 20.00 0.00 0.00 70–79 140 17.14 29.29 51.43 80–89 251 24.70 40.24 62.95 90–94 281 32.74 48.40 68.93 95–99 354 58.19 70.34 81.92 TABLE VI AVERAGE CONFIDENCE ACROSS DIFFERENT TEMPORAL PERIODS .Year Range Num Avg. Conf Year Range Num Avg. Conf 1952–1961 989.44 1992–2001 90 87.61 1962–1971 25 92.00 2002–2011 267 86.54 1972–1981 38 91.18 2012–2021 421 87.81 1982–1991 57 87.72 2022–2025 121 90.79
+
+and 81 .92 % within-3-year accuracy, substantially higher than lower-confidence groups. This indicates that the model con-fidence scores are informative and positively correlated with temporal prediction reliability. We additionally analyze confidence scores across different temporal periods. As shown in Table VI, the average con-fidence does not exhibit a clear monotonic trend from early historical periods to recent years. This suggests that the model is not simply assigning higher confidence to years near the temporal center of the dataset distribution. 
+
+C. The Effect of Prompt Incorporating CoT 
+
+Furthermore, to verify the persistence of this color shortcut, we introduce a Reasoning-based Verification module using an augmented prompt PCoT . This prompt incorporates a Chain-of-Thought (CoT) mechanism, explicitly instructing the model to deliberate on the semantic consistency of its judgment. Specifically, the model is required to consider a counterfactual scenario: whether its conclusion would remain unchanged if the color properties of I1 and I2 were swapped. By introducing this cross-consistency check, we aim to mitigate the possibility of the model being inadvertently misled by the grayscale filter. This advanced probing allows us to confirm whether the observed errors stem from a superficial heuristic or if the model can be guided to prioritize genuine chronological features over deceptive visual shortcuts. As illustrated in Fig. 13, we contrast standard zero-shot inference, where models predominantly rely on immediate visual intuition, with a CoT prompting strategy designed to isolate the effect of deliberate reasoning on model robustness. The efficacy of the CoT intervention is quantified by the reduction in the performance gap ( ∆ACC ) within the Shortcut Task. A contraction in ∆ACC signifies a weakened reliance on spurious color-based shortcuts and enhanced resilience to stylistic perturbations. As evidenced in Table VII, the integration of the Reasoning-based Verification module yields a consistent and significant improvement in robustness across all evaluated VLMs. The aggregate average ∆ACC undergoes a substantial reduction from 48 .51% to 27 .53% , representing a net robustness gain of ∆ = −20 .98% . This shift demonstrates that the CoT mechanism effectively disrupts the “grayscale-as-antiquity” heuristic. Notably, the most pronounced improvements are observed in InternVL 3.5-8B (from 65 .66% to 33 .25% ) and GLM-4.1V-9B-Thinking (from 57 .25% to 32 .67% ). By ex-plicitly mandating the model to deliberate on counterfactual scenarios during the verification phase, the Reasoning-based Verification module forces a decoupling of chronological judg-ment from superficial visual attributes. Instead of succumbing to the impulsive bias triggered by grayscale filters, models are redirected to prioritize semantic temporal anchors, thereby achieving superior consistency in chronological reasoning. Despite these gains, the granular results in Table IV reveal that shortcut bias is mitigated rather than fully eradicated. Even with CoT intervention, a formidable performance gap persists, particularly in abstract domains such as Politics (∆ACC = 33 .20% ) and Emergency ( ∆ACC = 32 .00% ). This suggests that the grayscale heuristic is not merely a superfi-cial decision-layer artifact but is likely entangled within the foundational feature representations of the VLMs. While CoT prompting serves as an effective post-hoc palliative, achieving full decoupling of stylistic attributes from temporal semantics may necessitate more fundamental interventions during the pre-training or alignment stages. 
+
+D. Retrieval-Augmented Baseline Analysis 
+
+A potential concern is that the proposed benchmark may evaluate whether VLMs can recall publicly available histor-ical knowledge, rather than requiring genuine chronological reasoning. If this were the case, then a simple retrieval-augmented pipeline should substantially improve performance by explicitly accessing external factual knowledge sources. Specifically, such a system could first extract salient visual 12 system_prompt = (        
+
+> "You are an expert in historical visual analysis and chronological reasoning. "
+> "Analyze the provided images for chronological clues such as technology, fashion,
+> architecture. "
+> "You must output a single JSON object containing: "
+> "1. 'thinking': A detailed analysis of which image is older. "
+> "2. 'answer': Strictly the number '1' (if Image 1 is earlier) or '2' (if Image 2 is earlier).")
+> system_prompt = ( …
+> "You must output a single JSON object containing: "
+> "1. ' time_anchors ': Identified entities for each image."
+> "2. ' historical_context ': Earliest appearance dates for these entities."
+> "3. ' reasoning_path ': Step -by -step logical deduction comparing the identified anchors. "
+> "4. ' bias_mitigation ': A mandatory counterfactual check. Explicitly ask yourself: 'If the
+> color properties of Image 1 and Image 2 were swapped (e.g., the colored image
+> becomes grayscale and vice versa), would my conclusion about the chronological
+> order remain unchanged?' Verify that your judgment relies on semantic evolutionary
+> features rather than visual shortcuts like color or image quality."
+> "5. 'answer': Strictly the number '1' (if Image 1 is earlier) or '2' (if Image 2 is earlier)." )
+
+w/o CoT        
+
+> user_prompt = (
+> "Compare these two images and determine which one appeared EARLIER in history. \n"
+> "Image 1 is the first image provided. \n"
+> "Image 2 is the second image provided. \n"
+> "Output your analysis and final choice in JSON format.")
+> user_prompt = (
+> “Compare these two images and determine which one appeared EARLIER in history .\n"
+> "Follow these steps strictly: \n"
+> "Step 1: Identify visual entities. \n"
+> "Step 2: List historical appearance times. \n"
+> "Step 3: Detail thinking process. \n"
+> "Step 4: Perform Bias -Check. \n"
+> "Output everything in a structured JSON format.")
+
+CoT 
+
+Fig. 13. The detailed prompt when processing with or without(w/o) CoT. TABLE VII THE ∆Acc WITH OR WITHOUT CHAIN -OF -T HOUGHT .Model w/o CoT with CoT ∆
+
+InternVL 3.5-8B 65 .66 33 .25 −32 .41 
+
+MiniCPM-V-4.5 46 .57 34 .25 −12 .32 
+
+GLM-4.1V-9B-Thinking 57 .25 32 .67 −24 .58 
+
+Qwen 2.5-VL-7B-Instruct 42 .84 21 .17 −21 .67 
+
+Qwen 3-VL-8B-Instruct 30 .25 16 .33 −13 .92 
+
+Total Average Performance 
+
+48 .51 27 .53 −20 .98 
+
+anchors from the image (e.g., artifact patterns, clothing styles, architectural elements, or event-related objects), then retrieve candidate references from publicly accessible sources such as Wikimedia Commons or Wikipedia, and finally aggregate the retrieved metadata to infer the dynasty or year. Under the “knowledge recall” hypothesis, such retrieval augmentation would be expected to significantly reduce the difficulty of the Artifacts and News tasks. To investigate this possibility, we implement a lightweight Retrieval-Augmented Generation (RAG) baseline on top of open-source VLMs. As shown in Algorithm 2, the pipeline consists of three stages: (1) extract visual descriptions from the image using the VLM itself, (2) retrieve candidate evidence from public knowledge sources through keyword matching, and (3) feed the retrieved textual evidence back into the model to produce the final chronological prediction. Table VIII summarizes the comparison between the original zero-shot setting and the retrieval-augmented setting. The re-sults reveal that retrieval provides only limited and inconsistent improvements (e.g., Qwen 3-VL-8B from 35 .80 to 36 .96 in News-Year Task). And it may degrade performance (e.g., Qwen 3-VL-8B from 38 .43 to 32 .81 , MiniCPM-V-4.5 from 
+
+44 .93 to 40 .92 in Artifacts–Chronological Localization Task). These findings suggest that our benchmark cannot be trivially solved through lightweight retrieval pipelines alone. While public factual knowledge may provide auxiliary support, the dominant challenge remains the ability to perform fine-grained chronological reasoning under ambiguous visual evidence. In 
+
+Algorithm 2: RAG-based Prediction Pipeline 
+
+Input: Input image I, multimodal model M
+
+Output: Chronological prediction ˆy
+
+// Stage 1: visual anchor extraction  
+
+> 1
+
+A ← M (I);
+
+// A: anchor text, type, confidence  
+
+> 2
+
+Q ← GenerateQueries (A); 
+
+> 3
+
+Q ← RemoveTimeTerms (Q);
+
+// remove dynasty/year leakage // Stage 2: external retrieval  
+
+> 4
+
+foreach qi ∈ Q do  
+
+> 5
+
+Ri ← Retrieve (qi);
+
+// Wikipedia + Wikimedia or museum  
+
+> 6
+
+R ← S 
+
+> i
+
+Ri;
+
+// Stage 3: retrieval re-ranking  
+
+> 7
+
+foreach r ∈ R do  
+
+> 8
+
+smeta ← MetaScore (r, A );
+
+// title/snippet/summary overlap  
+
+> 9
+
+scred ← CredibilityScore (r);
+
+// Wikipedia + Wikimedia or museum.  
+
+> 10
+
+squery ← QueryScore (r); 
+
+> 11
+
+stitle ← TitleSpecificity (r); 
+
+> 12
+
+s(r) ← 0.50 smeta + 0 .15 scred + 0 .20 squery + 0 .15 stitle ; 
+
+> 13
+
+R∗ ← TopK (R);
+
+// Stage 4: chronological voting  
+
+> 14
+
+V (c) ← P 
+
+> r∈R∗
+
+wr (c);
+
+// extract dynasty/year evidence from retrieved texts  
+
+> 15
+
+ˆyrag ← arg max c V (c);
+
+// Stage 5: final multimodal prediction  
+
+> 16
+
+ˆy ← M (I, R ∗); 
+
+> 17
+
+return ˆy
+
+particular, the persistent performance gap between retrieval-augmented open-source models and zero-shot closed models indicates that the benchmark evaluates more than simple memorization of public historical facts. VIII. C ONCLUSION 
+
+In this paper, we introduced a comprehensive benchmark along with a newly constructed dataset specifically designed to evaluate the chronological reasoning capabilities of VLMs. Our work systematically investigates how models perform across three critical dimensions: Artifacts, Shortcuts, and 13 
+
+TABLE VIII COMPARISON BETWEEN ZERO -SHOT (ZS) AND RETRIEVAL -AUGMENTED SETTINGS .Model Dynasty ZS Dynasty RAG Year ZS Year RAG 
+
+Qwen 3-VL-4B 40 .14 38 .22 32 .86 34 .34 
+
+Qwen 3-VL-8B 38 .43 32 .81 35 .80 36 .96 
+
+MiniCPM-V-4.5 44 .93 40 .92 31 .53 29 .57 
+
+News. Through extensive experiments on leading VLMs, we reveal that authentic chronological logic remains a significant hurdle for current multimodal systems. Our findings yield three insights: Persistence of Visual Shortcuts: We demonstrate that models heavily rely on super-ficial cues, such as the “grayscale equals old” heuristic. When these shortcuts conflict with chronological facts, model reason-ing often collapses, revealing a lack of deep historical under-standing. Domain-Specific Robustness: Our dataset reveals that categories with distinct technological iteration features, such as electronics, provide stronger visual anchors that help models resist color bias. In contrast, more abstract domains remain highly susceptible to stylistic misleading. Divergent Reasoning Bottlenecks: We identify a performance disparity where models exhibit different limitations in cross-modal year alignment versus absolute chronological localization. Ultimately, our work provides a rigorous foundation for assessing chronological intelligence. These results highlight the urgent need for future training paradigms that decouple superficial image styles from intrinsic chronological semantics to achieve more robust multimodal reasoning. REFERENCES [1] P. Jian, D. Yu, and J. Zhang, “Large language models know what is key visual entity: An llm-assisted multimodal retrieval for vqa,” in EMNLP ,2024, pp. 10 939–10 956. [2] S. Antol, A. Agrawal, J. Lu et al. , “Vqa: Visual question answering,” in ICCV , 2015, pp. 2425–2433. [3] A. Rasekh, E. B. Soula, O. Daliran et al. , “Enhancing temporal un-derstanding in video-llms through stacked temporal attention in vision encoders,” in NeurIPS , 2025. [4] S. Huang, L. Dong, W. Wang et al. , “Language is not all you need: Aligning perception with language models,” in NeurIPS , 2023, pp. 72 096–72 109. [5] W. Hu, Y. Xu, Y. Li et al. , “Bliva: A simple multimodal LLM for better handling of text-rich visual questions,” in AAAI , 2024, pp. 2256–2264. [6] Y. Zhang, H. Zhang, H. Tian et al. , “MME-RealWorld: Could your multimodal llm challenge high-resolution real-world scenarios that are difficult for humans?” in ICLR , 2025. [7] L. Celona, S. Bianco, M. Donzella et al. , “Improving image captioning descriptiveness by ranking and LLM-based fusion,” Neural Computing and Applications , vol. 37, no. 32, pp. 27 279–27 299, 2025. [8] M. F. Imam, C. Lyu, and A. F. Aji, “Can multimodal LLMs do visual temporal understanding and reasoning? the answer is no!” arXiv preprint arXiv:2501.10674 , 2025. [9] K. Tang, J. Gao, Y. Zeng et al. , “LEGO-Puzzles: How good are MLLMs at multi-step spatial reasoning?” arXiv preprint arXiv:2503.19990 , 2025. [10] R. Luo, D. Zhang, Y. Gao et al. , “Bridging semantic understanding and popularity bias with llms,” in The ACM Web Conference , 2026. [11] J. Cai, K. Yang, L. Fu et al. , “CompareBench: A benchmark for visual comparison reasoning in vision-language models,” arXiv preprint arXiv:2509.22737 , 2025. [12] Z. Chu, J. Chen, Q. Chen et al. , “Timebench: A comprehensive evalua-tion of temporal reasoning abilities in large language models,” in ACL ,2024, pp. 1204–1228. [13] B. Zhao, Z. Brumbaugh, Y. Wang et al. , “Set the clock: Temporal alignment of pretrained language models,” in ACL , 2024, pp. 15 015– 15 040. [14] K. Cheng, W. Song, J. Fan et al. , “Caparena: Benchmarking and analyzing detailed image captioning in the LLM era,” arXiv preprint arXiv:2503.12329 , 2025. [15] F. Yan, J. Yao, M. K. Chen et al. , “Investigating reasoning in large language models with counterfactual knowledge graphs,” in KDD , 2026. [16] T. Feng, C. Jin, J. Liu et al. , “How far are we from AGI: Are LLMs all we need?” TMLR , 2024. [17] Y. Park, C. Yoon, J. Park et al. , “ChroKnowledge: Unveiling chrono-logical knowledge of language models in multiple domains,” in ICLR ,2025. [18] J. Vladika, M. Dhaini, and F. Matthes, “Facts fade fast: Evaluating memorization of outdated medical knowledge in large language models,” in EMNLP , 2025, pp. 9161–9174. [19] Y. Park, C. Yoon, J. Park et al. , “Does time have its place? temporal heads: Where language models recall time-specific information,” in ACL ,2025. [20] F. Liu, Y. Wang, T. Wang et al. , “Visual news: Benchmark and challenges in news image captioning,” in EMNLP , 2021, pp. 6761–6771. [21] N. Tekaya, M. Waldner, and M. Zeppelzauer, “A matter of time: Revealing the structure of time in vision-language models,” in ACM MM , 2025, pp. 12 371–12 380. [22] K. Marino, M. Rastegari, A. Farhadi et al. , “Ok-vqa: A visual question answering benchmark requiring external knowledge,” in CVPR , 2019, pp. 3195–3204. [23] Y. Liu, H. Duan, Y. Zhang et al. , “Mmbench: Is your multi-modal model an all-around player?” in ECCV , 2024, pp. 216–233. [24] L. Chen, J. Li, X. Dong et al. , “Are we on the right way for evaluating large vision-language models?” 2024, pp. 27 056–27 087. [25] X. Cheng, W. Zhang, S. Zhang et al. , “Simplevqa: Multimodal factuality evaluation for multimodal large language models,” in ICCV , 2025, pp. 4637–4646. [26] H. Dong, J. Li, B. Wu et al. , “Benchmarking and improving detail image caption,” arXiv preprint arXiv:2405.19092 , 2024. [27] X. Yue, Y. Ni, K. Zhang et al. , “Mmmu: A massive multi-discipline multimodal understanding and reasoning benchmark for expert agi,” in 
+
+CVPR , 2024, pp. 9556–9567. [28] F. Wang, X. Fu, J. Y. Huang et al. , “MuirBench: A comprehensive benchmark for robust multi-image understanding,” in ICLR , 2025. [29] K. Sun, J. Pan, Y. Ge et al. , “Journeydb: A benchmark for generative image understanding,” NeurIPS , pp. 49 659–49 678, 2023. [30] G. Bradski, “The OpenCV library.” Dr. Dobb’s Journal: Software Tools for the Professional Programmer , vol. 25, no. 11, pp. 120–123, 2000. [31] G. Comanici, E. Bieber, M. Schaekermann et al. , “Gemini 2.5: Pushing the frontier with advanced reasoning, multimodality, long context, and next generation agentic capabilities,” arXiv preprint arXiv:2507.06261 ,2025. [32] A. Yang, A. Li, B. Yang et al. , “Qwen3 technical report,” arXiv preprint arXiv:2505.09388 , 2025. [33] W. Wang, Z. Gao, L. Gu et al. , “Internvl3.5: Advancing open-source multimodal models in versatility, reasoning, and efficiency,” arXiv preprint arXiv:2508.18265 , 2025. [34] T. Yu, Z. Wang, C. Wang et al. , “Minicpm-v 4.5: Cooking effi-cient mllms via architecture, data, and training recipe,” arXiv preprint arXiv:2509.18154 , 2025. [35] W. Hong, W. Yu, X. Gu et al. , “Glm-4.1 v-thinking: Towards versa-tile multimodal reasoning with scalable reinforcement learning,” arXiv preprint arXiv:2507.01006 , 2025. [36] P. K. Sen, “Estimates of the regression coefficient based on Kendall’s tau,” Journal of the American Statistical Association , vol. 63, no. 324, pp. 1379–1389, 1968. [37] C. J. Willmott and K. Matsuura, “Advantages of the mean absolute error (mae) over the root mean square error (rmse) in assessing average model performance,” Climate research , vol. 30, no. 1, pp. 79–82, 2005.

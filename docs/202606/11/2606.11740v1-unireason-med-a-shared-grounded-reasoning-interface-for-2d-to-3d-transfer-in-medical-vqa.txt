@@ -1,0 +1,453 @@
+Title: UniReason-Med: A Shared Grounded Reasoning Interface for 2D-to-3D Transfer in Medical VQA
+
+URL Source: https://arxiv.org/pdf/2606.11740v1
+
+Published Time: Thu, 11 Jun 2026 00:46:25 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+# UniReason-Med: A Shared Grounded Reasoning Interface for 2D-to-3D Transfer in Medical VQA 
+
+Mengzhuo Chen * Yan Shu * Chi Liu *
+
+Hongming Piao Xidong Wang Derek Li Bryan Dai †
+
+IQuest Research 
+
+{mzchen, yshu, cliu04, cbdai}@iquestlab.com 
+
+Abstract 
+
+We study whether grounded reasoning super-vision from abundant 2D medical images can improve 3D medical VQA when both input types are aligned through a common reason-ing interface. We introduce UniReason-Med, a single-checkpoint framework that processes either a 2D image or a slice-serialized 3D volume at inference time, generating inter-leaved textual reasoning and localized visual evidence through shared box syntax, region-token injection, and a common grounded rea-soning policy. To train this interface, we construct UniMed-CoT, a 220K instruction-tuning dataset with interleaved textual reason-ing and grounded visual evidence, including 170K 2D and 50K 3D samples. Through supervised fine-tuning followed by outcome-level reinforcement learning, UniReason-Med learns to generate grounded reasoning traces without IoU/Dice-based localization rewards during RL. Data-mixture and component ab-lations show that joint 2D+3D grounded su-pervision substantially improves 3D reason-ing over 3D-only training, while grounding and region-token injection consistently ben-efit both 2D and 3D tasks. These results suggest that a shared grounded reasoning in-terface can transfer reasoning structure from 2D images to slice-serialized volumetric med-ical understanding. The code and data are publicly available at https://github.com/ IQuestLab/unireason-med .
+
+1 Introduction 
+
+Multimodal Large Language Models (MLLMs) have demonstrated remarkable capabilities in vi-sual understanding and text generation, offering a promising foundation for intelligent medical AI 
+
+> *Equal contribution
+> †Corresponding author
+
+systems. By coupling strong language priors with visual perception, MLLMs are increasingly being explored as clinical assistants for medical image interpretation, disease analysis, report generation, and diagnostic support (Li et al., 2023; Chen et al., 2024; Mullappilly et al., 2024; Lin et al., 2025). However, real-world clinical decision-making poses challenges that extend far beyond general visual understanding. In routine practice, physi-cians interpret heterogeneous medical data span-ning multiple imaging modalities, such as 2D chest X-rays for pneumonia assessment and 3D CT vol-umes for tumor localization, requiring the synthesis of evidence across fundamentally different spatial representations. This setting calls for a common reasoning interface that can ground and reference evidence consistently across planar images and slice-serialized volumetric scans. Moreover, expert radiologists do not merely inspect images holisti-cally. They ground specific visual findings such as lesions, fractures, or anatomical landmarks and then reason over these localized observations to reach diagnostic conclusions (The Royal College of Radiologists, 2025). Thus, for universality and interpretability, medical MLLMs should support explicit evidence grounding and cross-dimensional transfer between planar and slice-serialized volu-metric reasoning. Despite recent progress, existing medical MLLMs still fall short of these requirements. Early medical MLLMs, such as LLaVA-Med (Li et al., 2023) and HuatuoGPT-Vision (Chen et al., 2024), primarily focus on 2D image understanding and instruction following. More recent reasoning-oriented models, including Med-R1 (Lai et al., 2025) and MedVLM-R1 (Pan et al., 2025), im-prove clinical reasoning but operate with only tex-tual chain-of-thought, without explicitly incorpo-rating grounded visual evidence into intermediate reasoning steps. In parallel, several works have extended medical 1
+
+> arXiv:2606.11740v1 [cs.CV] 10 Jun 2026
+
+MLLMs to 3D imaging or unified 2D-3D model-ing, such as RadFM (Wu et al., 2025a), M3D (Bai et al., 2024), OmniV-Med (Jiang et al., 2025), and VILA-M3 (Nath et al., 2025). While these methods improve modality coverage and general visual un-derstanding, they mainly emphasize representation unification or task generalization, rather than a rea-soning process that explicitly interleaves localized visual evidence with language for either 2D or 3D inputs under a shared interface. On the other hand, grounded medical reasoning has begun to emerge in specialized settings, including grounded report generation and region-aware reasoning on 2D im-ages (Bannur et al., 2024; Wang et al., 2025b; Liu et al., 2025; Le-Duc et al., 2025), as well as recent progress on medical grounding with reinforcement learning and task-specific 3D grounded reasoning datasets (Xu et al., 2025a; Sambara et al., 2025). Nevertheless, these approaches remain limited ei-ther to 2D scenarios, to specific anatomical sites, or to settings where grounding is not seamlessly integrated into the reasoning process. A shared interface for token-interleaved grounded reason-ing over both 2D and 3D medical images remains underexplored (Fig. 1). To address these challenges, we study cross-dimensional grounded transfer : whether abun-dant 2D grounded reasoning supervision can im-prove 3D medical VQA when 2D and 3D data share a common reasoning interface. We intro-duce UniReason-Med , a single-checkpoint frame-work that processes either a 2D image or a slice-serialized 3D volume while sharing the lan-guage model, grounding syntax, and grounded reasoning policy across dimensions. At the core of UniReason-Med is a Grounded Chain-of-Thought (GCoT) interface (Wu et al., 2025b), in which reasoning trajectories interleave textual rea-soning tokens with visual tokens extracted from regions specified by self-generated 2D boxes or 3D cuboids over ordered slice sequences. 
+
+Scope of unification. We study interface-level uni-fication: 2D images and slice-serialized 3D CT vol-umes share the same grounding syntax, GCoT pol-icy, region-token injection mechanism, and training objective. Each inference instance contains either a 2D image or a 3D CT volume serialized into 32 or-dered slices following M3D (Bai et al., 2024). We evaluate cross-dimensional transfer through joint training under this shared grounded reasoning in-terface. To support training, we construct UniMed-CoT ,a 220K instruction-tuning dataset with interleaved grounded reasoning annotations generated through an automated pipeline. UniMed-CoT contains 170K 2D and 50K 3D samples spanning diverse imaging modalities and anatomical systems. We first perform supervised fine-tuning on UniMed-CoT to establish the interleaved reasoning format, and then further optimize the model with Group Relative Policy Optimization (GRPO) to improve reasoning quality and grounding consistency (Guo et al., 2025; Xu et al., 2025a). This design lets us test whether a shared grounded reasoning interface can transfer reasoning structure from abundant 2D supervision to slice-serialized volumetric medical understanding. In summary, our contributions are fourfold: • We formulate cross-dimensional grounded transfer for medical VQA: whether abundant 2D grounded reasoning supervision can im-prove 3D medical reasoning through a shared language-side interface. • We introduce UniReason-Med , which shares box syntax, region-token injection, and a grounded reasoning policy across 2D images and slice-serialized 3D volumes. • We construct UniMed-CoT , a 220K-sample dataset with 170K 2D and 50K 3D interleaved grounded reasoning annotations, and validate its quality through automatic filtering and manual inspection. • Data-mixture and component ablations show that joint 2D+3D training improves 3D VQA over 3D-only training, grounded visual to-ken injection benefits both dimensions, and outcome-level RL improves grounding with-out IoU/Dice-based localization rewards dur-ing RL. 
+
+2 Related Works 
+
+Medical Multimodal Large Language Mod-els. The rapid evolution of large language mod-els (LLMs) and their multimodal counterparts (MLLMs) (Wang et al., 2023; Li et al., 2024; Zhu et al., 2025) has catalyzed progress in medical vi-sual understanding. To adapt general MLLMs to the medical domain, models like LLaVA-Med (Li et al., 2023), HuatuoGPT-Vision (Chen et al., 2024), and BiMediX2 (Mullappilly et al., 2024) 2Method Modality CoT Grounded CoT 2D 3D 2D 3D 2D 3D                                                              
+
+> LLaVA-Med ✓✗✗✗✗✗
+> HuatuoGPT-Vision ✓✗✗✗✗✗
+> RadFM ✓✓✗✗✗✗
+> MedBLIP ✗✓✗✗✗✗
+> M3D-LaMed ✗✓✗✗✗✗
+> Med-R1 ✓✗✓✗✗✗
+> MedVLM-R1 ✓✗✓✗✗✗
+> MAIRA-2 ✓✗✗✗✓✗
+> 3DReasonKnee ✗✓✗✓✗✓
+> Ours ✓✓✓✓✓✓2D/3D
+> Medical Input UniReason -Med
+> Reasoning With Grounding
+> Explainable
+> Outcome
+> VLM
+> BBox -guided Cropping
+> BBox
+> Tokens
+> Zoomed
+> Patches
+> X-ray
+> CT
+> Diagnosis
+> Evidence Localization
+
+Figure 1: Overview of UniReason-Med. Left: Comparison of medical MLLMs across key capabilities ( ✓ full support, ✓ partial, ✗ none). Checkmarks indicate whether a method reports the corresponding interface capability under public benchmark settings, not clinical readiness or native volumetric representation. UniReason-Med studies a shared grounded reasoning interface for both 2D images and slice-serialized 3D volumes. Right: Each inference instance contains either a 2D image or a 3D volume; the unification lies in the shared language-side box syntax, grounded reasoning policy, and region-token injection mechanism. 
+
+curate specialized multimodal datasets for pre-training and instruction-tuning. Recently, inspired by DeepSeek-R1 (Guo et al., 2025), efforts includ-ing Med-R1 (Lai et al., 2025) and Lingshu (Xu et al., 2025b) incentivize medical reasoning via verbal chain-of-thought (CoT) and reinforcement learning. To overcome the limitations of 2D-only mod-els, subsequent works explore 3D and unified 2D–3D architectures. Early generalist models like RadFM (Wu et al., 2025a) and M3D (Bai et al., 2024) enable joint processing of 2D and 3D scans. Recent frameworks, such as MedMD (Wu et al., 2025a), OmniV-Med (Jiang et al., 2025), and VILA-M3 (Nath et al., 2025), further unify hetero-geneous medical data and enhance 2D–3D informa-tion fusion. Despite these advances, a shared med-ical reasoning interface that consistently grounds and references localized visual evidence for either 2D or 3D inputs remains underexplored. 
+
+Visual Chain-of-Thought. Distinct from textual CoT, visual CoT integrates visual representations into the reasoning process. While early approaches rely on external visual tools (e.g., cropping or zooming) (Zheng et al., 2025; Wang et al., 2025a), recent paradigms internalize this mechanism by in-corporating localized visual evidence directly into intermediate reasoning steps to reduce hallucina-tions (Fan et al., 2025; Chen et al., 2025; Wu et al., 2025b). In the medical domain, V2T-CoT (Wang et al., 2025b) and MAIRA-2 (Bannur et al., 2024) ex-plore region-level attention and grounded genera-tion, while S-Chain (Le-Duc et al., 2025) intro-duces structured V-CoT with explicit bounding boxes. Concurrently, MedGround-R1 (Xu et al., 2025a) adapts GRPO to medical grounding without requiring manual CoT annotations. However, these methods are largely limited to 2D images, focus primarily on report generation, or lack interleaved grounded visual tokens during decoding. For 3D imaging, 3DReasonKnee (Sambara et al., 2025) introduces grounded reasoning for knee MRIs, but remains restricted to a single anatomical site. In contrast, our work studies a shared-interface 2D–3D medical reasoning framework that inter-leaves grounded visual tokens with textual reason-ing under a common box representation, enabling controlled analysis of cross-dimensional transfer across diverse imaging modalities and anatomical structures. 
+
+3 Method 
+
+In this section, we present the core components of UniReason-Med, a shared-interface framework for grounded visual reasoning over either 2D or 3D medical images. We detail the Grounded Chain-of-Thought (GCoT) interface (Sec. 3.1), describe our instruction-tuning dataset UniMed-CoT (Sec. 3.2), and introduce our two-stage training paradigm (Sec. 3.3). 
+
+3.1 Grounded Chain-of-Thought (GCoT) 
+
+UniReason-Med supports either 2D or 3D medical reasoning at inference time with one shared set of language-side parameters. The model is unified at the token and reasoning-interface level: each instance contains either a 2D image or a 3D CT volume serialized into ordered slices, and both in-put types share the same grounded output syntax, 3Question Q              
+
+> qv
+> Language Tokenizer
+> 2D Image
+> (e.g., X-Ray)
+> 3D Volume
+> (e.g., CT/MRI)
+> Large Language Model (LLM) f
+> Shared Visual Tokenization
+> (·)
+> <think> <bbox_start> x1 y1 <bbox_end> </think>
+> Grounded Chain-of-Thought (GCoT)
+> Final
+> GCoT
+> Model
+> Two-Stage Training
+> Pre-
+> trained
+> MLLM
+> Stage 1: SFT Stage 2: RL
+> SFT
+> Model
+> UniMed-CoT GRPO
+> 3D Interleaved Data
+> 2D Interleaved Data
+> UniMed-CoT: Interleaved Reasoning Data
+> Scanning through, a nodule is visi -
+> ble in this region [3d bbox] ...
+> Find the nodule.
+> The lesion is located in the upper
+> right lobe [2d bbox] ,consistent
+> with..1...
+> Where is the lesion? Q:
+> A:
+> Q:
+> A:
+> ... ... ...
+> Reasoning Rationales
+> Final Answer
+
+Figure 2: Overview of UniReason-Med. (a) Grounded visual evidence extraction for a 2D image or 32-slice CT sequence under the shared GCoT interface. (b) Interleaved UniMed-CoT data format. (c) Two-stage SFT+GRPO training. 
+
+autoregressive decoder, and GCoT policy. Traditional MLLMs θ output an answer via language-only reasoning: 
+
+[r1, r2, . . . , rk , a] ∼ Pθ (· | I, Q ), (1) 
+
+where I denotes image input, Q denotes the text in-put, k is the number of reasoning steps, ri denotes the i-th textual reasoning step, and a is the final an-swer. However, such purely textual reasoning lacks explicit grounding in visual evidence, limiting both accuracy and interpretability. To address this, we adapt Grounded Chain-of-Thought (GCoT) to 2D/3D medical reasoning, us-ing a shared interface where the model derives an-swers from multimodal reasoning chains that in-terleave textual tokens with visual evidence from grounded regions. Formally, GCoT generates: 
+
+[r1, (b1, v1), r2, (b2, v2), . . . , 
+
+rk , (bk , vk ), a] ∼ Pθ (· | I, Q ), (2) 
+
+where at each reasoning step i, the model generates a textual reasoning segment ri, produces grounding coordinates bi, and incorporates extracted visual to-kens vi from the grounded region. The final answer 
+
+a is derived based on this multimodal reasoning chain. Crucially, the model learns when and where to ground without relying on an external detector or segmenter at inference time. At each reasoning step, the model generates co-ordinates to localize task-relevant regions. For 2D images, the model outputs bounding box coordi-nates b = ( x1, y 1, x 2, y 2). For 3D images, we first serialize the volume into an ordered sequence of 2D slices, and the model outputs cuboid coordi-nates b = ( x1, y 1, z 1, x 2, y 2, z 2), where the z axis can be interpreted as the index of the image slice. In both cases, the coordinates are represented in absolute image coordinates. To ensure consistency of the coordinate system across inputs, we apply a smart resize (Bai et al., 2025) strategy so that the height and width of each image are divisible by the vision encoder patch size. Following M3D (Bai et al., 2024), each 3D CT volume is uniformly serialized into 32 ordered slices before visual encoding. In implementation, we instantiate the visual encoder with the frozen Qwen2.5-VL vision tower. Thus, our contribution is not a native 3D volumetric encoder, but a z-aware grounded reasoning interface over slice-serialized volumetric inputs. Under these preprocessing steps, both 2D and 3D grounding coordinates are consis-tently defined as absolute positions on the prepro-cessed input grid. Given grounding coordinates bi at step i, we in-ject focused visual context into the reasoning chain by cropping and encoding the localized region: 
+
+X = Sd(I), d ∈ { 2D, 3D}, (3) 
+
+vi = g(fV (Crop d(X, bi))) , (4) 
+
+where S2D denotes standard 2D image preprocess-ing and S3D serializes a 3D CT volume into 32 ordered slices following M3D (Bai et al., 2024). The shared frozen vision tower and projector are denoted by fV and g. Crop 2D extracts a 2D rect-angular region, whereas Crop 3D extracts the slice range [z1, z 2] and crops the corresponding (x, y )
+
+region on each selected slice. These visual tokens provide evidence that grounds subsequent reason-ing in actual image content, enabling the model to reason over what it “sees” rather than relying solely on textual descriptions. 4Grounding  
+
+> Extraction
+> Mask to 2D
+> Bounding Boxes
+> (x1,y1,x2,y2)
+> Volumetric Mask to
+> 3D Bounding Boxes
+> (x1,y1,z1,x2,y2,z2)
+> Question-Answer
+> Generation
+> Extracted
+> Metadata
+> Structure
+> Localization
+> Existence
+> Verification
+> Size Comparison
+> Spatial
+> Localization
+> Spatial
+> Relationship
+> Reasoning
+> Lesion Analysis
+> Selected
+> QA
+> Samples
+> Structures
+> with
+> Bounding
+> Boxes
+> Modality
+> and
+> Resolution
+> GPT-4 o Model
+> Grounded CoT Annotation UniMed-CoT
+> Dataset
+> 220K Samples
+> (2D &3D Medical
+> Images) with
+> Grounded CoT
+> Annotations
+> 2D Data
+> (SAMed2D-v1)
+> Injection of
+> Grounding
+> Coordinates
+> Grounded CoT
+> Multi S ource
+> 3D Data
+> (M3D)
+
+Figure 3: UniMed-CoT construction. From SAMed2D-v1 and M3D segmentation masks, we extract grounding coordinates, generate QA pairs, and use GPT-4o to produce interleaved grounded CoT annotations, yielding 220K 2D/3D samples. 
+
+3.2 UniMed-CoT Dataset 
+
+To train UniReason-Med, we construct UniMed-CoT (Fig. 3), a large-scale instruction-tuning dataset comprising 220K grounded chain-of-thought (CoT) samples (170K 2D and 50K 3D) that provide unified supervision across modalities. 
+
+Data Sources & Grounding. We build upon SAMed2D-v1 (Ye et al., 2023) for diverse 2D imaging and M3D (Bai et al., 2024) train-ing cases for 3D volumetric CTs. Ground-ing coordinates— (x1, y 1, x 2, y 2) for 2D and 
+
+(x1, y 1, z 1, x 2, y 2, z 2) for 3D—are extracted di-rectly from their existing segmentation masks, en-suring precise spatial grounding without additional annotation overhead. Evaluation images and case identifiers are excluded as summarized in Ap-pendix B. 
+
+QA & Grounded CoT Generation. We design question templates covering diverse clinical reason-ing dimensions (e.g., spatial localization, relation-ship reasoning, lesion analysis). We then prompt GPT-4o with the modality, structural boxes, and questions to generate step-by-step reasoning within 
+
+<think>...</think> blocks. Crucially, we inject grounding coordinates at the first mention of each structure using special tokens: <|box_start|> (x1,y1,x2,y2)<|box_end|><region> for 2D, and <|box_start|>(x1,y1,z1,x2,y2,z2) <|box_end|><region> for 3D. This yields the interleaved reasoning-grounding sequences essential for the GCoT paradigm. 
+
+Quality Filtering. To ensure dataset quality, we discard malformed samples exhibiting missing coordinates, invalid bounding box formats, bro-ken special tokens, or insufficient reasoning depth (< 50 tokens). After filtering, we retain the final 220K high-quality samples. For the manual audit, we sample 100 2D and 100 3D annotations. Two authors independently check whether (i) the final answer matches the generated question, (ii) the inserted box or cuboid covers the mentioned struc-ture, and (iii) the reasoning text is consistent with the localized evidence; disagreements are resolved by discussion. Overall, 92% of the inspected anno-tations exhibit both correct grounding and coherent reasoning, supporting the reliability of the auto-mated pipeline for large-scale grounded-reasoning supervision. 
+
+3.3 Training Paradigm 
+
+We adopt a two-stage training paradigm to establish and subsequently generalize the model’s grounded reasoning capabilities. 
+
+Stage 1: Grounded CoT SFT. In the first stage, we establish foundational grounded reasoning via supervised fine-tuning (SFT) on UniMed-CoT. As introduced in Sec. 3.1, each training sequence in-terleaves textual reasoning segments ri, ground-ing coordinates bi, inserted visual region embed-dings vi, and the final answer a. Let Y =[y1, y 2, . . . , y T ] denote the discrete output-token se-quence after excluding inserted continuous region embeddings. We apply standard auto-regressive cross-entropy loss over all discrete target tokens 
+
+D ⊂ { 1, 2, . . . , T }, including reasoning text, spe-cial markers, grounding coordinates, and the final answer: 
+
+LSFT = − X
+
+> t∈D
+
+log Pθ (yt | y<t , I, Q ), (5) 
+
+where I and Q denote the input image and ques-tion. The inserted visual region embeddings vi are continuous features from cropped regions and are therefore excluded from token-level supervision. This stage teaches the model to localize relevant 5regions and incorporate visual evidence during rea-soning. 
+
+Stage 2: Grounded CoT RL with GRPO. To generalize beyond SFT annotations, we apply Group Relative Policy Optimization (GRPO) (Shao et al., 2024). This stage is useful for mitigat-ing overfitting to imperfect automated artifacts in UniMed-CoT and encouraging flexible exploration of grounding strategies. By shifting from process-level imitation to outcome-level supervision, GRPO refines estab-lished reasoning patterns using outcome-driven re-wards for valid final solutions. Notably, we deliber-ately exclude ground-truth box-overlap localization rewards such as IoU or Dice, allowing us to evalu-ate whether outcome-level rewards can implicitly enhance spatial grounding. 
+
+Group sampling and rewards. For each input 
+
+x = ( I, Q ), we sample a group of G reasoning chains {yj }Gj=1 from the current policy. Each can-didate receives a composite reward:         
+
+> r(yj) = rans (yj) + λ·rformat (yj),(6)
+
+where rans , r format ∈ { 0, 1} strictly indicate answer correctness and adherence to the valid coordinate format, respectively. Rewards are normalized into relative advantages within the group to stabilize training:          
+
+> Aj=r(yj)−μr
+> σr+ϵ,(7)
+
+with μr and σr representing the group mean and standard deviation, and ϵ for numerical stability. 
+
+GRPO objective. Let πθ be the trainable policy and πold the reference policy (initialized from SFT). GRPO optimizes the clipped policy gradient:             
+
+> LGRPO =−Ex, {yj}
+> "
+> 1
+> G
+> GX
+> j=1
+> min
+> 
+> ρjAj,
+> clip (ρj,1−ϵc,1 + ϵc)Aj
+> #
+> ,
+> (8)
+
+where ρj = πθ (yj |x)  
+
+> πold (yj|x)
+
+and ϵc controls the clip-ping margin. By leveraging group-wise relative advantages, GRPO stably assigns higher probabil-ities to high-reward trajectories, unleashing inter-leaved reasoning without requiring ground-truth box-overlap supervision. 
+
+4 Experiments 
+
+Our experiments aim to address three research ques-tions: RQ1: Does joint 2D+3D grounded super-vision improve 3D medical VQA over 3D-only training? RQ2: Which components of the shared grounded reasoning interface contribute to perfor-mance? RQ3: Does outcome-level RL improve grounding without IoU/Dice-based localization re-wards during RL? 
+
+4.1 Evaluation Benchmarks and Baselines Benchmarks. We evaluate cross-modal medical visual understanding on OmniMedVQA (Hu et al., 2024) for 2D scenarios, encompassing multiple modalities (e.g., CT, MRI, X-ray, fundus). For 3D evaluation, we utilize M3D-VQA (Bai et al., 2024), which challenges models on clinically rel-evant tasks including spatial reasoning, abnormal-ity detection, and organ recognition within slice-serialized volumetric scans. 
+
+Baselines. We compare our method against rep-resentative general-domain and medical-specific multimodal large language models (MLLMs). For 2D VQA, baselines include generalist models (e.g., MiniGPT-4, InstructBLIP, LLaVA, Qwen2.5VL) and medical specialists (e.g., LLaVA-Med, Med-PLIB). We additionally report recent frontier/ref-erence models where reproducible evaluation is available to contextualize the gap between com-pact open-source medical models and much larger proprietary systems. For 3D evaluation, we com-pare against recent volumetric MLLMs, including M3D-LaMed (Bai et al., 2024), Lingshu (Xu et al., 2025b), and MedGemma (Research and Deep-Mind, 2025). For all Qwen2.5-VL-based models on M3D-VQA, including the backbone baselines and UniReason-Med, 3D CT volumes are serialized into the same 32-slice input sequence following the M3D protocol. 
+
+4.2 Training Setup 
+
+We adopt Qwen2.5-VL-7B-Instruct as our base model and employ a two-stage training pipeline. Detailed hyperparameters, system configurations, and the data-isolation summary for both stages are provided in Appendix B. We enforce image-identifier, case-identifier, metadata, hash, and image-similarity checks where available to reduce leakage and near-duplicate contamination. 
+
+Stage 1: Supervised Fine-Tuning (SFT). We optimize only the language model on our UniMed-CoT corpus (170K 2D samples from SAMed2D-v1; 50K 3D samples from M3D), leaving the vi-sion tower and projector frozen. For the SFT data-mixture ablations, each mixture is trained with 6Table 1: Data-mixture ablation during SFT under the same optimization schedule. Joint 2D+3D grounded-reasoning supervision improves 3D VQA over 3D-only training with matched training steps.                               
+
+> Model Plane Phase Organ Abnormality Location Mean
+> Qwen2.5VL-7B 91.3 45.5 47.7 48.9 53.1 57.3 UniReason-Med (2D-only) 90.7 38.6 52.4 46.1 45.2 56.2 UniReason-Med (3D-only) 90.1 31.6 65.3 63.5 55.8 61.2 UniReason-Med (2D+3D) 97.7 60.2 69.7 63.6 60.0 70.2
+
+Table 2: Contextual performance on the 2D benchmark OmniMedVQA. We additionally report representative recent frontier/reference models where reproducible evaluation is available.                                                                                                                                                       
+
+> Model Param. CT MR OCT Der MIC X-Ray FP US Mean
+> MiniGPT-4 7B 23.7 28.7 33.6 41.3 29.3 37.2 42.5 26.4 32.8 BLIP-2 4B 59.9 43.5 69.6 40.9 51.5 65.0 67.6 39.1 54.6 InstructBLIP 7B 29.5 36.1 45.5 63.0 48.7 58.1 44.3 43.4 46.1 LLaVA 7B 18.3 28.9 37.2 49.7 37.8 28.4 34.1 23.2 31.0 VPGTrans 7B 22.9 26.5 27.2 45.4 25.5 44.2 36.8 27.5 32.0 RadFM 14B 27.9 24.7 34.0 38.3 26.3 26.6 31.4 16.5 28.2 LLaVA-Med 7B 19.6 30.5 39.0 46.4 29.3 32.4 43.1 30.4 33.8 LISA 7B 63.0 49.0 66.2 41.6 54.7 62.3 46.7 32.1 52.0 MedPLIB 12B 62.7 67.0 75.1 51.5 64.4 60.3 65.0 38.8 60.6 Qwen2.5VL-7B 7B 69.7 61.3 59.6 60.5 64.4 76.2 74.5 32.4 61.4 Qwen2.5VL-32B 32B 70.5 69.7 69.1 67.2 65.9 76.0 72.4 39.1 66.0 Qwen3.5-9B 9B 72.2 68.5 69.8 68.0 68.5 77.5 75.0 42.9 67.8 GPT-5 –85.2 81.5 86.8 84.0 80.5 88.5 89.0 64.5 82.5 UniReason-Med 7B 69.7 78.9 82.2 70.9 66.9 81.3 85.3 34.2 71.1
+
+the same update-step budget via resampling when needed. Strict data decontamination ensures no overlap with OmniMedVQA or M3D-VQA test splits. 
+
+Stage 2: Reinforcement Learning (RL). Fol-lowing SFT, we further optimize the reasoning pol-icy via GRPO. To construct the RL environment, we sample 40K instances equally distributed be-tween the PMC-VQA (Zhang et al., 2023) training split and the M3D-VQA (Bai et al., 2024) train-ing split. These RL instances are disjoint from the SFT corpus and exclude OmniMedVQA/M3D-VQA test images or cases. During RL, the model explores diverse reasoning trajectories using group sampling, driven by the composite outcome-based reward described in Sec. 3.3. 
+
+4.3 Experiments RQ1: Does joint 2D+3D grounded supervision improve 3D medical VQA over 3D-only train-ing? Cross-Dimensional Transfer. We inves-tigate whether abundant 2D grounded reasoning data can enhance 3D capabilities via our shared GCoT interface. As shown in Table 1, 2D-only training degrades 3D performance, confirming that cross-modal transfer strictly requires 3D anchors. However, joint 2D+3D training boosts the 3D mean accuracy from 61.2 (3D-only) to 70.2. Since all SFT ablations share the same update-step budget and compute through mixture resampling, the gain is not explained by additional optimization steps alone; it is associated with adding 2D grounded supervision to 3D anchors under the shared GCoT interface. These results support our core hypothe-sis: 2D grounded supervision substantially benefits slice-serialized volumetric reasoning when aligned with 3D data. 
+
+Contextual 2D and 3D VQA Performance. 
+
+We further benchmark a single unified checkpoint across planar and volumetric datasets to contextu-alize this learned interface. On the 2D OmniMed-VQA (Table 2), UniReason-Med achieves a 71.1 mean accuracy, outperforming its Qwen2.5VL-7B backbone by 9.7 points and the larger 32B variant by 5.1 points, establishing strong open-source per-formance (though a gap to proprietary frontier mod-els like GPT-5 remains). On the 3D M3D-VQA (Table 3), UniReason-Med reaches 83.8 mean accu-racy, surpassing the strongest open-source baseline, M3D-LaMed-Phi-3-4B, by 3.9 points. 
+
+RQ2: Which components of the shared grounded reasoning interface contribute to per-formance? (1) GCoT Interface (Table 4): Up-grading from Text-CoT to Box-only GCoT (adding coordinates) and Full GCoT (injecting cropped visual tokens) consistently improves mean ac-7Table 3: Performance on the 3D benchmark M3D-VQA.                                                             
+
+> Model Plane Phase Organ Abnormality Location Mean
+> RadFM 19.7 28.7 16.8 18.9 14.9 19.8 Qwen2.5VL-7B 91.3 45.5 47.7 48.9 53.1 57.3 Qwen2.5VL-32B 90.8 49.4 53.7 57.4 54.8 61.2 MedGemma-4B-IT 75.5 32.3 51.0 58.8 51.3 53.8 LLaVA-Med-7B 73.4 18.4 39.0 41.8 30.6 40.6 M3D-LaMed-Llama-2-7B 98.8 79.8 74.8 66.7 58.9 75.8 M3D-LaMed-Phi-3-4B 98.6 87.4 76.8 74.4 62.4 79.9 Lingshu-7B 97.3 61.1 57.6 63.6 55.2 66.9 UniReason-Med 99.0 92.1 81.6 80.3 66.0 83.8
+
+Table 4: Ablation of the shared GCoT interface. Adding coordinates (Box-only) and cropped visual tokens (Full) improves both 2D and 3D VQA.         
+
+> Model Setup 2D Mean 3D Mean
+> Text-CoT SFT 62.0 67.7 Box-only GCoT SFT 63.7 69.7
+> Full GCoT SFT 65.3 70.2
+
+Table 5: Ablation study on training stages.           
+
+> Model 2D Mean 3D Mean
+> Qwen2.5VL-7B 61.4 57.3 UniReason-Med (SFT-only) 65.3 70.2 UniReason-Med (RL-only) 66.8 69.3
+> UniReason-Med (SFT+RL) 71.1 83.8
+
+curacy in both 2D (62.0 →63.7 →65.3) and 3D (67.7 →69.7 →70.2). This confirms that explicit spatial and visual grounding benefits both modali-ties. (2) Training Stages (Table 5): While apply-ing SFT or RL individually to the base Qwen2.5VL-7B yields strong gains, combining both stages (SFT+RL) achieves peak performance (71.1 in 2D, 83.8 in 3D). SFT effectively establishes founda-tional reasoning priors, which RL subsequently refines and generalizes. 
+
+RQ3: Does outcome-level RL improve ground-ing without IoU/Dice-based localization rewards during RL? Implicit Grounding Improvement. 
+
+We conduct a quantitative evaluation of ground-ing quality. For grounding evaluation, predicted 2D boxes and 3D cuboids are clipped to valid im-age boundaries, rescaled to the evaluation resolu-tion, converted into binary rectangular or cuboid masks, and compared with ground-truth segmen-tation masks using per-case Dice. Segmentation masks are used only for evaluation and are not used as RL rewards. As shown in Table 6, the RL stage consistently improves localization for both planar and slice-serialized volumetric inputs, despite lack-ing ground-truth box-overlap supervision during RL. On the 2D Kvasir-SEG benchmark (Jha et al., 
+
+Table 6: Grounding evaluation (Dice). RL improves grounding on 2D and 3D datasets without IoU/Dice localization rewards during RL.             
+
+> Dim. Dataset SFT SFT+RL
+> 2D Kvasir-SEG 0.54 0.65
+> 3D AMOS22 0.36 0.42
+> 3D MSD 0.38 0.45
+
+2019), Dice improves from 0.54 to 0.65. Simi-larly, 3D Dice scores increase from 0.36 to 0.42 (AMOS22) and 0.38 to 0.45 (MSD). 
+
+Correlation between Grounding and Reason-ing. To understand this implicit improvement, we analyze the Pearson correlation between ground-ing IoU and final answer correctness across all test samples. As detailed in Appendix F, the two metrics exhibit a significant positive correlation (r = 0 .832 , p < 1.7 × 10 −52 ). This positive corre-lation is consistent with the GCoT hypothesis that more accurate localization tends to provide more reliable visual tokens for reasoning. It also sug-gests a plausible mechanism for why answer-level RL can improve grounding indirectly: optimizing for answer correctness may favor trajectories with more accurate intermediate grounding. 
+
+Slice-volume Grounding Consistency. To fur-ther examine this shared syntax, we analyze consis-tency between slice-wise and volume-level ground-ing. For each generated 3D cuboid, we com-pare its xy projection within the predicted z range against 2D GCoT predictions on the corresponding slices. The average slice-volume Intersection-over-Union (IoU) improves from 0.42 (SFT-only) to 0.57 (SFT+RL). As visualized in Appendix G, our shared interface encourages the model to focus on consistent anatomical regions across planar slices and slice-serialized volumetric inputs. 
+
+5 Conclusion 
+
+We introduced UniReason-Med, a shared GCoT interface for studying 2D-to-3D transfer in medi-8cal VQA. With UniMed-CoT, a 220K grounded-reasoning dataset, the model interleaves textual rea-soning with localized evidence for 2D images and slice-serialized 3D volumes. Experiments show that, under matched SFT steps, joint 2D+3D super-vision improves 3D VQA over 3D-only training, while outcome-level RL improves grounding with-out IoU/Dice rewards. 
+
+Limitations 
+
+Our experiments mainly follow established public benchmarks, which provide reproducible compar-ison against prior medical MLLMs and grounded reasoning systems. Future work can extend this evaluation with prospective radiologist studies and downstream clinical workflows. UniReason-Med follows the M3D-style 32-slice serialization pro-tocol for 3D inputs; extending the same grounded reasoning interface to denser volumetric encoders is a natural next step. UniMed-CoT is built with an automated GPT-4o-based annotation pipeline, and our filtering, manual spot checks, and outcome-based RL are designed to improve the reliability of the resulting grounded reasoning traces. 
+
+Ethical Considerations and Responsible Use 
+
+UniReason-Med is intended for research use and benchmark analysis, not for autonomous clinical decision-making. Incorrect answers or inaccurate grounding could mislead downstream users in high-stakes diagnostic settings; deployment would re-quire prospective clinical validation, expert over-sight, and institution-specific safety review. We use publicly released, de-identified medical imaging datasets and do not collect new patient-identifying information, patient names, or free-form clinical notes. We plan to release our code under the MIT License and the UniMed-CoT annotations, prompts, and metadata that we create under CC BY 4.0, while the underlying images and third-party artifacts remain governed by their original licenses or terms of use. UniMed-CoT and UniReason-Med are intended for research use consistent with those source-data access conditions. ChatGPT was used for limited language polishing during writing; all technical claims, experimental results, and final text were reviewed and edited by the authors. 
+
+References 
+
+Fan Bai, Yuxin Du, Tiejun Huang, Max Q-H Meng, and Bo Zhao. 2024. M3d: Advancing 3d medical image analysis with multi-modal large language models. 
+
+arXiv preprint arXiv:2404.00578 .Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wen-bin Ge, Sibo Song, Kai Dang, Peng Wang, Shi-jie Wang, Jun Tang, Humen Zhong, Yuanzhi Zhu, Mingkun Yang, Zhaohai Li, Jianqiang Wan, Pengfei Wang, Wei Ding, Zheren Fu, Yiheng Xu, and 8 oth-ers. 2025. Qwen2.5-vl technical report. Preprint ,arXiv:2502.13923. Shruthi Bannur, Kenza Bouzid, Daniel C. Castro, An-ton Schwaighofer, Anja Thieme, Sam Bond-Taylor, Maximilian Ilse, Fernando Pérez-García, Valentina Salvatelli, Harshita Sharma, Felix Meissen, Mercy Ranjit, Shaury Srivastav, Julia Gong, Noel C. F. Codella, Fabian Falck, Ozan Oktay, Matthew P. Lungren, Maria Teodora Wetscherek, and 2 others. 2024. Maira-2: Grounded radiology report genera-tion. Preprint , arXiv:2406.04449. Junying Chen, Chi Gui, Ruyi Ouyang, Anningzhe Gao, Shunian Chen, Guiming Hardy Chen, Xidong Wang, Ruifei Zhang, Zhenyang Cai, Ke Ji, and 1 others. 2024. Huatuogpt-vision, towards injecting medi-cal visual knowledge into multimodal llms at scale. 
+
+arXiv preprint arXiv:2406.19280 .Xinyan Chen, Renrui Zhang, Dongzhi Jiang, Aojun Zhou, Shilin Yan, Weifeng Lin, and Hongsheng Li. 2025. Mint-cot: Enabling interleaved visual tokens in mathematical chain-of-thought reasoning. arXiv preprint arXiv:2506.05331 .Yue Fan, Xuehai He, Diji Yang, Kaizhi Zheng, Ching-Chen Kuo, Yuting Zheng, Sravana Jyothi Naraya-naraju, Xinze Guan, and Xin Eric Wang. 2025. Grit: Teaching mllms to think with images. arXiv preprint arXiv:2505.15879 .Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin Xu, Qihao Zhu, Shi-rong Ma, Peiyi Wang, Xiao Bi, and 1 others. 2025. Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948 .Yutao Hu, Tianbin Li, Quanfeng Lu, Wenqi Shao, Jun-jun He, Yu Qiao, and Ping Luo. 2024. Omnimed-vqa: A new large-scale comprehensive evaluation benchmark for medical lvlm. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pat-tern Recognition , pages 22170–22183. Debesh Jha, Pia H Smedsrud, Michael A Riegler, Pål Halvorsen, Thomas De Lange, Dag Johansen, and Håvard D Johansen. 2019. Kvasir-seg: A segmented polyp dataset. In International conference on multi-media modeling , pages 451–462. Springer. Songtao Jiang, Yuan Wang, Sibo Song, Yan Zhang, Zijie Meng, Bohan Lei, Jian Wu, Jimeng Sun, and 
+
+9Zuozhu Liu. 2025. Omniv-med: Scaling medical vision-language model for universal visual under-standing. Preprint , arXiv:2504.14692. Yuxiang Lai, Jike Zhong, Ming Li, Shitian Zhao, and Xiaofeng Yang. 2025. Med-r1: Reinforcement learn-ing for generalizable medical reasoning in vision-language models. arXiv preprint arXiv:2503.13939 .Khai Le-Duc, Duy M. H. Nguyen, Phuong T. H. Trinh, Tien-Phat Nguyen, Nghiem T. Diep, An Ngo, Tung Vu, Trinh Vuong, Anh-Tien Nguyen, Mau Nguyen, Van Trung Hoang, Khai-Nguyen Nguyen, Hy Nguyen, Chris Ngo, Anji Liu, Nhat Ho, Anne-Christin Hauschild, Khanh Xuan Nguyen, Thanh Nguyen-Tang, and 5 others. 2025. S-chain: Struc-tured visual chain-of-thought for medicine. Preprint ,arXiv:2510.22728. Bo Li, Yuanhan Zhang, Dong Guo, Renrui Zhang, Feng Li, Hao Zhang, Kaichen Zhang, Peiyuan Zhang, Yanwei Li, Ziwei Liu, and 1 others. 2024. Llava-onevision: Easy visual task transfer. arXiv preprint arXiv:2408.03326 .Chunyuan Li, Cliff Wong, Sheng Zhang, Naoto Usuyama, Haotian Liu, Jianwei Yang, Tristan Nau-mann, Hoifung Poon, and Jianfeng Gao. 2023. Llava-med: Training a large language-and-vision assistant for biomedicine in one day. Advances in Neural In-formation Processing Systems , 36:28541–28564. Tianwei Lin, Wenqiao Zhang, Sijing Li, Yuqian Yuan, Binhe Yu, Haoyuan Li, Wanggui He, Hao Jiang, Mengze Li, Xiaohui Song, and 1 others. 2025. Healthgpt: A medical large vision-language model for unifying comprehension and generation via het-erogeneous knowledge adaptation. arXiv preprint arXiv:2502.09838 .Bo Liu, Xiangyu Zhao, Along He, Yidi Chen, Huazhu Fu, and Xiao-Ming Wu. 2025. Gemex-rmcot: An en-hanced med-vqa dataset for region-aware multimodal chain-of-thought reasoning. In Proceedings of the 33rd ACM International Conference on Multimedia ,pages 13213–13220. Sahal Shaji Mullappilly, Mohammed Irfan Kur-path, Sara Pieri, Saeed Yahya Alseiari, Shanavas Cholakkal, Khaled Aldahmani, Fahad Khan, Rao Anwer, Salman Khan, Timothy Baldwin, and 1 oth-ers. 2024. Bimedix2: Bio-medical expert lmm for diverse medical modalities. arXiv preprint arXiv:2412.07769 .Vishwesh Nath, Wenqi Li, Dong Yang, Andriy Myro-nenko, Mingxin Zheng, Yao Lu, Zhijian Liu, Hongxu Yin, Yucheng Tang, Pengfei Guo, Can Zhao, Ziyue Xu, Yufan He, Greg Heinrich, Yee Man Law, Ben-jamin Simon, Stephanie Harmon, Stephen Aylward, Marc Edgar, and 6 others. 2025. Vila-m3: Enhancing vision-language models with medical expert knowl-edge. Preprint , arXiv:2411.12915. Jiazhen Pan, Che Liu, Junde Wu, Fenglin Liu, Jiayuan Zhu, Hongwei Bran Li, Chen Chen, Cheng Ouyang, and Daniel Rueckert. 2025. Medvlm-r1: Incentiviz-ing medical reasoning capability of vision-language models (vlms) via reinforcement learning. In Inter-national Conference on Medical Image Computing and Computer-Assisted Intervention , pages 337–347. Springer. Google Research and Google DeepMind. 2025. Medgemma technical report. CoRR , abs/2507.05201. Sraavya Sambara, Sung Eun Kim, Xiaoman Zhang, Luyang Luo, Shreya Johri, Mohammed Baha-roon, Du Hyun Ro, and Pranav Rajpurkar. 2025. 3dreasonknee: Advancing grounded reasoning in medical vision language models. Preprint ,arXiv:2510.20967. Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, YK Li, Yang Wu, and 1 others. 2024. Deepseekmath: Pushing the limits of mathematical reasoning in open language models. arXiv preprint arXiv:2402.03300 .The Royal College of Radiologists. 2025. Standards for interpretation and reporting of imaging investigations. The Royal College of Radiologists. 3rd edition. Haochun Wang, Chi Liu, Nuwa Xi, Zewen Qiang, Sendong Zhao, Bing Qin, and Ting Liu. 2023. Hu-atuo: Tuning llama model with chinese medical knowledge. Preprint , arXiv:2304.06975. Haozhe Wang, Alex Su, Weiming Ren, Fangzhen Lin, and Wenhu Chen. 2025a. Pixel reasoner: Incentivizing pixel-space reasoning with curiosity-driven reinforcement learning. arXiv preprint arXiv:2505.15966 .Yuan Wang, Jiaxiang Liu, Shujian Gao, Bin Feng, Zhi-hang Tang, Xiaotang Gai, Jian Wu, and Zuozhu Liu. 2025b. V2t-cot: From vision to text chain-of-thought for medical reasoning and diagnosis. In In-ternational Conference on Medical Image Computing and Computer-Assisted Intervention , pages 658–668. Springer. Chaoyi Wu, Xiaoman Zhang, Ya Zhang, Hui Hui, Yan-feng Wang, and Weidi Xie. 2025a. Towards gener-alist foundation model for radiology by leveraging web-scale 2d&3d medical data. Nature Communica-tions , 16(1):7866. Qiong Wu, Xiangcong Yang, Yiyi Zhou, Chenxin Fang, Baiyang Song, Xiaoshuai Sun, and Rongrong Ji. 2025b. Grounded chain-of-thought for multimodal large language models. Preprint , arXiv:2503.12799. Huihui Xu, Yuanpeng Nie, Hualiang Wang, Ying Chen, Wei Li, Junzhi Ning, Lihao Liu, Hongqiu Wang, Lei Zhu, Jiyao Liu, Xiaomeng Li, and Junjun He. 2025a. Medground-r1: Advancing medical image grounding via spatial-semantic rewarded group relative policy optimization. Preprint , arXiv:2507.02994. 
+
+10 Weiwen Xu, Hou Pong Chan, Long Li, Mahani Alju-nied, Ruifeng Yuan, Jianyu Wang, Chenghao Xiao, Guizhen Chen, Chaoqun Liu, Zhaodonghui Li, and 1 others. 2025b. Lingshu: A generalist foundation model for unified multimodal medical understanding and reasoning. arXiv preprint arXiv:2506.07044 .Jin Ye, Junlong Cheng, Jianpin Chen, Zhongying Deng, Tianbin Li, Haoyu Wang, Yanzhou Su, Ziyan Huang, Jilong Chen, Lei Jiang, Hui Sun, Min Zhu, Shaot-ing Zhang, Junjun He, and Yu Qiao. 2023. Sa-med2d-20m dataset: Segment anything in 2d med-ical imaging with 20 million masks. Preprint ,arXiv:2311.11969. Xiaoman Zhang, Chaoyi Wu, Ziheng Zhao, Weix-iong Lin, Ya Zhang, Yanfeng Wang, and Weidi Xie. 2023. Pmc-vqa: Visual instruction tuning for medical visual question answering. arXiv preprint arXiv:2305.10415 .Ziwei Zheng, Michael Yang, Jack Hong, Chenxiao Zhao, Guohai Xu, Le Yang, Chao Shen, and Xing Yu. 2025. Deepeyes: Incentivizing" thinking with images" via reinforcement learning. arXiv preprint arXiv:2505.14362 .Jinguo Zhu, Weiyun Wang, Zhe Chen, Zhaoyang Liu, Shenglong Ye, Lixin Gu, Hao Tian, Yuchen Duan, Weijie Su, Jie Shao, and 1 others. 2025. Internvl3: Exploring advanced training and test-time recipes for open-source multimodal models. arXiv preprint arXiv:2504.10479 .
+
+11 A Organization of the Appendix 
+
+This appendix provides supplementary details to ensure the reproducibility and comprehensiveness of our study. Appendix B details the hyperpa-rameter configurations and our strict data isolation strategy. Appendix C provides the specific prompt templates used for querying GPT-4o to construct the UniMed-CoT dataset. Appendix D elaborates on the programmatic implementation of the reward functions used during the GRPO stage. Finally, 
+
+Appendix G presents qualitative visual examples of our model’s grounded reasoning process. 
+
+B Detailed Training Configurations 
+
+To support reproducibility and maintain a concise main text, this section provides the comprehensive training details and hyperparameters for the two-stage training paradigm of UniReason-Med. 
+
+B.1 Hyperparameter Settings 
+
+Table 7 summarizes the key hyperparameters used during both the Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL) stages. For the SFT data-mixture ablations, we use a fixed update-step budget and resample each mixture when needed so that 3D-only, 2D-only, and joint 2D+3D settings are compared under the same optimization sched-ule. All training is conducted using bfloat16 preci-sion to optimize memory efficiency while maintain-ing numerical stability, and is parallelized using the DeepSpeed ZeRO-3 optimization framework.                     
+
+> Hyperparameter Value
+> Stage 1: Supervised Fine-Tuning (SFT)
+> Base Model Qwen2.5-VL-7B-Instruct Trainable Parameters LLM only (Vision & Projector frozen) Per-device Batch Size 2Gradient Accumulation Steps 4Effective Batch Size 8Learning Rate 1×10 −5
+> LR Scheduler Cosine Warmup Ratio 0.03 SFT Schedule Fixed update steps with mixture resampling Precision bfloat16 DeepSpeed Stage ZeRO-3
+> Stage 2: Reinforcement Learning (GRPO)
+> Global Training Batch Size 64 PPO Mini-batch Size 32 Actor Learning Rate 1×10 −6
+> Rollout Samples per Prompt ( G)8
+
+Table 7: Comprehensive hyperparameter configurations for the two-stage training pipeline. 
+
+B.2 Strict Data Isolation Strategy 
+
+To prevent data leakage and make the training mix-ture reproducible, Table 8 summarizes the data used in each stage. In the reported experiments, Stage-1 SFT uses UniMed-CoT as the grounded-reasoning corpus, consisting of 170K 2D samples derived from SAMed2D-v1 and 50K 3D samples derived from M3D training cases; all Stage-1 SFT sources are listed in the table. Stage-2 RL uses a disjoint 40K-instance mixture sampled from the PMC-VQA and M3D-VQA training splits. We enforce image-identifier and case-identifier isolation across SFT, RL, and evaluation. All evalu-ation images/cases from OmniMedVQA and M3D-VQA test splits are excluded from training. For M3D-derived data, we follow the official train/test split and remove any case identifiers overlapping with the M3D-VQA test set. To reduce near-duplicate contamination across repackaged pub-lic datasets, we additionally apply available meta-data checks, exact-file hashing, perceptual hash-ing for 2D images and rendered slices, and image-similarity screening for candidate overlaps between training sources and evaluation splits. Kvasir-SEG, AMOS22, and MSD are used only for ground-ing evaluation; images/cases flagged by identi-fier, metadata, hash, or similarity checks against these grounding-evaluation splits are removed from UniMed-CoT construction and RL training. 
+
+C Prompt Design for Grounded CoT Generation 
+
+To construct the UniMed-CoT dataset with high-quality step-by-step reasoning, we rely on GPT-4o. The prompt is meticulously designed to inject spa-tial metadata (bounding boxes) into the context, forcing the model to associate medical structures with their corresponding coordinates before gener-ating the final answer. Table 9 illustrates the unified prompt template used for both 2D and 3D modalities. By pro-viding the exact spatial coordinates of key struc-tures within the prompt, we ensure that GPT-4o’s generated reasoning within the <think> blocks is implicitly grounded. During post-processing, we string-match the structure names and append our special coordinate tokens (e.g., <|box_start|> (x1,y1,x2,y2)<|box_end|> ) at their first men-tion to construct the final interleaved SFT sequence. 
+
+D Reward Function Implementation in GRPO 
+
+During the Stage 2 Reinforcement Learning, our GRPO framework optimizes the policy using a 12 Source #Samples Modality Stage Overlap policy / relation to evaluation                                     
+
+> UniMed-CoT / SAMed2D-v1-derived 170K 2D SFT Used for grounded-reasoning SFT; OmniMedVQA test images are excluded. UniMed-CoT / M3D-derived training cases 50K 3D CT SFT Follows the official M3D split; M3D-VQA test case identifiers are excluded. PMC-VQA training split 20K 2D RL Sampled only for RL; disjoint from SFT and OmniMedVQA test images. M3D-VQA training split 20K 3D CT RL Sampled only for RL; official test case identifiers are excluded. OmniMedVQA test split Eval only 2D Evaluation Never used for SFT or RL. M3D-VQA test split Eval only 3D CT Evaluation Never used for SFT or RL. Kvasir-SEG grounding split Eval only 2D Evaluation Used only for grounding evaluation; excluded from SFT and RL via identifier/hash/similarity checks. AMOS22 grounding split Eval only 3D CT Evaluation Used only for grounding evaluation; excluded from SFT and RL via identifier/metadata/hash/similarity checks. MSD grounding split Eval only 3D CT Evaluation Used only for grounding evaluation; excluded from SFT and RL via identifier/metadata/hash/similarity checks.
+
+Table 8: Training and evaluation data isolation summary. 
+
+Figure 4: Evolution of key metrics during reinforcement learning training. The reward steadily increases as training progresses, indicating improved policy performance. Meanwhile, the crop area ratio shows a slightly decreasing trend with minor fluctuations, and the response length shows a mild upward trend. 
+
+System Prompt 
+
+You are an expert radiologist and medical AI assistant. You will be provided with the metadata of a medical image, including its modality, resolution, and a list of localized structures with their bounding box coordinates. Given a medical question, you must first think step-by-step in a rigorous clinical manner to deduce the answer. Wrap your reasoning process inside <think> and </think> tags. Then, provide the final answer. 
+
+User Input Template 
+
+[Modality]: {modality_type} (e.g., 3D CT, 2D MRI) 
+
+[Resolution]: {width} x {height} (x {depth} for 3D) 
+
+[Annotated Structures]: 
+
+- {structure_1}: {box_coordinates_1} - {structure_2}: {box_coordinates_2} ... 
+
+[Question]: {generated_question} 
+
+Table 9: The unified prompt template used to query GPT-4o for generating grounded chain-of-thought anno-tations in the UniMed-CoT dataset. 
+
+composite reward r(yj ) = rans (yj ) + λ · rformat (yj )
+
+(where λ = 0 .5). We avoid using ground-truth box-overlap metrics (e.g., IoU or Dice) as localiza-tion rewards, aiming to test whether outcome-level supervision naturally induces better intermediate grounding. The rewards are implemented program-matically as follows: 
+
+Answer Correctness Reward ( rans ): This re-ward assigns a value of 1.0 if the final answer matches the ground truth, and 0.0 otherwise. For closed-source multiple-choice or yes/no questions, we extract the generated answer using regular ex-pressions and perform exact string matching. For open-ended questions, we employ a rule-based matching mechanism that checks for the presence of key clinical entities or utilize a lightweight LLM (e.g., Llama-3-8B) as an automated judge to deter-mine semantic equivalence between the prediction and the ground truth. 
+
+Format Reward ( rformat ): This reward acts as a strict structural constraint to ensure the model produces valid interleaved GCoT sequences. We use Python’s re module to verify the following criteria, granting a reward of 1.0 only if all are satisfied: 1. The output must contain exactly one pair of 
+
+<think> and </think> tags. 2. The text outside the <think> tags must di-rectly address the final answer. 3. Any generated coordinates must strictly follow the defined grammatical structure. We use the regex pattern <|box_start|> \((\d+,\d+,\d+,\d+(?:,\d+,\d+)? )\)<|box_end|> to ensure no malformed coordinates are generated. If the model hallucinates irregular coordinate for-mats or fails to close the reasoning tags, it receives a 0.0 format reward, rapidly penalizing degenerate reasoning trajectories. 
+
+E RL Training Dynamics 
+
+To further understand the optimization process dur-ing the Stage-2 Reinforcement Learning, we visual-13 0.0 0.2 0.4 0.6 0.8 1.0    
+
+> Grounding IoU
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> VQA Accuracy
+> Pearson r= 0.832
+> p< 1.7e-52
+
+Figure 5: Pearson correlation analysis between ground-ing IoU and answer correctness ( r = 0 .832 ). 
+
+ize the training dynamics in Fig. 4. The progression of the GRPO stage suggests several training behav-iors: • Reward Convergence: As training pro-gresses, the composite reward steadily in-creases and converges, suggesting gradual improvement of the learned policy under outcome-level supervision. • Grounding Precision: The crop area ratio exhibits a slightly decreasing trend with mi-nor fluctuations. This suggests that the model gradually learns to localize and focus on more precise, relevant visual regions rather than broadly cropping large anatomical areas. • Reasoning Depth: The average response length shows a mild upward trajectory. In-stead of finding shortcuts, the model tends to produce more detailed and comprehensive rea-soning chains inside the <think> blocks as it optimizes for final answer correctness. These observations suggest that the GRPO framework remains stable while implicitly refin-ing spatial grounding behaviors without requiring step-by-step box-overlap rewards. 
+
+F Correlation Analysis between Grounding and Reasoning 
+
+To further illustrate the relationship between grounding accuracy and final reasoning perfor-mance discussed in Sec. 4, we plot the correlation between the grounding Intersection-over-Union (IoU) and the answer correctness score across the test set. As illustrated in Fig. 5, the two metrics exhibit a significant positive correlation, consis-tent with the hypothesis that more accurate spatial localization tends to provide more reliable visual evidence for medical reasoning. 
+
+G Qualitative Examples 
+
+To provide an intuitive view of the slice-volume grounding consistency related to the transfer anal-ysis in RQ1, we compare slice-wise 2D GCoT predictions with the xy projection of 3D GCoT cuboids in Fig. 6. The visualization suggests that the shared in-terface helps the model focus on consistent target anatomical regions across planar slices and slice-serialized volumetric inputs. 14 Figure 6: Slice-volume grounding consistency. The green boxes correspond to slice-wise 2D GCoT predictions, while the red boxes correspond to the xy projection of 3D GCoT cuboids within the predicted slice range. The top part shows three example cases, and the bottom part presents the detailed analysis of Case 2, including the question and the reasoning outputs of both 2D GCoT and 3D GCoT. 
+
+15

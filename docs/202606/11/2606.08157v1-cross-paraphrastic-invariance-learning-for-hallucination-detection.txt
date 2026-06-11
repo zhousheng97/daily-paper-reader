@@ -1,0 +1,373 @@
+Title: Cross Paraphrastic Invariance Learning for Hallucination Detection
+
+URL Source: https://arxiv.org/pdf/2606.08157v1
+
+Published Time: Tue, 09 Jun 2026 00:41:09 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+# CROSS PARAPHRASTIC INVARIANCE LEARNING FOR HALLUCINATION DETECTION 
+
+# Shanshan Lin 1,⋆ Dongsheng Hong 1,⋆ Sibo Ju 1 Chao Chen 2 Sihong Xie 3 Xiangwen Liao 1,†
+
+1Fuzhou University 2Harbin Institute of Technology (Shenzhen) 
+
+3The Hong Kong University of Science and Technology (Guangzhou) 
+
+⋆Equally contribution †Corresponding author 
+
+ABSTRACT 
+
+Large language models (LLMs) frequently generate hallucinations ,which are unsupported by a source document. To avoid costly LLM-as-evaluator pipelines and the heavy annotation demands of existing classifiers, we propose CPIL (Cross Paraphrastic Invari-ance Learning ), a two-stage Siamese framework that maximizes the utility of existing labeled data. Concretely, CPIL constructs infor-mative training pairs by: (i) generating paraphrastic views of each document-claim example as positives, and explicitly aligning their representations to enforce invariance to surface form; and (ii) mining 
+
+same-document, opposite-label pairs as hard negatives to sharpen document-sensitive decision boundaries. Then CPIL conduct a two-stage model training: Stage 1 performs contrastive pretraining to learn a paraphrase-invariant, grounding-aware embedding space; and Stage 2 attaches a lightweight classifier for binary grounded-ness. On the LLM-AggreFact benchmark (11 tasks), CPIL surpasses strong baselines concerning F1 scores with only ∼ 1% labeled data, showing its prediction superiority and label efficiency .
+
+Index Terms — Hallucination detection, contrastive learning, siamese neural network 
+
+1. INTRODUCTION 
+
+Large language models (LLMs) show impressive fluency and coher-ence across a wide range of tasks. However, a persistent challenge is hallucinations , the generation of statements that are factually in-correct or unsupported by a given source document [1, 2]. Accu-rately detecting hallucination is essential for developing trustworthy, safety-aligned AI systems [3]. Prior work on hallucination detection broadly falls into two fam-ilies [1]. (i) LLM-as-evaluator methods (e.g., SelfCheckGPT [4], SelfCheckAgent [5], and G-Eval [6]) query powerful LLMs to cri-tique or verify generated content. However, they are often expen-sive at inference time and tokens, as a single instance may require multiple LLM prompts (e.g., iterative entity-level checks or chain-of-thought reasoning [7]). (ii) Factuality classifiers train compact models to predict whether a claim is grounded in a source document, and are typically much more efficient to deploy. For example, Sum-maC [8] adapts pre-trained natural language inference (NLI) models for document-summary consistency; QAFactEval [9] probes docu-ments by question answering; AlignScore [10] aggregates NLI and factuality supervision; MiniCheck [11] uses LLMs to label large collections of document-claim pairs; and FactCG [12] synthesizes multi-hop claims via graph-based augmentation. However, as illus-trated in Fig. 1, many high-performing detectors depend on large volumes of labeled or synthetic examples, which are costly to obtain, either through extensive human annotation of factual consistency or heavy use of LLMs for data generation and labeling [11]. 100 1k 10k 100k 1M 
+
+> Labeled data size (log scale)
+> 68
+> 70
+> 72
+> 74
+> 76
+> 78
+> 80
+> Average F1 Score
+> Required labeled data vs. F1 score
+> No human labeling
+> Needs human labeling
+> No LLM
+> Needs LLM
+
+Fig. 1 . Required labeled data size vs. model F1 score. Colors and markers encode extra human and LLM labeling, respectively. We propose CPIL (Cross Paraphrastic Invariance Learning ), a two-stage Siamese framework for document-grounded hallucina-tion detection that better exploit existing labeled data without ad-ditional human or LLM annotation. The key is to construct infor-mative positive/negative training pairs from a few (e.g., 100) la-beled samples and adopt a Siamese Network [13, 14] to leverage far more supervision signal than a standard classification approach. Concretely, we use back-translation [15] to produce paraphrastic variants of each document-claim instance. Instead of simply ap-pending paraphrases to the training data [16], CPIL explicitly aligns the representations of the same instance’s cross-paraphrases (as pos-itives), encouraging invariance to lexical and syntactic variations. For negatives, rather than arbitrary cross-document mismatches [17], CPIL samples same-document, opposite-label pairs, yielding harder contrasts. After forming the pairing set tailored to hallucination detection, CPIL instantiates Siamese networks whose training pro-ceeds in two stages: Stage 1 performs contrastive pretraining to learn a paraphrase-invariant embedding space by (i) pulling together cross-paraphrase views of the same instance and (ii) pushing apart pairs that share the document but differ in label. Stage 2 attaches a lightweight classifier and optimizes a binary groundedness with limited labeled data. Empirically, CPIL outperforms strong baselines, including FactCG [12], MiniCheck [11], AlignScore [10], and SummaC [8], in average F1 score on LLM-AggreFact benchmark [11]. Moreover, CPIL is markedly label-efficient : it maintains strong performance with only a small fraction of supervised (e.g., 1% of labels), surpass-ing baselines trained on the full (or larger) datasets. Ablation studies corroborate the importance of our pairing and training strategies.          
+
+> arXiv:2606.08157v1 [cs.CL] 6 Jun 2026 Español En
+> En
+> En
+> ①Translate to Pivot ②Back Translation
+> (𝒅 𝒊
+> 𝒑 ,𝒄 𝒊
+> 𝒑 ,𝒚 𝒊 )
+
+(a) Pair Construction 
+
+> Representation
+> cosine
+
+(b) Two -Stage Training            
+
+> Embedding
+> Embedding
+> 中文
+> Français
+> 𝒑
+> 𝒒 (𝒅 𝒊
+> 𝒒 ,𝒄 𝒊
+> 𝒒 ,𝒚 𝒊 )
+> (𝒅 𝒊
+> 𝒓 ,𝒄 𝒊
+> 𝒓 ,𝒚 𝒊 )
+> shared
+> DeBERTa
+> 𝒇 𝜽
+> Original data
+
+min (𝒅 !) 
+
+> En DeBERTa
+> 𝒇 𝜽
+
+𝓓 "       
+
+> MLP
+> Embedding 𝒈 𝝓
+> 𝒅 𝒊
+> 𝒓 ,𝒄 𝒊
+> 𝒓 ,𝒅 𝒊
+> 𝒒 ,𝒄 𝒊
+> 𝒒
+
+# 𝓓 !                   
+
+> 𝒅 𝒊
+> &,𝒄 𝒊
+> &,𝒅 𝒊
+> 𝒑 ,𝒄 𝒊
+> 𝒑
+> 𝒅 𝒊
+> &,𝒄 𝒊
+> &,𝒅 𝒋
+> 𝒒 ,𝒄 𝒋
+> 𝒒 𝒅 𝒊
+> 𝒓 ,𝒄 𝒊
+> 𝒓 ,𝒅 𝒋
+> 𝒑 ,𝒄 𝒋
+> 𝒑
+
+# 𝓓 "             
+
+> …
+> …
+> s. t. '𝒅 𝒊 =𝒅 𝒋
+> 𝒚 𝒊 ≠𝒚 (
+> ③Construct 𝓓 $∪𝓓 %Based on Pairing Strategy
+> Stage 2: Classifier Fine -Tuning
+
+max (𝒅 #)       
+
+> Stage 1: Siamese Contrastive pretraining
+> Representation
+> En
+> doc
+> claim
+> label 𝒓
+> (𝒅 𝒊
+> &,𝒄 𝒊
+> &,𝒚 𝒊 )∈𝓓 𝒔
+
+Fig. 2 . Framework of CPIL. (a) Pair Construction : generates label-preserving paraphrases (via back-translation), and design a hallucination detection specified pairing strategy. (b) Two-Stage Training : trains an encoder fθ in Stage 1, and fine tune fθ as well as a lightweight classifier gϕ in Stage 2. In summary, our key contributions are: (1) We design a pairing strategy tailored to hallucination detection: cross-paraphrase pos-itives and same-document, opposite-label hard negatives . (2) We propose CPIL, a two-stage Siamese detector that fully exploits exist-ing labels via contrastive pretraining followed by lightweight clas-sification, requiring no extra human or LLM supervision. (3) On LLM-AggreFact, CPIL attains superior average F1 with significantly reduced supervision, demonstrating strong label efficiency. 
+
+2. PROPOSED METHOD 
+
+We begin by formalizing the task and notations in Sec. 2.1. We then introduce CPIL, our two-stage Siamese framework illustrated in Fig. 2. Sec. 2.2 describes how we obtain label-preserving paraphras-tic views and construct informative training pairs. Sec. 2.3 details contrastive pretraining and the classifier fine-tuning stages. 
+
+2.1. Problem Setup 
+
+Document-grounded hallucination detection is framed as a binary classification task [18]. Let training set be D = {(di, c i, y i)}Ni=1 ,where di is a document, ci is a claim about di, and yi ∈ { 0, 1}
+
+indicates whether the claim is supported (1) or hallucinated (0). The goal is to learn a detector h(d, c ) = Pr( y = 1 | d, c ).
+
+Rather than collecting additional annotations [12], CPIL max-imizes the utility of the existing labeled subset Ds ⊂ D by con-structing high-quality pairings. A na¨ ıve pairing strategy [17] forms positives from two randomly sampled examples that share a label and negatives otherwise. However, it may not suit to hallucination detection: examples drawn from different sources can be topically and lexically dissimilar, yielding weak alignment signals. Thus, CPIL creates dense and informative supervision pairings by cross-paraphrase positives and same-document hard negatives .
+
+2.2. Paraphrastic Views and Pair Construction Label-Invariant Paraphrases. To encourage invariance to super-ficial rewording, we generate paraphrastic views for each train-ing example. Formally, given an original document-claim sample 
+
+(di, c i, y i) ∈ D s, a paraphraser p ∈ P produces a view (d(p) 
+
+> i
+
+, c (p) 
+
+> i
+
+)
+
+that preserves meaning while altering wording and structure. Fol-lowing the label-invariance assumption [19], any faithful paraphrase 
+
+(d(p) 
+
+> i
+
+, c (p) 
+
+> i
+
+) of (di, c i) inherits the same label yi.Among possible paraphrastic transformations (e.g. using an LLM to rewrite text or QA-style reformulation [16, 20]), we pick 
+
+back-translation , which translates a text from the source language to a pivot language and then back to the source language. Because it requires no human annotation or complex prompt engineering, and can be performed via low-cost off-the-shelf machine translation systems 1 [21]. Notice that our pairing construction is agnostic to the specific paraphraser [22], and the contribution lies in how these views are systematically exploited during pair construction. 
+
+Cross-paraphrase Positive Pairs. Paraphrastic views provide natural positives for contrastive training. Let V = {0} ∪ P denote the set of available views, where view 0 is the identity (d(0)  
+
+> i
+
+, c (0)  
+
+> i
+
+) = (di, c i). We couple an instance with its own paraphrases (or two distinct paraphrases of the same instance) to form positive pairs. 
+
+D+ =
+
+n  (d(p) 
+
+> i
+
+, c (p) 
+
+> i
+
+), (d(q) 
+
+> i
+
+, c (q) 
+
+> i
+
+) : p, q ∈ V 
+
+o
+
+. (1) These cross-view positives encourage the encoder to map semanti-cally equivalent inputs to nearby representations, promoting gener-alization to lexical and syntactic variation. 
+
+Same-document Negative Pairs. To drive fine-grained discrim-ination, we construct negatives from samples that share the same document but have opposing labels . Formally, 
+
+n  (di, c i), (dj , c j ) : di = dj , y i̸ = yj
+
+o
+
+.
+
+Holding the document d fixed enforces the model focus on fine-grained claim-evidence alignment within the shared document to distinguish supported from hallucinated assertions. 
+
+> 1
+
+We use Google Translation: https://translate.google.com .Table 1 . F1 score (in %) across 11 tasks. Column best (without LLM) is bold with dark-green background, and runner-up is with light-green. Model AggreFact TofuEval WiCE REVEAL Claim Fact Expert LFQA RAG AVG CNN XSum MediaS MeetB Verify Check QA Truth SummaC-ZS 55.19 66.55 79.57 80.14 41.03 74.50 72.96 60.79 65.30 81.58 62.81 67.31 SummaC-CV 66.41 48.56 69.70 77.87 50.98 70.77 68.36 57.53 65.21 79.16 56.92 64.68 AlignScore 81.71 68.51 80.59 85.18 54.75 69.79 81.16 61.05 70.63 85.81 77.35 74.23 MiniCheck 74.88 74.49 83.72 81.26 62.10 72.31 85.54 60.15 72.22 88.15 86.36 76.47 FactCG 78.44 74.46 83.98 80.07 69.87 80.53 83.45 63.42 58.54 89.12 86.63 77.14 CPIL-1% 91.99 73.47 83.02 86.13 69.20 77.13 85.10 61.46 70.57 87.85 84.74 79.14 
+
+CPIL-2% 91.08 71.38 84.05 90.10 64.91 77.77 81.74 58.36 71.94 88.90 84.79 78.64 To further increase difficulty and diversity, we optionally replace one or both sides with paraphrastic views while preserving the same-document constraint, yielding cross-view hard negatives: 
+
+D− =
+
+n  (d(p) 
+
+> i
+
+, c (p) 
+
+> i
+
+), (d(q) 
+
+> j
+
+, c (q) 
+
+> j
+
+) : di = dj , y i̸ = yj , p, q ∈ V 
+
+o
+
+.
+
+(2) The resulting hard negatives provide substantially stronger training signals than arbitrary cross-document mismatches. 
+
+2.3. CPIL Network Training 
+
+CPIL comprises (i) an encoder fθ (e.g., DeBERTa [23]) that maps a packed document-claim input (di, c i) to a single embedding ei ∈
+
+Rd, and (ii) a lightweight classifier gϕ : Rd → R that outputs a hallucination logit. 
+
+Stage 1: Siamese Contrastive Pretraining. The encoder is trained to (i) pull together cross-paraphrase views of the same in-stances in D+ and (ii) repel pairs in D− that share the same docu-ment but have opposite labels. Two weight-tied towers of fθ process paired inputs drawn from D+ ∪ D −. Formally, we denote d+ =cos  e(p) 
+
+> i
+
+, e(q)
+
+> i
+
+ for a positive pair  (d(p) 
+
+> i
+
+, c (p) 
+
+> i
+
+), (d(q) 
+
+> i
+
+, c (q) 
+
+> i
+
+) ∈ D +,and define d− similarly. The objective is to minimize 
+
+Lctr = ED+ ∪ D −
+
+max {0, d + − d− + α} , (3) where α > 0 is a margin, and we set it 1.5 in practice. This yields an embedding space that is paraphrase-invariant yet document-sensitive . One may alternatively employ other contrastive learning based loss, such as NT-Xent [17] and SCL [24]. 
+
+Stage 2: Classifier Fine-Tuning. We jointly optimize the pre-trained encoder fθ and a newly attached lightweight head gϕ (e.g., a single-layer MLP) with a small labeled set Ds:
+
+Lf t = E(d,c,y )∼D s
+
+CE   σ(gϕ(fθ (d, c ))) , y  , (4) where CE is the binary cross-entropy and σ(·) is the sigmoid func-tion. We initialize fθ from Stage 1 and fine-tune it (or optionally freeze it). Because Stage 1 has already shaped a decision-friendly representation, high accuracy is attained with |D s| ≪ |D| . At infer-ence, prediction requires a single forward pass through fθ and gϕ.
+
+3. EXPERIMENTS 3.1. Experiment Settings Evaluation & metrics. We evaluate on LLM-AggreFact , an aggre-gate benchmark comprising 11 factuality datasets [11]. We report per-task F1 (%) and the macro-averaged F1 (AVG) across all tasks. We follow the official splits and evaluation protocols. 
+
+Baselines. CPIL is compared against four powerful non-LLM detectors: SummaC (ZS and CV variants) [8], AlignScore [10], 
+
+MiniCheck [11], and FactCG [12]. When available, we use authors’ released implementations and recommended checkpoints. 
+
+Implementation details. For CPIL, the encoder fθ is instan-tiated with DeBERTa [23], and the classifier gϕ is a single-layer MLP. Paraphrastic views are generated via back-translation using three pivots, P = {fr , es , zh } (French, Spanish, Chinese). Un-less noted otherwise, optimization settings follow FactCG [12], and we use a learning rate of 1×10 −5.
+
+Data Budget and Pair Generation. Starting from the dataset 
+
+D released with FactCG [12] (approximately 16 .7k labeled sam-ples), our three-pivot paraphrasing and pairing procedure can yield up to more than 350k training pairs. To study label efficiency under capped supervision, Ds only uses ∼ 2% labeled data in D, yield-ing about 7k training pairs; and a lower budget variant using about 
+
+∼ 1% labels leads to about 4k pairs. We denote these configurations as CPIL-2% and CPIL-1% , respectively. 
+
+3.2. Main Results 
+
+As reported in Table 1, CPIL attains the best macro average (79.14 with 1% labels) and the second-best (78.64 with 2% labels), outper-forming all baselines on average. The largest margins are from CNN 
+
+and MeetB , where paraphrase invariance and document-sensitive contrasts are especially beneficial given style variability and multi-speaker noise. Tasks such as WiCE and RAGTruth, which are sensitive to word sense and entity fidelity, remain challenging, while CPIL stays competitive. Both the 1% and 2% configurations surpass all baselines trained at full or larger data scale. Thus, CPIL converts limited labels into richer supervision via pairwise alignment, yielding higher accuracy without additional annotation and inference overhead. 
+
+3.3. Sensitivity Analysis 
+
+Fig. 3 plots macro F1 as the fraction ( |D s|/|D| ) of labeled exam-ples used to form CPIL’s pairs increases from 0.2% to 3.2% of the FactCG labels. Horizontal reference lines mark strong baselines, with their effective supervision levels annotated for context. Two observations stand out: 
+
+(i) Strong low-budget performance. With only 0.2% labels, CPIL already exceeds AlignScore and closely matches FactCG’s full-data performance. As the labeled subset Ds grows (and thus 
+
+D+∪D − enlarges), performance improves rapidly, peaking at 1.2%. 
+
+(ii) Mild plateau at moderate budgets. Beyond 1.2%, the curve stabilizes in a narrow band (about 78.6-79.0 F1). Modest non-monotonicity likely reflects (a) diminishing returns once the Table 2 . Ablation study : CPIL’s variants concerning different labeled data utilization strategy, and various pivots for back translation. Group Model AggreFact TofuEval WiCE REVEAL Claim Fact Expert LFQA RAG AVG CNN XSum MediaS MeetB Verify Check QA Truth CPIL-1% 91.99 73.47 83.02 86.13 69.20 77.13 85.10 61.46 70.57 87.85 84.74 79.14 
+
+CPIL-2% 91.08 71.38 84.05 90.10 64.91 77.77 81.74 58.36 71.94 88.90 84.79 78.64 Data Utilization ClsOnly 70.94 69.92 81.88 88.52 68.46 76.56 83.02 60.47 72.25 89.24 83.58 76.81 Append 78.30 69.20 82.46 86.74 69.90 77.77 86.41 61.28 65.15 87.47 86.10 77.34 RandPair 77.16 74.15 79.84 83.52 70.31 76.49 85.04 61.69 70.70 87.69 85.33 77.44 Pivot Selection Pivot-es 87.22 65.99 76.35 84.83 48.56 65.09 82.78 51.45 72.28 83.23 73.92 71.97 Pivot-zh 84.41 70.57 84.34 81.07 66.91 75.77 85.22 58.82 71.04 88.41 84.54 77.37 Pivot-fr 65.36 73.66 84.92 89.70 62.63 75.34 84.50 60.18 60.78 89.62 84.40 75.55 0.2% 0.5% 0.7% 1.2% 2.0% 3.2% 
+
+> Labeled data size (comparing to FactCG's)
+> 73
+> 74
+> 75
+> 76
+> 77
+> 78
+> 79
+> 80
+> F1 score
+> CPIL
+> Using x281, AlignScore: 74.23
+> Using 200%, MiniCheck: 76.47
+> Using 100%, FactCG: 77.14
+> Sensitivity of CPIL's F1 score to labeled data size
+
+Fig. 3 . CPIL’s F1 score when increasing fraction of labeled data used for pair construction, .e.g, |D s|/|D| .paraphrase-invariant geometry is well formed; (b) growing redun-dancy that increases the proportion of easy negatives and risks mild overfitting; and (c) finite encoder capacity. Practically, this indicates that strong accuracy is attainable without substantially scaling labels further, and additional gains may require increasing model capacity, or diversifying views-directions we leave to future work. Taken together, the curve highlights CPIL’s practical superiority: high accuracy at low-percent label budgets, with clear avenues to trade additional compute or mining strategies for incremental gains. 
+
+3.4. Ablation Study 
+
+We ablate CPIL along two axes: (i) data utilization (pairing/training strategy) and (ii) pivot selection (paraphraser). All ablations con-sume comparable supervision budgets by downsampling to about 
+
+16k training pairs/samples, and results are summarized in Table 2. 
+
+(i) Data utilization. We consider three variants that use the same labeled pool D but differ in how examples are consumed: (a) 
+
+ClsOnly : omits contrastive pretraining (Stage 1), and trains a clas-sifier on original D only. (b) Append : also skips Stage 1, but di-rectly appends paraphrases to D without explicit view alignment. (c) RandPair : forms positives/negatives by randomly pairing same-/opposite-label instances, irrespective of document identity. 
+
+Pair construction matters. Both Append and RandPair out-perform ClsOnly, indicating that additional supervision signals, whether via paraphrastic augmentation or pairwise signals, im-proves hallucination detection accuracy. Notably, RandPair lags on MediaSum and MeetB, consistent with the intuition that random same-/different-label pairing induces many weak positives and easy negatives that fail to enforce document-sensitive distinctions. CPIL’s superiority underscores the importance of the pairing/training strate-gies designed to hallucination detections. 
+
+(ii) Pivot selection. We next examine single-pivot instantiations, denoted Pivot-es /zh /fr , which uses only one back-translation pivot (Spanish, Chinese, or French, respectively). Single-pivot training consistently underperforms CPIL’s multi-view setting. Among indi-vidual pivots, Pivot-zh is strongest overall, whereas Pivot-es lags markedly behind Pivot-zh and Pivot-fr .We hypothesize the contributing factor as: Pivots that differ more in morphology and word order from en (e.g., zh ) tend to induce richer syntactic rephrasings yet still return faithful en render-ings, which produce harder but valid positives. Conversely, closer pivots (e.g., es ) often yield conservative paraphrases with limited structural variety, diminishing augmentation value. 
+
+Paraphrase diversity helps. Multi-pivot paraphrasing miti-gates pivot-specific drawbacks: combining views increases syn-tactic/lexical diversity while averaging out pivot-induced errors. Consequently, CPIL’s multi-view version improves macro F1 over any single-pivot variant, indicating that view diversity under label invariance could be the key. 
+
+4. CONCLUSION 
+
+We presented CPIL, a two-stage Siamese framework for hallucina-tion detection that maximizes the utility of existing labels. CPIL con-verts individual labeled examples into pairs by considering cross-paraphrase positives and same-document, opposite-label hard neg-atives . A contrastive pretraining stage learns a paraphrase invari-ant representation, followed by a lightweight classifier finetuning stage with single pass inference. On the LLM-AggreFact bench-mark, CPIL achieves state-of-the-art macro F1 with only ∼1% of labels and remains competitive at even smaller budgets. In the future, we will explore: (i) improving faithfulness of back translation with safeguards against semantic drift, for example entailment based filters; (ii) addressing the performance plateau at moderate label budgets using larger encoders (e.g., Flan-T5 [25]), adaptive hard negative mining, and greater view diversity through more paraphrase strategies; and (iii) extending CPIL to multi sen-tence claims, multi hop contexts, and multi modal grounding [26]. 
+
+# Acknowledgments 
+
+This work was supported by the Natural Science Foundation of China (No. 62476060). Chao Chen was also supported by the National Key Research and Development Program of China (No. 2023YFB3106504). Sihong Xie was supported by the Department of Science and Technology of Guangdong Province (2023CX10X079), National Key R&D Program of China (Grant No.2023YFF0725001), the Guangzhou-HKUST(GZ) Joint Fund-ing Program (Grant No.2023A03J0008), and Education Bureau Guangzhou Municipality. 
+
+5. REFERENCES 
+
+[1] Subhey Sadi Rahman, Md Adnanul Islam, Md Mahbub Alam, Musarrat Zeba, Md Abdur Rahman, Sadia Sultana Chowa, Mo-haimenul Azam Khan Raiaan, and Sami Azam, “Hallucination to truth: A review of fact-checking and factuality evaluation in large language models,” arXiv preprint arXiv:2508.03860 ,2025. [2] Joshua Maynez, Shashi Narayan, Bernd Bohnet, and Ryan Mc-Donald, “On faithfulness and factuality in abstractive summa-rization,” arXiv preprint arXiv:2005.00661 , 2020. [3] Arjun Krishna, Erick Galinkin, Leon Derczynski, and Jeffrey Martin, “Importing phantoms: Measuring llm package hal-lucination vulnerabilities,” arXiv preprint arXiv:2501.19012 ,2025. [4] Potsawee Manakul, Adian Liusie, and Mark JF Gales, “Self-checkgpt: Zero-resource black-box hallucination detection for generative large language models,” arXiv preprint arXiv:2303.08896 , 2023. [5] Diyana Muhammed, Gollam Rabby, and S¨ oren Auer, “Self-checkagent: Zero-resource hallucination detection in genera-tive large language models,” arXiv preprint arXiv:2502.01812 ,2025. [6] Yang Liu, Dan Iter, Yichong Xu, Shuohang Wang, Ruochen Xu, and Chenguang Zhu, “G-eval: Nlg evaluation us-ing gpt-4 with better human alignment,” arXiv preprint arXiv:2303.16634 , 2023. [7] Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny Zhou, et al., “Chain-of-thought prompting elicits reasoning in large language models,” 
+
+Advances in neural information processing systems , vol. 35, pp. 24824–24837, 2022. [8] Philippe Laban, Tobias Schnabel, Paul N Bennett, and Marti A Hearst, “Summac: Re-visiting nli-based models for inconsis-tency detection in summarization,” Transactions of the Asso-ciation for Computational Linguistics , vol. 10, pp. 163–177, 2022. [9] Alexander R Fabbri, Chien-Sheng Wu, Wenhao Liu, and Caiming Xiong, “Qafacteval: Improved qa-based factual consistency evaluation for summarization,” arXiv preprint arXiv:2112.08542 , 2021. [10] Yuheng Zha, Yichi Yang, Ruichen Li, and Zhiting Hu, “Align-score: Evaluating factual consistency with a unified alignment function,” arXiv preprint arXiv:2305.16739 , 2023. [11] Liyan Tang, Philippe Laban, and Greg Durrett, “Minicheck: Efficient fact-checking of llms on grounding documents,” 
+
+arXiv preprint arXiv:2404.10774 , 2024. [12] Deren Lei, Yaxi Li, Siyao Li, Mengya Hu, Rui Xu, Ken Archer, Mingyu Wang, Emily Ching, and Alex Deng, “Factcg: En-hancing fact checkers with graph-based multi-hop data,” arXiv preprint arXiv:2501.17144 , 2025. [13] Chao Chen, Yifan Shen, Guixiang Ma, Xiangnan Kong, Srini-vas Rangarajan, Xi Zhang, and Sihong Xie, “Self-learn to ex-plain siamese networks robustly,” in 2021 IEEE International Conference on Data Mining (ICDM) . IEEE, 2021, pp. 1018– 1023. [14] Anfeng He, Chong Luo, Xinmei Tian, and Wenjun Zeng, “A twofold siamese network for real-time object tracking,” in Pro-ceedings of the IEEE conference on computer vision and pat-tern recognition , 2018, pp. 4834–4843. [15] Sergey Edunov, Myle Ott, Michael Auli, and David Grang-ier, “Understanding back-translation at scale,” arXiv preprint arXiv:1808.09381 , 2018. [16] Wojciech Kry´ sci´ nski, Bryan McCann, Caiming Xiong, and Richard Socher, “Evaluating the factual consistency of abstrac-tive text summarization,” arXiv preprint arXiv:1910.12840 ,2019. [17] Ting Chen, Simon Kornblith, Mohammad Norouzi, and Ge-offrey Hinton, “A simple framework for contrastive learning of visual representations,” in International conference on ma-chine learning . PmLR, 2020, pp. 1597–1607. [18] Hannah Sansford, Nicholas Richardson, Hermina Petric Maretic, and Juba Nait Saada, “Grapheval: A knowledge-graph based llm hallucination evaluation framework,” arXiv preprint arXiv:2407.10793 , 2024. [19] Markus Bayer, Marc-Andr´ e Kaufhold, Bj¨ orn Buchhold, Mar-cel Keller, J¨ org Dallmeyer, and Christian Reuter, “Data aug-mentation in natural language processing: a novel text genera-tion approach for long and short text classifiers,” International journal of machine learning and cybernetics , vol. 14, no. 1, pp. 135–150, 2023. [20] Borui Yang, Md Afif Al Mamun, Jie M Zhang, and Gias Ud-din, “Hallucination detection in large language models with metamorphic relations,” Proceedings of the ACM on Software Engineering , vol. 2, no. FSE, pp. 425–445, 2025. [21] Felix Stahlberg, “Neural machine translation: A review,” Jour-nal of Artificial Intelligence Research , vol. 69, pp. 343–418, 2020. [22] Jason Wei and Kai Zou, “Eda: Easy data augmentation tech-niques for boosting performance on text classification tasks,” 
+
+arXiv preprint arXiv:1901.11196 , 2019. [23] Pengcheng He, Xiaodong Liu, Jianfeng Gao, and Weizhu Chen, “Deberta: Decoding-enhanced bert with disentangled attention,” arXiv preprint arXiv:2006.03654 , 2020. [24] Beliz Gunel, Jingfei Du, Alexis Conneau, and Ves Stoy-anov, “Supervised contrastive learning for pre-trained lan-guage model fine-tuning,” arXiv preprint arXiv:2011.01403 ,2020. [25] Hyung Won Chung, Le Hou, Shayne Longpre, et al., “Scaling instruction-finetuned language models,” arXiv:2210.11416 ,2022. [26] Xiang Chen, Chenxi Wang, Yida Xue, Ningyu Zhang, Xiaoyan Yang, Qiang Li, Yue Shen, Lei Liang, Jinjie Gu, and Huajun Chen, “Unified hallucination detection for multimodal large language models,” arXiv preprint arXiv:2402.03190 , 2024.
