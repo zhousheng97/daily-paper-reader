@@ -1,16 +1,354 @@
 {
   "mode": "standard",
-  "generated_at": "2026-06-11T03:10:03.883484+00:00",
+  "generated_at": "2026-06-11T03:18:29.116779+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
-    "deep_divecandidates": 0,
-    "deep_cap": null,
-    "deep_selected": 0,
-    "quick_candidates": 0,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 3,
     "quick_skim_target": 11,
-    "quick_selected": 0
+    "quick_selected": 3
   },
-  "deep_dive": [],
-  "quick_skim": []
+  "deep_dive": [
+    {
+      "id": "2606.04127v1",
+      "source": "arxiv",
+      "title": "When Retrieval Doesn't Help: A Large-Scale Study of Biomedical RAG",
+      "abstract": "Medical question answering is a high-stakes setting where factual errors can have serious consequences. Retrieval-augmented generation (RAG) is widely viewed as a promising solution, and prior work has reported substantial gains for large medical QA models. We revisit this assumption across a broad range of open-weight instruction-tuned models spanning 7B to 72B parameters. Across five models, ten biomedical QA datasets, four retrieval methods, and four retrieval corpora, we find that retrieval yields only small and inconsistent improvements over a no-retrieval baseline, typically within 1-2 points. In contrast, the choice of backbone model has a much larger effect than the choice of retriever or corpus, and expert and layman retrieval sources perform similarly in most settings. These results suggest that the main bottleneck is not retrieval quality alone, but the model's limited ability to use retrieved evidence effectively.",
+      "authors": [
+        "Erfan Nourbakhsh",
+        "Rocky Slavin",
+        "Ke Yang",
+        "Anthony Rios"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-02T18:34:54+00:00",
+      "link": "https://arxiv.org/pdf/2606.04127v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "large-scale study of RAG for medical QA",
+      "llm_evidence_cn": "对医学问答中检索增强生成的大规模研究",
+      "llm_evidence": "对医学问答中检索增强生成的大规模研究",
+      "canonical_evidence": "对医学问答中检索增强生成的大规模研究",
+      "llm_tldr_en": "This large-scale study across multiple models and datasets shows that retrieval provides minimal gains for biomedical QA, challenging the assumption that RAG is essential for medical question answering.",
+      "llm_tldr_cn": "医学问答中检索增强生成（RAG）被广泛认为能提升事实准确性，但本研究在多个模型、数据集和检索方法上发现，检索仅带来1-2%的微小提升，而主模型的选择影响远大于检索器。该结果重新审视了RAG在医学QA中的必要性，提示应更关注基础模型优化。",
+      "llm_tldr": "医学问答中检索增强生成（RAG）被广泛认为能提升事实准确性，但本研究在多个模型、数据集和检索方法上发现，检索仅带来1-2%的微小提升，而主模型的选择影响远大于检索器。该结果重新审视了RAG在医学QA中的必要性，提示应更关注基础模型优化。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.04323v1",
+      "source": "arxiv",
+      "title": "Answer Self-Consistency with Margin-Triggered Question Re-Arbitration for the CVPR 2026 VidLLMs Challenge",
+      "abstract": "In this report, we present our solution for Track 2 of the CVPR 2026 VidLLMs Challenge. This track evaluates visual relational reasoning in videos, where models must infer relations that are not always explicitly visible. We propose Answer Self-Consistency with Margin-Triggered Question Re-Arbitration (ASC-MQRA), a training-free test-time reasoning framework built on a multimodal reasoning model. The core ASC component performs multiple stochastic video question-answering runs and aggregates their answer choices through answer-level self-consistency. This substantially improves over single-pass inference and forms our final test submission. We further study MQRA, a conditional re-arbitration module for low-margin examples where the first-stage vote distribution indicates uncertainty. Our vote-margin analysis shows that low-margin examples often retain the ground-truth answer among the top candidates, motivating MQRA to narrow the candidate set and re-watch the video only over the retained candidates. On validation, MQRA further improves over ASC, indicating that low-margin vote distributions can provide a useful uncertainty signal. On test, however, MQRA slightly degrades performance relative to ASC, suggesting that re-arbitration is sensitive to the size and category distribution of the triggered subset. Our final test submission therefore uses ASC without re-arbitration, achieving 72.73 average accuracy and 78.34 category-wise macro average accuracy on validation, and 81.16 average accuracy and 80.91 category-wise macro average accuracy on test. This report details our prompting strategy, implementation setup, ablation studies, and diagnostic analyses. The code is available at https://github.com/data-analytics-labo/ASC-MQRA",
+      "authors": [
+        "Tomoya Miyazawa",
+        "Hiroyasu Okuno"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-03T00:51:55+00:00",
+      "link": "https://arxiv.org/pdf/2606.04323v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "presents a novel training-free reasoning framework for video question answering, improving answer consistency via self-consistency",
+      "llm_evidence_cn": "提出了一种无需训练的视频问答推理框架，通过自一致性提升答案准确性",
+      "llm_evidence": "提出了一种无需训练的视频问答推理框架，通过自一致性提升答案准确性",
+      "canonical_evidence": "提出了一种无需训练的视频问答推理框架，通过自一致性提升答案准确性",
+      "llm_tldr_en": "ASC-MQRA is a training-free test-time reasoning framework for video QA that uses multiple stochastic runs and answer-level self-consistency, significantly improving over single-pass inference.",
+      "llm_tldr_cn": "针对视频问答中关系推理的挑战，本文提出一种无需训练的新型推理框架ASC-MQRA。核心组件对同一问题进行多次随机问答，通过答案级自一致性聚合结果，大幅超越单次推理。额外设计的边界触发问题重新仲裁模块进一步提升了低置信度场景的鲁棒性。在CVPR 2026 VidLLMs挑战赛上，该方法取得了优异性能，为视频问答提供了高效且即插即用的改进方案。",
+      "llm_tldr": "针对视频问答中关系推理的挑战，本文提出一种无需训练的新型推理框架ASC-MQRA。核心组件对同一问题进行多次随机问答，通过答案级自一致性聚合结果，大幅超越单次推理。额外设计的边界触发问题重新仲裁模块进一步提升了低置信度场景的鲁棒性。在CVPR 2026 VidLLMs挑战赛上，该方法取得了优异性能，为视频问答提供了高效且即插即用的改进方案。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06407v1",
+      "source": "arxiv",
+      "title": "A Vision-language Framework for Comparative Reasoning in Radiology",
+      "abstract": "Medical imaging artificial intelligence has achieved strong performance in isolated image interpretation, but remains poorly aligned with radiological practice, where diagnosis and follow-up rely on comparison across prior studies and analogous reference cases. Here we formulate radiological comparison as an entity-aware cross-image reasoning problem and introduce a framework that supports both reference-case retrieval and temporal comparative interpretation. We construct MedReCo-DB, a large-scale comparative imaging resource derived from routine image-report pairs, comprising more than 690,000 images from over 160,000 patients across eight institutions, four countries and seven imaging modalities. Reports are decomposed into anatomical structures, abnormal findings and pathological conditions to provide supervision for entity-conditioned retrieval and comparative visual question answering. Using this resource, we develop MedReCo, an entity-aware visual encoder for controllable retrieval of clinically analogous cases, and MedReCo-VLM, a vision--language extension for generative interpretation of interval change. Across internal, external and cross-center evaluations, MedReCo achieved the highest Recall@1 in all 12 internal retrieval settings and improved external retrieval by a mean of 6.0 percentage points. In clinically confusable differential groups, it consistently outperformed the strongest baselines. MedReCo-VLM achieved the best performance across all comparative generation evaluations and improved longitudinal follow-up accuracy by 14.5-46.5 percentage points on chest radiographs and 13.0-27.9 percentage points on CT. These findings suggest that entity-aware comparative reasoning can be learned from routine clinical data at scale and may provide a more clinically aligned foundation for medical imaging AI.",
+      "authors": [
+        "Tengfei Zhang",
+        "Ziheng Zhao",
+        "Lisong Dai",
+        "Xiaoman Zhang",
+        "Pengcheng Qiu",
+        "Ya Zhang",
+        "Yanfeng Wang",
+        "Weidi Xie"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.IR",
+        "cs.LG",
+        "eess.IV"
+      ],
+      "published": "2026-06-04T17:12:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.06407v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "vision-language framework for comparative reasoning in radiology",
+      "llm_evidence_cn": "用于放射学比较推理的视觉语言框架",
+      "llm_evidence": "用于放射学比较推理的视觉语言框架",
+      "canonical_evidence": "用于放射学比较推理的视觉语言框架",
+      "llm_tldr_en": "This paper formulates radiological comparison as entity-aware cross-image reasoning building MedReCo-DB dataset and a retrieval-and-reasoning framework directly relevant to medical VQA.",
+      "llm_tldr_cn": "现有医学影像AI缺乏放射学实践中的比较推理能力。本文将放射学比较定义为一个实体感知的跨图像推理问题构建了包含超过69万张图像的多机构多模态数据集MedReCo-DB并提出了支持参考案例检索和时间比较推理的框架。该工作直接服务于医学视觉问答尤其是需要对比分析的任务。",
+      "llm_tldr": "现有医学影像AI缺乏放射学实践中的比较推理能力。本文将放射学比较定义为一个实体感知的跨图像推理问题构建了包含超过69万张图像的多机构多模态数据集MedReCo-DB并提出了支持参考案例检索和时间比较推理的框架。该工作直接服务于医学视觉问答尤其是需要对比分析的任务。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06407v2",
+      "source": "arxiv",
+      "title": "A Vision-language Framework for Comparative Reasoning in Radiology",
+      "abstract": "Medical imaging artificial intelligence has achieved strong performance in isolated image interpretation, but remains poorly aligned with radiological practice, where diagnosis and follow-up rely on comparison across prior studies and analogous reference cases. Here we formulate radiological comparison as an entity-aware cross-image reasoning problem and introduce a framework that supports both reference-case retrieval and temporal comparative interpretation. We construct MedReCo-DB, a large-scale comparative imaging resource derived from routine image-report pairs, comprising more than 690,000 images from over 160,000 patients across eight institutions, four countries and seven imaging modalities. Reports are decomposed into anatomical structures, abnormal findings and pathological conditions to provide supervision for entity-conditioned retrieval and comparative visual question answering. Using this resource, we develop MedReCo, an entity-aware visual encoder for controllable retrieval of clinically analogous cases, and MedReCo-VLM, a vision--language extension for generative interpretation of interval change. Across internal, external and cross-center evaluations, MedReCo achieved the highest Recall@1 in all 12 internal retrieval settings and improved external retrieval by a mean of 6.0 percentage points. In clinically confusable differential groups, it consistently outperformed the strongest baselines. MedReCo-VLM achieved the best performance across all comparative generation evaluations and improved longitudinal follow-up accuracy by 14.5-46.5 percentage points on chest radiographs and 13.0-27.9 percentage points on CT. These findings suggest that entity-aware comparative reasoning can be learned from routine clinical data at scale and may provide a more clinically aligned foundation for medical imaging AI.",
+      "authors": [
+        "Tengfei Zhang",
+        "Ziheng Zhao",
+        "Xiaoman Zhang",
+        "Lisong Dai",
+        "Pengcheng Qiu",
+        "Ya Zhang",
+        "Yanfeng Wang",
+        "Weidi Xie"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.IR",
+        "cs.LG",
+        "eess.IV"
+      ],
+      "published": "2026-06-04T17:12:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.06407v2",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "vision-language framework for comparative reasoning in radiology",
+      "llm_evidence_cn": "放射学比较推理的视觉语言框架",
+      "llm_evidence": "放射学比较推理的视觉语言框架",
+      "canonical_evidence": "放射学比较推理的视觉语言框架",
+      "llm_tldr_en": "Formulates radiological comparison as entity-aware cross-image reasoning, building MedReCo-DB dataset with 690k images, supporting reference-case retrieval and temporal comparison.",
+      "llm_tldr_cn": "本文提出放射学比较推理的视觉语言框架，将比较视为实体感知的跨图像推理问题，并构建MedReCo-DB大规模数据集。该数据集包含来自8个机构、7种模态的69万余张图像，支持参考病例检索和时间比较推理。该框架在多个医学影像任务上达到领先性能，为医学视觉问答提供了可靠的基础。",
+      "llm_tldr": "本文提出放射学比较推理的视觉语言框架，将比较视为实体感知的跨图像推理问题，并构建MedReCo-DB大规模数据集。该数据集包含来自8个机构、7种模态的69万余张图像，支持参考病例检索和时间比较推理。该框架在多个医学影像任务上达到领先性能，为医学视觉问答提供了可靠的基础。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "What are the state of the art methods for medical visual question answering?",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08615v1",
+      "source": "arxiv",
+      "title": "Harnessing Streaming Video in the Wild",
+      "abstract": "Vision-Language Models (VLMs) are increasingly required to process unbounded video streams in applications such as video-call assistants, live commentary, and embodied robots. An ideal streaming system should support proactive interaction, long-horizon memory, and real-time processing, while resting on a VLM backbone capable of handling diverse in-the-wild streaming tasks. However, existing VLMs excel at offline video understanding but fall short in streaming capabilities and lack dedicated infrastructure for streaming deployment. We address this gap on three fronts. (i) For backbone capability, we construct \\textbf{Streaming-Train-248K}, a streaming dataset paired with a novel training objective for adapting VLMs to streaming interaction and understanding. (ii) For real-world deployment, we introduce \\textbf{Streaming Harness}, a plug-and-play system that endows any VLM with three core abilities: proactive interaction (per-second response decisions), long-term memory (12-hour context retention), and real-time processing (sub-second latency). (iii) To drive continued community progress on streaming capabilities, we design \\textbf{Streaming-Eval}, a benchmark that reflects models' capabilities across diverse in-the-wild scenarios. Extensive experiments demonstrate consistent gains from our approach across all core capabilities required for streaming video understanding. We will open-source our data, code, and benchmark to advance the community's shift from offline video understanding to deployable streaming intelligence.",
+      "authors": [
+        "Dingyu Yao",
+        "Shuhuan Gu",
+        "Qingyi Si",
+        "Junhao Zhou",
+        "Chenxu Yang",
+        "Chuanyu Qin",
+        "Naibin Gu",
+        "Zheng Lin",
+        "Weiping Wang",
+        "Nan Duan",
+        "Jiaqi Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-06-07T13:00:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.08615v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "streaming video VLM for QA tasks",
+      "llm_evidence_cn": "用于问答任务的流式视频VLM",
+      "llm_evidence": "用于问答任务的流式视频VLM",
+      "canonical_evidence": "用于问答任务的流式视频VLM",
+      "llm_tldr_en": "Proposes a streaming video VLM framework with a new dataset and training objective for proactive interaction and long-horizon memory, enabling video question answering in the wild.",
+      "llm_tldr_cn": "针对现有VLM在流式视频问答中的不足，本文提出了Streaming-Train-248K数据集与新型训练目标，使VLM具备流式交互、长时记忆和实时处理能力。实验表明，该方法显著提升了模型在野外流式视频上的问答性能，为部署实时视频问答系统提供了基础设施。",
+      "llm_tldr": "针对现有VLM在流式视频问答中的不足，本文提出了Streaming-Train-248K数据集与新型训练目标，使VLM具备流式交互、长时记忆和实时处理能力。实验表明，该方法显著提升了模型在野外流式视频上的问答性能，为部署实时视频问答系统提供了基础设施。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.04613v1",
+      "source": "arxiv",
+      "title": "Beyond Symmetric Alignment: Spectral Diagnostics of Modality Imbalance in Vision-Language Models in the Medical Domain",
+      "abstract": "Vision-Language Models (VLMs) struggle when applied to medical image-text data, yet the tools available to diagnose this failure remain limited. Existing representation alignment metrics are symmetric, collapsing both modalities into a single score and hiding which modality drives cross-modal degradation. We introduce the Spectral Alignment Score (SAS), an asymmetric metric that projects both modalities onto the principal eigenbasis of an anchor modality and computes eigenvalue-weighted per-eigenmode correlations, resulting in directional scores whose difference quantifies modality information imbalance. We embed SAS within a benchmarking framework evaluating 15 VLMs across natural and medical image-text datasets alongside 6 alignment metrics and bidirectional retrieval. Our experiments show that medical images retain richer structural information than their paired clinical reports, a directional asymmetry invisible to all competing metrics, and that SAS achieves the strongest zero-label correlation with retrieval performance in the medical domain, positioning it as a practical diagnostic tool for clinical deployment. Code is available at this URL: https://github.com/iamalegambetti/medical-vlms-assessment.",
+      "authors": [
+        "Alessandro Gambetti",
+        "Qiwei Han",
+        "Cláudia Soares",
+        "Hong Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-06-03T08:50:30+00:00",
+      "link": "https://arxiv.org/pdf/2606.04613v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "asymmetric metric to diagnose modality imbalance in medical vision-language models",
+      "llm_evidence_cn": "用于诊断医学视觉语言模型模态失衡的非对称度量",
+      "llm_evidence": "用于诊断医学视觉语言模型模态失衡的非对称度量",
+      "canonical_evidence": "用于诊断医学视觉语言模型模态失衡的非对称度量",
+      "llm_tldr_en": "Introduces Spectral Alignment Score (SAS) for diagnosing modality imbalance in medical VLMs, demonstrating its utility on 15 models across natural and medical datasets.",
+      "llm_tldr_cn": "医学视觉语言模型在跨模态对齐中存在模态失衡问题，但现有对称指标无法揭示具体驱动因素。本文提出光谱对齐分数（SAS），通过将双模态投影到锚模态主特征基上计算方向性相关分数，量化模态信息失衡。在15个模型上的实验表明SAS能有效诊断医学VLM的模态退化。为医学VQA系统设计提供了重要的诊断工具。",
+      "llm_tldr": "医学视觉语言模型在跨模态对齐中存在模态失衡问题，但现有对称指标无法揭示具体驱动因素。本文提出光谱对齐分数（SAS），通过将双模态投影到锚模态主特征基上计算方向性相关分数，量化模态信息失衡。在15个模型上的实验表明SAS能有效诊断医学VLM的模态退化。为医学VQA系统设计提供了重要的诊断工具。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.03269v1",
+      "source": "arxiv",
+      "title": "Distilling Answer-Set Programming Rules from LLMs for Neurosymbolic Visual Question Answering",
+      "abstract": "Visual Question Answering (VQA) is the task of answering questions about images, requiring the integration of multimodal input and reasoning. Modular approaches that incorporate logic-based representations into the reasoning component offer clear advantages over end-to-end trained systems, particularly in terms of interpretability. However, adapting or extending these representations when task requirements change can place a significant burden on developers. To address this challenge, we present an approach for distilling rules from Large Language Models (LLMs). Our method prompts an LLM to extend an initial VQA reasoning theory, expressed as an answer-set program, to meet new requirements of the task. Examples from VQA datasets guide the LLM, validate the results, and help correct erroneous rules by leveraging feedback from the ASP solver. We demonstrate that our approach is effective across diverse VQA datasets. Notably, only a few examples are needed to elicit correct rules from LLMs. Our experiments suggest that rule distillation from LLMs is a promising alternative to traditional data-driven rule learning approaches. Under consideration in Theory and Practice of Logic Programming (TPLP).",
+      "authors": [
+        "Thomas Eiter",
+        "Nelson Higuera Ruiz",
+        "Johannes Oetsch"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-02T07:35:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.03269v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "neurosymbolic VQA using LLM-distilled rules",
+      "llm_evidence_cn": "利用LLM蒸馏规则的神经符号视觉问答",
+      "llm_evidence": "利用LLM蒸馏规则的神经符号视觉问答",
+      "canonical_evidence": "利用LLM蒸馏规则的神经符号视觉问答",
+      "llm_tldr_en": "This work distills answer-set programming rules from LLMs for interpretable visual question answering, enabling dynamic extension of reasoning theories.",
+      "llm_tldr_cn": "视觉问答的模块化方法需要手动扩展推理规则，开发负担重。本文提出从大语言模型蒸馏答案集编程规则，自动扩展VQA推理理论。实验表明，该方法在多个VQA数据集上提升了可解释性和准确性。其神经符号框架可应用于视频问答中的结构化推理。",
+      "llm_tldr": "视觉问答的模块化方法需要手动扩展推理规则，开发负担重。本文提出从大语言模型蒸馏答案集编程规则，自动扩展VQA推理理论。实验表明，该方法在多个VQA数据集上提升了可解释性和准确性。其神经符号框架可应用于视频问答中的结构化推理。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.06696v1",
+      "source": "arxiv",
+      "title": "MMBU: A Massive Multi-modal Biomedical Understanding Benchmark to Probe the Perception Capabilities of Vision-Language Models",
+      "abstract": "Vision and language models (VLMs) hold immense promise to transform biomedical imaging workflows, from detecting lesions in chest X-rays to profiling cellular features in microscopy. Realizing this potential, however, requires robust and fine-grained visual perception. Models need to correctly interpret subtle features in images, and they must do so across diverse biomedical modalities, scales, and contexts. Nevertheless, current benchmarks remain limited. To address these gaps, we introduce the Massive Multimodal Biomedical Understanding (MMBU) benchmark. It is the largest biomedical vision and language benchmark to date, covering 35 submodalities with rich structured metadata. It includes both open and closed versions of ungrounded classification, grounded classification, and object detection, enabling systematic evaluation of model performance across biological scales, clinical settings, and imaging modalities. Evaluating 15 open-weight and 2 frontier VLMs, we find that while medical adaptation provides measurable gains for some models, the high accuracy often reported on established benchmarks can mask deficiencies in visual perception and domain generalization.",
+      "authors": [
+        "Ryan D'Cunha",
+        "Alejandro Lozano",
+        "Xiaoxiao Sun",
+        "Daniel Vela Jarquin",
+        "Min Woo Sun",
+        "Josiah Aklilu",
+        "James Burgess",
+        "Yuhui Zhang",
+        "Ryan Nayebi",
+        "Paola Avila",
+        "Robayo",
+        "Jin Ye",
+        "Ming Hu",
+        "Zhongying Deng",
+        "Junjun He",
+        "Xin Chen",
+        "Yue Yao",
+        "Robert Tibshirani",
+        "Jeffrey J. Nirschl",
+        "Serena Yeung-Levy"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-04T20:24:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.06696v1",
+      "tags": [
+        "keyword:video-med-qa",
+        "query:video-med-qa"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "large biomedical VLM benchmark for evaluation",
+      "llm_evidence_cn": "大规模生物医学VLM感知基准",
+      "llm_evidence": "大规模生物医学VLM感知基准",
+      "canonical_evidence": "大规模生物医学VLM感知基准",
+      "llm_tldr_en": "MMBU is the largest biomedical vision-language benchmark covering 35 submodalities with rich metadata, designed to evaluate fine-grained perception capabilities of VLMs in biomedical domains.",
+      "llm_tldr_cn": "现有生物医学VLM基准覆盖有限，难以全面评估模型的细粒度感知能力。MMBU基准覆盖35个子模态，包含结构化元数据，可系统评估VLM在不同生物医学成像模态下的感知表现。实验揭示了现有模型在多样模态下的能力差异，为医疗VQA等任务提供了基准资源。",
+      "llm_tldr": "现有生物医学VLM基准覆盖有限，难以全面评估模型的细粒度感知能力。MMBU基准覆盖35个子模态，包含结构化元数据，可系统评估VLM在不同生物医学成像模态下的感知表现。实验揭示了现有模型在多样模态下的能力差异，为医疗VQA等任务提供了基准资源。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
 }
