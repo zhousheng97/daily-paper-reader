@@ -269,6 +269,41 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-06-11T03:57:18.874Z'
+    - tag: med-video
+      description: 医疗视频理解
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: medical video understanding
+          keyword_cn: 医疗视频理解
+          query: medical video comprehension and analysis
+        - keyword: surgical video processing
+          keyword_cn: 手术视频处理
+          query: processing and interpretation of surgical procedure videos
+        - keyword: patient video monitoring
+          keyword_cn: 患者视频监测
+          query: monitoring patients through video analysis
+        - keyword: medical imaging video
+          keyword_cn: 医学影像视频
+          query: video data from medical imaging modalities
+      intent_queries:
+        - query: How can deep learning be applied to medical video understanding?
+          query_cn: 深度学习如何应用于医疗视频理解？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Techniques for analyzing surgical videos automatically
+          query_cn: 自动分析手术视频的技术
+          enabled: true
+          source: manual
+          note: ''
+        - query: Applications of video understanding in healthcare
+          query_cn: 视频理解在医疗保健中的应用
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-11T03:58:11.978Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
