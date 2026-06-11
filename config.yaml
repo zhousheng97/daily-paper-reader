@@ -245,6 +245,30 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-06-11T03:56:27.418Z'
+    - tag: ego-video
+      description: 第一视角视频理解
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: egocentric video understanding
+          keyword_cn: 自我中心视频理解
+          query: egocentric video understanding
+        - keyword: self-centered scene understanding
+          keyword_cn: 自我中心场景理解
+          query: self-centered scene understanding
+      intent_queries:
+        - query: egocentric video understanding techniques
+          query_cn: 自我中心视频理解技术
+          enabled: true
+          source: manual
+          note: ''
+        - query: first person action recognition methods
+          query_cn: 第一人称动作识别方法
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-11T03:57:18.874Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
