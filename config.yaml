@@ -207,6 +207,44 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-06-11T03:55:52.655Z'
+    - tag: video-stream
+      description: 流式视频理解
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: streaming video
+          keyword_cn: 流式视频
+          query: streaming video understanding techniques
+        - keyword: video understanding
+          keyword_cn: 视频理解
+          query: deep learning methods for video understanding
+        - keyword: temporal modeling
+          keyword_cn: 时序建模
+          query: temporal modeling for video sequences
+        - keyword: real-time video analysis
+          keyword_cn: 实时视频分析
+          query: real-time video analysis algorithms
+        - keyword: spatial-temporal feature
+          keyword_cn: 时空特征
+          query: spatial-temporal feature extraction
+      intent_queries:
+        - query: How to perform real time video understanding on streaming data?
+          query_cn: 如何在流式数据上实现实时视频理解？
+          enabled: true
+          source: manual
+          note: ''
+        - query: What are the latest techniques for temporal action detection in video streams?
+          query_cn: 视频流中时序动作检测的最新技术有哪些？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Efficient video understanding models for edge devices handling streaming input?
+          query_cn: 处理流式输入的边缘设备高效视频理解模型？
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-11T03:56:27.418Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
