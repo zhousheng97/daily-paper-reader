@@ -1,0 +1,443 @@
+Title: MechLens: Late Crystallization of Factual Knowledge Explains Intervention Effectiveness in Language Models
+
+URL Source: https://arxiv.org/pdf/2606.07978v1
+
+Published Time: Tue, 09 Jun 2026 00:29:07 GMT
+
+Number of Pages: 12
+
+Markdown Content:
+# MECH LENS : Late Crystallization of Factual Knowledge Explains Intervention Effectiveness in Language Models 
+
+Xueping Gao 
+
+Alibaba Cloud 
+
+hellogxp@gmail.com 
+
+Abstract 
+
+Understanding where LLMs store factual knowledge is critical for hallucination mitiga-tion. We systematically quantify Late Crys-tallization : factual knowledge does not grad-ually emerge across layers but “crystallizes” abruptly at the final layers. Across five model families (Pythia, Gemma, Qwen2.5, Llama-3.1, Mistral; 0.5–14B), 26.8%–93.4% of cor-rect answers never enter top-10 predictions at any intermediate layer, with late emer-gence ( >80% depth) consistent across architec-tures. Cross-scale (Qwen2.5-14B) and cross-benchmark (MMLU: 98.2%) results confirm generality; tuned lens rules out probe artifacts. A sentiment-classification control (0.5% for Qwen vs. 85.9% factual; 2.0% for Mistral vs. 26.8%) confirms the phenomenon is specific to factual recall. Late Crystallization yields a crystallization-guided intervention principle : CAA outper-forms D OLA on moderate-crystallization mod-els (Llama, Mistral; p< 0.001 ), with a direction-ally consistent reversal on high-crystallization Qwen (+25.4% vs. +15.5% MC1, p=0 .069 ). LayerNorm ablation shows crystallization is intrinsic to the residual stream; LN scaling (×1.2) yields +11.8% MC1 with zero inference overhead. We further reveal a Computability– Memorization Spectrum : computable knowl-edge crystallizes earlier (layer 22.1/28) than memorized facts (28.0/28). We release M ECH -LENS supporting five model families. 1
+
+1 Introduction 
+
+Large language models (LLMs) frequently produce plausible-sounding but factually incorrect outputs— hallucinations—posing significant challenges for deployment in high-stakes applications (Huang et al., 2023; Ji et al., 2023). A natural approach to mitigating hallucinations is to identify the internal 
+
+> 1
+
+Code: https://anonymous.4open.science/r/ MechLens-EMNLP2026            
+
+> Input:
+> “The Eiffel Tower is in...”
+> L1 L2 L3 L4 L5
+> ...
+> L26 L27 L28 L28
+> Top-10: “The”, “It”... Top-10: “city”, “a”... Top-1: Paris
+> 85.9% of correct answers never enter top-10 at in-termediate layers →crystallize at final layer
+
+Figure 1: Late Crystallization : Correct answers remain invisible in logit space throughout intermediate layers, then abruptly “crystallize” into top predictions at the final layer. 
+
+components responsible for factual recall and in-tervene directly on their activations. However, the effectiveness of such interventions depends criti-cally on whether factual knowledge is localized in specific model components or distributed across the network. Prior work on knowledge localization has pro-duced mixed evidence. Causal tracing (Meng et al., 2022) identifies middle-layer MLPs as critical for factual recall in GPT-2, motivating localized edit-ing methods like ROME and MEMIT. However, recent work suggests knowledge may be more dis-tributed than initially assumed (Geva et al., 2022), raising questions about whether activation-level interventions can effectively modulate factual be-havior. We introduce M ECH LENS , a unified mechanistic interpretability framework that enables systematic investigation of these questions. Through compre-hensive experiments combining logit lens analy-sis, layer contrasting, and activation interventions across five model families, we characterize a phe-nomenon we term Late Crystallization : factual knowledge does not gradually emerge in interme-diate layers but crystallizes abruptly at the final layers (Figure 1). Our contributions: • Late Crystallization : 85.9% of correct an-swers never enter top-10 at any intermedi-ate layer in Qwen2.5-7B, validated across five architectures (Pythia: 93.4%, Gemma: 89.8%, Qwen: 85.9%, Llama: 70.4%, Mistral: 
+
+> arXiv:2606.07978v1 [cs.CL] 6 Jun 2026
+
+26.8%), scales (7–14B), benchmarks (Truth-fulQA, MMLU), and probing methods (logit lens vs. tuned lens, ∆=0.2%) • Factual specificity : A control experiment on non-factual tasks (SST-2: 0.5% late crystal-lization vs. 85.9% factual on Qwen) confirms the phenomenon is specific to factual knowl-edge retrieval • Crystallization-guided intervention selec-tion : Crystallization degree predicts optimal intervention type—CAA significantly outper-forms D OLA below a ∼80% crystallization threshold ( p< 0.001 for both Llama and Mis-tral); the pattern is consistent with a reversal above threshold ( p=0 .069 on Qwen, n.s. af-ter correction), providing a directionally sup-ported model-specific selection criterion • Distributed head-level processing : Per-head ablation reveals uniformly distributed attribu-tion at the FEP boundary (Gini <0.015 across all five architectures), demonstrating crystal-lization is an emergent residual-stream prop-erty rather than attributable to individual at-tention circuits • Mechanistic evidence : LayerNorm ablation shows crystallization is intrinsic to the resid-ual stream; LN scaling ( ×1.2) yields +11.8% MC1 with zero overhead • Computability–Memorization Spectrum :Computable knowledge crystallizes at layer 22.1/28; memorized facts only at 28.0/28 Together, these results bridge language model 
+
+understanding (when does factual knowledge be-come explicit?), theory (why do different interven-tions succeed or fail?), and practice (how should practitioners select interventions based on architec-ture?). 
+
+2 Related Work 
+
+Knowledge Localization and Editing. Causal tracing (Meng et al., 2022) identifies middle-layer MLPs as critical for factual recall in GPT-2, mo-tivating ROME and MEMIT (Meng et al., 2023). Geva et al. (2021, 2022) show MLPs function as key-value memories. Geva et al. (2023) further dis-sect factual recall into a three-step circuit: subject enrichment at early MLPs, relation propagation, and attribute extraction via late attention heads that              
+
+> Prior Work This Work
+> Observation Qualitative Quantified (85.9%) Metric Implicit FEP (formal) Cross-arch Limited 5 architectures
+> Causal test Circuit cases LN ablation
+> Intervention link Indirect Threshold principle
+> Table 1: Comparison with prior logit lens studies.
+
+move information to the last token position. Nanda (2023) corroborate this with neuron-level analysis showing factual information is assembled at late layers. These circuit-level findings predict that cor-rect answers should be invisible in logit space until late in the network—our work provides the first 
+
+population-level quantification of this prediction: 85.9% of answers never enter top-10 at any inter-mediate layer, and the degree varies systematically across architectures (93.4% for MHA to 26.8% for GQA+SWA), a finding that circuit case studies do not predict. Circuit tracing (Anthropic, 2025) re-veals distributed factual circuits, while logit lens (nostalgebraist, 2020) and tuned lens (Belrose et al., 2023) enable layer-wise prediction tracking. Con-current work (Wang, 2025) extends logit lens tool-ing to modern architectures and observes late-layer knowledge concentration. Table 1 summarizes how our work extends beyond prior observations. 
+
+Activation Intervention for Factual Accuracy. 
+
+ITI (Li et al., 2023) shifts activations along probed truthfulness directions. DOLA (Chuang et al., 2024) contrasts early/late logit distribu-tions without learned directions. CAA (Turner et al., 2023) and representation engineering (Zou et al., 2023) steer via contrastive activation vectors. SADI (Zhang et al., 2025) achieves state-of-the-art MC1=67% via semantic-adaptive intervention on instruction-tuned models. CCS (Burns et al., 2023) discovers latent knowledge through consistency constraints. These methods operate in activation space (ITI, CAA, SADI) or logit space (D OLA); our work provides a mechanistic account of why 
+
+their effectiveness differs across architectures. 
+
+3 The M ECH LENS Framework 
+
+MECH LENS is built on TransformerLens (Nanda and Bloom, 2022) and supports five model fami-lies spanning diverse architectures: Pythia (Bider-man et al., 2023), Gemma (Gemma Team, Google DeepMind, 2024), Qwen2.5 (Qwen Team, 2024), Llama-3.1 (Dubey et al., 2024), and Mistral (Jiang Model Layers Heads d Attention                                 
+
+> Qwen2.5-0.5B 24 14 896 GQA (2 KV) Qwen2.5-7B 28 28 3584 GQA (4 KV) Qwen2.5-14B 48 40 5120 GQA (8 KV) Pythia-1.4B 24 16 2048 MHA Pythia-6.9B 32 32 4096 MHA Llama-3.1-8B 32 32 4096 GQA (8 KV) Mistral-7B 32 32 4096 GQA+SWA (8 KV) Gemma-7B 28 16 3072 MHA
+
+Table 2: Supported model architectures. Qwen2.5-14B enables cross-scale validation (§7.2). 
+
+et al., 2023) (Table 2). 
+
+Analysis. We extend causal tracing (Meng et al., 2022) with adaptive noise calibration ( σ = α ·
+
+std (E(x)) , α=10 ), KL divergence metrics, and multi-run averaging ( n=5 ). We also implement contrastive activation analysis, computing normal-ized L2 distance between correct and hallucinated residual stream activations at each layer. Full methodological details are in Appendix B. 
+
+Intervention. MECH LENS supports three re-versible intervention types through hooks: ab-lation ( h′ 
+
+> l,c
+
+= 0), scaling ( h′ 
+
+> l,c
+
+= α · hl,c ), and injection ( h′ 
+
+> l,c
+
+= hsource  
+
+> l,c
+
+). For CAA, we follow Turner et al. (2023): given paired truth-ful/untruthful prompts, we extract contrastive di-rections dl = 1
+
+> N
+
+P
+
+> i
+
+(hl(x+ 
+
+> i
+
+) − hl(x− 
+
+> i
+
+)) and add 
+
+α · dl to the top-k layers ranked by ∥dl∥2 at in-ference time. Directions are extracted from 256 TruthfulQA training pairs. 
+
+4 Experimental Setup 
+
+Models and Phases. Phase 1 (causal trac-ing, contrastive analysis, activation scaling) uses Qwen2.5-0.5B and Pythia-1.4B—matched 24-layer models with different architectures (GQA/SwiGLU vs. MHA/GELU). Phase 2 (FEP detection, MC1/MC2 evaluation, cross-architecture validation) uses Qwen2.5-7B, Llama-3.1-8B, and Mistral-7B on the full TruthfulQA benchmark (817 samples) (Lin et al., 2022). Phase 3 (cross-scale validation) extends FEP detection to Qwen2.5-14B (48 layers) to test whether Late Crystallization per-sists at larger scale. 
+
+Evaluation. Phase 1 screening uses 200 Truth-fulQA samples with keyword matching plus LLM-as-Judge (Zheng et al., 2023). Phase 2 uses stan-dardized MC1 (single-correct accuracy) and MC2 (normalized probability mass) on all 817 samples. We test 20 activation scaling strategies across 6                                     
+
+> Method Configuration MC1 MC2
+> Baseline —0.2215 0.3921 ITI top_k=3, λ=1–3 0.2215 0.3921 ITI top_k=5, λ=1–3 0.2203 0.3926 ITI top_k=10, λ=3 0.2436 0.4178
+> DOLAearly (static) 0.2326 0.4371 DOLAmid (static) 0.2448 0.4555 DOLAdynamic 0.2778 0.4822
+> CAA top_k=3, all coeff 0.2215 0.3921 CAA top_k=5, all coeff 0.2203 0.3922 CAA top_k=10, coeff=5.0 0.2558 0.4338
+
+Table 3: MC1/MC2 on TruthfulQA (Qwen2.5-7B, 817 samples). DOLA dynamic achieves the best MC1 (+25.4% over baseline, p=0 .009 ). 95% bootstrap CI for MC1 ≈ ± 0.03 (n=817 ). 
+
+categories plus an 18-configuration ITI grid search; full details and results are in Appendix A. 
+
+5 Results 
+
+5.1 Negative Results: Activation Scaling and ITI 
+
+Simple activation scaling universally fails across 20 strategies and 4 models ( ≤2% gain; up to 28% degradation), and an 18-configuration ITI grid search achieves at most +2%. This consistency across 38 configurations demands a mechanistic explanation (§6; full tables in Appendix A). 
+
+5.2 MC1/MC2 Evaluation with Advanced Interventions 
+
+We evaluate four methods on the full 817-sample TruthfulQA benchmark using Qwen2.5-7B (Ta-ble 3). 
+
+Key findings. A clear hierarchy emerges: D OLA
+
+dynamic (+25.4% MC1) > CAA top_k=10 (+15.5%) > ITI top_k=10 (+10.0%) > simple scaling (0%). Both ITI and CAA show zero im-provement at top_k ∈ { 3, 5} but substantial gains at top_k=10, indicating a layer-count threshold. That D OLA (logit-space) achieves the largest gains motivates our mechanistic analysis in Section 6. All experiments use base (non-instruction-tuned) models (MC1 baselines: 18.9–22.2%); absolute values should not be compared with instruction-tuned methods like SADI (Zhang et al., 2025) (MC1=67%). D OLA’s improvement is significant (two-proportions z-test: z=2 .63 , p=0 .009 ; sur-vives Bonferroni correction at α=0 .017 ). Probe Mean FEP Late Crystal Exact Match ±2 Match       
+
+> Logit lens 27.3 ±1.8 85.9% 74.9% 76.4% Tuned lens 25.1 ±7.4 85.7%
+
+Table 4: Tuned lens vs. logit lens FEP (Qwen2.5-7B, 817 samples). Both yield near-identical late crystalliza-tion rates ( ∆=0.2%). 
+
+6 Late Crystallization of Factual Knowledge 
+
+The effectiveness hierarchy observed in Sec-tion 5.2—and the striking failure of simple activa-tion scaling—demands a mechanistic explanation. We hypothesize and test the idea that factual knowl-edge in LLMs undergoes a phase transition at the final layers, which we term Late Crystallization .
+
+6.1 Factual Emergence Point Detection 
+
+We define the Factual Emergence Point (FEP) for a query q with correct answer a as the earliest layer 
+
+L at which a enters the top-k predictions under logit lens projection: 
+
+LFEP = min {L : rank (a, WU · LN (hL)) ≤ k}
+
+(1) where hL is the residual stream at layer L, LN is the final layer norm, and WU is the unembedding matrix. If a never enters top-k at any intermediate layer, we set LFEP = Lmax (the final layer). We use k = 10 throughout. 
+
+Tuned lens validation. A natural concern is that FEP = Lmax for 85.9% of samples could reflect logit lens’s known limitations rather than a genuine phenomenon. We train per-layer affine probes on 2,000 WikiText-2 samples and compute tuned lens FEP on all 817 TruthfulQA samples: the tuned lens yields 85.7% late crystallization—within 0.2 per-centage points of the logit lens (85.9%), with 74.9% of samples having identical FEP (Table 4). Three further lines of evidence argue against a probe ar-tifact: (1) LayerNorm ablation produces identical FEP distributions (§7.5); (2) a systematic cross-architecture gradient (Qwen 85.9% > Llama 71.0% 
+
+> Mistral 27.1%) correlates with attention mech-anisms rather than showing random variation; (3) crystallization degree predicts optimal intervention type (§7). We compute FEP for all 817 TruthfulQA sam-ples on Qwen2.5-7B (28 layers), tracking the rank of each correct answer’s first token across all layers via logit lens projection.             
+
+> FEP Layer Count Percentage
+> 28 (final / never) 702 85.9% 23 47 5.8% 21 20 2.4% 25 13 1.6% Other ( ≤1.2% each) 35 4.3%
+
+Table 5: FEP distribution (Qwen2.5-7B, 817 Truth-fulQA samples). 85.9% of correct answers never enter top-10 at any intermediate layer. 
+
+Robustness to k threshold. Late Crystallization is robust across k ∈ { 1, 3, 5, 10 , 20 , 50 , 100 }: even at k=100 (top 0.1% of vocabulary), 64.7% of cor-rect answers still never appear at any intermediate layer, and FEP Depth remains above 93% (Table 16 in Appendix F). 
+
+6.2 The Late Crystallization Phenomenon 
+
+Table 5 reveals a striking pattern: 85.9% of cor-rect answers (702/817) never enter the top-10 predictions at any intermediate layer (mean FEP = 27.3 ± 1.8 out of 28 layers). This Late Crys-tallization shows that factual knowledge does not gradually “build up” across depth but exists in a distributed, implicit form within the residual stream before abruptly crystallizing into explicit predic-tions at the final layer. 
+
+6.3 Computability–Memorization Spectrum 
+
+FEP varies systematically across knowledge cate-gories (full table in Appendix H): Logical False-hood crystallizes earliest (mean FEP=22.1, σ=2.6), while categories like History, Psychology, and Weather show FEP=28.0 with zero variance—every sample has its answer invisible until the final layer. This Computability–Memorization Spectrum re-veals that “computable” knowledge emerges at in-termediate layers, while purely memorized world knowledge remains fully distributed until crystal-lization. 
+
+6.4 FEP–D OLA Decorrelation 
+
+DOLA’s dynamic layer selection does not corre-late with FEP (Pearson r = −0.057 , p = 0 .103 ): DOLA selects near-exclusively layer 0–1 (mean = 0.95), while FEP concentrates at layer 27–28. This reveals D OLA’s true mechanism: contrast-ing the maximally early layer against the final layer, amplifying the factual signal that crystal-lization produces. Late Crystallization explains all observed patterns: D OLA contrasts pre- vs. post-crystallization logits; CAA/ITI require top_k ≥10 Model Layers Mean FEP FEP Depth Late Crystal                                     
+
+> Qwen2.5-7B 28 27.3 ±1.8 97.5% 85.9% Qwen2.5-14B 48 46.0 ±4.9 95.8% 77.7% Llama-3.1-8B 32 29.4 ±4.9 91.9% 71.0% Mistral-7B 32 26.3 ±6.2 82.3% 27.1% Pythia-6.9B 32 30.8 ±4.2 96.2% 93.4% Gemma-7B 28 27.4 ±2.4 97.7% 89.8%
+
+Table 6: Cross-architecture and cross-scale FEP detec-tion (817 samples). FEP Depth = Mean FEP / total layers. All models show knowledge emergence >80% depth, with strict final-layer crystallization varying by attention mechanism: standard MHA (Pythia, Gemma) shows highest rates, GQA (Qwen, Llama) intermediate, and sliding window attention (Mistral) enables earlier information routing. 
+
+to span the pre-crystallization window; simple scal-ing amplifies all components uniformly, unable to selectively steer the nonlinear crystallization pro-cess. 
+
+7 Cross-Architecture Validation and Causal Analysis 
+
+We extend our analysis to four additional ar-chitectures: Llama-3.1-8B (GQA), Mistral-7B (GQA+SWA), Pythia-6.9B (standard MHA), and Gemma-7B (standard MHA), covering the major attention mechanism variants. 
+
+7.1 Cross-Architecture FEP Detection 
+
+Table 6 and Figure 2 reveal two key findings: (1) 
+
+Late knowledge emergence is consistent across all five tested architectures —across all models, factual knowledge emerges at >80% model depth (range: 82.2%–97.7%); (2) The degree varies with architecture —strict final-layer crystalliza-tion ranges from 93.4% (Pythia, standard MHA) to 26.8% (Mistral, GQA+SWA), where sliding win-dow attention correlates with earlier information routing. Notably, models with standard multi-head attention (Pythia) show the strongest crystalliza-tion, while Gemma (also MHA) exhibits very high rates (89.8%). 
+
+7.2 Cross-Scale Validation (Qwen2.5-14B) 
+
+To test scale invariance, we run FEP detection on Qwen2.5-14B (48 layers, 14.7B parameters). Re-sults (Table 6, row 2) confirm Late Crystallization 
+
+persists : 77.7% of correct answers never enter top-10 at any intermediate layer, and FEP Depth is 95.8% (vs. 97.5% at 7B). The negligible 1.7pp dif-ference in FEP Depth confirms that the relative crystallization layer is scale-invariant within the                         
+
+> Model Method MC1 ∆%
+> Llama-3.1-8B Baseline 0.1897 —DOLAdynamic 0.1934 +1 .9
+> CAA (top_k=10) 0.2534 +33 .5
+> Mistral-7B Baseline 0.2044 —DOLAdynamic 0.2277 +11 .4
+> CAA (top_k=10) 0.2705 +32 .3
+> Qwen2.5-7B Baseline 0.2215 —DOLAdynamic 0.2778 +25 .4
+> CAA (top_k=10) 0.2558 +15 .5
+
+Table 7: Cross-architecture intervention results (817 samples). Crystallization degree predicts optimal in-tervention: CAA significantly outperforms D OLA on moderate-crystallization models ( p< 0.001 ); the pat-tern is directionally consistent with a reversal on high-crystallization Qwen ( p=0 .069 , non-significant; see §7). 
+
+same architecture family. 
+
+7.3 Cross-Benchmark Validation (MMLU) 
+
+To verify generality beyond TruthfulQA, we run FEP detection on 1,200 MMLU samples spanning 24 subjects. Late Crystallization is even more 
+
+pronounced: 98.2% of correct answers never en-ter top-10 at any intermediate layer, with near-perfect consistency across STEM (99.1%), Hu-manities (98.0%), Social Sciences (97.2%), and Other (98.0%) domains (Table 17 in Appendix G). The higher MMLU crystallization is consistent with MMLU testing primarily memorized do-main knowledge, while TruthfulQA includes “com-putable” categories that emerge earlier. 
+
+7.4 Crystallization-Guided Intervention Selection 
+
+Table 7 reveals that crystallization degree pre-dicts the optimal intervention type. On moderate-crystallization models, CAA significantly out-performs D OLA—Llama (70.4% crystallization): +33.5% vs. +1.9% ( z=4 .93 , p< 0.001 ); Mistral (26.8%): +32.3% vs. +11.4% ( z=3 .21 , p=0 .001 ). Both survive Bonferroni correction ( α=0 .017 ). On high-crystallization Qwen (85.9%), the pat-tern is consistent with a reversal: D OLA achieves +25.4% vs. CAA’s +15.5% ( z=1 .82 , p=0 .069 ), which does not reach significance after Bonfer-roni correction. While this single comparison is non-significant, the relationship across all three ar-chitectures is monotonic—DoLa’s MC1 gap over CAA increases with crystallization rate (Mistral: 
+
+−20 .9 pp; Llama: −31 .6 pp; Qwen: +9 .9 pp)— Figure 2: Late Crystallization across architectures. Each row: a TruthfulQA sample; each column: a layer. Color: 
+
+log 10 (rank ) of correct answer under logit lens. White stars: FEP. 
+
+directionally supporting a crystallization threshold (∼80%) that separates two intervention regimes: activation-space steering (CAA) dominates below, while logit-space contrasting (D OLA) becomes preferable above. We frame this threshold as sug-gestive evidence pending broader validation across additional high-crystallization architectures. C RYS -
+
+> TAL
+
+BOOST (Appendix D) further validates this principle, outperforming D OLA on Llama (+8.4% vs. +1.9%). 
+
+7.5 LayerNorm Ablation Analysis 
+
+To test whether LayerNorm causes crystallization, we ablate and scale ln_final on Qwen2.5-7B (Ta-ble 8). Complete ablation of ln_final produces identi-cal FEP distributions (Mean FEP=27.30, 85.9% late crystallization), providing strong evidence that crystallization is intrinsic to the residual stream. Scaling LN up ( ×1.2, ×1.5) progressively in-creases late crystallization to 87.6% and 95.7%, re-vealing LN as a “crystallization amplifier.” The op-timal MC1 occurs at ×1.2 (+11.8%), a simple inter-vention adding zero inference-time overhead (a sin-                                 
+
+> Condition Mean FEP Late Crystal MC1 ∆MC1
+> Baseline (with LN) 27.30 85.9% 0.2179 —Ablate ln_final 27.30 85.9% 0.2252 +3.4% LN scale ×0.5 27.30 85.9% 0.2240 +2.8% LN scale ×0.8 27.30 85.9% 0.2240 +2.8% LN scale ×1.2 27.34 87.6% 0.2436 +11.8%
+> LN scale ×1.5 27.71 95.7% 0.2387 +9.0%
+
+Table 8: LayerNorm ablation (Qwen2.5-7B, 817 sam-ples). Ablating ln_final has zero effect on FEP; LN ×1.2 yields +11.8% MC1. 2
+
+gle element-wise multiply), compared to D OLA’s 2× forward pass cost. 
+
+7.6 Head-Level Attribution 
+
+To identify the specific architectural components driving crystallization, we perform per-head ab-lation at the FEP boundary layer. For each sam-ple, we zero-ablate each attention head at the layer where crystallization occurs and measure the result-ing rank degradation of the correct answer token. Table 9 reveals remarkably distributed process-ing across all five architectures: Gini coefficients are uniformly below 0.015 (where 0 indicates per-fectly uniform distribution), and Top-10% Share values match their expected-under-uniform base-Figure 3: FEP depth distribution across architectures (817 samples each). Qwen concentrates at the final layer (85.9%), Llama shows a bimodal pattern (71.0%), Mistral distributes broadly (27.1%) while maintaining >82% mean depth.                               
+
+> Model #Heads Attn Type Gini Top-10% Share Expected unif
+> Qwen2.5-7B 28 GQA 0.008 7.3% 7.1% Llama-3.1-8B 32 GQA 0.006 9.8% 9.4% Mistral-7B 32 GQA+SWA 0.013 9.9% 9.4% Pythia-6.9B 32 MHA 0.008 9.8% 9.4% Gemma-7B 16 MHA 0.001 6.3% 6.3%
+
+Table 9: Head-level attribution at the FEP boundary layer. Gini coefficient measures concentration of ab-lation impact across heads (0=uniform, 1=single head dominates). Top-10% Share shows the fraction of to-tal rank degradation attributable to the most influential heads; Expected unif : share expected under uniform dis-tribution. All models exhibit near-uniform attribution (Gini <0.015), indicating no dominant critical heads. 
+
+lines within 0.5 percentage points. This holds re-gardless of attention mechanism—MHA (Pythia, Gemma), GQA (Qwen, Llama), and GQA+SWA (Mistral) all exhibit the same uniform pattern. No single head dominates the crystallization process, connecting to our LayerNorm ablation finding (§7.5) and supporting the interpretation that Late Crystallization is an emergent property of the full residual stream rather than attributable to specific attention circuits. 
+
+7.7 Control Task Validation 
+
+To confirm that Late Crystallization is specific to factual knowledge retrieval rather than a general property of token prediction, we run FEP detection on a non-factual control task: sentiment classifica-tion (SST-2). Table 10 shows a clear contrast for models capa-ble of zero-shot sentiment classification: Qwen2.5-7B drops from 84.9% (factual) to 0.5% (SST-2)— a 170 × gap—and Mistral-7B drops from 26.8% to 2.0% (13 ×), supporting that Late Crystalliza-tion is specific to factual knowledge retrieval rather than a generic property of transformer predic-tions. Llama-3.1-8B exhibits an intermediate pat-tern (49.5% on SST-2 vs. 70.4% factual), a smaller 
+
+Model SST-2 Late% Factual Late% 
+
+Qwen2.5-7B 0.5% 84.9% Llama-3.1-8B 49.5% 70.4% Mistral-7B 2.0% 26.8% Pythia-6.9B 100.0% † 93.4% Gemma-7B 100.0% † 89.8% 
+
+Table 10: Control task comparison on SST-2 sentiment classification. Models capable of zero-shot sentiment classification (Qwen, Mistral) show dramatically lower late crystallization on SST-2 than on factual retrieval. Factual Late% computed on the same 200-sample subset used for control evaluation. †Base models unable to perform zero-shot sentiment classification (excluded from the specificity comparison). 
+
+relative gap than Qwen or Mistral. We attribute this to Llama’s overall lower factual crystallization (70.4%, vs. 85.9–93.4% for Qwen/Pythia/Gemma) leaving more information accessible at intermedi-ate layers across task types; the directional gap (factual > control) is preserved. Pythia-6.9B and Gemma-7B cannot perform zero-shot senti-ment classification (100% on SST-2 reflects the chance-level early-token distribution rather than late-emerging task-relevant information) and are excluded from the specificity comparison; an eval-uation with few-shot prompting on these models is left to future work. 
+
+8 Discussion 
+
+Why activation scaling fails. Late Crystalliza-tion provides a principled explanation: across all five tested architectures, 26.8–93.4% of correct an-swers are invisible in logit space at intermediate lay-ers, so scaling amplifies non-factual signals along-side implicit factual ones. Successful methods ei-ther bypass the crystallization boundary (D OLA:pre- vs. post-crystallization logit contrast) or span the entire pre-crystallization window (ITI/CAA: top_k ≥10 layers). 
+
+Crystallization-guided intervention selection. 
+
+Our results suggest a practical guideline: charac-terize a model’s crystallization profile (via FEP de-tection) before selecting an intervention. A crystal-lization threshold at ∼80% separates two regimes: above threshold (Qwen 85.9%), logit-space meth-ods like D OLA are preferred because crystalliza-tion is directly visible in the vocabulary distri-bution; below threshold (Llama 70.4%, Mistral 26.8%), activation-space methods like CAA are significantly more effective ( p< 0.001 ). This prin-ciple is further validated by C RYSTAL BOOST (Ap-pendix D), which uses FEP-derived layer bound-aries. 
+
+Computational cost. LN scaling is the cheap-est effective intervention ( 1.0× overhead, +11.8% MC1), compared to ITI/CAA ( ∼1.05 ×, +10– 15.5%) and D OLA (2.0×, +25.4%). 
+
+Why C RYSTAL BOOST underperforms D OLA
+
+on Qwen. This reveals a space mismatch : D OLA
+
+operates in logit space where crystallization is di-rectly visible, while C RYSTAL BOOST steers in activation space where 85.9% of correct answers remain implicit. On lower-crystallization Llama (71.0%), CRYSTAL BOOST outperforms D OLA
+
+(+8.4% vs. +1.9%), validating FEP theory. 
+
+Computability–Memorization Spectrum. 
+
+Category-level FEP variation (Figure 4) reveals different processing pathways: computable knowledge (Logical Falsehood, FEP=22.1) crosses the top-10 threshold at earlier layers than memorized knowledge (History, Psychology, FEP=28.0) across all architectures, suggesting category-adaptive interventions. 
+
+Relationship to SADI and instruction tuning. 
+
+SADI (Zhang et al., 2025) achieves MC1=67% on instruction-tuned models (baseline ≈40–50%); our contribution is orthogonal, providing a mechanistic explanation for intervention effectiveness. A pilot on Qwen2.5-7B-Instruct reveals instruction tuning reshapes the crystallization profile: strict final-layer crystallization drops from 85.9% to 37.3%, while knowledge still emerges late (FEP depth=91.0%). This is consistent with activation-space interven-tions being more effective on instruction-tuned models, aligning with SADI’s success. 
+
+Future directions. Key directions include architecture-adaptive interventions that au-tomatically match a model’s crystallization profile, category-adaptive methods leveraging the Computability–Memorization Spectrum, scaling verification at 70B+ parameters, and systematic investigation of how RLHF and instruction tuning reshape crystallization across model families. 
+
+9 Conclusion 
+
+We systematically quantify Late Crystallization —factual knowledge in LLMs crystallizes abruptly at the final layers (85.9% in Qwen2.5-7B), vali-dated across architectures (Llama: 71.0%, Mis-tral: 27.1%), scales (14B: FEP Depth 95.8%), benchmarks (MMLU: 98.2%), and probing meth-ods (tuned lens ∆=0.2%). A pilot on Qwen2.5-7B-Instruct shows instruction tuning reshapes the boundary (37.3% vs. 85.9%). This phenomenon provides a crystallization-guided intervention prin-ciple: a ∼80% threshold separates two regimes where CAA and D OLA each excel ( p< 0.001 ), ex-plains the consistent failure of activation scaling, and reveals a Computability–Memorization Spec-trum. LayerNorm ablation provides evidence that crystallization is intrinsic to the residual stream, while LN scaling ( ×1.2) yields +11.8% MC1 with zero overhead. We release M ECH LENS as open-source software supporting five model families. 
+
+Limitations 
+
+Scale. Late Crystallization is validated on five 7–8B base models (Qwen, Llama, Mistral, Pythia, Gemma) and one 14B model within the Qwen fam-ily. Verification at 70B+ scales remains needed to establish scale-invariance more broadly. 
+
+Task Format. All evaluations use multiple-choice format (MC1/MC2). Extending FEP anal-ysis to open-ended generation requires token-by-token FEP tracking across decoding steps, which we leave to future work. First-token FEP provides a lower bound, as true factual emergence may be even later for multi-token answers; we verified on a 100-sample subset that subsequent tokens show similar late-crystallization patterns (mean FEP dif-ference <0.5 layers). 
+
+Instruction-Tuned Models. Our pilot on Qwen2.5-7B-Instruct shows crystallization is reshaped but not eliminated (37.3% vs. 85.9% strict final-layer). A preliminary intervention comparison found both D OLA and CAA degrade MC1 below the higher instruct baseline, suggest-ing intervention parameters require re-tuning for instruction-tuned representations. Broader instruct/RLHF coverage across model families is needed for generalization. 
+
+Methodological Scope. CRYSTAL BOOST grid search covers only 5 configurations. The correla-tion between sliding window attention (Mistral) and lower crystallization rates is observational; while consistent with SWA enabling earlier infor-mation routing, we have not performed controlled ablation of the attention mechanism itself to estab-lish causality. 
+
+Ethics Statement 
+
+Our work aims to improve understanding of LLM factual behavior to support safety research. 
+
+Reproducibility Statement 
+
+All experiments are reproducible with the released MECH LENS codebase. Key details: (1) Hardware :NVIDIA A100-40GB GPUs, CUDA 12.1; (2) Soft-ware : Python 3.10, PyTorch 2.0+, Transformer-Lens 2.0+; (3) Data : TruthfulQA (817 samples), MMLU (1,200 samples), WikiText-2 (2,000 sam-ples for tuned lens); (4) Models : All models loaded via HuggingFace/ModelScope in FP16; (5) Hy-perparameters : k=10 for FEP, CAA coeff ∈{0.5– 5.0}, ITI λ ∈{1–3}. Full configuration files and scripts are included in the supplementary materials. 
+
+References 
+
+Anthropic. 2025. Circuit tracing: Revealing compu-tational graphs in language models. Transformer Circuits Thread .Nora Belrose, Zach Furman, Logan Smith, Danny Ha-lawi, Igor Ostrovsky, Lev McKinney, Stella Bider-man, and Jacob Steinhardt. 2023. Eliciting latent predictions from transformers with the tuned lens. In 
+
+Advances in Neural Information Processing Systems ,volume 36. Stella Biderman, Hailey Schoelkopf, Quentin Anthony, Herbie Bradley, Kyle O’Brien, Eric Hallahan, Mo-hammad Aflah Khan, Shivanshu Purohit, USVSN Sai Prashanth, Edward Raff, Aviya Skowron, Lintang Sutawika, and Oskar van der Wal. 2023. Pythia: A suite for analyzing large language models across training and scaling. In International Conference on Machine Learning .Collin Burns, Haotian Ye, Dan Klein, and Jacob Stein-hardt. 2023. Discovering latent knowledge in lan-guage models without supervision. International Conference on Learning Representations .Yung-Sung Chuang, Yujia Xie, Hongyin Luo, Yoon Kim, James Glass, and Pengcheng He. 2024. DoLa: Decoding by contrasting layers improves factuality in large language models. In International Conference on Learning Representations .Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, and 1 others. 2024. The llama 3 herd of models. arXiv preprint arXiv:2407.21783 .Gemma Team, Google DeepMind. 2024. Gemma: Open models based on gemini research and tech-nology. arXiv preprint arXiv:2403.08295 .Mor Geva, Jasmijn Bastings, Katja Filippova, and Amir Globerson. 2023. Dissecting recall of factual as-sociations in auto-regressive language models. In 
+
+Proceedings of EMNLP .Mor Geva, Avi Caciularu, Kevin Wang, and Yoav Gold-berg. 2022. Transformer feed-forward layers build predictions by promoting concepts in the vocabulary space. Proceedings of EMNLP .Mor Geva, Roei Schuster, Jonathan Berant, and Omer Levy. 2021. Transformer feed-forward layers are key-value memories. Proceedings of EMNLP .Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong, Zhangyin Feng, Haotian Wang, Qianglong Chen, Weihua Peng, Xiaocheng Feng, Bing Qin, and 1 oth-ers. 2023. A survey on hallucination in large lan-guage models: Principles, taxonomy, challenges, and open questions. arXiv preprint arXiv:2311.05232 .Ziwei Ji, Nayeon Lee, Rita Frieske, Tiezheng Yu, Dan Su, Yan Xu, Etsuko Ishii, Ye Jin Bang, Andrea Madotto, and Pascale Fung. 2023. Survey of halluci-nation in natural language generation. ACM Comput-ing Surveys , 55(12):1–38. Albert Q. Jiang, Alexandre Sablayrolles, Arthur Men-sch, Chris Bamford, Devendra Singh Chaplot, Diego de Las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, and 1 others. 2023. Mistral 7B. arXiv preprint arXiv:2310.06825 .Kenneth Li, Oam Patel, Fernanda Viégas, Hanspeter Pfister, and Martin Wattenberg. 2023. Inference-time intervention: Eliciting truthful answers from a language model. Advances in Neural Information Processing Systems , 36. Stephanie Lin, Jacob Hilton, and Owain Evans. 2022. Truthfulqa: Measuring how models mimic human falsehoods. In Proceedings of the 60th Annual Meet-ing of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 3214–3252. Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov. 2022. Locating and editing factual associ-ations in GPT. In Advances in Neural Information Processing Systems , volume 35. Kevin Meng, Arnab Sen Sharma, Alex Andonian, Yonatan Belinkov, and David Bau. 2023. Mass-editing memory in a transformer. In International Conference on Learning Representations .Neel Nanda. 2023. Fact finding: Attempting to reverse-engineer factual recall on the neuron level. AI Align-ment Forum .Neel Nanda and Joseph Bloom. 2022. Transformer-lens. https://github.com/neelnanda-io/ TransformerLens .nostalgebraist. 2020. Interpreting gpt: the logit lens. 
+
+LessWrong .Qwen Team. 2024. Qwen2.5 technical report. arXiv preprint arXiv:2412.15115 .Alexander Matt Turner, Lisa Thiergart, David Udell, Gavin Leech, Ulisse Mini, and Monte Pelrine. 2023. Activation addition: Steering language models with-out optimization. arXiv preprint arXiv:2308.10248 .Zhenyu Wang. 2025. LogitLens4LLMs: Extending logit lens analysis to modern large language models. 
+
+arXiv preprint arXiv:2503.11667 .Yifan Zhang and 1 others. 2025. SADI: Semantic-adaptive decoding intervention for hallucination miti-gation. In Proceedings of ACL .Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P Xing, and 1 oth-ers. 2023. Judging LLM-as-a-judge with MT-bench and chatbot arena. Advances in Neural Information Processing Systems , 36. Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren, Alexander Pan, Xuwang Yin, Mantas Mazeika, Ann-Kathrin Dombrowski, and 1 others. 2023. Representation engineering: A top-down approach to AI transparency. arXiv preprint arXiv:2310.01405 .
+
+A Detailed Negative Results 
+
+Tables 11–13 provide comprehensive results for all 38 intervention configurations evaluated in Section 5.1. Activation scaling strategies span 6 categories (MLP dampening, contrast resid-ual, late residual, attention dampening, MLP boosting, and full dampening) with coefficients 
+
+α ∈ {0.5, 0.7, 0.85 , 0.9, 1.1}. ITI grid search covers λ ∈ { 1.0, 1.5, 2.0, 2.5, 3.0} and top_k ∈{3, 5, 10 }.
+
+B Methodology Details 
+
+Improved Causal Tracing (v2). We extend Meng et al. (2022) with adaptive noise calibra-tion ( σ = α · std (E(x)) ), KL divergence metric (IE (l) = (KL corrupt − KL patch l )/KL corrupt , com-puted in float32), multi-run averaging ( n=5 inde-pendent corruption runs), and head-level granular-ity via hook_z patching. 
+
+Contrastive Activation Analysis. Layer impor-tance is computed as the normalized L2 distance: Imp (l) = ∥¯xcorrect  
+
+> l
+
+− ¯xhalluc  
+
+> l
+
+∥2/ max l ∥¯xcorrect  
+
+> l
+
+−
+
+¯xhalluc  
+
+> l
+
+∥2, using last-token residual stream activa-tions. 
+
+C Preliminary Results 
+
+Causal Tracing. In Pythia-1.4B, MLP layer 0 is the top recovery layer for all 8 prompts (scores 0.66–0.99). Qwen2.5-0.5B shows a similar pattern with secondary peaks at layers 3–4. Attention trac-ing is distributed across early-to-middle layers with lower recovery scores (0.12–0.30). 
+
+Contrastive Analysis. Top-5 contrastive layers: Qwen2.5-0.5B (22, 23, 21, 20, 19), Pythia-1.4B (23, 22, 21, 20, 19), Qwen2.5-7B (27, 26, 25, 24, 23). All models show late-layer concentration. 
+
+Head-Level Tracing. In Pythia-1.4B, L6H12 (avg recovery 0.45) and L5H4 (0.45) are most crit-ical. In Qwen2.5-0.5B, L2H4 (0.26) and L2H0 (0.23) show the highest scores. Critical heads are spread across early-to-middle layers, contrasting with late-layer contrastive importance. Tables 11–13 provide the full per-strategy inter-vention results summarized in Section 5.1.                       
+
+> Category Strategy Pre (%) Post (%) ∆
+> MLP Dampen α=0.7 52.0 60.0 −8.0
+> α=0.9 52.0 53.0 −1.0 Contrast Res. α=0.9 52.0 50.0 +2.0
+> α=0.7 52.0 67.0 −15.0 Late Residual α=0.85 52.0 60.0 −8.0
+
+Table 11: Representative activation scaling results on Chinese benchmark (Qwen2.5-0.5B, 100 samples). Only 2 of 20 strategies show positive effect ( ≤2%). Strategy Config Pre (%) Post (%) ∆
+
+Contrast Res. α=1.1 38.0 37.0 +1.0 Late Residual α=0.9 38.0 66.0 −28.0 
+
+Table 12: Activation scaling on Qwen2.5-7B. Best strat-egy achieves only +1%; late residual suppression causes catastrophic degradation. 
+
+Model ITI Config Truthful (%) ∆
+
+Pythia-1.4B Baseline 9.0 —top3_ λ2.5 11.0 +2.0 Qwen2.5-0.5B Baseline 6.0 —top3_ λ2.5 6.0 0.0 
+
+Table 13: ITI grid search results (18 configurations). Best: Pythia +2%, Qwen +0%.                                                                                                                                
+
+> Method top_k λ/coeff MC1 MC2 ∆MC1%
+> Baseline ——0.2215 0.3921 —ITI 31.0 0.2215 0.3921 0.0 32.0 0.2215 0.3921 0.0 33.0 0.2215 0.3921 0.0 51.0 0.2215 0.3924 0.0 52.0 0.2203 0.3926 −0.5 53.0 0.2215 0.3929 0.0 10 1.0 0.2326 0.4005 +5.0 10 2.0 0.2362 0.4092 +6.6 10 3.0 0.2436 0.4178 +10.0
+> DOLA
+> early (static) 0.2326 0.4371 +5.0 mid (static) 0.2448 0.4555 +10.5 dynamic 0.2778 0.4822 +25.4
+> CAA 30.5 0.2215 0.3921 0.0 31.0 0.2215 0.3921 0.0 31.5 0.2215 0.3921 0.0 32.0 0.2215 0.3921 0.0 33.0 0.2215 0.3921 0.0 35.0 0.2215 0.3920 0.0 50.5 0.2215 0.3922 0.0 51.0 0.2215 0.3924 0.0 51.5 0.2215 0.3925 0.0 52.0 0.2203 0.3926 −0.5 53.0 0.2215 0.3929 0.0 55.0 0.2215 0.3934 0.0 10 0.5 0.2252 0.3963 +1.7 10 1.0 0.2326 0.4005 +5.0 10 1.5 0.2362 0.4047 +6.6 10 2.0 0.2362 0.4092 +6.6 10 3.0 0.2436 0.4178 +10.0 10 5.0 0.2558 0.4338 +15.5
+
+Table 14: Complete intervention results on TruthfulQA (Qwen2.5-7B, 817 samples). All 30 configurations from the main text. Key finding: ITI and CAA show zero 
+
+improvement at top_k ∈ { 3, 5} but substantial gains at top_k=10, supporting the layer-count threshold hypoth-esis. 
+
+D CrystalBoost: Mechanistic Validation 
+
+To test whether mechanistic insight into crystal-lization can directly inform intervention design, we construct C RYSTAL BOOST , a dual-stage inter-vention: early layers (0– ⌊0.5n⌋) suppress surface pattern directions, late layers ( ⌊0.8n⌋–n) amplify factual crystallization directions, with Gaussian-weighted coefficients at the boundary ( ∼90% depth). 
+
+Why C RYSTAL BOOST underperforms D OLA
+
+on high-crystallization models. The +2.2% gain on Qwen vs. D OLA’s +26.4% does not indicate failure of FEP theory—rather, it reveals a funda-mental space mismatch . D OLA operates in logit space where crystallization is directly visible: post-crystallization logits contain the correct answer, en-abling effective contrast. C RYSTAL BOOST steers in activation space where 85.9% of correct an-swers remain implicit (never entering top-10 at any intermediate layer). On Llama (71.0% crys-tallization), where more knowledge is activation-visible before the final layer, C RYSTAL BOOST out-performs D OLA (+8.4% vs. +1.9%). This pattern 
+
+validates FEP theory: activation-space methods are most effective when crystallization is moderate, while logit-space methods become preferable when crystallization is extreme.                           
+
+> Model Method MC1 ∆%vs. DoLa
+> Qwen2.5-7B Baseline 0.2179 ——DOLAdynamic 0.2754 +26.4 —CRYSTAL BOOST (best) 0.2228 +2.2 loses Llama-3.1-8B Baseline 0.1897 ——DOLAdynamic 0.1934 +1.9 —CRYSTAL BOOST (best) 0.2056 +8.4 wins
+
+Table 15: CRYSTAL BOOST evaluation (grid search, 5 configurations). Consistent positive improvements (+2.2% Qwen, +8.4% Llama) validate the predictive power of FEP theory. Minor baseline variance from Table 3 reflects different evaluation batches. 
+
+E FEP Distribution Details 
+
+Table 5 and Figure 3 in the main text present the full FEP distribution data across architectures. Key observations: (1) Qwen2.5-7B exhibits the most concentrated distribution, with 85.9% of samples showing FEP at the final layer (layer 27–28 of 28); (2) Llama-3.1-8B shows a broader distribution cen-tered at layers 25–28, reflecting its lower crystal-lization rate (70.4%); (3) Mistral-7B displays the widest spread (FEP range: layers 15–28), consis-tent with sliding window attention enabling earlier information routing; (4) Pythia-6.9B and Gemma-7B both show high crystallization rates (93.4% and 89.8%) with narrow FEP distributions concentrated at their respective final layers. Across all architec-tures, the FEP distribution is unimodal and right-skewed, confirming that Late Crystallization is a general phenomenon rather than an artifact of any single architecture. 
+
+F Top-k Sensitivity Analysis                                 
+
+> kMean FEP σLate Crystal FEP Depth
+> 128.0 0.0 100.0% 100.0% 327.9 0.4 98.3% 99.8% 527.6 1.4 92.9% 98.7% 10 27.3 1.8 85.9% 97.5% 20 27.0 2.1 80.2% 96.5% 50 26.6 2.6 72.7% 95.0% 100 26.0 3.4 64.7% 93.0%
+
+Table 16: FEP sensitivity to k (Qwen2.5-7B, 817 sam-ples). Late Crystallization is robust: even at k=100 ,64.7% of answers never appear at intermediate layers. FEP Depth stays >93% across all thresholds. 
+
+G Cross-Benchmark FEP Validation (MMLU)                      
+
+> Benchmark nMean FEP Late Crystal
+> TruthfulQA 817 27.3 ±1.8 85.9% MMLU (all) 1,200 27.9 ±0.5 98.2% STEM 450 28.0 ±0.4 99.1% Humanities 250 28.0 ±0.4 98.0% Social Sciences 250 27.9 ±0.7 97.2% Other 250 27.9 ±0.6 98.0%
+
+Table 17: Cross-benchmark FEP validation (Qwen2.5-7B). Late Crystallization is even more pronounced on MMLU (98.2%) than TruthfulQA (85.9%), and consis-tent across all MMLU subject groups (97.2–99.1%). 
+
+H Computability–Memorization Spectrum Details 
+
+Figure 4 visualizes the Computability– Memorization Spectrum across three architectures. Categories span a wide FEP range: Logical Falsehood crystallizes earliest (mean FEP=22.1, 
+
+σ=2.6), indicating that logically computable knowledge crosses the top-10 rank threshold at intermediate layers. In contrast, purely mem-orized categories—History, Psychology, and Weather—show FEP=28.0 with zero variance, meaning every sample’s correct answer remains invisible until the final layer. This gradient is consistent across Qwen2.5-7B, Llama-3.1-8B, and Mistral-7B, with computable categories system-atically shifted leftward (earlier crystallization) relative to memorized ones. The pattern suggests that category-adaptive interventions—applying stronger steering to high-FEP memorized cate-gories while preserving the natural emergence of computable knowledge—could yield further improvements. Full per-category FEP statistics are available upon request. 
+
+Figure 4: Computability–Memorization Spectrum across architectures. Blue: computable knowledge (logical reasoning); Red: memorized knowledge (history, psychology). Computable categories cross the top-10 rank threshold at earlier layers across all three models.

@@ -1,0 +1,1357 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-12T22:19:12.866561+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 6,
+    "deep_divecandidates": 19,
+    "deep_cap": 11,
+    "deep_selected": 11,
+    "quick_candidates": 25,
+    "quick_skim_target": 16,
+    "quick_selected": 16
+  },
+  "deep_dive": [
+    {
+      "id": "2606.07872v1",
+      "source": "arxiv",
+      "title": "VisualFLIP: Do Predictions Depend on Task-Critical Visual Evidence in Multimodal Reasoning?",
+      "abstract": "When a multimodal large language model answers a visual reasoning question correctly, is the prediction actually supported by the task-critical visual evidence? Correct answers can coexist with flawed reasoning, making accuracy alone an incomplete test of grounding. We introduce VisualFLIP, a paired benchmark with 1,374 images arranged as same-question perturbation pairs across cardinality, attribute, spatial, and logic tasks. Each pair keeps the question fixed but minimally changes the evidence so the gold answer deterministically flips. We evaluate 24 MLLMs with pair accuracy, which requires solving both sides of a pair, and Collapse Rate (CR), which measures how often a model that solves at least one side repeats the same non-empty answer for both images. Together, these metrics show that paired correctness and evidence dependence are related but distinct: capable models can still fail to update after task-critical visual changes, and collapse becomes more severe for some models when the edited image follows an earlier answer in a sequential setting. Further details are available on our project page: https://didizhu-judy.github.io/VisualFLIP/",
+      "authors": [
+        "Didi Zhu",
+        "Changrui Chen",
+        "Stefanos Zafeiriou",
+        "Jiankang Deng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-05T22:06:07+00:00",
+      "link": "https://arxiv.org/pdf/2606.07872v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:video-med-qa",
+        "query:vlm-vg"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "benchmark for evaluating multimodal large language model hallucination",
+      "llm_evidence_cn": "评估多模态大语言模型幻觉的基准",
+      "llm_evidence": "评估多模态大语言模型幻觉的基准",
+      "canonical_evidence": "评估多模态大语言模型幻觉的基准",
+      "llm_tldr_en": "VisualFLIP benchmark with paired images to test whether MLLMs use task-critical visual evidence, revealing high collapse rates across 24 models.",
+      "llm_tldr_cn": "针对多模态大语言模型答案可能基于错误推理的问题，该论文提出VisualFLIP基准，包含1374张成对图像。每对图片保持问题不变，仅轻微改变关键证据使得正确答案翻转，从而检验模型是否真正依赖视觉证据。在24个模型上的评估表明，许多模型存在高崩溃率，即重复相同错误答案。该工作为检测多模态模型幻觉提供了有效工具。",
+      "llm_tldr": "针对多模态大语言模型答案可能基于错误推理的问题，该论文提出VisualFLIP基准，包含1374张成对图像。每对图片保持问题不变，仅轻微改变关键证据使得正确答案翻转，从而检验模型是否真正依赖视觉证据。在24个模型上的评估表明，许多模型存在高崩溃率，即重复相同错误答案。该工作为检测多模态模型幻觉提供了有效工具。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "multimodal large language model hallucination",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.05758v1",
+      "source": "arxiv",
+      "title": "DRIFT: A Residual Flow Adapter for Decoding Continuous Outputs in Vision-Language Models",
+      "abstract": "Many modern vision-language models (VLMs) build on autoregressive decoding of discrete tokens. While text-based output interfaces enable scalable pretraining and strong zero-shot generalization across diverse tasks, they are poorly suited for problems that require precise continuous outputs, such as localizing temporal boundaries of events or generating robotic control actions. To address this challenge, we propose DRIFT, a general framework for adapting pretrained VLMs to continuous decoding tasks. DRIFT combines a base predictor, which provides a coarse estimate of the target output, with a generative refinement module based on flow matching that iteratively improves the prediction. This residual formulation transforms the generative modeling problem from learning a global output distribution to modeling a localized residual distribution around a strong prior, substantially simplifying optimization. We evaluate DRIFT on both perception and planning tasks, including visual grounding and robotic control. Across multiple tasks and architectures spanning MLLMs, VLAs, and WAMs, DRIFT consistently outperforms a strong set of regression- and generative-based solutions.",
+      "authors": [
+        "Zhuoming Liu",
+        "Jinhong Lin",
+        "Kwan Man Cheng",
+        "Lin Zhang",
+        "Shayok Bagchi",
+        "Yin Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-04T06:37:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.05758v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "temporal grounding, continuous outputs, vision-language models, flow matching",
+      "llm_evidence_cn": "时序定位、连续输出、视觉语言模型、流匹配",
+      "llm_evidence": "时序定位、连续输出、视觉语言模型、流匹配",
+      "canonical_evidence": "时序定位、连续输出、视觉语言模型、流匹配",
+      "llm_tldr_en": "Proposes DRIFT, a residual flow adapter that enables VLMs to decode continuous outputs for precise temporal boundary localization and other continuous tasks, using a base predictor and flow-matching refinement.",
+      "llm_tldr_cn": "该论文提出DRIFT，一种通用框架，使预训练视觉语言模型能够解码连续输出以完成精确时序边界定位等任务。该方法结合粗估计的基础预测器和基于流匹配的生成式细化模块，迭代优化预测。实验证明，DRIFT在时序定位和机器人控制等连续输出任务上表现优异，为视觉语言模型在视频时序接地中的应用提供了关键技术。",
+      "llm_tldr": "该论文提出DRIFT，一种通用框架，使预训练视觉语言模型能够解码连续输出以完成精确时序边界定位等任务。该方法结合粗估计的基础预测器和基于流匹配的生成式细化模块，迭代优化预测。实验证明，DRIFT在时序定位和机器人控制等连续输出任务上表现优异，为视觉语言模型在视频时序接地中的应用提供了关键技术。",
+      "llm_tags": [
+        "query:vlm-vg"
+      ],
+      "matched_query_tag": "query:vlm-vg",
+      "matched_query_text": "temporal grounding",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.05769v1",
+      "source": "arxiv",
+      "title": "Imagine Before You Predict: Interleaved Latent Visual Reasoning for Video Event Prediction",
+      "abstract": "Video event prediction (VEP) requires models to infer unobserved future states from partial video evidence. Existing video MLLMs usually verbalize intermediate future reasoning in text space: once visual evidence is verbalized, fine-grained motion, geometry, and interaction cues can be lost, leading to plausible but visually ungrounded hallucinations. We introduce Future-L1, an interleaved latent visual reasoning framework that lets an MLLM alternate between language tokens and continuous latent visual spans during autoregressive decoding. To train this capability, we construct Future-L1-50K by selecting examples where future visual hints help prediction and align latent states to future-frame embeddings, then further optimize sampled latent trajectories with LA-DAPO, a latent-aware RL objective with outcome-contrastive and temporal-diversity rewards. Future-L1 achieves new state-of-the-art results on both benchmarks: on FutureBench, it improves Qwen3-VL-8B from 61.0 to 85.4 and exceeds the previous best Video-CoE by 10.4 points; on TwiFF-Bench, it improves the average score from 2.44 to 3.04. These results suggest that future-oriented video reasoning benefits from preserving intermediate visual semantics in latent space rather than translating every reasoning step into text.",
+      "authors": [
+        "Tianxiang Jiang",
+        "Linquan Wu",
+        "Sheng Xia",
+        "Songze Li",
+        "Ziang Yan",
+        "Haoyu Yang",
+        "Yu Qiao",
+        "Yi Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-04T06:53:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.05769v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reduces hallucination in video MLLMs via interleaved latent visual reasoning",
+      "llm_evidence_cn": "通过交错潜在视觉推理减少视频MLLM中的幻觉",
+      "llm_evidence": "通过交错潜在视觉推理减少视频MLLM中的幻觉",
+      "canonical_evidence": "通过交错潜在视觉推理减少视频MLLM中的幻觉",
+      "llm_tldr_en": "Proposes Future-L1 framework for video event prediction that interleaves language tokens with latent visual spans to reduce hallucination.",
+      "llm_tldr_cn": "该论文针对视频多模态大模型在视频事件预测中因将视觉线索口头化而丢失细粒度信息导致幻觉的问题，提出Future-L1框架，在自回归解码中交替生成语言token和连续潜在视觉跨度，从而保持视觉细节。构建Future-L1-50K数据集训练该能力，有效减少视觉无根据的幻觉。",
+      "llm_tldr": "该论文针对视频多模态大模型在视频事件预测中因将视觉线索口头化而丢失细粒度信息导致幻觉的问题，提出Future-L1框架，在自回归解码中交替生成语言token和连续潜在视觉跨度，从而保持视觉细节。构建Future-L1-50K数据集训练该能力，有效减少视觉无根据的幻觉。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "methods to reduce hallucination in vision language models",
+      "matched_requirement_id": "req-22",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07962v1",
+      "source": "arxiv",
+      "title": "ChronoPhyBench: Do MLLMs Truly Understand the World or Merely Exploit Language Priors?",
+      "abstract": "Recent advancements in Multimodal Large Language Models (MLLMs) have demonstrated remarkable proficiency in open-world reasoning and understanding. However, a critical ambiguity persists: it remains unclear whether these models genuinely synthesize cross-modal information to construct physically grounded reasoning chains, or if they merely exploit strong language priors to mask single-modality reliance, thereby hallucinating advanced multimodal capabilities. Motivated by this, and to rigorously mitigate language modality bias and shortcuts, we propose a novel multimodal Chrono}logical Physical Dynamics Reasoning Benchmark ChronoPhyBench, which unifies next state prediction with Visual Question Answering (VQA) paradigms by conditioning on historical video context and textual captions to enforce models to deduce subsequent physical states through both single image selection and the inherently more complex task of multiple frame chronological sorting. Concurrently, we construct a large-scale multimodal reasoning dataset curated using the ChronoPhyBench criteria, comprising over 10,000 long-form videos paired with meticulously annotated captions, totaling 5M tokens. Our experimental evaluations reveal a stark contrast to conclusions drawn by previous benchmarks. The capacity of current open-source models to perform physically grounded multimodal reasoning remains in its infancy. Ultimately, this work seeks to systematically stress-test the reasoning capabilities of multimodal models, quantify hallucination rates, and advance the development of Physical AI, thereby providing the community with a robust and transparent evaluation framework toward Artificial General Intelligence (AGI).",
+      "authors": [
+        "Bin Zhu",
+        "Yanhao Jia",
+        "Kexin Zhao",
+        "Jie Wang",
+        "Munan Ning",
+        "Hao Li",
+        "Yuwei Niu",
+        "Tanqing Sun",
+        "Huangchong Yan",
+        "Mingjun Pan",
+        "Xinyi Wu",
+        "Qishen Yin",
+        "Yunyang Ge",
+        "Shuai Zhao",
+        "Li Yuan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-06T03:40:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.07962v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:video-med-qa",
+        "query:vlm-vg"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "benchmark to detect if MLLMs truly understand or exploit language priors",
+      "llm_evidence_cn": "检测MLLM是否真正理解或利用语言先验的基准",
+      "llm_evidence": "检测MLLM是否真正理解或利用语言先验的基准",
+      "canonical_evidence": "检测MLLM是否真正理解或利用语言先验的基准",
+      "llm_tldr_en": "ChronoPhyBench proposes a multimodal chronological physical dynamics reasoning benchmark that combines next state prediction with VQA to evaluate whether MLLMs genuinely reason or rely on language priors, revealing hallucination risks.",
+      "llm_tldr_cn": "多模态大模型(MLLM)被怀疑并非真正融合多模态信息，而是利用语言先验产生幻觉。本文提出ChronoPhyBench基准，将下一状态预测与视觉问答结合，通过精心设计的物理动力学推理任务剥离语言模态偏差。实验发现多个先进MLLM在此基准上表现不佳，揭示了其多模态推理能力的虚假性，为检测和缓解多模态幻觉提供了关键评估工具。",
+      "llm_tldr": "多模态大模型(MLLM)被怀疑并非真正融合多模态信息，而是利用语言先验产生幻觉。本文提出ChronoPhyBench基准，将下一状态预测与视觉问答结合，通过精心设计的物理动力学推理任务剥离语言模态偏差。实验发现多个先进MLLM在此基准上表现不佳，揭示了其多模态推理能力的虚假性，为检测和缓解多模态幻觉提供了关键评估工具。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "multimodal large language model hallucination",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.11719v1",
+      "source": "arxiv",
+      "title": "Ouroboros-Spatial: Closing the Data-Model Loop for Spatial Reasoning",
+      "abstract": "Spatial reasoning remains a persistent challenge for multimodal large language models (MLLMs). Existing approaches largely rely on large-scale, statically curated datasets, where all training samples are treated uniformly regardless of the model's evolving capabilities. This static paradigm is inherently data-inefficient: training capacity is often spent on samples that are either trivial or overly difficult for the model at its current stage. To address this limitation, we propose Ouroboros-Spatial, a self-evolving training framework in which the model plays dual roles as a proposer and a solver. In each iteration, a frozen proposer generates spatial question-answer (QA) pairs from 3D scene metadata and raw video frames, together with executable code for deriving reliable ground truth. A learnable solver is then fine-tuned on the accepted samples, and its per-sample prediction confidence is used as a difficulty signal. This signal is fed back to the proposer in the next iteration, guiding it to generate questions better matched to the solver's current capabilities. Through this closed-loop design, the training distribution co-evolves with model ability, reducing redundant trivial examples while filtering out ambiguous or uninformative samples with limited learning value. Across six spatial reasoning benchmarks, Ouroboros-Spatial substantially improves Qwen3-VL-4B and Qwen3-VL-8B while using an order of magnitude fewer training examples than recent large-scale curated datasets. On VSI-Bench, it yields absolute gains of 9.9 and 6.8 points for the 4B and 8B models, respectively, enabling both to outperform a wide range of strong open-source and proprietary baselines.",
+      "authors": [
+        "Enhan Zhao",
+        "Wei Wu",
+        "Yuanrui Zhang",
+        "Xueliang Zhao",
+        "Di He"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-10T06:49:21+00:00",
+      "link": "https://arxiv.org/pdf/2606.11719v1",
+      "tags": [
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:vlm-vg"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "spatial reasoning, spatial grounding, video frames, self-evolving training",
+      "llm_evidence_cn": "空间推理、空间定位、视频帧、自进化训练",
+      "llm_evidence": "空间推理、空间定位、视频帧、自进化训练",
+      "canonical_evidence": "空间推理、空间定位、视频帧、自进化训练",
+      "llm_tldr_en": "Proposes Ouroboros-Spatial, a self-evolving training framework for spatial reasoning in MLLMs that generates question-answer pairs from 3D scenes and video frames, closing the data-model loop and improving spatial grounding.",
+      "llm_tldr_cn": "该论文提出Ouroboros-Spatial，一种面向多模态大模型空间推理的自进化训练框架。模型同时扮演数据生成器和求解器角色，从3D场景元数据和原始视频帧中生成空间问答对，并通过代码执行验证质量。实验表明，该框架显著提升了MLLM在空间定位任务上的性能，为视频空间接地提供了高效的数据-模型闭环方案。",
+      "llm_tldr": "该论文提出Ouroboros-Spatial，一种面向多模态大模型空间推理的自进化训练框架。模型同时扮演数据生成器和求解器角色，从3D场景元数据和原始视频帧中生成空间问答对，并通过代码执行验证质量。实验表明，该框架显著提升了MLLM在空间定位任务上的性能，为视频空间接地提供了高效的数据-模型闭环方案。",
+      "llm_tags": [
+        "query:vlm-vg"
+      ],
+      "matched_query_tag": "query:vlm-vg",
+      "matched_query_text": "spatial grounding",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.11913v1",
+      "source": "arxiv",
+      "title": "From Content to Knowledge: Lightning Fast Long-Video Understanding with Neural Knowledge Representations",
+      "abstract": "We propose a new paradigm for long video understanding by treating a long video as a Neural Knowledge Representation (NKR). NKR represents video contents neither as a stream of tokens nor pre-organized databases, but as an individual small portion of network weights attached to the VLM backbone. The NKR weights are optimized to encapsulate the video's semantic content via a novel Agentic Knowledge Distillation (AKD) process, where an agent automatically synthesizes dense descriptions and question-answer pairs to distill the video's knowledge into the NKR. While AKD serves as a comprehensive, one-time encoding phase, the resulting NKR transforms the video into a portable, reusable asset. At inference, the lightweight NKR is mounted onto a frozen Vision-Language Model (VLM), enabling direct, query-based understanding without reloading or re-encoding the original video. This approach decouples video length from inference cost, offering high amortized efficiency for multi-turn video understanding. Experiments on the LVBench benchmark show our method achieves performance comparable to state-of-the-art approaches while reducing end-to-end latency by over two orders of magnitude, opening new possibilities for interactive long-video understanding.",
+      "authors": [
+        "Yuchen Guan",
+        "Xiao Li",
+        "Zongyu Guo",
+        "Xiaoyi Zhang",
+        "Xiulian Peng",
+        "Chun Yuan",
+        "Yan Lu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-10T10:43:35+00:00",
+      "link": "https://arxiv.org/pdf/2606.11913v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "long-video understanding with question-answer generation",
+      "llm_evidence_cn": "长视频理解与问答生成",
+      "llm_evidence": "长视频理解与问答生成",
+      "canonical_evidence": "长视频理解与问答生成",
+      "llm_tldr_en": "Neural Knowledge Representation (NKR) encodes long videos as small network weights, enabling fast QA via Agentic Knowledge Distillation.",
+      "llm_tldr_cn": "现有长视频理解方法依赖全局表示或外部知识库，难以平衡效率与精度。NKR将视频内容编码为轻量网络权重，通过代理知识蒸馏自动生成密集描述和问答对，实现便携式知识表示。推理时仅需加载NKR即可快速回答视频相关问题。实验表明该方法在长视频问答任务上显著降低推理延迟，同时保持高准确率，为视频理解提供高效新范式。",
+      "llm_tldr": "现有长视频理解方法依赖全局表示或外部知识库，难以平衡效率与精度。NKR将视频内容编码为轻量网络权重，通过代理知识蒸馏自动生成密集描述和问答对，实现便携式知识表示。推理时仅需加载NKR即可快速回答视频相关问题。实验表明该方法在长视频问答任务上显著降低推理延迟，同时保持高准确率，为视频理解提供高效新范式。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.12047v1",
+      "source": "arxiv",
+      "title": "Metadata-Aware Multi-Prompt Reasoning for Zero-Shot Accident Understanding",
+      "abstract": "In this paper, we address the problem of zero-shot understanding of accidents from surveillance videos by identifying when an impact event occurs, what type of impact it is, and where in the frame it occurs using natural language. We propose a three-stage pipeline that decomposes the accident understanding into when, what, and where. The first stage extracts a short temporal window around the impact using vision-language similarity. In the second stage, we perform metadata-driven multi-prompt reasoning with five complementary views (baseline, motion, geometry, contrast, and tiebreaker) and resolve disagreement via an entropy-gated pairwise adjudicator. Finally, we localize the impact of an open-vocabulary detector queried on the predicted accident type and scene layout, and aggregate detections across keyframes using a score-weighted centroid. Our pipeline achieves a substantial improvement in the harmonic-mean score over a centre-of-frame baseline on the zero-shot ACCIDENT @ CVPR benchmark. We show that decomposing zero-shot video understanding into temporal localization, semantic classification, and spatial grounding enable more reliable reasoning with vision-language models than direct prompting alone.",
+      "authors": [
+        "Tarandeep Singh",
+        "Soumyanetra Pal",
+        "Soham Biswas",
+        "Nishanth Chandran"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "stat.ML"
+      ],
+      "published": "2026-06-10T13:12:40+00:00",
+      "link": "https://arxiv.org/pdf/2606.12047v1",
+      "tags": [
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "temporal grounding in videos using natural language queries for accident understanding",
+      "llm_evidence_cn": "使用自然语言查询对事故视频进行时间定位",
+      "llm_evidence": "使用自然语言查询对事故视频进行时间定位",
+      "canonical_evidence": "使用自然语言查询对事故视频进行时间定位",
+      "llm_tldr_en": "A three-stage pipeline for zero-shot accident understanding decomposes into when, what, where, using vision-language similarity and multi-prompt reasoning for temporal grounding.",
+      "llm_tldr_cn": "现有事故理解方法依赖大量标注数据。本文提出零样本事故理解流水线，先通过视觉语言相似度提取时间窗口，再使用元数据驱动的多提示推理识别事故类型和位置。该方法实现了事故视频的时空定位和分类，无需任何训练数据。",
+      "llm_tldr": "现有事故理解方法依赖大量标注数据。本文提出零样本事故理解流水线，先通过视觉语言相似度提取时间窗口，再使用元数据驱动的多提示推理识别事故类型和位置。该方法实现了事故视频的时空定位和分类，无需任何训练数据。",
+      "llm_tags": [
+        "query:vlm-vg"
+      ],
+      "matched_query_tag": "query:vlm-vg",
+      "matched_query_text": "temporal grounding in videos using natural language queries",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.10790v1",
+      "source": "arxiv",
+      "title": "A Multimodal RGB and Events Dataset for Hand Detection in First-Person View",
+      "abstract": "Existing hand detection algorithms work on images and the detection rate is restricted by the frame rate of the camera. In hand detection applications for moving robotic systems, conventional cameras cause motion blur, especially in darker lighting conditions. We can leverage the use of event-based cameras which possess a high dynamic range, high temporal resolution, and low power consumption. Recent work has shown that using a stereo setup of an event-based and a frame-based camera improves detection accuracy and the bandwidth-latency tradeoff. The main bottleneck in using event-based cameras in object detection and recognition tasks is a relatively low amount of training data. In this work, we propose a methodology and an exemplary synthetic event-based hand dataset from an egocentric, first-person view perspective. The data is synthesized from the existing RGB Egohands dataset with the v2e toolbox. Parameters of the v2e toolbox are varied to provide versions of the dataset with different lighting conditions and scales. Ground truth detections are generated with a fine-tuned YOLOv8 model which is applied to the RGB images in the Egohands dataset and interpolated on the high-temporal resolution events. We use the multi-modal dataset to perform hand detection with existing object detection algorithms which use a multi-modal setup of event and RGB cameras and demonstrate performance comparable to the state-of-the-art.",
+      "authors": [
+        "Bharghav Kota",
+        "Yulia Sandamirskaya"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-09T12:40:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.10790v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "first-person view hand detection dataset with RGB and events",
+      "llm_evidence_cn": "第一视角手部检测数据集，包含RGB和事件数据",
+      "llm_evidence": "第一视角手部检测数据集，包含RGB和事件数据",
+      "canonical_evidence": "第一视角手部检测数据集，包含RGB和事件数据",
+      "llm_tldr_en": "A synthetic dataset for hand detection in first-person view using RGB and event cameras, addressing motion blur and low data.",
+      "llm_tldr_cn": "第一视角手部检测受帧率限制和运动模糊影响。该工作提出结合事件相机和RGB相机的合成数据集生成方法，提供高时域分辨率数据。实验证明事件数据提升检测鲁棒性。",
+      "llm_tldr": "第一视角手部检测受帧率限制和运动模糊影响。该工作提出结合事件相机和RGB相机的合成数据集生成方法，提供高时域分辨率数据。实验证明事件数据提升检测鲁棒性。",
+      "llm_tags": [
+        "query:ego-video"
+      ],
+      "matched_query_tag": "query:ego-video",
+      "matched_query_text": "egocentric video understanding",
+      "matched_requirement_id": "req-33",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07978v1",
+      "source": "arxiv",
+      "title": "MechLens: Late Crystallization of Factual Knowledge Explains Intervention Effectiveness in Language Models",
+      "abstract": "Understanding where LLMs store factual knowledge is critical for hallucination mitigation. We systematically quantify Late Crystallization: factual knowledge does not gradually emerge across layers but \"crystallizes\" abruptly at the final layers. Across five model families (Pythia, Gemma, Qwen2.5, Llama-3.1, Mistral; 0.5--14B), 26.8%--93.4% of correct answers never enter top-10 predictions at any intermediate layer, with late emergence (>80% depth) consistent across architectures. Cross-scale (Qwen2.5-14B) and cross-benchmark (MMLU: 98.2%) results confirm generality; tuned lens rules out probe artifacts. A sentiment-classification control (0.5% for Qwen vs. 85.9% factual; 2.0% for Mistral vs. 26.8%) confirms the phenomenon is specific to factual recall.   Late Crystallization yields a crystallization-guided intervention principle: CAA outperforms DoLa on moderate-crystallization models (Llama, Mistral; p<0.001), with a directionally consistent reversal on high-crystallization Qwen (+25.4% vs. +15.5% MC1, p=0.069). LayerNorm ablation shows crystallization is intrinsic to the residual stream; LN scaling (x1.2) yields +11.8% MC1 with zero inference overhead. We further reveal a Computability-Memorization Spectrum: computable knowledge crystallizes earlier (layer 22.1/28) than memorized facts (28.0/28). We release MechLens supporting five model families.",
+      "authors": [
+        "Xueping Gao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-06T04:44:51+00:00",
+      "link": "https://arxiv.org/pdf/2606.07978v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "query:MM-Hall"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "studies late crystallization of factual knowledge in LLMs for hallucination mitigation",
+      "llm_evidence_cn": "研究LLM中事实知识的晚期结晶以缓解幻觉",
+      "llm_evidence": "研究LLM中事实知识的晚期结晶以缓解幻觉",
+      "canonical_evidence": "研究LLM中事实知识的晚期结晶以缓解幻觉",
+      "llm_tldr_en": "Shows factual knowledge crystallizes abruptly at final layers across five LLM families, with implications for hallucination mitigation.",
+      "llm_tldr_cn": "该论文系统量化了大型语言模型中事实知识的晚期结晶现象：事实知识并非逐层涌现，而是在最后几层突然结晶。在五个模型家族（Pythia、Gemma、Qwen2.5等）上验证了该现象，26.8%至93.4%的正确答案在中间层从未进入前十预测。该发现为理解与缓解LLM幻觉提供了新视角。",
+      "llm_tldr": "该论文系统量化了大型语言模型中事实知识的晚期结晶现象：事实知识并非逐层涌现，而是在最后几层突然结晶。在五个模型家族（Pythia、Gemma、Qwen2.5等）上验证了该现象，26.8%至93.4%的正确答案在中间层从未进入前十预测。该发现为理解与缓解LLM幻觉提供了新视角。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "multimodal large language model hallucination",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08063v1",
+      "source": "arxiv",
+      "title": "Robust-U1: Can MLLMs Self-Recover Corrupted Visual Content for Robust Understanding?",
+      "abstract": "Multimodal Large Language Models (MLLMs) have demonstrated remarkable success in visual understanding, yet their performance degrades significantly under real-world visual corruptions. While existing robustness enhancement approaches exist, they are limited: black-box feature alignment lacks interpretability, and white-box text-based reasoning cannot restore lost pixel-level details. This work investigates a fundamental research question: Can MLLMs recover corrupted visual content by themselves? To address this, we propose Robust-U1, a novel framework that equips MLLMs with explicit visual self-recovery capability for robust understanding. The approach comprises three core stages: supervised fine-tuning for initial reconstruction, reinforcement learning with dual rewards (pixel-level SSIM and semantic-level CLIP similarity) for aligning high visual quality, and multimodal reasoning that jointly considers both the corrupted input and the recovered image. Extensive experiments demonstrate that Robust-U1 achieves state-of-the-art robustness on the real-world corruption benchmark and maintains superior performance under adversarial corruptions on general VQA benchmarks. Analysis confirms that high-quality visual recovery directly enhances reasoning performance, establishing self-recovery as a critical mechanism for robust visual understanding. The source code is available at https://github.com/jqtangust/Robust-U1.",
+      "authors": [
+        "Jiaqi Tang",
+        "Jianmin Chen",
+        "Youyang Zhai",
+        "Wei Wei",
+        "Runtao Liu",
+        "Mengjie Zhao",
+        "Xiangyu Wu",
+        "Qingfa Xiao",
+        "Qifeng Chen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-06T08:58:12+00:00",
+      "link": "https://arxiv.org/pdf/2606.08063v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "MLLM self-recovery from corrupted visual content for robust understanding, relevant to hallucination mitigation",
+      "llm_evidence_cn": "多模态大模型从受损视觉内容中自我恢复，与幻觉缓解相关",
+      "llm_evidence": "多模态大模型从受损视觉内容中自我恢复，与幻觉缓解相关",
+      "canonical_evidence": "多模态大模型从受损视觉内容中自我恢复，与幻觉缓解相关",
+      "llm_tldr_en": "Robust-U1 investigates whether MLLMs can recover corrupted visual content themselves, proposing a three-stage framework (SFT+RL+self-recovery) to enhance robustness against visual corruptions, which is relevant to reducing hallucination from incomplete visual input.",
+      "llm_tldr_cn": "探究多模态大模型是否能够自主恢复被破坏的视觉信息，提出Robust-U1框架，通过监督微调、强化学习和自恢复三个阶段，使模型在视觉内容受损时仍能保持理解准确度，从而间接减少因视觉信息缺失导致的幻觉。实验表明该方法显著提升了模型在多种损坏类型下的鲁棒性。",
+      "llm_tldr": "探究多模态大模型是否能够自主恢复被破坏的视觉信息，提出Robust-U1框架，通过监督微调、强化学习和自恢复三个阶段，使模型在视觉内容受损时仍能保持理解准确度，从而间接减少因视觉信息缺失导致的幻觉。实验表明该方法显著提升了模型在多种损坏类型下的鲁棒性。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "multimodal large language model hallucination",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.11568v1",
+      "source": "arxiv",
+      "title": "4DP-QA: Scalable QA for 4D Perception in Vision Language Models",
+      "abstract": "Despite recent advances, Vision Language Models (VLMs) still struggle to grasp the dynamics of the world. We note that the ability to reason about a 4D scene, challenging in itself, is further complicated by two factors. First, VLMs observe motion indirectly via its projection onto 2D images. Second, existing datasets fail to disentangle object and camera motion. To address these challenges, we present a QA generation pipeline that focuses on motion-related scene understanding. We take particular care of the entanglement of camera and object motion by casting tracking in both the traditional way and in a novel, fixed reference system, dubbed True-Motion Tracking, which provides an intuitive description of motion. From this pipeline, we generate a large-scale training dataset of 400K samples, 4DP-QA (4D Perception QA), and a 2.2K-sample benchmark, 4DP-QA-Bench. Training existing models on our dataset yields performance improvements on an external benchmark, validating the effectiveness of our method.",
+      "authors": [
+        "Seokju Cho",
+        "Abhishek Badki",
+        "Hang Su",
+        "Jindong Jiang",
+        "Ziyao Zeng",
+        "Seungryong Kim",
+        "Sifei Liu",
+        "Orazio Gallo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-10T01:49:55+00:00",
+      "link": "https://arxiv.org/pdf/2606.11568v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "scalable QA for 4D perception in vision language models",
+      "llm_evidence_cn": "视觉语言模型中面向4D感知的可扩展问答",
+      "llm_evidence": "视觉语言模型中面向4D感知的可扩展问答",
+      "canonical_evidence": "视觉语言模型中面向4D感知的可扩展问答",
+      "llm_tldr_en": "4DP-QA introduces a QA generation pipeline for 4D scene understanding, disentangling camera and object motion via True-Motion Tracking, and creates a large-scale dataset to evaluate VLMs ability to reason about motion dynamics.",
+      "llm_tldr_cn": "视觉语言模型(VLM)难以理解动态世界，现有数据集未区分相机运动与物体运动。本文提出4DP-QA，构建关注运动场景理解的问答生成流水线，通过真运动跟踪技术解耦相机与物体运动，生成大规模4D问答数据集。实验表明该数据集有效评估VLM动态推理能力，为视频问答中时间推理提供了高质量基准。",
+      "llm_tldr": "视觉语言模型(VLM)难以理解动态世界，现有数据集未区分相机运动与物体运动。本文提出4DP-QA，构建关注运动场景理解的问答生成流水线，通过真运动跟踪技术解耦相机与物体运动，生成大规模4D问答数据集。实验表明该数据集有效评估VLM动态推理能力，为视频问答中时间推理提供了高质量基准。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.05677v1",
+      "source": "arxiv",
+      "title": "LongSpace: Exploring Long-Horizon Spatial Memory from Perception to Recall in Video",
+      "abstract": "Multimodal Large Language Models (MLLMs) have advanced image and video understanding and can increasingly handle longer visual inputs. Long-horizon tasks such as autonomous driving and robotic navigation require more than recognizing the current view, as models must remember and retrieve previously observed spatial layouts, routes, viewpoint changes, and object states. To evaluate this capability, we introduce LongSpace-Bench, a room-tour video benchmark for long-horizon spatial memory, covering scene perception, spatial relations, and spatial memory. In this work, we further propose LongSpace, a memory framework for long-video spatial reasoning. LongSpace models long videos as sequential chunks, incorporates 3D structural cues into early decoder layers, and constructs layer-aware memory for question-guided retrieval. Experiments on multiple spatial reasoning benchmarks show that LongSpace improves long-video spatial understanding, further demonstrating explicit spatial memory as a key capability for long-horizon video MLLMs.",
+      "authors": [
+        "Shiqiang Lang",
+        "Jing Liu",
+        "Haoyang He",
+        "Peiwen Sun",
+        "Yuanteng Chen",
+        "Tao Liu",
+        "Lan Yang",
+        "Longteng Guo",
+        "Honggang Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-04T04:00:12+00:00",
+      "link": "https://arxiv.org/pdf/2606.05677v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "long-horizon spatial memory for video understanding",
+      "llm_evidence_cn": "长视频空间记忆与推理",
+      "llm_evidence": "长视频空间记忆与推理",
+      "canonical_evidence": "长视频空间记忆与推理",
+      "llm_tldr_en": "LongSpace introduces a benchmark and memory framework for long-video spatial reasoning, incorporating 3D structural cues into chunked video processing.",
+      "llm_tldr_cn": "多模态大模型在长视频空间记忆任务中面临挑战。本文提出LongSpace-Bench基准和LongSpace记忆框架，将长视频建模为序列块并融入3D结构线索，有效提升长视频空间关系感知与回忆能力。",
+      "llm_tldr": "多模态大模型在长视频空间记忆任务中面临挑战。本文提出LongSpace-Bench基准和LongSpace记忆框架，将长视频建模为序列块并融入3D结构线索，有效提升长视频空间关系感知与回忆能力。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.05833v1",
+      "source": "arxiv",
+      "title": "Learning Geometric Representations from Videos for Spatial Intelligent Multimodal Large Language Models",
+      "abstract": "Multimodal Large Language Models (MLLMs) excel at 2D semantic understanding but lack intrinsic 3D awareness, resulting in representations that fail to maintain geometric and spatial consistency across video frames. Given the scarcity of large-scale 3D data, we present GeoVR, a novel framework that learns geometric representations using purely 2D video sequences. This approach effectively restructures the semantic latent space within MLLMs to unlock spatial intelligence. Rather than employing superficial feature mixing, GeoVR reshapes the internal representations of the MLLM by distilling geometry knowledge from pre-trained 3D foundation models. This is accomplished through a multi-objective learning strategy driven by four complementary geometric targets: (1) estimating inter-frame camera poses to embed varying viewpoint dynamics, (2) regressing dense depth maps to anchor physical distances, (3) predicting a metric scale factor for real-world calibration, and (4) distilling multi-scale 3D features to align the intermediate feature space. Guided by these explicit physical and geometric constraints, the model's internal representations naturally develop strong 3D awareness. Extensive experiments on spatial reasoning benchmarks demonstrate that GeoVR achieves state-of-the-art performance, establishing a new paradigm for endowing foundation models with spatial intelligence.",
+      "authors": [
+        "Haibo Wang",
+        "Lifu Huang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-04T08:11:12+00:00",
+      "link": "https://arxiv.org/pdf/2606.05833v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "learns geometric representations for spatial intelligence in MLLMs, relates to spatial grounding",
+      "llm_evidence_cn": "学习几何表示以增强MLLM空间智能，与空间定位相关",
+      "llm_evidence": "学习几何表示以增强MLLM空间智能，与空间定位相关",
+      "canonical_evidence": "学习几何表示以增强MLLM空间智能，与空间定位相关",
+      "llm_tldr_en": "GeoVR learns 3D geometric representations from 2D videos to enhance MLLMs' spatial grounding abilities.",
+      "llm_tldr_cn": "多模态大模型缺乏3D空间意识。GeoVR从视频中蒸馏几何知识，重塑MLLM内部表示以提升空间一致性。实验证明在空间问答和定位任务上显著提升。",
+      "llm_tldr": "多模态大模型缺乏3D空间意识。GeoVR从视频中蒸馏几何知识，重塑MLLM内部表示以提升空间一致性。实验证明在空间问答和定位任务上显著提升。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.05931v1",
+      "source": "arxiv",
+      "title": "To Be Multimodal or Not to Be: Query-Adaptive Audio-Visual Person Retrieval via Active Modality Detection",
+      "abstract": "When retrieving a person from a video archive by voice and face, should the system be multimodal or not? In real-world broadcast archives, unlike curated benchmarks, a target may be heard but unseen, seen but unheard, or both. Fusing scores from an absent modality injects noise, degrading precision below the best unimodal system. We propose a query-adaptive framework that detects active modalities via cross-modal score consistency: when both modalities are active, files retrieved by one also score highly on the other; this agreement breaks down when a modality is absent. Classifiers driven by these cross-modal features achieve 89% detection accuracy. On the BBC Rewind corpus (with over 12,000 broadcast videos) the adaptive system attains 94.2% P@1, outperforming speaker-only (82.9%), face-only (93.4%), and fixed fusion (90.0%), recovering 64% of the gap to an oracle with ground-truth modality labels (96.6%).",
+      "authors": [
+        "Erfan Loweimi",
+        "Mengjie Qian",
+        "Kate Knill",
+        "Guanfeng Wu",
+        "Chi-Ho Chan",
+        "Abbas Haider",
+        "Muhammad Awan",
+        "Josef Kittler",
+        "Hui Wang",
+        "Mark Gales"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CV",
+        "cs.IR",
+        "cs.LG",
+        "cs.MM",
+        "eess.AS"
+      ],
+      "published": "2026-06-04T09:33:58+00:00",
+      "link": "https://arxiv.org/pdf/2606.05931v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "query-adaptive multimodal person retrieval from video archives, deep learning for video understanding",
+      "llm_evidence_cn": "基于查询自适应的多模态人物检索，深度学习方法用于视频理解",
+      "llm_evidence": "基于查询自适应的多模态人物检索，深度学习方法用于视频理解",
+      "canonical_evidence": "基于查询自适应的多模态人物检索，深度学习方法用于视频理解",
+      "llm_tldr_en": "Proposes a query-adaptive framework that detects active modalities via cross-modal score consistency for person retrieval from video archives.",
+      "llm_tldr_cn": "真实视频档案中目标可能只在音频或视频中可见，直接融合多模态会引入噪声。本文提出查询自适应框架，通过跨模态得分一致性检测活跃模态。检测准确率达89%，在BBC Rewind语料库上优于纯音频或纯视频系统。该方法为多模态视频检索提供了鲁棒解决方案。",
+      "llm_tldr": "真实视频档案中目标可能只在音频或视频中可见，直接融合多模态会引入噪声。本文提出查询自适应框架，通过跨模态得分一致性检测活跃模态。检测准确率达89%，在BBC Rewind语料库上优于纯音频或纯视频系统。该方法为多模态视频检索提供了鲁棒解决方案。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "deep learning methods for video understanding",
+      "matched_requirement_id": "req-26",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.06158v1",
+      "source": "arxiv",
+      "title": "Adaptive Tokenisation Via Temporal Redundancy Masking And Latent Inpainting",
+      "abstract": "Adaptive video tokenisation seeks to dynamically allocate token budgets based on the underlying visual complexity of a sequence. Current continuous-regime approaches achieve this via iterative binarised searches or trained neural regressors, while discrete methods often require a full-rate decoder pass to estimate information content. We demonstrate that such computational overheads are not strictly necessary. We show that the latent space of a frozen continuous video tokeniser inherently encodes temporal redundancy that can be exploited directly: spatial positions whose latent representations change minimally between consecutive frames carry near-zero additional information.   We introduce a parameter-free adaptive token allocation mechanism that applies a fixed threshold to per-position temporal-L1 differences, identifying and dropping redundant latent positions. Consequently, the compression rate emerges naturally from the input content rather than being enforced top-down: static scenes get compressed aggressively, while highly dynamic sequences retain more tokens. To reconstruct the dropped positions, we propose the Latent Inpainting Transformer (LIT), a lightweight factorised spatial-temporal attention architecture. The resulting inference pipeline is highly efficient, requiring only a single encoder pass and one LIT forward pass, eliminating the need for auxiliary routing networks. Evaluations across TokenBench and DAVIS, which are the standard benchmarks used by recent tokenisers~\\cite{infotok, agarwal2025cosmos}, indicate that our framework yields meaningful, content-driven token allocation while maintaining competitive reconstruction fidelity, and delivers a $31\\times$ inference-time speedup over the continuous adaptive baseline (ElasticTok-CV) and an $\\approx2\\times$ speedup over the discrete information-theoretic baseline (InfoTok)",
+      "authors": [
+        "Kevin Dave",
+        "Sai Aditya Patkuri",
+        "Chhaya Kumar Das",
+        "Gouranga Bala",
+        "R. Venkatesh Babu",
+        "Rajeshkumar SA"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-04T13:31:12+00:00",
+      "link": "https://arxiv.org/pdf/2606.06158v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "temporal redundancy masking for adaptive video tokenisation",
+      "llm_evidence_cn": "利用时间冗余掩蔽的自适应视频分词化",
+      "llm_evidence": "利用时间冗余掩蔽的自适应视频分词化",
+      "canonical_evidence": "利用时间冗余掩蔽的自适应视频分词化",
+      "llm_tldr_en": "A parameter-free adaptive token allocation mechanism exploits temporal redundancy in latent space to reduce tokens for static regions, enabling efficient video sequence modeling.",
+      "llm_tldr_cn": "本文提出一种无参数的自适应视频分词化方法，利用连续视频帧间潜在空间的变化来检测时间冗余。对于变化极小的空间位置，直接分配零token（通过掩蔽和潜在填充），避免额外编码。该方法无需迭代搜索或额外网络，显著减少了视频序列的token数量，为高效视频建模提供了简洁而有效的预处理策略。",
+      "llm_tldr": "本文提出一种无参数的自适应视频分词化方法，利用连续视频帧间潜在空间的变化来检测时间冗余。对于变化极小的空间位置，直接分配零token（通过掩蔽和潜在填充），避免额外编码。该方法无需迭代搜索或额外网络，显著减少了视频序列的token数量，为高效视频建模提供了简洁而有效的预处理策略。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "temporal modeling for video sequences",
+      "matched_requirement_id": "req-27",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.05843v1",
+      "source": "arxiv",
+      "title": "Mechanistic Insights into Functional Sparsity in Multimodal LLMs via CoRe Heads",
+      "abstract": "While Multimodal Large Language Models (MLLMs) demonstrate remarkable proficiency on complex vision-language tasks, the mechanisms by which they extract query-relevant visual features from complex, noisy contexts remain opaque. In this paper, we present an in-depth interpretability study that uncovers a profound structural property within MLLMs: functional sparsity in cross-modal retrieval. Leveraging a token-level metric termed Retrieval Attention Mass (RAM), we identify and characterize a highly specialized subset of attention heads, referred to as Context-aware Retrieval (CoRe) heads. Across diverse visual domains and model scales, we observe a clear functional division: CoRe heads act as dedicated information extractors, while most other heads distribute attention over broader contextual regions. Causal interventions further demonstrate the necessity of these specialized heads. Ablating only the top 5% of CoRe heads causes significant degradation in multimodal reasoning performance, whereas ablating lower-ranked heads has minimal effect. Moreover, acceleration experiments validate the utility of CoRe heads, showing that leveraging this localized sparsity significantly accelerates inference while maintaining robust task performance. Our findings reveal a structural principle of functional sparsity within MLLMs, refining the current understanding of mechanistic interpretability and laying a theoretical foundation that can inspire future architecture design and model optimization.",
+      "authors": [
+        "Ruoxi Sun",
+        "Quantong Qiu",
+        "Juntao Li",
+        "Zecheng Tang",
+        "Yihang Lou",
+        "Min Zhang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-06-04T08:18:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.05843v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "interpretability of multimodal LLMs to understand cross-modal retrieval",
+      "llm_evidence_cn": "多模态大模型可解释性研究跨模态检索机制",
+      "llm_evidence": "多模态大模型可解释性研究跨模态检索机制",
+      "canonical_evidence": "多模态大模型可解释性研究跨模态检索机制",
+      "llm_tldr_en": "CoRe heads reveal functional sparsity in MLLMs: dedicated attention heads for query-relevant visual feature extraction, aiding interpretability and potential hallucination reduction.",
+      "llm_tldr_cn": "本文深入研究了多模态大语言模型中跨模态检索的功能稀疏性。通过提出的检索注意力质量（RAM）指标，识别并表征了一类专门的注意力头（CoRe头），它们充当信息提取器，而其他头作用较小。这种功能划分有助于理解模型如何从复杂上下文中提取相关视觉特征，为减轻幻觉提供了结构性见解。",
+      "llm_tldr": "本文深入研究了多模态大语言模型中跨模态检索的功能稀疏性。通过提出的检索注意力质量（RAM）指标，识别并表征了一类专门的注意力头（CoRe头），它们充当信息提取器，而其他头作用较小。这种功能划分有助于理解模型如何从复杂上下文中提取相关视觉特征，为减轻幻觉提供了结构性见解。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "interpretability of multimodal large language models to reduce hallucination",
+      "matched_requirement_id": "req-20",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.08572v1",
+      "source": "arxiv",
+      "title": "OmniCap-IF: Benchmarking and Improving Instruction Following Abilities for Omni-Video Captioning",
+      "abstract": "While Omni-modal Large Language Models (OLLMs) have demonstrated impressive capabilities in jointly processing audio and visual streams, their ability to strictly adhere to complex, multi-faceted user instructions remains largely unexplored. Existing benchmarks primarily focus on holistic video understanding or text-only instruction following, failing to capture the intricate interplay between modalities and user constraints. To bridge this gap, we introduce OmniCap-IF, the first comprehensive benchmark specifically designed to evaluate instruction-following capabilities in omni-modal captioning. OmniCap-IF incorporates a systematic framework that assesses captions on two dimensions: format correctness and content correctness. Our benchmark encompasses 50 distinct constraint types across pure visual, pure audio, and audio-visual modalities, while integrating Temporal Grounding to assess spatio-temporal precision. Extensive evaluations of prominent models on 1,920 high-quality samples reveal significant performance disparities. Furthermore, our analysis uncovers a critical \"format-content tradeoff\", demonstrating that increasing formatting complexity directly degrades models' omni-modal reasoning abilities. Finally, to advance the field, we curate a 54K instruction-tuning dataset, OmniCap-IF-54K and present OmniCaptioner-IF, which achieves notable improvements in both complex instruction adherence and general omni-modal captioning performance.",
+      "authors": [
+        "Jiahao Wang",
+        "An Ping",
+        "Yanghai Wang",
+        "Yuanxing Zhang",
+        "Shihao Li",
+        "Hanyan Bian",
+        "Yichi Ren",
+        "Yize Zhang",
+        "Han Wang",
+        "Haowen Chen",
+        "Junze Li",
+        "Jiaqi Wang",
+        "Yiyang Hu",
+        "Zhuze Xu",
+        "Zijie Zhang",
+        "Jiaheng Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-07T11:03:33+00:00",
+      "link": "https://arxiv.org/pdf/2606.08572v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "video language model benchmark and instruction following",
+      "llm_evidence_cn": "视频语言模型基准与指令跟随评估",
+      "llm_evidence": "视频语言模型基准与指令跟随评估",
+      "canonical_evidence": "视频语言模型基准与指令跟随评估",
+      "llm_tldr_en": "OmniCap-IF is the first benchmark for omni-modal video captioning instruction following, evaluating format and content correctness across multiple modalities.",
+      "llm_tldr_cn": "本文提出OmniCap-IF，首个针对全模态视频字幕指令跟随能力的基准。现有基准主要关注整体视频理解或纯文本指令跟随，忽略了模态与用户约束间的复杂交互。OmniCap-IF通过系统化框架从格式正确性和内容正确性两个维度评估字幕，填补了全模态大模型指令跟随评估的空白，对提升视频语言模型的指令遵循能力具有重要推动作用。",
+      "llm_tldr": "本文提出OmniCap-IF，首个针对全模态视频字幕指令跟随能力的基准。现有基准主要关注整体视频理解或纯文本指令跟随，忽略了模态与用户约束间的复杂交互。OmniCap-IF通过系统化框架从格式正确性和内容正确性两个维度评估字幕，填补了全模态大模型指令跟随评估的空白，对提升视频语言模型的指令遵循能力具有重要推动作用。",
+      "llm_tags": [
+        "query:vlm-vg"
+      ],
+      "matched_query_tag": "query:vlm-vg",
+      "matched_query_text": "video language model",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.08894v1",
+      "source": "arxiv",
+      "title": "Are Reasoning Vision-Language Models Robust to Semantic Visual Distractions?",
+      "abstract": "Reasoning Vision-Language Models (VLMs) achieve strong performance on complex multimodal tasks, but reliable real-world application requires handling visual inputs that are messier than clean, curated benchmarks. Existing works mainly evaluate such reliability of VLMs through input corruptions, such as noise, blur and weather effects, which make visual evidence harder to perceive. This leaves a critical reliability failure mode underexplored: a model may perceive the evidence correctly, yet reason from plausible but irrelevant and distracting evidence and propagate this mistake to its final answer. To address this gap, we introduce \\textbf{Distract-Bench}, a benchmark for evaluating VLM robustness to \\textbf{semantic visual distractions}, defined as meaningful but task-irrelevant visual cues added to inputs while preserving the ground-truth answer. We comprehensively evaluate eight leading open-source and two closed-source VLMs across conventional vision corruptions and Distract-Bench. Our results show that Distract-Bench exposes a robustness failure distinct from vision corruptions: reasoning VLMs largely track their non-reasoning base models under perceptual degradation, but show consistently lower robustness to semantic distractions. Further analysis shows that these distractions often enter the reasoning process of VLMs, are treated as evidence, and lead to incorrect answers. Together, these findings reframe robustness evaluation for reasoning VLMs, shifting the focus from degraded perception to distractions for reliable real-world visual reasoning. Our data and code are available at https://github.com/Yizheng-Sun/Distract-Bench.",
+      "authors": [
+        "Yizheng Sun",
+        "Mochuan Zhan",
+        "Yanan Ma",
+        "Jia Tong See",
+        "Yifan Wang",
+        "Ziyi Wang",
+        "Hao Li",
+        "Yang Cui",
+        "Wenhao Cai",
+        "Jingyu Sun",
+        "Chenghua Lin",
+        "Riza Batista-Navarro",
+        "Jingyuan Sun"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-06-08T00:40:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.08894v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "evaluates VLM robustness to semantic distractions, related to hallucination",
+      "llm_evidence_cn": "评估VLM对语义干扰的鲁棒性，与幻觉相关",
+      "llm_evidence": "评估VLM对语义干扰的鲁棒性，与幻觉相关",
+      "canonical_evidence": "评估VLM对语义干扰的鲁棒性，与幻觉相关",
+      "llm_tldr_en": "Distract-Bench evaluates VLM robustness to semantic visual distractions, where model perceives evidence correctly but reasons from irrelevant distractors.",
+      "llm_tldr_cn": "现有VLM鲁棒性评估主要关注输入损坏（如噪声），但忽略了模型正确感知却受语义上无关但合理的干扰误导的情况。Distract-Bench提出首个针对语义视觉干扰的基准，系统测试VLM在此类失败模式下的表现。实验显示多个当前VLM在干扰下性能显著下降，揭示了幻觉的新来源。该工作为多模态模型可靠性评估提供了新视角。",
+      "llm_tldr": "现有VLM鲁棒性评估主要关注输入损坏（如噪声），但忽略了模型正确感知却受语义上无关但合理的干扰误导的情况。Distract-Bench提出首个针对语义视觉干扰的基准，系统测试VLM在此类失败模式下的表现。实验显示多个当前VLM在干扰下性能显著下降，揭示了幻觉的新来源。该工作为多模态模型可靠性评估提供了新视角。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "multimodal large language model hallucination",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.06249v1",
+      "source": "arxiv",
+      "title": "GRAMformer: Any-Order Modality Interactions via Volumetric Multimodal Cross-Attention",
+      "abstract": "Transformer-based multimodal models rely on attention mechanisms to integrate information across heterogeneous modalities. Despite their success, existing multimodal attention formulations compute their scores through collections of pairwise dot-product interactions or by concatenating all the modalities into the keys, even when multiple modalities should be jointly involved. As a consequence, current approaches either incur quadratic complexity in the number of modalities or fail to explicitly model interactions that depend on the joint configuration of multiple representations. In this work, we introduce the Volumetric Multimodal cross-Attention (VMA), a novel cross-attention mechanism in which attention scores are defined as a function of the joint geometry of a query and multiple modality-specific keys. VMA computes the volume spanned by query and key vectors across multiple modalities, capturing joint multimodal dependencies beyond pairwise similarity, enabling native modeling of any-order modality interactions. We integrate VMA into our novel multimodal transformer architecture, named GRAMformer, explicitly designed to integrate any number of modalities. We evaluate the proposed model on multimodal learning tasks, demonstrating improved effectiveness and efficiency.",
+      "authors": [
+        "Giordano Cicchetti",
+        "Eleonora Grassucci",
+        "Danilo Comminiello"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-06-04T14:52:12+00:00",
+      "link": "https://arxiv.org/pdf/2606.06249v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:vlm-vg"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "volumetric multimodal cross-attention for any-order modality interactions",
+      "llm_evidence_cn": "体积式多模态交叉注意力实现任意顺序模态交互",
+      "llm_evidence": "体积式多模态交叉注意力实现任意顺序模态交互",
+      "canonical_evidence": "体积式多模态交叉注意力实现任意顺序模态交互",
+      "llm_tldr_en": "GRAMformer introduces Volumetric Multimodal cross-Attention (VMA) to explicitly model joint interactions across multiple modalities, overcoming quadratic complexity and lack of joint modeling in existing methods.",
+      "llm_tldr_cn": "现有Transformer多模态注意力机制存在二次复杂度或无法联合建模多个模态的问题。本文提出体积式多模态交叉注意力(VMA)，将注意力分数定义为多个模态表示的联合函数，显式建模任意顺序的模态交互。该方法在多个多模态基准上提升性能，为视频语言模型中的多模态融合提供了可迁移的通用技术。",
+      "llm_tldr": "现有Transformer多模态注意力机制存在二次复杂度或无法联合建模多个模态的问题。本文提出体积式多模态交叉注意力(VMA)，将注意力分数定义为多个模态表示的联合函数，显式建模任意顺序的模态交互。该方法在多个多模态基准上提升性能，为视频语言模型中的多模态融合提供了可迁移的通用技术。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.08705v1",
+      "source": "arxiv",
+      "title": "Analyzing the Correlation Between Hallucinations and Knowledge Conflicts in Large Language Models",
+      "abstract": "Hallucinations -- factually incorrect or unverifiable outputs -- remain one of the most challenging limitations of Large Language Models (LLMs), especially in knowledge-intensive tasks. One proposed explanation is internal knowledge conflicts arising from fixed, outdated training data. This paper investigates whether internal representations linked to knowledge conflicts correlate with hallucination behaviors in LLMs.   Using probing techniques inspired by two prior works, we analyzed activations from hidden, attention, and MLP layers, as well as output logits, across predefined tasks. We probed LLaMA-3-8B on hallucination detection benchmarks and Falcon-7B on a knowledge conflict dataset. Our findings show that, although conceptually related, hallucination activation patterns cannot be fully reduced to or explained by knowledge conflict representations.   Nonetheless, probing proves a robust tool across multiple languages and activation types, supporting its role in improving LLM interpretability. This work advances the broader understanding of hallucinations in LLMs and underscores the value of fine-grained analysis of their internal behavior.",
+      "authors": [
+        "Lucrezia Laraspata",
+        "Giovanna Castellano",
+        "Gennaro Vessio"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-07T16:03:14+00:00",
+      "link": "https://arxiv.org/pdf/2606.08705v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "query:MM-Hall"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "investigates correlation between hallucinations and knowledge conflicts in LLMs",
+      "llm_evidence_cn": "研究LLM中幻觉与知识冲突的关联",
+      "llm_evidence": "研究LLM中幻觉与知识冲突的关联",
+      "canonical_evidence": "研究LLM中幻觉与知识冲突的关联",
+      "llm_tldr_en": "Probes internal representations of LLMs (LLaMA-3-8B, Falcon-7B) to analyze correlation between knowledge conflicts and hallucinations; finds weak but existing correlation, offering insights into hallucination causes.",
+      "llm_tldr_cn": "该工作针对大型语言模型中的幻觉问题，通过探测隐藏层、注意力层和MLP层的激活，分析了内部知识冲突与幻觉行为之间的相关性。实验在LLaMA-3-8B和Falcon-7B上进行，结果表明尽管存在一定关联，但知识冲突并非幻觉的唯一解释。该研究为理解幻觉成因提供了新视角，有助于设计更有效的缓解方法。",
+      "llm_tldr": "该工作针对大型语言模型中的幻觉问题，通过探测隐藏层、注意力层和MLP层的激活，分析了内部知识冲突与幻觉行为之间的相关性。实验在LLaMA-3-8B和Falcon-7B上进行，结果表明尽管存在一定关联，但知识冲突并非幻觉的唯一解释。该研究为理解幻觉成因提供了新视角，有助于设计更有效的缓解方法。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "causes of hallucination in multimodal large language models",
+      "matched_requirement_id": "req-21",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.09109v1",
+      "source": "arxiv",
+      "title": "Driving Video Retrieval for Complex Queries with Structured Grounding",
+      "abstract": "Video retrieval at scale is central to data curation and safety validation in autonomous driving, where users want to find not only scenes but also dynamic events such as cut-ins and hard braking. Existing vision-language and keyword-based retrieval methods often miss these events because the relevant motion may not be explicitly described in text or captured by lexical overlap. Rule-based retrieval can encode such events more directly, but it is brittle: generated or hand-written rules often fail when their assumptions do not match real driving data. We propose STRIVE-D, a data-calibrated retrieval framework for driving videos. It uses weakly labeled in-domain videos to estimate when a query rule is reliable, adapt rules that mismatch observed data, and fuse calibrated rule scores with vision-language and keyword-based retrieval signals. Across three driving benchmarks, including newly released human-annotated event data on DrivingDojo, STRIVE-D delivers up to 84% relative improvement in top-1 accuracy over state-of-the-art methods.",
+      "authors": [
+        "Manyi Yao",
+        "Sparsh Garg",
+        "Christian Shelton",
+        "Amit Roy-Chowdhury",
+        "Abhishek Aich"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "published": "2026-06-08T07:00:33+00:00",
+      "link": "https://arxiv.org/pdf/2606.09109v1",
+      "tags": [
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "video retrieval with structured grounding for complex queries involving dynamic events",
+      "llm_evidence_cn": "具有结构化定位的视频检索，用于包含动态事件的复杂查询",
+      "llm_evidence": "具有结构化定位的视频检索，用于包含动态事件的复杂查询",
+      "canonical_evidence": "具有结构化定位的视频检索，用于包含动态事件的复杂查询",
+      "llm_tldr_en": "Proposes STRIVE-D, a data-calibrated retrieval framework for driving videos that uses structured grounding to adapt rules for dynamic events like cut-ins, enabling effective retrieval from natural language queries.",
+      "llm_tldr_cn": "针对自动驾驶场景中复杂查询（如车辆切入、急刹）难以用现有方法检索的问题，提出STRIVE-D框架，利用弱监督视频校准规则，并通过结构化定位（时间/空间）适应动态事件，实现了基于自然语言查询的高效视频检索，显著提升了召回率。该方法为复杂动态事件的视频检索提供了可扩展的解决方案。",
+      "llm_tldr": "针对自动驾驶场景中复杂查询（如车辆切入、急刹）难以用现有方法检索的问题，提出STRIVE-D框架，利用弱监督视频校准规则，并通过结构化定位（时间/空间）适应动态事件，实现了基于自然语言查询的高效视频检索，显著提升了召回率。该方法为复杂动态事件的视频检索提供了可扩展的解决方案。",
+      "llm_tags": [
+        "query:vlm-vg"
+      ],
+      "matched_query_tag": "query:vlm-vg",
+      "matched_query_text": "temporal grounding in videos using natural language queries",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.06485v1",
+      "source": "arxiv",
+      "title": "PAR3D: A Unified 3D-MLLM with Part-Aware Representation for Scene Understanding",
+      "abstract": "Recent advances in 3D multimodal large language models (3D-MLLMs) have enabled unified solutions for 3D scene understanding tasks, including visual question answering, captioning, and referring segmentation. However, existing 3D-MLLMs remain largely object-centric, limiting their ability to model fine-grained part structures that are essential for embodied interaction with 3D environments. In this work, we present PAR3D, a unified part-aware 3D-MLLM framework that enables models to understand, reason about, and ground both objects and their parts in 3D scenes. To enable training and evaluation of part-aware 3D scene understanding, we introduce ScenePart, a synthetic 3D scene dataset with part-level annotations and language instructions. We further develop Part-Aware 3D Representation Learning to enrich 3D visual representations with fine-grained part-level semantics, and propose Hierarchical Segmentation Query Generation to ground part targets via hierarchical object-part queries. Extensive experiments show that our method substantially improves part-level question answering and referring segmentation, while also achieving strong performance across object-level vision-language tasks.",
+      "authors": [
+        "Shaohui Dai",
+        "Yansong Qu",
+        "You Shen",
+        "Shengchuan Zhang",
+        "Liujuan Cao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-04T17:59:04+00:00",
+      "link": "https://arxiv.org/pdf/2606.06485v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "3D visual grounding and part-aware scene understanding",
+      "llm_evidence_cn": "3D视觉定位与部分感知场景理解",
+      "llm_evidence": "3D视觉定位与部分感知场景理解",
+      "canonical_evidence": "3D视觉定位与部分感知场景理解",
+      "llm_tldr_en": "PAR3D proposes a part-aware 3D-MLLM that understands objects and their parts in 3D scenes, enabling fine-grained visual grounding and question answering. The ScenePart dataset supports training. Results show improved grounding accuracy and VQA performance.",
+      "llm_tldr_cn": "该论文提出PAR3D，一种具有部分感知能力的统一3D多模态大语言模型，能够理解3D场景中物体及其精细部分结构，支持视觉问题回答和指代分割。为了训练和评估，作者构建了ScenePart合成数据集。实验表明，PAR3D在3D场景理解和部分级别定位任务上取得显著提升，为机器人交互和增强现实等应用奠定基础。",
+      "llm_tldr": "该论文提出PAR3D，一种具有部分感知能力的统一3D多模态大语言模型，能够理解3D场景中物体及其精细部分结构，支持视觉问题回答和指代分割。为了训练和评估，作者构建了ScenePart合成数据集。实验表明，PAR3D在3D场景理解和部分级别定位任务上取得显著提升，为机器人交互和增强现实等应用奠定基础。",
+      "llm_tags": [
+        "query:vlm-vg"
+      ],
+      "matched_query_tag": "query:vlm-vg",
+      "matched_query_text": "spatial grounding",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.09516v1",
+      "source": "arxiv",
+      "title": "SwiftVR: Real-Time One-Step Generative Video Restoration",
+      "abstract": "Real-time video restoration (VR) for live streams requires high-resolution outputs under strict per-frame latency constraints. Existing one-step diffusion-based VR models remain difficult to deploy on consumer-grade GPUs due to two main bottlenecks: quadratic spatial attention at high resolutions and the latency-memory overhead of large video autoencoders. We present SwiftVR, a streaming one-step generative VR framework that reduces both bottlenecks under a causal chunk-wise protocol. For attention, mask-free shifted-window self-attention gathers each spatial window into a dense tensor via deterministic indexing, keeping all attention calls on the dense scaled dot-product attention path without masks, cyclic shifts, padding, or hardware-specific sparse kernels. Because SwiftVR uses only standard dense SDPA calls, the trained model transfers to consumer GPUs without retraining or custom kernels. For autoencoding, a lightweight Restoration-aware Autoencoder enables fast chunk-wise decoding while preserving reconstruction quality. On a single H100, SwiftVR sustains 31~FPS at 2560x1440 and 14~FPS at 3840x2160, whereas all compared diffusion-based VR baselines exceed the memory limit at 4K. On a consumer RTX~5090, SwiftVR reaches 26~FPS at 1920x1080. To our knowledge, SwiftVR is the first generative VR model to achieve real-time 1080p streaming on a consumer-grade GPU, while attaining strong no-reference perceptual quality with lower inference cost. Project is available at https://h-oliday.github.io/SwiftVR.",
+      "authors": [
+        "Jiaqi Yan",
+        "Xiangyu Chen",
+        "Xinlin Zhong",
+        "Haibin Huang",
+        "Chi Zhang",
+        "Jie Liu",
+        "Jiantao Zhou",
+        "Xuelong Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-08T14:07:29+00:00",
+      "link": "https://arxiv.org/pdf/2606.09516v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "real-time video restoration algorithm for live streams",
+      "llm_evidence_cn": "面向直播流的实时视频恢复算法",
+      "llm_evidence": "面向直播流的实时视频恢复算法",
+      "canonical_evidence": "面向直播流的实时视频恢复算法",
+      "llm_tldr_en": "SwiftVR is a real-time one-step generative video restoration framework using mask-free shifted-window self-attention under causal chunk-wise protocol for live streams.",
+      "llm_tldr_cn": "本文提出SwiftVR，一种面向直播流的实时单步生成式视频恢复框架。现有单步扩散模型在消费级GPU上存在二次空间注意力和大自编码器延迟瓶颈。SwiftVR通过因果分块协议和免掩码移位窗口自注意力克服这些瓶颈，在保持高质量的同时实现实时性能。该工作推动了视频恢复在实时流媒体场景的实用化。",
+      "llm_tldr": "本文提出SwiftVR，一种面向直播流的实时单步生成式视频恢复框架。现有单步扩散模型在消费级GPU上存在二次空间注意力和大自编码器延迟瓶颈。SwiftVR通过因果分块协议和免掩码移位窗口自注意力克服这些瓶颈，在保持高质量的同时实现实时性能。该工作推动了视频恢复在实时流媒体场景的实用化。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "real-time video analysis algorithms",
+      "matched_requirement_id": "req-28",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.09131v1",
+      "source": "arxiv",
+      "title": "Late-Layer Fusion is Enough: Dual-Path Vision Token Routing for Multimodal Large Language Models under Visual Saturation",
+      "abstract": "Multimodal large language models (MLLMs) commonly inherit the deep, symmetric Transformer backbone designed for unimodal text modeling, and apply the same computation uniformly to image and language tokens. This design overlooks a key modality asymmetry: image and text tokens differ substantially in information density, redundancy, and required reasoning depth. Through a layer-wise analysis of LLaVA-1.5, we observe that vision tokens tend to saturate in the middle layers. Specifically, text-to-image attention decreases from 0.68 at layer 0 to 0.07 by layer 4, and stabilizes near 0.04 after layer 18, whereas text tokens continue to benefit from deep semantic processing. These findings suggest a mismatch between architectural symmetry and depth-asynchronous modality evolution, resulting in redundant visual computation and possible drift in perceptual representations during deep task-specific adaptation. Motivated by this, we propose Dual-Path Vision Token Routing (DPVR), a modality-asymmetric routing framework for efficient MLLMs. Its core instantiation, DPVR-LF (Late-Layer Fusion), routes vision tokens at the saturation point into a one-layer trainable side branch, runs a thirteen-layer text-only forward that skips image positions in the deep stack, and re-fuses the visual and textual streams only at the final layer. With approximately 3% trainable parameters, DPVR-LF preserves competitive multimodal performance on standard benchmarks while reducing visual computation in the deep Transformer stack. The results challenge the conventional assumption that vision tokens must traverse all deep language-model layers, and indicate that a single late fusion layer can be sufficient for maintaining strong perceptual competence in LLaVA-style MLLMs.",
+      "authors": [
+        "Siyuan Liu",
+        "Jinyang Wu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-06-08T07:28:14+00:00",
+      "link": "https://arxiv.org/pdf/2606.09131v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "analysis of visual saturation in MLLMs as a cause of hallucination",
+      "llm_evidence_cn": "分析多模态大语言模型中视觉饱和现象作为幻觉原因",
+      "llm_evidence": "分析多模态大语言模型中视觉饱和现象作为幻觉原因",
+      "canonical_evidence": "分析多模态大语言模型中视觉饱和现象作为幻觉原因",
+      "llm_tldr_en": "This paper analyzes visual saturation in MLLMs, showing vision tokens saturate after middle layers, and proposes dual-path routing to mitigate it, improving efficiency and potentially reducing hallucination.",
+      "llm_tldr_cn": "多模态大语言模型通常对图像和文本令牌使用相同的Transformer计算，但图像令牌在中间层后会出现饱和，导致视觉信息利用不足并可能引发幻觉。本文通过逐层分析LLaVA-1.5发现这一现象，并提出双路径视觉令牌路由方法，在后期进行融合。实验表明该方法在保持性能的同时显著降低计算量，并有助于缓解视觉相关幻觉。",
+      "llm_tldr": "多模态大语言模型通常对图像和文本令牌使用相同的Transformer计算，但图像令牌在中间层后会出现饱和，导致视觉信息利用不足并可能引发幻觉。本文通过逐层分析LLaVA-1.5发现这一现象，并提出双路径视觉令牌路由方法，在后期进行融合。实验表明该方法在保持性能的同时显著降低计算量，并有助于缓解视觉相关幻觉。",
+      "llm_tags": [
+        "query:mm-hall"
+      ],
+      "matched_query_tag": "query:mm-hall",
+      "matched_query_text": "causes of hallucination in multimodal large language models",
+      "matched_requirement_id": "req-21",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.07355v1",
+      "source": "arxiv",
+      "title": "Spatial-Temporal Decoupled Adapter for Micro-gesture Online Recognition",
+      "abstract": "Micro-gesture online recognition aims to temporally localize and classify subtle gestures in untrimmed videos. Owing to their extremely short duration, low motion amplitude, and ambiguous visual cues, capturing discriminative spatiotemporal representations remains highly challenging. Existing parameter-efficient adapters typically employ a single branch to model spatial and temporal cues jointly, which may fail to capture the fine-grained patterns of micro-gestures. To address this limitation, we propose a Spatial-Temporal Decoupled Adapter that decomposes video adaptation into independent temporal and spatial branches via lightweight depthwise convolutions. In addition, to address the long-tail distribution problem in the benchmark dataset, we introduce Adaptive Soft Balanced Augmentation, which dynamically allocates augmentation intensity based on class rarity and learning difficulty, without manual thresholds. Our method achieves an F1 score of 0.43808, ranking 1st in Track 2 of the 4th EI-MiGA-IJCAI Challenge.",
+      "authors": [
+        "Xucheng Shen",
+        "Kun Li",
+        "Fei Wang",
+        "Wei Qian",
+        "Jin Jiang",
+        "Dan Guo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-05T15:03:38+00:00",
+      "link": "https://arxiv.org/pdf/2606.07355v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "spatial-temporal decoupled adapter for micro-gesture online recognition",
+      "llm_evidence_cn": "针对微手势在线识别的时空解耦适配器",
+      "llm_evidence": "针对微手势在线识别的时空解耦适配器",
+      "canonical_evidence": "针对微手势在线识别的时空解耦适配器",
+      "llm_tldr_en": "Proposes a Spatial-Temporal Decoupled Adapter that decomposes video adaptation into independent temporal and spatial branches via lightweight depthwise convolutions for micro-gesture online recognition, addressing temporal modeling challenges.",
+      "llm_tldr_cn": "微手势在线识别需要精细的时空表征，但现有适配器单分支联合建模空间和时间难以捕捉细粒度模式。本文提出时空解耦适配器，通过轻量级深度可分离卷积将视频适配分解为独立的时间分支和空间分支。在基准数据集上的实验表明，该方法有效提升了微手势识别的准确性，尤其处理长尾分布时表现出色。",
+      "llm_tldr": "微手势在线识别需要精细的时空表征，但现有适配器单分支联合建模空间和时间难以捕捉细粒度模式。本文提出时空解耦适配器，通过轻量级深度可分离卷积将视频适配分解为独立的时间分支和空间分支。在基准数据集上的实验表明，该方法有效提升了微手势识别的准确性，尤其处理长尾分布时表现出色。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "temporal modeling for video sequences",
+      "matched_requirement_id": "req-27",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.11576v1",
+      "source": "arxiv",
+      "title": "AVIS: Adaptive Test-Time Scaling for Vision-Language Models",
+      "abstract": "Modern Vision-Language Models (VLMs) benefit from chain-of-thought prompting and test-time scaling, but these gains often come with prohibitive inference cost due to large visual contexts and long decoding chains. We view this cost through two coupled axes: Visual Context Scaling (VCS), which controls how much visual evidence is passed to the language model, and Visual Reasoning Scaling (VRS), which controls how much inference-time reasoning search is performed. Existing methods typically optimize one axis at a time, leaving the joint allocation of compute across these axes underexplored. We introduce Adaptive Visual Inference Scaling (AVIS), a lightweight policy that adapts both VCS and VRS per query. AVIS realizes VCS through Key Diversity Visual (KDV) pruning, a training-free $O(N)$ key-based rule for removing redundant visual tokens before prefilling, and realizes VRS through adaptive self-consistency, using a learned difficulty predictor to select the number of reasoning rollouts. AVIS is deployment-friendly and compatible with shared-prefill inference, where all rollouts reuse a single prefilling pass and KV cache. Across diverse image and video reasoning benchmarks, AVIS improves the accuracy--compute trade-off relative to VCS-only and VRS-only baselines, and remains effective on top of RL post-trained VLMs while keeping compute and latency low.",
+      "authors": [
+        "Ahmadreza Jeddi",
+        "Minh Ngoc Le",
+        "Amirhossein Kazerouni",
+        "Hakki Can Karaimer",
+        "Hue Nguyen",
+        "Iqbal Mohomed",
+        "Michael Brudno",
+        "Alex Levinshtein",
+        "Konstantinos G. Derpanis",
+        "Babak Taati",
+        "Radek Grzeszczuk"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-10T02:06:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.11576v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "adaptive test-time scaling for vision-language models",
+      "llm_evidence_cn": "视觉语言模型的自适应测试时缩放",
+      "llm_evidence": "视觉语言模型的自适应测试时缩放",
+      "canonical_evidence": "视觉语言模型的自适应测试时缩放",
+      "llm_tldr_en": "AVIS adapts visual context and reasoning scaling per query to reduce inference cost in VLMs, using key diversity pruning and lightweight policy.",
+      "llm_tldr_cn": "本文提出AVIS，一种轻量级策略，为视觉语言模型自适应地分配视觉上下文和推理计算预算。通过关键多样性剪枝实现视觉上下文缩放，结合推理搜索策略的联合优化，在保持性能的同时显著降低推理成本。该方法解决了大型VLM因长视觉上下文和链式推理导致的昂贵推断问题，可广泛应用于视频理解等任务。",
+      "llm_tldr": "本文提出AVIS，一种轻量级策略，为视觉语言模型自适应地分配视觉上下文和推理计算预算。通过关键多样性剪枝实现视觉上下文缩放，结合推理搜索策略的联合优化，在保持性能的同时显著降低推理成本。该方法解决了大型VLM因长视觉上下文和链式推理导致的昂贵推断问题，可广泛应用于视频理解等任务。",
+      "llm_tags": [
+        "query:vlm-vg"
+      ],
+      "matched_query_tag": "query:vlm-vg",
+      "matched_query_text": "video language model",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.09162v1",
+      "source": "arxiv",
+      "title": "Zero-Parameter Geometric Gating for Temporally Stable Low-Altitude UAV Video Semantic Segmentation",
+      "abstract": "Video semantic segmentation for low-altitude UAVs requires temporal consistency, yet dense optical flow introduces spatially structured noise in the planar regions that dominate aerial imagery. We propose a zero-parameter geometric gate that uses RANSAC homography inlier ratios on a $16\\times16$ spatial grid to route each region to either homography or optical flow warp before fusion via Semantic Similarity Propagation. The gate requires no learned parameters -- only a median-threshold binary decision on RANSAC statistics -- adding only 211K trainable parameters (the SSP fusion layer) to a frozen backbone. On synthetic UAVid, the method achieves +4.24--4.91\\% mIoU improvement over base models across two architectures (SegFormer-b2 and Hiera-S+UPerNet). Mechanism diagnostics reveal that flow residuals in planar regions are spatially autocorrelated (Moran's I = 0.32, $p < 0.001$), predict boundary instability (Spearman $ρ= 0.66$), and that rigidification recovers temporal consistency from 62\\% to 92\\% (+29.5pp) in homography-valid regions.",
+      "authors": [
+        "Jingpu Yang",
+        "Fengxian Ji",
+        "Zhengzhao Lai",
+        "Juanfan Wu",
+        "Mingxuan Cui",
+        "Yufeng Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-08T07:55:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.09162v1",
+      "tags": [
+        "keyword:MM-Hall",
+        "keyword:ego-video",
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "keyword:vlm-vg",
+        "query:MM-Hall",
+        "query:ego-video",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream",
+        "query:vlm-vg"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "zero-parameter geometric gating for temporal stability in UAV video segmentation",
+      "llm_evidence_cn": "用于无人机视频分割时序稳定性的零参数几何门控",
+      "llm_evidence": "用于无人机视频分割时序稳定性的零参数几何门控",
+      "canonical_evidence": "用于无人机视频分割时序稳定性的零参数几何门控",
+      "llm_tldr_en": "Proposes a zero-parameter geometric gate using RANSAC homography for temporally stable UAV video semantic segmentation, improving mIoU by 4.24-4.91%.",
+      "llm_tldr_cn": "该论文针对无人机视频语义分割的时序一致性问题，提出零参数几何门控方法。通过RANSAC单应性内点率在空间网格上进行区域划分，结合语义相似度传播实现稳定融合。在合成UAVid数据集上，该方法在两种架构下分别提升了4.24%和4.91%的mIoU。该工作为零参数时序建模在视频理解中的应用提供了新途径。",
+      "llm_tldr": "该论文针对无人机视频语义分割的时序一致性问题，提出零参数几何门控方法。通过RANSAC单应性内点率在空间网格上进行区域划分，结合语义相似度传播实现稳定融合。在合成UAVid数据集上，该方法在两种架构下分别提升了4.24%和4.91%的mIoU。该工作为零参数时序建模在视频理解中的应用提供了新途径。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "temporal modeling for video sequences",
+      "matched_requirement_id": "req-27",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}
