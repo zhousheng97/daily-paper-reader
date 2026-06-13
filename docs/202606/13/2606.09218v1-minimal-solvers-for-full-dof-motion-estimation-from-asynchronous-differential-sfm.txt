@@ -1,0 +1,456 @@
+Title: Minimal Solvers for Full-DoF Motion Estimation from Asynchronous Differential SfM
+
+URL Source: https://arxiv.org/pdf/2606.09218v1
+
+Published Time: Tue, 09 Jun 2026 01:56:58 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+# . RESEARCH PAPER .
+
+# Minimal Solvers for Full-DoF Motion Estimation from Asynchronous Differential SfM 
+
+## Shuo PAN 1,2 , Banglei GUAN 1,2* , Bin LI 1,2 , Zhenbao YU 1,2 
+
+## Zibin LIU 1,2 , Zi WANG 1,2 , Yang SHANG 1,2 & Qifeng YU 1,2 
+
+> 1
+
+College of Aerospace Science and Engineering, National University of Defense Technology, Changsha 410073, China 
+
+> 2
+
+The Hunan Provincial Key Laboratory of Image Measurement and Vision Navigation, Changsha 410073, China 
+
+Abstract As a bio-inspired intelligent sensor, event cameras have introduced a new paradigm in the intelligent perception of spa-tiotemporal information and visual motion estimation, characterized by their high temporal resolution, low latency, and minimal power consumption. However, their asynchronous data streams present significant challenges to traditional synchronous, frame-based algo-rithms. To address these challenges, this paper presents a novel framework for full degree of freedom (DoF) egomotion estimation directly from asynchronous optical flow, specifically targeting the joint recovery of angular and linear velocities. We decouple the differ-ential epipolar constraint into distinct angular and linear velocity components, and derive its formulation for asynchronous data. Based on this formulation, an optimization algorithm is developed that enables full-DoF egomotion estimation leveraging at least five points. Furthermore, by applying a first-order approximation to rotational dynamics, we transform the constraint equations into a polynomial form, resulting in the first algebraic minimal 5-point solver for this formulation. To ensure real-time performance in high-speed scenarios, we additionally propose an accelerated solver achieved by truncating high-order angular velocity terms. Extensive evaluations on both synthetic and real-world datasets demonstrate that the asynchronous approach outperforms traditional synchronous methods, particu-larly in its accuracy and robustness to spatiotemporal noise. We believe that this work establishes a critical foundation for efficient and accurate continuous-time motion estimation in high-speed robotics applications. 
+
+Keywords event-based vision, motion estimation, differential epipolar constraints, minimal solvers, gröbner basis 
+
+Citation Title for citation. , for review 
+
+## 1 Introduction 
+
+Accurate egomotion estimation is fundamental to equipping unmanned systems with autonomous navigation capa-bilities in critical applications, including autonomous driving, unmanned aerial vehicle control, and visual servo-ing [1–4]. Inspired by biological vision mechanisms, event cameras, with their unique combination of high temporal resolution, exceptional dynamic range, and low power consumption, have emerged as a promising technology, attract-ing broad interest and demonstrating considerable potential across numerous fields [5–7]. Consequently, achieving fast and accurate egomotion estimation with event cameras has recently become a key research focus [8, 9]. Unlike the conventional imaging paradigm [10, 11], event cameras asynchronously report per-pixel brightness changes as a stream of events [12]. This asynchronicity calls for a paradigm shift in algorithm design, from syn-chronous processing to methods that natively exploit the spatiotemporal structure of events for rapid estimation of motion [13, 14]. Previous works on monocular egomotion estimation with event cameras have typically followed conventional imaging approaches, accumulating events into frames [15–17] and applying conventional synchronous-vision algorithms, such as those based on feature matching, geometric constraints, optical flow, deep learning, or using sensors requiring extra data [18–25]. These strategies inevitably constrain the intrinsic high-speed capabili-ties and independence of event cameras. To overcome these limitations, some methods have adopted event-native strategies directly to estimate motion parameters from the event stream. These include leveraging spatial features like lines [26], normal flow [27], as well as increasingly sophisticated data-driven techniques that have demonstrated considerable promise in recent years [28]. A notable attempt to unify the modeling of rolling shutter cameras and event cameras under a common asynchronous framework is presented in [13], which presented the minimal solvers for egomotion estimation via feature matching under the asynchronous framework. 
+
+* Corresponding author (email: guanbanglei12@nudt.edu.cn) 
+
+> arXiv:2606.09218v1 [cs.CV] 8 Jun 2026 2
+
+However, the performance of feature matching in event-based vision is often limited [8]. Rather than capturing absolute photometric intensity, event cameras asynchronously trigger sparse events primarily along brightness-changing edges [29]. This intrinsic sensing modality inherently destabilizes the feature extraction and matching processes upon which motion estimation relies, thereby presenting a fundamental bottleneck for event-based ego-motion algorithms. To break through this fundamental bottleneck, computing optical flow from event streams has become a crucial research trajectory. By providing a low-latency, dense estimation of velocity fields directly from brightness changes, optical flow naturally facilitates more resilient egomotion tracking without the need for fragile point matching. This paradigm is fundamentally aligned with the asynchronous streaming nature of event data, as it can natively interpret the spatiotemporal correlations within events and fully leverage their microsecond-level timestamp precision. These inherent advantages have rendered optical flow estimation a fundamental primitive in event-based vision, serving as a robust precursor for precise egomotion estimation [30–40]. t  
+
+> X
+> Y
+> ON Events (+)
+> OFF Events ( -)
+> Optical flow
+> t
+> X
+> Y
+> time
+> Motion Parameter
+> Ground truth
+> Estimation value
+> time
+> Motion Parameter
+> Ground truth
+> Estimation value
+> (a) Synchronous egomotion estimation
+> (b) Asynchronous egomotion estimation
+> Figure 1 Comparison between traditional synchronous and asynchronous motion estimation. (a) Frame-based synchronous estimation methods inherently discretize temporal resolution with fixed steps, resulting in latency and piecewise-constant estimation errors. (b) Estimating egomotion parameters directly from asynchronous optical flow enables motion estimation over adaptive time intervals, allowing the estimates to closely track the true motion dynamics.
+
+As illustrated in Figure 1, when performing ego-motion estimation via differential epipolar constraints, traditional synchronous methods operate on fixed time intervals, inherently suffering from temporal discretization artifacts and latency, leading to piecewise-constant approximations that fail to capture dynamic motion. In contrast, the asyn-chronous paradigm directly integrates event-driven optical flow over adaptive time horizons, enabling continuous-time estimation that precisely tracks the true motion dynamics with high temporal fidelity. Nevertheless, there is a lack of the systematic modeling and solving of asynchronous differential epipolar constraints. The objective of this paper is to propose a novel egomotion estimation method for event cameras, building upon the extraction of asynchronous optical flow. In this paper, we establish an asynchronous formulation of the differential epipolar geometry constraints, and derive iterative solver and minimal algebraic solvers for the egomotion estimation of a monocular event camera. To the best of our knowledge, this is the first minimal algebraic solver proposed for the differential epipolar constraints. The primary contributions of this paper can be summarized as follows: 
+
+• A Novel Asynchronous and Decoupled Formulation : We establish a new framework for full-DoF monoc-ular egomotion estimation from asynchronous optical flow, grounded in differential epipolar geometry. This novel constraint formulation naturally decouples rotational and translational motion parameters. By explicitly modeling geometric constraints across different timestamps, it provides a more tractable and stable foundation for subsequent optimization compared to traditional coupled approaches. 
+
+• Iterative Solver Based on Eigenvalue Minimization : Building upon the decoupled model, we develop an iterative optimization solver. This solver estimates motion parameters by sequentially minimizing the smallest eigenvalue of a data matrix constructed from the constraints. It operates on a minimal set of only 5 event-flow correspondences and achieves full-DoF motion estimation. 3
+
+• Minimal Gröbner Basis-based Solvers via Polynomialization : By employing a first-order approxima-tion for rotation, we transform the problem into a polynomial system and derive a closed-form solution via the Gröbner basis method, yielding the first-of-its-kind minimal solver. Furthermore, through strategically truncating higher-order angular velocity terms, we present an accelerated variant of this solver, which reduces computational complexity and achieves nearly an order of magnitude speedup with only a marginal loss in precision. This paper is organized as follows: Sec.2 provides the necessary background on differential epipolar constraints and reviews related works in event-based optical flow and motion estimation. Sec.3 formulates the problem, introducing the decoupled differential epipolar constraints and extending it to the asynchronous event stream. 
+
+Sec.4 presents three minimal solvers. Sec.5 describes the experimental setup, including the synthetic and real-world datasets. Sec.6 concludes this paper. 
+
+## 2 Related works 
+
+Differential epipolar constraints : The differential epipolar constraints establish a fundamental relationship be-tween camera motion parameters (linear and angular velocities) and optical flow, enabling the estimation of relative pose and finding broad applications in visual odometry [41], 3D reconstruction [42], and image correction [43]. Early work by Ma et al. [44] laid the theoretical groundwork. Subsequent research has focused on developing efficient solvers for various camera models. For global-shutter cameras, a linear 8-point solver was proposed [45] to recover motion parameters. To correct image distortion and motion parameter errors in rolling-shutter cameras, solvers were developed under both constant velocity and constant acceleration assumptions [43]. More recent advance-ments include introducing radial distortion into the Wconstraint framework, accompanied by a robust generalized eigenvalue solver and a maximum-likelihood refinement scheme [46], and extending the formulation to generalized rolling-shutter stereo systems with corresponding solving strategies [47]. The recently proposed E-MoFlow by Li et al. [30] establishes a novel, unsupervised framework for joint optical flow and egomotion estimation. By in-tegrating differential epipolar constraints, the method bypasses explicit depth estimation and achieves superior, state-of-the-art performance on multiple benchmarks. 
+
+Event-based optical flow estimation : Diverging from frame-based techniques, the input of optical flow estimation in event-based vision is no longer a sequence of continuous frames but rather sparse, unstructured spatiotemporal point clouds. Consequently, classical optical flow algorithms, such as Lucas-Kanade [48] and Horn-Schunck [49], cannot be directly applied. Due to the asynchronous nature of event cameras, processing methods can be categorized as synchronous if they force continuous event streams into fixed time slices, and asynchronous if they process events individually according to their independent arrival times. Since modern GPUs and deep learning frameworks are optimized for dense matrix operations, synchronous processing of event streams has become a pragmatic yet efficient strategy. Representative works include EV-FlowNet [31], which estimates flow on discrete event voxels via self-supervised learning, and E-RAFT [32], which adapts the RAFT architecture using correlation volumes and recurrent units to achieve high-precision predictions in complex scenes. To enhance spatiotemporal modeling, STE-FlowNet [33] introduces a spatiotemporal recurrent encoder, while ADM-Flow [34] addresses information loss during discretization through an Adaptive Density Module. These methods have demonstrated superior performance on multiple datasets. Asynchronous optical flow algorithms aim to exploit the high temporal resolution of event streams. Early gradient-based methods utilized local differentiation of the event surface or plane fitting to resolve motion direction [35] [36]. Within deep learning, spiking neural networks (SNNs) have become the dominant asynchronous architecture; for instance, Spike-FlowNet [37] combines SNNs with ANNs to handle sparse spike inputs, while hierarchical SNN mod-els [38] utilize spike synchrony for estimation. Additionally, the graph-based HUGNets [39] employs a hemispherical update mechanism compatible with continuous event transmission, significantly reducing prediction latency. Re-cently, Gehrig et al. [40] proposed using parameterized Bézier curves to represent pixel trajectories in continuous time. Although this method often relies on deep networks to predict control points, its output consists of continuous functions rather than discrete frames, preserving the ability to query optical flow at an arbitrary timestamp.Despite the high accuracy of synchronous deep learning methods, their forced discretization of continuous event streams inherently contradicts the high temporal resolution of event cameras. In contrast, while asynchronous methods are more complex to design, they better align with the physical characteristics of event cameras, enabling low-latency, continuous-time motion estimation, a critical requirement for high-speed control applications. 
+
+Event-based motion estimation : Event cameras asynchronously detect per-pixel brightness changes, produc-ing events that encode temporal information with high precision and low latency. Contrast Maximization (CMax) aligns events by warping them to a reference view and maximizing the variance of the resulting image, effectively 4
+
+recovering motion parameters through contrast optimization [15]. Complementary approaches, such as dispersion minimization [16] and progressive event-to-map alignment scheme [17], enhance robustness and efficiency by em-ploying alternative loss functions and optimization strategies. Some techniques based on geometry establish direct relationships between events and motion parameters. For example, incidence relations between events and lines have been used for motion estimation [24, 25], though early methods often relied on external sensors (e.g., IMUs) for rotational velocity, limiting fully event-based solutions. Recent advances overcome this by developing solvers that jointly estimate rotational and translational velocities directly from event data. These approaches leverage event manifolds induced by line segments [26] or normal flow [27] to recover full-DoF motion without external dependencies. Learning methods have emerged as a powerful alternative, utilizing neural networks to map event data to motion parameters [30]. Methods such as unsupervised learning frameworks [50], dense patch-based ar-chitectures [51], and event-frame fusion [52] have been developed to enhance the applicability of learning-based approaches, albeit with hardware dependencies. 
+
+## 3 Problem formulation 
+
+In this section, we introduce the fundamentals of the differential epipolar constraints and formulate the basic framework for recovering the camera’s angular and linear velocities from asynchronous optical flow. 
+
+3.1 The decoupled differential epipolar constraints 
+
+Consider a calibrated camera moving within a static scene, observing a set of 3D points {Pi}Ni=1 (as illustrated by 
+
+Pi and Pj in Figure 2). For the sake of clarity in the subsequent derivation, we temporarily omit the subscript and consider a generic 3D point P ∼ (X, Y, Z ) projected onto the image plane at point p, represented in the camera coordinate system. We denote their relationship using normalized image coordinates as P ∼ Z · p ∼ Z · (px, p y , 1) .At a time instant, the camera undergoes motion with angular velocity ω ∼ (wx, w y , w z ) and linear velocity v ∼
+
+(vx, v y , v z ). The projection of this motion onto the image plane generates an optical flow vector u ∼ (ux, u y , 0) at the point p.vxyyzziPjPiPjPvx
+
+pi
+
+pj
+
+ui
+
+uj             
+
+> Figure 2 Geometric illustration of differential epipolar constraints. The camera’s ego-motion (characterized by linear velocity vand angular velocity ω) induces relative 3D velocities ( ˙Pi,˙Pj) on static spatial points ( Pi,Pj). The projection of these 3D velocities onto the image plane forms optical flow vectors ( ui,uj) at the normalized image coordinates ( pi,pj).
+
+The velocity of P in the camera coordinate system during the motion is: 
+
+˙P = −[ω]×P − v, (1) where ˙P denotes the differential of P with respect to time t, [ω]× represents the skew-symmetric matrix of ω,explicitly written as 
+
+[ω]× =
+
+
+
+0 −wz wy
+
+wz 0 −wx
+
+−wy wx 0
+
+ .
+
+By differentiating both sides of P = Z · p, we obtain: 
+
+˙P = ˙Z · p + Z · ˙p. (2) 5
+
+For the sake of brevity, we use the optical flow u to replace the temporal derivative of the image points in subsequent sections. Combining Eq.(1) with Eq.(2) yields: 
+
+−[ω]×Z · p − v = ˙Z · p + Z · u. (3) By taking the dot-product with the vector v × p = [ v]×p with both sides of Eq.(3), we obtain the differential epipolar constraints under camera motion at a moment: 
+
+uT [v]×p − pT [ω]×[v]×p = 0 . (4) In the case of traditional frame cameras, which use only one frame of image point coordinates and optical flow, the solution typically employs an 8-point linear method and obtains the translational and angular velocities of the camera through singular value decomposition (SVD) [45]. We express the skew-symmetric matrix multiplications in Eq.(4) using their corresponding cross products, leading to the equivalent form: 
+
+u · (v × p) − p · (ω × (v × p)) = 0 . (5) By employing the vector triple product and the cyclic property of the scalar triple product, Eq.(5) can be simplified to the following form: 
+
+(p × u − (ω · p)p + p · p · ω) · v = 0 . (6) The linear velocity v is isolated as a linear variable through Eq.(6). This algebraic structure allows us to extend the constraint to asynchronous event streams, enabling the construction of efficient solvers. 
+
+3.2 Asynchronous differential epipolar constraints 
+
+Exploiting the microsecond-level resolution of event cameras, it is common practice to model camera motion as constant over sufficiently short time intervals [26]. We present the general form of differential epipolar constraints across different timestamps in this section, which is the foundation for the solver developed subsequently. To incorporate multiple asynchronous events or observations (e.g., pi and pj shown in Figure 2), we reintroduce the index i to formulate a system of constraints based on their respective coordinates pi and optical flow ui. Let 
+
+ei = {pi, t i} denote the i-th event triggered by a static scene, comprising the normalized image coordinates pi and the corresponding timestamp ti. Suppose the optical flow ui is extracted at these event coordinates. Furthermore, let ωi and vi denote the instantaneous angular and linear velocities, respectively, defined in the local camera coordinate system at time ti.It is critical to note that all parameters in Eq.(6) are represented in their respective camera coordinate systems. In this paper, the world coordinate system is aligned with the first camera coordinate system at the start of camera motion. Let t1 = 0 , and the timestamps of other events have a fixed deviation from it. Based on the assumption that the camera moves with constant angular and linear velocities in the world coordinate system within a brief temporal window, the corresponding values are denoted as ω and v, which satisfy the following relation with the instantaneous local velocities ωi and vi:
+
+{ωi = ω,
+
+vi = Riv, (7) where Ri denotes the rotation matrix between the world coordinate frame and the camera coordinate frame at time 
+
+ti, which is determined by ω and time ti. The differential epipolar constraints at multi-time can be expressed as: 
+
+(pi × ui − (ω · pi)pi + pi · pi · ω)Riv = 0 . (8) The geometric relationship between asynchronous event observations and the underlying continuous camera motion is formulated by Eq.(8). The subsequent section will detail how we parameterize this system and design an efficient algebraic solver to accurately recover the global motion parameters ω and v.
+
+## 4 Egomotion Estimation 
+
+Building upon the theoretical foundations laid in the previous section, we develop 3 solvers to meet different practical requirements. Sec.4.1 introduces an exact formulation via singular value minimization. To ensure algebraic solvability, Sec.4.2 employs a first-order rotation approximation using a Gröbner basis. Finally, Sec.4.3 truncates higher-order terms of angular velocity, sacrificing large-rotation robustness for maximal computational speed. 6
+
+4.1 Eigenvalues Minimization Solver 
+
+This subsection details an approach to solving Eq.(8), where a singular value minimization algorithm decouples the problem into sequential optimizations for ω and v. Theoretically, this process requires only 5 events to achieve a solution. Under the multi-time epipolar differential epipolar constraints, Eq.(8) can be written as: 
+
+A(ω)v = 0 , (9) where A(ω) = ( pi × ui − (ω · pi)pi + pi · pi · ω)Ri is contingent upon the unknown ω. The rotation matrix Ri, as defined by Rodrigues’ rotation formula, can be explicitly expressed as follows: 
+
+Ri = exp([ tiω]×) = I + sin( θi)
+
+θi
+
+[tiω]× + 1 − cos( θi)
+
+θ2
+
+> i
+
+[tiω]2
+
+> ×
+
+, (10) where θi represents the rotation angle, defined as the magnitude of the vector tiω, and tiω/θ i denotes the unit vector along the rotation axis. In Eq.(9), owing to the inherent scale ambiguity in monocular vision, the magnitude of the linear velocity vector 
+
+v is indeterminable, only its direction can be recovered, thus it possesses 2-DoF. Together with the 3-DoF from 
+
+ω, there are a total of 5 unknown motion parameters to be estimated. Constraining these 5 unknowns requires at least 5 independent linear equations. By analyzing the sub-determinants of matrix A(ω) and setting them to zero, it can be rigorously proven that a minimum of 5 point pairs are necessary to ensure a unique solution. Thus the solution to the equation A(ω)v = 0 exists when the linear velocity is non-zero and the coefficient matrix A(ω) possesses a non-trivial null space. To estimate the angular velocity ω, the problem is formulated as an optimization that minimizes the singular values of A(ω), particularly targeting the square root of the smallest eigenvalue of M (ω), which is defined as: 
+
+M (ω) = AT (ω)A(ω). (11) Given that M is a real symmetric and positive semidefinite 3 × 3 matrix, the objective function is equivalent to minimizing its smallest eigenvalue λmin :
+
+ω∗ = arg min  
+
+> ω
+
+λmin (M (ω)) . (12) The linear velocity v is subsequently obtained as the solution to the homogeneous polynomial system Eq.(9) . 
+
+4.2 The Polynomial 5 Point Solver 
+
+Under asynchronous timing conditions, the use of an exact rotation matrix introduces complex, nonlinear con-straints. To circumvent these difficulties for egomotion estimation, a Gröbner basis approach is employed here. A key step in this method is to replace the exact rotation matrix in Eq.(10) with its first-order approximation. This approximation reduces the problem to solving a system of polynomial equations, thereby enabling the application of computational algebraic geometry techniques. Under small rotation angles, the first-order approximation formula for the rotation matrix is: 
+
+Ri
+
+.
+
+= I + [ tiω]× =
+
+
+
+1 −tiwz tiwy
+
+tiwz 1 −tiwx
+
+−tiwy tiwx 1
+
+ , (13) where I3×3 is an identity matrix. The constraints are reformulated into a system of polynomial equations by substituting Eq.(13) into Eq.(8). Due to the inherent scale ambiguity, only five unknowns need to be estimated. Following common practice, we therefore adopt the parameterization v ∼ (vx, v y , 1) for the unscaled translation velocity estimation.This transformation yields a polynomial system comprising 27 monomials, with a total maximum degree of 3 and a maximum degree of 2 in the variable ω.To construct the minimal solver, we arrange the coefficients of this polynomial system for 5 input event-correspondences into a matrix. The null space of this coefficient matrix provides the solution to the monomial vector x. By applying Gaussian elimination to eliminate trivial rows, we obtain a condensed matrix N.Thus, the problem is formulated as finding the null vector of a 5 × 27 matrix: 
+
+N5×27 x = 0 , (14) 7
+
+where 
+
+x = [vy w2
+
+> x
+
+, w 2
+
+> x
+
+, v xwxwy , v y wxwy , w xwy , v xwxwz , v y wxwz , w xwz , v y w2 
+
+> y
+
+,w2 
+
+> y
+
+, v xwy wz , w z , v y wy wz , w z , v 2
+
+> x
+
+, v y w2 
+
+> z
+
+, v y wz , v xw2 
+
+> z
+
+, w 2 
+
+> z
+
+, v xvy , 1]T . (15) The final solver, generated via [53], operates on a template of size 433 × 473 , which yields 40 solutions. Notably, by setting v ∼ (vx, v y , 1) , the velocity direction is constrained to a plane z = 1 from the origin, which cannot represent pure lateral or vertical motions perpendicular to the z-axis (where vz = 0). However, the condition vz = 1 acts as a linear constraint that reduces the number of unknowns by one when constructing the elimination matrix, without increasing the degree of the equations. As a result, the final Gröbner basis becomes smaller, leading to improved numerical stability and faster solving speed. Furthermore, considering the decoupled angle and linear velocity equations in Eq.(8), both (vx, v y , 1) and its opposite (−vx, −vy , −1) satisfy the system. Thus, reversing the signs of vx and vy in the process allows the representation of backward motion. 
+
+4.3 Fast Solver via High-Order Truncation 
+
+Under the small-rotation assumption, the components of the rotation vector are considered small. Given this, the higher-order terms of ω in Eq.(15) become negligible compared to the lower-order ones. Truncating the cubic terms reduces the system to a set of 10 quadratic equations in 12 monomials, expressed as 
+
+Q5×12 y = 0 , (16) where 
+
+y = [ vxwx, v y wx, w x, v xwy , v y wy , w y , v xwz , v y wz , w z , v x, v y , 1] T . (17) The monomial vector y (Eq.(17)) corresponds to the lower-order part of ω in the original vector x (Eq.(15)). The matrix Q is the coefficient matrix of this truncated system. Eq.(16) is a polynomial system and we solve it using the Gröbner basis method. The generated automatic solver template size is 72 × 82 . This approach is much faster than the method in Sec.4.2 and reduces the number of solutions to 10. 
+
+## 5 Experiment 
+
+Following a consistent experimental setup, we evaluate the three solvers mentioned above: the eigenvalues mini-mization ( MiniEV ), the first-order approximation for rotation matrix ( ApproxRM ), the fast solver via high-order truncation of the angular velocity w (TruncAV ). The classical linear solver [45] and the asynchronous matching-based method [13] serve as baseline algorithms and are compared in the subsequent sections of this chapter. We adopt the same metric in Zhao et al. [26] to quantitatively assess the performance of the recovered angle velocities ωest . Let ωgt denote the ground-truth angular velocity. The evaluation metric is defined as: 
+
+εang (ωest , ωgt ) = ∥ωest − ωgt ∥
+
+(∥ωest ∥ + ∥ωgt ∥) . (18) The resulting error is confined to the interval [0 , 1] , with values closer to zero indicating higher estimation accuracy. Similarly, for evaluating the recovered linear velocities, we use the angle deviation between the estimated and ground-truth vectors as the performance measure: 
+
+εlin (vest , vgt ) = arccos 
+
+( vT
+
+> est
+
+vgt 
+
+∥vest ∥ ∥ vgt ∥
+
+)
+
+, (19) where vgt denotes the ground-truth linear velocity and vest denotes the estimated linear velocity. This error metric provides a scale-invariant assessment of directional accuracy. All experiments were conducted on a laptop equipped with an Intel(R) Core(TM) Ultra 7 255HX CPU and 32 GB of RAM. The system operated without dedicated GPU acceleration to maintain a consistent baseline for evaluating computational efficiency and convergence behavior across methods. 8
+
+5.1 Simulation 
+
+In this section, we conducted simulation experiments to evaluate the performance of the proposed solvers. The ground-truth angular velocity ω and linear velocity v were sampled from uniform distributions spanning [ −1/8, 1/8] rad/s and [ −5, 5] m/s respectively. The event set was generated with a time interval of 0.5 seconds. To ensure sampling generality, we randomly generated three-dimensional points within a conical field of view characterized by a 45 ◦angle and a depth range of [1, 20] meters. The corresponding optical flow was then derived based on the sampled true linear and angle velocities. All simulations utilized a virtual camera with a focal length f = 400 pixels. 
+
+Numerical Stability and Runtime. The performance of the solvers is evaluated in terms of efficiency (runtime) and numerical stability on synthetic data free from observational noise. After 10,000 trials per solver, the median angular and linear velocity estimation errors are recorded. Given the propensity of the MiniEV to converge to local optima, it was initialized with random perturbations near the ground truth, its stability is further quantified by the success rate ( SR ) at two thresholds: SR1 (error < 0.01) and SR2 (error < 0.05). The median solution error is derived from the objective function value of the estimated solutions. The performance of the MiniEV is shown in Table1, with a median solver runtime of 2.5 ms.    
+
+> Table 1 Runtime, numerical stability, and success rates of MINIEV on noise-free synthetic data.
+
+Formulation Median ϵang Median ϵlin (◦) SR1 (%) SR2 (%) Median objective Runtime( μs)MiniEV 8.36 × 10 −3 2.45 × 10 −1 48.87 87.17 −4.19 × 10 −9 2.50 × 10 3     
+
+> Table 2 Runtime, numerical stability of ApproxRM and TruncAV on noise-free synthetic data.
+
+Formulation Vars Sols Median ϵang Median ϵlin (◦) Median runtime( μs)ApproxRM 5 40 4.28 × 10 −7 3.08 × 10 −6 2.77 × 10 3
+
+TruncAV 5 10 1.10 × 10 −3 2.66 × 10 −2 2.17 × 10 2
+
+We evaluated the Gröbner basis solvers on standard data with image coordinates and optical flow generated under the first-order approximation rotation matrix. As shown in Table2, the ApproxRM solver produced 40 polynomial solutions ( Sols ) with high precision and a runtime comparable to that of MiniEV . In contrast, TruncAV , which discards higher-order terms, exhibited significantly lower precision. Nevertheless, under the minimal configuration, its computational precision was on par with the minimal singular value method, while its computation time was 12.7 times faster than ApproxRM and over 11.5 times than MiniEV respectively. 
+
+Number of events. To validate the robustness of the MiniEV under conditions of extreme data sparsity, we designed a quantitative evaluation experiment concerning the number of sampled events. In this experiment, the number of events used for estimation was incrementally increased from 5 to 30 . For each sampling density, 1, 000 
+
+trials were conducted to obtain the error distribution data. The statistical distribution of errors is shown in Figure 3. The red horizontal lines indicate the median values, while the upper and lower boundaries of the boxes represent the upper and lower quartiles, respectively. This visualization intuitively reflects the accuracy and stability of the algorithm. The left and right subplots correspond to the error distributions of angular velocity and linear velocity. Number of events            
+
+> 510 15 20 25 30
+> Angular velocity error
+> 00.01 0.02 0.03 0.04 0.05 0.06
+> Number of events
+> 510 15 20 25 30
+> Linear velocity error (°)
+> 00.2 0.4 0.6 0.8 11.2 1.4 1.6
+> Figure 3 Statistical evaluation of estimation errors for angular velocity (left) and linear velocity (right) with respect to the number of events. 9
+
+Experimental results demonstrate that the MiniEV algorithm exhibits significant convergence characteristics. When the number of input events is low, the estimation error decays exponentially with the increase in the number of events. Under the extremely sparse condition of N = 5 , although the dispersion of the error distribution is relatively large, the median error remains within an acceptable range, verifying the fundamental feasibility of the algorithm. As N increases to 15 , the median errors for both angular and linear velocities decrease by approximately 
+
+77% , accompanied by a significant contraction in variance. When N > 20 , the marginal gain in accuracy begins to diminish, and the variations in median errors for angular and linear velocities across different event counts are bounded by 4.0 × 10 −4 and 1.4 × 10 −3, respectively. These minimal fluctuations confirm that the error distributions have stabilized, indicating that the algorithm has reached a steady state. 
+
+Noise Resilience Analysis. To increase realism, Gaussian noise was introduced to the simulated data. Specif-ically, a standard deviation of σ = 5 ∼ 25 pixel was applied to the event coordinates, σ = |u|/40 ∼ | u|/8 pixel/s to the optical flow coordinates, and σ = 0 .04 ∼ 0.2s (2 tmax /25 ∼ 2tmax /5) to the timestamps. We compared the proposed asynchronous method with the traditional 8-point algorithm ( Linear-8p ) [45]. The 8-point algorithm disregards timestamp information and aggregates events and optical flow within a 0.5s window into a single frame. The MiniEV solver was implemented in both 5-point ( MiniEV-5p ) and 8-point ( MiniEV-8p ) configurations, while the Gröbner basis-based solvers utilized 5 points. Each solver was executed 1,000 times, with the standard deviation of the noise scaled from different levels. 1 2 3 4 5
+
+Noise Levels     
+
+> Ang ular velocity error
+> 00.2 0.4 0.6 0.8 112345
+
+Noise Levels Linear velocity error (°)     
+
+> 0510 15 20
+> Linear-8p MiniEV-5p MiniEV-8p Appr ox RM-5p TruncAV-5p
+
+(a) Robustness to Pixel Noise 1 2 3 4 5
+
+Noise Levels     
+
+> Ang ular velocity error
+> 00.2 0.4 0.6 0.8 112345
+
+Noise Levels Linear velocity error (°) 
+
+> 010 20 30 40
+
+(b) Robustness to Optical Flow Noise 1 2 3 4 5
+
+Noise Levels     
+
+> Ang ular velocity error
+> 00.2 0.4 0.6 0.8 112345
+
+Noise Levels Linear velocity error (°) 
+
+> 0510 15
+
+(c) Robustness to Timestamps                 
+
+> Figure 4 The results on synthetic data demonstrate the relationship between errors of various factors. The layout compares angular error and linear velocity error across three different noise factors. (a) Robustness to Pixel Noise.( σ= 5 ∼25 pixel) (b) Robustness to Optical Flow Noise.( σ=|u|/40 ∼ | u|/8) (c) Robustness to Timestamps.( σ= 0 .04 ∼0.2s(2 tmax /25 ∼2tmax /5)) 10
+
+The resulting solution errors are summarized in Figure 4. The Linear-8p consistently exhibits lower accuracy than the asynchronous approach, and is even outperformed by the MiniEV-5p given reasonable initial values. This result underscores the importance of explicit temporal modeling for improving the accuracy of egomotion estimation in event cameras. MiniEV-8p achieved the highest accuracy, which we attribute to its utilization of a larger number of events. Interestingly, TruncAV demonstrated marginally more robust performance than the ApproxRM algorithm under high-noisy conditions. The performance trade-off between ApproxRM and 
+
+TruncAV is clearly demonstrated in the pixel error and optical flow extraction error experiments, as illustrated in Figure 4. Under low-noise conditions, ApproxRM exhibits a significantly lower median error and superior error convergence compared to TruncAV . This advantage likely stems from ApproxRM ’s retention of higher-order terms, which more accurately capture the differential epipolar geometric constraints under well-conditioned scenarios, thereby maintaining higher estimation fidelity and stability. However, as the noise level increases, the performance of ApproxRM degrades rapidly and is eventually surpassed by TruncAV . This reversal suggests that the higher-order terms in ApproxRM may render it more sensitive to data corruption and noise. In contrast, by truncating the higher-order terms associated with infinitesimal rotational velocities, TruncAV demonstrates stronger robustness under high-error conditions, resulting in better adaptability in challenging and highly uncertain scenarios, a behavior that is also corroborated in real experiments. Experimental results on temporally noisy synthetic data indicate that performance of algorithms is influenced differently by temporal noise compared to other noise types. Linear-8p lacks an explicit temporal model and exhibits nearly constant solution errors. In contrast, the Gröbner basis-based solver shows low sensitivity to temporal perturbations and achieves superior accuracy. When utilizing the same number of events, MiniEV-8p maintains a significant accuracy advantage over Linear-8p . A notable trade-off is observed with MiniEV-5p : it achieves higher accuracy in angular velocity estimation compared to Linear-8p , but this is offset by a slight reduction in linear velocity estimation accuracy. This trade-off is attributed to the sequential estimation process of MiniEV-5p . As shown in Eq.(7), the angular velocity is invariant to the coordinate system and thus relatively immune to temporal errors. However, the linear velocity components are intrinsically linked to the timeline and the angular velocity magnitude, making them highly correlated with temporal errors. Therefore, even minor inaccuracies in the angular velocity estimation inevitably propagate and are amplified during the subsequent linear velocity estimation. Conversely, the unified cost function used in Linear-8p facilitates concurrent optimization of all parameters, enabling implicit error compensation and resulting in a solution that is balanced overall, albeit not optimal for any single parameter. 
+
+Comparison with point-matching method. Furthermore, we evaluated the recent advancements in asyn-chronous 5-point matching solvers ( AsynTR ) [13]. Predicated on acquiring matched data within an asynchronous spatiotemporal space, this approach utilizes 5 asynchronously matched point correspondences to estimate angular and linear velocities. Under the K1, A2 configuration and problems with m=2, n=5 described in [13], the generated solver requires an elimination template size of 190 × 210 . Concurrently, by truncating higher-order angular velocity terms, we derived a more compact solver ( TruncATR ) characterized by an elimination template of 72 × 82 .Following the aforementioned experimental setup, we set the focal length to f = 400 pixel. To strictly evaluate the accuracy disparity among polynomial minimal solvers, varying levels of Gaussian noise were injected into the pixel coordinates (with a baseline error of σ = 0 .2 pixel), optical flow, and timestamps. To enforce a mathematically fair comparison between optical flow and discrete coordinate matching, spatial noise was initially modeled on the first set of points. The noise scales were explicitly formulated to be proportional to either the discrete spatial distance |p1 − p2|/f or the optical flow magnitude |u|/f . Timestamp perturbations were bounded by 1/25 of the maximum temporal interval across the five events. To maintain absolute equivalence via error propagation, the induced noise in the point-matching algorithms was evenly distributed across the two discrete observations. Each solver was executed 1,000 times, and the median solution errors are summarized in Figure 5. As illustrated in Figure 5, AsynTR demonstrates acute sensitivity to both pixel and temporal noise. As the pixel noise level increases, its estimation error diverges rapidly, ultimately being outperformed by the optical flow-based asynchronous minimal solvers. Algebraically, this instability is rooted in the multiplication of two rotation matrices within its discrete epipolar constraint, which induces highly nonlinear error coupling and severely destabilizes the polynomial system under perturbations. However, minimal solvers relying on optical flow exhibit a significantly higher sensitivity to numerical inaccuracies in the optical flow estimates themselves—an effect that slightly surpasses the impact of raw event coordinate extraction errors on feature-point-based matching algorithms. Furthermore, we observe that solvers utilizing full polynomial approximations are noticeably more susceptible to noise corruption compared to those truncating higher-order angular velocity terms. By discarding these higher-order terms, the elimination template size and the number of feasible solutions are systematically reduced, rendering the solver both computationally more efficient and robust. This phenomenon is also corroborated in the TruncATR solver, 11 Noise Levels          
+
+> 12345678910
+> Ang ular velocity error
+> 00.2 0.4 0.6 0.8
+
+Noise Levels             
+
+> 12345678910
+> Linear velocity error ( /)
+> 0510 15 20 25 30
+> AsynTR[8] TruncATR[8] ApproxRM TruncAV
+
+(a) Robustness to Pixel Noise Noise Levels          
+
+> 12345678910
+> Ang ular velocity error
+> 00.1 0.2 0.3
+
+Noise Levels          
+
+> 12345678910
+> Linear velocity error ( /)
+> 0246810
+
+(b) Robustness to Optical Flow and Matching Noise Noise Levels          
+
+> 12345678910
+> Ang ular velocity error
+> 00.1 0.2 0.3 0.4 0.5 0.6
+
+Noise Levels          
+
+> 12345678910
+> Linear velocity error ( /)
+> 0246810 12
+
+(c) Robustness to Timestamps                    
+
+> Figure 5 Robustness evaluation of various asynchronous minimal solvers under multimodal noise on synthetic data. The layout compares the angular (left) and linear (right) velocity estimation errors of point-matching-based solvers ( AsynTR ,TruncATR ) and optical-flow-based solvers ( ApproxRM ,TruncAV ) across three distinct noise factors: (a) Pixel coordinate quantization noise.( σ= 0 .2∼2pixel) (b) Optical flow extraction and equivalent matching noise.( σ=|u|/40 ∼ | u|/4) (c) Temporal timestamp jitter.( σ= 0 .002 ∼0.02 s(2 tmax /25 ∼2tmax /5))
+
+which achieves accelerated resolution speeds with negligible degradation in accuracy. In conclusion, the observations indicate that optical flow-based egomotion recovery is intrinsically more resilient against temporal jitter and pixel quantization errors; nonetheless, this resilience fundamentally relies on the availability of highly precise optical flow measurements from the front-end. 
+
+5.2 Real experiments 
+
+In this section, we evaluate the performance of various solvers in a real-world scenario using the public M3ED dataset [54]. It is worth noting that comprehensive real-world benchmarking for asynchronous egomotion is currently constrained by the extreme scarcity of datasets providing high-fidelity, asynchronous optical flow ground truth. Consequently, the real-world evaluation is exclusively conducted on the selected sequences of the M3ED dataset, where reliable flow references can be established. The experiments focus on the falcon_indoor_flight_1 sequence, in which intervals that approximately satisfy the constant velocity and small rotation assumptions. We obtain the optical flow ground truth following the methodology of the T 2CEF dataset [55]. In contrast, the corresponding pose ground truth in this paper, characterized by a higher temporal resolution, was acquired via spline interpolation to facilitate rigorous algorithm benchmarking. Camera motion is estimated every 5 ms. The asynchronous solver uses generated optical flow data calculated from every 1 ms event data, which is then calculated in the same time window for comparison against the traditional 12 
+
+synchronous Linear-8p method. The estimation accuracy for linear and angular velocities is then quantitatively assessed using this ground truth with Eq.(18) and (19). As shown in Figure 6, gray-scale image from the real dataset is used to represent the visual scene. To illustrate the imaging characteristics of the event camera, event streams within a 5ms interval are projected onto a single image(Figure 6(b)). Additionally, the spatiotemporal surface of the event stream, together with the downsampled optical flow ground truth, is visualized in a three-dimensional coordinate system(Figure 6(c)).                
+
+> (a) Gray-scale image (b) 2D event projection (c) Real events optical flow
+> Figure 6 Optical flow visualization for the falcon_indoor_flight_1 sequences from the M3ED dataset. (a) A grayscale image from M3ED (only for visual reference). (b) Event streams accumulated over a 5ms interval and projected onto the image plane. (c) A three-dimensional visualization of the spatiotemporal event surface (polarity: red=positive, blue=negative), projected onto the XY plane, with a sparsely sampled set of optical flow vectors overlaid (green arrows).
+> Table 3 Real-world experiment results. We report the median errors for εang and εlin , bold entries indicate the best performance (lowest error or shortest runtime) across all compared methods in each column, while underlined entries denote the second-best performance.
+
+Algorithm Median 
+
+εang 
+
+Median 
+
+εlin (◦)Runtime (ms) 
+
+Linear-8p 0.5360 21.6988 0.094 MiniEV-5p 0.3312 10.3753 4.702 
+
+MiniEV-8p 0.4004 8.2937 20.806 
+
+TruncAV 0.1901 5.5909 0.194 
+
+TruncAV + MiniEV-8p 0.1242 3.5147 18.203 
+
+TruncAV + MiniEV-5p 0.1811 4.7654 1.425 The fact that ApproxRM fails to converge in real-world experiments stems from the instability in Gröbner basis determination, critically undermined by accumulated floating-point rounding errors during large-scale computation. Additionally, we attempted to benchmark the asynchronous 5-point matching solvers ( AsynTR and TruncATR )in this real-world setup by generating discrete point correspondences via optical flow integration. However, due to the inevitable accumulation of real-world flow extraction noise and the error amplification during the multiplication of sequential rotation matrices (as analyzed in Sec.5.1), the coordinate perturbations far exceeded the solvers’ algebraic tolerance. Consequently, AsynTR and TruncATR failed to converge to any physically meaningful solutions, precluding their inclusion in the quantitative comparison. The remaining results of real-world experiment are presented in Table3, Linear-8p achieves the fastest runtime due to its minimal number of SVD operations, but exhibits significant estimation errors in the solution. TruncAV demonstrated the best performance among the individual algorithms, achieving the highest accuracy within the second-shortest computation time, in which the solution accuracy was significantly superior to that of the other algorithms. The MiniEV algorithm often converges to local optima during iterative optimization, resulting in slightly higher errors compared to the TruncAV method. All algorithms presented in this paper achieve higher accuracy than Linear-8p , which is additionally influenced by asynchronous timing effects. Finally, we employed TruncAV to provide initial values and optimized the estimates using both the MiniEV-8p and MiniEV-5p methods. Both approaches achieved a substantial improvement in the accuracy of linear and angular velocity estimation, along with a significant reduction in the computational time required for iterative optimization. While MiniEV-8p yielded a greater enhancement in temporal precision, the 5-point method demonstrated a shorter solution time. 13 
+
+To provide a more comprehensive evaluation of algorithmic robustness in complex real-world scenarios, we visu-alize the statistical distribution of estimation errors on the falcon_indoor_flight_1 sequence using boxplots, as depicted in Figure 7. Algorithm                 
+
+> 123456
+> Angular velocity error
+> 0
+> 0.5
+> 1
+> Algorithm
+> 123456
+> Linear velocity error (°)
+> 0
+> 50
+> 100
+> 150
+> 200
+> Linear-8p miniEV-5p miniEV-8p TruncAV TruncAV + MiniEV-8p TruncAV + MiniEV-5p
+> Figure 7 Statistical distribution of angular and linear velocity estimation errors for various algorithms evaluated on the real-world sequence.
+
+As illustrated in Figure 7, the boxplots provide a clear visualization of the error dispersion for both angular and linear velocity estimation across the six evaluated algorithms. Linear-8p exhibits the highest median errors and the widest interquartile range, particularly in linear velocity estimation where the error distribution stretches extensively. This visually confirms the geometric degradation and temporal aliasing caused by forcing asynchronous event data into discrete frames. While iterative methods ( MiniEV-5p and MiniEV-8p ) manage to reduce the median errors compared to the baseline, their distributions remain highly dispersed with prominent whiskers. This indicates a continuing susceptibility to local optima and instability when exposed to unmodeled real-world noise. In contrast, the TruncAV method significantly compresses the error distribution. By algebraically truncating high-order noise-sensitive terms, it achieves a markedly narrower interquartile range, demonstrating enhanced numerical stability. Ultimately, the visual data strongly supports the superiority of the hybrid coarse-to-fine strategies. Both TruncAV + MiniEV-8p and TruncAV + MiniEV-5p deliver the most robust performance. Their respective boxplots are the most concentrated among all evaluated methods, effectively suppressing extreme outliers while achieving the lowest median errors. This rigorously substantiates the conclusion that initializing exact iterative solvers with robust algebraic approximations yields optimal stability and accuracy in dynamic, real-world environments. 
+
+## 6 Conclusion 
+
+To address the fundamental challenge of estimating full-DoF camera motion from asynchronous event camera data streams, this paper decouples angular and linear velocities within the differential epipolar constraint equation and formally models the differential epipolar constraint for asynchronous observations. Building upon this formulation, we derive three minimal 5-point solvers specifically tailored for asynchronous event streams. Experimental results validate the benefits of explicitly modeling temporal asynchrony. Compared to traditional synchronous approaches (the 8-point algorithm) that disregard precise timestamp information, the proposed asynchronous framework demon-strates superior estimation accuracy and robustness against pixel, optical flow, and timestamp noise.We further investigate the trade-off between accuracy and computational efficiency: while the iterative optimization solver achieves theoretical optimality under ideal conditions, the polynomial-based Gröbner basis solver yields significant efficiency gains with negligible loss in accuracy. Notably, the adoption of a hybrid coarse-to-fine solving strategy in real-world experiments achieves an optimal balance between performance and efficiency. Despite these encouraging results, several avenues for future research merit further exploration. First, while the presented method performs exceptionally well in static environments, extending the differential epipolar framework to handle dynamic scenes containing moving objects remains a challenging open problem. Second, while the presented solvers demonstrate strong algebraic resilience, the final estimation accuracy remains heavily contingent upon the precision of the front-end optical flow extraction. Consequently, developing high-fidelity, purely asynchronous optical flow estimation algorithms represents a critical direction for future research.       
+
+> Acknowledgements This work was supported by the National Natural Science Foundation of China (Grant No. 12372189) and the Science and Technology Innovation Program of Hunan Province (Grant No. 2025RC1045).
+> References
+> 1Tong Qin, Peiliang Li, and Shaojie Shen. VINS-Mono: A robust and versatile monocular visual-inertial state estimator. IEEE Transactions on Robotics , 34(4):1004–1020, 2018. 2Christian Forster, Zichao Zhang, Michael Gassner, Manuel Werlberger, and Davide Scaramuzza. SVO: Semidirect visual odometry for monocular and multicamera systems. IEEE Transactions on Robotics , 33(2):249–265, 2017.
+
+14 3 Yanjie Chen, Yangning Wu, Zhenguo Zhang, Zhiqiang Miao, Hang Zhong, Hui Zhang, and Yaonan Wang. Image-based visual servoing of unmanned aerial manipulators for tracking and grasping a moving target. IEEE Transactions on Industrial Informatics , 19(8):8889–8899, 2022. 4 Yunhao Liu, Li Liu, Yawen Zheng, Yunhuai Liu, Fan Dang, Ningbo Li, and Ke Ma. Embodied navigation. Science China Information Sciences , 68(4):141101, 2025. 5 Daniel Gehrig and Davide Scaramuzza. Low-latency automotive vision with event cameras. Nature , 629(8014):1034–1040, 2024. 6 Davide Falanga, Kevin Kleber, and Davide Scaramuzza. Dynamic obstacle avoidance for quadrotors with event cameras. Science Robotics ,5(40):eaaz9712, 2020. 7 Banglei Guan, Yifei Bian, Zibin Liu, Haoyang Li, Xuanyu Bai, Taihang Lei, Bin Li, Yang Shang, and Qifeng Yu. Event-based method for high-speed 3d deformation measurement under extreme illumination conditions. Experimental Mechanics , pages 1–14, 2026. 8 Guillermo Gallego, Tobi Delbrück, Garrick Orchard, Chiara Bartolozzi, Brian Taba, Andrea Censi, Stefan Leutenegger, Andrew J. Davison, Jörg Conradt, Kostas Daniilidis, and Davide Scaramuzza. Event-based vision: A survey. IEEE Transactions on Pattern Analysis and Machine Intelligence , 44(1):154–180, 2022. 9 Haoyang Wang, Ruishan Guo, Pengtao Ma, Ciyu Ruan, Xinyu Luo, Wenhua Ding, Tianyang Zhong, Jingao Xu, Yunhao Liu, and Xinlei Chen. Event camera meets mobile embodied perception: abstraction, algorithm, acceleration, application. ACM Computing Surveys ,58(8):1–41, 2026. 10 Banglei Guan, Dongcai Tan, Jing Tao, Ang Su, Yang Shang, and Qifeng Yu. Fusion-restoration image processing algorithm to improve the high-temperature deformation measurement. Experimental Mechanics , pages 1–12, 2026. 11 Banglei Guan, Jing Tao, Liang Xu, Dongcai Tan, Pengju Sun, Jianbing Liu, Yang Shang, and Qifeng Yu. A dmd-based adaptive modulation method for high dynamic range imaging in high-glare environments. Experimental Mechanics , pages 1–13, 2026. 12 Yi Wu, Wenjie Deng, Xiaoqing Chen, Jingjie Li, Songyu Li, and Yongzhe Zhang. Cmos-compatible retinomorphic si photodetector for motion detection. Science China Information Sciences , 66(6):162401, 2023. 13 Petr Hruby and Marc Pollefeys. Minimal solvers for full dof motion estimation from asynchronous tracks. arXiv preprint arXiv:2508.17537 ,2025. 14 Hang Su, Yunlong Feng, Daniel Gehrig, Panfeng Jiang, Ling Gao, Xavier Lagorce, and Laurent Kneip. A linear n-point solver for structure and motion from asynchronous tracks. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 4339–4348, 2025. 15 Guillermo Gallego, Henri Rebecq, Elias Mueggler, and Davide Scaramuzza. A unifying contrast maximization framework for event cameras, with applications to motion, depth, and optical flow estimation. IEEE Transactions on Pattern Analysis and Machine Intelligence ,40(12):2952–2967, 2018. 16 Urbano Miguel Nunes and Yiannis Demiris. Robust event-based vision model estimation by dispersion minimisation. IEEE Transactions on Pattern Analysis and Machine Intelligence , 44(12):9561–9573, 2021. 17 Xueyan Huang, Yueyi Zhang, and Zhiwei Xiong. Progressive spatio-temporal alignment for efficient event-based motion estimation. In 
+
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 1537–1546, 2023. 18 Banglei Guan and Ji Zhao. Affine correspondences between multi-camera systems for relative pose estimation. IEEE Transactions on Pattern Analysis and Machine Intelligence , 48(2):2012–2029, 2026. 19 Banglei Guan, Ji Zhao, and Laurent Kneip. A complete solution to generalized relative pose estimation from affine correspondences. IEEE Transactions on Pattern Analysis and Machine Intelligence , pages 1–15, 2026. 20 David Nistér. An efficient solution to the five-point relative pose problem. IEEE Transactions on Pattern Analysis and Machine Intelligence , 26(6):756–770, 2004. 21 Jakob Engel, Vladlen Koltun, and Daniel Cremers. Direct sparse odometry. IEEE Transactions on Pattern Analysis and Machine Intelligence , 40(3):611–625, 2017. 22 H. Zhan, C. S. Weerasekera, J. W. Bian, and I. Reid. Visual odometry revisited: What should be learnt? In 2020 IEEE International Conference on Robotics and Automation , pages 4203–4210, 2020. 23 Alex Kendall, Matthew Grimes, and Roberto Cipolla. Posenet: A convolutional neural network for real-time 6-dof camera relocalization. In 2015 IEEE International Conference on Computer Vision , pages 2938–2946. IEEE, 2015. 24 Ling Gao, Hang Su, Daniel Gehrig, Marco Cannici, Davide Scaramuzza, and Laurent Kneip. A 5-point minimal solver for event camera relative motion estimation. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 8049–8059, 2023. 25 Ling Gao, Daniel Gehrig, Hang Su, Davide Scaramuzza, and Laurent Kneip. An n-point linear solver for line and motion estimation with event cameras. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 14596–14605, 2024. 26 Ji Zhao, Banglei Guan, Zibin Liu, and Laurent Kneip. Full-dof egomotion estimation for event cameras using geometric solvers. In 
+
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 11515–11524, 2025. 27 Zhongyang Ren, Bangyan Liao, Delei Kong, Jinghang Li, Peidong Liu, Laurent Kneip, Guillermo Gallego, and Yi Zhou. Motion and structure from event-based normal flow. In European Conference on Computer Vision , pages 108–125. Springer, 2024. 28 Hugh Greatorex, Michele Mastella, Madison Cotteret, Ole Richter, and Elisabetta Chicca. Event-based vision for egomotion estimation using precise event timing. arXiv preprint arXiv:2501.11554 , 2025. 29 Patrick Lichtsteiner, Christoph Posch, and Tobi Delbruck. A 128 × 128 120 db 15 μs latency asynchronous temporal contrast vision sensor. 
+
+IEEE Journal of Solid-State Circuits , 43(2):566–576, 2008. 30 Wenpu Li, Bangyan Liao, Yi Zhou, Qi Xu, Pian Wan, and Peidong Liu. E-moflow: Learning egomotion and optical flow from event data via implicit regularization. In Annual Conference on Neural Information Processing Systems , 2025. 31 Alex Zhu, Liangzhe Yuan, Kenneth Chaney, and Kostas Daniilidis. Ev-flownet: Self-supervised optical flow estimation for event-based cameras. In Proceedings of Robotics: Science and Systems , Pittsburgh, Pennsylvania, June 2018. 32 Mathias Gehrig, Mario Millhäusler, Daniel Gehrig, and Davide Scaramuzza. E-raft: Dense optical flow from event cameras. In 2021 International Conference on 3D Vision (3DV) , pages 197–206. IEEE, 2021. 33 Ziluo Ding, Rui Zhao, Jiyuan Zhang, Tianxiao Gao, Ruiqin Xiong, Zhaofei Yu, and Tiejun Huang. Spatio-temporal recurrent networks for event-based optical flow estimation. In Proceedings of the AAAI conference on artificial intelligence , volume 36, pages 525–533, 2022. 34 Xinglong Luo, Kunming Luo, Ao Luo, Zhengning Wang, Ping Tan, and Shuaicheng Liu. Learning optical flow from event camera with rendered dataset. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 9847–9857, 2023. 35 David Reverter Valeiras, Xavier Clady, Sio-Hoi Ieng, and Ryad Benosman. Event-based line fitting and segment detection using a neuromorphic visual sensor. IEEE transactions on neural networks and learning systems , 30(4):1218–1230, 2018. 36 Myo Tun Aung, Rodney Teo, and Garrick Orchard. Event-based plane-fitting optical flow for dynamic vision sensors in fpga. In 2018 IEEE International Symposium on Circuits and Systems , pages 1–5. IEEE, 2018. 37 Chankyu Lee, Adarsh Kumar Kosta, Alex Zihao Zhu, Kenneth Chaney, Kostas Daniilidis, and Kaushik Roy. Spike-flownet: event-based optical flow estimation with energy-efficient hybrid neural networks. In European conference on computer vision , pages 366–382. Springer, 2020. 38 Federico Paredes-Vallés, Kirk YW Scheper, and Guido CHE De Croon. Unsupervised learning of a hierarchical spiking neural network for optical flow estimation: From events to global motion perception. IEEE transactions on pattern analysis and machine intelligence ,42(8):2051–2064, 2019. 39 Thomas Dalgaty, Thomas Mesquida, Damien Joubert, Amos Sironi, Pascal Vivet, and Christoph Posch. Hugnet: Hemi-spherical update graph neural network applied to low-latency event-based optical flow. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 3953–3962, 2023. 15 40 Mathias Gehrig, Manasi Muglikar, and Davide Scaramuzza. Dense continuous-time optical flow from event cameras. IEEE Transactions on Pattern Analysis and Machine Intelligence , 46(7):4736–4746, 2024. 41 Alessandro Chiuso, Paolo Favaro, Hailin Jin, and Stefano Soatto. Structure from motion causally integrated over time. IEEE transactions on pattern analysis and machine intelligence , 24(4):523–535, 2002. 42 John Oliensis. A critique of structure-from-motion algorithms. Computer Vision and Image Understanding , 80(2):172–214, 2000. 43 Bingbing Zhuang, Loong-Fah Cheong, and Gim Hee Lee. Rolling-shutter-aware differential sfm and image rectification. In Proceedings of the IEEE International Conference on Computer Vision , pages 948–956, 2017. 44 Yi Ma, Stefano Soatto, Jana Košecká, and Shankar Sastry. An invitation to 3-d vision: from images to geometric models , volume 26. Springer, 2004. 45 Yi Ma, Jana Košecká, and Shankar Sastry. Linear differential algorithm for motion recovery: A geometric approach. International Journal of Computer Vision , 36(1):71–89, 2000. 46 Bin Fan, Yuchao Dai, Zhiyuan Zhang, and Mingyi He. Fast and robust differential relative pose estimation with radial distortion. IEEE Signal Processing Letters , 29:294–298, 2021. 47 Bin Fan, Yuchao Dai, Zhiyuan Zhang, and Ke Wang. Differential sfm and image correction for a rolling shutter stereo rig. Image and Vision Computing , 124:104492, 2022. 48 Bruce D Lucas and Takeo Kanade. An iterative image registration technique with an application to stereo vision. In IJCAI’81: 7th international joint conference on Artificial intelligence , volume 2, pages 674–679, 1981. 49 Berthold KP Horn and Brian G Schunck. Determining optical flow. Artificial intelligence , 17(1-3):185–203, 1981. 50 Chengxi Ye, Anton Mitrokhin, Cornelia Fermüller, James A. Yorke, and Yiannis Aloimonos. Unsupervised learning of dense optical flow, depth and egomotion with event-based sensors. In 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems , pages 5831–5838, 2020. 51 Simon Klenk, Marvin Motzet, Lukas Koestler, and Daniel Cremers. Deep event visual odometry. In 2024 International Conference on 3D Vision , pages 739–749, 2024. 52 Roberto Pellerito, Marco Cannici, Daniel Gehrig, Joris Belhadj, Olivier Dubois-Matra, Massimo Casasco, and Davide Scaramuzza. Deep visual odometry with events and frames. In 2024 IEEE/RSJ International Conference on Intelligent Robots and Systems , pages 8966– 8973. IEEE, 2024. 53 Viktor Larsson, Kalle Astrom, and Magnus Oskarsson. Efficient solvers for minimal problems by syzygy-based reduction. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 820–829, 2017. 54 Kenneth Chaney, Fernando Cladera, Ziyun Wang, Anthony Bisulco, M. Ani Hsieh, Christopher Korpela, Vijay Kumar, Camillo J. Taylor, and Kostas Daniilidis. M3ed: Multi-robot, multi-sensor, multi-environment event dataset. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops , pages 4015–4022, June 2023. 55 Anthony Bisulco, Vijay Kumar, and Kostas Daniilidis. Ev-ttc: Event-based time to collision under low light conditions. IEEE Robotics and Automation Letters , pages 1–8, 2025.

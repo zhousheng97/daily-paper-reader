@@ -1,0 +1,767 @@
+Title: SpikeTAD: Spiking Neural Networks for End-to-End Temporal Action Detection
+
+URL Source: https://arxiv.org/pdf/2606.12033v1
+
+Published Time: Thu, 11 Jun 2026 01:13:18 GMT
+
+Number of Pages: 34
+
+Markdown Content:
+# SpikeTAD: Spiking Neural Networks for End-to-End Temporal Action Detection 
+
+> Min Yang a, Mi Zhou a, Limin Wang a, B
+> aState Key Laboratory for Novel Software Technology, Nanjing University, Nanjing, Jiangsu, China
+
+Abstract 
+
+Video understanding is a crucial part of computer vision, with numerous application scenarios. With the increasing popularity of mobile devices, an increasing number of e ff orts are trying to deploy video understanding models on them. However, ex-isting video understanding models are di ffi cult to deploy due to their large size and prohibitive power consumption. Spiking Neural Networks (SNNs) have shown bio-plausibility and low power advantages over Artificial Neural Networks (ANNs), es-pecially on neuromorphic chips which are regarded as essential components of future mobile devices. However, excessively long conversion time-steps and severe perfor-mance degradation problems limit their application. To solve the problems above, we explore the application of SNNs on temporal action detection (TAD), which is an im-portant task in video understanding, and propose the first SNN-based end-to-end TAD architecture coined as SpikeTAD . While maintaining extremely low power consump-tion, SpikeTAD achieves an average mAP of 67.2% in THUMOS14 and 37.42% in ActivityNet-1.3, demonstrating the feasibility of a low-power TAD model. Our code is available at https://github.com/MCG-NJU/SpikeTAD .
+
+Keywords: Temporal Action Detection, Spiking Neural Network 
+
+1. Introduction 
+
+The video understanding community continues to evolve, with the research focus gradually shifting from short-term video action classification to long-term video con-tent comprehension. As an important basic task in the field of video understanding, 
+
+> arXiv:2606.12033v1 [cs.CV] 10 Jun 2026
+
+Temporal Action Detection (TAD) refers to localizing and classifying action snip-pets in untrimmed long videos. Existing work [1, 2, 3, 4] continues to advance the detection performance, allowing the TAD model to be applied to a wider range of sce-narios [5, 6]. However, these TAD works remain focused on improving the detection results, with mobile device deployment not being a priority in current TAD research. Although some methods [7] attempt to explore how to build e ffi cient TAD models for limited computing resources, they remain focused on GPU-based inference, without considering the power consumption which is crucial for mobile devices. Spiking neural networks (SNNs) [8] are biologically plausible neural networks based on the dynamic characteristics of biological neurons. As the third generation of artificial neural networks, SNNs have attracted great attention due to their low-power advantages over artificial neural networks (ANNs). Spiking neurons inside SNNs emit spikes when the membrane potentials exceed a threshold, and trigger sparse additions only when they receive a spike. From the perspective of computational hardware op-erations, multiplication operations in state-of-the-art deep ANNs are replaced by ac-cumulation (AC) operations in SNNs, achieving lower energy consumption compared to ANNs. However, the negative impact of complex neuronal dynamics and spike-driven nature is that SNNs are di ffi cult to train and have limited task performance and application scenarios. Most SNN methods [9, 10] try to reduce the time-step and im-prove SNN to obtain e ffi cient and powerful models, but they are all limited to simple classification tasks. Applying SNNs to TAD models on neuromorphic chips faces much greater chal-lenges than image models. First, TAD requires further understanding of video se-mantics, which is more complex than images. Second, videos have additional time dimension compared with images, and SNN requires an additional time-step for spike accumulation, making the power consumption of the model greater than that of image models. To solve the problems above, we not only need to ensure the video understand-ing ability of SNN, but also need to use as few time-steps as possible to accumulate spikes. Existing end-to-end TAD frameworks [4, 11, 12, 13, 14] usually consist of a backbone and a detector. The backbone [15, 16, 17] relies on pre-trained weights 2Figure 1: Comparison between SpikeTAD and other methods. We compared the energy consumption ratio and detection performance of SpikeTAD with other end-to-end TAD methods for THUMOS14 [5]. Due to the excessive power consumption of these ANN methods compared to SpikeTAD, we use log on the power consumption axis to visualize the power consumption gap between di ff erent methods. 
+
+from action classification datasets [18, 19], while the detector can be optimized from scratch. Specifically, we first build and train an ANN version of the TAD model, in-cluding the backbone network and the detector in an end-to-end manner. Next, we adopt an ANN-SNN transformation strategy to convert the ANN model into an SNN model by transferring the trained weights. For the non-linear activation units con-taining training weights in the backbone, we use a combination of Multi-Threshold Neuron and Expectation Compensation Module [20, 21] to maintain lossless infor-mation propagation as much as possible. For simple action detectors, we replace the continuous activation functions like ReLU with simple Integrate-and-Fire Neuron. To use fewer time steps and maintain performance as much as possible, we used a quan-tization clip-floor activation function [22] to eliminate transformation errors. To this end, we build the first SNN-based framework for TAD, termed as Spike-TAD . We choose the ViT-S model [17] for its high accuracy and low parameter count and computational cost. We use a simple multi-scale feature pyramid [14, 23] for its 3lighter architectures to construct multi-level features along with several convolutional blocks for detection in the detector. As shown in Fig. 1, our SpikeTAD achieves com-parable results to many ANN methods with only a few time-steps, while consuming significantly less power. The main contributions of this work are: 
+
+• We are the first to explore the application of SNNs on TAD and propose the first SNN-based end-to-end TAD framework termed as SpikeTAD .
+
+• SpikeTAD explores a variety of spiking neurons and chooses the most e ff ective manner through detailed experimental exploration, achieving a balance between power consumption and detection accuracy. 
+
+• SpikeTAD achieves outstanding accuracy with low energy consumption on two widely-used TAD datasets, and achieves better detection performance than its ANN version. 
+
+2. Related Work 
+
+2.1. Temporal Action Detection 
+
+Temporal action detection (TAD) aims to localize the temporal interval of each action instance in an untrimmed video and recognize its action category. These meth-ods can be divided into one-stage TAD and multi-stage TAD. One-stage TAD meth-ods [1, 2, 14] aim to detect the boundaries and categories of action segments in a single shot, they o ff er e ffi ciency but are constrained by default anchors, requiring meticu-lous hyperparameter tuning. Multi-stage TAD methods [3, 24] often involve multiple stages to generate and refine action detection results. They usually generate action proposals using predefined temporal anchors, refining them via boundary regression and classification. Due to limited GPU memory, most existing methods [1, 2, 3] use pre-extracted action recognition features as inputs to the TAD model, while others try to train an end-to-end model [14, 24, 12]. In the past year, the TAD community has produced models with faster inference speed and fewer parameters [7] and better de-tection results [11]. However, no work has attempted to reduce the power consumption of TAD. Unlike the aforementioned TAD works that involve complex ANN structure 4optimization, our SpikeTAD attempts to introduce a low-power SNN architecture for TAD models, taking an important step towards deploying it on neuromorphic chips of mobile devices. 
+
+2.2. Spiking Neural Networks 
+
+Spiking Neural Networks (SNNs) [8, 9] are a class of neural networks that more closely emulate the behavior of biological neurons compared to ANNs. The primary distinction lies in their use of discrete spikes for information transmission, as opposed to the continuous signals employed by ANNs. SNNs have two advantages. The first is the addition of a time dimension, which is conducive to long-term learning without forgetting. The second one is that SNNs can transmit information in a binary manner, which is more energy-e ffi cient. This makes SNNs ideal for edge computing and real-time applications involving spatiotemporal data. Our SpikeTAD is the first to apply SNN to TAD tasks, significantly reducing energy consumption while ensuring high detection performance. 
+
+2.3. Learning Paradigms for Spiking Neural Networks 
+
+There are currently two mainstream approaches to training SNNs. The first paradigm is the conversion from ANN to SNN (ANN-SNN) [22, 25, 26, 27, 28], and the second one is the supervised learning [29, 30, 31, 32, 33]. The ANN-SNN conversion method involves initially training an ANN and subsequently converting it into a homogeneous SNN by transferring the trained weights and substituting non-linear activation neurons with spiking neurons. However, being restricted to rate-coding, ANN-SNN conver-sion usually requires dozens or even hundreds of timesteps to obtain well-performed networks. Several works [22, 25, 20, 21] have tried to improve the rate-coding to minimize the conversion error and use fewer time-steps to solve these problems. On the other hand, supervised learning employs alternative functions during backpropa-gation to approximate the firing process, enabling the direct training of SNNs as if they were ANNs. For example, by regarding the SNN as a special RNN, a train-ing method of back-propagation through time with di ff erent kinds of surrogate gra-dient was proposed [34]. Spike-Timing-Dependent Plasticity (STDP) [35] enabled 5pure SNNs to learn temporal patterns e ff ectively like the backpropagation algorithm in ANN, achieving impressive performance with just a few time-steps. Our SpikeTAD adopts the learning paradigms of ANN-SNN to maximize the use of backbone weights in ANN models. Despite this, we go deep into the errors caused by the ANN-SNN conversion and try our best to reduce the errors with fewer spikes. 
+
+3. Method 
+
+In this section, we first briefly review the preliminaries for SNNs, then introduce SpikeTAD and provide other details. 
+
+3.1. Preliminary 3.1.1. Integrate-and-Fire Neuron 
+
+The Integrate-and-Fire (IF) [22] neuron accumulates spikes within a fixed time-step T , which are then encoded into a membrane potential and sent to the next neuron. If the IF neurons in the l-th layer receive the input xl−1(t) from the last layer at time-step t, the temporal potential of the IF neurons can be defined as: 
+
+ml(t) = vl(t − 1) + Wl xl−1(t), (1) 
+
+sl(t) = H(ml(t) − θl), (2) 
+
+xl(t) = θl sl(t), (3) 
+
+vl(t) = ml(t) − xl(t). (4) where ml(t) and vl(t) represent the membrane potential before and after the trigger of a spike at time-step t. Wl denotes the synaptic weight in the l-th layer. When any element mli(t) from ml(t) exceeds the firing threshold θl, the neuron will elicit a spike 
+
+sli(t) and update the membrane potential vli(t), where i is the index of the threshold. 
+
+θl denotes the learnable firing threshold, which is often initialized or bounded by the maximum activation value of the layer to ensure optimal information transmission. We use H to represent the Heaviside step function, which equals 1 when the spike triggers, otherwise 0. At the same time, the spike sl(t) refers to the output spikes of all neurons in layer l at time t. xl(t) is the postsynaptic potential of layer l, which equals 6θl if the neuron fires and 0 otherwise, to achieve spike intensity equivalence. We use the “reset-by-subtraction" mechanism in Eq(4) to avoid information loss. s l1 (t)                       
+
+> sl2(t)
+> ...
+> sl2n (t)
+> 𝑊𝑊 𝑙𝑙 𝜆𝜆 1𝑙𝑙
+> 𝑣𝑣 𝑙𝑙 (𝑡𝑡 − 1)
+> 𝑚𝑚 𝑙𝑙 (𝑡𝑡 )𝑊𝑊 𝑙𝑙 𝑥𝑥 𝑙𝑙−1 (𝑡𝑡 )
+> Soma Axon Synapse Dendrite
+> 𝑊𝑊 𝑙𝑙 𝑥𝑥 𝑙𝑙 (𝑡𝑡 )
+> 𝑊𝑊 𝑙𝑙 𝜆𝜆 2𝑙𝑙
+> 𝑊𝑊 𝑙𝑙 𝜆𝜆 2𝑛𝑛 𝑙𝑙
+> 𝑣𝑣 𝑙𝑙 (𝑡𝑡 )
+> 𝜃,n MTH 𝑙
+> Figure 2: Diagram of the multi-threshold neuron. The multi-threshold neuron receives input from last module and emits up to one spike at each time-step t.
+
+3.1.2. Multi-Threshold Neuron 
+
+IF neurons are mostly used to replace ReLU activation from linear or convolution layers in CNNs, but they cannot replace the activation operations like GELU from non-linear operations in Transformers. These operations require interaction between neurons within the same layer and exhibit non-linear characteristics. Integrate-and-Fire neurons can only send very simple spike signals and cannot express complex features. Forcing them to express complex features will result in a great loss of infor-mation, making it challenging to achieve accurate conversion through the linear piece-wise quantization of individual neurons. To tackle this challenge, the multi-threshold neuron (MTN) is proposed. MTN has a total of 2 n thresholds with the base threshold 
+
+θ, with n positive thresholds and n negative thresholds. Both of them are learnable and derived from weights of the ANN function in the l−th layer. These thresholds divide the input signal into multiple intervals, thereby simulating more complex response patterns of neurons. Specifically, the MTN learning method describes the strength and polarity (positive or negative) of spike signals, rather than simply addressing the binary question of whether or not a spike is activated. However, MTN transitions from single-bit spike communication to multi-bit event representation, which inevitably in-creases the communication bandwidth and energy overhead compared to vanilla IF 7neurons. Therefore, we only use MTN when we need to simulate spike activation in complex nonlinear layers within the backbone network. We can refer to λli as the i-th threshold value of MTN corresponding to index i.
+
+λl 
+
+> 1
+
+= θl, λ l 
+
+> 2
+
+= θl
+
+2 , . . . , λ ln = θl
+
+2n−1 , (5) 
+
+λln+1 = −θl, λ ln+2 = − θl
+
+2 , . . . , λ l 
+
+> 2n
+
+= − θl
+
+2n−1 . (6) Powers of 2 can give binary neurons multi-bit output capabilities and provide more fine-grained threshold representation. As shown in Fig 2, the dynamics of MTN can be described as the following equations: 
+
+ml(t) = vl(t − 1) + Wl xl−1(t), (7) 
+
+sli(t) = MTH θ, n(ml(t), i), (8) 
+
+xl(t) =
+
+X
+
+> i
+
+sliλli, (9) 
+
+vl(t) = ml(t) − xl(t), (10) MTH θ, n(ml(t), i) =
+
+
+
+0, if λ2n < x < λ n.
+
+1, elif i = arg min  
+
+> p
+
+|x − λp|.
+
+0, else .
+
+(11) The only di ff erence between MTN and IF is the generation of sli(t). When n = 1, this model reduces to an IF neuron with an additional negative threshold. However, because MTN needs to transmit specific numerical values, the data packets transmit-ted between neurons become larger, significantly increasing the communication band-width burden and data exchange power consumption. Therefore, we only use it when necessary. 
+
+3.1.3. ANN-SNN conversion 
+
+For ANNs, the computations of analog neurons can be simplified as the combina-tion of a linear and a non-linear transformation: 
+
+al = h(Wlal−1) = F(al−1), (12) 8Here al denotes the output of all neurons in the l-th layer, Wl denotes the weight of function F in the l-th layer and h(.) is a non-linear activation function. The key idea of ANN-SNN conversion is to map the activation value of a neuron in ANN to the firing rate of a spiking neuron in SNN. Specifically, we can get the potential update equation by combining equations from Eq (1) to Eq (4). 
+
+vl(t) − vl(t − 1) = Wl xl−1(t) − sl(t)θl, (13) By summing Eq (13) from 1 to T and dividing T on both sides, we obtain: 
+
+vl(T ) − vl(0) 
+
+T = Wl PTi=1 xl−1(i)
+
+T −
+
+PTi=1 sl(i)θl
+
+T , (14) We use rl(T ) =  
+
+> PTi=1sl(i)θl
+> T
+
+to denote the encoded activation that aims to map activation value al from the corresponding ANN layer. When we substitute Eq (3) and Eq (14), then we get: 
+
+rl(T ) = Wlrl−1(T ) − vl(T ) − vl(0) 
+
+T , (15) Assuming the input rate rl−1(T ) ≈ al−1, as the total time-steps T increase or the residual term vl(T )−vl(0)  
+
+> T
+
+becomes negligible, the encoded rate rl(T ) in the SNN asymp-totically approximates the activation al in the corresponding ANN. This mathematical equivalence ensures that the SNN can replicate the functional mapping of the ANN while operating with discrete spikes. 
+
+3.1.4. Expectation Compensation Module 
+
+In ANN-SNN conversion, using a limited number of time-steps ( T ) for e ffi ciency often leads to severe information loss, particularly due to the non-linear nature of the modules. To mitigate this, the Expectation Compensation Module (ECM) [20, 21] leverages prior cumulative information to compute precise expectations and preserve non-linearity. For a non-linear layer l with activation function F, let S l−1(T ) =
+
+PTt=1 xl−1(t) be the cumulative input spikes up to time T . The exact spike output xl(T )at step T can be deduced by subtracting the total expected output at T − 1 from that at 
+
+T :
+
+xl(T ) = T F ( S l−1(T )
+
+T ) − (T − 1) F( S l−1(T − 1) 
+
+T − 1 ), (16) 9Eq (16) demonstrates that lossless conversion can be achieved simply by maintaining an accumulator for S l−1(T ) from the previous layer. When extending this mecha-nism to matrix product operations—which are widely adopted in self-attention mech-anisms—we apply the same expectation logic. Consider two spike input matrices, 
+
+A(t) and B(t), with their respective cumulative sums denoted as S A(T ) = PTt=1 A(t)and S B(T ) = PTt=1 B(t). The cumulative matrix product S M (T ) = S A(T )S B(T ) can be updated recursively: 
+
+S M (T ) = S M (T − 1) + A(T )B(T ) + A(T )S B(T − 1) + S A(T − 1) B(T ) (17) Consequently, the expected output matrix x(T ) at time T is derived from the di ff erence between consecutive expectation states: 
+
+x(T ) = 1
+
+T S M (T ) − 1
+
+T − 1 S M (T − 1) (18) This formulation indicates that a neuron requires only two variables to record the his-torical states S A(T − 1) and S B(T − 1). The main power consumption occurs during the computation of the update terms in Eq (17). However, because the input matrix guarantees limited e ff ective thresholds per time-step, the total number of operations is highly constrained by the inherent spatial-temporal sparsity of the spikes. This allows the matrix product to be implemented through sparse accumulations, significantly re-ducing the energy footprint compared to dense ANN matrix multiplications. 
+
+3.1.5. Quantization Clip-Floor Activation Function 
+
+To mitigate performance degradation in ANN-SNN conversion at short time-steps, we replace the standard ReLU with a quantized clip-floor activation function [22, 28, 36]. To account for cases where the quantization steps L di ff er from the SNN time-steps T , we introduce a shift parameter ϕ. Let zl = Wlal−1 denote the pre-activation potential. The shifted ANN activation function is defined as: 
+
+al = θlclip( 1
+
+L ⌊ zl L
+
+θl + ϕ⌋, 0, 1) , (19) In the corresponding SNN, accumulating zl over T steps with an initial membrane po-tential vl(0) yields the expected firing rate rl(T ). By tracking the membrane potential 10 dynamics and bounding the residual potential 0 ≤ vl(T ) < θ l, the firing rate can be directly expressed as: 
+
+rl(T ) = θlclip ( 1
+
+T ⌊ zlT + vl(0) 
+
+θl ⌋, 0, 1) (20) Our goal is to minimize the expected conversion error Ez[Err ] = Ez(rl − al). We can decouple this error into two components relative to the unquantized pre-activation zl:
+
+Ez[Err ] = Ez(rl − zl) + Ez(zl − al) (21) To eliminate this error, we assume zl is locally uniform within small intervals. For a uniformly distributed random variable x ∈ [0 , θ ] with symmetrical boundary probabil-ity densities ( p0 = pT ), the expected quantization error with a half-step shift evaluates to zero: 
+
+Ex x − θ
+
+T
+
+$ T x 
+
+θ + 12
+
+%! 
+
+= (p0 − pT ) θ2
+
+8T 2 = 0 (22) Applying this property to Eq (21), we set the shift parameter ϕ = 1/2 and the initial membrane potential vl(0) = θl/2. This configuration independently zeroes out both terms ( Ez(rl − zl) = 0 and Ez(zl − al) = 0). Consequently, the mean conversion error strictly reaches zero ( Ez[Err ] = 0), guaranteeing accurate ANN-SNN conversion even when the quantization steps L are decoupled from the simulation time-steps T .
+
+3.1.6. Di ff erence between Semantic Time and Computational Time 
+
+As illustrated in Figure 3, a fundamental distinction in our framework lies be-tween the Semantic Time (video frame index) and the Computational Time (spike simulation steps). In video-based SNNs, the spike accumulation process operates on each individual frame, inherently leading to a multiplicative increase in computa-tional overhead. To maintain high-precision ANN-SNN conversion within a strictly limited number of time-steps, we strategically deploy di ff erent neuronal mechanisms across the network. Specifically, for the three-dimensional spatio-temporal features (T × H × W) in the backbone, we employ the Expectation Compensation Module (ECM) and Multi-Threshold Neuron (MTN). The ECM preserves temporal fidelity by leveraging the statistical properties of mathematical expectation to compensate for 11 meyiz     
+
+> (a) Video Semantic Time (Video Timeline)
+> Tvid
+> Action A Action B
+> s1e1s2e2
+> (b) Temporal Tokenization (Frames / Tokens)
+> Tmodel
+> (c) SNN Computational Time (SNN Timestamps)
+> t
+> t
+> t
+> t
+> Input
+> Spikes
+> Output
+> Spikes
+> Preprocessing and
+> Computing in Model
+
+Figure 3: Di ff erence between semantic time and computational time. 
+
+residual information lost during quantization, thereby reducing the dependency on ex-tensive time-steps. Simultaneously, the MTN enhances the information capacity per time-step and mitigates fine-grained quantization errors. For the detector stage, where features are compressed into the temporal-only dimension ( T ), we utilize a simplified Integrate-and-Fire (IF) neuron to ensure computational e ffi ciency while maintaining eff ective spike activation. 
+
+3.2. SpikeTAD Architecture 3.2.1. Overview 
+
+The overview of SpikeTAD is shown in Fig 4. We input raw untrimmed videos with dimensions T × H × W × 3 into our SpikeTAD. Then the input will be split into patches and projected into tokens in spatiotemporal position embedding (SPE) [17]. After adding the corresponding position embedding (PE), the spatiotemporal features will be input into the ViT block module with L layers. We adopt expectation com-pensation module along with multi-threshold neuron to replace nonlinear operations in the ViT block. Specifically, each layer has Multi-Threshold Spiking Self-Attention (MSSA) and Multi-Threshold Feedforward network (MFFN) along with LayerNorm and shortcuts. The ANN’s feature input U needs to be transferred into postsynaptic 12 Video       
+
+> T×H×W×3
+> Conv3D
+
++
+
+> Linear
+> MSSA
+
++ +         
+
+> Linear LN
+> Linear
+> Linear
+> Linear GELU Linear
+> Reg
+> Conv1D Conv1D
+> ×L
+> ViT Block
+> MFFN
+> PE SPE FPN
+> Head
+> Head
+> Head
+> Head
+> Detector shared
+> Cls
+> LN
+> LN
+> MP
+> MP
+> MSSA MFFN
+> ×3
+> LN Conv1D Conv1D
+> ×3
+> Reg
+> Cls
+> Multi-threshold Neuron Layer
+> Integrate-and-Fire Neuron Layer
+> MP Matrix Product Layer
+> Neuron
+> Layer
+> Membrane potential
+> before spike firing
+> Membrane potential
+> after spike firing
+> Backbone
+> K
+> Q
+> V
+> Softmax
+> Expectation Compensation
+> Pred.
+
+Figure 4: The overview of SpikeTAD. Our SpikeTAD consists of a backbone and detector. The backbone has L ViT blocks. We transfer the input into spikes using multi-threshold neuron layer. We also transfer non-linear modules like GELU, LayerNorm and Softmax (marked in green) into corresponding expectation compensation modules to preserve prior information after each time-step. The detector adopts simple max-pooling layer to construct multi-scale features and uses integrate-and-fire neuron layer to replace the ReLU activation layer. 
+
+potential features X through spiking neurons by X = MTN( U) before any Linear or matrix product operations. The whole procedure inside the l−th ViT block can be written as: 
+
+Xl = MSSA( Xl−1) + Xl−1, l = 1, ..., L (23) 
+
+Xl = MFFN( Xl) + Xl, l = 1, ..., L (24) Specifically, the generation of K, Q, V inside the MSSA can be represented as 
+
+XK,Q,V = MTN( WK,Q,V (MTN( X))). And softmax and matrix product operations are as follows: 
+
+Xl = MP(MTN(Softmax(MP( Xl−1
+
+K , Xl−1
+
+Q ))) , Xl−1
+
+V ), (25) After channel dimension mapping Wc, we can obtain Xl = WcMTN( Xl) as the output. We omit the relevant representation in MFFN which is similar to MSSA. Then the feature X in form of membrane potential will be input into the TAD’s detector. We 13 construct multi-scale temporal features through the maxpooling layer and eliminate the spatial dimension of video feature, then feed them into the regression and classifi-cation branches for the final results. Specifically, we add an Integrate-and-Fire Neuron layer to replace ReLU between the convolution operations: X = IF(LN(Conv1d( X))). The last convolution layer in the regression and classification branches will transform the postsynaptic potential features X into the detection results of actions, in the form of triplet ( si, ei, c) where ( si, ei) represents the boundary of i−th action and c is the label of category. 
+
+3.2.2. ANN-SNN Conversion Module 
+
+The ANN-SNN conversion uses rate coding, which means the frequency of neu-ral spikes per unit time, to transmit information. In this section, we will explain how neural spikes propagate information between nonlinear layers, including the mathe-matical derivation of expectation compensation modules and matrix products during inference within the backbone, and the quantization clip-floor-shift activation function used when training the ANN version of SpikeTAD inside the detector. 
+
+ANN-SNN Conversion inside Backbone. In this section, We will present the trans-formation process of ANN-SNN in the backbone network of SpikeTAD using pseu-docode. Algorithm 1 details the operational dynamics of the Multi-Threshold Neuron (MTN) within the MSSA and MFFN modules. The process begins with the temporal integration of the membrane potential Vl(t). To achieve high-fidelity quantization, we implement an iterative firing mechanism across N threshold levels. We introduce a bias term θ/ 2 within the Heaviside function to facilitate "round-to-nearest" quantiza-tion, consistent with the error-minimization proof in Eq (21). The unexcited mask 
+
+Mmask ensures a "Winner-Takes-All" logic across scales, where only the highest ap-plicable threshold is triggered for each neuron per time-step. Upon firing, a "reset-by-subtraction" operation updates the residual potential, preserving information for subsequent cycles. Finally, the thresholds are geometrically scaled by factor g to re-fine the representation in the next iteration. Algorithm 2 presents the operational flow of the Expectation Compensation Mod-ule (ECM) for matrix products, typically utilized in self-attention mechanisms. For 14 Algorithm 1: Operation in Multi-Threshold Neuron in MSSA and MFFN 
+
+Input : Input feature at time-step t from layer l: Xl(t); Membrane potential at previous time-step t − 1 from layer l: Vl(t − 1); Number of positive /negative threshold N;Positive /Negative threshold value: θp, θ n; Threshold scaling factor g;
+
+Output: Accumulative spike tensor S l(t); Updated potential Vl(t);  
+
+> 1
+
+Vl(t) ← Vl(t − 1) + Xl(t); λp ← θp · gN−1; λn ← θn · gN−1; S l(t) ← 0;
+
+Mmask ← 1 
+
+> 2
+
+for i ← 1 to N do  
+
+> 3
+
+Hp ← Heaviside( Vl(t) − λp + θp/2); Hn ← Heaviside( −Vl(t) − λn + θn/2);  
+
+> 4
+
+Tp ← Hp ⊙ Mmask ; Tn ← Hn ⊙ Mmask ; 
+
+> 5
+
+∆V ← (Tp · λp) − (Tn · λn); Vl(t) ← Vl(t) − ∆V; S l(t) ← S l(t) + ∆ V; 
+
+> 6
+
+Mmask ← Mmask ⊙ (1 − (Tp + Tn)); λp ← λp/g; λn ← λn/g; 
+
+> 7
+
+end  
+
+> 8
+
+return S l(t); 
+
+Algorithm 2: Expectation Compensation Module for Matrix Product 
+
+Input : Input matrix tensor at t time-step At, Bt ∈ RB×L×D;
+
+Output: Compensated correlation matrix Ot; 
+
+> 1
+
+if t = 0 then  
+
+> 2
+
+S A ← At; S B ← Bt; S M ← At ⊗ Bt; t ← 1; return S M ; 
+
+> 3
+
+end  
+
+> 4
+
+∆M ← (At ⊗ Bt) + (At ⊗ S B) + (S A ⊗ Bt); S M ← S M + ∆ M ; 
+
+> 5
+
+S A ← S A + At; S B ← S B + Bt; t ← t + 1; Ot ← ∆M 
+
+> t−1
+
+− S M 
+
+> t(t−1)
+
+; 
+
+> 6
+
+return Ot;15 the input tensors At and Bt at time-step t, where L represents the flattened spatiotem-poral token dimension, the module first initializes the state at t = 0. For subsequent steps, the ECM avoids the massive memory overhead of storing historical raw spikes by adopting a recursive update strategy. Specifically, we update the cumulative prod-uct S M using the incremental term ∆M , as derived in Eq (17). By maintaining only the cumulative sum tensors S A and S B, the module e ffi ciently computes the compen-sated correlation matrix Ot, which rectifies the quantization-induced expectation bias in short time-steps. 
+
+Algorithm 3: Expectation Compensation Module for Non-linear Function 
+
+Input : Input tensor at t time-step xt, Non-linear function f (·); 
+
+Output: Compensated correlation matrix yt; 
+
+> 1
+
+if t = 0 then  
+
+> 2
+
+Vlast ← 0; S ← xt 
+
+> 3
+
+end  
+
+> 4
+
+else  
+
+> 5
+
+Vlast ← f (S /t) × t; S ← S + xt; 
+
+> 6
+
+end  
+
+> 7
+
+t ← t + 1; Vnow ← f (S /t) × t; yt ← Vnow − Vlast ; 
+
+> 8
+
+return yt;Algorithm 3 illustrates the ECM for non-linear functions (e.g., Softmax, GeLU, LayerNorm). Standard SNN quantization typically disrupts the precise probability distributions or normalization scales required by these operators. By maintaining a cumulative sum S and computing the incremental contribution through the di ff erence of expectations (i.e., Vnow − Vlast ), the ECM ensures that the total accumulated output at any time-step T remains functionally equivalent to the non-linear mapping of the input mean sequence. This di ff erentially encoded output e ff ectively captures transient semantic transitions between video frames, preserving high information fidelity even with minimal temporal latency. 16 Algorithm 4: Operation in Integrate-and-Fire Neuron in Head 
+
+Input : Input feature at layer l: Xl ∈ RB×L×C ;Accumulative time-step T ; Learnable threshold θ;
+
+Output: Accumulative spike tensor S acc ; 
+
+> 1
+
+Xseq ← ExpandTemporalDim( Xl, T ); Vl ← 0.5 · θ; S list ← [];  
+
+> 2
+
+for t ← 1 to T do  
+
+> 3
+
+Vl ← Vl + Xseq [t, . . . ];  
+
+> 4
+
+sl ← Heaviside( Vl − θ);  
+
+> 5
+
+Xspike ← sl · θ; Vl ← Vl − Xspike ; 
+
+> 6
+
+S list .append( Xspike );  
+
+> 7
+
+end  
+
+> 8
+
+S acc ← Stack( S list , dim = 0);  
+
+> 9
+
+S acc ← MeanTemporalDim( S acc ) return S acc ;
+
+ANN-SNN Conversion inside Detector. Algorithm 4 illustrates the ANN-SNN conver-sion process within the detector head of SpikeTAD. For an input feature Xl ∈ RB×L×C ,where L denotes the temporal dimension of video features and C represents the chan-nel capacity, the module first replicates the features across T simulation time-steps. To minimize the quantization-induced expectation bias, the membrane potential is initialized to θ/ 2, consistent with our theoretical derivation in Eq (21). During each time-step, the neuron performs temporal integration, spike firing via the Heaviside function, and a precise "reset-by-subtraction" operation. Finally, the generated spikes are accumulated and averaged to obtain the equivalent SNN activation, ensuring a seamless and high-fidelity transition from the ANN backbone to the spiking detector. During inference, we simply substitute the function above into Integrate-and-Fire neurons due to the sparsity of spikes. Specifically, we set ml(0) = θl 
+
+> 2
+
+. From Eq (1) to Eq (4), we can get each output xl(t) at each time-step t, and then we can get the output of this layer by rl(T ) =  
+
+> PTi=1xl(i)
+> T
+
+to denote the encoded activation that aims to 17 map activation value from the corresponding ANN layer. 
+
+3.2.3. Training loss 
+
+SpikeTAD adopts simple loss functions as used in many other TAD methods. We use focal [37] loss Lcls for classification and DIoU [38] loss Lreg for distance regres-sion. The total loss can be represented as Ltotal = Lcls + Lreg .
+
+3.2.4. Energy consumption. 
+
+Algorithm 5: SOP for Linear Layers 
+
+Input : Input tensor x ∈ RB×M ; Linear layer weights W ∈ RM×N ;
+
+Output: Active operands S OP act ; Total theoretical operands S OP total ; 
+
+> 1
+
+S OP act ← Sum(Linear( I(x , 0) , 1W , 0)); S OP total ← Sum(Linear( 1x, 1W , 0));  
+
+> 2
+
+return S OP act , S OP total ;
+
+Algorithm 6: SOP for Matrix Product in Expectation Compensation Module 
+
+Input : Input A ∈ RL×D, B ∈ RD×L,Cumulative historical state 
+
+S A, S B ∈ RL×D
+
+Output: Active operands S OP act , Total theoretical operands S OP total  
+
+> 1
+
+MA, MB ← I(A , 0) , I(B , 0) MS A , MS B ← I(S A , 0) , I(S B , 0)  
+
+> 2
+
+Ops 1 ← Sum( MA ⊗ MB) Ops 2 ← Sum( MA ⊗ MS B ) Ops 3 ← Sum( MS A ⊗ MB) 
+
+> 3
+
+S OP act ← Ops 1 + Ops 2 + Ops 3; S OP total ← Sum( 1A ⊗ 1B);  
+
+> 4
+
+return S OP act , S OP total ;
+
+Algorithm 7: SOP for Neurons 
+
+Input : List of multi-level output spikes of neurons Y = [y1, y2, . . . , yN ]
+
+Output: Active operands S OP act , Total theoretical operands S OP total  
+
+> 1
+
+S OP total ← numel( y1); S OP act ← 0;  
+
+> 2
+
+foreach yi ∈ Y do  
+
+> 3
+
+S OP act ← S OP act + CountNonZero( yi); S OP total ← S OP total + numel (yi);  
+
+> 4
+
+end  
+
+> 5
+
+return S OP act , S OP total ;18 We use synaptic operation (SOP) [39] for SNN to represent the required basic op-eration numbers. With the sparsity of firing and the short simulation period, the num-ber of SOPs per layer of the network can be easily estimated. A multiply-accumulate computation (MAC) takes place per synaptic operation for the ANN. Specialized SNN hardware would perform an accumulated computation (AC) per synaptic operation only upon receiving an incoming spike. Specifically, the energy consumption ratio between the SNNs and the related ANN is: 
+
+ES NN 
+
+EANN 
+
+= MACs S NN ∗ EMAC + ACs S NN ∗ EAC 
+
+MACs ANN ∗ EMAC 
+
+, (26) We use ES NN  
+
+> EANN
+
+to represent the energy ratio in the subsequent experiments. All op-erations assume a 32-bit floating-point implementation on 45nm technology, where 
+
+EMAC = 4.6pJ and EAC = 0.9pJ [40]. Since most computations in SNN occur in the fully connected, convolutional, and matrix multiplication layers, which are primarily implemented by additions (with ACs S NN >> MACs S NN ), we approximate MACs S NN 
+
+to zero. To be specific, the calculation of ACs S NN can be denoted as: 
+
+ACs S NN = T × f r × OAC , (27) where T and f r represent the simulation time-steps and the firing rate. The firing rate is the number of spikes released by each neuron divided by the total time-step T. The pseudocode computation process in SpikeTAD can be found in Algorithms 5, 6, and 7. In these algorithms, we obtain the number of spurious activation units 
+
+S OP act and the total number of operations S OP total . Here, f r is obtained by dividing 
+
+S OP act /S OP total . OAC is the total number of AC operations which can obtained by open-sourced calculations tool [41]. 
+
+4. Experiment 
+
+4.1. Datasets 
+
+We evaluate SpikeTAD on two standard datasets for TAD: THUMOS-14 [5] and ActivityNet-1.3 [6]. THUMOS14 is a classic dataset for the TAD task, which con-tains 413 videos of 30 fps, containing 200 validation videos, and 213 test videos 19 with labeled temporal annotations from 20 categories. ActivityNet-1.3 has 200 ac-tion classes. We use the 10,024 videos from the training set for training and use the 4,926 videos from the validation set for testing. 
+
+4.2. Implementation Details 
+
+We train and test SpikeTAD by feeding raw RGB videos, which means SpikeTAD is an end-to-end TAD pipeline. On THUMOS14, we randomly truncate a window of 768 frames with a temporal stride of 4. On ActivityNet-1.3, we resize the video to a fixed length of 768 frames. Following [1, 11], we use AdamW [42] with warm-up for training. The learning rate is 1e-4 for THUMOS14 and 1e-3 for ActivityNet-1.3, and a cosine learning rate decay is used. The batch size is 2 for THUMOS14 and 16 for ActivityNet-1.3. THUMOS14 takes 60 epochs for training while ActivityNet-1.3 takes 15 epochs. The random seed is 42 for reproducing our model results. 
+
+4.2.1. Data processing 
+
+During training, each video only randomly samples 768 consecutive frames, with the starting point of the sampling window being random. Then, when spatial changes occur on the video frames, the shorter side of the video is uniformly scaled to 182 pixels to allow space for subsequent cropping. Random cropping is then performed, randomly selecting a region from the 182 ×182 area to simulate random camera move-ment and scaling e ff ects. The cropped area fluctuates randomly between 90% and 100% of the original image. The randomly cropped area is then forcibly stretched or compressed to a final 160 × 160 size. To ensure the model recognizes more than just "color" and "direction," a 50% probability horizontal flip, image enhancement (including basic image processing such as blurring, noise reduction, and sharpening), and color jitter are introduced. During testing, each video was sampled using a 768-frame sliding window. The Decord library was then used for video decoding, followed by spatial transformation of the captured video frames. The shorter side of the video was scaled to 160 pixels, and the scaled image frames were then cropped from the center to a 160 × 160 pixel size. These 768 × 160 × 160 video frames were then input into SpikeTAD for inference. 20 4.2.2. Hyperparameter table 
+
+The hyperparameters used in the above algorithm and the statistics of random seeds used in training the code are shown in Table 1.                          
+
+> Table 1: Hyperparameter Configurations
+> Hyperparameter Value Hyperparameter Value
+> Random Seed 42 Scaling Factor ( g)2Time Steps ( T)16 Quantization Step ( L)8Base Threshold Positive (θp)in Softmax 0.0125 Base Threshold Negative (θn)in Softmax 0.0125 Base Threshold Positive ( θp) in Lin-ear 0.25 Base Threshold Negative (θn)in Linear 0.08 Number of Threshold in MTN ( N)8
+
+4.3. Comparison with SOTA Methods 
+
+Table 2 compares our SpikeTAD with other state-of-the-art methods on THU-MOS14 and ActivityNet-1.3. Since we aim to make the architecture simple and the computational complexity of inference small, our results cannot be compared with SOTA methods such as AdaTAD. Despite this, the ANN version of SpikeTAD still outperforms most TAD tasks. When the time-step is 8, the detection performance of SpikeTAD decreases by 0.9 and 0.65 compared with the baseline (ANN) on THU-MOS14 and ActivityNet-1.3, respectively. SpikeTAD achieves tiny performance loss on TAD tasks, further demonstrating that the conversion of ANN-SNN is suitable for the TAD task. 
+
+4.4. Ablation Study 4.4.1. Ablations on di ff erent SNN learning paradigms for TAD 
+
+Since there are currently no SNN architectures specifically designed for the TAD task, this section examines the impact of various SNN paradigms on TAD perfor-mance. Most existing SNN architectures for object detection tasks [46, 47] primarily adopt fully supervised training method to directly train SNN models. Here, we refer 21 Table 2: Comparison with state-of-the-art methods on THUMOS14 and ActivityNet-1.3. Base-line(ANN) represents the ANN structure of SpikeTAD equipped with ReLU activation function. T rep-resents the time-steps in the backbone. 
+
+Type Method Backbone THUMOS14 ActivityNet-1.3 0.3 0.4 0.5 0.6 0.7 Avg 0.5 0.75 0.95 Avg ANN BMN [3] TSN [16] 56.0 47.4 38.8 29.7 20.5 38.5 50.07 34.78 8.29 33.85 TadTR [2] I3D [15] 62.4 57.4 49.2 37.8 26.3 46.6 49.10 32.60 8.50 32.30 ActionFormer [1] SlowFast-R50 [43] 78.7 73.3 65.2 54.6 39.7 62.3 54.26 37.04 8.13 36.02 ActionFormer [1] I3D [15] 82.1 77.8 71.0 59.4 43.9 66.8 53.50 36.20 8.20 35.60 Tridet [44] I3D [15] 83.6 80.1 72.9 62.4 47.4 69.3 54.70 38.00 8.40 36.80 TALLFormer [12] VideoSwin-B [45] 76.0 - 63.2 - 34.5 59.2 54.10 36.20 7.90 35.60 BasicTAD [14] SlowOnly-R50 [43] 75.5 70.8 63.5 50.9 37.4 59.6 51.20 33.41 7.57 33.12 ViT-TAD [4] ViT-S [17] 79.8 75.2 68.4 56.4 41.7 64.3 55.09 37.81 8.75 36.69 ViT-TAD [4] ViT-B [17] 85.1 80.9 74.2 61.8 45.4 69.5 55.87 38.47 8.80 37.40 AdaTAD [11] ViT-S [17] 84.5 80.2 71.6 60.9 46.9 68.8 56.15 38.99 9.07 37.85 AdaTAD [11] ViT-B [17] 87.0 82.4 75.3 63.8 49.2 71.5 56.77 39.35 9.71 38.39 AdaTAD [11] ViT-L [17] 87.7 84.1 76.7 66.4 52.4 73.5 57.69 40.56 10.13 39.22 Re 2TAL [13] Re 2VideoSwin-T [13] 77.0 71.5 62.4 49.7 36.3 59.4 54.75 37.81 9.03 36.80 Re 2TAL [13] Re 2SlowFast-101 [13] 77.4 72.6 64.9 53.7 39.0 61.5 55.30 37.90 9.10 37.00 Baseline(ANN) ViT-S [17] 82.7 77.9 69.8 60.2 46.0 67.3 56.09 38.71 8.86 37.64 SpikeTAD(ANN) ViT-S [17] 82.6 77.7 69.7 60.0 45.6 67.1 55.83 37.92 8.67 37.12 ANN2SNN SpikeTAD T =4 ViT-S [17] 79.0 74.6 67.0 57.2 42.3 64.0 55.26 37.21 8.80 36.53 SpikeTAD T =8 ViT-S [17] 81.4 76.6 70.0 60.0 44.8 66.5 55.87 37.99 8.69 37.05 SpikeTAD T =16 ViT-S [17] 82.1 77.9 70.5 59.9 45.6 67.2 56.04 38.97 8.75 37.42 
+
+to the approach in [46] to build a pure SNN-based TAD model. Subsequently, we apply Integrate-and-Fire neurons directly to all activation functions, using clip-floor shift activation functions during training and accumulating spikes during testing to obtain detection results, denoted as ANN2SNN*. Finally, our proposed ANN2SNN paradigm incorporates an expectation compensation module with multi-threshold neu-rons in the backbone and employs clip-floor shift activation functions in the detector. The results are presented in Table 3. We observed that both the SNN and ANN2SNN* approaches yielded comparable results, as they indiscriminately replaced activation units in the Backbone with their respective spiking neurons, leading to significant per-formance degradation. In contrast, ANN2SNN preserves the pre-trained weights of the Backbone, achieving performance close to the ANN model at T =8 time steps and even surpassed the ANN at T =16. 22 Table 3: Comparison of di ff erent neural networks for TAD. ANN is treated as baseline. SNN means Leaky Integrate-and-Fire spiking neurons that combine integer-valued training with spike-driven infer-ence. ANN2SNN* means clip-floor shift activation functions replace all activation functions like ReLU and GELU during training. ANN2SNN means our choice described in ANN-SNN Conversion Module.                                                                                        
+
+> Model Type Time-step T 0.3 0.4 0.5 0.6 0.7 Avg.mAP Backbone +Detector ANN -82.6 77.7 69.7 60.0 45.6 67.1 SNN 276.4 71.2 64.3 53.1 38.7 60.7 477.7 72.1 64.5 54.2 39.5 61.6 878.7 73.0 65.1 54.7 40.4 62.4 16 78.8 72.9 65.2 54.8 40.5 62.5 ANN2SNN* 258.1 53.2 46.5 36.7 22.7 43.4 477.0 71.9 63.2 54.0 39.4 61.1 878.8 72.6 64.5 53.6 39.4 61.8 16 78.7 72.7 64.3 54.4 40.6 62.1 ANN2SNN 264.5 58.8 51.7 43.3 32.3 50.2 479.0 74.6 67.0 57.2 42.3 64.0 881.4 76.6 70.0 60.0 44.8 66.5 16 82.1 77.9 70.5 59.9 45.6 67.2
+
+4.4.2. E ff ectiveness of Clip-floor Activation Function 
+
+To further verify the e ff ectiveness of clip-floor activation function, we propose the baseline with the standard clip-floor activation function where we adopt al =
+
+θlclip( ⌊ Wlal−1 
+
+> θl
+
+⌋, 0, 1) at layer l to substitute the ReLU activation function in the detec-tor during training, which means the weights are normalized to between 0 and 1, and whether the signal is transmitted is determined by whether the spike is activated or not. During inference, we convert the models in both configurations into SNNs with spike activation. As shown in Table 4, the baseline results still lag significantly be-hind the clip-floor shift activation function, even using more time-steps for simulation. Therefore, we adopt clip-floor shift activation function for the rest of our experiments. 
+
+4.4.3. Energy consumption ratio of SpikeTAD. 
+
+We can use open-sourced calculations tool [41] to calculate the theoretical amount of AC and MAC operations. After that, we explore the power consumption and results when applying di ff erent time-steps in SpikeTAD’s backbone and detector. As shown 23 Table 4: Comparison between clip-floor shift with baseline clip-floor function. The baseline takes more time-steps to simulate and the performance degrades a lot.                                                       
+
+> Model Type Func. Time-step T 0.3 0.4 0.5 0.6 0.7 Avg.mAP Detector ANN2SNN Clip-Floor 842.3 20.8 5.1 1.2 0.3 13.9 16 70.1 63.7 51.6 32.4 8.9 45.4 32 74.8 68.9 61.5 49.4 30.3 56.9 64 75.8 70.8 63.4 53.0 36.6 60.0 128 76.4 70.9 63.7 54.0 38.6 60.7 256 76.5 71.1 63.6 53.8 39.5 60.9 Clip-Floor Shift 482.1 77.7 70.7 60.1 46.0 67.3
+
+Table 5: Detection results and energy consumption ratio of SpikeTAD’s detector on THUMOS14. 
+
+ANN denotes the pure ANN version of the TAD baseline with ReLU. Energy ratio only calculates the modules in the detector.                                                     
+
+> Model Type Time-step T Energy Ratio 0.3 0.4 0.5 0.6 0.7 Avg. mAP Detector ANN -1.0 82.6 77.7 69.7 60.0 45.6 67.1 ANN2SNN 10.03 80.6 76.5 67.7 55.4 41.4 64.3 20.06 81.7 77.8 69.9 58.5 45.6 66.7 40.14 82.0 77.8 70.4 60.0 45.8 67.2 80.27 82.2 78.0 70.2 60.2 45.6 67.2 16 0.55 82.1 77.7 70.7 60.1 46.0 67.3
+
+in Table 5 and Table 6, we find that SpikeTAD achieves its ANN version’s perfor-mance when T = 8, with the energy ratio of 46% when calculating both backbone and detector. When T = 16, the energy ratio is still lower than its ANN version. 
+
+4.4.4. Energy consumption comparison with other end-to-end TAD methods 
+
+The energy consumption of other end-to-end TAD models can be shown in Ta-ble 7. We can find that SpikeTAD’s energy consumption is significantly lower than that of existing end-to-end TAD methods even the compressed TAD method [7] which costs over 1000 mJ. Both the low power consumption of neuromorphic chips and the low computational complexity of SpikeTAD contribute to such result. Compare Base-line(ANN) with SpikeTAD(T =4), we can find that SpikeTAD’s energy consumption is nearly one fifth of the Baseline. Since 45nm neuromorphic chips’s EAC is close to one fifth of EMAC , we can find that the total cost of neuron accumulated computations 24 Table 6: Detection results and energy consumption ratio of SpikeTAD’s backbone on THUMOS14. 
+
+ANN denotes the pure ANN version of the TAD baseline with ReLU. Energy ratio calculates both the backbone and the detector.                                                     
+
+> Model Type Time-step T Energy Ratio 0.3 0.4 0.5 0.6 0.7 Avg. mAP Backbone +Detector ANN -1.0 82.6 77.7 69.7 60.0 45.6 67.1 ANN2SNN 10.05 40.8 36.1 30.4 23.5 15.2 29.2 20.09 64.5 58.8 51.7 43.3 32.3 50.2 40.21 79.0 74.6 67.0 57.2 42.3 64.0 80.46 81.4 76.6 70.0 60.0 44.8 66.5 16 0.89 82.1 77.9 70.5 59.9 45.6 67.2
+
+Table 7: Comparison between the SpikeTAD and previous end-to-end TAD models. - means the model does not require or provide the corresponding parameters. 
+
+Type Method Backbone Time-Step Param(M) Power(mJ) ANN TALLFormer [12] VideoSwin-B [45] - 114.77 8369.4 ViT-TAD [4] ViT-B [17] - 131.27 1993.3 AdaTAD [11] ViT-S [17] - 48.56 552.9 AdaTAD [11] ViT-B [17] - 113.47 2024.6 AdaTAD [11] ViT-L [17] - 331.44 7033.2 Re 2TAL [13] Re 2SlowFast-101 [13] - 91.52 1310.8 Progressive Block Drop block =3 [7] ViT-S [17] - - 1002.8 Baseline(ANN) ViT-S [17] - 48.58 400.4 ANN2SNN SpikeTAD ViT-S [17] 4 48.58 84.1 8 48.58 184.2 16 48.58 356.4 
+
+(AC) when T = 4 still comparable to the number of MAC operations in ANNs. This indicates the sparse nature of SNN spike activations. 
+
+4.4.5. Statistical Significance 
+
+For most deep learning models, the output hardly changes when all weights and hyperparameters, including the random seed, are fixed. Therefore, we further test the robustness of model training here. We train our ANN models with the following random seeds: 42, 123, 666, 1024, 2026, and apply the ANN2SNN technique from SpikeTAD, testing the results with an activation time step of 16. We calculate the mean μ and standard deviation σ for the model results trained with di ff erent random seeds at di ff erent IoUs. Due to the small sample size, we use the t-distribution to cal-25 1G
+
+> 2G
+> 3G
+> 4G
+> 5G
+> 6G
+> 7G
+> 8G
+> 9G
+> 10 G
+
+Top Predictions 
+
+0
+
+10 
+
+20 
+
+30 
+
+40 
+
+50 
+
+60 
+
+70 
+
+80 
+
+90 
+
+100 
+
+> Error Breakdown (%)
+
+Background Err Confusion Err Localization Err Wrong Label Err Double Detection Err True Positive 
+
+Error Type 
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+> Average-mAP N
+> Improvment  (%)
+
+0.7 0.7 6.1 0.5 4.7 
+
+Removing Error Impact Figure 5: Error analysis of SpikeTAD. There are error rates of 5 types on top-10G predictions, where G denotes the number of ground truths. 
+
+culate the confidence interval, with degrees of freedom d f = 4, a significance level 
+
+α = 0.05, a two-sided critical value tα/ 2,d f = 2.776, and the confidence interval is 
+
+CI = μ ± tα/ 2 σ√n . As shown in Table 8, SpikeTAD exhibits a remarkably low standard deviation, demonstrating that our proposed SNN-based temporal accumulation mech-anism e ff ectively suppresses initialization noise and ensures high training stability. 
+
+4.4.6. Error Analysis 
+
+To analyze the limitations of our model, we provide false positive error chart [48] of our SpikeTAD on THUMOS14 dataset shown in Fig 5. Background errors and localization errors are the most common. We obtain quite high true positive rate on Top-1G predictions. 
+
+5. Limitations 
+
+From a task-oriented perspective, the intrinsic complexity of Temporal Action De-tection (TAD) necessitates a reliance on sophisticated pre-trained ANN backbones, 26 Table 8: Statistical significance analysis of SpikeTAD over 5 independent runs. 
+
+Metric Run1 Run2 Run3 Run4 Run5 Mean ±Std 95% Conf. Inter. 
+
+mAP@0.3 82.1 82.3 82.4 81.8 81.9 82.10 ± 0.25 [81.78, 82.42] mAP@0.4 77.9 77.8 78.0 77.7 77.6 77.80 ± 0.16 [77.60, 78.00] mAP@0.5 70.5 70.2 70.5 70.2 70.4 70.36 ± 0.15 [70.17, 70.55] mAP@0.6 59.9 60.1 60.2 59.7 60.0 59.98 ± 0.19 [59.74, 60.22] mAP@0.7 45.6 45.5 45.6 45.4 45.8 45.58 ± 0.15 [45.39, 45.77] Average mAP 67.2 67.2 67.3 67.0 67.1 67.16 ± 0.11 [67.02, 67.30] 
+
+which in turn elevates the di ffi culty of the ANN-to-SNN conversion process. Specifi-cally, two major challenges persist: Computational Overhead: Due to the fundamental gap between semantic time and computational time, video-based SNNs encounter a significantly higher temporal redundancy than image-based models, as each video frame requires multiple internal spike accumulation steps. Energy-Accuracy Trade-off : Unlike image processing where models can be trained from scratch (e.g., Spik-ingYOLO [47]), the high-level semantic representation in TAD currently relies on converted ANN features. This forces the use of high-bit activation methods like the Multi-Threshold Neuron (MTN) to maintain competitive accuracy within constrained time-steps, leading to increased power consumption compared to binary spiking mod-els. Consequently, future research on SpikeTAD may follow two trajectories: devel-oping end-to-end SNN architectures that support training-from-scratch to bypass the reliance on pre-trained ANN backbones, and optimizing the spike-firing mechanisms themselves to achieve high-fidelity conversion with lower power overhead. 
+
+6. Conclusion 
+
+In this paper, we propose the first SNN-based end-to-end TAD framework called SpikeTAD, which is simple enough and consumes much lower energy compared with other ANN-based TAD frameworks. We adopt di ff erent ANN-SNN conversion strate-gies for the backbone and detector of TAD, so that the model can retain the pre-trained 27 weights from the backbone as much as possible and minimize the conversion error. We hope that SpikeTAD’s successful attempt can trigger more thinking and attempts about low-power TAD architecture, enabling the deployment of TAD on hardware of neuromorphic computing. 
+
+Acknowledgments. This work is supported by the Basic Research Program of Jiangsu (No. BK20250009), the Fundamental and Interdisciplinary Disciplines Break-through Plan of the Ministry of Education of China (No. JYB2025XDXM118), and the Collaborative Innovation Center of Novel Software Technology and Industrializa-tion. 
+
+References 
+
+[1] C. Zhang, J. Wu, Y. Li, Actionformer: Localizing moments of actions with trans-formers, in: Computer Vision - ECCV 2022 - 17th European Conference, Tel Aviv, Israel, October 23-27, 2022, Proceedings, Part IV, Vol. 13664 of Lecture Notes in Computer Science, Springer, 2022, pp. 492–510. doi:10.1007 /978-3-031-19772-7_29. [2] X. Liu, Q. Wang, Y. Hu, X. Tang, S. Zhang, S. Bai, X. Bai, End-to-end temporal action detection with transformer, IEEE Trans. Image Process. 31 (2022) 5427– 5441. doi:10.1109 /TIP.2022.3195321. [3] T. Lin, X. Liu, X. Li, E. Ding, S. Wen, BMN: boundary-matching network for temporal action proposal generation, in: 2019 IEEE /CVF International Con-ference on Computer Vision, ICCV 2019, Seoul, Korea (South), October 27 -November 2, 2019, IEEE, 2019, pp. 3888–3897. doi:10.1109 /ICCV.2019.00399. [4] M. Yang, H. Gao, P. Guo, L. Wang, Adapting short-term transformers for action detection in untrimmed videos, in: Proceedings of the IEEE /CVF conference on computer vision and pattern recognition, 2024, pp. 18570–18579. [5] Y.-G. Jiang, J. Liu, A. Roshan Zamir, G. Toderici, I. Laptev, M. Shah, R. Suk-thankar, THUMOS challenge: Action recognition with a large number of classes, 
+
+http://crcv.ucf.edu/THUMOS14/ (2014). 28 [6] F. Caba Heilbron, V. Escorcia, B. Ghanem, J. Carlos Niebles, Activitynet: A large-scale video benchmark for human activity understanding, in: Proceedings of the ieee conference on computer vision and pattern recognition, 2015, pp. 961–970. [7] X. Chen, Y. Guo, J. Liang, S. Zhuang, R. Zeng, X. Hu, Temporal action detection model compression by progressive block drop, in: Proceedings of the IEEE /CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2025. [8] W. Maass, Networks of spiking neurons: the third generation of neural network models, Neural networks 10 (9) (1997) 1659–1671. [9] W. Fang, Z. Yu, Y. Chen, T. Huang, T. Masquelier, Y. Tian, Deep residual learn-ing in spiking neural networks, Advances in Neural Information Processing Sys-tems 34 (2021) 21056–21069. [10] Z. Zhou, Y. Zhu, C. He, Y. Wang, S. Yan, Y. Tian, L. Yuan, Spikformer: When spiking neural network meets transformer, in: International Conference on Learning Representations (ICLR), 2023. [11] S. Liu, C.-L. Zhang, C. Zhao, B. Ghanem, End-to-end temporal action detec-tion with 1b parameters across 1000 frames, in: Proceedings of the IEEE /CVF conference on computer vision and pattern recognition, 2024, pp. 18591–18601. [12] F. Cheng, G. Bertasius, Tallformer: Temporal action localization with a long-memory transformer, in: Computer Vision - ECCV 2022 - 17th European Con-ference, Tel Aviv, Israel, October 23-27, 2022, Proceedings, Part XXXIV, Vol. 13694 of Lecture Notes in Computer Science, Springer, 2022, pp. 503–521. doi:10.1007 /978-3-031-19830-4_29. [13] C. Zhao, S. Liu, K. Mangalam, B. Ghanem, Re 2tal: Rewiring pretrained video backbones for reversible temporal action localization, in: Proceedings of the IEEE /CVF conference on computer vision and pattern recognition, 2023, pp. 10637–10647. 29 [14] M. Yang, G. Chen, Y. Zheng, T. Lu, L. Wang, Basictad: An astounding rgb-only baseline for temporal action detection, Comput. Vis. Image Underst. 232 (2023) 103692. doi:10.1016 /J.CVIU.2023.103692. [15] J. Carreira, A. Zisserman, Quo vadis, action recognition? A new model and the kinetics dataset, in: 2017 IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2017, Honolulu, HI, USA, July 21-26, 2017, IEEE Com-puter Society, 2017, pp. 4724–4733. doi:10.1109 /CVPR.2017.502. [16] L. Wang, Y. Xiong, Z. Wang, Y. Qiao, D. Lin, X. Tang, L. V. Gool, Tempo-ral segment networks: Towards good practices for deep action recognition, in: Computer Vision - ECCV 2016 - 14th European Conference, Amsterdam, The Netherlands, October 11-14, 2016, Proceedings, Part VIII, Vol. 9912 of Lecture Notes in Computer Science, Springer, 2016, pp. 20–36. doi:10.1007 /978-3-319-46484-8_2. [17] L. Wang, B. Huang, Z. Zhao, Z. Tong, Y. He, Y. Wang, Y. Wang, Y. Qiao, Videomae V2: scaling video masked autoencoders with dual masking, in: IEEE /CVF Conference on Computer Vision and Pattern Recognition, CVPR 2023, Vancouver, BC, Canada, June 17-24, 2023, IEEE, 2023, pp. 14549–14560. doi:10.1109 /CVPR52729.2023.01398. [18] W. Kay, J. Carreira, K. Simonyan, B. Zhang, C. Hillier, S. Vijayanarasimhan, F. Viola, T. Green, T. Back, P. Natsev, M. Suleyman, A. Zisserman, The kinetics human action video dataset, CoRR abs /1705.06950 (2017). [19] Y. Wang, Y. He, Y. Li, K. Li, J. Yu, X. Ma, X. Li, G. Chen, X. Chen, Y. Wang, P. Luo, Z. Liu, Y. Wang, L. Wang, Y. Qiao, Internvid: A large-scale video-text dataset for multimodal understanding and generation, in: The Twelfth Interna-tional Conference on Learning Representations, ICLR 2024, Vienna, Austria, May 7-11, 2024, OpenReview.net, 2024. [20] Z. Huang, X. Shi, Z. Hao, T. Bu, J. Ding, Z. Yu, T. Huang, Towards high-performance spiking transformers from ann to snn conversion, in: Proceedings 30 of the 32nd ACM International Conference on Multimedia, 2024, pp. 10688– 10697. [21] Z. Huang, W. Fang, T. Bu, P. Xue, Z. Hao, W. Liu, Y. Tang, Z. Yu, T. Huang, Dif-ferential coding for training-free ann-to-snn conversion, in: International Con-ference on Machine Learning (ICML), 2025. [22] T. Bu, W. Fang, J. Ding, P. Dai, Z. Yu, T. Huang, Optimal ann-snn conversion for high-accuracy and ultra-low-latency spiking neural networks, in: International Conference on Learning Representations (ICLR), 2022. [23] T. N. Tang, K. Kim, K. Sohn, Temporalmaxer: Maximize temporal con-text with only max pooling for temporal action localization, arXiv preprint arXiv:2303.09055 (2023). [24] C. Lin, C. Xu, D. Luo, Y. Wang, Y. Tai, C. Wang, J. Li, F. Huang, Y. Fu, Learning salient boundary feature for anchor-free temporal action localization, in: IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2021, virtual, June 19-25, 2021, Computer Vision Foundation / IEEE, 2021, pp. 3320–3329. doi:10.1109 /CVPR46437.2021.00333. [25] T. Bu, J. Ding, Z. Yu, T. Huang, Optimized potential initialization for low-latency spiking neural networks, in: Proceedings of the AAAI conference on artificial intelligence, Vol. 36, 2022, pp. 11–20. [26] Z. Hao, J. Ding, T. Bu, T. Huang, Z. Yu, Bridging the gap between anns and snns by calibrating o ff set spikes, in: International Conference on Learning Represen-tations (ICLR), 2023. [27] B. Han, K. Roy, Deep spiking neural network: Energy e ffi ciency through time based coding, in: European conference on computer vision, Springer, 2020, pp. 388–404. [28] Z. Hao, T. Bu, J. Ding, T. Huang, Z. Yu, Reducing ann-snn conversion error through residual membrane potential, in: Proceedings of the AAAI conference on artificial intelligence, Vol. 37, 2023, pp. 11–21. 31 [29] M. Zhang, J. Wang, J. Wu, A. Belatreche, B. Amornpaisannon, Z. Zhang, V. P. K. Miriyala, H. Qu, Y. Chua, T. E. Carlson, et al., Rectified linear postsynaptic potential function for backpropagation in deep spiking neural networks, IEEE transactions on neural networks and learning systems 33 (5) (2021) 1947–1958. [30] Y. Li, Y. Guo, S. Zhang, S. Deng, Y. Hai, S. Gu, Di ff erentiable spike: Rethink-ing gradient-descent for training spiking neural networks, Advances in neural information processing systems 34 (2021) 23426–23439. [31] Y. Guo, Y. Chen, L. Zhang, Y. Wang, X. Liu, X. Tong, Y. Ou, X. Huang, Z. Ma, Reducing information loss for spiking neural networks, in: European Conference on Computer Vision, Springer, 2022, pp. 36–52. [32] Y. Guo, Y. Chen, L. Zhang, X. Liu, Y. Wang, X. Huang, Z. Ma, Im-loss: in-formation maximization loss for spiking neural networks, Advances in Neural Information Processing Systems 35 (2022) 156–166. [33] Y. Guo, W. Peng, X. Liu, Y. Chen, Y. Zhang, X. Tong, Z. Jie, Z. Ma, Enof-snn: Training accurate spiking neural networks via enhancing the output feature, Advances in Neural Information Processing Systems 37 (2024) 51708–51726. [34] E. O. Neftci, H. Mostafa, F. Zenke, Surrogate gradient learning in spiking neural networks: Bringing the power of gradient-based optimization to spiking neural networks, IEEE Signal Processing Magazine 36 (6) (2019) 51–63. [35] N. Caporale, Y. Dan, Spike timing–dependent plasticity: a hebbian learning rule, Annu. Rev. Neurosci. 31 (1) (2008) 25–46. [36] C. Li, L. Ma, S. Furber, Quantization framework for fast spiking neural net-works, Frontiers in Neuroscience 16 (2022) 918793. [37] T. Lin, P. Goyal, R. B. Girshick, K. He, P. Dollár, Focal loss for dense object detection, in: IEEE International Conference on Computer Vision, ICCV 2017, Venice, Italy, October 22-29, 2017, IEEE Computer Society, 2017, pp. 2999– 3007. doi:10.1109 /ICCV.2017.324. 32 [38] Z. Zheng, P. Wang, W. Liu, J. Li, R. Ye, D. Ren, Distance-iou loss: Faster and better learning for bounding box regression, in: Proceedings of the AAAI con-ference on artificial intelligence, Vol. 34, 2020, pp. 12993–13000. [39] P. A. Merolla, J. V. Arthur, R. Alvarez-Icaza, A. S. Cassidy, J. Sawada, F. Akopyan, B. L. Jackson, N. Imam, C. Guo, Y. Nakamura, et al., A million spiking-neuron integrated circuit with a scalable communication network and interface, Science 345 (6197) (2014) 668–673. [40] M. Horowitz, 1.1 computing’s energy problem (and what we can do about it), in: 2014 IEEE international solid-state circuits conference digest of technical papers (ISSCC), IEEE, 2014, pp. 10–14. [41] G. Chen, P. Peng, G. Li, Y. Tian, Training full spike neural networks via auxiliary accumulation pathway, CoRR abs /2301.11929 (2023). [42] I. Loshchilov, F. Hutter, Decoupled weight decay regularization, in: 7th Interna-tional Conference on Learning Representations, ICLR 2019, New Orleans, LA, USA, May 6-9, 2019, OpenReview.net, 2019. [43] C. Feichtenhofer, H. Fan, J. Malik, K. He, Slowfast networks for video recog-nition, in: Proceedings of the IEEE /CVF international conference on computer vision, 2019, pp. 6202–6211. [44] D. Shi, Y. Zhong, Q. Cao, L. Ma, J. Li, D. Tao, Tridet: Temporal action detection with relative boundary modeling, in: Proceedings of the IEEE /CVF Conference on Computer Vision and Pattern Recognition, 2023, pp. 18857–18866. [45] Z. Liu, J. Ning, Y. Cao, Y. Wei, Z. Zhang, S. Lin, H. Hu, Video swin transformer, in: Proceedings of the IEEE /CVF conference on computer vision and pattern recognition, 2022, pp. 3202–3211. [46] X. Luo, M. Yao, Y. Chou, B. Xu, G. Li, Integer-valued training and spike-driven inference spiking neural network for high-performance and energy-e ffi cient ob-ject detection, in: European Conference on Computer Vision, Springer, 2024, pp. 253–272. 33 [47] S. Kim, S. Park, B. Na, S. Yoon, Spiking-yolo: spiking neural network for energy-e ffi cient object detection, in: Proceedings of the AAAI conference on artificial intelligence, Vol. 34, 2020, pp. 11270–11277. [48] H. Alwassel, F. C. Heilbron, V. Escorcia, B. Ghanem, Diagnosing error in tem-poral action detectors, in: Proceedings of the European conference on computer vision (ECCV), 2018, pp. 256–272. 34

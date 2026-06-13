@@ -1,134 +1,35 @@
 {
-  "generated_at": "2026-06-12T22:19:12.868259+00:00",
-  "updated_date": "20260612",
+  "generated_at": "2026-06-13T21:38:20.307052+00:00",
+  "updated_date": "20260613",
   "carryover_days": 9,
   "tag_states": {
     "video-med-qa": {
-      "updated_date": "20260612",
+      "updated_date": "20260613",
       "carryover_days": 9,
-      "items": [
-        {
-          "id": "2606.12125v1",
-          "source": "arxiv",
-          "title": "Q-Fold: Query-Aware Focus-Context Spatio-Temporal Folding for Long Video Understanding",
-          "abstract": "Long-video understanding remains challenging for multimodal large language models, because temporally extended videos often contain thousands of frames and are therefore expensive to process exhaustively. Existing methods usually construct compact visual inputs from long videos under a limited visual budget. However, most of them still follow a frame-centric paradigm and apply similar representations to retained content regardless of its importance. This makes it difficult to preserve both high-fidelity visual evidence and broad temporal coverage. To address this issue, we propose Q-Fold, a training-free input construction framework for long-video understanding. Instead of treating isolated frames as the basic modeling unit, Q-Fold operates on contiguous temporal segments and constructs a heterogeneous Focus--Context representation under query guidance. Query-relevant segments are preserved as high-fidelity Focus Frames, while less relevant segments are folded into chronology-preserving contextual layouts. In this way, Q-Fold preserves critical visual evidence and broad temporal coverage, while better maintaining local temporal continuity within short segments. Experiments on four long-video benchmarks with multiple Video-MLLMs show that Q-Fold consistently improves performance without increasing the input budget. Notably, it achieves gains of up to 9.1 percentage points on an ultra-long video benchmark. Code will be made publicly available.",
-          "authors": [
-            "Biao Tang",
-            "Xu Chen",
-            "Shuxiang Gou",
-            "Jingyi Yuan",
-            "Yuhan Zhang",
-            "Chenqiang Gao"
-          ],
-          "primary_category": "cs.CV",
-          "categories": [
-            "cs.CV"
-          ],
-          "published": "2026-06-10T14:19:15+00:00",
-          "link": "https://arxiv.org/pdf/2606.12125v1",
-          "tags": [
-            "keyword:MM-Hall",
-            "keyword:ego-video",
-            "keyword:med-video",
-            "keyword:video-med-qa",
-            "keyword:video-stream",
-            "keyword:vlm-vg",
-            "query:MM-Hall",
-            "query:ego-video",
-            "query:med-video",
-            "query:video-med-qa",
-            "query:video-stream",
-            "query:vlm-vg"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "long video understanding framework for MLLMs enabling video QA",
-          "llm_evidence_cn": "用于多模态大模型的长视频理解框架，支持视频问答",
-          "llm_evidence": "用于多模态大模型的长视频理解框架，支持视频问答",
-          "canonical_evidence": "用于多模态大模型的长视频理解框架，支持视频问答",
-          "llm_tldr_en": "Q-Fold proposes a training-free input construction framework for long video understanding, using query-aware focus-context spatio-temporal folding to preserve high-fidelity visual evidence with broad temporal coverage for multimodal LLMs.",
-          "llm_tldr_cn": "针对多模态大模型处理长视频时帧数多、计算成本高的问题，提出Q-Fold免训练输入构建框架，通过查询感知的焦点-上下文时空折叠，在有限预算下保留高保真视觉证据和广泛时间覆盖。该方法无需训练即可直接应用于视频问答任务，在多个长视频理解基准上取得领先性能，显著提升了MLLM在长视频上的理解准确性。",
-          "llm_tldr": "针对多模态大模型处理长视频时帧数多、计算成本高的问题，提出Q-Fold免训练输入构建框架，通过查询感知的焦点-上下文时空折叠，在有限预算下保留高保真视觉证据和广泛时间覆盖。该方法无需训练即可直接应用于视频问答任务，在多个长视频理解基准上取得领先性能，显著提升了MLLM在长视频上的理解准确性。",
-          "llm_tags": [
-            "query:video-med-qa"
-          ],
-          "matched_query_tag": "query:video-med-qa",
-          "matched_query_text": "video understanding for question answering tasks",
-          "matched_requirement_id": "req-3",
-          "selection_source": "carryover_cache",
-          "paper_id": "2606.12125v1",
-          "carry_days": 1
-        }
-      ]
+      "items": []
     },
     "vlm-vg": {
-      "updated_date": "20260612",
+      "updated_date": "20260613",
       "carryover_days": 9,
       "items": []
     },
     "MM-Hall": {
-      "updated_date": "20260612",
+      "updated_date": "20260613",
       "carryover_days": 9,
       "items": []
     },
     "video-stream": {
-      "updated_date": "20260612",
+      "updated_date": "20260613",
       "carryover_days": 9,
-      "items": [
-        {
-          "id": "2606.09827v1",
-          "source": "arxiv",
-          "title": "MemoryVLA++: Temporal Modeling via Memory and Imagination in Vision-Language-Action Models",
-          "abstract": "Temporal modeling is essential for robotic manipulation, as effective control requires both memory of past interactions and imagination of future states. However, most VLA models rely primarily on the current observation and therefore struggle with long-horizon, temporally dependent tasks. Cognitive science suggests that humans rely on working memory to buffer short-lived context, the hippocampal system to preserve episodic memory of past experience, and internal models to imagine possible future state evolution. Inspired by these mechanisms, we propose MemoryVLA++, a full temporal modeling framework that equips VLA models with memory and imagination for robotic manipulation. A pretrained VLM encodes the current observation into perceptual and cognitive tokens, forming working memory. These tokens query a Perceptual-Cognitive Memory Bank to retrieve relevant historical context. This bank stores low-level details and high-level semantics from past interactions, and is updated through redundancy-aware consolidation. A world model imagines future states in a denoising latent space, and the imagined latents are integrated under memory guidance to form full temporal-aware tokens. The resulting tokens condition a diffusion action expert to predict temporally consistent action sequences. We conduct extensive experiments on 5 simulation benchmarks and 3 categories of real-robot tasks across 3 robots, covering general manipulation, long-horizon temporal tasks, robustness, and generalization. Our method achieves strong performance across Libero, SimplerEnv, Mikasa-Robo, Calvin, Libero-Plus, and diverse real-robot tasks, validating the effectiveness of full temporal modeling with memory and imagination. For example, on real robots, it achieves +9%, +26%, +28% gains on general, memory-dependent, and imagination-dependent tasks. Project Page: https://shihao1895.github.io/MemoryVLA-PP-Web",
-          "authors": [
-            "Hao Shi",
-            "Weiye Li",
-            "Bin Xie",
-            "Yulin Wang",
-            "Renping Zhou",
-            "Tiancai Wang",
-            "Xiangyu Zhang",
-            "Ping Luo",
-            "Gao Huang"
-          ],
-          "primary_category": "cs.RO",
-          "categories": [
-            "cs.RO",
-            "cs.CV"
-          ],
-          "published": "2026-06-08T17:59:53+00:00",
-          "link": "https://arxiv.org/pdf/2606.09827v1",
-          "tags": [
-            "keyword:MM-Hall",
-            "keyword:video-stream",
-            "query:MM-Hall"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "temporal modeling for video sequences via memory and imagination",
-          "llm_evidence_cn": "通过记忆和想象进行视频序列的时间建模",
-          "llm_evidence": "通过记忆和想象进行视频序列的时间建模",
-          "canonical_evidence": "通过记忆和想象进行视频序列的时间建模",
-          "llm_tldr_en": "MemoryVLA++ equips VLA models with working memory, episodic memory, and internal imagination models for comprehensive temporal modeling in robotic manipulation, enabling long-horizon task execution.",
-          "llm_tldr_cn": "机器人操作中现有VLA模型缺乏长时间依赖的时间建模能力。受认知科学启发，MemoryVLA++引入工作记忆缓冲短期上下文、情景记忆保存过去经验、内部模型想象未来状态演化，构建完整时间建模框架。实验证明该方法在长时域操控任务上显著优于基线，其时间建模机制可直接迁移至视频理解中的时间序列分析。",
-          "llm_tldr": "机器人操作中现有VLA模型缺乏长时间依赖的时间建模能力。受认知科学启发，MemoryVLA++引入工作记忆缓冲短期上下文、情景记忆保存过去经验、内部模型想象未来状态演化，构建完整时间建模框架。实验证明该方法在长时域操控任务上显著优于基线，其时间建模机制可直接迁移至视频理解中的时间序列分析。",
-          "llm_tags": [
-            "query:video-stream"
-          ],
-          "matched_query_tag": "query:video-stream",
-          "matched_query_text": "temporal modeling for video sequences",
-          "matched_requirement_id": "req-27",
-          "selection_source": "carryover_cache",
-          "paper_id": "2606.09827v1",
-          "carry_days": 1
-        }
-      ]
+      "items": []
     },
     "ego-video": {
-      "updated_date": "20260612",
+      "updated_date": "20260613",
       "carryover_days": 9,
       "items": []
     },
     "med-video": {
-      "updated_date": "20260612",
+      "updated_date": "20260613",
       "carryover_days": 9,
       "items": []
     }
