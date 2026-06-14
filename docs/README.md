@@ -6,76 +6,85 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-13
-- 运行时间：2026-06-13 21:46:51 UTC
+- 最新运行日期：2026-06-14
+- 运行时间：2026-06-14 21:54:02 UTC
 - 运行状态：成功
-- 本次总论文数：18
-- 精读区：4
-- 速读区：14
+- 本次总论文数：21
+- 精读区：10
+- 速读区：11
 
 ### 今日简报（AI）
-今日日报共收录18篇论文，精读4篇，重点关注灵巧操作学习与视觉语言模型先验依赖问题。  
-最值得精读的为《EgoAERO》与《Do Vision-Language Models See or Guess?》，分别涉及无需物体资产的灵巧操作和视觉语言模型的文本先验依赖测量与缓解。  
-建议优先阅读这两篇高分论文，速读方向可关注视频检索与高光谱跟踪的语义融合方法。
-- 详情：[/202606/13/README](/202606/13/README)
+今日推荐21篇论文，精读10篇，聚焦视频大模型幻觉修复与因果时序推理。  
+最值得关注的是《MultiToP》（满分10分）提出视觉令牌修补缓解视频多模态幻觉，以及《CACR》（9分）用候选感知因果推理强化教学视频时序定位。  
+建议优先精读这两篇，再从速读中选取“不确定性量化”与“立体视觉跌倒预测”扩展视野。
+- 详情：[/202606/14/README](/202606/14/README)
 
 ### 精读区论文标签
-1. [EgoAERO: Learning Dexterous Manipulation from a Single Egocentric Video without Object Assets](/202606/13/2606.08057v1-egoaero-learning-dexterous-manipulation-from-a-single-egocentric-video-without-object-assets)  
+1. [MultiToP: Learning to Patch Visual Tokens to Mitigate Hallucinations in Video Large Multimodal Models](/202606/14/2606.11792v2-multitop-learning-to-patch-visual-tokens-to-mitigate-hallucinations-in-video-large-multimodal-models)  
+   标签：评分：10.0/10、query:mm-hall
+   evidence：缓解视频大模型中的幻觉
+2. [CACR:Reinforcing Temporal Answer Grounding in Instructional Video via Candidate-Aware Causal Reasoning](/202606/14/2606.08436v2-cacrreinforcing-temporal-answer-grounding-in-instructional-video-via-candidate-aware-causal-reasoning)  
+   标签：评分：9.0/10、query:vlm-vg
+   evidence：教学视频中的时间答案定位
+3. [OpenMedQ: Broad Open Pretraining for Medical Vision-Language Models](/202606/14/2606.12953v1-openmedq-broad-open-pretraining-for-medical-vision-language-models)  
+   标签：评分：9.0/10、query:video-med-qa
+   evidence：医学视觉语言模型在医学VQA基准上取得SOTA
+4. [Objects Before Words: Object-First Inductive Biases for Grounding Language in Child-View Video](/202606/14/2606.12985v1-objects-before-words-object-first-inductive-biases-for-grounding-language-in-child-view-video)  
    标签：评分：9.0/10、query:ego-video
-   evidence：从单段第一人称视频学习灵巧操作
-2. [Do Vision-Language Models See or Guess? Measuring and Reducing Textual-Prior Reliance with a Phrasing-Controlled Benchmark](/202606/13/2606.10400v1-do-vision-language-models-see-or-guess-measuring-and-reducing-textual-prior-reliance-with-a-phrasing-controlled-benchmark)  
-   标签：评分：9.0/10、query:mm-hall
-   evidence：测量和减少VLM中的文本先验依赖以提高可解释性
-3. [EgoTactile: Learning Grasp Pressure for Everyday Objects from Egocentric Video](/202606/13/2606.09243v1-egotactile-learning-grasp-pressure-for-everyday-objects-from-egocentric-video)  
-   标签：评分：8.0/10、query:ego-video
-   evidence：从第一人称视频学习抓取压力
-4. [Motion Reinforces Appearance: RGB-Skeleton Gated Residual Fusion for Micro-Gesture Online Recognition](/202606/13/2606.11645v1-motion-reinforces-appearance-rgb-skeleton-gated-residual-fusion-for-micro-gesture-online-recognition)  
+   evidence：在自我中心视频中语言接地的物体优先偏置
+5. [Rethinking RAG in Long Videos: What to Retrieve and How to Use It?](/202606/14/2606.13141v1-rethinking-rag-in-long-videos-what-to-retrieve-and-how-to-use-it)  
+   标签：评分：9.0/10、query:video-med-qa
+   evidence：视频问答；视频检索增强生成；长视频检索；基准
+6. [Iterative Visual Thinking: Teaching Vision-Language Models Spatial Self-Correction through Visual Feedback](/202606/14/2606.13156v1-iterative-visual-thinking-teaching-vision-language-models-spatial-self-correction-through-visual-feedback)  
+   标签：评分：9.0/10、query:vlm-vg
+   evidence：通过视觉反馈迭代改进VLM空间定位
+7. [OR-Action: Multi-Role Video Understanding with Fine-Grained Actions](/202606/14/2606.13332v1-or-action-multi-role-video-understanding-with-fine-grained-actions)  
+   标签：评分：9.0/10、query:med-video
+   evidence：手术室视频中的细粒度动作理解
+8. [TBD-VLA: Temporal Block Diffusion Vision Language Action Model](/202606/14/2606.07895v1-tbd-vla-temporal-block-diffusion-vision-language-action-model)  
+   标签：评分：8.0/10、query:vlm-vg
+   evidence：基于时间块扩散的视觉-语言-动作模型
+9. [Analyzing and Improving Fine-grained Preference Optimization in Medical LVLMs](/202606/14/2606.12590v1-analyzing-and-improving-fine-grained-preference-optimization-in-medical-lvlms)  
+   标签：评分：8.0/10、query:mm-hall
+   evidence：医学LVLM的幻觉与视觉定位改进
+10. [MoVerse: Real-Time Video World Modeling with Panoramic Gaussian Scaffold](/202606/14/2606.13376v1-moverse-real-time-video-world-modeling-with-panoramic-gaussian-scaffold)  
    标签：评分：8.0/10、query:video-stream
-   evidence：微手势在线识别，即视频流中的时序动作检测
+   evidence：实时视频世界建模，具备流式处理能力
 
 ### 速读区论文标签
-1. [IMAGINE: Adaptive Schema-Imagery Enhanced Composition for Composed Video Retrieval](/202606/13/2606.08144v1-imagine-adaptive-schema-imagery-enhanced-composition-for-composed-video-retrieval)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：自适应模式-意象增强组合用于复合视频检索，涉及视频理解和语言查询
-2. [Learnable Token Sparsification for Efficient Gigapixel Whole Slide Image Reasoning](/202606/13/2606.08641v1-learnable-token-sparsification-for-efficient-gigapixel-whole-slide-image-reasoning)  
-   标签：评分：7.0/10、query:video-med-qa
-   evidence：用于视觉语言模型中全切片图像推理的可学习标记稀疏化
-3. [Vision-Language Guided Hyperspectral Object Tracking via Semantics Fusion and Contextual Template Updating](/202606/13/2606.09167v1-vision-language-guided-hyperspectral-object-tracking-via-semantics-fusion-and-contextual-template-updating)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：通过视觉语言引导实现视频目标跟踪中的时间定位
-4. [RT-SDGOD: Real-Time Single-Domain Generalized Object Detection](/202606/13/2606.09367v1-rt-sdgod-real-time-single-domain-generalized-object-detection)  
-   标签：评分：7.0/10、query:video-stream
-   evidence：面向流式场景的实时目标检测方法，处理分布偏移
-5. [From Senses to Decisions: The Information Flow of Auditory and Visual Perception in Multimodal LLMs](/202606/13/2606.10147v1-from-senses-to-decisions-the-information-flow-of-auditory-and-visual-perception-in-multimodal-llms)  
+1. [Remember with Confidence: Uncertainty Quantification for Spatio-temporal Memory with Probabilistic Guarantees](/202606/14/2606.08277v1-remember-with-confidence-uncertainty-quantification-for-spatio-temporal-memory-with-probabilistic-guarantees)  
    标签：评分：7.0/10、query:mm-hall
-   evidence：追踪多模态大语言模型中音频和视觉信息流以增强可解释性并减少幻觉
-6. [AgenticNav: Zero-Shot Vision-and-Language Navigation as a Tool-Calling Harness](/202606/13/2606.10577v1-agenticnav-zero-shot-vision-and-language-navigation-as-a-tool-calling-harness)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：利用视觉语言模型作为智能体进行空间定位的导航方法
-7. [miniReranker: Efficient Multimodal Reranking through Visual Cache Reuse and Interaction Sparsity](/202606/13/2606.10759v1-minireranker-efficient-multimodal-reranking-through-visual-cache-reuse-and-interaction-sparsity)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：面向VQA的视觉优先多模态重排序
-8. [SpikeTAD: Spiking Neural Networks for End-to-End Temporal Action Detection](/202606/13/2606.12033v1-spiketad-spiking-neural-networks-for-end-to-end-temporal-action-detection)  
-   标签：评分：7.0/10、query:video-stream
-   evidence：脉冲神经网络用于端到端时间动作检测
-9. [Point Cloud Segmentation for Autonomous Clip Positioning in Laparoscopic Cholecystectomy on a Phantom](/202606/13/2606.12048v1-point-cloud-segmentation-for-autonomous-clip-positioning-in-laparoscopic-cholecystectomy-on-a-phantom)  
+   evidence：基于目标级语义不确定性检测VLM记忆中的不可靠描述
+2. [Stereo Vision-Based Fall Prediction and Detection using Human Pose Estimation on the AMD Kria K26 SOM](/202606/14/2606.12473v1-stereo-vision-based-fall-prediction-and-detection-using-human-pose-estimation-on-the-amd-kria-k26-som)  
    标签：评分：7.0/10、query:med-video
-   evidence：使用点云分割进行腹腔镜手术中的自动夹子定位
-10. [Q-Fold: Query-Aware Focus-Context Spatio-Temporal Folding for Long Video Understanding](/202606/13/2606.12125v1-q-fold-query-aware-focus-context-spatio-temporal-folding-for-long-video-understanding)  
-   标签：评分：7.0/10、query:video-stream
-   evidence：查询感知的时空折叠用于长视频理解
-11. [What Makes Video World Model Latents Action-Relevant: Prediction over Reconstruction](/202606/13/2606.07687v1-what-makes-video-world-model-latents-action-relevant-prediction-over-reconstruction)  
+   evidence：跌倒检测；老年人监测；边缘设备实时视频分析
+3. [SalArt-VQA: Diagnosing Whether VLMs Understand Salient Artifacts in Generated Images](/202606/14/2606.12671v1-salart-vqa-diagnosing-whether-vlms-understand-salient-artifacts-in-generated-images)  
+   标签：评分：7.0/10、query:mm-hall
+   evidence：评估视觉语言模型在生成图像上事实一致性的诊断基准
+4. [HYDRA-X: Native Unified Multimodal Models with Holistic Visual Tokenizers](/202606/14/2606.13289v1-hydra-x-native-unified-multimodal-models-with-holistic-visual-tokenizers)  
+   标签：评分：7.0/10、query:vlm-vg
+   evidence：统一图像和视频标记化的多模态视频语言模型
+5. [MotionVLA: Injecting Geometric Motion into Vision-Language-Action Model](/202606/14/2606.08288v1-motionvla-injecting-geometric-motion-into-vision-language-action-model)  
    标签：评分：6.0/10、query:video-stream
-   evidence：探究视频预训练信号中动作相关结构的来源
-12. [TVI-CoT: Text-Visual Interleaved Chain-of-Thought Reasoning for Multimodal Understanding](/202606/13/2606.08464v1-tvi-cot-text-visual-interleaved-chain-of-thought-reasoning-for-multimodal-understanding)  
-   标签：评分：6.0/10、query:video-med-qa
-   evidence：适用于视频问答的多模态链式推理方法
-13. [Minimal Solvers for Full-DoF Motion Estimation from Asynchronous Differential SfM](/202606/13/2606.09218v1-minimal-solvers-for-full-dof-motion-estimation-from-asynchronous-differential-sfm)  
-   标签：评分：6.0/10、query:ego-video
-   evidence：从异步光流进行全自由度自运动估计，与第一视角视频相关
-14. [A Controlled Study of Decoding-Time Truthfulness Methods on Instruction-Tuned LLMs](/202606/13/2606.12160v1-a-controlled-study-of-decoding-time-truthfulness-methods-on-instruction-tuned-llms)  
+   evidence：视频序列的时间建模
+6. [Look Less, Reason More: Block-wise Attention Skipping for Efficient Multimodal LLMs](/202606/14/2606.08511v1-look-less-reason-more-block-wise-attention-skipping-for-efficient-multimodal-llms)  
    标签：评分：6.0/10、query:mm-hall
-   evidence：通过分析LLM内部logits检测幻觉
+   evidence：多模态大模型效率；视觉注意力饱和分析
+7. [MAVIS: Multi-Agent Video Retrieval via Structured Video Understanding](/202606/14/2606.09641v1-mavis-multi-agent-video-retrieval-via-structured-video-understanding)  
+   标签：评分：6.0/10、query:video-stream
+   evidence：多智能体结构化视频理解
+8. [Latent Spatial Memory for Video World Models](/202606/14/2606.09828v1-latent-spatial-memory-for-video-world-models)  
+   标签：评分：6.0/10、query:video-stream
+   evidence：提出视频世界模型的潜在空间记忆，是一种视频理解的深度学习方法
+9. [BiWM: Advancing Open-Source Interactive Video World Models with Bidirectional Autoregression](/202606/14/2606.10135v1-biwm-advancing-open-source-interactive-video-world-models-with-bidirectional-autoregression)  
+   标签：评分：6.0/10、query:video-stream
+   evidence：视频世界模型；双向自回归；交互式视频
+10. [VL-DINO: Leveraging CLIP Vision-Language Knowledge for Open-Vocabulary Object Detectio](/202606/14/2606.11546v1-vl-dino-leveraging-clip-vision-language-knowledge-for-open-vocabulary-object-detectio)  
+   标签：评分：6.0/10、query:vlm-vg
+   evidence：利用视觉语言知识进行开放词汇目标检测，通过文本查询实现空间定位
+11. [A Machine Learning Framework for Real-Time Personalized Ergonomic Pose Analysis](/202606/14/2606.12988v1-a-machine-learning-framework-for-real-time-personalized-ergonomic-pose-analysis)  
+   标签：评分：6.0/10、query:video-stream
+   evidence：使用体积视频数据进行实时姿态分析
 
 
 <div class="dpr-home-promo-card">

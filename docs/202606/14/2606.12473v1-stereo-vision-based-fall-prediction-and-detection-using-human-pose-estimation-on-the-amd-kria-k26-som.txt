@@ -1,0 +1,418 @@
+Title: Stereo Vision-Based Fall Prediction and Detection using Human Pose Estimation on the AMD Kria K26 SOM
+
+URL Source: https://arxiv.org/pdf/2606.12473v1
+
+Published Time: Fri, 12 Jun 2026 00:08:23 GMT
+
+Number of Pages: 20
+
+Markdown Content:
+# Highlights 
+
+Stereo Vision-Based Fall Prediction and Detection using Human Pose Estimation on the AMD Kria K26 SOM 
+
+Shreyas Narasimhiah Ramesh, P. D. Rathika, Mahasweta Sarkar, Kristen Wells, Michel Audette, Christopher Paolini 
+
+• Design, implementation, and performance evaluation of a novel embedded, accelerated, vision-based fall detection system for elderly at-risk individuals. 
+
+• Deployment is on an AMD System on a Module (SoM), with a Zynq UltraScale+ MultiProcessor System on Chip (MPSoC), which supports low power accelerated AI. 
+
+• Implementation employs a 3-stage pipeline architecture to process RGB and depth frames through a quantized YOLOX, A2J, and fall detection model. 
+
+> arXiv:2606.12473v1 [cs.CV] 10 Jun 2026
+
+# Stereo Vision-Based Fall Prediction and Detection using Human Pose Estimation on the AMD Kria K26 SOM 
+
+Shreyas Narasimhiah Ramesh a, P. D. Rathika b, Mahasweta Sarkar a, Kristen Wells c, Michel Audette d,Christopher Paolini a
+
+> aElectrical and Computer Engineering, San Diego State University, 5500 Campanile Drive, San Diego, 92182-1309, California, USA
+> bDepartment of Robotics and Automation Engineering, PSG College of Technology, Peelamedu, Coimbatore, 641004, Tamil Nadu, India
+> cPsychology, San Diego State University, 5500 Campanile Drive, San Diego, 92182-4611, California, USA
+> dElectrical and Computer Engineering, Old Dominion University, 5115 Hampton Blvd, Norfolk, 23529, Virginia, USA
+
+Abstract Background and Objective: Falls among elderly people can lead to serious injuries and significantly impact their quality of life. Timely detection and prediction of falls are crucial for preventing fall-related injuries and improving the well-being of older adults. In this research, we propose a portable, low-power battery-operated, vision-based fall prediction and detection system using a human pose estimation (HPE) model running on an edge computing device, the AMD ® Kira ™ K26 System-on-Module (SOM). Our objective is to create a non-intrusive and efficient solution for detecting potential fall events in real time. 
+
+Methods: The system consists of an Intel ® RealSense ™ D455 range-sensing camera connected to a K26 SOM through USB. The camera captures synchronized RGB and depth frames of pixel dimensions 640 ×
+
+480 × 3 ( H × W × C) and 640 × 480 , respectively, at a rate of 60 frames per second (FPS) for real-time processing. The K26 SOM employs a 3-stage pipeline architecture to process the frames through quantized YOLOX, A2J, and fall detection machine learning models. The YOLOX model takes each RGB frame to produce a bounding box for each human in the frame. The system then discards the RGB frame, preserving privacy. The second model, Anchor-to-Joint (A2J), accepts a depth frame and produces 15 key points of joint information for each detected human. The final model is a convolutional neural network (CNN) that takes informative joint coordinates (x, y, z ) and predicts human fall activity. The YOLOX model was trained on the CrowdHuman dataset for human detection, the A2J model was trained on ITOP, MP-3DHP, UR Fall Detection, and a custom SDSU PSG dataset for pose estimation, and the fall prediction CNN was trained on UR Fall Detection and SDSU PSG datasets for binary fall classification.The system is implemented on two different hardware architectures: a single-core DPU with the maximum possible resource executing a single thread and a two-core DPU to run YOLOX and A2J independently on each core executed using multiple threads. 
+
+Results: The quantized accuracy—evaluated using Intersection over Union (IoU) of 50% for YOLOX, mean Average Precision (mAP) with a 10-cm rule for A2J, and classification accuracy (TP + TN)/(TP + TN + FP + FN) for the fall prediction CNN—is 74%, 84.13%, and 75.85%, respectively. The single-threaded serial pipeline achieved a throughput of approximately 2.5 FPS, while the multi-threaded implementation achieved up to 4.5 FPS. 
+
+Conclusion: This research demonstrates the feasibility of a privacy-preserving, real-time fall detection system achieving 4.5 FPS on an AMD Kria K26 edge device. The proposed system validates that on-device human pose estimation and fall classification can be performed efficiently without cloud dependency, supporting practical applications in elderly monitoring and assistive healthcare environments. Future work will focus on improving model accuracy and processing speed for large-scale deployment. 
+
+Keywords: human falls, assisted living, human pose analysis, daily living activity recognition, fall prediction, action recognition, edge computing. 1. Introduction 
+
+In the realm of healthcare and assisted living, the timely detection and prediction of falls stand as pivotal challenges with far-reaching implications, particularly for the elderly demographic. Falls are the leading cause of injury-related death and hos-pitalization in seniors [1, 2, 3], potentially result-ing in disabilities, depression, and decreased qual-ity of life. More than two-thirds of older adults fall at least once a year, with those in assisted living or long-term care facilities falling more fre-quently [4, 5]. Demographic trends show a rapidly expanding older adult population, intensifying the demand for effective fall-prevention and monitoring technolo-gies. Longer life expectancy has led to rising rates of chronic and age-related health conditions, further straining healthcare systems and increasing the ur-gency of preventive care. Fall-related risks are further magnified by the physical and psychological consequences that follow such events. Falls are the leading cause of traumatic injuries in seniors, often contributing to sustained functional decline and reduced independence. Falls continue to be the leading cause of injury-related morbidity and mortality among seniors. [6] In the United States alone, millions of fall events occur annually, resulting in tens of thousands of deaths. Beyond the immediate physical impacts, fall events frequently generate long-term complications that jeopardize well-being and quality of life. Severe outcomes such as hip fractures carry sig-nificant mortality, with nearly one-fifth of patients dying within a year. They are also a major contributor to traumatic brain injuries and long-term functional decline. [7, 8]. Delayed assistance after a fall, often referred to as the “long lie,” can lead to serious complications including dehydration, hypothermia, and muscle breakdown. The broader impact of falls extends beyond clinical outcomes. The economic burden is im-mense, and the psychological effects—including fear of falling, reduced activity, and accelerated de-cline—add further complexity to fall management. The economic burden is equally substantial, with fall-related healthcare expenditures exceeding $50 billion each year. [9] Psychological impacts such as the fear of falling can trigger reduced activity, isolation, and worsen-ing physical and mental health. [10] Timely intervention plays a pivotal role in mit-igating the impact of fall-related injuries, under-scoring the critical need for accurate and efficient fall detection and prediction systems. These fac-tors highlight the importance of timely interven-tion, reinforcing the need for accurate and efficient fall-detection systems. 
+
+1.1. Existing Technologies and Limitations 
+
+Fall detection systems generally rely on wear-able sensors or vision-based monitoring, but both categories present limitations that hinder depend-able real-world deployment. Wearable devices of-ten suffer from user compliance issues, discomfort, and limited battery life, reducing their reliability for continuous monitoring [11, 12]. Vision-based systems provide richer contextual information but raise privacy concerns, particu-larly in sensitive environments such as bedrooms or assisted-living facilities [13]. Their performance is also affected by occlusions, lighting variations, and the fact that cameras only monitor the specific spaces in which they are installed [14, 15]. Embedded and edge-based solutions must ad-ditionally operate under strict computational and power constraints, making real-time inference chal-lenging without hardware acceleration [16]. These limitations highlight the need for fall detection ap-proaches that are privacy-preserving, robust to en-vironmental variations, and capable of efficient real-time execution on resource-constrained platforms. 
+
+1.2. Human Pose Estimation 
+
+Human pose estimation (HPE), the process of identifying and tracking key points or joints on the human body from visual data, has emerged as a fundamental technology for fall detection and pre-diction. By accurately extracting human poses, re-searchers can gain insights into body movements and postures, enabling the detection of abnormal patterns indicative of potential falls. Human pose estimation offers a non-intrusive approach while preserving user privacy, making it a promising av-enue for fall detection systems. [17, 18] Modern HPE systems build upon advancements in deep learning that enable precise joint localiza-tion in both 2D and 3D, making them suitable for analyzing critical activities of daily living and iden-tifying deviations associated with fall events. [19] 21.3. Research Objectives 
+
+The primary objective of this research is to de-velop an accurate and efficient fall detection and prediction system using human pose estimation techniques on the AMD Kria K26 SOM platform. Specific objectives include exploring state-of-the-art neural networks, designing a real-time pipeline, developing robust fall detection techniques, op-timizing performance, conducting comprehensive evaluations, and exploring integration with other assistive technologies. These objectives directly address the limitations of conventional camera-based and wearable ap-proaches by leveraging depth-based pose extraction and embedded AI acceleration to achieve privacy-preserving, real-time performance. 
+
+1.4. Proposed Approach 
+
+Existing wearable and camera-based fall detec-tion systems suffer from issues such as user discom-fort, privacy concerns, sensitivity to lighting and occlusions, and limited robustness in real-world en-vironments. The proposed design addresses these limitations by relying on depth data and skeletal pose representations, which significantly reduce pri-vacy intrusion compared to RGB video and remain resilient under varying illumination conditions. Hu-man pose estimation further mitigates the effects of occlusions and background clutter by extracting structural body keypoints rather than operating di-rectly on raw pixel values. Additionally, deploy-ing the full inference pipeline on the AMD Kria K26 SOM enables efficient, on-device processing, eliminating cloud dependence, reducing latency, and ensuring reliability in resource-constrained set-tings. These features collectively provide a privacy-preserving, robust, and real-time fall detection so-lution that overcomes the fundamental challenges of prior approaches. 
+
+1.5. Contributions 
+
+The primary contribution of this research is the development of an embedded, hardware-accelerated, low-power, and portable fall prediction and detection system that utilizes human pose es-timation techniques. Additionally, a dataset of hu-man pose kinematics features from controlled fall experiments has been created, providing valuable insights for training and evaluating fall detection algorithms. The system is designed to be privacy-preserving, resource-aware, and robust, ensuring its effectiveness and practicality in real-world scenar-ios. Furthermore, this work bridges advances in edge intelligence and embedded AI by demonstrating an FPGA-accelerated fall detection pipeline capable of real-time performance on the AMD Kria K26 SOM platform. This positions the system as a practical and scalable solution for deployment in home-care and assisted-living environments. The remainder of this paper is organized as fol-lows: Section 2 provide an overview of prior re-search in sensor-based and vision-based fall detec-tion; Section 3 describes the system architecture and methodology; Section 3 presents the dataset, training details, and experimental setup; Section 4 reports results and discusses model performance; and Section 5 concludes the paper with limitations and future work. 
+
+2. Related Works 
+
+Fall detection technologies have evolved consid-erably over the past two decades, particularly with the transition from threshold-based and binary de-cision systems to more sophisticated multi-class and severity-aware models. Early work largely relied on wearable sensors, such as accelerometers and gy-roscopes, to capture motion signatures indicative of falls [11]. These systems typically analyzed ac-celeration thresholds or angular velocity patterns, and later incorporated both sensing modalities to improve robustness and reduce false alarms. The integration of deep learning techniques, including Convolutional Neural Networks (CNNs), further enhanced classification accuracy in wearable fall detection systems [12, 20]. More recent advance-ments explore the feasibility of implementing ma-chine learning and fall-detection algorithms directly on microcontroller units (MCUs) and edge devices, supported by the increasing computational capabil-ity of embedded platforms [21, 22]. In parallel with MCU-based approaches, hardware-accelerated and FPGA-based fall de-tection systems have emerged as a promising class of edge-intelligent solutions. Tian et al. [23] introduced an ultra low-power, wearable ar-chitecture that accelerates shallow-learning fall detection models for elderly at-risk individuals. Their subsequent work demonstrated efficient fall detection through edge inferencing on embed-ded hardware platforms [24]. Complementary research by Bharathkumar et al. [25] implemented 3FPGA-based edge inferencing for fall detection, highlighting the benefits of hardware acceleration in achieving low-latency and energy-efficient op-eration. These developments illustrate a broader shift toward deploying fall detection models on specialized hardware to improve responsiveness and reduce computational load. Vision-based fall detection approaches have also gained significant traction due to their non-intrusive nature and ability to capture rich contex-tual information [26, 27]. Traditional RGB methods leveraged background subtraction, object tracking, and motion analysis to identify fall-related pat-terns [15]. Despite their effectiveness, these meth-ods are often sensitive to illumination changes, oc-clusions, and differences in clothing or body ap-pearance. Depth-based systems, enabled by de-vices such as the Microsoft Kinect, provided a more robust alternative by capturing three-dimensional structural information and using it to estimate body pose and movement trajectories [28]. Recent work has focused on extracting 3D human pose, mo-tion dynamics, and postural transitions to detect falls with higher reliability. To address privacy concerns associated with RGB imaging, researchers have experimented with obfuscated or anonymized visual representations, such as silhouette extraction, thermal imaging, or depth-only video streams [29, 30]. These privacy-preserving modalities help mitigate ethical and user-acceptance challenges, particularly in sensitive environments such as assisted living facilities. Despite significant progress, several challenges re-main. Many existing systems struggle with occlu-sions, cluttered backgrounds, and multi-person en-vironments, reducing their reliability in real-world deployments [31, 32]. Additionally, computation-heavy deep learning architectures hinder real-time performance on resource-constrained plat-forms, motivating research into model optimiza-tion, hardware acceleration, and embedded process-ing [16, 33, 34]. Deployment scalability also re-mains a challenge, as vision-based systems often re-quire environment-specific calibration and may fail to generalize across different architectural layouts or user behaviors [35, 32]. 
+
+3. Methods 
+
+3.1. System Overview 
+
+Figure 1 shows the overview of the proposed fall prediction and detection system. The system is comprised of an Intel ® RealSense ™ D455 range-sensing camera [38] connected to a AMD ® Kria ™
+
+KV260 Vision AI [39] development platform. The camera produces frames at a resolution of 640 ×480 
+
+pixels and a frame rate of 60 frames per second (fps), allowing the system to process and operate in real time. RGBD frames from the camera are processed through a combination of machine learn-ing models on the KV260 to predict the event of a human fall. Upon the availability of a synchronized frameset, the RGB frame is first extracted and provided as in-put to the YOLOX model [36] for human detection. This model processes the full RGB image and re-turns bounding box coordinates delineating any de-tected human subjects in the pixel space, taking the form [ xmin, ymin, width, height ] within the frame dimensions. With humans localized in the scene, the depth frame is subsequently extracted from the frameset and preprocessed to isolate the region of interest using the estimated boundary box. If there is no person identified int he frame of view then the RGB and depth frame pair is dropped. The cropped depth frame is then passed to the A2J [19] pose estimation model which outputs a list of 15 joint coordinates for each detected human in 3D space as [ x, y, z ] triplets. Finally, the predicted joint positions are analyzed by the fall prediction model to categorize the pose as either a fall event, or normal posture, through binary classification [40]. 
+
+3.2. Data Acquisition 
+
+The data acquisition process involves captur-ing synchronized RGB and depth frames using an Intel ® RealSense ™ D455 depth camera. This cam-era employs active infrared stereo vision technology to generate depth information, enabling the sys-tem to perceive the 3D spatial characteristics of the scene. The depth camera captures frames at a resolution of 640 × 480 pixels and a frame rate of 60 frames per second (fps), facilitating real-time processing. The librealsense SDK [41] is employed to interface with the depth camera, enabling seam-less color and depth video streaming, as well as providing intrinsic and extrinsic calibration infor-mation. This SDK also offers synthetic streams, such as pointclouds and depth alignment to color frames, along with built-in support for recording and replaying streaming sessions in the ROSBag file format. 4Figure 1: The proposed fall detection method. First, a human subject in a frame is detected using YOLOX [36] Second, the A2J model [19] is applied on the depth frame to estimate the joint pose information. Third, a CNN model analyses a set of frames’ joint information to detect the occurrence of fall events. Images are taken from the UR Fall Detection dataset [37]. 
+
+3.3. Kria KV260 Vision AI Platform 
+
+The AMD ® Kria ™ KV260 Vision AI development platform is a powerful and efficient edge comput-ing solution designed for accelerating deep learning and computer vision applications. At the heart of this platform lies the Xilinx Kria K26 System-on-Module (SOM), which combines a quad-core Arm Cortex-A53 CPU with a dual-core Arm Cortex-R5 real-time processor and a dedicated deep learning processing unit (DPU). The DPU, based on the Xilinx Deep Learn-ing Processor (DLP) architecture, provides hard-ware acceleration for convolutional neural networks (CNNs), enabling high-performance and energy-efficient inference at the edge. The Kria KV260 platform is well-suited for applications requiring real-time processing of visual data, making it an ideal choice for the proposed fall prediction and de-tection system. 
+
+3.4. Machine Learning Models 
+
+The fall detection system leverages three main machine learning models: YOLOX for human de-tection, Anchor-to-Joint Regression Network (A2J) for human pose estimation[19], and a Convolutional Neural Network (CNN) for fall detection and clas-sification. These models are briefly summarized as follows: 
+
+3.4.1. YOLOX 
+
+The primary goal is to detect humans within the camera’s field of view, achieved through the uti-lization of the YOLOX-S object detection model. The YOLOX model is an anchor-free approach known for its exceptional speed and accuracy, re-quiring fewer operations during inference compared to anchor-based models like YOLOv3 [42] and YOLOv4 [43]. Several modifications were made to the model architecture: The activation func-tion was changed from MISH to LeakyReLU, the maxpool sizes of the spatial pyramid pooling (SPP) were changed to 3 ×3, 5 ×5, and 7 ×7, as the DPU has a maximum kernel size of 8 ×8 as the limitation. Lastly, the number of output labels was limited to only one, i.e., a single person. The YOLOX model was trained on the CrowdHuman dataset [44], a large dataset of human detection images. The pri-mary evaluation metric for object detection is Av-erage Precision (AP) for the person class, repre-senting how accurately the model detects persons. Intersection over Union (IoU) is a key component in calculating AP. It measures the overlap between the predicted bounding box Bp and ground truth box Bgt :
+
+> Figure 2: Intersection of Union Concept
+
+IoU = Area of Intersection (Bp ∩ Bgt )
+
+Area of Union (Bp ∪ Bgt )
+
+A prediction is considered a true positive if its IoU with the ground truth exceeds a threshold like 50.5. The IoU directly indicates localization accu-racy for object detection. Maximizing IoU typi-cally improves mAP as higher overlap with ground truth equates to better detection performance. The model produces the boundary box coordinates in the format [ xmin, ymin, width, height ], where xmin, ymin are the left-top corner of the bounding box. The modified YOLOX model is able to achieve good accuracy on real-time streams from the depth cam-era. 
+
+3.4.2. Human Pose Estimation 
+
+Accurate human pose estimation is a crucial com-ponent of the fall prediction and detection system. This work leverages the Anchor-to-Joint Regression Network (A2J) [19], a deep learning model that in-fers 3D human body pose from a single depth im-age. The A2J model employs a 2D CNN ResNet-50 architecture pretrained on the ImageNet dataset [45] as the backbone network, enabling efficient op-eration on the resource-constrained Kria K26 SOM platform. The A2J model is trained on multi-
+
+> Figure 3: Full human body pose joints of interest.
+
+ple datasets, including ITOP [46], MP-3DHP [47], UR Fall Detection [37], and a custom SDSU_PSG dataset. The model predicts the positions of 15 key joints in the human body, represented as 3D coor-dinates in the camera space. 
+
+3.4.3. Fall Detection and Classification 
+
+The fall detection and classification component of the system utilizes a Convolutional Neural Net-work (CNN) model [48] to analyze the predicted 3D human pose information from the A2J model. This CNN model is trained on the UR Fall Detection Dataset [37] and the custom SDSU_PSG dataset, comprising sequences of falls and activities of daily living (ADL). The CNN model processes the tem-poral sequence of 3D joint positions and classifies each frame as either a "fall" or "non-fall" event. The model’s performance is evaluated using a con-fusion matrix, enabling the calculation of essential metrics such as precision, recall, and F1 score, pro-viding a comprehensive assessment of its accuracy in distinguishing between fall and non-fall events. 
+
+3.5. Model Quantization and Deployment    
+
+> Figure 4: Steps involved in the model development of the pre-trained FP32 PyTorch ™AI models into INT8 for infer-ence on the Kria ™K26 SOM.
+
+The Vitis AI framework from AMD is leveraged to optimize and deploy the deep learning models on the Kria KV260 platform, taking advantage of its hardware acceleration capabilities. The key compo-nents of the Vitis AI stack [49] involved in system optimization workflow are: 1. Model Inspector: Before quantizing the pre-trained float model, it is examined with the Vitis AI Model Inspector, which returns parti-tion information showing which operators may operate on which device (DPU/CPU). 2. Model Quantization: The Vitis AI Quantizer lowers processing complexity without sacrific-ing prediction accuracy by converting 32-bit floating-point (FP32) weights and activations to 8-bit fixed-point integers (INT8). The pre-trained FP32 PyTorch models (YOLOX, A2J, and Fall Predictor CNN) are quantized to INT8 precision using the Vitis AI Quantizer tool. 3. Model Compilation: The quantized INT8 mod-els are compiled using the Vitis AI Com-piler, which generates an optimized executable model (xmodel file) tailored for efficient execu-tion on the Kria K26 SOM’s DPU hardware. 4. Application Integration: The compiled xmodel is integrated into the software application run-ning on the PetaLinux operating system using the VART (Vitis AI RunTime) APIs. This in-cludes deserializing the xmodel, creating DPU runners, managing input/output tensors, and asynchronous job execution on the DPU. 65. Runtime Optimization: During inference, the application leverages the VART APIs to op-timally utilize the DPU hardware accelera-tion capabilities. This includes techniques like asynchronous job submission, multi-threading, and efficient data transfer between the CPU and DPU. 
+
+3.6. Deep Learning Processor Unit 
+
+The AMD ® Kria ™ K26 SOM features a Deep Learning Processing Unit (DPU), a customizable compute engine tailored for convolutional neural networks. The DPUCZDX8G , designed for the Ul-traScale + MPSoC, seamlessly integrates into the pro-grammable logic (PL) and establishes direct connectiv-ity to the processing system (PS) through an AXI inter-connect [50]. Upon reset, instructions are fetched from off-chip memory to govern the computing engine’s op-erations, with these instructions generated by the Vitis AI compiler for optimized model layer performance. 
+
+3.6.1. Integrating the DPU into Custom Platforms 
+
+Two primary workflows are supported for integrat-ing the DPUCZDX8G: the Vivado flow and the Vitis flow [51]. In this research, the Vivado flow was chosen, which involves creating a hardware platform project in Vivado, configuring the hardware for an accelerated de-sign, synthesizing, and generating a bitstream file. 
+
+3.6.2. Possible DPU Architectures on the KV260 
+
+The AMD ® Kria ™ K26 SOM’s programmable logic offers various logical resources, including 256K system logic cells, 64 UltraRAM blocks, 144 block RAM blocks, and 1.2K DSP slices. These resources enable the syn-thesis of different DPU architectures within the pro-grammable logic fabric. The available DPU configu-rations range from a single high-performance core to multiple lower-performance cores, catering to diverse computational requirements. For instance, a single core B4096 architecture can be implemented, capable of exe-cuting 4096 multiply-accumulate (MAC) operations per clock cycle at a frequency of 325 MHz. Alternatively, multiple homogeneous cores can be instantiated, such as two B1600 cores or three B1024 cores, enabling parallel execution of multiple models or workloads. 
+
+3.6.3. Chosen DPU Architecture 
+
+To achieve optimal system throughput, three distinct hardware architectures were explored and evaluated: 1. Single-core B4096 DPU design: The single-core B4096 architecture allows for the sequential execution of AI models on the DPU. With the max-imum available logical resources, this architecture executes 4096 multiply-accumulate (MAC) oper-ations per clock cycle at 325 MHz, providing a higher inference time per model execution. The throughput can be further boosted by employing data parallelism and multi-threading techniques for the DPU runners. While the single-core design has limited parallel processing capacity, which may impact throughput in scenarios demanding simul-taneous model execution, its higher performance per core and the ability to leverage data paral-lelism and multi-threading make it a compelling choice for our application. 2. Dual-core B1600 DPU design: The dual-core B1600 architecture features two homogeneous B1600 DPU cores connected to the Zynq Ultra-Scale+ MPSoC processing system (PS) through an AXI interconnect. This design allows for the par-allel execution of models, with YOLOX and A2J running on dedicated DPU cores, while the fall prediction model is executed on the CPU itself. The dual-core approach offers enhanced through-put by processing input data concurrently on sep-arate cores. However, it introduces potential chal-lenges in balancing the workload between cores and introduces overhead due to offloading the fall pre-diction model to the CPU. 3. Three-core B1024 DPU design: The three-core B1024 architecture allocates separate B1024 DPU cores to each of the three models: YOLOX, A2J, and fall prediction. This design enables par-allel execution of all three models, potentially im-proving overall throughput. However, the limi-tations in the operations capability of the B1024 architecture DPU core lead to poor inference re-sults for the computationally intensive YOLOX model. Achieving a balance between model com-plexity and the available core resources becomes crucial in this scenario. 
+
+3.6.4. Resource Utilization  
+
+> Figure 5: FPGA Resource Utilization of the 1 core B4096 DPU Design.
+
+7Figure 6: FPGA Resource Utilization of 2 core B1600 DPU Design.  
+
+> Figure 7: FPGA Resource Utilization of the 3 core B1024 DPU Design.
+
+Figures 5, 6, and 7 summarize the logical resource utilization for the different DPU architectures explored. 
+
+3.7. Embedded Linux, PetaLinux 
+
+PetaLinux is an embedded Linux Software Develop-ment Kit (SDK) targeting FPGA based system-on-chip (SoC) designs. The PetaLinux SDK contains everything necessary to build, develop, test, and deploy embedded Linux systems. The PetaLinux Board Support Package for the KV260 Starter Kit is used to build the embed-ded Linux to run on the KV260. Kernel is configured to enable the DPU device driver. Root filesystem is con-figured to include Vitis AI librarries and other support-ing library packages within the build image. PetaLinux includes U-Boot, Linux kernel, Device Tree, and Root Filesystem components. 
+
+3.7.1. Device Tree 
+
+The device tree is a data structure used to describe the hardware components and their connections in a system. Using the XSCT (Xilinx Software Command-line Tool) command createdts a device tree domain is created based on the hardware description specified by the XSA file (hardware design). The -overlay option is used to generate an overlay, which allows for dynamic device tree modifications without rebuilding the entire tree. 
+
+3.7.2. Accelerated Application 
+
+To dynamically enable the accelerated applications on the AMD Kria K26 SOM we use the platform man-agement utility called xmutil . Figure 8 shows the list of available applications 
+
+3.8. Software Architecture 
+
+The proposed fall prediction and detection system is implemented using a producer-consumer software archi-tecture, as illustrated in Figure 9. This architecture de-couples the data acquisition process (producer) from the data processing and analysis tasks (consumer), enabling better concurrency, scalability, and fault tolerance. 
+
+3.8.1. Data Acquisition and Preprocessing 
+
+The producer process is responsible for acquiring data from either a pre-recorded video file or directly from the Intel RealSense D455 camera. The RealSense SDK [38] is installed on the AMD Kria KV260 Vision AI Development Platform running PetaLinux, enabling seamless integration with the depth camera. The pro-ducer reads synchronized RGB and depth frames at a resolution of 640 × 480 pixels and a frame rate of 60 fps, facilitating real-time processing. To ensure data in-tegrity during inter-process communication, header and trailer bytes are used as decorators to identify the start and end of frame data. The producer writes the frame data to a named pipe (FIFO) with a resized buffer to accommodate the large frame size. Semaphores are em-ployed for synchronization, preventing race conditions and ensuring the integrity of data transfer between the producer and consumer processes. 
+
+3.8.2. Serial Pipeline Implementation 
+
+The serial pipeline design, as depicted in Figure 10, processes data sequentially using a single-core B4096 Deep Learning Processing Unit (DPU) architecture. The consumer process follows these steps: 1. Read frame data from the FIFO pipe. 2. Extract color and depth frames from the frame buffer. 3. Run the YOLOX model [36] for human detection on the color frame. 4. If a person is detected, run the A2J model [19] for pose estimation on the depth frame using the bounding box coordinates from YOLOX. 5. Run the fall detection model [48] on the pose es-timation output to classify the pose as a fall or non-fall event. 
+
+3.8.3. Parallel Pipeline Implementation 
+
+The parallel design implementation, shown in Fig-ure 11, utilizes a multi-threaded approach and executes each AI model on a dedicated DPU core. A dual-core 
+
+8Figure 8: List of accelerated application available for execution. 
+
+> Figure 9: Producer-Consumer Software Architecture
+> Figure 10: Serial Design Implementation.
+
+B1600 DPU architecture is synthesized, with YOLOX and A2J running on separate DPU cores, and the fall predictor model executing on the ARM CPU. The main thread enqueues color and depth frames to a shared queue. The YOLOX thread continuously checks for frames in the queue, runs the YOLOX model on the color frame, and enqueues the depth frame and bounding box results for the pose estimation thread. The A2J thread dequeues depth frames, runs the pose estimation model, and passes the pose results to the fall prediction model for classification. 
+
+3.9. Data Logging and Performance Monitoring 
+
+To monitor system performance and log relevant met-rics, a signal handler is implemented to handle the 
+
+SIGALRM signal. The signal handler function is called periodically (every 100 milliseconds) by the system timer and logs various metrics to a CSV file, including timestamps, frame counts, frame rates, model inference times, and prediction outputs. This logging mechanism enables comprehensive analysis and evaluation of the system’s performance. 
+
+4. Results 
+
+4.1. Training Results 
+
+The float model training results for the 3 models employed in the fall prediction and detection system are summarized here. Figure 12 illustrates the tensor-board training plot for the YOLOX object detection model, depicting the IoU set at 50% over the training epochs. Figure 13 shows the accuracy and training vs validation loss plot of the human pose estimation model A2J[19]. Figure 14 presents the training plot for the fall prediction model, which utilizes temporal information and human pose data to anticipate potential falls before they occur. 
+
+4.2. Quantization Results 
+
+This section discusses the model performance once the quantized model is deployed on the hardware. Av-erage power consumption by the SOM is monitored dur-ing the execution of the models, benchmarking tests are 
+
+9Figure 11: Parallel Design with Multithreaded Implementation. 
+
+Figure 12: Training plot for the YOLOX object detection model, showing the IoU set at 50% over the training epochs 
+
+Figure 13: Training plot for the A2J human pose estimation model, top showing the accuracy of joint prediction, bottom plot shows the training vs validation loss. 
+
+Figure 14: Training plot for the fall prediction model, top plot showing the accuracy, bottom plot shows the training vs validation loss. 
+
+10 performed to identify the maximum throughput of a model executing instructions only on the DPU engine. 
+
+4.2.1. Quantized model summary 
+
+The accuracy of the 3 model design is summarized in Table 1. The FP32 is the float model accuracy that is trained on the GPU server. INT8 is the quantized model accuracy.             
+
+> Model Dataset Accuracy (FP32) Accuracy (INT8)
+> YOLOX 1CrowdHuman 74.45% 74.00% A2J 2SDSU_PSG 93% 84.13% Fall Detector 3SDSU_PSG Fall Detection 96.91% 75.85%
+> 1Accuracy is based on the IoU of the boundary box, set at 50%.
+> 2Accuracy is mean average precision (mAP) with a 10-cm rule for all the 15 joints.
+> 3Accuracy = (TP + TN) / (TP + TN + FP + FN).
+
+Table 1: Model Performance Summary 
+
+4.3. Power Efficiency 
+
+To assess the power efficiency of the deployed sys-tem on the AMD Kria K26 SOM, the xmutil command is used to monitor the power consumption of the plat-form. The following command output shows the real-time power consumption: 
+
+ramesh@notos :~ $ watch -n 1 xmutil xlnx_platformstats -p 
+
+The power consumption is higher in the parallel design implementation compared to the serial design imple-mentation. In figure 15 and 16 first column shows the power consumption in milliwatts (mW) for individual models executing. 
+
+4.4. Benchmark results 
+
+The xdputil command is used to benchmark the per-formance of the quantized models on the AMD Kria K26 SOM. The output is given in the units of frames per second (FPS). The inference time in milliseconds, inference speed in FPS, and power consumption in mil-liwatts (mW) is summarized for each models in figure 15 and figure 16 running on B4096 and B1600 architecture DPUs, respectively. 
+
+> 1
+
+Does not include the frame capture time (only model inference on the DPU without pre/post processing). 
+
+Figure 15: Benchmark Performance of AI Models on B4096 architecture DPU. 
+
+> 2
+
+Does not include the frame capture time (only model inference on the DPU without pre/post processing). 
+
+Figure 16: Benchmark Performance of AI Models on B1600 architecture DPU. 
+
+4.5. Profiling Results: 
+
+To analyze the performance and identify potential bottlenecks, profiling was conducted on the deployed system using the AMD Kria K26 SOM. 
+
+4.5.1. Frame Alignment Bottleneck 
+
+During the profiling process of the producer process that simply reads the frame and flushes it to consumer, a bottleneck was identified in the frame alignment step, which aligns the depth and color frames for accurate boundary box estimation. The following terminal out-put illustrate the time taken by the align_to_depth 
+
+function: 
+
+root@xilinx - kv260 - starterkit -20221:~/ camera # ./ profiling align_to_depth Elapsed time : 115 ms align_to_depth Elapsed time : 91 ms align_to_depth Elapsed time : 94 ms align_to_depth Elapsed time : 88 ms align_to_depth Elapsed time : 87 ms align_to_depth Elapsed time : 90 ms 
+
+4.5.2. Vitis AI Analyzer 
+
+The Vitis AI Analyzer is used to profile the perfor-mance of the deployed models on the AMD Kria K26 SOM’s DPU. Figures 17 and 18 show the Vitis AI An-alyzer views for profiling results with one core and two cores DPU, respectively. In figure 17 we observe the 
+
+Figure 17: Vitis AI Analyzer view showing profile results of 1 core DPU. 
+
+time between the two subgraphs execution on the DPU is the time spent on CPU executing the post processing and preprocessing functions. This is an area to im-prove the system performance and the overall through-put. Figure 18 shows the execution of the DPU sub-graphs executing on the two cores of DPU. Each model 
+
+11 Figure 18: Vitis AI Analyzer view showing profile results of 2 core DPU. 
+
+> Figure 19: Text Summary of the DPU profile.
+
+is dedicated to a DPU core for its execution. Figure 19 shows an example of text summary that is printed on the terminal when the profiling is executed. The fig-ure shows important parameters such as a core usage efficiency of 69.8 and 69.6 on DPU core one and core two, respectively, external memory average bandwidth in MBps, and computation work-load on each core that indicates the number of MAC operations in GOP units. 
+
+4.6. Serial Implementation 
+
+The first step is to start the execution of the appli-cation is to run the producer process. Figure 20 shows the execution of the producer process that takes a .bag 
+
+file as its input. The producer process prints the frame number and other exceptions during runtime. 
+
+> Figure 20: Log showing the execution of the producer pro-cess.
+
+Summary of the serial design implementation: 
+
+1. The bag file used to run the test have 175 frames that was recorded at 30 FPS. 2. Figure 21 shows the terminal log when the con-sumer application is executed. 
+
+> Figure 21: Log showing the execution of the consumer pro-cess with serial pipeline implementation
+
+3. Yolox model was able to infer 125 frames out of 175 frames. 4. All the 125 frames were processed by the A2J model and generated the pose. 5. 125 predictions were made on the pose data. 6. The total run time of the consumer application = 43.65 seconds. The consumer application implements a log of the num-ber of frames processed by each model and its time stamps. Figure 22 shows the total number of frames   
+
+> Figure 22: Number of frames received vs. relative time in the serial implementation.
+
+seen by the consumer application vs relative time. Fig- 
+
+> Figure 23: Time difference between the frame arrival time and inference time by each model in the serial implementa-tion (includes all CPU pre/post processing).
+
+ure 23 shows the difference in time between the frame 
+
+12 originally arrived to the consumer and the time taken by each model for inferencing, including the pre- and post-processing functions. The large spike observed for the frames towards the ending of the video (frames that featured a person falling or with bad posture) shows that the YOLOX was unable to infer the person. Asignificant number of frames were skipped due to this problem. Figure 24 shows the final prediction output  
+
+> Figure 24: Frames predicted as FALL/No FALL in Serial Implementation.
+
+for each frames. A FALL is represented with ’1’ and a No Fall as ’0’. The prediction is a no-fall after the fall has occured could be due to multiple reasons, One of which could be false positives prediction as an ADL activity of sleeping. 
+
+4.7. Parallel Implementation 
+
+The first step is to start the execution of the appli-cation is to run the producer process. 
+
+Summary of the parallel design implementa-
+
+> Figure 25: Log showing the execution of the consumer pro-cess with serial pipeline implementation
+
+tion: 
+
+1. The bag file used to run the test have 175 frames that was recorded at 30 FPS. 2. Figure 25 shows the terminal log when the con-sumer application is executed. 3. Yolox model was able to infer 125 frames out of 175 frames. 4. All the 125 frames were processed by the A2J model and generated the pose. 5. 125 predictions were made on the pose data. 6. The total run time of the consumer application = 62.42 seconds. 7. The difference in the serial and parallel design im-plementation is that the throughput of individual model is improved.  
+
+> Figure 26: Number of frames received vs relative time in Parallel Implementation.
+
+Figure 26 shows the total number of frames seen by the consumer application vs relative time. The fall predic-tion model executes as soon as the A2J model produces the pose joint information. We can see that YOLOX model continues its execution until there are new frames available. Similarly, the A2J and Fall predictor models execute as soon as the YOLOX model produces a valid frame. Figure 27 shows the difference in time between  
+
+> Figure 27: Time difference between the frame arrival time and inference time by each model in the parallel implemen-tation (includes all CPU pre/post processing).
+
+a frame that originally arrives to the consumer frame queue and the time taken by each model for inferenc-ing, including the pre- and post-processing functions. The large spike observed for the last frame is due to the maximum wait time of the frame from the producer showing end of frame in the video file. Figure 28 shows the final prediction output for each frames. FALL is represented with ’1’ and a No Fall as ’0’. 
+
+13 Figure 28: Frames predicted as FALL/No FALL in the par-allel implementation. 
+
+4.8. System Throughput 
+
+> Figure 29: Bottleneck diagram showing the throughput rate for serial (left) and parallel (right) design implementation.
+
+Figure 29 shows the system throughput analysis of the deployed system, highlighting the overall perfor-mance and capabilities for the serial and parallel design implementation. The first bottleneck in the application is the frame alignment process which is a computation-ally costly operation on the CPU. The inferencing rate is improved in the parallel design implementation for individual models. Therefore, the final throughput is comparatively higher than the serial implementation. 
+
+4.9. Fall Prediction Results 
+
+The performance of the proposed system in predict-ing falls was evaluated using the validation set of the 
+
+SDSU_PSG dataset, and the results are presented in this section. The system’s prediction capabilities were as-sessed through various metrics, including a confusion matrix (Figure 30, F1 score, precision, recall, and over-all accuracy. The confusion matrix provides insights into the system’s ability to correctly classify falls and 
+
+> Figure 30: Confusion matrix of the fall predictor model.
+
+non-falls, while the F1 score, precision, and recall met-rics quantify the trade-off between false positives and false negatives. The achieved accuracy score highlights the system’s overall performance in accurately predict-ing falls and non-falls. The number of frames involving Fall are 453 and non-fall are 1423. F1-score = 2 × precision × recall precision + recall (1) Precision = True Positives True Positives + False Positives (2) Recall = True Positives True Positives + False Negatives (3) Accuracy = TP + TN TP + FP + TN + FN (4) 
+
+Fβ = (1 + β2) · Precision · Recall 
+
+(β2 · Precision ) + Recall (5) Where, True Positives (TP) are the instances correctly pre-dicted as FALL. True Negatives (TN) are the instances correctly predicted as NOFALL. False Positives (FP) are the instances incorrectly predicted as FALL. False Negatives (FN) are the instances incorrectly predicted as NOFALL. The values obtained from the confusion matrix are: 
+
+14 F 1 Score : 0.93 
+
+P recision : 0.99 
+
+Recall : 0.89 
+
+Accuracy : 0.97 
+
+F 3 Score : 0.89 
+
+4.10. Sample Inference Results 
+
+Figure 31 shows the output of frames captured at intermediate stages of the pipeline. 
+
+5. Discussion 
+
+The development of edge-based fall detection systems presents unique challenges in balancing performance, privacy, and practical implementation. Our research findings provide several insights into these challenges while suggesting potential pathways for future develop-ment. 
+
+5.1. Edge Computing Performance 
+
+Our implementation on the K26 SOM demonstrates the viability of edge-based fall detection, achieving 5.5 FPS with multi-threading optimization. This aligns with the current trend toward edge computing solu-tions identified by Mrozek et al. [52], though with some performance trade-offs. While traditional fall detection systems often rely on cloud computing for processing [53], our edge-based approach eliminates latency issues and privacy concerns associated with data transmission, albeit at the cost of lower frame rates. 
+
+5.2. Privacy-Preserving Architecture 
+
+The system’s architecture addresses a critical gap in existing fall detection solutions by incorporating privacy preservation at its core. By discarding RGB frames after initial processing and relying on depth data for analysis, our approach aligns with privacy-preserving techniques recommended by Liu et al. [29]. This de-sign choice is particularly relevant for deployment in sensitive environments such as healthcare facilities and private residences. 
+
+5.3. Model Performance and Trade-offs 
+
+The accuracy rates achieved by our pipeline (YOLOX: 74%, A2J: 84.13%, Fall prediction: 75.85%) reveal interesting insights about model performance on edge devices. While these figures are lower than some cloud-based solutions [15], they represent a practical compromise between accuracy and real-time processing capabilities. The relatively high accuracy of the A2J model (84.13%) suggests that joint detection remains robust even with edge computing constraints. 
+
+> Figure 31: Output captured at intermediate stages of the pipeline.
+
+15 5.4. System Limitations and Practical Considera-tions 
+
+Several key limitations warrant discussion: 1. The frame rate limitation may impact the system’s ability to detect rapid falls 2. Current accuracy levels, while promising, may need improvement for clinical applications 3. Environmental factors such as occlusions and mul-tiple subjects may affect performance These limitations align with challenges identified in pre-vious research [35], [32], suggesting common hurdles in edge-based vision systems. 
+
+5.5. Future Development Paths 
+
+This research opens several avenues for future inves-tigation: 1. Implementing lightweight model architectures to improve frame rates while maintaining accuracy 2. Exploring hardware acceleration techniques for en-hanced real-time performance 3. Conducting extensive real-world testing in elderly care environments 4. Investigating methods to improve model accuracy without compromising privacy or computational efficiency 
+
+6. Conclusion 
+
+In this work, we presented a comprehensive vision-based fall prediction and detection system leveraging human pose estimation from depth camera video on the AMD Kria K26 SOM platform. The proposed method meets the design goals identified in Section 1 and is a novel approach to fall detection representing a promis-ing step towards enhancing the safety, independence, and overall quality of life for vulnerable populations, while reducing the burden on healthcare systems and caregivers. Through continued research and innovation, the developed system can be further refined and opti-mized, ultimately enabling widespread deployment and making a tangible impact on the lives of those at risk of falls. 
+
+Acknowledgment 
+
+Research reported in this publication/abstract was supported by the National Institute on Minority Health and Health Disparities of the National Institutes of Health under Award Numbers S21MD010690 (SDSU HealthLINK Endowment) and U54MD012397 (SDSU HealthLINK Center). The content is solely the respon-sibility of the authors and does not necessarily represent the official views of the National Institutes of Health. 
+
+7. CRediT authorship contribution state-ment 
+
+Conceptualization: Shreyas Narasimhiah Ramesh, Michel Audette, Christopher Paolini; Methodol-ogy: Shreyas Narasimhiah Ramesh, Michel Audette, Christopher Paolini; Software: Shreyas Narasimhiah Ramesh; Validation: Shreyas Narasimhiah Ramesh; Formal analysis: Shreyas Narasimhiah Ramesh; In-vestigation: Shreyas Narasimhiah Ramesh, Christo-pher Paolini; Resources: Shreyas Narasimhiah Ramesh, Mahasweta Sarkar, Kristen Wells, Christopher Paolini;Data Curation: Shreyas Narasimhiah Ramesh; Writing — original draft: Shreyas Narasimhiah Ramesh; Writing — review & editing: Christopher Paolini; Visualization: Shreyas Narasimhiah Ramesh; Supervision: Christopher Paolini; Project administra-tion: Christopher Paolini, Kristen Wells; Funding ac-quisition: Christopher Paolini, Kristen Wells; 
+
+8. Data availability 
+
+GitHub: https://github.com/cpaolini/falldetection 
+
+References 
+
+[1] J. Lafleur, M. Montero-Odasso, and A. Huang , Falls in older adults , Canadian Medi-cal Association Journal, 197 (2025), pp. E20–E29. [2] National Council on Aging , Get the facts on falls prevention . https://www.ncoa.org/ older-adults/health/falls-prevention/ falls-facts/ , 2025. Accessed: 2025-02-15. [3] Centers for Disease Control and Preven-tion , Older adult falls – facts . https://www.cdc. gov/falls/facts.html , 2024. Accessed: 2025-02-15. [4] N. Albasha, C. Curtin, R. Mccullagh, N. Cornally, and S. Timmons , Staff ’s insights into fall prevention solutions in long-term care fa-cilities: a cross-sectional study , BMC Geriatrics, 23 (2023). [5] L. Shao, Y. Shi, X.-Y. Xie, Z. Wang, Z.-A. Wang, and J.-E. Zhang , Incidence and risk fac-tors of falls among older people in nursing homes: Systematic review and meta-analysis , Journal of the American Medical Directors Association, 24 (2023), pp. 1708–1717. [6] G. Bergen, M. R. Stevens, and E. R. Burns ,
+
+Falls and fall injuries among adults aged ≥ 65 years—united states, 2014 , Morbidity and mortal-ity weekly report, 65 (2016), p. 993. 
+
+16 [7] B. Abrahamsen, T. van Staa, R. Ariely, C. Cooper, and T. D. Myers , Excess mortality following hip fracture: a systematic epidemiologi-cal review , Osteoporosis International, 20 (2009), pp. 1633–1650. [8] P. Haentjens, J. Magaziner, C. Colón-Emeric, D. Vanderschueren, K. Milisen, B. Velkeniers, and S. Boonen , Meta-analysis: excess mortality after hip fracture among older women and men , Annals of internal medicine, 152 (2010), pp. 380–390. [9] C. S. Florence, G. Bergen, A. Atherly, E. Burns, J. Stevens, and C. Drake , Medi-cal costs of fatal and nonfatal falls in older adults ,Journal of the American Geriatrics Society, 66 (2018), pp. 693–698. [10] R. Hernandez, T. R. Prohaska, P.-C. Wang, and C. A. Sarkisian , The longitudinal relation-ship between depression and walking behavior in older latinos: The “¡caminemos!” study , Journal of Aging and Health, 25 (2012), pp. 319–341. [11] Q. Li, J. A. Stankovic, M. A. Hanson, A. T. Barth, J. Lach, and G. Zhou , Accurate, fast fall detection using gyroscopes and accelerometer-derived posture information , in 2009 Sixth Inter-national Workshop on Wearable and Implantable Body Sensor Networks, IEEE, June 2009. [12] X. Li, T. Pang, W. Liu, and T. Wang , Fall detection for elderly person care using convolu-tional neural networks , in 2017 10th International Congress on Image and Signal Processing, BioMed-ical Engineering and Informatics (CISP-BMEI), IEEE, Oct. 2017. [13] Y. Zheng and D. Wu , A survey on vision-based fall detection and behavior analysis in smart home ,in 2015 International Conference on Intelligent In-formation Hiding and Multimedia Signal Process-ing (IIH-MSP), (2015), pp. 281–284. [14] B. Kwolek and M. Kepski , Human fall detec-tion on embedded platform using depth maps and wireless accelerometer , in Proceedings of the 22nd International Conference on Pattern Recognition, 2014, pp. 1496–1501. [15] Z. Huang, Y. Liu, Y. Fang, and B. K. P. Horn , Video-based fall detection for seniors with human pose estimation , in 2018 4th International Conference on Universal Village (UV), IEEE, Oct. 2018. [16] E. Torti, A. Fontanella, M. Musci, N. Blago, D. Pau, F. Leporati, and M. Pi-astra , Embedded real-time fall detection with deep learning on wearable devices , in 2018 21st Euromi-cro Conference on Digital System Design (DSD), 2018, pp. 405–412. [17] Z. Cao, G. Hidalgo, T. Simon, S. Wei, and Y. Sheikh , Openpose: Realtime multi-person 2d pose estimation using part affinity fields , CoRR, abs/1812.08008 (2018). [18] K. Sun, B. Xiao, D. Liu, and J. Wang , Deep high-resolution representation learning for human pose estimation , CoRR, abs/1902.09212 (2019). [19] F. Xiong, B. Zhang, Y. Xiao, Z. Cao, T. Yu, J. T. Zhou, and J. Yuan , A2j: Anchor-to-joint regression network for 3d articulated pose estima-tion from a single depth image , 2019. [20] S. Hwang, D. Ahn, H. Park, and T. Park ,
+
+Maximizing accuracy of fall detection and alert systems based on 3d convolutional neural network: Poster abstract , in Proceedings of the Second Inter-national Conference on Internet-of-Things Design and Implementation, IoTDI ’17, ACM, Apr. 2017. [21] D. Mrozek, A. Koczur, and B. Małysiak-Mrozek , Fall detection in older adults with mo-bile iot devices and machine learning in the cloud and on the edge , Information Sciences, 537 (2020), p. 132–147. [22] A. El Attaoui, S. Largo, S. Kaissari, A. Benba, A. Jilbab, and A. Bourouhou , Ma-chine learning-based edge-computing on a multi-level architecture of wsn and iot for real-time fall detection , IET Wireless Sensor Systems, 10 (2020), p. 320–332. [23] J. Tian, P. Mercier, and C. Paolini , Ultra low-power, wearable, accelerated shallow-learning fall detection for elderly at-risk persons , Smart Health, 33 (2024), p. 100498. [24] J. Tian, P. Mercier, and C. Paolini , Fall de-tection through inferencing at the edge , in Proceed-ings of the International Symposium on Intelligent Computing and Networking 2024, vol. 1094 of Lec-ture Notes in Networks and Systems, Springer, 2024. [25] K. Bharathkumar, C. Paolini, and M. Sarkar , Fpga-based edge inferencing for fall detection , in 2020 IEEE Global Humanitarian Technology Conference (GHTC), 2020, pp. 1–8. [26] R. Espinosa, H. Ponce, S. Gutiérrez, L. Martínez-Villaseñor, J. Brieva, and E. Moya-Albor , A vision-based approach for 
+
+17 fall detection using multiple cameras and convolu-tional neural networks: A case study using the up-fall detection dataset , Computers in Biology and Medicine, 115 (2019), p. 103520. [27] V. Bevilacqua, N. Nuzzolese, D. Barone, M. Pantaleo, M. Suma, D. D’Ambruoso, A. Volpe, C. Loconsole, and F. Stroppa , Fall detection in indoor environment with kinect sensor ,in 2014 IEEE International Symposium on Innova-tions in Intelligent Systems and Applications (IN-ISTA) Proceedings, IEEE, June 2014. [28] M. D. Solbach and J. K. Tsotsos , Vision-based fallen person detection for the elderly , in 2017 IEEE International Conference on Computer Vi-sion Workshops (ICCVW), IEEE, Oct. 2017. [29] J. Liu, Y. Xia, and Z. Tang , Privacy-preserving video fall detection using visual shielding informa-tion , The Visual Computer, 37 (2020), p. 359–370. [30] U. Asif, B. Mashford, S. Von Cavallar, S. Yohanandan, S. Roy, J. Tang, and S. Har-rer , Privacy Preserving Human Fall Detection us-ing Video Data , in Proceedings of the Machine Learning for Health NeurIPS Workshop, A. V. Dalca, M. B. McDermott, E. Alsentzer, S. G. Fin-layson, M. Oberst, F. Falck, and B. Beaulieu-Jones, eds., vol. 116 of Proceedings of Machine Learning Research, PMLR, 13 Dec 2020, pp. 39– 51. [31] R. Rajagopalan, I. Litvan, and T.-P. Jung ,
+
+Fall prediction and prevention systems: Recent trends, challenges, and future research directions ,Sensors, 17 (2017), p. 2509. [32] R. Igual, C. Medrano, and I. Plaza , Chal-lenges, issues and trends in fall detection systems ,BioMedical Engineering OnLine, 12 (2013), p. 66. [33] Y. Chen, R. Du, K. Luo, and Y. Xiao , Fall de-tection system based on real-time pose estimation and svm , in 2021 IEEE 2nd International Confer-ence on Big Data, Artificial Intelligence and Inter-net of Things Engineering (ICBAIE), IEEE, Mar. 2021. [34] F. Bagalà, C. Becker, A. Cappello, L. Chiari, K. Aminian, J. M. Hausdorff, W. Zijlstra, and J. Klenk , Evaluation of accelerometer-based fall detection algorithms on real-world falls , PLoS ONE, 7 (2012), p. e37062. [35] Z. Zhang, C. Conly, and V. Athitsos , A sur-vey on vision-based fall detection , in Proceedings of the 8th ACM International Conference on PEr-vasive Technologies Related to Assistive Environ-ments, PETRA ’15, ACM, July 2015. [36] Z. Ge, S. Liu, F. Wang, Z. Li, and J. Sun ,
+
+Yolox: Exceeding yolo series in 2021 , 2021. [37] B. Kwolek and M. Kepski , Human fall detec-tion on embedded platform using depth maps and wireless accelerometer , Computer Methods and Programs in Biomedicine, 117 (2014), pp. 489–501. [38] Intel Corporation , Depth camera D455 . https://www.intelrealsense.com/ depth-camera-d455/ , June 2020. Accessed: 2023-6-14. [39] GitHub - Xilinx/Vitis-AI: Vitis AI is Xilinx’s de-velopment stack for AI inference on Xilinx hard-ware platforms, including both edge devices and Alveo cards. — github.com . https://github.com/ Xilinx/Vitis-AI . [Accessed 07-05-2024]. [40] S. N. Ramesh, M. Sarkar, M. Audette, and C. Paolini , Efficient real-time fall prediction and detection using privacy-centric vision-based human pose estimation on the xilinx ® kria ™ k26 som , in 2023 IEEE Biomedical Circuits and Systems Con-ference (BioCAS), 2023, pp. 1–5. [41] Intel Corp. , Intel ® RealSense ™ SDK 2.0 , 2023. Rev. v2.54.2. [42] J. Redmon and A. Farhadi , Yolov3: An in-cremental improvement , CoRR, abs/1804.02767 (2018). [43] A. Bochkovskiy, C. Wang, and H. M. Liao ,
+
+Yolov4: Optimal speed and accuracy of object de-tection , CoRR, abs/2004.10934 (2020). [44] S. Shao, Z. Zhao, B. Li, T. Xiao, G. Yu, X. Zhang, and J. Sun , Crowdhuman: A bench-mark for detecting human in a crowd , arXiv preprint arXiv:1805.00123, (2018). [45] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang, A. Karpathy, A. Khosla, M. Bernstein, A. C. Berg, and L. Fei-Fei , ImageNet Large Scale Visual Recogni-tion Challenge , International Journal of Computer Vision (IJCV), 115 (2015), pp. 211–252. [46] A. Haque, B. Peng, Z. Luo, A. Alahi, S. Ye-ung, and L. Fei-Fei , ITOP dataset , Oct. 2016. [47] Y. Guo, Z. Li, Z. Li, X. Du, S. Quan, and Y. Xu , Pop-net: Pose over parts network for multi-person 3d pose estimation from a depth im-age , in Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), January 2022, pp. 1240–1249. 
+
+18 [48] Z. Chen, Y. Wang, and W. Yang , Video based fall detection using human poses , 2021. [49] Vitis ai . https://www.xilinx.com/products/ design-tools/vitis/vitis-ai.html . (Accessed on 03/29/2024). [50] . Advanced Micro Devices , Zynq dpu product guide (pg338) . https://docs.amd. com/r/3.3-English/pg338-dpu/Introduction? tocId=s1fbdzgCvidtCcYf54iW2g . (Accessed on 03/29/2024). [51] . Advanced Micro Devices , Dpu ip details and system integration — vitis ™ ai 3.5 documen-tation . https://xilinx.github.io/Vitis-AI/ 3.5/html/docs/workflow-system-integration. html# . (Accessed on 03/29/2024). [52] P. Grzesik and D. Mrozek , Combining machine learning and edge computing: Opportunities, chal-lenges, platforms, frameworks, and use cases , Elec-tronics (Basel), 13 (2024), p. 640. [53] A. El Attaoui, S. Largo, S. Kaissari, A. Benba, A. Jilbab, and A. Bourouhou , Ma-chine learning-based edge-computing on a multi-level architecture of WSN and IoT for real-time fall detection , IET Wirel. Sens. Syst., 10 (2020), pp. 320–332. 
+
+19
