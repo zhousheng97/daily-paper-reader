@@ -1,0 +1,523 @@
+Title: Towards Accurate Emotion-Attributed Video Captioning via Fine-grained Emotion-Cause Pair Extraction
+
+URL Source: https://arxiv.org/pdf/2606.08566v1
+
+Published Time: Tue, 09 Jun 2026 01:29:43 GMT
+
+Number of Pages: 14
+
+Markdown Content:
+> JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 1
+
+# Towards Accurate Emotion-Attributed Video Captioning via Fine-grained Emotion-Cause Pair Extraction 
+
+Weidong Chen, Member, IEEE , Cheng Ye, Zhendong Mao, Member, IEEE , Liping Wang, Xinyan Liu, Yongdong Zhang, Fellow, IEEE 
+
+Abstract —Emotional Video Captioning (EVC) is a challenging task that aims to generate factually accurate and emotionally rich descriptions for videos. Existing EVC methods leverage holistic visual features to mine global emotional cues, and then aggregate multimodal features to guide the emotional caption generation, which ignores the critical characteristic of the EVC task. Visual emotions are evoked by specific motivational causes, which are usually only implied in core video segments. The holistic mining brings significant information redundancy and inaccurate emotional cues. Thus, fine-grained visual cause ex-traction has a facilitative effect on both emotion perception and emotion-attributed caption generation. To this end, we propose a fine-grained emotion-cause pair extraction framework for emotion-attributed video captioning. Specifically, we learn pair-wise emotion and cause features in two rounds: 1) We propose a Concept-aware Visual Semantic Decomposition module to augment visual features by exploring scene, object, and motion concepts. Besides, to enhance emotional features, we propose a Visual-guided Emotion Interpretable Learning module, which guides emotion refinement with visual temporal dynamics, and augments the interpretable refinement process by reliable VAD-vector constraints. 2) We achieve emotion-cause pair extraction by cross-coupling the visual and emotional features before and after refinement, and leverage contrastive loss to achieve semantic forced alignment. Overall, our approach optimizes complex se-mantic understanding and emotion perception of videos, leading to a promising performance in emotional captioning. Extensive experiments on three challenging datasets demonstrate the supe-riority of our approach and each proposed module, e.g. , achieving the best performances with +4.4% and +5.4% w.r.t. BLEU-2 and ROUGE-L, respectively, on the EVC-MSVD dataset. 
+
+Index Terms —Emotion-Cause Pair Extraction, Emotion-attributed Video Captioning, Multi-round Mutual Learning 
+
+I. I NTRODUCTION 
+
+# WITH the rapid evolution of self-media platforms, users are no longer satisfied with mere information transmis-sion, they are increasingly inclined to express subjective emo-tions through multimodal contents. This burgeoning demand 
+
+This research is supported by Artificial Intelligence-National Science and Technology Major Project 2023ZD0121200, and the National Natural Science Foundation of China under Grants 62302474 and 62502115. Corresponding author: Zhendong Mao. Weidong Chen, Cheng Ye, and Liping Wang are with the School of Information Science and Technology, University of Science and Technology of China, Hefei 230027, China (e-mail: chenweidong@ustc.edu.cn; kyri-eye@mail.ustc.edu.cn; lipingwang@mail.ustc.edu.cn). Zhendong Mao and Yongdong Zhang, are with the School of Information Science and Technology, University of Science and Technology of China, and are also with the Institute of Artificial Intelligence, Hefei Comprehensive National Science Center, Hefei 230027, China (e-mail: zdmao@ustc.edu.cn; zhyd73@ustc.edu.cn). Xinyan Liu is with the School of Information Science and Technology, Harbin Institute of Technology (Weihai), Weihai 264209, China (e-mail: xinyliu@hit.edu.cn). 
+
+Fig. 1. Motivation of our paper, which illustrates the difference between previous work and our proposed method, and shows two classical failure cases of previous work. 
+
+for emotional expression has catalyzed the community’s en-thusiasm for exploring automated visual emotion analysis, i.e., 
+
+facial emotion recognition [19], [20], [58], [68], video emotion classification [1], [2], [8], [29], [43], and emotional video cap-tioning (EVC) [14], [40], [51], [64]. Among them, Emotional Video Captioning (EVC) task, which aims to generate factually accurate and emotionally rich descriptions for video, stands out as a fundamental yet highly challenging endeavor due to the complex intersection of vision, emotion, and language studies. Firstly, EVC necessitates the effective alignment and fusion of content across multiple modalities (e.g., vision and text). Besides, it requires to not only comprehend factual content but also accurately perceive implicit emotional cues within the video and seamlessly integrate them into caption generation. EVC offers significant potential for various real-world applications, i.e., empathetic conversational agent, video comment generation, and automated film production. Existing EVC methods [5], [18], [21], [24], [27], [42], [48], [56], [59], [66] usually leverage holistic visual features to mine global emotional cues, and then aggregate multimodal features to guide the emotional caption generation. However, they ignore the critical characteristic of the EVC task. Visual emotions are evoked by specific motivational causes, which are usually only implied in core video segments. The holistic min-ing brings significant information redundancy and emotional bias. As shown in Fig. 1, previous works overlook the critical contribution of visual causes that the building is destroyed,  
+
+> arXiv:2606.08566v1 [cs.CV] 7 Jun 2026 JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 2
+
+resulting in wrong emotional descriptions ‘interesting’. In fact, exploring the visual causes not only enhances the accuracy and interpretability of emotion perception, but also facilitates the factual and emotional description generation, alleviating the mutual interference of multi-source information during emotional caption generation. Thus, in this paper, we focus on multimodal emotion-cause pair extraction to enhance the EVC task. The key differences between the previous works and ours are illustrated in Fig. 1. Current research on multimodal Emotion-Cause Pair Ex-traction (ECPE) remains predominantly centered on linguistic cause cues, encountering significant challenges in processing visual causes. Although recent studies attempt to integrate visual or auditory features, they primarily focus on text-based extraction and treat other modalities merely as auxil-iary information, failing to achieve modality-agnostic cause-emotion alignment. Conversely, our approach focuses on the pairwise extraction of visual-based causes(e.g., scenes, objects, actions) and textual emotional expressions within multimodal scenarios, which transcends the limitations of existing methods and is more challenging. Specifically, it brings two inher-ent difficulties: (1) Cause-to-Emotion Mismatch — Visual information is frequently characterized by high redundancy and contains significant noise that is irrelevant to emotional cues. Such coarse-grained visual representations fail to provide the necessary support for fine-grained emotional mining. (2) 
+
+Emotion-to-Cause Asynchrony — subtle emotion changes are hard to spatio-temporal synchrony with their visual causes in videos. Thus, the difficulty of our work lies in how to extract fine-grained cause features and mine subtle emotional cues for collaborative emotion-cause pair extraction. To fill the research gap, we propose a Fine-grained Emotion-Cause Pair Extraction framework (MM-ECPE++) in this pa-per for joint extraction of emotional cues and visual causes through multi-round step-by-step refinement by mutual learn-ing for emotion-attributed video captioning. Specifically, in the first-round mutual learning, we propose a Concept-aware Visual Semantic Decomposition (CVSD) and a Visual-guided Emotion Interpretable Learning (VEIL) to achieve preliminary refinement on visual features and emotion lexicon to eliminate the noise caused by emotion-irrelevant spatio-temporal visual information and video-irrelevant emotional information. Subsequently, we capture the visual emotion cues and causes in the second-round mutual learning. Specifically, we couple the preliminary refined features and original features by a cross-attention mechanism. Besides, we design a contrastive loss to force semantic alignment in pairwise extraction. Over-all, our method optimizes the complex semantic and emotional understanding of videos, leading to a promising performance in emotional captioning. In short, our main contributions are summarized as follows: 
+
+• In this paper, we propose a novel Fine-grained Emotion-Cause Pair Extraction network (MM-ECPE++) for emotion-attributed video captioning, which focuses on noticing the visual causes of emotions, improving the accuracy and in-terpretability of emotion perception and effectively alleviating the mutual interference of multiple factors in captioning. 
+
+• To achieve cross-modal pair extraction (visual causes + textual emotions), we propose a novel multi-round mutual learning framework. It preliminarily refines the relevant in-formation in the video and emotion lexicon in the first round, and then, the refined information interacts with each other’s original features, and is jointly optimized by contrastive loss to force the alignment of the common semantic space, to capture the emotion-cause pair. 
+
+• Technically, we propose a Concept-aware Visual Se-mantic Decomposition (CVSD) and a Visual-guided Emotion Interpretable Augmentation (VEIL) to achieve preliminary refinement on video features and emotion lexicon to eliminate the noise caused by emotion-irrelevant spatio-temporal visual information and video-irrelevant emotional information. 
+
+• Experiments on three public datasets, e.g. , EVC-MSVD, EVC-VE, and EVC-Combined, illustrate the superiority of our method, e.g. , achieving the best performance with +4.4% and +5.4% w.r.t. BLEU-2 and ROUGE-L, respectively, on EVC-MSVD. This manuscript extends MM-ECPE [8], which was se-lected as an Oral paper at ACM Multimedia 2025. While sharing the same core motivation, we extend this work in the following aspects: 1) We completely rebuild the framework MM-ECPE into MM-ECPE++, which significantly improves the mutual learning through finer-grained factual refinement and more interpretable emotional exploration. 2) We improve the factual refinement by redesigning a Concept-aware Visual Adaptive Refinement module. Specifically, we enhance the granularity of visual refinement to the concept level, extracting key cause cues from three categories of concepts: scenes, objects, and motions. 3) We improve the emotional exploration by redesigning an Interpretable Emotion Exploration module. Specifically, we introduce an emotional VAD dictionary and design a multi-dimensional constrained emotional loss to im-prove the interpretable emotional exploration. 4) We extend the Related Work section by adding more analyses about the new research on emotion-cause pair extraction and emotional video captioning, and making more discussions about the differences between them and our work. 5) We perform the main experiment and ablation study on a larger EVC-Combine dataset instead of the original EVC-MSVD dataset, which helps to validate the robustness and generalization ability of our method. 6) We add more ablation studies to quantitatively validate the effectiveness of our proposed modules, as shown in Tables II-V. 7) We discuss the effects of the trade-off parameters in Fig. 3 to evaluate the sensitivity of our model to parameters. 8) We improve the qualitative results to illustrate the effectiveness of our proposed modules, as shown in Fig. 4-6. 9) We add human evaluation to assess the degree of human preference of our generated descriptions, which is difficult to reflect in objective metrics such as BLEU. II. R ELATED WORK 
+
+A. Emotion-cause Pair Extraction 
+
+Emotion cause analysis has received increasing attention due to its potential to promote emotional exploration. Emotion-cause pair extraction(ECPE) is one of the most representative tasks [7], [9], [13], [13], [54], [57], [60], [61]. Xia and Ding JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 3
+
+> Fig. 2. Overview of our proposed MM-ECPE++ framework for emotion-attributed video captioning. Given an input video and emotion dictionary, we perform concept-level fine-grained visual cause-emotion pair extraction by two modules: (A) Concept-aware Visual Semantic Decomposition (top right plot) and (B) Video-guided Emotion Interpretable Learning (bottom right plot). Subsequently, we perform emotion-cause pair mutual refinement by two cross-attention components and a contrastive loss. Finally, pairwise emotion-cause features are combined with video features to be sent into the emotion-attributed caption generation decoder.
+
+[31] firstly propose this task to extract emotions and their causes in documents. To this day, recent research has focused more on analyzing emotion-cause pairs in diverse textual sce-narios such as articles, stories, microblogs, or conversations. Zhu et al. [50] propose a novel knowledge-guided graph attention network, which designs two guiding principles: inter-clause dependency graph and inter-pair possibility graph, to aggregate features between clause pairs for emotion-clause and cause-clause pair extraction. Chen et al. [33] propose to utilize the causal discourse knowledge in a knowledge distillation way, which designs a teacher model to learn to predict causal connective words between utterances and then guide a student model in identifying both the fine-grained emotion labels and causal spans. Hu et al. [67] analyze that emotion extraction is more crucial to the ECPE task than cause extraction and propose an approach oriented toward emotion prediction, which aims to fully exploit the potential of emotion prediction to enhance ECPE. Furthermore, they design a synchronization mechanism to share their optimizations in the training process. Besides, some researchers have extended the ECPE task to the multimodal field [5], [10], [34], [36], [38], [38], [38], [39], [55], [57], [62], [65]. Wang et al. [22] design a two-stage framework, which first generates emotion-cause aware video captions and then facilitates the generation of emotion causes. With the help of corresponding captions, the model improves the accuracy of pair extractions. However, all exist-ing multimodal ECPE still perform on the text modality while treating image and audio modalities as auxiliary information. In contrast, our work focuses on the cross-modal scenario (visual causes + textual emotions). 
+
+B. Emotional Video Captioning 
+
+Emotional video captioning task is proposed to solve the problem of boring and soulless captions generated by tradi-tional video captioning model, which firstly mines emotional clues hidden in videos and collaborates visual contents to generate more vivid captions. Wang et al. [59] firstly propose this task and release a new dataset. They design two indepen-dent prediction networks for factual and emotional caption-ing separately and finally generate emotional descriptions by weighted average scores. Song et al. [21] propose a contextual attention network to recognize and describe the fact and emotion in the video by semantic-rich context learning. Song 
+
+et al. [42] propose a novel tree-structured emotion learning module to achieve explicit emotion perception. Song et al. [41] incorporate visual context, textual context, and visual-textual relevance into an aggregated multimodal contextual vector to enhance video captioning. Ye et al. [48] propose a dual-path collaborative generation network to dynamically perceive emo-tions at different time steps and design an emotion-adaptive decoder to solve the problem of overemphasis on the role of emotional guidance. Wang et al. [47] introduce two learnable prompting strategies: visual emotion prompting and textual emotion prompting, to learn emotional cue representations JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 4
+
+and further design two levels of objective functions: the ER-sentence level and the AU-word level alignment losses, to facilitate the interaction and alignment. All aforementioned works directly perceive the emotional cues from visual contents and ignore that emotional cues have intrinsic motivational causes reflected in the video content. To the best of our knowledge, we are the first work to notice the visual causes of emotions, improving the accuracy and interpretability of emotion perception and effectively alleviat-ing the mutual interference of multiple factors in emotional caption generation. III. M ETHOD 
+
+In this section, we describe our proposed Fine-grained Emotion-Cause Pair Extraction framework (MM-ECPE++) for the EVC task. As shown in Fig. 2, it mainly con-sists of five parts: Multimodal Feature Extraction, Concept-aware Visual Semantic Decomposition, Visual-guided Emotion Interpretable Learning, Emotion-Cause Pair Extraction, and Emotion-Attributed Caption Generation. 
+
+A. Multimodal Feature Extraction 
+
+Video Encoder. Following the setting of previous works [42], [48], we firstly down-sample the video to obtain a frame sequence {f1, f 2. . . , f T }, where T denotes the num-ber of frames. Subsequently, we leverage the pre-trained Transformer-based feature encoder [44] to extract visual fea-tures: 
+
+V = VisEncoder([f 1, f2, . . . , fT]) ∈ RT×P×D, (1) where VideoEncoder denotes the visual feature projector and 
+
+D is the feature dimension. P is the number of patches since each frame is divided into P patches. 
+
+Emotion Encoder. Following previous works [42], [48], we leverage a pre-defined psychology emotional vocabulary dic-tionary Ω = {wi}Nw
+
+> i=1
+
+, where wi denotes the i-th emotion word, such as “happy”, and Nw denotes the number of emotion words in dictionary. Then, we leverage the pre-trained Transformer-based emotion embedding, i.e., GloVe [3], to encode these emotion words to E ∈ RNw ×D . The whole process can be formalized as: 
+
+E = EmoEncoder(Ω) ∈ RNw ×D . (2) 
+
+E contains rich emotion candidates and helps to mine accurate emotional cues from video contents. Subsequently, in the first-round mutual learning, we propose two novel modules, i.e., Concept-aware Visual Semantic De-composition (CVSD) and Video-guided Emotion Interpretable Learning (VEIL), to perform preliminary refinement and filter irrelevant information on video features and emotion lexicon, respectively, which provides strong factual and emotional support for emotion-cause pair extraction. 
+
+B. Concept-aware Visual Semantic Decomposition 
+
+For emotion-cause pair extraction, the video contains a lot of redundant information and only the key semantic components are effective. Thus, it is a considerable challenge to efficiently capture key semantic information in video representations. Conventional methods often employ frame sampling tech-niques [21], [35], [42], [53] or design a frame selection module [4], [8], [30], [48] to eliminate redundant information. However, these methods essentially only perform filtering and reweighting at the frame-level, and struggle to truly decouple semantic entities in the visual space. Therefore, we propose a novel Concept-aware Visual Semantic Decomposition module to decouple distinct semantic entity types from the video for better emotion-cause pair extraction. Specifically, we distin-guish three types of key semantic entities: (1) Scene feature 
+
+includes background information and reflects the environment of the video. (2) Object feature focuses on the main static elements ( i.e., characters and things) relevant to the emotional event in the video. (3) Motion feature focuses on dynamic elements that can evoke emotions ( i.e., the movements and trajectories of objects). With these semantic entities, we could eliminate the redundant information in the video and accu-rately capture highly interpretable emotional causes. 
+
+Scene Feature. Scene features primarily focus on the environment and background context within a video, playing a crucial role in predicting coarse-grained emotion color. For example, a rainy environment typically reflects negative emotions ( i.e., sadness or fear), which lays the foundation for subsequent fine-grained emotion prediction. Meanwhile, we observe that capturing scene features tends to focus more on global information rather than local details. Therefore, we first perform an average pooling operation along the patch dimension to obtain global video features: 
+
+Vagg = AvgPool(V) ∈ RT ×D, (3) where AvgPool denotes the average pooling operation. Sub-sequently, we perform a multi-head self-attention between frames to capture global context dependencies: 
+
+eVagg = MHSA( Vagg ), (4) where MHSA denotes the multi-head self-attention operation. Finally, we capture scene features from global visual informa-tion by linear transformations and average pooling operations: 
+
+Fscene = ϕ2
+
+> scene
+
+(AvgPool( ϕ1
+
+> scene
+
+(eVagg ))) ∈ RD , (5) where ϕ1
+
+> scene
+
+, ϕ 2 
+
+> scene
+
+are two linear transformation layers and 
+
+AvgPool denotes the average pooling operation, respectively. 
+
+Object Feature. Object features mainly capture static el-ements in a video ( i.e., characters and things), which are the main carriers of emotional events. With accurate object features, our model could answer who/what evokes emotions, especially in hard samples with complex character relation-ships and multiple emotion types. Specifically, we refine visual features from spatial and temporal dimensions to capture object features. Firstly, we employ a spatial-geometry attention JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 5
+
+mechanism for each frame, which captures key object regions from horizontal and vertical spatial directions: 
+
+vi = V[i]|T −axis ∈ RP ×D (6) 
+
+Qaxis i = W axis Q vi, K axis i = W axis K vi, V i = WV vi, (7) 
+
+Oaxis i = Softmax( Qaxis i (Kaxis i )T ), axis ∈ { x, y }, (8) 
+
+Oi = Oyi (Oxi Vi)T ∈ RP ×D, (9) 
+
+Vs = [ O1, O 2, · · · ,O T ] ∈ RT ×P ×D , (10) where Qaxis i (Kaxis i )T , axis ∈ { x, y } means calculate atten-tion scores along vertical and horizontal axis for the i-th visual frame and [, ] denotes the concatenate operation. The spatial-geometry attention captures the key regions in each frame. However, not all frames are closely related to emotional arousal. Therefore, we next perform emotion-related frame filtering in the temporal dimension. Specifically, we generate an emotion mask A by the emotion dictionary E to filter emotion-related frames. Meanwhile, to alleviate the long-range dependency of distant frames and reduce computational com-plexity, we leverage the temporal-block attention and apply the emotion mask to filter emotion-related frames. Specifically, each B frames is divided into a block, and a mask attention mechanism is executed within the block. Finally, the attention outputs of all blocks are concatenated to restore the shape: 
+
+Vb,i = Vs[iB : ( i + 1) B], i ∈ { 1, · · · , T /B }, (11) 
+
+Ob,i = MaskAttn( Vb,i , mask = A)|{Q,K,V }:Vb,i , (12) 
+
+Fobject = [ Ob, 1, O b, 2, · · · , O b,T /B ] ∈ RT ×P ×D, (13) where Vb,i denotes the visual features of the i-th block and 
+
+MaskAttn denotes the mask attention mechanism. Finally, we obtain the object features Fobject with detailed spatial region awareness and accurate emotion-related temporal filtering, which play a crucial role in analyzing emotional affiliation. 
+
+Motion Feature. Due to the variable and dynamic nature of video modality, it is insufficient for mining emotional causes to capture static backgrounds and elements solely through learning scene and object features. Therefore, we propose to learn the action features to capture temporal dynamics of moving elements ( i.e., actions and activities). Specifically, we propose a pixel-level motion correlation calculation module, which quantifies motion information through calculating the similarity of all pixel positions between adjacent frames. For the j-th patch of the t-th frame vjt , the motion information is quantified as: 
+
+vjt = V[t]|T −axis [j]|P −axis ∈ RD , (14) 
+
+sjt = 1 − vjt−1 · vjt
+
+|| vjt−1|||| vjt || , (15) where sjt ∈ [0 , 2] denotes the degree of motion change. The lower the similarity of corresponding patches between adjacent frames, the greater the degree of motion change. By performing the calculation for each patch, we obtain the motion-aware mask matrix for t-th frame, denoted as 
+
+st ∈ RP . Meanwhile, in order to eliminate biases caused by some unexpected disturbances ( i.e., camera shake or perspec-tive change), we calculate the global motion baseline through the average of all frames. The motion information for each frame comprehensively considers the global motion baseline and its own motion mask matrix. Finally, we leverage the motion information to generate motion features: 
+
+s = 1
+
+T
+
+> T
+
+X
+
+> i=1
+
+st, (16) 
+
+mt = (1 − λm)st + λms, (17) 
+
+Fmotion = m ⊙ V ∈ RT ×P ×D , (18) where λm is a hyper-parameter to control the weight of the global motion baseline. Finally, we obtain the refined visual features by aggregating three concept semantics: 
+
+C = [ Fscene , Fobject , Fmotion ], (19) 
+
+˜V =ϕ2 
+
+> agg
+
+(AvgPool( ϕ1 
+
+> agg
+
+(C))) ∈ RT ×P ×D , (20) where ϕ1 
+
+> agg
+
+, ϕ 2 
+
+> agg
+
+denote two linear transformation layers and 
+
+[, ], AvgPool denote the concatenate operation and average pooling operation, respectively. 
+
+C. Visual-guided Emotion Interpretable Learning 
+
+We adopt the VAD lexicon [45] to obtain a 3-dimensional affective vector for each emotion word, i.e., r = ( v, a, d )⊤ ∈
+
+R3, where each entry is normalized to [−1, 1] (and out-of-lexicon words are set to 0). These psychologically grounded VAD priors provide an interpretable attribute space; thus, we leverage them to augment emotion representations and to en-force explicit alignment in the (v, a, d ) dimensions, improving interpretability of emotion learning. Building on this, our visual-guided emotion interpretable learning consists of three components: VAD Modeling, Visual-guided Emotion Refinement, and VAD Regression Objective. 
+
+VAD Modeling. Given the emotion vocabulary Ω = {wi}Nw
+
+> i=1
+
+,the NRC VAD lexicon provides a VAD triplet (vi, a i, d i) for each emotion word. We stack these triplets into a VAD feature matrix: 
+
+Fvad = VADEnc( {(vi, a i, d i)}Nw
+
+> i=1
+
+) ∈ RNw ×3. (21) We then fuse Fvad with the emotion representations E ∈ 
+
+RNw ×D via concatenation, followed by a linear projection to integrate affective priors into the emotion space: 
+
+ˆE = W E (E ⊕ Fvad ) + bE ∈ RNw ×D , (22) where ⊕ denotes concatenation and (W E , bE ) are learnable parameters. The resulting ˆE serves as a VAD-enhanced emo-tion feature , which augments semantic emotion features with explicit affective attributes. 
+
+Visual-guided Emotion Refinement. To refine emotion rep-resentations with both affective priors and visual evidence, we leverage video features to calibrate the VAD-enhanced emotion features. Specifically, we apply the compact video features Vagg on ˆE by a cross-attention mechanism: 
+
+E′ = Attn( ˆE, Vagg )|Q:Vagg , {K,V }: ˆE ∈ RT ×D. (23) JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 6
+
+To further incorporate global video context, we adopt a video-conditioned affine transformation to calibrate the refined emotion features. Specifically, scaling and shifting factors are generated from the video features via pooling operations: 
+
+α = Pooling |PD -axis (Reshape[ ϕα(V)] |RT ×P ×D ) ∈ RT ×1,
+
+(24) 
+
+β = Pooling |P-axis [ϕβ (V)] ∈ RT ×D. (25) The final interpretable emotion representation is obtained as: 
+
+˜E = α ⊙ Norm( E′) + β, (26) where Norm( ·) denotes a normalization operation applied to stabilize feature scale before affine modulation, and ⊙
+
+represents element-wise multiplication. 
+
+VAD Regression Objective. To explicitly regularize the refined emotion representations with VAD attributes, we intro-duce a VAD regression head implemented as a single linear layer. We predict a VAD vector as follows: 
+
+ˆr = W V ˜E + bV , (27) where ˆr = (ˆ v, ˆa, ˆd)⊤ denotes the predicted VAD vector, and 
+
+W V and bV are learnable weights and bias. We adopt mean squared error (MSE) to minimize the discrepancy between predicted VAD vectors and ground-truth VAD vectors: 
+
+Lvad = ∥ˆr − r∥22 , (28) where r = ( v, a, d )⊤ denotes the ground-truth VAD vector and ∥·∥ 22 denotes the 2-norm operation. 
+
+D. Emotion-Cause Pair Extraction 
+
+In the second round of mutual learning, in order to collab-oratively extract emotion-cause pairs, we propose to leverage the refined visual features and the refined emotion features, which record the effective information of their modalities. With the interaction of the original features, the refined features are further refined to better represent visual causes and textual emotions. Thus, specifically, we exploit the cross-attention of the preliminary refined features and the original features to obtain the ultimate emotional cues E and visual causes C. The formulations are: 
+
+E = Attn( eV, E)|Q: eV,{K,V }:E ∈ RT ×P ×D , (29) 
+
+C = Attn( V, eE)|Q: eE,{K,V }:V ∈ RT ×P ×D , (30) where E and C are perceived by visual features and emotional features respectively, which ensures that they promote each other through collaborative extraction, thereby enhancing the accuracy and interpretability of emotion perception and help-ing decouple factual and emotional description generation. Besides, to forcibly align the semantic representation of 
+
+[E, C] pairs, driven by the success of contrastive learning in visual-language pre-training tasks [23], [46], we design an op-timization objective functions based on intrinsic relationships between each emotion-cause pair. Specifically, given a batch of B emotion-cause pairs, we maximize the cosine similarity of the emotion and cause embedding from B real pairs in the batch while minimizing the cosine similarity of embeddings from the ( B2 − B) incorrect pairs: 
+
+Lc2e = − 1
+
+B
+
+X
+
+> i∈B
+
+log exp {Ci · E⊤ 
+
+> i
+
+/τ }
+
+P 
+
+> j∈B
+
+exp {Ci · E⊤ 
+
+> j
+
+/τ } ,
+
+Le2c = − 1
+
+B
+
+X
+
+> i∈B
+
+log exp  Ei · C⊤ 
+
+> i
+
+/τ P 
+
+> j∈B
+
+exp  Ei · C⊤ 
+
+> j
+
+/τ  ,
+
+Lctr = 12 (Lc2e + Le2c),
+
+(31) where τ is the temperature hyper-parameter. 
+
+E. Emotion-Attributed Caption Generation 
+
+After obtaining sufficient semantic information including video and emotion-cause pair features, we concatenate them to generate a unified multi-modal semantic representation 
+
+M = [ V; C; E] ∈ R(T ×3P )×D . Subsequently, we utilize a pre-trained BLIP-2 [44] architecture, which contains Q-former and pre-trained language decoder [17], to generate captions. Specifically, we leverage a Q-former module to convert M to tokens that could be interpreted by a language decoder. The Q-former uses learnable query vectors q ∈ RNq ×D to extract interpretable representations, where Nq is the query length. We first use self-attention to aggregate each query: 
+
+q = Attn( q)|{Q,K,V }:q + q ∈ RNq ×D , (32) then the aggregated query is applied to generate interpretable multimodal features by a cross-attention and a linear projec-tion: 
+
+M = ϕM [Attn( q, M )|Q:q, {K,V }:M + q] ∈ RNq ×D , (33) Finally, we send M to the language decoder for caption generation. In addition to Lctr , we also design two emotion-aware optimization objectives. Firstly, since the important role of emotional words in EVC, we use emotion-focused cross-entropy loss that adds a penalty term on emotional words: 
+
+Le =
+
+
+
+−(1 + θ) PNT 
+
+> t=1
+
+log P (yt|y<t ), if yt ∈ Ω,
+
+− PNT 
+
+> t=1
+
+log P (yt|y<t ), otherwise ,
+
+(34) where θ is a hyper-parameter that controls the level of pun-ishment in the equation when yt is emotional words from emotional lexicon Ω, and NT denote the sequence length. Furthermore, to provide more sufficient emotional loss, we also design an emotional classification loss. Specifically, we add a simple classification header for the emotion features E
+
+to obtain the emotional distribution d. Then we calculate the emotional classification loss as follows: 
+
+Lcls = − X
+
+> e∈Ω
+
+log P (e|d), (35) where e is emotional words from emotional lexicon Ω. The overall loss is the weighted sum of four losses: 
+
+L = λeLe + λcls Lcls + λctr Lctr + λvad Lvad , (36) JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 7
+
+TABLE I PERFORMANCE FOR EMOTIONAL VIDEO CAPTIONING TASK ON THREE BENCHMARKS . T HE BEST RESULTS ARE HIGHLIGHTED IN BOLD .
+
+Methods Emotion Semantic Hybrid 
+
+Acc sw ↑ Acc c↑ BLEU-1 ↑ BLEU-2 ↑ BLEU-3 ↑ BLEU-4 ↑ METEOR ↑ ROUGE ↑ CIDEr ↑ BFS ↑ CFS ↑
+
+EVC-MSVD 
+
+SA-LSTM [11] 68.8 67.2 80.7 67.9 56.3 45.5 33.0 68.2 72.1 59.0 71.3 FT [59] 69.4 67.1 77.2 60.3 47.4 36.3 29.0 63.4 62.5 52.5 63.7 SGN [26] 73.9 73.1 77.5 62.7 51.3 41.1 30.6 63.6 71.0 56.4 71.5 CANet [21] 78.7 76.8 78.5 64.0 52.1 41.8 30.8 65.7 74.4 57.9 75.1 VEIN [41] 82.7 82.1 82.0 68.4 57.1 45.9 33.0 69.0 79.6 62.4 80.2 EPAN [42] 84.1 82.8 82.5 69.6 57.8 46.2 34.4 69.8 80.6 63.1 81.1 DCGN [48] 86 .5 85 .7 84 .5 70 .9 59 .2 48 .7 35 .7 71 .0 85 .2 65 .7 86 .6
+
+MM-ECPE [8] 90 .4 89.1 96.9 87.8 80.2 71.4 45.5 83.1 168 .3 81 .8 152 .6
+
+Ours 91.2 89.7 97.7 88.4 80.5 71.5 45.8 83.8 169.6 82.3 153.8 EVC-VE 
+
+SA-LSTM [11] 48.6 47.1 71.0 51.1 34.5 22.5 19.6 40.7 30.2 38.9 33.7 CANet [21] 41.9 39.7 66.9 44.8 29.3 19.3 18.2 37.9 23.3 33.9 26.8 VEIN [41] 57.4 56.8 71.6 52.1 37.4 26.3 20.9 41.7 33.4 43.0 39.2 EPAN [42] 63.8 62.3 73.6 54.0 38.3 27.0 21.2 42.3 34.7 45.0 40.4 DCGN [48] 71 .0 69 .4 74 .5 55 .3 40 .0 28 .1 23 .4 47 .7 41 .5 47 .3 46 .9
+
+MM-ECPE [8] 73.4 72.3 76.8 57.5 41.7 28.9 24.7 49.5 65.2 49.2 66.7 
+
+Ours 74.1 72.9 77.8 58.2 42.2 29.2 25.1 50.4 66.1 49.7 67.6 EVC-Combine 
+
+SA-LSTM [11] 53.4 50.7 70.6 51.4 36.7 25.4 21.0 45.9 38.8 41.2 41.5 FT [59] 51.2 49.6 67.6 47.2 32.0 21.6 20.4 43.1 29.0 37.6 33.3 SGN [26] 50.4 48.6 68.7 48.9 34.2 24.0 20.1 44.8 35.5 39.1 38.3 CANet [21] 53.7 52.7 68.1 47.7 32.9 22.5 19.7 43.7 34.5 38.8 38.2 VEIN [41] 59.0 57.6 72.1 52.8 37.9 27.1 21.6 46.8 39.4 43.6 43.1 EPAN [42] 69.3 67.2 74.4 55.6 39.9 28.0 23.0 47.1 43.0 47.0 48.0 DCGN [48] 74 .8 73 .1 75 .6 56 .7 40 .5 28 .5 24 .9 51 .7 49 .8 48 .5 51 .7
+
+MM-ECPE [8] 75.6 73.8 78.1 58.5 42.3 30.2 26.4 53.8 67.9 50.4 69.3 
+
+Ours 76.4 74.3 78.9 59.2 42.6 30.5 26.8 54.5 69.0 50.8 70.3 
+
+TABLE II THE RESULTS OF ABLATION STUDIES ON THE EVC-C OMBINE DATASET TO DISCUSS THE EFFECTIVENESS OF DIFFERENT INPUTS FOR THE DECODER .Inputs Acc sw ↑ Acc c↑ BLEU-1 ↑ BLEU-2 ↑ BLEU-3 ↑ BLEU-4 ↑ METEOR ↑ ROUGE ↑ CIDEr ↑ BFS ↑ CFS ↑                                            
+
+> Video 70.4 68.9 75.1 56.0 40.8 29.2 25.3 52.0 65.6 48.0 66.4 Video+Emotion 74.6 72.8 76.4 56.9 41.5 29.6 25.9 53.1 66.6 49.4 68.0 Cause+Emotion 75.4 73.3 77.2 57.7 41.8 30.0 26.2 53.7 68.1 49.9 69.4 Video+Cause+Emotion 76.4 74.3 78.9 59.2 42.6 30.5 26.8 54.5 69.0 50.8 70.3
+
+where λe, λcls , λctr , and λvad are hyper-parameters that balance the four objectives. Our model is trained end-to-end by minimizing the overall loss L.IV. E XPERIMENT 
+
+A. Experimental Settings 
+
+Datasets. We experiment on three public emotional video captioning benchmarks, e.g. , EVC-MSVD [32], EVC-VE [52], and EVC-Combine [59]. EVC-MSVD contains 240/134 videos and 8,169/4,611 sentences for training/testing by addi-tionally embedding emotion words into the caption sentences of the traditional video captioning dataset MSVD [32]. EVC-VE is built based on a traditional emotional video prediction dataset VideoEmotion-8 [52] and is divided into 1,141/382 videos and 19,398/6,527 sentences for training/testing, respec-tively. EVC-Combine is the combination of EVC-MSVD and EVC-VE, which contains 1,381/516 videos and 27,567/11,138 sentences for training/testing. 
+
+Evaluation Metrics. To evaluate the accuracy of emotion in generated sentences effectively, following previous work [59], we consider the emotion word accuracy Acc sw [59] and emotion sentence accuracy Acc c [59]. Additionally, to measure the semantic matching degree between the generated sentence and the ground-truth label, we use the standard metrics, e.g. ,
+
+BLEU [63], METEOR [15], ROUGE [49], and CIDEr [25]. Moreover, there are two hybrid metrics BFS [59] and CFS [59] that combine the emotion evaluation with BLEU and CIDEr metrics, respectively. 
+
+Implementation Details. For each video, we sample T =20 frames and resize them to 224 × 224 with central cropping for pixel values. We extract video features by pre-trained VideoBLIP [44], and set the patch number to P = 16 × 16 .Following [59] and [42], we build an overall vocabulary of size 32,128 that contains all words in the corpus and set the number of emotion words to Nw = 179 . The embedding dimensions are constructed to dE = 300 and D = 1408 . The block number is set to B = 5 . For the Q-former component, we set the length of the learnable queries to 32. In training, we adopt freeze FLAN-T5 XL [17] as the language decoder and integrate a LoRA adapter [16] with r = 16 and α = 32 
+
+to align the visual and emotional latent space. We adopt the Adam optimizer [12] with a learning rate of 7e-4, and the batch size is set to 16. We set the global motion parameter 
+
+λm, the penalty parameter θ, the objective function weights JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 8
+
+TABLE III THE RESULTS OF ABLATION STUDIES ON EVC-C OMBINE DATASET TO DISCUSS THE EFFECTIVENESS OF OUR PROPOSED COMPONENTS , WHERE CVSD, VEIL DENOTE CONCEPT -AWARE VISUAL SEMANTIC DECOMPOSITION AND VISUAL -GUIDED EMOTION INTERPRETABLE LEARNING , RESPECTIVELY .Components Acc sw ↑ Acc c ↑ BLEU-1 ↑ BLEU-2 ↑ BLEU-3 ↑ BLEU-4 ↑ METEOR ↑ ROUGE ↑ CIDEr ↑ BFS ↑ CFS ↑                                                 
+
+> CVSD VEIL
+> ××70.4 68.9 75.1 56.0 40.8 29.2 25.3 52.0 65.6 48.0 66.4
+> ✓×71.5 69.8 77.6 58.0 42.1 30.2 26.4 53.9 68.4 49.4 68.9
+> ×✓74.7 73.1 76.1 56.6 41.0 29.3 25.7 52.8 66.2 49.1 67.7
+> ✓✓76.4 74.3 78.9 59.2 42.6 30.5 26.8 54.5 69.0 50.8 70.3
+
+TABLE IV THE RESULTS OF ABLATION STUDIES ON EVC-C OMBINE DATASET TO DISCUSS THE EFFECTIVENESS OF EACH DENSE COMPONENT IN SOM A WARE 
+
+VISUAL SEMANTIC DECOMPOSITION MODULE .Components Acc sw ↑ Acc c ↑ BLEU-1 ↑ BLEU-2 ↑ BLEU-3 ↑ BLEU-4 ↑ METEOR ↑ ROUGE ↑ CIDEr ↑ BFS ↑ CFS ↑                                                                                                          
+
+> Scene Object Motion
+> ×××74.7 73.1 76.1 56.6 41.0 29.3 25.7 52.8 66.2 49.1 67.7
+> ✓××75.2 73.4 75.6 55.9 40.1 28.4 24.9 52.2 65.8 48.6 67.5
+> ×✓×74.4 73.0 77.2 57.5 41.5 29.5 25.9 53.2 66.6 49.5 68.0
+> ××✓74.1 72.8 76.5 57.0 41.2 29.3 25.9 53.4 67.0 49.2 68.3
+> ×✓✓74.3 73.0 78.3 58.6 42.1 30.0 26.3 53.9 68.2 50.1 69.3
+> ✓×✓75.5 73.8 77.0 57.2 41.4 29.5 25.7 53.0 66.4 49.6 68.1
+> ✓✓×75.9 74.0 77.8 58.3 41.8 29.8 26.1 53.6 67.9 50.1 69.3
+> ✓✓✓76.4 74.3 78.9 59.2 42.6 30.5 26.8 54.5 69.0 50.8 70.3
+
+λe, λcls , λctr , and λvad to 0.2, 0.1, 0.8, 0.3, 0.2, and 0.6. The maximum length of captions is set to 15 and the size of beam search is set to 4. All experiments are implemented on 2 NVIDIA A800 GPUs. 
+
+Baselines. We consider several state-of-the-art methods to make comparisons and divide them into two categories: (i) Traditional Captioning Methods and (ii) Emotional Captioning Methods. 
+
+(i) Traditional Captioning Methods 
+
+1) SA-LSTM (CVPR18’) [11] proposes a reconstruction network to leverage both the forward (video to sentence) and backward (sentence to video) flows for video captioning. The forward flow produces the sentence description based on the encoded video semantic features and the backward flow reproduces the video features based on the hidden state sequence generated by the decoder. 2) CANet (TMM22’) [21] proposes a contextual attention network to recognize and describe the fact and emotion by semantic-rich context learning, which first extracts visual and textual features from both video and previously generated words and then applies the attention mechanism to capture informative contexts for captioning. 3) VideoBLIP (EMNLP24’) [28] proposes a training paradigm that induces in-context learning over video and text by capturing key properties of pre-training data found by prior work to be crucial for improving the ability of LLMs to generate video descriptions. 
+
+(ii) Emotional Captioning Methods 
+
+1) FT (TMM21’) [59] introduces a visual emotion analyzer to detect implicit emotional cues and a dual-stream network that integrates emotional and factual semantics for caption generation by a weighted sum operation. 2) EPAN (MM23’) [42] introduces a tree-structured emo-tion repository to enable hierarchical emotion perception and an emotion-prior awareness network to achieve the explicit and fine-grained emotion perception by an emotion masking mechanism and then decode the emotional caption by exploit-ing the multimodal semantic cues. 3) VEIN (TIP24’) [41] designs a vision-based emotion interpretation network, which first models the emotion dis-tribution over an open psychological vocabulary and then incorporates visual context, textual context, and visual-textual relevance into an aggregated multimodal contextual vector to enhance video captioning. 4) DCGN (MM24’) [48] propose a framework to leverage fact-emotion collaborative learning to address the challenge of dynamic emotion changes during caption generation. 5) MM-ECPE (MM25’) [8] focus on the importance of emotional causes in emotional exploration and propose a multi-round mutual learning network to jointly extract emotion-cause pairs for LLM-based caption generation. 
+
+B. Comparison with State-of-the-art Methods 
+
+As shown in Table I, we present the comparison with the state-of-the-art methods on three EVC datasets. We evaluate the performance of our model and have the following metic-ulous observations: Firstly, we test our model on semantic metrics, which could reflect the accuracy and vividness of generated cap-tions. We observe that our model outperforms all existing methods on most semantic metrics. For instance, on the EVC-Combine dataset, our model performs better than DCGN [48] by 4.4%/5.4% on BLEU-2/ROUGE-L metrics, respectively. Especially on the CIDEr metric, our model achieves a huge improvement of 38.6%. Due to the fine-grained visual concept refinement, our model could mine accurate factual seman-tics and provide customized guidance for caption generation, which generates more semantically relevant descriptions. Secondly, our model also achieves the best performance on emotion accuracy, which is an extremely important metric to evaluate whether our model could predict accurate emo-tions. For example, our model performs better than MM-ECPE [8] by +1.0%/+0.8% with Acc sw /Acc c on the EVC-VE JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 9
+
+TABLE V THE RESULTS OF ABLATION STUDIES ON EVC-C OMBINE DATASET TO DISCUSS THE EFFECTIVENESS OF Lctr AND Lvad ON DIFFERENT SETTINGS . 1 ST ,2ND DENOTE APPLYING CONTRASTIVE LOSS Lctr ON THE 1ST ROUND MUTUAL LEARNING ( eV, eE ) OR 2ND ROUND MUTUAL LEARNING (C, E), 
+
+> RESPECTIVELY
+
+.Components Settings Acc sw ↑ Acc c↑ BLEU-1 ↑ BLEU-2 ↑ BLEU-3 ↑ BLEU-4 ↑ METEOR ↑ ROUGE ↑ CIDEr ↑ BFS ↑ CFS ↑Lctr Lvad                                                                  
+
+> ××-73.6 71.9 76.8 57.6 41.1 28.9 25.4 52.1 65.3 49.0 66.8
+> ×✓-75.1 73.2 77.2 57.9 41.4 29.1 25.6 52.5 65.9 49.5 67.6
+> ✓✓1st 74.8 73.0 78.0 58.6 41.9 29.6 25.8 52.9 66.4 49.9 67.9
+> ✓✓1st+2nd 75.7 73.8 78.5 58.9 42.2 30.0 26.3 53.6 67.8 50.4 69.2
+> ✓✓2nd 76.4 74.3 78.9 59.2 42.6 30.5 26.8 54.5 69.0 50.8 70.3
+
+TABLE VI COMPARISON WITH THE STATE -OF -THE -ART METHODS WITH CLIP SCORE METRIC ON EVC-MSVD DATASET . T HE BEST RESULTS ARE HIGHLIGHTED IN BOLD . +∆% IS THE IMPROVEMENT COMPARED WITH OUR METHOD .Methods CLIPScores ↑ +∆% ↑ RefCLIP-S ↑ +∆% ↑                    
+
+> VEIN [41] 59.8 -81.9 -EPAN [42] 61.1 +2.2% 83.2 +1.6% DCGN [48] 66.4 +11.0% 86.1 +5.1% MM-ECPE [8] 69.1 +15.6% 88.6 +8.2%
+> Ours 69.7 +16.6% 89.5 +9.3%
+
+dataset. The proposed model utilizes visual temporal dynamics to guide emotion refinement and augments the interpretable refinement process by reliable VAD-vector constraints, which enhances the emotional understanding capabilities and predicts emotions more accurately. Moreover, we evaluate our model on hybrid metrics, which investigate the overall performance of our model. As shown in the last two columns of Table I, our model achieves the best performance with BFS and CFS metrics on three datasets, i.e., +1.5%/+1.4% improvements over MM-ECPE [8] on EVC-VE/EVC-Combine datasets with CFS metric, which demonstrates that captions generated by our model take into account both emotional and factual accuracy. In addition, we evaluate our model with two higher human correlation evaluation metrics: CLIPScore and RefCLIP-S, which focus on the degree of semantic alignment between the video/reference sentence and the prediction sentence. As shown in Table VI, our model also achieves the best perfor-mance on these two metrics, i.e., +5.0%/+3.9% improvements over DCGN [48] with CLIPScore/RefCLIP-S metric on EVC-MSVD dataset, which demonstrates that captions generated by our model are not only similar to the reference, but also highly semantic-aligned with the video and reference. 
+
+C. Ablation Studies 
+
+Discussion on emotion-cause pairs. To explore the impact of emotion-cause pairs on model performance, we conduct an ablation study on different inputs for caption generation, 
+
+i.e., video, cause, and emotion features. As shown in Table II, we firstly observe that compared with only sending video features into decoder, adding the emotion cue features could significantly enhance the emotional perception ability, i.e., 
+
++6.0%/+5.7% improvements on Acc sw /Acc c. The pre-trained language decoder lacks the ability to understand the emotional cues implicit in video. Instead, our module firstly locates 
+
+TABLE VII THE COMPARISON WITH SOTA METHODS ON HUMAN EVALUATIONS .Metric Accuracy Relevance Coherence Usability VEIN [41] 5.47 5.18 6.27 5.04 EPAN [42] 6.24 5.97 7.13 5.76 DCGN [48] 6.88 6.43 7.68 6.32 VideoBLIP [28] 5.91 5.54 7.20 4.56 MM-ECPE [8] 6.40 6.75 8.04 7.36 GPT-4o [6] 6.98 6.04 7.24 6.62 VideoLLaMA3 [37] 7.22 6.20 7.72 6.84     
+
+> Ours 7.02 6.98 8.44 7.76
+
+the emotion-related visual features by concept-aware visual refinement and leverages them to mine more accurate visual emotion cues. Besides, adding the cause features could signifi-cantly enhance the semantic understanding, i.e., +3.3%/+3.6% improvements on BLEU-1/CIDEr metrics. Our model achieves accurate descriptions of key visual elements by precisely mining fine-grained cause concepts, thereby improving the performance of semantic metrics. 
+
+Discussion on proposed modules. In this paper, we propose two important modules to refine visual and emotional features, named CVSD and VEIL. To further present their effectiveness, we conduct another ablation study shown in Table III. We observe that each module could improve its performance inde-pendently. Specifically, CVSD refines visual features to locate fine-grained cause concepts, which helps to capture more accurate factual semantics, resulting in obvious improvements on semantic metrics, i.e., +3.4%/+4.3% improvements on BLEU-4/CIDEr. Besides, VEIL enhances emotion dictionary features to help capture visual emotion cues and improve the rationality of the emotion-attributed captions, resulting in obvi-ous improvements in emotion accuracy, i.e., +6.1%/+6.1% im-provements on Acc sw /Acc c. Finally, we combine two modules to achieve the best performance in both emotional and factual semantics, i.e., +5.8%/+5.9% improvements on BFS/CFS. 
+
+Discussion on dense components. In our proposed Concept-aware Visual Semantic Decomposition module, we capture three types of cause concepts to refine the visual features, namely scene, object, and motion concepts. Therefore, it is necessary to discuss the effectiveness of each dense concept for our model. As shown in Table IV, we observe that each concept could improve the model’s performance indepen-dently. Specifically, the scene concept significantly improves emotion accuracy. We analyze that the scene in the video determines the emotional tone. For example, a dark scene JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 10          
+
+> Fig. 3. The effects of three trade-off parameters on EVC-MSVD of λe,λcls ,λctr , and λvad , respectively.
+> Fig. 4. Qualitative results for comparison between our model and other SOTA methods, i.e., DCGN [48] and MM-ECPE [8].
+
+often points to negative emotions. Besides, the object and motion concepts significantly improve semantic metrics. They usually include the characters and their actions in the main events of the video, which helps the model accurately generate event-related words. Through combining these three concepts, our model achieves the best performance, demonstrating the superiority of our proposed module. 
+
+Discussion on objective functions. In our framework, in addition to the common emotion classification loss and cross-entropy loss, we also propose two objective functions to optimize our model, namely Lctr and Lvad . We conduct an ablation study to discuss the effectiveness of them. As shown in Table V, we first observe that Lvad could optimize the per-formance of our model, especially on emotion accuracy, i.e., 
+
++2.0%/+1.8% improvements on Acc sw /Acc c. Lvad enables accurate emotional mining by aligning the predicted emotion representation with the vectors in the VAD dictionary. Besides, we discuss the effectiveness of Lctr under three settings, namely 1st round, 2nd round, and the combination. We observe that applying Lctr in the 1st round produces only a slight improvement and even hurts some performances on emotion accuracy. Applying Lctr to ( eV, eE) may affect the extraction of ( C, E), causing the emotion and cause features to become homogenized, which hurts the prediction of visual emotions. Besides, compared with the combination setting, applying Lctr 
+
+only on the 2nd round achieves better performance. 
+
+Discussion on trade-off parameters. We introduce several hyper-parameters to control the optimization of our model, namely λe, λcls , λctr , and λvad . It is essential to discuss the best setting for them. Since the hybrid metric CFS could reflect both emotional accuracy and factual semantics, we evaluate the performance of different parameter settings on it. As shown in Figure 3, the model achieves the best performance when 
+
+λe = 0 .8, λcls = 0 .3, λctr = 0 .2, and λvad = 0 .6, which is consistent with our setting. 
+
+D. Human Evaluation 
+
+Due to the highly subjective nature of the EVC task, it is a crucial criterion for evaluation whether the generated descriptions conform to human preferences. Therefore, we add human evaluation to fully measure the quality of emotional descriptions. Inspired by the work [59], we designs four metrics, including (1) emotion accuracy: assess the accuracy of emotional expression, (2) relevance: assess whether the gener-ated description is relevant to the video content, (3) coherence: assess the coherence and readability of the description, and (4) usability: how useful would the description be for a person (especially a blind person) to understand what is happening in the video. The score of each metric ranges from 1 to 10. Subsequently, we invite 20 participants with excellent English skills to score a subset of 50 video-caption pairs on these four metrics and calculate the average score on each metric. We make a comparison with two types of models on human evaluation: the state-of-the-art models on EVC and several large vision-language models (LVLMs). 
+
+Comparison with SOTA methods. As shown in Table VII, compared with the SOTA methods for EVC, our model is significantly ahead in all four metrics. Our proposed CVSD captures fine-grained cause concepts, thereby generating more accurate and diverse vocabulary. Furthermore, our proposed VEIL utilizes VAD constraints to enhance the interpretability of emotions, making the generated descriptions more easily empathized with and understood by humans. These show that our model does not simply imitate the reference sentences, but learns the representation of emotional and factual semantics. 
+
+Comparison with LVLMs. As shown in Table VII, despite the outstanding performance of LVLMs, our model still out-performs them in human evaluations. Due to their powerful ability in objective understanding and generation, LVLMs could produce a wide variety of descriptions. However, limited by insufficient emotion understanding and the influence of visual hallucinations, they sometimes generate factual and emotional contents irrelevant to the video, leading to lower JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 11  
+
+> Fig. 5. Qualitative results for our proposed Concept-aware Visual Semantic Decomposition module. The yellow, red, and blue words in the caption correspond to the scene, object, and motion cause exploration.
+> Fig. 6. Qualitative results for our proposed Visual-guided Emotion Inter-pretable Learning module.
+
+human ratings. Conversely, our model filters out emotion-irrelevant visual information and visual-irrelevant emotional information through fine-grained visual and emotional refine-ment, thereby generating emotional descriptions that are more closely aligned with the video content. 
+
+E. Qualitative Results 
+
+To intuitively demonstrate the advantage of our model, we make a visualization from several aspects: comparison with the state-of-the-art methods, visualization of proposed CVSD, and visualization of proposed VEIL. 
+
+Comparison with the SOTA methods. As shown in Fig. 4, compared with the SOTA methods DCGN [48] and MM-ECPE [8], our method generates more accurate emotional captions in both two cases. Firstly, we observe that cause extraction is helpful to locate more accurate emotion causes, 
+
+i.e., “enjoy the life” and “his loud talking”. Compared with global visual features, fine-granularity visual features could focus on emotion-related visual regions and capture more detailed factual semantics. Besides, we observe that emotion-cause pair collaborative extraction could also improve emotion perception, which results in correct emotion word prediction “delightful” and “wrathfully”. Specifically, our model accu-rately captures emotion-related cause concepts and applies it for emotion perception, which filters out the emotion errors caused by irrelevant visual noises. 
+
+Visualization of proposed CVSD. To demonstrate the effec-tiveness of our proposed CVSD module, we make a visual-ization for the extraction of different concepts ( e.g., scene, object, and motion). As shown in Fig. 5, the proposed CVSD accurately captures the different types of semantic concepts corresponding to specific words in the generated sentence. For the scene cause, the global attention forces our model to focus on the background and environment in the video, resulting in the generation of the word “amusement park” . For the object cause, we employ spatial-geometry and temporal-block attention to focus on the main character, generating the key words “boyfriend” and “woman” . For the motion cause, our model focuses on the dynamic changes of key visual regions over temporal dimension, resulting in the correct word 
+
+“propose” . Overall, the proposed CVSD achieves accurate mining of potential emotional causes by decoupling different types of semantic concepts in videos, providing a credible foundation for mining visual emotions. 
+
+Visualization of proposed VEIL. To intuitively demonstrate the process of capturing visual emotions, we make a visual-ization for our proposed VEIL module. As shown in Fig. 6, the proposed VEIL improves the accuracy of emotion mining by two constraints, including probability distribution in the emotion dictionary and interpretable VAD vector prediction. Firstly, we observe that in the distribution on E, the cor-rect emotion word “sorrowful” has the highest probability. Besides, in the VAD semantic space, our prediction VAD vector achieves the closest space distance to the vector of 
+
+“sorrowful” . The results above demonstrate that our proposed VEIL could not only obtain the optimal emotion distribution through cross-attention between video and emotion dictionary, but also analyze video content from the aspects of arousal and valence under the constraint of VAD knowledge, thereby improving the interpretability of emotion mining. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 12 
+
+V. C ONCLUSION 
+
+In this paper, we propose MM-ECPE++, a novel Fine-grained Emotion-Cause Pair Extraction framework for Emotion-Attributed Video Captioning, which performs pair-wise extraction of emotional cues and visual causes through multi-round step-by-step refinement. The pairwise extraction promotes each other mutually, enhancing the accuracy and interpretability of emotion perception and helping to decou-ple the factual and emotional description generation. To be specific, in the 1st round, we propose a concept-aware visual semantic decomposition to refine the visual features through fine-grained concepts mining, including scene, object, and motion concepts. Besides, we propose a visual-guided emo-tion interpretable learning to filter visual-irrelevant emotional information through visual guiding and VAD-vector constraint. Subsequently, we achieve emotion-cause pair extraction in the 2nd round by cross-coupling the visual and emotional features before and after refinement, and leveraging contrastive loss to achieve semantic forced alignment. Finally, we aggregate visual and emotion-cause semantics into the LLMs-based decoder through a Q-former component for more accurate and vivid emotional captions. Extensive experiments on challeng-ing datasets demonstrate the superiority of our method and each proposed module. REFERENCES [1] J. Wang, C. Wang, L. Guo, S. Zhao, D. Wang, S. Zhang, X. Zhao, J. Yu, Y. Wang, Y. Yang et al. , “Mdkat: Multimodal decoupling with knowledge aggregation and transfer for video emotion recognition,” 
+
+IEEE Transactions on Circuits and Systems for Video Technology , 2025. [2] S. Li, C. Lu, Y. Zong, H. Lian, and W. Zheng, “Feature evaluation and joint interaction for audio-visual emotion recognition,” IEEE Transac-tions on Circuits and Systems for Video Technology , 2025. [3] J. Pennington, R. Socher, and C. D. Manning, “Glove: Global vectors for word representation,” in Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) , 2014, pp. 1532–1543. [4] W. Chen, G. Li, X. Zhang, S. Wang, L. Li, and Q. Huang, “Weakly supervised text-based actor-action video segmentation by clip-level multi-instance learning,” ACM Transactions on Multimedia Computing, Communications and Applications , vol. 19, no. 1, pp. 1–22, 2023. [5] X. Huang, W. Chen, B. Hu, and Z. Mao, “Graph mixture of experts and memory-augmented routers for multivariate time series anomaly detec-tion,” in Proceedings of the AAAI Conference on Artificial Intelligence ,vol. 39, no. 16, 2025, pp. 17 476–17 484. [6] A. Hurst, A. Lerer, A. P. Goucher, A. Perelman, A. Ramesh, A. Clark, A. Ostrow, A. Welihinda, A. Hayes, A. Radford et al. , “Gpt-4o system card,” arXiv preprint arXiv:2410.21276 , 2024. [7] W. Li, Y. Li, V. Pandelea, M. Ge, L. Zhu, and E. Cambria, “Ecpec: Emotion-cause pair extraction in conversations,” IEEE Transactions on Affective Computing , vol. 14, no. 3, pp. 1754–1765, 2022. [8] C. Ye, W. Chen, P. Song, X. Liu, L. Zhang, and Z. Mao, “Multi-round mutual emotion-cause pair extraction for emotion-attributed video captioning,” in Proceedings of the 33rd ACM International Conference on Multimedia , 2025, pp. 3320–3329. [9] J. An, Z. Ding, K. Li, and R. Xia, “Global-view and speaker-aware emotion cause extraction in conversations,” IEEE/ACM Transactions on Audio, Speech, and Language Processing , vol. 31, pp. 3814–3823, 2023. [10] B. Li, H. Fei, F. Li, T.-s. Chua, and D. Ji, “Multimodal emotion-cause pair extraction with holistic interaction and label constraint,” 
+
+ACM Transactions on Multimedia Computing, Communications and Applications , 2024. [11] B. Wang, L. Ma, W. Zhang, and W. Liu, “Reconstruction network for video captioning,” in Proceedings of the IEEE conference on computer vision and pattern recognition , 2018, pp. 7622–7631. [12] D. P. Kingma and J. Ba, “Adam: A method for stochastic optimization,” 
+
+arXiv preprint arXiv:1412.6980 , 2014. [13] B. Wang, K. Tang, and P. Zhu, “Enhancing emotion-cause pair extraction in conversations via center event detection and reasoning,” in Findings of the Association for Computational Linguistics: EMNLP 2024 , 2024, pp. 10 773–10 783. [14] T. Yu, K. Fu, S. Wang, Q. Huang, and J. Yu, “Prompting video-language foundation models with domain-specific fine-grained heuristics for video question answering,” IEEE Transactions on Circuits and Systems for Video Technology , vol. 35, no. 2, pp. 1615–1630, 2024. [15] S. Banerjee and A. Lavie, “Meteor: An automatic metric for mt evalua-tion with improved correlation with human judgments,” in Proceedings of the acl workshop on intrinsic and extrinsic evaluation measures for machine translation and/or summarization , 2005, pp. 65–72. [16] E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, and W. Chen, “Lora: Low-rank adaptation of large language models,” 2021. [Online]. Available: https://arxiv.org/abs/2106.09685 [17] C. Raffel, N. Shazeer, A. Roberts, K. Lee, S. Narang, M. Matena, Y. Zhou, W. Li, and P. J. Liu, “Exploring the limits of transfer learning with a unified text-to-text transformer,” Journal of machine learning research , vol. 21, no. 140, pp. 1–67, 2020. [18] J. Gao, M. Chen, and C. Xu, “Learning probabilistic presence-absence evidence for weakly-supervised audio-visual event perception,” IEEE Transactions on Pattern Analysis and Machine Intelligence , 2025. [19] X. Lan, J. Xue, J. Qi, D. Jiang, K. Lu, and T.-S. Chua, “Expllm: Towards chain of thought for facial expression recognition,” IEEE Transactions on Multimedia , 2025. [20] D. Guo, K. Li, B. Hu, Y. Zhang, and M. Wang, “Benchmarking micro-action recognition: Dataset, method, and application,” IEEE Transac-tions on Circuits and Systems for Video Technology , 2024. [21] P. Song, D. Guo, J. Cheng, and M. Wang, “Contextual attention network for emotional video captioning,” IEEE Transactions on Multimedia ,2022. [22] F. Wang, H. Ma, X. Shen, J. Yu, and R. Xia, “Observe before generate: Emotion-cause aware video caption for multimodal emotion cause gen-eration in conversations,” in Proceedings of the 32nd ACM International Conference on Multimedia , 2024, pp. 5820–5828. [23] A. Radford, J. W. Kim, C. Hallacy, A. Ramesh, G. Goh, S. Agarwal, G. Sastry, A. Askell, P. Mishkin, J. Clark et al. , “Learning transferable visual models from natural language supervision,” in International conference on machine learning . PMLR, 2021, pp. 8748–8763. [24] N. Xu, Y. Gao, T.-T. Zhang, H. Tian, and A.-A. Liu, “Cross-modal coherence-enhanced feedback prompting for news captioning,” in Pro-ceedings of the 32nd ACM International Conference on Multimedia ,2024, pp. 9369–9377. [25] R. Vedantam, C. Lawrence Zitnick, and D. Parikh, “Cider: Consensus-based image description evaluation,” in Proceedings of the IEEE confer-ence on computer vision and pattern recognition , 2015, pp. 4566–4575. [26] H. Ryu, S. Kang, H. Kang, and C. D. Yoo, “Semantic grouping network for video captioning,” in proceedings of the AAAI Conference on Artificial Intelligence , vol. 35, no. 3, 2021, pp. 2514–2522. [27] N. Xu, T. Zhang, H. Tian, and A.-A. Liu, “Rule-driven news captioning,” 
+
+IEEE Transactions on Circuits and Systems for Video Technology , 2024. [28] K. Yu, Z. Zhang, F. Hu, S. Storks, and J. Chai, “Eliciting in-context learning in vision-language models for videos through curated data distributional properties,” in Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing , 2024, pp. 20 416– 20 431. [29] F. Qi, H. Zhang, X. Yang, and C. Xu, “A versatile multimodal learning framework for zero-shot emotion recognition,” IEEE Transactions on Circuits and Systems for Video Technology , vol. 34, no. 7, pp. 5728– 5741, 2024. [30] W. Chen, G. Li, X. Zhang, H. Yu, S. Wang, and Q. Huang, “Cascade cross-modal attention network for video actor and action segmentation from a sentence,” in Proceedings of the 29th ACM International Con-ference on Multimedia , 2021, pp. 4053–4062. [31] R. Xia and Z. Ding, “Emotion-cause pair extraction: A new task to emotion analysis in texts,” in Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , 2019, pp. 1003–1012. [32] D. Chen and W. B. Dolan, “Collecting highly parallel data for paraphrase evaluation,” in Proceedings of the 49th annual meeting of the association for computational linguistics: human language technologies , 2011, pp. 190–200. [33] X. Chen, C. Yang, C. Sun, M. Lan, and A. Zhou, “From coarse to fine: A distillation method for fine-grained emotion-causal span pair extraction in conversation,” in Proceedings of the AAAI Conference on Artificial Intelligence , vol. 38, no. 16, 2024, pp. 17 790–17 798. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 13 
+
+[34] H. Ma, J. Yu, F. Wang, H. Cao, and R. Xia, “From extraction to generation: multimodal emotion-cause pair generation in conversations,” 
+
+IEEE Transactions on Affective Computing , 2024. [35] T. Wang, W. Chen, Y. Tian, Y. Song, and Z. Mao, “Improving image captioning via predicting structured concepts,” in Proceedings of the 2023 Conference on Empirical Methods in Natural Language Process-ing , 2023, pp. 360–370. [36] C. Liu, Y. Tian, W. Chen, Y. Song, and Y. Zhang, “Bootstrapping large language models for radiology report generation,” in Proceedings of the AAAI Conference on Artificial Intelligence , vol. 38, no. 17, 2024, pp. 18 635–18 643. [37] B. Zhang, K. Li, Z. Cheng, Z. Hu, Y. Yuan, G. Chen, S. Leng, Y. Jiang, H. Zhang, X. Li et al. , “Videollama 3: Frontier multimodal foundation models for image and video understanding,” arXiv preprint arXiv:2501.13106 , 2025. [38] Y. Jin, W. Chen, Y. Tian, Y. Song, C. Yan, and Z. Mao, “Improving radiology report generation with d 2-net: When diffusion meets dis-criminator,” in ICASSP 2024-2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) . IEEE, 2024, pp. 2215–2219. [39] Y. Jin, W. Chen, Y. Tian, Y. Song, and C. Yan, “Improving radiology report generation with multi-grained abnormality prediction,” Neurocom-puting , vol. 600, p. 128122, 2024. [40] A.-A. Liu, Q. Wu, N. Xu, H. Tian, and L. Wang, “Enriched image cap-tioning based on knowledge divergence and focus,” IEEE Transactions on Circuits and Systems for Video Technology , 2025. [41] P. Song, D. Guo, X. Yang, S. Tang, and M. Wang, “Emotional video captioning with vision-based emotion interpretation network,” IEEE Transactions on Image Processing , 2024. [42] P. Song, D. Guo, X. Yang, S. Tang, E. Yang, and M. Wang, “Emotion-prior awareness network for emotional video captioning,” in Proceedings of the 31st ACM International Conference on Multimedia , 2023, pp. 589–600. [43] C. Wang, W. Chen, X. Cui, Y. Zhao, Z. Qi, P. Huang, X. Liu, and W. Zhang, “Combatting data imbalance and noise in micro-action recognition,” in Proceedings of the 33rd ACM International Conference on Multimedia , 2025, pp. 14 229–14 235. [44] K. Yu, Z. Zhang, F. Hu, S. Storks, and J. Chai, “Eliciting in-context learning in vision-language models for videos through curated data distributional properties,” in Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing , Y. Al-Onaizan, M. Bansal, and Y.-N. Chen, Eds. Miami, Florida, USA: Association for Computational Linguistics, Nov. 2024, pp. 20 416–20 431. [Online]. Available: https://aclanthology.org/2024.emnlp-main.1137 [45] S. Mohammad, “Obtaining reliable human ratings of valence, arousal, and dominance for 20,000 english words,” in Proceedings of the 56th annual meeting of the association for computational linguistics (volume 1: Long papers) , 2018, pp. 174–184. [46] Z. Fu, L. Zhang, H. Xia, and Z. Mao, “Linguistic-aware patch slimming framework for fine-grained cross-modal alignment,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,2024, pp. 26 307–26 316. [47] Y. Wang, Y. Liu, S. Zhou, Y. Huang, C. Tang, W. Zhou, and Z. Chen, “Emotion-oriented cross-modal prompting and alignment for human-centric emotional video captioning,” IEEE Transactions on Multimedia ,2025. [48] C. Ye, W. Chen, J. Li, L. Zhang, and Z. Mao, “Dual-path collaborative generation network for emotional video captioning,” in Proceedings of the 32nd ACM International Conference on Multimedia , 2024, p. 496–505. [49] C.-Y. Lin, “Rouge: A package for automatic evaluation of summaries,” in Text summarization branches out , 2004, pp. 74–81. [50] P. Zhu, B. Wang, K. Tang, H. Zhang, X. Cui, and Z. Wang, “A knowledge-guided graph attention network for emotion-cause pair ex-traction,” Knowledge-Based Systems , vol. 286, p. 111342, 2024. [51] T. Yu, X. Lin, S. Wang, W. Sheng, Q. Huang, and J. Yu, “A comprehen-sive survey of 3d dense captioning: Localizing and describing objects in 3d scenes,” IEEE Transactions on Circuits and Systems for Video Technology , vol. 34, no. 3, pp. 1322–1338, 2023. [52] Y.-G. Jiang, B. Xu, and X. Xue, “Predicting emotions in user-generated videos,” in Proceedings of the AAAI conference on artificial intelligence ,vol. 28, no. 1, 2014. [53] W. Chen, D. Hong, Y. Qi, Z. Han, S. Wang, L. Qing, Q. Huang, and G. Li, “Multi-attention network for compressed video referring object segmentation,” in Proceedings of the 30th ACM International Conference on Multimedia , 2022, pp. 4416–4425. [54] P. Song, L. Zhang, L. Lan, W. Chen, D. Guo, X. Yang, and M. Wang, “Towards efficient partially relevant video retrieval with active moment discovering,” IEEE Transactions on Multimedia , 2025. [55] J. Gao, M. Chen, and C. Xu, “Vectorized evidential learning for weakly-supervised temporal action localization,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 45, no. 12, pp. 15 949 – 15 963, 2023. [56] F. Fu, S. Fang, W. Chen, and Z. Mao, “Sentiment-oriented transformer-based variational autoencoder network for live video commenting,” 
+
+ACM Transactions on Multimedia Computing, Communications and Applications , vol. 20, no. 4, pp. 1–24, 2024. [57] Z. Lin, W. Chen, Y. Song, and Y. Zhang, “Prompting few-shot multi-hop question generation via comprehending type-aware semantics,” in 
+
+Findings of the Association for Computational Linguistics: NAACL 2024 , 2024, pp. 3730–3740. [58] A. P. Fard, M. M. Hosseini, T. D. Sweeny, and M. H. Mahoor, “Affectnet+: A database for enhancing facial expression recognition with soft-labels,” IEEE Transactions on Affective Computing , 2025. [59] H. Wang, P. Tang, Q. Li, and M. Cheng, “Emotion expression with fact transfer for video description,” IEEE Transactions on Multimedia .[60] S. Tang, D. Guo, R. Hong, and M. Wang, “Graph-based multimodal sequential embedding for sign language translation,” IEEE Transactions on Multimedia , vol. 24, pp. 4433–4445, 2021. [61] H. Li, X. Liu, G. Li, S. Wang, L. Qing, and Q. Huang, “Boost tracking by natural language with prompt-guided grounding,” IEEE Transactions on Intelligent Transportation Systems , vol. 26, no. 1, pp. 1088–1100, 2025. [62] F. Wang, Z. Ding, R. Xia, Z. Li, and J. Yu, “Multimodal emotion-cause pair extraction in conversations,” IEEE Transactions on Affective Computing , vol. 14, no. 3, pp. 1832–1844, 2022. [63] K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, “Bleu: a method for automatic evaluation of machine translation,” in Proceedings of the 40th annual meeting of the Association for Computational Linguistics , 2002, pp. 311–318. [64] J. Deng, L. Li, B. Zhang, S. Wang, Z. Zha, and Q. Huang, “Syntax-guided hierarchical attention network for video captioning,” IEEE Trans-actions on Circuits and Systems for Video Technology , vol. 32, no. 2, pp. 880–892, 2021. [65] X. Ju, D. Zhang, J. Li, S. Li, and G. Zhou, “Enhanced generative framework with llms for multimodal emotion-cause pair extraction in conversations,” IEEE Transactions on Multimedia , 2025. [66] C. Ye, W. Chen, B. Hu, L. Zhang, Y. Zhang, and Z. Mao, “Improving video summarization by exploring the coherence between corresponding captions,” IEEE Transactions on Image Processing , 2025. [67] G. Hu, Y. Zhao, and G. Lu, “Emotion prediction oriented method with multiple supervisions for emotion-cause pair extraction,” IEEE/ACM Transactions on Audio, Speech, and Language Processing , vol. 31, pp. 1141–1152, 2023. [68] W. Chen, C. Ye, P. Song, L. Zhang, Y. Zhang, and Z. Mao, “Subjective-objective emotion correlated generation network for subjective video captioning,” IEEE Transactions on Image Processing , 2026. 
+
+Weidong Chen (member, IEEE) received the Ph.D. degree in computer application technology from University of Chinese Academy of Sciences, in 2022. He is currently an Associate Researcher with the School of Information Science and Technology, University of Science and Technology of China, Hefei, China. He was a post-doctor with the School of Information Science and Technology, University of Science and Technology of China, from 2022 to 2024. His research interests include computer vision, natural language processing and cross-modal understanding. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 14 
+
+Cheng Ye received the B.E. degree in the School of Cyberspace Science and Technology, University of Science and Technology of China, Hefei, China, in 2024. He is currently a master student with the School of Information Science and Technology, University of Science and Technology of China, Hefei, China. His research interests include emo-tional intelligence, video analysis, and multimodal understanding. 
+
+Zhendong Mao received the Ph.D. degree in com-puter application technology from the Institute of Computing Technology, Chinese Academy of Sci-ences, in 2014. He is currently a professor with the School of Cyberspace Science and Technology, University of Science and Technology of China, Hefei, China. He was an assistant professor with the Institute of Information Engineering, Chinese Academy of Sciences, Beijing, from 2014 to 2018. His research interests include cross-modal under-standing and cross-modal generation. He serves as an Associate Editor of the IEEE TRANSACTIONS ON CIRCUITS AND SYSTEMS FOR VIDEO TECHNOLOGY and IEEE TRANSACTIONS ON MULTIMEDIA. 
+
+Liping Wang received the B.E. degree in Infor-mation Engineering from Sun Yat-sen University, Guangzhou, China. She is currently a master stu-dent with the Institute of Advanced Technology, University of Science and Technology of China, Hefei, China. Her research interests include multi-modal empathetic dialogue generation, multi-agent systems, and affective computing. 
+
+Xinyan Liu is currently an Associate Professor at Harbin Institute of Technology (HIT) and a Post-doctoral Fellow at City University of Hong Kong. He received his Ph.D. degree from the University of Chinese Academy of Sciences (UCAS) in 2025. His research interests lie at the intersection of video un-derstanding and cross-media content understanding, with a focus on multimodal learning, video analysis, and intelligent content processing. He has published several academic papers in top-tier journals and con-
+
+Yongdong Zhang (M’08–SM’13-F’24) received the Ph.D. degree in electronic engineering from Tianjin University, Tianjin, China, in 2002. He is currently a Professor with the School of Information Science and Technology, University of Science and Tech-nology of China. His current research interests are in the fields of multimedia content analysis and understanding, multimedia content security, video encoding, and streaming media technology. He has authored over 200 refereed journal and conference papers, accumulating more than 29,000 citations on Google Scholar. He was a recipient of the best paper awards in PCM 2013, ICIMCS 2013, ICME 2010, the best student paper award in ACM Multimedia 2022 and the Best Paper Candidate in ICME 2011. He serves as an Editorial Board Member of the Multimedia Systems Journal and the IEEE TRANSACTIONS ON MULTIMEDIA. He is a fellow of the IEEE.
