@@ -1,37 +1,294 @@
 {
-  "generated_at": "2026-06-15T22:54:16.296012+00:00",
-  "updated_date": "20260615",
+  "generated_at": "2026-06-18T21:25:50.383674+00:00",
+  "updated_date": "20260618",
   "carryover_days": 9,
   "tag_states": {
     "video-med-qa": {
-      "updated_date": "20260615",
+      "updated_date": "20260618",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2606.18441v1",
+          "source": "arxiv",
+          "title": "Reasoning as Intersection: Consensus-Frame Alignment for Visual Focus in Video-MLLMs",
+          "abstract": "Reinforcement learning has improved the reasoning ability of large language models, but applying outcome-only rewards to video multimodal large language models (Video-MLLMs) provides limited guidance on which visual evidence should support the answer. Inspired by multisensory integration, where consistent cues can enhance the salience and reliability of perceptual estimates, we introduce Consensus Frame GRPO (CF-GRPO), a temporal-annotation-free process-level reward framework for evidence-aware video reasoning. CF-GRPO constructs a consensus frame prior from intrinsic video cues, including temporal coverage, scene-transition cues, and query-conditioned visual relevance. It then computes a model-side frame-use score from visual and response representations and optimizes their agreement through the Consensus Frame Reward (CFR). With salience-aware sparse aggregation and distribution sharpening, CFR provides a high-contrast reward signal without requiring human temporal annotations. Experiments show that VideoCFR achieves competitive performance across complex video reasoning benchmarks and improves several metrics over representative Video-MLLM and RL baselines, while the consensus prior provides an interpretable view of the evidence frames emphasized during training. The implementation is available at https://github.com/1Pansy/VideoCFR.",
+          "authors": [
+            "Chengwen Liu",
+            "Zhe Huang",
+            "Jisheng Dang",
+            "Hong Peng",
+            "Qi Tian",
+            "Tat-Seng Chua"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-06-16T19:42:54+00:00",
+          "link": "https://arxiv.org/pdf/2606.18441v1",
+          "tags": [
+            "keyword:MM-Hall",
+            "keyword:ego-video",
+            "keyword:med-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:MM-Hall",
+            "query:ego-video",
+            "query:med-video",
+            "query:video-med-qa",
+            "query:video-stream",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "evidence-aware video reasoning in Video-MLLMs",
+          "llm_evidence_cn": "视频多模态大模型中的证据感知推理",
+          "llm_evidence": "视频多模态大模型中的证据感知推理",
+          "canonical_evidence": "视频多模态大模型中的证据感知推理",
+          "llm_tldr_en": "Introduces Consensus Frame GRPO (CF-GRPO), a process-level reward framework for evidence-aware video reasoning, using consensus frame prior from intrinsic video cues.",
+          "llm_tldr_cn": "针对视频多模态大模型在推理时缺乏视觉证据引导的问题，本文提出共识帧GRPO（CF-GRPO），一种无需时间标注的过程级奖励框架。该方法从视频内在线索（时间覆盖、场景切换等）构建共识帧先验，并计算模型侧帧使用分数进行对齐。实验证明，CF-GRPO显著提升了视频推理的准确性和可解释性。",
+          "llm_tldr": "针对视频多模态大模型在推理时缺乏视觉证据引导的问题，本文提出共识帧GRPO（CF-GRPO），一种无需时间标注的过程级奖励框架。该方法从视频内在线索（时间覆盖、场景切换等）构建共识帧先验，并计算模型侧帧使用分数进行对齐。实验证明，CF-GRPO显著提升了视频推理的准确性和可解释性。",
+          "llm_tags": [
+            "query:video-med-qa"
+          ],
+          "matched_query_tag": "query:video-med-qa",
+          "matched_query_text": "video understanding for question answering tasks",
+          "matched_requirement_id": "req-3",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.18441v1",
+          "carry_days": 1
+        }
+      ]
     },
     "vlm-vg": {
-      "updated_date": "20260615",
+      "updated_date": "20260618",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2606.16158v1",
+          "source": "arxiv",
+          "title": "Focus When Necessary: Adaptive Routing and Collaborative Grounding for Training-Free Visual Grounding",
+          "abstract": "While Multimodal Large Language Models (MLLMs) excel in cross-modal reasoning, they often struggle to perceive fine-grained details in complex high-resolution images. Recent training-free methods address this through image scaling and localized cropping. However, applying these manipulations indiscriminately introduces computational redundancy for simple queries and can degrade accuracy by truncating essential global context or introducing irrelevant background noise. To this end, we propose LazyMCoT, a dynamic and training-free framework that adaptively allocates visual grounding efforts based on sample difficulty. The framework features an Adaptive Routing mechanism that evaluates predictive uncertainty using first-token statistics from a single forward pass. This efficiently bypasses confident cases while ensuring the recall of difficult samples via conformal calibration. For these challenging cases, a Collaborative Grounding module integrates the inherent cross-modal attention of the model with an external visual expert through a two-stage refinement process. This refinement process generates a precise localized display to recover small or occluded targets. Extensive experiments across diverse benchmarks demonstrate that LazyMCoT rivals training-based approaches by simultaneously improving reasoning accuracy and reducing average inference latency. Our code is availble at https://github.com/TencentBAC/LazyMCoT.",
+          "authors": [
+            "Yifan Wang",
+            "Peiming Li",
+            "Shiyu Li",
+            "Zhiyuan Hu",
+            "Xiaochen Yang",
+            "Wenming Yang",
+            "Yang Tang",
+            "Zheng Wei"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.CL"
+          ],
+          "published": "2026-06-15T03:17:44+00:00",
+          "link": "https://arxiv.org/pdf/2606.16158v1",
+          "tags": [
+            "keyword:MM-Hall",
+            "keyword:ego-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:MM-Hall",
+            "query:ego-video",
+            "query:video-med-qa",
+            "query:video-stream",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "training-free visual grounding with adaptive routing",
+          "llm_evidence_cn": "无需训练的视觉接地方法，自适应路由分配计算",
+          "llm_evidence": "无需训练的视觉接地方法，自适应路由分配计算",
+          "canonical_evidence": "无需训练的视觉接地方法，自适应路由分配计算",
+          "llm_tldr_en": "LazyMCoT adaptively allocates visual grounding effort based on sample difficulty using an adaptive routing mechanism, achieving training-free fine-grained grounding.",
+          "llm_tldr_cn": "针对多模态大语言模型在复杂高分辨率图像中感知细节不足的问题，现有无训练方法存在计算冗余或精度下降。本文提出LazyMCoT，一种动态无训练框架，通过自适应路由机制根据样本难度分配视觉接地资源，在保持精度的同时降低计算量。实验表明其在多个视觉接地基准上达到最优效率。",
+          "llm_tldr": "针对多模态大语言模型在复杂高分辨率图像中感知细节不足的问题，现有无训练方法存在计算冗余或精度下降。本文提出LazyMCoT，一种动态无训练框架，通过自适应路由机制根据样本难度分配视觉接地资源，在保持精度的同时降低计算量。实验表明其在多个视觉接地基准上达到最优效率。",
+          "llm_tags": [
+            "query:vlm-vg"
+          ],
+          "matched_query_tag": "query:vlm-vg",
+          "matched_query_text": "visual grounding",
+          "matched_requirement_id": "req-9",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.16158v1",
+          "carry_days": 1
+        }
+      ]
     },
     "MM-Hall": {
-      "updated_date": "20260615",
+      "updated_date": "20260618",
       "carryover_days": 9,
       "items": []
     },
     "video-stream": {
-      "updated_date": "20260615",
+      "updated_date": "20260618",
       "carryover_days": 9,
       "items": []
     },
     "ego-video": {
-      "updated_date": "20260615",
+      "updated_date": "20260618",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2606.16569v1",
+          "source": "arxiv",
+          "title": "PROSE: Training-Free Egocentric Scene Registration with Vision-Language Models",
+          "abstract": "Registering two captures of the same indoor space taken at different times underpins persistent spatial memory for robots and AR systems, yet the realistic version of this task is egocentric and its most scalable form is RGB-only. Head-mounted cameras yield blurry, fast-moving, partially overlapping views from which dense geometry is hard to recover. Classical registration leans on exactly the clean point clouds this setting lacks, while learned scene-graph methods require a pre-built or annotated graph and a trained matcher that we find brittle under egocentric data. We take a different route, using a pretrained vision-language model as the source of both scene understanding and cross-scan matching. Our method, PROSE (Prompted Scene rEgistration), lifts each RGB sequence into an object-level 3D scene graph using off-the-shelf foundation models for geometry, segmentation, and language, then prompts the same VLM to match object instances across the two RGB sequences. To make this matching tractable and reliable, we leverage object heights as a prior and verify each proposed match with a paired same/different query, then solve for the rigid transform by hypothesizing a candidate per matched object and selecting the one with the strongest geometric consensus. PROSE adds no learned parameters and requires no depth sensor, training, or annotated graph. On the egocentric Aria Digital Twin and Aria Everyday Activities benchmarks, it outperforms both geometric and learned scene-graph baselines in registration accuracy, on ground-truth and RGB-reconstructed point clouds alike, and the scene graph it produces transfers directly to downstream tasks.",
+          "authors": [
+            "Zhiang Chen",
+            "Nahyuk Lee",
+            "Boyang Sun",
+            "Taein Kwon",
+            "Marc Pollefeys",
+            "Zuria Bauer",
+            "Sunghwan Hong"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.RO"
+          ],
+          "published": "2026-06-15T11:11:14+00:00",
+          "link": "https://arxiv.org/pdf/2606.16569v1",
+          "tags": [
+            "keyword:MM-Hall",
+            "keyword:ego-video",
+            "keyword:med-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:MM-Hall",
+            "query:ego-video",
+            "query:med-video",
+            "query:video-med-qa",
+            "query:video-stream",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "egocentric scene registration using VLM",
+          "llm_evidence_cn": "使用视觉语言模型进行自我中心场景配准",
+          "llm_evidence": "使用视觉语言模型进行自我中心场景配准",
+          "canonical_evidence": "使用视觉语言模型进行自我中心场景配准",
+          "llm_tldr_en": "Proposes PROSE, a training-free method using pretrained VLMs for egocentric scene registration, overcoming blurry and fast-moving views.",
+          "llm_tldr_cn": "自我中心RGB图像因模糊和快速运动难以直接配准。本文利用预训练视觉语言模型进行场景理解和跨扫描匹配，无需额外训练。PROSE在挑战性数据上取得很好效果，为持续空间记忆提供了新方案。",
+          "llm_tldr": "自我中心RGB图像因模糊和快速运动难以直接配准。本文利用预训练视觉语言模型进行场景理解和跨扫描匹配，无需额外训练。PROSE在挑战性数据上取得很好效果，为持续空间记忆提供了新方案。",
+          "llm_tags": [
+            "query:ego-video"
+          ],
+          "matched_query_tag": "query:ego-video",
+          "matched_query_text": "egocentric video understanding",
+          "matched_requirement_id": "req-33",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.16569v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2606.16202v1",
+          "source": "arxiv",
+          "title": "EgoPhys: Learning Generalizable Physics Models of Deformable Objects from Egocentric Video",
+          "abstract": "Humans naturally understand object physics through everyday interactions, but faithfully predicting complex deformable dynamics, such as elastic materials and fabrics, remains a major challenge for computer vision and robotics. We present EgoPhys, a framework that constructs deformable physical digital twins from egocentric RGB-only video using generalizable priors. EgoPhys overcomes the limitations of existing methods to enable controllable deformable digital twin generation from egocentric videos by distilling per-object inverse-physics solutions into a compact codebook, enabling prediction of dense spring stiffness fields for unseen objects without per-spring test-time optimization. Trained with generalizable priors from diverse egocentric interactions, EgoPhys outperforms baselines in reconstruction, future prediction, and zero-shot generalization. To support training and evaluation, we curate an egocentric interaction dataset covering diverse deformable objects, scenes, and manipulation styles. We deploy EgoPhys on a real xArm6 robot, demonstrating that a digital twin initialized from a single egocentric human play video can serve as an internal world representation to aid in deformable-object planning, highlighting egocentric RGB observations as a scalable path toward real-to-sim pipelines.",
+          "authors": [
+            "Hyunjin Kim",
+            "Ri-Zhao Qiu",
+            "Guangqi Jiang",
+            "Xiaolong Wang"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.RO"
+          ],
+          "published": "2026-06-15T04:25:15+00:00",
+          "link": "https://arxiv.org/pdf/2606.16202v1",
+          "tags": [
+            "keyword:MM-Hall",
+            "keyword:ego-video",
+            "keyword:med-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:MM-Hall",
+            "query:ego-video",
+            "query:med-video",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "egocentric video for physics model learning",
+          "llm_evidence_cn": "利用第一人称视频学习物理模型",
+          "llm_evidence": "利用第一人称视频学习物理模型",
+          "canonical_evidence": "利用第一人称视频学习物理模型",
+          "llm_tldr_en": "EgoPhys constructs deformable physical digital twins from egocentric RGB video using a codebook of inverse-physics solutions, enabling prediction for unseen objects without test-time optimization.",
+          "llm_tldr_cn": "该论文针对从第一人称视频理解物体物理属性的挑战，提出EgoPhys框架，通过将每个物体的逆物理求解结果蒸馏到紧凑的码本中，实现从单目RGB视频生成可变形物体的数字孪生。该方法无需逐弹簧的测试时优化即可预测未知物体的密集弹簧刚度场，展示了从第一人称交互视频中学习泛化物理模型的可能性，对机器人操作和虚拟现实具有重要价值。",
+          "llm_tldr": "该论文针对从第一人称视频理解物体物理属性的挑战，提出EgoPhys框架，通过将每个物体的逆物理求解结果蒸馏到紧凑的码本中，实现从单目RGB视频生成可变形物体的数字孪生。该方法无需逐弹簧的测试时优化即可预测未知物体的密集弹簧刚度场，展示了从第一人称交互视频中学习泛化物理模型的可能性，对机器人操作和虚拟现实具有重要价值。",
+          "llm_tags": [
+            "query:ego-video"
+          ],
+          "matched_query_tag": "query:ego-video",
+          "matched_query_text": "egocentric video understanding",
+          "matched_requirement_id": "req-33",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.16202v1",
+          "carry_days": 1
+        }
+      ]
     },
     "med-video": {
-      "updated_date": "20260615",
+      "updated_date": "20260618",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2606.17615v1",
+          "source": "arxiv",
+          "title": "SkillMoV: Mixture-of-View Routing with Prototype-Conditioned Gating for Unified Multi-View Proficiency Estimation",
+          "abstract": "Estimating human proficiency from video is a key challenge for automated skill assessment, with applications in sports coaching, music pedagogy, surgical training, and workplace learning. Existing approaches often focus on individual scenarios or rely on shared multi-view aggregation, limiting their ability to adapt to heterogeneous camera viewpoints and activity domains. We introduce SkillMoV, a unified, parameter-efficient framework for multi-scenario proficiency estimation from synchronized multi-view video. At its core, SkillMoV introduces a Mixture-of-View Projector (MoVP), which adapts the mixture-of-experts paradigm to camera-specific view features. MoVP is composed of four stages: (i) a Mixture-of-View soft router with twelve expert MLPs that learns view-dependent expert preferences without camera-identity supervision; (ii) cross-view attention to align synchronized cameras; (iii) learnable prototype anchoring to condition the representation on class-level reference vectors; and (iv) a prototype-conditioned gated projection that produces the final skill embedding. We evaluate SkillMoV on EgoExo4D across six skill domains and three separately trained view configurations: Ego, Exos, and Ego+Exos. SkillMoV reaches 50.17% overall accuracy in the Exos setting with a single model trained jointly across all scenarios, surpassing the strongest reported Exos result among the compared methods by 3.57 percentage points. In Ego+Exos, SkillMoV remains close to the best reported result in that setting (47.63% versus 48.20%). Ablations on the selected Exos configuration validate each component: MoV routing contributes +6.61 pp over attentive aggregation, cross-view attention +4.92 pp, prototype anchoring +4.07 pp, and stochastic view dropout +3.90 pp. Through LoRA adaptation, SkillMoV trains only 23.32% of its parameters and adds limited measured overhead relative to a LoRA-only baseline.",
+          "authors": [
+            "Edoardo Bianchi",
+            "Antonio Liotta"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "published": "2026-06-16T07:19:20+00:00",
+          "link": "https://arxiv.org/pdf/2606.17615v1",
+          "tags": [
+            "keyword:MM-Hall",
+            "keyword:ego-video",
+            "keyword:med-video",
+            "keyword:video-med-qa",
+            "keyword:video-stream",
+            "keyword:vlm-vg",
+            "query:MM-Hall",
+            "query:ego-video",
+            "query:med-video",
+            "query:video-med-qa",
+            "query:video-stream",
+            "query:vlm-vg"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "surgical skill assessment from multi-view video",
+          "llm_evidence_cn": "从多视角视频进行手术技能评估",
+          "llm_evidence": "从多视角视频进行手术技能评估",
+          "canonical_evidence": "从多视角视频进行手术技能评估",
+          "llm_tldr_en": "SkillMoV uses a mixture-of-view projector with prototype-conditioned gating to estimate human proficiency from synchronized multi-view video, with applications in surgical training and other domains.",
+          "llm_tldr_cn": "现有方法难以适应异构视图和活动域。SkillMoV提出混合视图投影器，通过原型条件门控机制聚合多视角特征，实现统一的技能评估。在手术视频等场景中验证了其参数高效性和跨域泛化能力。",
+          "llm_tldr": "现有方法难以适应异构视图和活动域。SkillMoV提出混合视图投影器，通过原型条件门控机制聚合多视角特征，实现统一的技能评估。在手术视频等场景中验证了其参数高效性和跨域泛化能力。",
+          "llm_tags": [
+            "query:med-video"
+          ],
+          "matched_query_tag": "query:med-video",
+          "matched_query_text": "processing and interpretation of surgical procedure videos",
+          "matched_requirement_id": "req-38",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.17615v1",
+          "carry_days": 1
+        }
+      ]
     }
   }
 }
