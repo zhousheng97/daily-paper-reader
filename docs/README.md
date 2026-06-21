@@ -6,86 +6,116 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-23 ~ 2026-06-21
-- 运行时间：2026-06-21 08:59:37 UTC
+- 最新运行日期：2026-06-21
+- 运行时间：2026-06-21 21:18:02 UTC
 - 运行状态：成功
-- 本次总论文数：21
-- 精读区：0
-- 速读区：21
+- 本次总论文数：32
+- 精读区：15
+- 速读区：17
 
 ### 今日简报（AI）
-1) 本期速读21篇论文，重点聚焦眼科多模态大模型与医学视觉语言模型调控，其中《OphIn-500K》获满分推荐。
-2) 最值得关注两个方向：一是通过大规模视觉指令构建眼科多模态大模型，二是利用稀疏自编码器精准调控医学视觉语言模型的行为。
-3) 对于普通读者，建议优先关注医学多模态模型在辅助诊断中的潜力，以及流式视频理解在实时场景中的应用。
-- 详情：[/20260523-20260621/README](/20260523-20260621/README)
+今日精读15篇速读17篇，重点覆盖训练免微调VLM幻觉缓解与第一人称视频持续空间推理方向。最值得关注的是满分论文《Spectral Query-Key Product Weight Steering for Training-Free VLM Hallucination Mitigation》，以及9分论文《Keep It in Mind: User Centric Continual Spatial Intelligence Reasoning in Egocentric Video Streams》。建议优先精读这两篇，并跟进手术视频解剖感知检测与免训练视觉定位的速读工作。
+- 详情：[/202606/21/README](/202606/21/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Spectral Query-Key Product Weight Steering for Training-Free VLM Hallucination Mitigation](/202606/21/2606.20419v1-spectral-query-key-product-weight-steering-for-training-free-vlm-hallucination-mitigation)  
+   标签：评分：10.0/10、query:mm-hall
+   evidence：提出无数据无训练权重编辑减少VLM对象幻觉
+2. [Keep It in Mind: User Centric Continual Spatial Intelligence Reasoning in Egocentric Video Streams](/202606/21/2606.15200v1-keep-it-in-mind-user-centric-continual-spatial-intelligence-reasoning-in-egocentric-video-streams)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：第一视角视频流中的空间推理与含时间戳问答
+3. [Conditional Multi-Event Temporal Grounding in Long-Form Video](/202606/21/2606.15320v1-conditional-multi-event-temporal-grounding-in-long-form-video)  
+   标签：评分：9.0/10、query:vlm-vg
+   evidence：长视频中带组合条件的多事件时序定位
+4. [From Frames to Temporal Graphs: In-Context Egocentric Action Recognition with Vision-Language Models](/202606/21/2606.15417v1-from-frames-to-temporal-graphs-in-context-egocentric-action-recognition-with-vision-language-models)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：使用时序图和VLM进行第一人称动作识别
+5. [RoboPIN: Grounded Embodied Reasoning via Pinned Chain-of-Thought](/202606/21/2606.15753v1-robopin-grounded-embodied-reasoning-via-pinned-chain-of-thought)  
+   标签：评分：9.0/10、query:vlm-vg
+   evidence：通过钉桩式思维链实现视觉定位
+6. [Revisiting LLM Adaptation for 3D CT Report Generation: A Study of Scaling and Diagnostic Priors](/202606/21/2606.17213v1-revisiting-llm-adaptation-for-3d-ct-report-generation-a-study-of-scaling-and-diagnostic-priors)  
+   标签：评分：9.0/10、query:mm-hall
+   evidence：针对医学报告生成中LLM适应的临床幻觉问题
+7. [Beyond Benchmarks: Continuous Edge Inference for Fine-Grained Roadside Perception](/202606/21/2606.17241v1-beyond-benchmarks-continuous-edge-inference-for-fine-grained-roadside-perception)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：流式视频的连续边缘推理
+8. [Divide, Deliberate, Decide: A Multi-Agent Framework for Fine-Grained Egocentric Action Recognition](/202606/21/2606.17627v1-divide-deliberate-decide-a-multi-agent-framework-for-fine-grained-egocentric-action-recognition)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：基于多智能体VLM商榷的精细第一视角动作识别
+9. [Reasoning as Intersection: Consensus-Frame Alignment for Visual Focus in Video-MLLMs](/202606/21/2606.18441v1-reasoning-as-intersection-consensus-frame-alignment-for-visual-focus-in-video-mllms)  
+   标签：评分：9.0/10、query:vlm-vg
+   evidence：提出共识帧对齐提升视频推理
+10. [Hand-4DGS: Feed-Forward 3D Gaussian Splatting for 4D Hand Reconstruction from Egocentric Videos](/202606/21/2606.19156v1-hand-4dgs-feed-forward-3d-gaussian-splatting-for-4d-hand-reconstruction-from-egocentric-videos)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：从第一视角视频进行4D手部重建
+11. [Language-Instructed Vision Embeddings for Controllable and Generalizable Perception](/202606/21/2606.19584v1-language-instructed-vision-embeddings-for-controllable-and-generalizable-perception)  
+   标签：评分：9.0/10、query:mm-hall
+   evidence：通过语言引导的视觉嵌入减少视觉幻觉
+12. [ViCoStream: Streaming VideoLLMs Can Run Beyond 100 FPS with Stage-Wise Coordinated Inference](/202606/21/2606.19849v1-vicostream-streaming-videollms-can-run-beyond-100-fps-with-stage-wise-coordinated-inference)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：提出ViCoStream实现流式视频LLM推理超过100 FPS
+13. [SurgVista: Long-Horizon Surgical World Modeling with Plausible Instrument-Tissue Dynamics](/202606/21/2606.19889v1-surgvista-long-horizon-surgical-world-modeling-with-plausible-instrument-tissue-dynamics)  
+   标签：评分：9.0/10、query:med-video
+   evidence：手术世界建模中的器械-组织动力学
+14. [UNIEGO: Proxies as Mediators for Unified Egocentric Video Representation Learning](/202606/21/2606.20559v1-uniego-proxies-as-mediators-for-unified-egocentric-video-representation-learning)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：UNIEGO通过多教师蒸馏学习统一的第一视角视频表示，直接针对第一视角视频理解
+15. [TimeProVe: Propose, then Verify for Efficient Long Video Temporal Reasoning in Activities of Daily Living](/202606/21/2606.20561v1-timeprove-propose-then-verify-for-efficient-long-video-temporal-reasoning-in-activities-of-daily-living)  
+   标签：评分：9.0/10、query:video-med-qa
+   evidence：基于动作候选证据的高效长视频问答与时序定位
 
 ### 速读区论文标签
-1. [OphIn-500K: Curating Web-Scale Visual Instructions for Scaling Ophthalmic Multimodal Large Language Models](/20260523-20260621/2605.27916v1-ophin-500k-curating-web-scale-visual-instructions-for-scaling-ophthalmic-multimodal-large-language-models)  
-   标签：评分：10.0/10、query:eye-surgery
-   evidence：眼科多模态大语言模型，指令数据构建
-2. [Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models](/20260523-20260621/2605.24977v1-universal-boosts-specific-suppressors-sparse-autoencoder-steering-of-medical-vision-language-models)  
-   标签：评分：9.0/10、query:mm-hall
-   evidence：通过稀疏自编码器引导缓解医学视觉语言模型的幻觉
-3. [Don't Pause: Streaming Video-Language Synchrony for Online Video Understanding](/20260523-20260621/2606.06991v1-dont-pause-streaming-video-language-synchrony-for-online-video-understanding)  
-   标签：评分：9.0/10、query:video-stream
-   evidence：流式视频语言同步在线视频理解
-4. [Gaussian Spatial Priors for Anatomy-Aware Object Detection in Surgical Videos](/20260523-20260621/2606.15049v1-gaussian-spatial-priors-for-anatomy-aware-object-detection-in-surgical-videos)  
-   标签：评分：9.0/10、query:med-video
-   evidence：手术视频，物体检测，高斯空间先验，解剖感知
-5. [From Frames to Temporal Graphs: In-Context Egocentric Action Recognition with Vision-Language Models](/20260523-20260621/2606.15417v1-from-frames-to-temporal-graphs-in-context-egocentric-action-recognition-with-vision-language-models)  
-   标签：评分：9.0/10、query:ego-video
-   evidence：第一视角动作识别与视觉语言模型
-6. [Object Tokens as a Bridge Between Segmentation and Visual Question Answering in Robotic Surgery](/20260523-20260621/2606.15861v1-object-tokens-as-a-bridge-between-segmentation-and-visual-question-answering-in-robotic-surgery)  
-   标签：评分：9.0/10、query:video-med-qa
-   evidence：手术视觉问答与分割统一框架
-7. [Training LLMs with Reinforcement Learning over Digital Twin Representations for Reasoning-Intensive Surgical VideoQA](/20260523-20260621/2606.17279v1-training-llms-with-reinforcement-learning-over-digital-twin-representations-for-reasoning-intensive-surgical-videoqa)  
-   标签：评分：9.0/10、query:video-med-qa
-   evidence：基于强化学习与数字孪生表示的手术视频问答
-8. [Language-Instructed Vision Embeddings for Controllable and Generalizable Perception](/20260523-20260621/2606.19584v1-language-instructed-vision-embeddings-for-controllable-and-generalizable-perception)  
-   标签：评分：9.0/10、query:mm-hall
-   evidence：通过语言引导视觉编码器减少视觉幻觉
-9. [Parameter-Efficient VLMs for Gastrointestinal Endoscopy: Medical Image Generation and Clinical Visual Question Answering](/20260523-20260621/2605.24792v1-parameter-efficient-vlms-for-gastrointestinal-endoscopy-medical-image-generation-and-clinical-visual-question-answering)  
-   标签：评分：8.0/10、query:video-med-qa
-   evidence：胃肠道内窥镜图像的医学视觉问答
-10. [LLaVA-OneVision-2: Towards Next-Generation Perceptual Intelligence](/20260523-20260621/2605.25979v1-llava-onevision-2-towards-next-generation-perceptual-intelligence)  
-   标签：评分：8.0/10、query:vlm-vg
-   evidence：具有码流令牌化的先进视频语言模型，支持长视频
-11. [Clinically-Grounded Counterfactual Reasoning for Medical Video Diagnosis](/20260523-20260621/2605.26483v1-clinically-grounded-counterfactual-reasoning-for-medical-video-diagnosis)  
+1. [Gaussian Spatial Priors for Anatomy-Aware Object Detection in Surgical Videos](/202606/21/2606.15049v1-gaussian-spatial-priors-for-anatomy-aware-object-detection-in-surgical-videos)  
    标签：评分：8.0/10、query:med-video
-   evidence：医学视频诊断中的反事实推理
-12. [From Pixels to Words -- Towards Native One-Vision Models at Scale](/20260523-20260621/2605.28820v1-from-pixels-to-words----towards-native-one-vision-models-at-scale)  
+   evidence：用于手术视频分析的解剖感知目标检测技术
+2. [Focus When Necessary: Adaptive Routing and Collaborative Grounding for Training-Free Visual Grounding](/202606/21/2606.16158v1-focus-when-necessary-adaptive-routing-and-collaborative-grounding-for-training-free-visual-grounding)  
    标签：评分：8.0/10、query:vlm-vg
-   evidence：原生视频语言模型，端到端时空建模
-13. [Masked Diffusion Vision-Language Models for Temporal Action Localization](/20260523-20260621/2605.29858v1-masked-diffusion-vision-language-models-for-temporal-action-localization)  
-   标签：评分：8.0/10、query:vlm-vg
-   evidence：掩码扩散视觉语言模型用于时序动作定位与联合精炼
-14. [Cohort-Scale Neural Atlases of Ultrasound Video](/20260523-20260621/2606.00890v1-cohort-scale-neural-atlases-of-ultrasound-video)  
+   evidence：无需训练的视觉接地方法，自适应路由分配计算
+3. [EgoPhys: Learning Generalizable Physics Models of Deformable Objects from Egocentric Video](/202606/21/2606.16202v1-egophys-learning-generalizable-physics-models-of-deformable-objects-from-egocentric-video)  
+   标签：评分：8.0/10、query:ego-video
+   evidence：利用第一人称视频学习物理模型
+4. [PROSE: Training-Free Egocentric Scene Registration with Vision-Language Models](/202606/21/2606.16569v1-prose-training-free-egocentric-scene-registration-with-vision-language-models)  
+   标签：评分：8.0/10、query:ego-video
+   evidence：利用VLM进行无需训练的第一人称场景注册
+5. [Geometry-Consistent Endoscopic Representations for Image-Guided Navigation via Structured Foundation Model Adaptation](/202606/21/2606.17340v1-geometry-consistent-endoscopic-representations-for-image-guided-navigation-via-structured-foundation-model-adaptation)  
    标签：评分：8.0/10、query:med-video
-   evidence：超声视频分析
-15. [CoSTL: Comprehensive Spatial-Temporal Representation Learning for Moment Retrieval and Highlight Detection](/20260523-20260621/2606.01149v1-costl-comprehensive-spatial-temporal-representation-learning-for-moment-retrieval-and-highlight-detection)  
-   标签：评分：8.0/10、query:vlm-vg
-   evidence：基于文本查询的时刻检索和高亮检测的时空表示学习
-16. [Moment-Video: Diagnosing Temporal Fidelity of Video MLLMs on Momentary Visual Events](/20260523-20260621/2606.02522v1-moment-video-diagnosing-temporal-fidelity-of-video-mllms-on-momentary-visual-events)  
-   标签：评分：8.0/10、query:vlm-vg
-   evidence：视频多模态大语言模型瞬时视觉事件时序保真度基准
-17. [Noise-Aware Visual Representation Learning for Medical Visual Question Answering](/20260523-20260621/2606.05535v1-noise-aware-visual-representation-learning-for-medical-visual-question-answering)  
+   evidence：内窥镜视频表示学习用于手术导航，直接与手术视频分析相关
+6. [Enhancing Pathological VLMs with Cross-scale Reasoning](/202606/21/2606.17412v2-enhancing-pathological-vlms-with-cross-scale-reasoning)  
    标签：评分：8.0/10、query:video-med-qa
-   evidence：医学视觉问答，去噪自编码器，噪声感知
-18. [MOSS-Video-Preview: Toward Real-Time Video Understanding via Cross-Attention](/20260523-20260621/2606.07639v1-moss-video-preview-toward-real-time-video-understanding-via-cross-attention)  
+   evidence：医学视觉问答
+7. [NEST: Narrative Event Structures in Time for Long Video Understanding](/202606/21/2606.19706v1-nest-narrative-event-structures-in-time-for-long-video-understanding)  
    标签：评分：8.0/10、query:video-stream
-   evidence：实时视频理解，双通道架构，交叉注意力
-19. [Q-Fold: Query-Aware Focus-Context Spatio-Temporal Folding for Long Video Understanding](/20260523-20260621/2606.12125v1-q-fold-query-aware-focus-context-spatio-temporal-folding-for-long-video-understanding)  
+   evidence：叙事事件结构的长视频理解
+8. [Timage: A Generative Text-in-Image Paradigm for Fine-Tuning Vision-Language Models](/202606/21/2606.19944v1-timage-a-generative-text-in-image-paradigm-for-fine-tuning-vision-language-models)  
    标签：评分：8.0/10、query:vlm-vg
-   evidence：查询感知的时空折叠用于长视频理解
-20. [Reasoning Text-to-Video Retrieval for Operating Room Clips via Action-Driven Digital Twins](/20260523-20260621/2606.17298v1-reasoning-text-to-video-retrieval-for-operating-room-clips-via-action-driven-digital-twins)  
-   标签：评分：8.0/10、query:eye-surgery
-   evidence：手术室文本视频检索的语言模型
-21. [SurgVista: Long-Horizon Surgical World Modeling with Plausible Instrument-Tissue Dynamics](/20260523-20260621/2606.19889v1-surgvista-long-horizon-surgical-world-modeling-with-plausible-instrument-tissue-dynamics)  
+   evidence：通过文本嵌入图像实现空间定位
+9. [Vision-Reasoning-Guided Occlusion Removal from Light Fields](/202606/21/2606.19985v1-vision-reasoning-guided-occlusion-removal-from-light-fields)  
+   标签：评分：8.0/10、query:mm-hall
+   evidence：在基于VLM的遮挡去除中减少幻觉
+10. [ARTEMIS: Agent-guided Reliability-aware Temporal Mask Evolution for Imperfectly Supervised Video Polyp Segmentation](/202606/21/2606.20161v1-artemis-agent-guided-reliability-aware-temporal-mask-evolution-for-imperfectly-supervised-video-polyp-segmentation)  
    标签：评分：8.0/10、query:med-video
-   evidence：手术视频世界模型
+   evidence：面向医疗视频分析的弱监督视频息肉分割
+11. [Enhancing Pathological VLMs with Cross-scale Reasoning](/202606/21/2606.17412v1-enhancing-pathological-vlms-with-cross-scale-reasoning)  
+   标签：评分：7.0/10、query:video-med-qa
+   evidence：针对病理视觉语言模型的跨尺度推理以提升多图像视觉问答
+12. [DREAM: Extending Vision-Language Models with Dual-Objective Encoding for Cross-Modal Retrieval](/202606/21/2606.19062v1-dream-extending-vision-language-models-with-dual-objective-encoding-for-cross-modal-retrieval)  
+   标签：评分：7.0/10、query:vlm-vg
+   evidence：双目标编码的跨模态视频检索
+13. [OneCanvas: 3D Scene Understanding via Panoramic Reprojection](/202606/21/2606.19253v1-onecanvas-3d-scene-understanding-via-panoramic-reprojection)  
+   标签：评分：7.0/10、query:vlm-vg
+   evidence：通过全景重投影实现VLM中的3D场景理解，与视觉定位和空间定位相关
+14. [VCG: A Multimodal Retrieval Framework for E-Commerce Video Feeds under Extreme Cold-Start Conditions](/202606/21/2606.19627v1-vcg-a-multimodal-retrieval-framework-for-e-commerce-video-feeds-under-extreme-cold-start-conditions)  
+   标签：评分：7.0/10、query:vlm-vg
+   evidence：使用视觉语言模型进行多模态视频检索
+15. [Gaussian Process Prior Variational Autoencoder for Endoscopic Videos](/202606/21/2606.19908v1-gaussian-process-prior-variational-autoencoder-for-endoscopic-videos)  
+   标签：评分：7.0/10、query:med-video
+   evidence：使用时间高斯过程先验进行内窥镜视频恢复
+16. [Scalable Training of Spatially Grounded 2D Vision-Language Models for Radiology](/202606/21/2606.20477v1-scalable-training-of-spatially-grounded-2d-vision-language-models-for-radiology)  
+   标签：评分：7.0/10、query:video-med-qa
+   evidence：提出RefRad2D数据集和RadGrounder模型，用于医学视觉问答和空间定位
+17. [TivTok: Broadcasting Time-Invariant Tokens for Scalable Video Tokenization](/202606/21/2606.17590v1-tivtok-broadcasting-time-invariant-tokens-for-scalable-video-tokenization)  
+   标签：评分：6.0/10、query:video-stream
+   evidence：可扩展的视频标记化用于视频理解
 
 
 <div class="dpr-home-promo-card">
