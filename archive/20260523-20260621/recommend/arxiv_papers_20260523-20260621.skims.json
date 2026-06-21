@@ -1,0 +1,899 @@
+{
+  "mode": "skims",
+  "generated_at": "2026-06-21T08:52:56.551922+00:00",
+  "stats": {
+    "mode": "skims",
+    "forced_all_quick": true,
+    "min_score": 8.0,
+    "deep_divecandidates": 21,
+    "deep_cap": null,
+    "deep_selected": 0,
+    "quick_candidates": 21,
+    "quick_skim_target": null,
+    "quick_selected": 21
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2605.27916v1",
+      "source": "arxiv",
+      "title": "OphIn-500K: Curating Web-Scale Visual Instructions for Scaling Ophthalmic Multimodal Large Language Models",
+      "abstract": "The advancement of general medical Multimodal Large Language Models (MLLMs) has shown great potential for building conversational assistants to support clinical diagnosis. However, their adaptation to highly specialized domains such as ophthalmology remains underexplored, primarily due to the scarcity of large-scale, domain-specific instruction-tuning data. Existing ophthalmic datasets for conversational agents are often limited in scale and largely rely on images from established public benchmarks, limiting the scalability of ophthalmic MLLMs and their ability to capture real-world clinical complexity. To address this gap, we propose $\\textbf{OphIn-Engine}$, an ophthalmology-specific instruction data curation pipeline that constructs high-quality instruction data from open-access ophthalmology web-scale videos. The pipeline integrates multimodal transcription for extracting image-transcript pairs, visual cue separation and scoring for identifying clinically relevant visual descriptions, and instruction synthesis with quality control for generating accurate and diverse clinical dialogues. Using this engine, we introduce $\\textbf{OphIn-500K}$, a large-scale multimodal ophthalmology instruction-tuning dataset containing over 500,000 instruction instances and more than 151,000 unique images from over 29,000 video clips, formatted as visual question answering (VQA), multi-turn conversational interactions, and chain-of-thought (CoT) reasoning. Built upon this dataset, we further develop $\\textbf{OphIn-VL}$, an ophthalmology-specific MLLM with advanced visual understanding and conversational capabilities. Comprehensive experiments and case studies demonstrate that OphIn-VL achieves superior performance compared with state-of-the-art general medical and domain-specific MLLMs.",
+      "authors": [
+        "Xuanzhao Dong",
+        "Wenhui Zhu",
+        "Xiwen Chen",
+        "Hao Wang",
+        "Xin Li",
+        "Yujian Xiong",
+        "Jiajun Cheng",
+        "Jingjing Wang",
+        "Xiaobing Yu",
+        "Haiyu Wu",
+        "Shao Tang",
+        "Zhipeng Wang",
+        "Langechuan Liu",
+        "Shan Lin",
+        "Oana Dumitrascu",
+        "Yalin Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-05-27T03:43:23+00:00",
+      "link": "https://arxiv.org/pdf/2605.27916v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "ophthalmic multimodal large language model, instruction data curation",
+      "llm_evidence_cn": "眼科多模态大语言模型，指令数据构建",
+      "llm_evidence": "眼科多模态大语言模型，指令数据构建",
+      "canonical_evidence": "眼科多模态大语言模型，指令数据构建",
+      "llm_tldr_en": "OphIn-500K curates web-scale visual instructions specifically for ophthalmic MLLMs, addressing scarcity of domain-specific data and enabling scaling.",
+      "llm_tldr_cn": "本文提出OphIn-Engine，针对眼科多模态大语言模型缺乏大规模领域专用指令数据的难题，构建了包含50万样本的眼科视觉指令数据集。该数据集覆盖丰富临床场景，显著提升了眼科MLLM的性能，为眼科视频理解和语言模型应用奠定了基础。",
+      "llm_tldr": "本文提出OphIn-Engine，针对眼科多模态大语言模型缺乏大规模领域专用指令数据的难题，构建了包含50万样本的眼科视觉指令数据集。该数据集覆盖丰富临床场景，显著提升了眼科MLLM的性能，为眼科视频理解和语言模型应用奠定了基础。",
+      "llm_tags": [
+        "query:eye-surgery:composite"
+      ],
+      "matched_query_tag": "query:eye-surgery:composite",
+      "matched_query_text": "Papers central to 眼科手术，眼科视频理解，眼科视频语言模型, especially work that connects or combines: ophthalmic surgery video analysis; eye surgery video understanding; video understanding in ophthalmology; ocular surgery video analysis; video language model for surgical applications; Eye surgery video understanding using language models; Ophthalmic surgical video analysis techniques; Video language model for surgical procedure recognition in eye surgery.",
+      "matched_requirement_id": "req-composite-eye-surgery",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.24977v1",
+      "source": "arxiv",
+      "title": "Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models",
+      "abstract": "Medical vision-language models (VLMs) often hallucinate findings when generating chest X-ray reports: they fabricate findings that are not present in the image, miss important ones, or locate them incorrectly. We mitigate this without weight updates by decoding-time residual steering on a per-token sparse autoencoder (SAE) basis: Top-$K$ SAEs on late layers, causal steering against clinical errors, then combined suppress/boost intervention at inference time. On the MIMIC-CXR test split, our inference-only method improves the quality of generated reports for three radiology VLMs (RadVLM, LLaVA-Rad, and CheXOne), with relative improvements of +5.4%, +7.2%, and +17.0% in the clinical composite metric, and statistically significant GREEN gains on all backbones. A cross-model feature alignment shows that the quality-promoting (boost) directions overlap strongly across architectures, whereas hallucination-linked (suppress) directions are model-specific. Therefore, transferable steering must treat suppression per-backbone, rather than sharing a universal suppress list. The same recipe transfers zero-shot to IU-Xray (Green $+7.7\\%$ rel.) without retraining, confirming that the identified features are properties of the model, not of the training corpus. We release causal feature sets and an interactive feature dashboard: https://cxr-sparse-feature-dashboard.netlify.app/.",
+      "authors": [
+        "Farhad Nooralahzadeh",
+        "Benjamin Gundersen",
+        "Nicolas Deperrois",
+        "Hidetoshi Matsuom",
+        "Mizuho Nishio",
+        "Thomas Frauenfelder",
+        "Ahmed Allam",
+        "Christian Blüthgen",
+        "Michael Moor",
+        "Michael Krauthammer"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-05-24T10:17:24+00:00",
+      "link": "https://arxiv.org/pdf/2605.24977v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "mitigating hallucination in medical VLMs via sparse autoencoder steering",
+      "llm_evidence_cn": "通过稀疏自编码器引导缓解医学视觉语言模型的幻觉",
+      "llm_evidence": "通过稀疏自编码器引导缓解医学视觉语言模型的幻觉",
+      "canonical_evidence": "通过稀疏自编码器引导缓解医学视觉语言模型的幻觉",
+      "llm_tldr_en": "Decoding-time residual steering on per-token sparse autoencoders reduces hallucination in chest X-ray report generation for three radiology VLMs, with relative improvements of 5-17% in clinical metrics.",
+      "llm_tldr_cn": "该文针对医学视觉语言模型生成报告时频繁出现幻觉的问题，提出一种无需权重更新的推理时残余引导方法：在后期层上使用Top-K稀疏自编码器，依据临床错误进行因果引导，在解码时结合抑制/增强干预。在MIMIC-CXR数据集上，三个放射学VLM（RadVLM、LLaVA-Rad、CheXOne）的报告质量在临床综合指标上分别相对提升5.4%、7.2%和17.0%，且统计显著。",
+      "llm_tldr": "该文针对医学视觉语言模型生成报告时频繁出现幻觉的问题，提出一种无需权重更新的推理时残余引导方法：在后期层上使用Top-K稀疏自编码器，依据临床错误进行因果引导，在解码时结合抑制/增强干预。在MIMIC-CXR数据集上，三个放射学VLM（RadVLM、LLaVA-Rad、CheXOne）的报告质量在临床综合指标上分别相对提升5.4%、7.2%和17.0%，且统计显著。",
+      "llm_tags": [
+        "query:mm-hall:composite"
+      ],
+      "matched_query_tag": "query:mm-hall:composite",
+      "matched_query_text": "Papers central to 多模态大模型；幻觉问题, especially work that connects or combines: multimodal large language model hallucination; methods for detecting hallucination in multimodal models; techniques to mitigate hallucination in large multimodal models; factual consistency evaluation of multimodal models; interpretability of multimodal large language models to reduce hallucination; causes of hallucination in multimodal large language models; methods to reduce hallucination in vision language models; evaluation metrics for hallucination in multimodal AI; comparing hallucination rates across different multimodal architectures.",
+      "matched_requirement_id": "req-composite-mm-hall",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06991v1",
+      "source": "arxiv",
+      "title": "Don't Pause: Streaming Video-Language Synchrony for Online Video Understanding",
+      "abstract": "Online Video Large Language Models (Video-LLMs) have advanced toward seamless human-AI interaction through frame-by-frame processing and proactive responding. However, a critical challenge remains in streaming scenarios: existing models typically pause video perception while generating responses, breaking real-time video-language synchrony and causing stutters. To address this, we introduce a novel paradigm for online video understanding: Streaming Video-Language Synchrony (SVLS), and present LyraV, a live streaming assistant built upon a hierarchical control framework with two core innovations. First, the Frame-Driven Transition Controller (FDTC), a training-free verification-based finite-state machine, makes high-level semantic decisions on when to continue speaking, start a new response, or stay silent. Second, the Streaming Token Pacer (SToP), a plug-and-play lightweight predictive module, dynamically adapts the language generation rate to match the pace of the visual content. Concretely, LyraV performs \\emph{per-frame incremental, sub-budget decoding}: within each frame interval it emits only a small chunk of tokens that fits the real-time budget, so perception is never blocked for a full sentence. Together, these components enable LyraV to seamlessly interleave incoming video frames with generated word tokens, achieving a fine-grained synchrony. Extensive experiments conducted on five online and three offline benchmarks demonstrate that LyraV preserves the backbone's general understanding ability while substantially improving streaming synchrony and narrative fluency, delivering a 98.29\\% synchrony with video playback and a real-time processing speed of 3.89 FPS. Interestingly, we observe an empirical capability in LyraV: dynamic reasoning over streaming tokens, enabling continuous interpretation and \"thinking\" alongside visual input.",
+      "authors": [
+        "Zhenyu Yang",
+        "Kairui Zhang",
+        "Shengsheng Qian",
+        "Weiming Dong",
+        "Changsheng Xu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-05T07:29:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.06991v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "streaming video-language synchrony for online video understanding",
+      "llm_evidence_cn": "流式视频语言同步在线视频理解",
+      "llm_evidence": "流式视频语言同步在线视频理解",
+      "canonical_evidence": "流式视频语言同步在线视频理解",
+      "llm_tldr_en": "Introduces Streaming Video-Language Synchrony (SVLS) paradigm and LyraV for online video understanding, enabling real-time frame processing without pausing during response generation via a hierarchical control framework.",
+      "llm_tldr_cn": "针对在线视频理解中模型在生成回答时暂停视频感知的问题，提出流式视频语言同步范式LyraV，通过分层控制框架实现不间断的帧处理与响应，消除卡顿。",
+      "llm_tldr": "针对在线视频理解中模型在生成回答时暂停视频感知的问题，提出流式视频语言同步范式LyraV，通过分层控制框架实现不间断的帧处理与响应，消除卡顿。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15049v1",
+      "source": "arxiv",
+      "title": "Gaussian Spatial Priors for Anatomy-Aware Object Detection in Surgical Videos",
+      "abstract": "Detecting anatomical structures in surgical video is essential for intraoperative safety frameworks such as the Critical View of Myopectineal Orifice (CVMPO) in inguinal hernia repair. While prominent structures like the Cooper's Ligament and Triangle of Doom are reliably detected by standard methods, smaller structures such as the epigastric vessels remain challenging due to their visual ambiguity and intermittent visibility. We observe that the spatial relationship between structures is anatomically constrained, and propose a Gaussian Spatial Prior (GSP) module that encodes this relationship as a compact, parametric bias injected into the self-attention of a DAB-DETR decoder. The prior is computed offline from training annotations as a small set of frozen Gaussian parameters and recomputed at each decoder layer using the iteratively refined reference points. On a dataset of inguinal hernia repair videos with 5-fold cross-validation, GSP improves dependent class detection by $+33.5\\%$ ($\\text{AP}_{50}$) over DAB-DETR and $+53.9\\%$ over YOLOv26, while also improving anchor detection by $+6.0\\%$. These gains are statistically significant across all folds ($p=0.012$, paired $t-$test).",
+      "authors": [
+        "Yunfan Li",
+        "Artem Shmelev",
+        "Himanshu Gupta"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-13T01:39:12+00:00",
+      "link": "https://arxiv.org/pdf/2606.15049v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "surgical video, object detection, Gaussian spatial prior, anatomy-aware",
+      "llm_evidence_cn": "手术视频，物体检测，高斯空间先验，解剖感知",
+      "llm_evidence": "手术视频，物体检测，高斯空间先验，解剖感知",
+      "canonical_evidence": "手术视频，物体检测，高斯空间先验，解剖感知",
+      "llm_tldr_en": "Gaussian Spatial Prior module injects anatomical spatial relationships into DETR decoder for detecting challenging structures in surgical videos, improving detection of small anatomy.",
+      "llm_tldr_cn": "本文提出高斯空间先验模块，编码解剖结构间的空间关系，注入到DAB-DETR解码器的自注意力中，用于手术视频中的解剖结构检测。该方法在腹股沟疝修补视频中有效提升了小结构（如腹壁下血管）的检测率，为手术安全框架提供支持。",
+      "llm_tldr": "本文提出高斯空间先验模块，编码解剖结构间的空间关系，注入到DAB-DETR解码器的自注意力中，用于手术视频中的解剖结构检测。该方法在腹股沟疝修补视频中有效提升了小结构（如腹壁下血管）的检测率，为手术安全框架提供支持。",
+      "llm_tags": [
+        "query:med-video:composite"
+      ],
+      "matched_query_tag": "query:med-video:composite",
+      "matched_query_text": "Papers central to 医疗视频理解, especially work that connects or combines: medical video comprehension and analysis; processing and interpretation of surgical procedure videos; monitoring patients through video analysis; video data from medical imaging modalities; How can deep learning be applied to medical video understanding?; Techniques for analyzing surgical videos automatically; Applications of video understanding in healthcare.",
+      "matched_requirement_id": "req-composite-med-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15417v1",
+      "source": "arxiv",
+      "title": "From Frames to Temporal Graphs: In-Context Egocentric Action Recognition with Vision-Language Models",
+      "abstract": "Action reasoning in egocentric video requires capturing fine-grained transitions of hand-object interactions, a task where general-purpose Vision-Language Models (VLMs) often struggle when operating directly on raw pixels. We propose to decouple visual perception from symbolic reasoning by converting videos into Temporal Action Graphs. In a multi-stage prompting pipeline, we first generate dense natural language narratives over short temporal windows as a semantic bottleneck, then formalize them into structured, open-vocabulary graph representations. On the EGTEA and Epic-Kitchens-100 datasets, the symbolic representation unlocks efficient in-context learning: few-shot graph demonstrations yield substantial accuracy gains over zero-shot frame and graph-based inference alike. Even in the zero-shot setting, graph-based reasoning remains competitive with pixel-based inference despite potential pretraining contamination favoring the latter. Across 11 open-weight VLMs from 6 model families ranging from 2B to 235B parameters, our findings indicate that current VLMs are more effective as symbolic reasoners than as direct visual observers. By projecting video into the language domain, we provide a scalable, fine-tuning-free alternative to end-to-end approaches that better leverages these models' latent reasoning strengths. The code will be made public.",
+      "authors": [
+        "Bessie Dominguez-Dager",
+        "Francisco Gomez-Donoso",
+        "Miguel Cazorla",
+        "Marc Pollefeys",
+        "Daniel Barath",
+        "Zuria Bauer"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-13T18:00:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.15417v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "egocentric action recognition using vision-language models",
+      "llm_evidence_cn": "第一视角动作识别与视觉语言模型",
+      "llm_evidence": "第一视角动作识别与视觉语言模型",
+      "canonical_evidence": "第一视角动作识别与视觉语言模型",
+      "llm_tldr_en": "Converts egocentric videos into Temporal Action Graphs via multi-stage prompting for in-context action recognition with VLMs, achieving substantial accuracy gains on EGTEA and Epic-Kitchens-100.",
+      "llm_tldr_cn": "针对第一视角视频中的动作识别，提出将视频转换为时间动作图，通过多阶段提示将视觉感知与符号推理解耦，在EGTEA和Epic-Kitchens-100数据集上实现显著精度提升，为自我中心视频理解提供新范式。",
+      "llm_tldr": "针对第一视角视频中的动作识别，提出将视频转换为时间动作图，通过多阶段提示将视觉感知与符号推理解耦，在EGTEA和Epic-Kitchens-100数据集上实现显著精度提升，为自我中心视频理解提供新范式。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15861v1",
+      "source": "arxiv",
+      "title": "Object Tokens as a Bridge Between Segmentation and Visual Question Answering in Robotic Surgery",
+      "abstract": "Visual Question Answering (VQA) in robotic surgery, referred to as surgical VQA, requires high-level understanding of complex surgical scenes and the integration of visual perception with language reasoning, with the potential to support surgical training and intraoperative decision-making. Recent Vision-Language Models (VLMs) have shown promising performance through parameter-efficient fine-tuning; however, most existing approaches rely on coarse visual grounding, typically limited to bounding boxes, which fails to capture the fine-grained spatial structure of surgical objects. In this work, we propose a unified framework that jointly performs pixel-level segmentation and visual question answering within a single framework. Our approach integrates a VLM with a Segment Anything Model (SAM)-based decoder and represents scene elements as object tokens generated by the VLM. These object tokens guide answer prediction and are further projected to the SAM-based decoder to produce segmentation masks. By optimizing the object token embeddings through both segmentation and question answering objectives, the model learns spatially grounded representations that enhance visual reasoning while providing explicit pixel-level grounding. We evaluate the proposed method on the private RAMIE (Robot-Assisted Minimally Invasive Esophagectomy) dataset and the public EndoVis18 dataset, where it consistently outperforms baseline methods for surgical VQA. These results demonstrate that incorporating context-aware object tokens into vision-language models improves fine-grained surgical scene understanding.",
+      "authors": [
+        "Yiping Li",
+        "Ronald de Jong",
+        "Romy van Jaarsveld",
+        "Franco Badaloni",
+        "Gino Kuiper",
+        "Jelle Ruurda",
+        "Josien Pluim",
+        "Marcel Breeuwer"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-14T15:30:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.15861v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "surgical visual question answering with segmentation and VQA unified",
+      "llm_evidence_cn": "手术视觉问答与分割统一框架",
+      "llm_evidence": "手术视觉问答与分割统一框架",
+      "canonical_evidence": "手术视觉问答与分割统一框架",
+      "llm_tldr_en": "Unifies pixel-level segmentation and visual question answering in robotic surgery using object tokens as a bridge, achieving fine-grained visual grounding beyond bounding boxes.",
+      "llm_tldr_cn": "针对机器人手术视觉问答中视觉定位粗糙的问题，提出统一框架，通过对象令牌桥接分割与VQA，实现像素级细粒度理解，在手术VQA任务上取得优异性能。",
+      "llm_tldr": "针对机器人手术视觉问答中视觉定位粗糙的问题，提出统一框架，通过对象令牌桥接分割与VQA，实现像素级细粒度理解，在手术VQA任务上取得优异性能。",
+      "llm_tags": [
+        "query:video-med-qa:composite"
+      ],
+      "matched_query_tag": "query:video-med-qa:composite",
+      "matched_query_text": "Papers central to 视频问答；医学视觉问答, especially work that connects or combines: recent advances in video question answering; medical visual question answering systems; video understanding for question answering tasks; How to build a video question answering model using transformers?; What are the state of the art methods for medical visual question answering?; Datasets and evaluation metrics for video and medical VQA; Challenges in combining video understanding with medical image analysis for VQA.",
+      "matched_requirement_id": "req-composite-video-med-qa",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.17279v1",
+      "source": "arxiv",
+      "title": "Training LLMs with Reinforcement Learning over Digital Twin Representations for Reasoning-Intensive Surgical VideoQA",
+      "abstract": "Surgical video question answering requires multi-step reasoning across semantic, spatial, and temporal dimensions. Existing methods architecturally compress videos into discrete token representations and couple visual perception with reasoning. This approach fragments continuous spatial-temporal relationships and has been shown to restrict multi-step reasoning capabilities. We introduce a reinforcement learning (RL) framework that trains large language models (LLMs) to decouple perception from reasoning by operating over digital twin representations constructed from surgical foundation models. Additionally, we introduce hierarchical representations across frame, temporal window, and procedure levels with probabilistic uncertainty estimates. Finally, we propose a novel reward that combines format validation with accuracy assessment through clinical plausibility evaluation and uncertainty-aware calibration for training. To demonstrate the capabilities of this approach, we introduce REAL-Colon-Reason, a colonoscopic benchmark with 2000 question-answer pairs across three complexity levels. We achieve state-of-the-art performance on REAL-Colon-Reason and two existing surgical VideoQA benchmarks REAL-Colon-VQA and EndoVis18-VQA.",
+      "authors": [
+        "Yiqing Shen",
+        "Han Zhang",
+        "Mathias Unberath"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-15T20:40:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.17279v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "surgical video question answering with RL over digital twin representations",
+      "llm_evidence_cn": "基于强化学习与数字孪生表示的手术视频问答",
+      "llm_evidence": "基于强化学习与数字孪生表示的手术视频问答",
+      "canonical_evidence": "基于强化学习与数字孪生表示的手术视频问答",
+      "llm_tldr_en": "Proposes an RL framework that trains LLMs on digital twin representations from surgical foundation models for multi-step reasoning in surgical VideoQA, outperforming methods that couple perception and reasoning.",
+      "llm_tldr_cn": "针对手术视频问答中的多步推理难题，提出强化学习框架，训练LLM在由手术基础模型构建的数字孪生表示上进行推理，解耦感知与推理，显著提升复杂问答性能。",
+      "llm_tldr": "针对手术视频问答中的多步推理难题，提出强化学习框架，训练LLM在由手术基础模型构建的数字孪生表示上进行推理，解耦感知与推理，显著提升复杂问答性能。",
+      "llm_tags": [
+        "query:video-med-qa:composite"
+      ],
+      "matched_query_tag": "query:video-med-qa:composite",
+      "matched_query_text": "Papers central to 视频问答；医学视觉问答, especially work that connects or combines: recent advances in video question answering; medical visual question answering systems; video understanding for question answering tasks; How to build a video question answering model using transformers?; What are the state of the art methods for medical visual question answering?; Datasets and evaluation metrics for video and medical VQA; Challenges in combining video understanding with medical image analysis for VQA.",
+      "matched_requirement_id": "req-composite-video-med-qa",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.19584v1",
+      "source": "arxiv",
+      "title": "Language-Instructed Vision Embeddings for Controllable and Generalizable Perception",
+      "abstract": "Vision foundation models are typically trained as static feature extractors, placing the burden of task adaptation onto large downstream models. We propose an alternative paradigm: instead of solely feeding visual features into language models, we use language itself to dynamically guide the vision encoder. Our method, Language-Instructed Vision Embeddings (LIVE), leverages language as high-level guidance to produce task-centric embeddings at inference time, removing the need for task-specific retraining. This enables the encoder to focus on contextually relevant aspects of the input, yielding more controllable and generalizable representations. Empirically, LIVE reduces visual hallucinations (+34 points on MMVP), surpasses vision-language models with orders of magnitude more parameters on visual question answering, and generalizes to unseen instructions and tasks -- offering a direct path toward adaptive, instruction-driven visual intelligence.",
+      "authors": [
+        "Chengzhi Mao",
+        "Xudong Lin",
+        "Wen-Sheng Chu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-17T20:39:04+00:00",
+      "link": "https://arxiv.org/pdf/2606.19584v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reducing visual hallucinations in VLMs via language-guided vision encoder",
+      "llm_evidence_cn": "通过语言引导视觉编码器减少视觉幻觉",
+      "llm_evidence": "通过语言引导视觉编码器减少视觉幻觉",
+      "canonical_evidence": "通过语言引导视觉编码器减少视觉幻觉",
+      "llm_tldr_en": "LIVE uses language to dynamically guide vision encoder, reducing hallucinations and surpassing existing VLMs.",
+      "llm_tldr_cn": "视觉基础模型通常作为静态特征提取器，将任务适应负担转嫁下游模型。本文提出语言引导视觉嵌入（LIVE）新范式，在推理时利用语言作为高层指导动态引导视觉编码器，产生任务中心嵌入。该方法在MMVP上视觉幻觉降低34个百分点，超越多个视觉语言模型，同时实现了更可控和可泛化的表示，为减少多模态大模型幻觉提供了有效且通用的解决方案。",
+      "llm_tldr": "视觉基础模型通常作为静态特征提取器，将任务适应负担转嫁下游模型。本文提出语言引导视觉嵌入（LIVE）新范式，在推理时利用语言作为高层指导动态引导视觉编码器，产生任务中心嵌入。该方法在MMVP上视觉幻觉降低34个百分点，超越多个视觉语言模型，同时实现了更可控和可泛化的表示，为减少多模态大模型幻觉提供了有效且通用的解决方案。",
+      "llm_tags": [
+        "query:mm-hall:composite"
+      ],
+      "matched_query_tag": "query:mm-hall:composite",
+      "matched_query_text": "Papers central to 多模态大模型；幻觉问题, especially work that connects or combines: multimodal large language model hallucination; methods for detecting hallucination in multimodal models; techniques to mitigate hallucination in large multimodal models; factual consistency evaluation of multimodal models; interpretability of multimodal large language models to reduce hallucination; causes of hallucination in multimodal large language models; methods to reduce hallucination in vision language models; evaluation metrics for hallucination in multimodal AI; comparing hallucination rates across different multimodal architectures.",
+      "matched_requirement_id": "req-composite-mm-hall",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.24792v1",
+      "source": "arxiv",
+      "title": "Parameter-Efficient VLMs for Gastrointestinal Endoscopy: Medical Image Generation and Clinical Visual Question Answering",
+      "abstract": "The major limitations of gastrointestinal (GI) endoscopy AI systems arise from a shortage of annotated data, strict privacy policies, and significant bottlenecks in conventional model fine-tuning. Such limitations impede the successful application of sophisticated AI models in clinical practice, particularly affecting the reliability and scalability of diagnosis. In this paper, we present a dual-pipeline PEFT model that addresses two fundamental problems: medical Visual Question Answering (VQA) and the generation of privacy-preserving synthetic data. For clinical VQA, we adopt the Florence-2 vision-language model. Leveraging PEFT enhances model interpretability while substantially reducing the computational cost of training. Simultaneously, we employ Low-Rank Adaptation (LoRA) with Stable Diffusion 2.1 to generate high-quality GI images that enhance training databases without violating patient privacy. This research utilized the Kvasir-VQA dataset. Our Florence-2 VQA model achieved ROUGE-1 of 0.92, ROUGE-L of 0.91, and BLEU score improvements from 0.08 to 0.24. Fine-tuning on private datasets consistently showed better results than fine-tuning on public datasets. The rank-4 LoRA synthesis achieved optimal performance with a fidelity score of 0.290, an agreement score of 0.730, and a Frechet BiomedCLIP Distance (FBD) of 1450, reducing computational costs by almost 90 percent. This framework improves the clinical potential of AI in GI endoscopy. Compared to FLUX, MSDM, and Kandinsky 2.2, our model demonstrates superior FBD and strong semantic alignment. While other models lead in Fidelity or Agreement, our lower FBD indicates better image-text coherence. These results establish our approach as a robust solution for enhancing VQA and synthetic data generation in clinical AI.",
+      "authors": [
+        "Ojonugwa Oluwafemi Ejiga Peter",
+        "Frederick Akor Ejiga",
+        "Fahmi Khalifa",
+        "Md Mahmudur Rahman"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-24T00:33:54+00:00",
+      "link": "https://arxiv.org/pdf/2605.24792v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "medical visual question answering for gastrointestinal endoscopy",
+      "llm_evidence_cn": "胃肠道内窥镜图像的医学视觉问答",
+      "llm_evidence": "胃肠道内窥镜图像的医学视觉问答",
+      "canonical_evidence": "胃肠道内窥镜图像的医学视觉问答",
+      "llm_tldr_en": "Applies PEFT on Florence-2 for medical VQA and synthetic data generation in endoscopy.",
+      "llm_tldr_cn": "胃肠道内窥镜AI面临数据少、隐私保护和微调瓶颈等问题。本文提出双流水线PEFT模型，采用Florence-2架构，分别解决医学视觉问答（VQA）和合成数据生成。通过参数高效微调，模型在临床VQA上取得了高可解释性和低计算成本，同时生成的隐私保护合成数据有助于缓解数据稀缺，为内窥镜视频理解与问答提供了实用方案。",
+      "llm_tldr": "胃肠道内窥镜AI面临数据少、隐私保护和微调瓶颈等问题。本文提出双流水线PEFT模型，采用Florence-2架构，分别解决医学视觉问答（VQA）和合成数据生成。通过参数高效微调，模型在临床VQA上取得了高可解释性和低计算成本，同时生成的隐私保护合成数据有助于缓解数据稀缺，为内窥镜视频理解与问答提供了实用方案。",
+      "llm_tags": [
+        "query:video-med-qa:composite"
+      ],
+      "matched_query_tag": "query:video-med-qa:composite",
+      "matched_query_text": "Papers central to 视频问答；医学视觉问答, especially work that connects or combines: recent advances in video question answering; medical visual question answering systems; video understanding for question answering tasks; How to build a video question answering model using transformers?; What are the state of the art methods for medical visual question answering?; Datasets and evaluation metrics for video and medical VQA; Challenges in combining video understanding with medical image analysis for VQA.",
+      "matched_requirement_id": "req-composite-video-med-qa",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.25979v1",
+      "source": "arxiv",
+      "title": "LLaVA-OneVision-2: Towards Next-Generation Perceptual Intelligence",
+      "abstract": "We introduce LLaVA-OneVision-2 (LLaVA-OV-2), the most capable vision-language model in the LLaVA-OneVision series to date, achieving superior performance across a broad range of multimodal benchmarks. The model builds on a native OneVision-Encoder and incorporates Windowed Attention for efficient local computation while maintaining native resolution. Its key advance is codec-stream tokenization: it treats compressed video as a continuous bit-cost stream, where bit-cost dynamics determine adaptive temporal groups, and motion-residual cues select salient spatial evidence into compact visual canvases. This allocation concentrates a limited token budget on event-bearing content, enabling more stable long-video token compression than fixed groups of pictures. A shared 3D RoPE further places codec canvases, sampled frames, and images in a unified spatiotemporal coordinate system. Furthermore, we build the LLaVA-OV-2 data and training stack around large-scale open supervision: approximately 8M re-captioned video samples for pretraining, a 4M-sample spatial corpus for fine-tuning. We also introduce JumpScore, a temporal-localization benchmark targeting fine-grained grounding in high-frequency, densely repeated motion, a regime underrepresented by existing video evaluations. A standout capability of LLaVA-OV-2 is its unified perception across video understanding, temporal grounding, spatial grounding, and manipulation-trace reasoning. On JumpScore, LLaVA-OneVision-2-8B reaches 74.9 JumpScore mAP, surpassing Qwen3-VL-8B (30.1) by +44.8 points; under matched visual-token budgets on the same benchmark, codec-stream inputs improve temporal grounding over frame sampling by +9.7 points. Across standard benchmarks, LLaVA-OneVision-2-8B further outperforms Qwen3-VL-8B by +4.3 average points on video tasks, +5.3 on spatial tasks, and +15.6 average J&F on tracking tasks.",
+      "authors": [
+        "Xiang An",
+        "Yin Xie",
+        "Feilong Tang",
+        "Yunyao Yan",
+        "Huajie Tan",
+        "Didi Zhu",
+        "Changrui Chen",
+        "Xiuwei Zhao",
+        "Bin Qin",
+        "Kaicheng Yang",
+        "Yifei Shen",
+        "Yuanhan Zhang",
+        "Kaichen Zhang",
+        "Wenkang Zhang",
+        "Zheng Cheng",
+        "Nansen Zhang",
+        "Chunsheng Wu",
+        "Chunjiang Ge",
+        "Zimin Ran",
+        "Dehua Song",
+        "Chunyuan Li",
+        "Shikun Feng",
+        "Ming Hu",
+        "Zhangquan Chen",
+        "Junbo Niu",
+        "Bo Li",
+        "Ziyong Feng",
+        "Ziwei Liu",
+        "Zongyuan Ge",
+        "Jiankang Deng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-25T15:54:04+00:00",
+      "link": "https://arxiv.org/pdf/2605.25979v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "advanced video language model with codec-stream tokenization for long video",
+      "llm_evidence_cn": "具有码流令牌化的先进视频语言模型，支持长视频",
+      "llm_evidence": "具有码流令牌化的先进视频语言模型，支持长视频",
+      "canonical_evidence": "具有码流令牌化的先进视频语言模型，支持长视频",
+      "llm_tldr_en": "LLaVA-OV-2 introduces codec-stream tokenization for efficient long-video processing, achieving SOTA on multimodal benchmarks.",
+      "llm_tldr_cn": "多模态模型在处理长视频时面临令牌预算有限和压缩效率低的问题。本文提出LLaVA-OneVision-2，其关键创新是码流令牌化：将压缩视频视为连续比特成本流，根据比特成本动态确定自适应时间分组，并利用运动残差线索选择显著性空间证据，将有限令牌集中在事件承载内容上。该模型在多个多模态基准上达到领先性能，尤其长视频理解方面显著提升。",
+      "llm_tldr": "多模态模型在处理长视频时面临令牌预算有限和压缩效率低的问题。本文提出LLaVA-OneVision-2，其关键创新是码流令牌化：将压缩视频视为连续比特成本流，根据比特成本动态确定自适应时间分组，并利用运动残差线索选择显著性空间证据，将有限令牌集中在事件承载内容上。该模型在多个多模态基准上达到领先性能，尤其长视频理解方面显著提升。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.26483v1",
+      "source": "arxiv",
+      "title": "Clinically-Grounded Counterfactual Reasoning for Medical Video Diagnosis",
+      "abstract": "Medical video diagnosis involves inferring clinical decisions from dynamic tissue responses throughout examination processes. Existing methods rely on an end-to-end learning paradigm that i) focuses on appearance rather than pathology, ii) lacks clinical priors, and iii) reasons solely from observations without counterfactual comparison. This work introduces MedVCR, a counterfactual reasoning framework that mimics clinical diagnostic thinking. MedVCR comprises three components: a Counterfactual Generator that synthesizes tissue evolution under specified pathological states via a diffusion-based manner; a Counterfactual Representation Learning module that encodes diagnostic knowledge through clinical rules (i.e., temporal consistency, pathological separability, and counterfactual alignment); and a Dual Diagnostic Prediction strategy that integrates video-level assessment with frame-level counterfactual analysis. MedVCR is evaluated under both fully supervised (e.g., colposcopy) and weakly supervised (e.g., colonoscopy) video diagnosis settings, yielding 2.6%-10.2% performance gains compared with leading baselines. Comprehensive ablation studies further validate the effectiveness of each component. The code will be released.",
+      "authors": [
+        "Jianzhe Gao",
+        "Churan Wang",
+        "Weiyi Zhang",
+        "Jianghua Li",
+        "Li-An Li",
+        "Wenguan Wang",
+        "Yixin Zhu",
+        "Yizhou Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-26T02:46:15+00:00",
+      "link": "https://arxiv.org/pdf/2605.26483v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "medical video diagnosis with counterfactual reasoning",
+      "llm_evidence_cn": "医学视频诊断中的反事实推理",
+      "llm_evidence": "医学视频诊断中的反事实推理",
+      "canonical_evidence": "医学视频诊断中的反事实推理",
+      "llm_tldr_en": "Introduces MedVCR, a counterfactual reasoning framework for medical video diagnosis, mimicking clinical thinking.",
+      "llm_tldr_cn": "现有医学视频诊断方法侧重外观特征而忽略病理先验，缺乏反事实推理。本文提出MedVCR框架，包含反事实生成器通过扩散模型合成指定病理状态下的组织演化，反事实表示学习模块编码临床规则，并利用反事实对比推理做出诊断。该方法模仿临床医生诊断思维，在医疗视频数据集上取得了优于端到端方法的性能，为医学视频理解提供了新范式。",
+      "llm_tldr": "现有医学视频诊断方法侧重外观特征而忽略病理先验，缺乏反事实推理。本文提出MedVCR框架，包含反事实生成器通过扩散模型合成指定病理状态下的组织演化，反事实表示学习模块编码临床规则，并利用反事实对比推理做出诊断。该方法模仿临床医生诊断思维，在医疗视频数据集上取得了优于端到端方法的性能，为医学视频理解提供了新范式。",
+      "llm_tags": [
+        "query:med-video:composite"
+      ],
+      "matched_query_tag": "query:med-video:composite",
+      "matched_query_text": "Papers central to 医疗视频理解, especially work that connects or combines: medical video comprehension and analysis; processing and interpretation of surgical procedure videos; monitoring patients through video analysis; video data from medical imaging modalities; How can deep learning be applied to medical video understanding?; Techniques for analyzing surgical videos automatically; Applications of video understanding in healthcare.",
+      "matched_requirement_id": "req-composite-med-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.28820v1",
+      "source": "arxiv",
+      "title": "From Pixels to Words -- Towards Native One-Vision Models at Scale",
+      "abstract": "Current vision-language models (VLMs) typically stitch together separate image encoders and language decoders via multi-stage alignment, a modular framework that inevitably fragments pixel-level signals across frames and scatters early pixel-word interactions. In parallel, native VLMs, despite impressive performance on single images, remain largely unexplored in multi-image, video understanding, and spatial intelligence. Hence, we introduce NEO-ov, a native foundation model that learns cross-frame and pixel-word correspondence end-to-end, without any external encoders, auxiliary adapters, or post-hoc fusion. By eliminating module boundaries entirely, NEO-ov enables fine-grained and unified spatiotemporal modeling to emerge natively inside the model. Notably, NEO-ov largely narrows the gap to modular counterparts while excelling at fine-grained visual perception, validating that native \"one-vision\" architectures are not only feasible but competitive at scale. Beyond empirical performance, we unveil systematic architectural analyses and detailed training recipes to facilitate subsequent native multimodal modeling. Our code and models are publicly available at: https://github.com/EvolvingLMMs-Lab/NEO.",
+      "authors": [
+        "Haiwen Diao",
+        "Jiahao Wang",
+        "Penghao Wu",
+        "Yuhao Dong",
+        "Yuwei Niu",
+        "Yue Zhu",
+        "Zhongang Cai",
+        "Weichen Fan",
+        "Linjun Dai",
+        "Silei Wu",
+        "Xuanyu Zheng",
+        "Mingxuan Li",
+        "Yuanhan Zhang",
+        "Bo Li",
+        "Hanming Deng",
+        "Huchuan Lu",
+        "Quan Wang",
+        "Lei Yang",
+        "Lewei Lu",
+        "Dahua Lin",
+        "Ziwei Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-27T17:59:55+00:00",
+      "link": "https://arxiv.org/pdf/2605.28820v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "native video-language model with end-to-end spatiotemporal modeling",
+      "llm_evidence_cn": "原生视频语言模型，端到端时空建模",
+      "llm_evidence": "原生视频语言模型，端到端时空建模",
+      "canonical_evidence": "原生视频语言模型，端到端时空建模",
+      "llm_tldr_en": "Introduces NEO-ov, a native foundation model that learns cross-frame and pixel-word correspondence end-to-end without external encoders, enabling unified spatiotemporal modeling for video understanding.",
+      "llm_tldr_cn": "该论文提出NEO-ov，一种原生基础模型，完全摒弃外部编码器和后期融合，以端到端方式学习跨帧和像素-词对应。通过消除模块边界，模型内部自然涌现出细粒度统一的时空建模能力，在多图像、视频理解和空间智能任务上展现出显著优势。",
+      "llm_tldr": "该论文提出NEO-ov，一种原生基础模型，完全摒弃外部编码器和后期融合，以端到端方式学习跨帧和像素-词对应。通过消除模块边界，模型内部自然涌现出细粒度统一的时空建模能力，在多图像、视频理解和空间智能任务上展现出显著优势。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.29858v1",
+      "source": "arxiv",
+      "title": "Masked Diffusion Vision-Language Models for Temporal Action Localization",
+      "abstract": "Temporal action localization (TAL) requires recognizing the target event and localizing its start and end times precisely in untrimmed videos. Recent vision-language formulations improve semantic reasoning and support language-conditioned outputs, but their autoregressive decoders still generate tokens from left to right, preventing later semantic evidence from revising earlier timestamp predictions.   We adapt masked diffusion vision-language models (MDVLMs) to TAL so that semantic tokens and boundary tokens remain editable throughout iterative denoising with bidirectional attention, allowing temporal boundaries and semantic content to be refined jointly.   Direct adaptation, however, creates two TAL-specific mismatches: standard masked diffusion training corrupts all positions uniformly at random, but the time tokens are more reliable when enough semantic context is available; and token-level cross-entropy does not reflect temporal IoU. To address these mismatches, we introduce a Planned Training Objective that uses boundary-aware masking and step-weighted reconstruction to rehearse the late recovery of time tokens, together with a Step-Level IoU Reward that provides overlap-aware supervision during denoising. A standard sequence-level cross-entropy term provides the base reconstruction signal.   Experiments on ActivityNet-RTL, ActivityNet-1.3, and THUMOS-14 show that MDVLM-TAL improves both temporal reasoning and boundary localization over autoregressive vision-language baselines, with especially strong gains under stricter temporal IoU criteria.",
+      "authors": [
+        "Fengshun Wang",
+        "Zhengbo Zhang",
+        "Zhigang Tu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-28T12:39:04+00:00",
+      "link": "https://arxiv.org/pdf/2605.29858v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "masked diffusion vision-language model for temporal action localization and refinement",
+      "llm_evidence_cn": "掩码扩散视觉语言模型用于时序动作定位与联合精炼",
+      "llm_evidence": "掩码扩散视觉语言模型用于时序动作定位与联合精炼",
+      "canonical_evidence": "掩码扩散视觉语言模型用于时序动作定位与联合精炼",
+      "llm_tldr_en": "Adapts masked diffusion vision-language models to temporal action localization, enabling joint refinement of semantic tokens and temporal boundaries through iterative denoising with bidirectional attention.",
+      "llm_tldr_cn": "该文将掩码扩散视觉语言模型（MDVLM）应用于时序动作定位（TAL），以解决自回归解码器无法利用后续语义证据修正早期时间戳预测的问题。通过引入双向注意力的迭代去噪过程，语义令牌和边界令牌在整个过程中保持可编辑，从而联合精炼时序边界和语义内容。针对标准扩散与TAL之间的不匹配，提出两项特定调整：边界感知噪声计划和条件注入，实验表明该方法在TAL基准上取得了显著改进。",
+      "llm_tldr": "该文将掩码扩散视觉语言模型（MDVLM）应用于时序动作定位（TAL），以解决自回归解码器无法利用后续语义证据修正早期时间戳预测的问题。通过引入双向注意力的迭代去噪过程，语义令牌和边界令牌在整个过程中保持可编辑，从而联合精炼时序边界和语义内容。针对标准扩散与TAL之间的不匹配，提出两项特定调整：边界感知噪声计划和条件注入，实验表明该方法在TAL基准上取得了显著改进。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.00890v1",
+      "source": "arxiv",
+      "title": "Cohort-Scale Neural Atlases of Ultrasound Video",
+      "abstract": "Ultrasound is the most widely used real-time imaging modality in clinical practice, yet per-frame video annotation remains a major bottleneck: expert labels are scarce and costly, and image appearance varies with speckle, shadowing, attenuation, and operator-dependent probe pose. This is especially limiting because clinically relevant information is often dynamic, from left-ventricular motion in echocardiography to muscle and bone kinematics in musculoskeletal imaging. Population atlases can amortize annotation cost by registering observations to a shared canonical coordinate system, but existing neural atlas methods mainly target single videos, small test-time image sets, or object-centric image collections. We introduce a cohort-scale neural atlas for ultrasound video: a single canonical chart with per-video Generative Latent Optimization embeddings, trained jointly over thousands of frames in DINOv3 feature space. Across five cardiac and musculoskeletal datasets with point landmarks and segmentation masks, our method learns coherent canonical templates and enables accurate atlas-space annotation transfer. On EchoNet-Dynamic and MSK-Bone, it supports single- and few-shot transfer with accuracy competitive with strong dense-correspondence baselines, while training in minutes on a single consumer GPU. The learned embeddings are interpretable: linear projections reveal structured cohort variation, image-decoder interpolation produces anatomically plausible intermediate frames, and test-time latent inversion reconstructs held-out frames through the atlas. These results suggest that cohort-scale neural atlases offer a practical, interpretable representation for reducing expert annotation burden in ultrasound video analysis.",
+      "authors": [
+        "Zhuorui Zhang",
+        "Roger Pallarès-López",
+        "Xuan Wu",
+        "Praneeth Namburi",
+        "Brian W. Anthony"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-30T20:52:02+00:00",
+      "link": "https://arxiv.org/pdf/2606.00890v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "ultrasound video analysis",
+      "llm_evidence_cn": "超声视频分析",
+      "llm_evidence": "超声视频分析",
+      "canonical_evidence": "超声视频分析",
+      "llm_tldr_en": "Introduces a cohort-scale neural atlas for ultrasound videos to amortize annotation cost by registering videos to a shared canonical coordinate system.",
+      "llm_tldr_cn": "超声视频的逐帧标注昂贵且困难，论文提出一种群体级神经图谱方法，将多个超声视频配准到共享标准坐标系，从而摊销标注成本。该方法通过可变形配准和隐式神经表示，在保留动态信息的同时实现跨视频的语义对齐。在心脏和肌肉骨骼超声数据集上展示了有效性和泛化性。",
+      "llm_tldr": "超声视频的逐帧标注昂贵且困难，论文提出一种群体级神经图谱方法，将多个超声视频配准到共享标准坐标系，从而摊销标注成本。该方法通过可变形配准和隐式神经表示，在保留动态信息的同时实现跨视频的语义对齐。在心脏和肌肉骨骼超声数据集上展示了有效性和泛化性。",
+      "llm_tags": [
+        "query:med-video:composite"
+      ],
+      "matched_query_tag": "query:med-video:composite",
+      "matched_query_text": "Papers central to 医疗视频理解, especially work that connects or combines: medical video comprehension and analysis; processing and interpretation of surgical procedure videos; monitoring patients through video analysis; video data from medical imaging modalities; How can deep learning be applied to medical video understanding?; Techniques for analyzing surgical videos automatically; Applications of video understanding in healthcare.",
+      "matched_requirement_id": "req-composite-med-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01149v1",
+      "source": "arxiv",
+      "title": "CoSTL: Comprehensive Spatial-Temporal Representation Learning for Moment Retrieval and Highlight Detection",
+      "abstract": "Video Moment Retrieval (MR) and Highlight Detection (HD) are crucial tasks in video analysis that aim to localize specific moments and estimate clip-wise relevance based on a given text query. Recent approaches treat them as similar video grounding tasks and use the same architecture to solve them. These tasks require both fine-grained comprehension at the image level and high-level temporal understanding across the entire video. Existing approaches have primarily focused on temporal modeling using frame-level features, often neglecting the rich visual information related to the text query within individual frames. This oversight leads to inaccurate grounding results. To address this limitation, we propose a Comprehensive Spatial-Temporal Representation Learning Framework (CoSTL), which captures both fine-grained image-level information and temporal dynamics. Specifically, CoSTL incorporates a text-driven progressive fine-grained image encoder, performing a two-step text-driven knowledge extraction process to learn fine-grained spatial representations. Furthermore, a multi-scale temporal perception module captures comprehensive spatial-temporal representations, enhancing the model's ability to process temporal dynamics. We demonstrate state-of-the-art performance on four public benchmarks: QVHighlights, Charades-STA, TACoS, and TVSum.",
+      "authors": [
+        "Xin Dong",
+        "Wenjia Geng",
+        "Wenfeng Deng",
+        "Yansong Tang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-31T10:36:49+00:00",
+      "link": "https://arxiv.org/pdf/2606.01149v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "spatial-temporal representation learning for moment retrieval and highlight detection based on text query",
+      "llm_evidence_cn": "基于文本查询的时刻检索和高亮检测的时空表示学习",
+      "llm_evidence": "基于文本查询的时刻检索和高亮检测的时空表示学习",
+      "canonical_evidence": "基于文本查询的时刻检索和高亮检测的时空表示学习",
+      "llm_tldr_en": "Proposes CoSTL for comprehensive spatial-temporal representation learning that integrates both frame-level fine-grained visual information and temporal context for accurate video moment retrieval and highlight detection.",
+      "llm_tldr_cn": "该论文提出CoSTL框架，针对视频时刻检索和高亮检测任务，在帧级细粒度视觉信息和全视频时间上下文之间建立综合表示。解决了先前方法仅使用帧级特征而忽略文本查询相关视觉细节的问题，从而显著提升了定位准确性。",
+      "llm_tldr": "该论文提出CoSTL框架，针对视频时刻检索和高亮检测任务，在帧级细粒度视觉信息和全视频时间上下文之间建立综合表示。解决了先前方法仅使用帧级特征而忽略文本查询相关视觉细节的问题，从而显著提升了定位准确性。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.02522v1",
+      "source": "arxiv",
+      "title": "Moment-Video: Diagnosing Temporal Fidelity of Video MLLMs on Momentary Visual Events",
+      "abstract": "Video multimodal large language models (MLLMs) have made rapid progress on general and long-form video understanding, yet their ability to preserve brief answer-critical visual evidence remains underexplored. Many practical questions are determined by momentary visual events: localized actions or state transitions that may last only a few frames. Such evidence can be skipped by sparse frame sampling, suppressed by visual-token compression, or diluted by coarse temporal aggregation, causing failures that language-side reasoning cannot reliably recover. We introduce Moment-Video, a benchmark for diagnosing the temporal fidelity of video MLLMs through momentary visual event understanding. Each question is grounded in a localized, visually observable, and sampling-sensitive event, requiring models to notice, count, describe, or reason about transient evidence rather than rely on persistent objects, global scene context, or language priors. Moment-Video contains 1,000 human-verified video-QA pairs across 7 domains and 25 fine-grained subcategories, covering four task types: Temporal Occurrence, Temporal Counting, Action Description, and Temporal Reasoning. We evaluate 33 proprietary and open-source MLLMs on Moment-Video. The best-performing model, Seed-2.0-Pro, achieves only 39.6% overall accuracy, while most open-source models remain below 25%, revealing a substantial gap in momentary visual event understanding. Diagnostic analyses show that denser frame sampling improves some models but does not eliminate the bottleneck, and longer videos introduce stronger temporal-localization challenges. These findings suggest that current video MLLMs still lack temporally faithful representations for capturing, preserving, and using brief but decisive visual evidence.",
+      "authors": [
+        "Xiaolin Liu",
+        "Yilun Zhu",
+        "Xiangyu Zhao",
+        "Xuehui Wang",
+        "Yan Li",
+        "Xin Li",
+        "Haoyu Cao",
+        "Xing Sun",
+        "Shaofeng Zhang",
+        "Xu Yang",
+        "Zhihang Zhong",
+        "Xue Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-01T17:32:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.02522v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "benchmark for temporal fidelity of video MLLMs on momentary visual events",
+      "llm_evidence_cn": "视频多模态大语言模型瞬时视觉事件时序保真度基准",
+      "llm_evidence": "视频多模态大语言模型瞬时视觉事件时序保真度基准",
+      "canonical_evidence": "视频多模态大语言模型瞬时视觉事件时序保真度基准",
+      "llm_tldr_en": "Introduces Moment-Video benchmark to diagnose temporal fidelity of video MLLMs by grounding questions in localized momentary visual events, revealing failures in brief answer-critical evidence.",
+      "llm_tldr_cn": "该文针对视频多模态大语言模型在瞬时视觉事件理解上的时序保真度问题，提出Moment-Video基准。基准中每个问题均基于局部化、视觉可观测的瞬间事件（仅持续数帧的动作或状态变化），检验模型是否能够保留简短但关键的回答证据。实验发现现有视频MLLMs因稀疏帧采样、视觉令牌压缩或粗粒度时序聚合而频繁遗漏这些细微证据，即使语言推理也无法弥补。揭示了当前模型在时间粒度上的重大缺陷。",
+      "llm_tldr": "该文针对视频多模态大语言模型在瞬时视觉事件理解上的时序保真度问题，提出Moment-Video基准。基准中每个问题均基于局部化、视觉可观测的瞬间事件（仅持续数帧的动作或状态变化），检验模型是否能够保留简短但关键的回答证据。实验发现现有视频MLLMs因稀疏帧采样、视觉令牌压缩或粗粒度时序聚合而频繁遗漏这些细微证据，即使语言推理也无法弥补。揭示了当前模型在时间粒度上的重大缺陷。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.05535v1",
+      "source": "arxiv",
+      "title": "Noise-Aware Visual Representation Learning for Medical Visual Question Answering",
+      "abstract": "Medical visual question answering (Med-VQA) has strong potential for clinical decision support by enabling AI models to interpret medical images and answer clinically relevant queries. Recent approaches typically connect off-the-shelf vision encoders with large language models (LLMs) through lightweight mapping networks to reduce computational cost. However, these methods often overlook the importance of handling noise and small irrelevant changes in visual representations. To address these challenges, we propose a noise-aware Med-VQA framework that incorporates a denoising autoencoder before visual embeddings are mapped into the input space of an LLM. The denoising autoencoder is pretrained to reconstruct clean visual embeddings from corrupted inputs, encouraging the model to learn robust visual representations that are less sensitive to noise. The resulting embeddings are then projected into the language model embedding space using a multi-layer perceptron (MLP), forming visual prefix tokens that provide image information to the LLM. To enable efficient adaptation without full retraining, we employ parameter-efficient fine-tuning using low-rank adaptation (LoRA). The proposed method is evaluated on the SLAKE and PathVQA benchmarks. Experimental results show improved robustness to noisy input embeddings while maintaining competitive clean performance across multiple evaluation criteria. These findings suggest that learning more robust visual representations can enhance Med-VQA performance and robustness.",
+      "authors": [
+        "I Putu Adi Pratama",
+        "Bahadorreza Ofoghi",
+        "Atul Sajjanhar",
+        "Shang Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-04T00:37:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.05535v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "medical visual question answering, denoising autoencoder, noise-aware",
+      "llm_evidence_cn": "医学视觉问答，去噪自编码器，噪声感知",
+      "llm_evidence": "医学视觉问答，去噪自编码器，噪声感知",
+      "canonical_evidence": "医学视觉问答，去噪自编码器，噪声感知",
+      "llm_tldr_en": "Noise-aware Med-VQA framework uses a denoising autoencoder to reconstruct clean visual embeddings before feeding into LLM, improving robustness to noise.",
+      "llm_tldr_cn": "本文提出噪声感知的医学视觉问答框架，在视觉嵌入输入大语言模型之前加入去噪自编码器，重构干净表示。该方法有效应对医学图像中的噪声和无关变化，在公共数据集上提升问答准确率，为医学VQA的实际应用提供了鲁棒解决方案。",
+      "llm_tldr": "本文提出噪声感知的医学视觉问答框架，在视觉嵌入输入大语言模型之前加入去噪自编码器，重构干净表示。该方法有效应对医学图像中的噪声和无关变化，在公共数据集上提升问答准确率，为医学VQA的实际应用提供了鲁棒解决方案。",
+      "llm_tags": [
+        "query:video-med-qa:composite"
+      ],
+      "matched_query_tag": "query:video-med-qa:composite",
+      "matched_query_text": "Papers central to 视频问答；医学视觉问答, especially work that connects or combines: recent advances in video question answering; medical visual question answering systems; video understanding for question answering tasks; How to build a video question answering model using transformers?; What are the state of the art methods for medical visual question answering?; Datasets and evaluation metrics for video and medical VQA; Challenges in combining video understanding with medical image analysis for VQA.",
+      "matched_requirement_id": "req-composite-video-med-qa",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07639v1",
+      "source": "arxiv",
+      "title": "MOSS-Video-Preview: Toward Real-Time Video Understanding via Cross-Attention",
+      "abstract": "Video understanding is shifting from the offline paradigm -- taking a fully recorded video as input and producing a single answer after it ends -- toward real-time interaction, in which the model perceives new frames while still replying, revises its answer as new evidence appears, and remains silent when there is nothing to say. We present MOSS-Video-Preview to validate this paradigm. Our central claim is that perception must not be blocked by generation; its natural realization is a two-channel architecture. We argue that a cross-attention backbone is better suited to real-time vision-language fusion than the prevailing decoder-only design: visual features enter through a side channel rather than joining the autoregressive sequence, so perception and generation run on separate, non-blocking pathways -- reducing the frequency of visual processing and exposing a clean channel-wise interface for independent compression. We complement this with a data synthesis pipeline that converts dense captions into real-time understanding QA whose answers are revised to match what the model has perceived so far, and we specialize an offline model on these data to elicit real-time behavior. Our model trails the strong Qwen2.5-VL-7B baseline overall -- a gap we attribute primarily to data and scale rather than the architecture -- yet attains competitive offline video and multimodal understanding, remains robust on the spatial and fine-grained temporal reasoning central to real-time use, and acquires behaviors that offline models lack: continuous perception, answer revision, and timely silence. On a single H200 with 256 frames per video, it achieves about a 5x speedup in time to first token and 2.7x higher decoding throughput, with negligible degradation in offline ability. Our study of paradigm, architecture, and data outlines a viable path toward real-time video understanding.",
+      "authors": [
+        "Pengyu Wang",
+        "Chenkun Tan",
+        "Shaojun Zhou",
+        "Wei Huang",
+        "Qirui Zhou",
+        "Zhan Huang",
+        "Zhen Ye",
+        "Jijun Cheng",
+        "Xiaomeng Qian",
+        "Yanxin Chen",
+        "Xingyang He",
+        "Huazheng Zeng",
+        "Chenghao Wang",
+        "Pengfei Wang",
+        "Hongkai Wang",
+        "Shanqing Gao",
+        "Yixian Tian",
+        "Chenghao Liu",
+        "Xinghao Wang",
+        "Botian Jiang",
+        "Xipeng Qiu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-01T09:07:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.07639v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "real-time video understanding, two-channel architecture, cross-attention",
+      "llm_evidence_cn": "实时视频理解，双通道架构，交叉注意力",
+      "llm_evidence": "实时视频理解，双通道架构，交叉注意力",
+      "canonical_evidence": "实时视频理解，双通道架构，交叉注意力",
+      "llm_tldr_en": "MOSS-Video-Preview proposes a cross-attention-based two-channel architecture for real-time video understanding, enabling perception without blocking generation.",
+      "llm_tldr_cn": "本文提出MOSS-Video-Preview，针对实时视频理解需求，采用交叉注意力双通道架构，使模型在生成回答的同时仍能感知新帧，支持实时交互。实验验证了该范式的有效性，为流式视频理解提供了新思路。",
+      "llm_tldr": "本文提出MOSS-Video-Preview，针对实时视频理解需求，采用交叉注意力双通道架构，使模型在生成回答的同时仍能感知新帧，支持实时交互。实验验证了该范式的有效性，为流式视频理解提供了新思路。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.12125v1",
+      "source": "arxiv",
+      "title": "Q-Fold: Query-Aware Focus-Context Spatio-Temporal Folding for Long Video Understanding",
+      "abstract": "Long-video understanding remains challenging for multimodal large language models, because temporally extended videos often contain thousands of frames and are therefore expensive to process exhaustively. Existing methods usually construct compact visual inputs from long videos under a limited visual budget. However, most of them still follow a frame-centric paradigm and apply similar representations to retained content regardless of its importance. This makes it difficult to preserve both high-fidelity visual evidence and broad temporal coverage. To address this issue, we propose Q-Fold, a training-free input construction framework for long-video understanding. Instead of treating isolated frames as the basic modeling unit, Q-Fold operates on contiguous temporal segments and constructs a heterogeneous Focus--Context representation under query guidance. Query-relevant segments are preserved as high-fidelity Focus Frames, while less relevant segments are folded into chronology-preserving contextual layouts. In this way, Q-Fold preserves critical visual evidence and broad temporal coverage, while better maintaining local temporal continuity within short segments. Experiments on four long-video benchmarks with multiple Video-MLLMs show that Q-Fold consistently improves performance without increasing the input budget. Notably, it achieves gains of up to 9.1 percentage points on an ultra-long video benchmark. Code will be made publicly available.",
+      "authors": [
+        "Biao Tang",
+        "Xu Chen",
+        "Shuxiang Gou",
+        "Jingyi Yuan",
+        "Yuhan Zhang",
+        "Chenqiang Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-10T14:19:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.12125v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "query-aware spatio-temporal folding for long video understanding",
+      "llm_evidence_cn": "查询感知的时空折叠用于长视频理解",
+      "llm_evidence": "查询感知的时空折叠用于长视频理解",
+      "canonical_evidence": "查询感知的时空折叠用于长视频理解",
+      "llm_tldr_en": "Q-Fold is a training-free input construction framework that uses query-aware folding to preserve high-fidelity visual evidence and broad temporal coverage for long-video understanding with VLMs.",
+      "llm_tldr_cn": "针对长视频理解中视觉预算有限且现有方法对内容重要性区分不足的问题，本文提出Q-Fold，一种无需训练的输入构建框架。它通过查询感知的焦点-上下文时空折叠操作，将长视频压缩为紧凑表示，同时保留高保真视觉证据和广泛时间覆盖，在多个长视频理解基准上以更少输入取得更优性能。",
+      "llm_tldr": "针对长视频理解中视觉预算有限且现有方法对内容重要性区分不足的问题，本文提出Q-Fold，一种无需训练的输入构建框架。它通过查询感知的焦点-上下文时空折叠操作，将长视频压缩为紧凑表示，同时保留高保真视觉证据和广泛时间覆盖，在多个长视频理解基准上以更少输入取得更优性能。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.17298v1",
+      "source": "arxiv",
+      "title": "Reasoning Text-to-Video Retrieval for Operating Room Clips via Action-Driven Digital Twins",
+      "abstract": "Text-to-video retrieval in operating rooms (OR) is an enabling technology for OR safety, as it allows stakeholders to retrieve and inspect recordings of specific events. However, because the most safety-critical events may not follow the common structure, to unlock its full potential text-to-video retrieval must be able to handle implicit queries that require reasoning to identify the right video (e.g., the step right before clipping). However, existing methods rely on global embeddings that cannot reason over such queries. We propose OR3, a text-to-video retrieval method that converts clips into action-driven digital twins (ActDTs), grouping concurrent subject-action-object triplets under non-overlapping temporal intervals. Moreover, rather than cross-modal matching through paired encoders, OR3 performs imagination-based retrieval where an LLM generates hypothetical ActDTs from queries. This enables intra-modal matching via a single encoder trained with ActDT-tailored hard negatives. Finally, evidence-grounded refinement revises imagined ActDTs based on discrepancies with top candidates to capture procedure-specific patterns. We construct a benchmark from MM-OR with 276 implicit queries across four reasoning categories over 386 clips from robotic knee procedures. OR3 achieves 57.6 R@1 and 77.3 R@5, outperforming the strongest baseline. These results demonstrate that OR3 enables fine-grained discrimination between visually similar OR video clips through temporal action reasoning.",
+      "authors": [
+        "Yiqing Shen",
+        "Hao Ding",
+        "Mathias Unberath"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-15T21:06:53+00:00",
+      "link": "https://arxiv.org/pdf/2606.17298v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Text-to-video retrieval for OR using language models",
+      "llm_evidence_cn": "手术室文本视频检索的语言模型",
+      "llm_evidence": "手术室文本视频检索的语言模型",
+      "canonical_evidence": "手术室文本视频检索的语言模型",
+      "llm_tldr_en": "Proposes OR3, a reasoning text-to-video retrieval method for OR clips using action-driven digital twins to handle implicit queries.",
+      "llm_tldr_cn": "手术室文本视频检索可提升安全，但现有方法无法推理隐式查询。本文提出OR3，将视频片段转为动作驱动数字孪生（ActDT），通过分组subject-action-object三元组实现推理式检索。该方法直接针对手术视频理解并利用语言模型，与视频语言模型用于手术应用高度匹配。",
+      "llm_tldr": "手术室文本视频检索可提升安全，但现有方法无法推理隐式查询。本文提出OR3，将视频片段转为动作驱动数字孪生（ActDT），通过分组subject-action-object三元组实现推理式检索。该方法直接针对手术视频理解并利用语言模型，与视频语言模型用于手术应用高度匹配。",
+      "llm_tags": [
+        "query:eye-surgery"
+      ],
+      "matched_query_tag": "query:eye-surgery",
+      "matched_query_text": "video language model for surgical applications",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.19889v1",
+      "source": "arxiv",
+      "title": "SurgVista: Long-Horizon Surgical World Modeling with Plausible Instrument-Tissue Dynamics",
+      "abstract": "Scaling robot policy learning for autonomous surgery is challenging, as expert demonstrations are expensive and in vivo exploration poses substantial safety risks. Surgical world models address this by generating realistic, action-conditioned future frames from an initial observation, but existing methods exhibit two persistent failure modes: spatial interaction incoherence, where visible instrument contact fails to induce spatially consistent tissue deformation, and temporal fidelity collapse, where prediction errors compound across autoregressive rollouts and progressively corrupt visual quality. We present SurgVista, a surgical world model that mitigates both failures through two training recipes. Deformation Consistency Regularization extracts scene-point trajectories from training videos and enforces cross-frame coherence through latent contrastive learning, strengthening physically consistent instrument-tissue dynamics. Drift Adaptation Training mitigates long-horizon drift by perturbing conditioning frames with online prediction residuals and photometric augmentations calibrated to long-horizon drift statistics, sustaining visual fidelity over extended rollouts. To enable rigorous evaluation, we further introduce SurgWorld-Bench, featuring diverse procedure types, long-range rollouts, and decoupled metrics for instrument-motion accuracy and tissue-response fidelity. Extensive experiments show that SurgVista consistently outperforms state-of-the-art methods across visual quality, temporal consistency, and interaction fidelity, with gains widening as the prediction horizon grows.",
+      "authors": [
+        "Wentao Pan",
+        "Wuyang Li",
+        "Shengyuan Liu",
+        "Xinyu Liu",
+        "Hengyu Liu",
+        "Yixuan Yuan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-18T07:47:28+00:00",
+      "link": "https://arxiv.org/pdf/2606.19889v1",
+      "tags": [
+        "keyword:eye-surgery",
+        "query:eye-surgery"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "surgical world model for video",
+      "llm_evidence_cn": "手术视频世界模型",
+      "llm_evidence": "手术视频世界模型",
+      "canonical_evidence": "手术视频世界模型",
+      "llm_tldr_en": "Presents SurgVista, a surgical world model generating realistic future frames with plausible instrument-tissue dynamics, addressing spatial and temporal incoherence.",
+      "llm_tldr_cn": "手术世界模型常出现空间交互不连贯和时间退化问题。论文提出SurgVista，通过变形一致性正则化和时序稳定性训练，生成具有合理器械-组织动态的长时程未来帧。在多个手术视频数据集上，SurgVista在视觉质量和动作一致性上均显著优于现有方法，为自主手术策略学习提供了可靠的仿真环境。",
+      "llm_tldr": "手术世界模型常出现空间交互不连贯和时间退化问题。论文提出SurgVista，通过变形一致性正则化和时序稳定性训练，生成具有合理器械-组织动态的长时程未来帧。在多个手术视频数据集上，SurgVista在视觉质量和动作一致性上均显著优于现有方法，为自主手术策略学习提供了可靠的仿真环境。",
+      "llm_tags": [
+        "query:med-video:composite"
+      ],
+      "matched_query_tag": "query:med-video:composite",
+      "matched_query_text": "Papers central to 医疗视频理解, especially work that connects or combines: medical video comprehension and analysis; processing and interpretation of surgical procedure videos; monitoring patients through video analysis; video data from medical imaging modalities; How can deep learning be applied to medical video understanding?; Techniques for analyzing surgical videos automatically; Applications of video understanding in healthcare.",
+      "matched_requirement_id": "req-composite-med-video",
+      "selection_source": "fresh_fetch"
+    }
+  ]
+}

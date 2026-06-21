@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-18T21:25:50.383674+00:00",
-  "updated_date": "20260618",
+  "generated_at": "2026-06-21T08:52:56.553857+00:00",
+  "updated_date": "20260523-20260621",
   "carryover_days": 9,
   "tag_states": {
     "video-med-qa": {
@@ -289,6 +289,11 @@
           "carry_days": 1
         }
       ]
+    },
+    "eye-surgery": {
+      "updated_date": "20260523-20260621",
+      "carryover_days": 9,
+      "items": []
     }
   }
 }
