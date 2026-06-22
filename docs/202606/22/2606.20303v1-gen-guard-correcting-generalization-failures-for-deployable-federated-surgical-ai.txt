@@ -1,0 +1,686 @@
+Title: GEN-Guard: Correcting Generalization Failures for Deployable Federated Surgical AI
+
+URL Source: https://arxiv.org/pdf/2606.20303v1
+
+Published Time: Fri, 19 Jun 2026 01:04:10 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+This article has been accepted to the International Conference on Information Processing in Computer-Assisted Interventions, 2026. 
+
+# GEN-Guard: Correcting Generalization Failures for Deployable Federated Surgical AI 
+
+Julia Alekseenko a,b, ∗, Pietro Mascagni b,c , AI4SafeChole Consortium c,d,e,f , Nicolas Padoy a,b 
+
+> aUniversity of Strasbourg, CNRS, INSERM, ICube, UMR7357, Strasbourg, France
+> bIHU Strasbourg, Strasbourg, France
+> cBioimage Analysis Center, Fondazione Policlinico Universitario Agostino Gemelli IRCCS, Rome, Italy
+> dAzienda Ospedaliero-Universitaria Sant’Andrea, Rome, Italy
+> eFondazione IRCCS Ca’ Granda Ospedale Maggiore Policlinico di Milano, University of Milan, Milan, Italy
+> fMonaldi Hospital, AORN dei Colli, Naples, Italy
+
+Purpose: Federated Learning (FL) in surgical video AI enables collaborative model training without sharing sensitive data. However, standard evaluation practices – selecting the “best” global model based only on validation data from participating hospitals – can lead to suboptimal deployment choices. We identify this critical failure mode as performance leakage , where the selected model overfits internal federation data and fails to generalize to unseen institutions, thereby undermining the core goal of FL: robust real-world generalization .
+
+Method: We propose GEN-Guard, a practical post-hoc framework to detect and correct generalization failures in federated surgical AI. It integrates Generalization Detection via Client-Blocked Evaluation (CBE), which validates performance on isolated client distributions to prevent performance leakage, and Generalization Correction through Disagreement-Aware Distillation (DAD), which learns adaptive feature-level corrections for cross-institutional robustness. Both components operate after standard FL convergence while providing robust support for zero-shot adaptation to unseen clinical environments. 
+
+Results: We first quantify the severity of performance leakage, observing Model Selection Failures (MSFs) exceeding 80% under standard evaluation. GEN-Guard is evaluated on two multi-center clinical challenges: surgical phase recognition in laparoscopic cholecystectomy and polyp segmentation in colonoscopy. Across both datasets, GEN-Guard consistently corrects these failures, improving in-federation F1 scores by up to 2 points, unseen-institution performance by up to 3 points, and worst-case institutional performance by 3–9 points. 
+
+Conclusions: Performance leakage represents a systematic and previously under-recognized risk in federated surgical AI. GEN-Guard provides a practical, privacy-preserving solution for detecting and correcting such failures without altering federated training procedures. By improving cross-institutional robustness and zero-shot generalization, it strengthens the reliability of FL for real-world surgical deployment. 
+
+Keywords: Federated Learning, Federated Surgical AI, Federated Generalization 1. Introduction 
+
+Surgical video Artificial Intelligence (AI) analysis – such as phase /step recognition [13], anatomical segmentation [23], and complex decision-support tasks like Critical View of Safety (CVS) prediction [20] – require large and diverse datasets for clinically reliable performance. However, the dis-tributed and privacy-sensitive nature of surgical video data makes centralized training challenging. Traditional methods that aggregate data across institutions are often impractical due to strict sensitive data regulations [4]. Federated Learn-ing (FL) [22] enables each hospital to train models locally on its own data and share only model updates – not the raw data – with a central server, allowing data-rich collaborative learning while keeping patient data private. Recent studies show that FL can achieve performance com-parable to centralized training across hospitals. For exam-ple, FL models have achieved strong results in surgical tasks, 
+
+> ∗Corresponding author: alekseenko@unistra.fr
+
+including segmentation ( Dice = 82 .62 ±0.09 vs. Centralized 83 .21 ±0.85 [7]) and phase recognition ( F1 = 65 .77 ±0.89 vs. Centralized 69 .29 ±0.97 [10]), demonstrating its e ff ectiveness for decentralized surgical AI. Despite this promise, FL has yet to achieve its ultimate goal: robust generalization. Work in [29] frames this through two dimensions: the Out-of-Sample Gap , capturing drops on new data from known clients, and the more critical FL-specific Participation Gap , where perfor-mance collapses on data from unseen client distributions. In surgical FL, this gap is evident: on external-site evaluation, FL performance drops sharply: phase recognition [10] decreases by 23% (65.77 F1 on federated clients → 42.91 F1 externally) and segmentation [7] by 4.7% (82.62 Dice → 77.97 Dice), with worst-case declines exceeding 65% [12]. This highlights a key deployment bottleneck: FL-trained models often fail to generalize e ff ectively across unseen clinical sites . A system-atic review [27] confirms that few FL studies in healthcare re-port real-world deployments or assess performance on unseen institutions. This bottleneck arises from the multi-dimensional nature of the generalization gap in FL [29]. Conventional FL evalua-
+
+> arXiv:2606.20303v1 [cs.CV] 18 Jun 2026 2
+
+Training Federation Real-World Deployment   
+
+> G
+> Optimized for
+> participating clients
+> Lacks external validity
+> Unpredictable real-world
+> performance Validation Split
+> Real-World Deployment Not optimized for
+> participating clients
+> External validity
+> Unpredictable real-world
+> performance
+> Real-World Deployment Optimized for
+> participating clients
+> External validity
+> More predictable
+> real-world performance
+
+Evaluation 
+
+Training 
+
+Evaluation 
+
+Training 
+
+Evaluation 
+
+> GEN-Guard
+
+(a) 
+
+(b) 
+
+(c) 
+
+> Client-Blocked Evaluation (CBE)
+> Federation
+> Federation
+
+Unseen Client 
+
+Unseen Client 
+
+Unseen Client 
+
+> FL model to deploy
+> Train Split
+> Train Split
+> Validation Split
+> Validation Split
+> Train Split
+
+# G
+
+# G
+
+# G 
+
+> Fig. 1: Training and deployment strategies in Federated Learning (FL). (a) Conventional FL Evaluation. (b) Baseline Client-Blocked Evaluation (CBE). (c) Pro-posed GEN-Guard Framework .
+
+tions often measure performance only on participating clients, providing a limited view of true generalization. Two critical but overlooked factors contribute to this: 
+
+• Institutional Variation – Di ff erences in data distributions across hospitals due to equipment, workflows, and pa-tient demographics. 
+
+• Deployment Diversity – The gap between training envi-ronments within the federation and the diverse, unseen conditions beyond the federation. Most studies focus on the first factor while neglecting the sec-ond. We identify the root cause of this failure as Performance Leakage in model selection: models appear stable on corre-lated validation in-federation data but fail on unseen institu-tions. In summary, although FL is feasible for decentralized surgi-cal video AI, reliable generalization remains challenging. To our knowledge, no prior work systematically quantifies Model Selection Failures (MSFs) in surgical video FL or corrects them. Existing methods frequently adopt evaluation proto-cols that introduce bias, causing generalization collapse across unseen sites. As a solution, we propose GEN-Guard, a deployment-oriented, post-hoc framework that operates on a discrete set of models after the federated training process. It detects and corrects MSFs via two components: Client-Blocked Evaluation (CBE) and Disagreement-Aware Distilla-tion (DAD), promoting cross-hospital generalization of feder-ated surgical AI without modifying or adding communication to the main FL training protocol. 
+
+2. Related Work 
+
+2.1. Generalization and Domain Shift 
+
+A central challenge in medical FL is robust generalization across heterogeneous clinical environments [14]. FL models often underperform on unseen sites due to severe non-IID data [32]. For example, federated models show promise in surgi-cal outcome prediction [24] or pre-operative analysis [28] but decline on external hospitals, and greater site heterogeneity reduces segmentation accuracy [18], highlighting the limits of current FL deployment frameworks .Methodological advances, including personalized FL, do-main generalization, and meta-learning [17, 31, 11] – aim to improve robustness by adapting global models to local data or learning domain-invariant representations. Data-centric strategies, i.e., diverse training datasets or synthetic augmenta-tion [25], have also been explored. However, these approaches mainly enhance in-federation consistency and often overlook evaluation and model selection, where bias and information leakage remain. Systematic reviews [5, 27] indicate that most FL studies in healthcare lack prospective external validation . In surgical FL, strong institutional biases and persistent non-IID data fur-ther limit reliable deployment. In response, recent e ff orts call for standardized multi-institutional benchmarks [8] and open reporting of out-of-federation performance as essential steps toward deployable and generalizable surgical FL. 
+
+2.2. Model Selection and Evaluation Bias 
+
+Systematic external validation is essential to assess gener-alization to unseen clients. Models should be evaluated on in-dependent, multi-center datasets excluded from training, pro-viding realistic estimates of real-world performance [29, 3]. 3Tools: Procedure: 
+
+> Client 1
+
+Surgeon: 
+
+> Skill Level
+> Style of Execution
+
+Surgery Setup:   
+
+> Endoscope:
+> Type Angle
+> FPS Light
+> Sensor
+> …
+> Brand
+> …
+> Hidden Biases 1
+> Client 1: Biased Dataset 1
+> Client 2
+> …
+
+States & Processes   
+
+> are not independent , each client is an “unit”:
+> Unit 1
+> Grandparent
+> State/Process (S/P)
+> Parent S/P
+> Child S/P Child S/P
+> Hidden Biases 2
+> Unit 2
+> Client 2: Biased Dataset 2
+> Shape
+> Omission
+> Order Pacing
+> Quantity
+> Fig. 2: Sources of hidden biases in surgical video datasets and the “Unit” analogy.
+
+In contrast, FL model selection typically relies on metrics from participating clients, introducing bias and causing Per-formance Leakage . While FedAvg [22] provides a baseline, methods like FedProx [15] and SCAFFOLD [9] handle op-timization under client heterogeneity but do not ensure gen-eralization or external validity. While CCVR [19] proposes post-hoc calibration, it does not improve the learned repre-sentation space, is limited to classification tasks, and requires ground-truth labels. Fine-tuning like FedFTG [30] adds a full training step and requires supervision, making it impractical for deployment. Both methods lack full external validity. 
+
+3. Methodology 
+
+3.1. Problem Formulation 
+
+Federated Learning (FL) aims to optimize a global parame-ter vector θ by minimizing the aggregate empirical risk across 
+
+K clients. The empirical risk ( L(θ)) is defined directly over the model weights, where the objective is to find a global θ
+
+that performs optimally across all distributed datasets {D k}Kk=1:min  
+
+> θ
+
+L(θ) =
+
+> K
+
+X
+
+> k=1
+
+nk
+
+N Lk(θ), Lk(θ) = 1
+
+nk
+
+X
+
+> i∈D k
+
+ℓ( fθ(xi), yi), (1) where nk is the local data size at client k, N = Pk nk the total, and ℓ(·) the sample loss. The central server coordinates T communication rounds. At each round t, the global model parameters are updated via weighted aggregation of the locally trained client models: 
+
+θt+1 =
+
+> K
+
+X
+
+> k=1
+
+nk
+
+N θtk, (2) where θtk denotes the local model parameters at client k, and 
+
+θt+1 represents the aggregated global model weights for the next round. Institutional distribution heterogeneity ( Dk1 , Dk2 ) intro-duces a covariate generalization gap. Consequently, minimiz-ing empirical risk across participating clients does not guaran-tee optimal generalization to unseen institutional distributions. In standard FL practice, model selection is performed by choosing 
+
+θ∗ = arg max   
+
+> t∈{ 1,..., T}
+
+Ek∈C train 
+
+hG( fθt , Dval k )i , (3) where Ctrain denotes participating clients and Dval k their respec-tive validation distributions. We define performance leakage as the condition where 
+
+θ∗ , arg max  
+
+> t
+
+EDunseen 
+
+G( fθt ) , (4) i.e., when the model selected using internal federation vali-dation does not coincide with the model that would maxi-mize performance on unseen institutional distributions. Per-formance leakage thus reflects a biased proxy of external gen-eralization induced by federation-internal validation. This mismatch results in a Model Selection Failure (MSF) 
+
+at deployment, where the chosen global model underperforms on previously unseen clients. 
+
+Goal: Correct MSF by learning a deployment model that maximizes generalization to unseen clients. In this work, we define this model as fGEN-Guard :max 
+
+> fGEN-Guard
+
+EDunseen [G( fGEN-Guard )] , (5) where G denotes a task-specific performance metric evaluat-ing the model on unseen institutional distributions. 
+
+3.2. Hidden Biases in Federated Surgical Video Datasets 
+
+Surgical video datasets are inherently non-homogeneous, shaped by institution-specific factors that create client-biased datasets in FL, where local features are highly interdependent and correlated [6] (Figure 2). As noted by a SAGES con-sensus [6], ignoring such dataset-specific biases can system-atically over- or underestimate algorithmic performance. We conceptualize client-level heterogeneity using a hierarchical States /Processes (S /P) analogy, inspired by multi-level mod-eling in clinical and surgical studies [6]: 
+
+• Grandparent S /P: Surgeon Characteristics: Skill, style, and decision-making a ff ect temporal dynamics, instru-ment trajectories, and scene composition. 
+
+• Parent S /P: Surgical Setup : Variations in endoscope set-tings, tool usage, and procedural execution introduce dis-tinct visual and procedural patterns. 4
+
+• Child S /P: Video Data: Captures the combined e ff ects of Grandparent and Parent levels. Together, these factors create a unique institutional fingerprint with intra-client feature correlations. This challenges the sta-tistical independence assumptions required by conventional learning algorithms and FL. Conceptually, each client is a cor-related data “Unit”. Evaluating the model on a pooled vali-dation set across these units encourages the model to evaluate on, and thus capture, the same client-specific patterns it just learned. This explains strong in-federation performance yet poor external robustness. 
+
+3.3. GEN-Guard Framework 
+
+Unlike traditional Federated Domain Generalization (FedDG) which integrates regularizers directly into the optimization objective, GEN-Guard is a post-hoc selection and refinement framework. It is integrated as: 
+
+• Standard FL Training: The federation optimizes the empirical risk in Equation 1, producing a discrete trajec-tory of model checkpoints S = { fθ1 , . . . , fθT };
+
+• Generalization Detection & Correction: After train-ing, GEN-Guard operates exclusively on the set S to identify and refine a deployable model. 
+
+3.3.1. Detection: Client-Blocked Evaluation 
+
+The Client-Blocked Evaluation (CBE) challenges the as-sumption that mixed-client validation predicts performance on unseen clients by enforcing client-level validation (see Fig-ure 1). Let fθ be a model, Ctrain the set of training clients, Vmix 
+
+a conventional mixed validation set, and Vblock ,c the client-isolated validation split for client c. The training set remains identical; only the validation split di ff ers, and the isolated client used for validation is never included in training. Con-ventional FL selects the best model by maximizing a metric (e.g., F1) on the mixed set: ˆfθ, CONV = arg max 
+
+> fθ
+
+Metric( fθ, Vmix ). (6) CBE identifies the optimal model by maximizing the ro-bustness expectation on a held-out (blocked) client distribu-tion, which serves as a proxy for the worst-case domain shift in the federation: ˆfθ, CBE = arg max 
+
+> fθ
+
+Ex∼V block ,c
+
+Metric( fθ, x) . (7) Here, c ∈ C block is a client excluded from training. We define this evaluation as a worst-case generalization scenario because the model must perform “blindly” on a novel distribu-tion without the benefit of site-specific artifacts (e.g., center-specific lighting or surgical tools) encountered during FL op-timization. By maximizing performance on this unseen cen-ter, the framework prioritizes invariance, ensuring that the se-lected model remains robust to the domain shifts it is likely to face during deployment. CBE tests whether conventional selection aligns with ro-bust generalization: No Selection Failure: ˆfθ, CONV = ˆfθ, CBE –mixed-validation evaluation is reliable; Model Selection Fail-ure (MSF): ˆfθ, CONV , ˆfθ, CBE – conventional evaluation is un-reliable. Thus, CBE provides the foundation for GEN-Guard, serv-ing as the explicit Generalization Detection mechanism that guides subsequent correction. 
+
+3.3.2. Correction: Disagreement-Aware Distillation 
+
+DAD transfers feature-level knowledge from the robust Client-Blocked model ( fθ, CBE ) to the conventional model ( fθ, CONV ), focusing on disagreements to correct biases and im-prove cross-institutional generalization (Figure 3). For each sample xi, normalized feature embeddings from the most abstract high-level layer are extracted from both models ( ECBE , ECONV ∈ Rembed_dim ). A small MLP, Gembed ,then produces a low-dimensional distribution embedding: 
+
+ei ∈ Rdist_dim = Gembed ([ ECBE ∥ ECONV ]) , (8) which feeds a residual predictor Rpred to generate residual weights and biases ( Wres , bres ). Final predictions are corrected as: ˆyfinal = ECONV · (WCONV + Wres ) + (bCONV + bres ). (9) The DAD loss is a weighted sum of agreement and dis-agreement components: 
+
+LDAD = wagree · L agree + wdisagree · L disagree . (10) 
+
+Disagreement Loss: Heavily weighted ( wdisagree > wagree )with higher temperature Tdisagree , combining KL divergence (LKL ) and cosine similarity LCOS on samples where ˆ fθ, CBE and ˆfθ, CONV di ff er: 
+
+Ldisagree =
+
+X
+
+> i∈M disagree
+
+LKL 
+
+ˆyfinal ,i
+
+Tdis 
+
+ˆyCBE ,i
+
+Tdis 
+
+!
+
++ LCOS (ˆ yfinal ,i, ˆyCBE ,i)
+
+!
+
+.
+
+(11) 
+
+Agreement Loss: Applied on samples where predictions align, with smaller weight and temperature Tagree :
+
+Lagree =
+
+X
+
+> i∈M agree
+
+LKL 
+
+ˆyfinal ,i
+
+Tagree 
+
+ˆyCBE ,i
+
+Tagree 
+
+!
+
+. (12) For in-federation clients, an optional supervised loss (Lsupervised ) ensures task accuracy. On unseen clients, DAD performs zero-shot without Lsupervised by default. 
+
+3.4. Convergence and Complexity Analysis 
+
+GEN-Guard adds minimal overhead while correcting gen-eralization bias: – FL Training: The global model ( fθ) converges under the base FL algorithm (e.g., FedAvg), with GEN-Guard re-maining post-hoc and optimizer-agnostic, preserving the base algorithm’s convergence behavior. 5Wfinal = W conv + Wres 
+
+bfinal = b conv + bres     
+
+> xi
+> f̂ θ, CBE ECBE
+> f̂ θ,CONV ECONV
+> [E CBE ∥Econ
+> v]
+> MLP
+> (𝒢 embed )
+
+𝐞 ᵢ 𝓡 pred 
+
+> Residual
+> Predictor
+
+Wres 
+
+bres 
+
+ŷCBE 
+
+ŷCONV 
+
+𝓛 DAD 
+
+> Agreement
+> Mask
+> Feature
+> Extraction
+> Distribution
+> Vector
+
+ŷfinal = E conv · W final + b final 
+
+> Distribution
+> Embedding
+> Fig. 3: The Disagreement-Aware Distillation (DAD) pipeline.
+
+– DAD: A shallow refinement process applied to se-lected checkpoints for a few epochs ( Tmax ). This pre-deployment step avoids the iterative FL communication rounds typical of federated updates. Overall, GEN-Guard preserves base FL e ffi ciency, espe-cially for compute-intensive video models (Table 1).                         
+
+> Table 1: Complexity comparison of GEN-Guard and standard FL.
+> Metric Standard FL GEN-Guard
+> Training Communication ( Trounds) O(N|W|)– (no additional rounds) Detection Overhead (CBE) O(|V mix |)O(|V block |) (extra fwd.) Correction Overhead (DAD) –O(Tmax |V local |CG,R)Inference Overhead (DAD) O(CCNN )≈O(CCNN )
+> N=number of clients; |W|=model size; CCNN =CNN forward pass cost;
+> CG,R=parameter generator cost ( CG,R≪CCNN ).
+
+4. Results 
+
+4.1. Experimental Evaluation 
+
+We evaluate GEN-Guard on two multi-institutional surgi-cal video datasets for distinct tasks. Multi-Cholec (MultiC-hole2022) [10] targets Laparoscopic Cholecystectomy Phase Recognition (6 phases) with 180 de-identified videos from 5 centers (A–E) via the MOSaiC platform [21]: Gemelli, Sant’Andrea, Ca’ Granda, Mondaldi (25 videos each), and Cholec80 (80 videos). We used the same dataset split strategy as in [10]: for Cholec80, 40 videos for training, 8 for vali-dation, and 32 for testing; for the other four MultiChole2022 datasets, 13 videos for training, 6 for validation, and 6 for test-ing. PolypGen [1] is used for Polyp Segmentation, containing 1,537 images from 6 centers (A–F) across Norway, France, UK, Egypt, and Italy (x2). The dataset was partitioned into training, validation, and testing sets using a randomized strat-ified split following a 70-15-15% ratio. We use repeated cross-validation, partitioning each dataset into three sets: In-Federation (In-Fed) for training FL mod-els; Held-out (Blocked) for Client-Blocked Evaluation (CBE) as the generalization detection mechanism; and Out-of-Federation (Out-Fed) for testing zero-shot generalization on a never-seen client. Experiments focused on clients with extreme data imbal-ances, showing the strongest institutional bias: in Multi-Cholec , the smallest and largest Out-Fed clients are E and B, respectively; in PolypGen , they are F and C. We adopt the model architectures and pre-processing from the original papers [10, 1]. We evaluate three FL algorithms: FedAvg [22] as baseline, FedProx ( μ = 0.2) [15] to mitigate client drift on Non-IID data, and SCAFFOLD [9] for variance-reduced convergence. FL training used 10 global rounds with local epochs and optimizers as in the original datasets. GEN-Guard is trained for up to Tmax = 5 with early stopping, using Adam (lr = 10 −4) and hyperparameters Tdisagree = wdisagree =
+
+2.0, Tagree = wagree = 1.0. Both Gembed and Rpred have 2 MLP layers for e ffi ciency. We train models on Nvidia V100 GPUs, using Flower FL research framework [2]. 
+
+4.2. Generalization Detection: Model Selection Failure Re-sults 
+
+Figure 4 shows the divergence between the conventionally selected model ( fθ, CONV ) and the robust CBE-selected model ( fθ, CBE ). A Model Selection Failure (MSF) occurs when ˆfθ, CONV , ˆfθ, CBE .                               
+
+> Table 2: MSF across datasets and FL algorithms; runs =experiments.
+> Multi-Cholec PolypGen Algorithm Runs MSF MSF % Algorithm Runs MSF MSF %
+> FedAvg 8787.5 FedAvg 10 770.0 FedProx 7685.7 FedProx 7685.7 SCAFFOLD 7685.7 SCAFFOLD 7685.7
+> Total: 46 runs, MSF: 38, Overall: 82.6%
+
+Across 46 experiments, MSF occurred in 38 cases (82.6%), as shown in Table 2, confirming that conventional model se-lection is often unreliable. FedProx and SCAFFOLD runs were skipped when FedAvg had already converged to avoid redundancy. Additional statistics o ff er further insight: 
+
+• Mean Absolute Divergence (2.6 Rounds): On average, the selected model is 2.6 global rounds away from the optimal model for generalization. 
+
+• Maximum Selection Risk (8 Rounds): In the worst-case, conventional selection picks a model 8 epochs away from the optimal, posing a severe deployment risk. 
+
+• Bias Trend (27 Positive / 11 Negative): The influence of positive values indicates overfitting to institutional signa-tures within the known federation data. 60 2 4 6 8 10 
+
+> Epoch of Best Performance (Model Selection)
+> Exp 1 (D)
+> Exp 2 (B)
+> Exp 3 (B)
+> Exp 4 (E)
+> Exp 5 (D)
+> Exp 6 (C)
+> Exp 7 (A)
+> Exp 8 (A)
+> FedAvg Conv.
+> FedProx Conv.
+> SCAFFOLD Conv.
+
+Divergence Across FL Algorithms: 
+
+Multi-Cholec Dataset      
+
+> 0246810
+> Epoch of Best Performance (Model Selection)
+> Exp 1 (E)
+> Exp 2 (D)
+> Exp 3 (C)
+> Exp 4 (F)
+> Exp 5 (B)
+> Exp 6 (A)
+> Exp 7 (A)
+> Exp 8 (E)
+> Exp 9 (D)
+> Exp 10 (B)
+> FedAvg Conv.
+> FedAvg Conv.
+> FedAvg Conv.
+> FedProx Conv.
+> SCAFFOLD Conv.
+
+Divergence Across FL Algorithms: 
+
+PolypGen Dataset                 
+
+> Algorithm Comparison
+> FedAvg: f, CONV
+> FedAvg: f, CBE
+> FedProx: f, CONV
+> FedProx: f, CBE
+> SCAFFOLD: f, CONV
+> SCAFFOLD: f, CBE
+> f, CONV =f, CBE
+
+Fig. 4: Divergence of FL algorithms: generalization detection via Client-Blocked Evaluation (CBE) across di ff erent clinical datasets. Each row represents an experimental setup, where the letter in parentheses denotes the held-out client (e.g., “Exp 1 (D)” indicates Client D was used for evaluation.) 
+
+4.3. Generalization Correction Results 
+
+Table 3 shows that GEN-Guard consistently improves Multi-Cholec F1 scores across all FL protocols, boosting aver-age performance (up to 2.8 points) and reducing variance. In worst-case scenarios, GEN-Guard improves the weakest mod-els (up to 8.9 F1 points), demonstrating its ability to safeguard against catastrophic failures. To qualitatively assess phase recognition, we visualize the surgical pipeline for five randomly selected test videos from di ff erent clients. Figure 5 compares the ground truth with pre-dictions from both the conventional and GEN-Guard methods. Overall, GEN-Guard shows fewer “spiky” misclassifications than the conventional baseline, especially during transitional phases. Table 4 shows similar trends on the PolypGen dataset. GEN-Guard consistently improves F1 (equivalent to Dice) across all metrics, with the largest gains in zero-shot gener-alization (Held-Out F1 up to 3.3 points, Out-Fed F1 up to 1.8 points). Even in worst-case scenarios, it substantially raises the minimum performance. Figure 6 presents a qualitative comparison of segmentation results across the PolypGen clients, with test samples ran-domly selected from each client. Overall, GEN-Guard en-hances spatial robustness. Notably, when the fθ, CONV and 
+
+fθ, CBE models exhibit high-confidence agreement, the GEN-Guard pipeline preserves the prediction. This behavior is clearly illustrated in a sample frame from Client C. Overall, across both datasets, GEN-Guard consistently pro-vides positive gains across all average metrics while reducing inter-institution variability, demonstrating its e ff ectiveness in addressing Model Selection Failures (MSFs) and improving deployment reliability in federated surgical AI. 
+
+4.4. Comparison with Personalized and Domain-Specific Baselines 
+
+To address the challenges of data heterogeneity, we com-pare GEN-Guard against two established Personalized Fed-erated Learning strategies as shown in Table 5: FedBN Client A: Video 5                                       
+
+> Frames
+> GT
+> Conv (F1: 0.72)
+> GEN-Guard (0.75)
+> 500 01000 1500 2000 2500 3000 3500 4000 500
+> Client A: Video 5 Client B: Video 27
+> GT
+> Conv (F1: 0.70)
+> GEN-Guard (0.75)
+> Frames
+> 0250 500 750 1000 1250 1500 1750
+> Client B: Video 27 Client C: Video 1
+> GT
+> Conv (F1: 0.61)
+> GEN-Guard (0.65)
+> 0500 1000 1500 2000 Client D: Video 6
+> GT
+> Conv (F1: 0.69)
+> GEN-Guard (0.74)
+> 0500 1000 1500 2000 2500 3000 3500 Client E: Video 1
+> GT
+> Conv (F1: 0.56)
+> GEN-Guard (0.64)
+> 0200 400 600 800 1000 1200 1400 1600
+> Frames
+> P0 P1 P2 P3 P4 P5
+
+Fig. 5: Phase (P) recognition qualitative results across the Multi-Cholec clients. Each row displays the ground truth (GT), conventional (Conv), and GEN-Guard results on random test videos. 
+
+[16], which utilizes local batch normalization to capture site-specific statistics, and pFedMe [26], which employs Moreau envelopes to balance global and local model updates. Entries marked with an asterisk ( ∗) indicate models with lo-cal personalization, which requires an annotated local dataset for supervised fine-tuning from fθ, CONV (up to Tmax = 5 with early stopping). For FedBN, this adapts local BN statistics, while for pFedMe it corresponds to optimizing from the global proximal weight to a personalized local model. In the Multi-Cholec task, personalized baselines such as FedBN achieve slightly higher Out-Fed performance, largely due to extensive supervised fine-tuning enabled by the large, expert-annotated Cholec80 dataset. In contrast, GEN-Guard achieves comparable Held-Out and strong Out-Fed robustness 7Table 3: GEN-Guard performance on Multi-Cholec: average F1 ±std and worst-case correction. 
+
+FL Protocol In-Fed F1 (Supervised) Held-Out F1 (Zero-shot) Out-Fed F1 (Zero-shot) F1 CONV F1 GEN-Guard (∆) F1 CONV F1 GEN-Guard (∆) F1 CONV F1 GEN-Guard (∆)FedAvg 69 .53 ±2.14 71 .47 ±1.90 (↑ 1.94 ) 64 .57 ±2.99 66 .89 ±4.27 (↑ 2.32 ) 65 .82 ±2.47 67 .18 ±1.40 (↑ 1.36 )FedProx 65 .58 ±3.26 67 .31 ±1.48 (↑ 1.73 ) 64 .96 ±4.35 67 .72 ±3.82 (↑ 2.76 ) 62 .12 ±3.70 64 .27 ±1.20 (↑ 2.15 )SCAFFOLD 68 .98 ±2.68 71 .25 ±2.60 (↑ 2.27 ) 66 .45 ±1.68 68 .79 ±1.86 (↑ 2.34 ) 66 .04 ±2.88 67 .72 ±1.60 (↑ 1.68 )
+
+Worst-Case F1 Correction 
+
+FedAvg 65 .71 67 .86 (↑ 2.15 ) 62 .08 67 .49 (↑ 5.41 ) 62 .46 65 .51 (↑ 3.05 )FedProx 59 .89 65 .95 (↑ 6.06 ) 55 .47 62 .36 (↑ 6.88 ) 54 .57 63 .50 (↑ 8.93 )SCAFFOLD 66 .19 70 .97 (↑ 4.78 ) 66 .44 70 .75 (↑ 4.31 ) 62 .49 66 .53 (↑ 4.04 ) 
+
+> Table 4: GEN-Guard performance on PolypGen: average F1 ±std and worst-case correction.
+
+FL Protocol In-Fed F1 (Supervised) Held-Out F1 (Zero-shot) Out-Fed F1 (Zero-shot) F1 CONV F1 GEN-Guard (∆) F1 CONV F1 GEN-Guard (∆) F1 CONV F1 GEN-Guard (∆)FedAvg 80 .23 ±0.06 81 .63 ±0.04 (↑ 1.40 ) 71 .02 ±0.14 74 .29 ±0.13 (↑ 3.27 ) 84 .07 ±0.03 85 .64 ±0.04 (↑ 1.57 )FedProx 79 .89 ±0.04 82 .04 ±0.04 (↑ 2.15 ) 70 .98 ±0.13 74 .30 ±0.13 (↑ 3.32 ) 83 .56 ±0.03 84 .79 ±0.04 (↑ 1.23 )SCAFFOLD 80 .92 ±0.05 82 .85 ±0.05 (↑ 1.93 ) 71 .53 ±0.13 73 .13 ±0.14 (↑ 1.60 ) 84 .16 ±0.04 86 .01 ±0.04 (↑ 1.85 )
+
+Worst-Case F1 Correction 
+
+FedAvg 79 .40 81 .82 (↑ 2.42 ) 79 .16 87 .14 (↑ 7.98 ) 88 .31 90 .94 (↑ 2.63 )FedProx 86 .30 88 .73 (↑ 2.43 ) 78 .80 81 .76 (↑ 2.96 ) 79 .95 83 .78 (↑ 3.83 )SCAFFOLD 85 .54 81 .94 (↑ 3.40 ) 57 .49 60 .83 (↑ 3.34 ) 78 .34 81 .94 (↑ 3.60 )
+
+without any ground-truth labels. Unlike personalized base-lines that rely on supervision, our method learns domain-invariant patterns via an unsupervised disagreement-aware signal. 
+
+4.5. Ablations 
+
+To evaluate the contribution of each component, particu-larly in the DAD module, we performed a stepwise ablation study using FedAvg as the base FL algorithm (Table 6). Since DAD operates on a discrete set of finalized candidate mod-els, it is decoupled from the specific gradient descent mechan-ics or aggregation logic. FedAvg was chosen as a representa-tive baseline, as it underlies more advanced federated methods such as FedProx and SCAFFOLD. The ablation studies show that starting from ˆfθ, CONV ,standard distillation o ff ers minimal improvement. Adding disagreement-weighting and cosine similarity increases both in-federation and zero-shot F1 scores. Overall, the full GEN-Guard model achieves the best results. We conducted a comprehensive grid search over the tem-perature Tdisagree ∈ [1 .0, 3.0] and distillation weight wdisagree ∈
+
+[0 .5, 3.0] (Figure 7). The Agreement parameters were fixed at Tagree = 1.0 and wagree = 1.0, reflecting standard Knowl-edge Distillation (KD). This study was performed on Held-Out clients to assess true zero-shot generalization to unseen clinical distributions. FedAvg was used as the base algorithm for two reasons: (1) as the foundational and widely adopted federated learning protocol; and (2) because of the post-hoc nature, the disagreement-aware logic is decoupled from the training optimizer’s gradients. Overall, both phase recognition (left) and spatial segmenta-tion (right) show robust performance across parameter vari-ations, with a stable plateau near the chosen configuration (Tdis = 2, wdis = 2). 
+
+4.6. Computational Footprint 
+
+We evaluate the computational footprint of GEN-Guard across two datasets using a single NVIDIA V100 per client. Table 7 reports the mean and standard deviation over all fed-erated clients. In the Multi-Cholec phase recognition task, the detection phase (CBE) achieves a throughput of 120.30 FPS, about five times faster than the training loop. The DAD correction phase remains e ffi cient (39.16 FPS), and the distilled model sustains high inference speeds suitable for real-time surgical deploy-ment. For the PolypGen segmentation task, while standard train-ing exceeds 2.6 GB of VRAM, the DAD correction phase re-duces peak usage to 489.37 MB. The distilled inference model remains equally lightweight for resource-constrained environ-ments. 
+
+5. Discussion 
+
+GEN-Guard detects MSFs, but its precision depends on the representativeness of client validation sets during CBE. Noisy or unrepresentative validation data may lead to a suboptimal choice of fθ, CBE , potentially a ff ecting the subsequent DAD correction. 
+
+Limitations: Nevertheless, the disagreement-aware DAD acts as a protective bu ff er by applying corrections only where models diverge, thereby limiting the propagation of errors from an imperfect fθ, CBE and preventing catastrophic gener-alization collapse. Empirically, the framework maintains sta-ble performance even under imperfect model selection. For 8F1:0.940 HD:4.0       
+
+> F1:0.943 HD:4.4
+> Frame Ground Truth GEN-Guard Conventional
+> Client A
+> F1:0.954 HD:3.6
+> Client B Client C
+> F1:0.961 HD:3.9
+> F1:0.983 HD:4.1 F1:0.985 HD:4.1 F1:0.972 HD:3.9
+> F1:0.199 HD:7.1
+> F1:0.196 HD:5.0
+> Frame Ground Truth GEN-Guard Conventional
+> Client D Client E Client F
+> F1:0.460 HD:4.0
+> F1:0.809 HD:5.2
+> F1:0.973 HD:3.2
+
+Fig. 6: Segmentation qualitative results across the PolypGen clients. Each row compares the original frame, ground truth, conventional prediction, and GEN-Guard prediction on random frames from test videos. Table 5: Personalized FL vs. proposed GEN-Guard: average F1 ±std across In-Federation (In-Fed), Held-Out, and Out-Federation (Out-Fed) clients. ( ∗) indicates methods with local personalization. 
+
+Method Multi-Cholec PolypGen In-Fed F1 Held-Out F1 Out-Fed F1 In-Fed F1 Held-Out F1 Out-Fed F1 Personalized Baselines: 
+
+FedBN 68 .15 ±1.84 67 .29 ∗±3.11 68 .85 ∗±5.19 80 .05 ±4.38 72 .01 ∗±0.09 81 .90 ∗±0.04 
+
+pFedMe 67 .60 ±2.47 65 .31 ∗±3.97 65 .37 ∗±1.82 81 .36 ±5.52 73 .31 ∗±0.11 83 .14 ∗±0.08 
+
+Proposed: 
+
+FedAvg +GEN-Guard 71 .47 ±1.90 66 .89 ±4.27 67 .18 ±1.40 81 .63 ±0.04 74 .29 ±0.13 85 .64 ±1.57 
+
+FedProx +GEN-Guard 67 .31 ±1.48 67 .72 ±3.83 64 .27 ±1.20 82 .04 ±0.04 74 .30 ±0.13 84 .79 ±1.23 
+
+SCAFFOLD +GEN-Guard 71 .25 ±2.60 68 .79 ±1.86 67 .72 ±1.60 82 .85 ±0.05 73 .13 ±0.14 86 .01 ±0.04 
+
+example, evaluations on highly divergent datasets, such as Cholec80 (France) versus Italian surgical centers, indicate that GEN-Guard can still extract domain-invariant patterns. Sim-ilar robustness is observed under extreme data imbalance in Multi-Cholec, where the method remains e ff ective across both the smallest and largest out-of-federation cohorts (Clients E and B), a trend also reproduced in the PolypGen segmentation task (Clients F and C). Nonetheless, highly biased validation splits may still reduce MSF detection sensitivity. 
+
+Clinical implications: Performance leakage poses poten-tial patient safety risks when federated models are deployed across institutions with unseen procedural styles, imaging sys-tems, or patient populations. Even moderate degradation in phase recognition or polyp segmentation may a ff ect down-stream clinical workflows, including intraoperative guidance, documentation automation, and quality monitoring. By ex-plicitly detecting and correcting MSFs prior to deployment, GEN-Guard introduces an additional validation safeguard that can improve the reliability of cross-institutional surgical AI systems. 
+
+Ethical considerations: Residual performance leakage may also raise fairness concerns if models systematically under-perform on certain institutions or patient subgroups. While GEN-Guard reduces this risk, it cannot eliminate it entirely, as unseen distributions may still di ff er substantially from those observed during training. Responsible deployment therefore requires continuous post-deployment monitoring, transparent reporting of cross-institutional variability, and appropriate hu-man oversight. Future work will investigate strategies to further improve scalability and robustness, such as automated weighting of validation clients based on domain diversity or performing CBE on a subset of anchor clients to reduce computational overhead in large federations while preserving corrective ca-pability. 
+
+6. Conclusion 
+
+This work presents GEN-Guard, a post-hoc deployment-oriented federated learning framework that detects and cor-rects Model Selection Failures (MSFs), enhancing cross-institutional generalization in surgical AI. MSFs were ob-served in over 80% of experiments, emphasizing the impor-tance of bias correction and robust model selection. GEN-Guard improves in-federation F1 scores by up to 2 points, zero-shot generalization F1 on unseen clients by up to 3 points, and worst-case F1 by 3–9 points, all with minimal computation and no extra communication during the main fed-erated training. These results demonstrate GEN-Guard’s prac-ticality and e ff ectiveness for real-world deployment of feder-ated surgical AI. 9Table 6: Ablation study (F1-Score) across two datasets. “Unseen” denotes the mean of Held-Out and Out-Fed F1 scores, with ±Std between these two values. 
+
+Ablation Model / Component Added Multi-Cholec F1 PolypGen F1 
+
+In-Fed (Supervised) Unseen (Zero-shot) In-Fed (Supervised) Unseen (Zero-shot) 
+
+ˆfθ, CONV 69 .53 ±2.14 65 .20 ±0.62 80 .23 ±0.06 77 .54 ±6.52 
+
+Conventional Distillation ( LKL ) 69 .75 ±2.15 65 .45 ±0.53 80 .40 ±0.06 77 .80 ±6.45 
+
++ Disagreement Split (Uniform w) 70 .15 ±2.08 66 .00 ±0.35 80 .42 ±0.05 78 .40 ±6.42 
+
++ Disagreement Focus ( wdisagree > wagree ) 70 .05 ±2.01 65 .51 ±0.30 80 .95 ±0.06 78 .85 ±6.22 
+
++ Cosine Similarity ( LCOS ) 70 .81 ±1.95 66 .75 ±0.21 81 .19 ±0.04 79 .04 ±5.97 
+
++ Temperature Di ff erential ( Tdisagree , Tagree ) 71 .29 ±1.92 66 .98 ±0.19 81 .49 ±0.04 79 .50 ±5.95 
+
+Final Model (GEN-Guard) 71 .47 ±1.90 67 .03 ±0.14 81 .63 ±0.04 79 .96 ±5.67 0.5 1.0 2.0 3.0 
+
+Distillation Weight ( wdisagree )
+
+> 1.0 1.5 2.0 2.5 3.0
+> Temperature ( Tdisagree )
+
+66.46 66.35 66.26 66.20 
+
+66.22 66.15 65.93 65.92 
+
+66.04 66.24 66.89 66.36 
+
+66.18 66.33 66.43 66.42 
+
+66.24 65.78 66.02 66.16 
+
+Hyperparameter Sensitivity 
+
+Held-Out Clients Mean F1 (Multi-Cholec) 
+
+65.8 
+
+66.0 
+
+66.2 
+
+66.4 
+
+66.6 
+
+66.8 
+
+> Mean F1-Score (%)
+
+0.5 1.0 2.0 3.0 
+
+Distillation Weight ( wdisagree )
+
+> 1.0 1.5 2.0 2.5 3.0
+> Temperature ( Tdisagree )
+
+71.43 70.22 70.22 69.17 
+
+71.14 72.45 68.79 74.30 
+
+72.90 72.54 74.29 71.29 
+
+73.88 72.64 73.29 71.48 
+
+74.15 73.92 73.25 72.26 
+
+Hyperparameter Sensitivity 
+
+Held-Out Clients Mean F1 (PolypGen) 
+
+69 
+
+70 
+
+71 
+
+72 
+
+73 
+
+74 
+
+> Mean F1-Score (%)
+
+Fig. 7: Heatmaps visualizing average F1 ±std across Held-Out clients. Table 7: Comparison of computational e ffi ciency across two datasets. 
+
+Dataset Step Throughput (FPS) ↑ Peak VRAM (MB) ↓
+
+Multi-Cholec 
+
+FL Training 23 .18 ±10 .1 1091 .65 ±25 .6
+
+CBE Detection 120 .30 ±20 .5 580 .11 ±1.0
+
+DAD Correction 39 .16 ±9.7 489 .37 ±12 .0
+
+DAD Inference 116 .30 ±52 .4 466 .89 ±0.9
+
+PolypGen 
+
+FL Training 10 .42 ±3.2 2643 .54 ±0.1
+
+CBE Detection 13 .80 ±4.1 577 .15 ±2.4
+
+DAD Correction 15 .13 ±4.7 453 .13 ±0.3
+
+DAD Inference 19 .21 ±8.7 419 .75 ±1.2
+
+7. Compliance with Ethical Standards Ethical approval: This article does not contain any studies with human participants or animals performed by any of the authors. 
+
+Competing interests: The authors declare no conflict of interest. 
+
+Informed consent: This manuscript does not contain any patient data. 
+
+8. Disclosures 
+
+Pietro Mascagni and Nicolas Padoy are co-founders and shareholders of Scialytics. The other co-authors do not have any conflict of interests to disclose. 
+
+9. Acknowledgments 
+
+This work was supported by French state funds managed within the Plan Investissements d’Avenir by the ANR under references ANR-22-FAI1-0001 (project DAIOR) and ANR-10-IAHU-02 (IHU Strasbourg). 
+
+References 
+
+[1] Ali, S., Jha, D., Ghatwary, N., Realdon, S., Cannizzaro, R., Salem, O., Lamarque, D., Daul, C., Riegler, M., Ånonsen, K.V., Petlund, A., Halvorsen, P., Rittscher, J., de Lange, T., East, J., 2023. A multi-centre polyp detection and segmentation dataset for generalisability assess-ment. Scientific Data 10, 75. [2] Beutel, D., Topal, T., Mathur, A., Qiu, X., Parcollet, T., Lane, N., 2020. Flower: A friendly federated learning research framework. arXiv preprint arXiv:2007.14390 . [3] Bujotzek, M., Ak"unal, U., Denner, S., Neher, P., Zenk, M., Frodl, E., Jaiswal, A., Kim, M., Krekiehn, N., Nickel, M., Ruppel, R., Both, M., Doellinger, F., Opitz, M., Persigehl, T., Kleesiek, J., Penzkofer, T., Maier-Hein, K., Braren, R., Bucher, A., 2025. Real-world federated learning in radiology: hurdles to overcome and benefits to gain. Journal of the American Medical Informatics Association 32, 193–205. [4] Conduah, A.K., Ofoe, S., Siaw-Marfo, D., 2025. Data privacy in healthcare: Global challenges and solutions. Digital Health 11, 20552076251343959. [5] Crowson, M.G., Moukheiber, D., Arévalo, A.R., Lam, B.D., Mantena, S., Rana, A., Goss, D., Bates, D.W., Celi, L.A., 2022. A systematic review of federated learning applications for biomedical data. PLOS Digital Health 1. 10 [6] Eckho ff , J., Rosman, G., Altieri, M., Speidel, S., Stoyanov, D., An-vari, M., Meier-Hein, L., M"arz, K., Jannin, P., Pugh, C., Wagner, M., Witkowski, E., Shaw, P., Madani, A., Ban, Y., Ward, T., Filicori, F., Padoy, N., Talamini, M., Meireles, O., 2023. Sages consensus recom-mendations on surgical video data use, structure, and exploration (for research in artificial intelligence, clinical quality improvement, and sur-gical education). Surgical Endoscopy 37, 8690–8707. [7] Fang, Z., Qi, X., Feng, C.M., Pei, J., Si, W., Jin, Y., 2026. Spatio-temporal representation decoupling and enhancement for federated in-strument segmentation in surgical videos. IEEE Transactions on Medi-cal Imaging . [8] Karargyris, A., Umeton, R., Sheller, M., Aristizabal, A., George, J., Wuest, A., Pati, S., Kassem, H., Zenk, M., Baid, U., Moorthy, P., Chowdhury, A., Guo, J., Nalawade, S., Rosenthal, J., Kanter, D., Xenochristou, M., Beutel, D., Chung, V., Mattson, P., 2023. Federated benchmarking of medical artificial intelligence with medperf. Nature machine intelligence 5, 799–810. [9] Karimireddy, S.P., Kale, S., Mohri, M., Reddi, S., Stich, S., Suresh, A.T., 2020. Sca ff old: Stochastic controlled averaging for federated learning, in: International conference on machine learning, PMLR. pp. 5132–5143. [10] Kassem, H., Alapatt, D., Mascagni, P., Karargyris, A., Padoy, N., 2022. Federated cycling: Semi-supervised federated learning of sur-gical phases. IEEE TMI 42, 1920–1931. [11] Khoee, A.G., Yu, Y., Feldt, R., 2024. Domain generalization through meta-learning: a survey. Artificial Intelligence Review 57, 285. [12] Kirchner, M., Ho ff mann, H., Jenke, A., Saldanha, O., Pfei ff er, K., Kanjo, W., Alekseenko, J., Boer, C., Kolamuri, S., Mazza, L., Padoy, N., Bano, S., Reinke, A., Maier-Hein, L., Stoyanov, D., Kather, J., Kol-binger, F., Bodenstedt, S., Speidel, S., 2025. Federated learning for sur-gical vision in appendicitis classification: Results of the fedsurg endovis 2024 challenge. arXiv preprint arXiv:2510.04772 . [13] Lavanchy, J.L., Ramesh, S., Dall’Alba, D., Gonzalez, C., Fiorini, P., Müller-Stich, B.P., Nett, P.C., Marescaux, J., Mutter, D., Padoy, N., 2024. Challenges in multi-centric generalization: phase and step recog-nition in roux-en-y gastric bypass surgery. IJCARS 19, 2249–2257. [14] Li, M., Xu, P., Hu, J., Tang, Z., Yang, G., 2025. From challenges and pitfalls to recommendations and opportunities: Implementing federated learning in healthcare. Medical Image Analysis , 103497. [15] Li, T., Sahu, A.K., Zaheer, M., Sanjabi, M., Talwalkar, A., Smith, V., 2020. Federated optimization in heterogeneous networks. Proceedings of Machine learning and systems 2, 429–450. [16] Li, X., Jiang, M., Zhang, X., Kamp, M., Dou, Q., 2021. Fed{bn}: Federated learning on non-{iid} features via local batch normalization, in: ICLR. [17] Liu, Y., Qu, Z., Wang, S., Shen, C., Liang, Y., Wang, J., 2025. A unified personalized federated learning framework ensuring domain generaliza-tion. Expert Systems with Applications 263, 125700. [18] Luo, G., Liu, T., Lu, J., Chen, X., Yu, L., Wu, J., Chen, D.Z., Cai, W., 2023. Influence of data distribution on federated learning performance in tumor segmentation. Radiology: Artificial Intelligence 5, e220082. [19] Luo, M., Chen, F., Hu, D., Zhang, Y., Liang, J., Feng, J., 2021. No fear of heterogeneity: Classifier calibration for federated learning with non-iid data. Advances in Neural Information Processing Systems 34, 5972–5984. [20] Mascagni, P., Alapatt, D., Laracca, G., Guerriero, L., Spota, A., Fiorillo, C., Vardazaryan, A., Quero, G., Alfieri, S., Baldari, L., Cassinotti, E., Boni, L., Cuccurullo, D., Costamagna, G., Dallemagne, B., Padoy, N., 2022. Multicentric validation of endodigest: a computer vision platform for video documentation of the critical view of safety in laparoscopic cholecystectomy. Surgical Endoscopy 36, 8379–8386. [21] Mazellier, J.P., Boujon, A., Bour-Lang, M., Erharhd, M., Waechter, J., Wernert, E., Mascagni, P., Padoy, N., 2023. Mosaic: a web-based plat-form for collaborative medical video assessment and annotation. arXiv preprint arXiv:2312.08593 . [22] McMahan, B., Moore, E., Ramage, D., Hampson, S., y Arcas, B.A., 2017. Communication-e ffi cient learning of deep networks from decen-tralized data, in: Artificial intelligence and statistics, PMLR. pp. 1273– 1282. [23] Murali, A., Mascagni, P., Mutter, D., Padoy, N., 2024. Cyclesam: One-shot surgical scene segmentation using cycle-consistent feature match-ing to prompt sam. arXiv preprint arXiv:2407.06795 . [24] Ren, Y., Park, Y., Shickel, B., Ziyuan, G., Patel, A., Ma, Y., Hu, Z., Balch, J., Loftus, T., Rashidi, P., Ozrazgat Baslanti, T., Bihorac, A., 2025. Federated learning for predicting major postoperative complica-tions. Annals of Surgery Open 6, e573. [25] Rujas, M., Herranz, R., Fico, G., Merino-Barbancho, B., 2024. Syn-thetic data generation in healthcare: A scoping review of reviews on domains, motivations, and future applications. International Journal of Medical Informatics , 105763. [26] T Dinh, C., Tran, N., Nguyen, J., 2020. Personalized federated learn-ing with moreau envelopes. Advances in neural information processing systems 33, 21394–21405. [27] Teo, Z., Jin, L., Liu, N., Li, S., Miao, D., Zhang, X., Ng, W., Tan, T., Lee, D., Chua, K., Heng, J., Liu, Y., Goh, R., Ting, D., 2024. Fed-erated machine learning in healthcare: A systematic review on clinical applications and technical architecture. Cell Reports Medicine 5. [28] Tzortzis, I.N., Gutierrez-Torre, A., Sykiotis, S., Agulló, F., Bakalos, N., Doulamis, A., Doulamis, N., Berral, J.L., 2025. Towards generaliz-able federated learning in medical imaging: A real-world case study on mammography data. Computational and structural biotechnology jour-nal 28, 106–117. [29] Yuan, H., Morningstar, W.R., Ning, L., Singhal, K., 2022. What do we mean by generalization in federated learning?, in: ICLR. [30] Zhang, L., Shen, L., Ding, L., Tao, D., Duan, L.Y., 2022. Fine-tuning global model via data-free knowledge distillation for non-iid federated learning, in: Proceedings of the IEEE /CVF, pp. 10174–10183. [31] Zhang, R., Fan, Z., Xu, Q., Yao, J., Zhang, Y., Wang, Y., 2023. Grace: A generalized and personalized federated learning method for medical imaging, in: MICCAI, Springer. pp. 14–24. [32] Zhao, Y., Li, M., Lai, L., Suda, N., Civin, D., Chandra, V., 2018. Feder-ated learning with non-iid data. arXiv preprint arXiv:1806.00582 .

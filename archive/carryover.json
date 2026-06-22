@@ -1,82 +1,40 @@
 {
-  "generated_at": "2026-06-21T21:01:13.907012+00:00",
-  "updated_date": "20260621",
+  "generated_at": "2026-06-22T22:53:49.731764+00:00",
+  "updated_date": "20260622",
   "carryover_days": 9,
   "tag_states": {
     "video-med-qa": {
-      "updated_date": "20260621",
+      "updated_date": "20260622",
       "carryover_days": 9,
       "items": []
     },
     "vlm-vg": {
-      "updated_date": "20260621",
+      "updated_date": "20260622",
       "carryover_days": 9,
       "items": []
     },
     "MM-Hall": {
-      "updated_date": "20260621",
+      "updated_date": "20260622",
       "carryover_days": 9,
       "items": []
     },
     "video-stream": {
-      "updated_date": "20260621",
+      "updated_date": "20260622",
       "carryover_days": 9,
       "items": []
     },
     "ego-video": {
-      "updated_date": "20260621",
+      "updated_date": "20260622",
       "carryover_days": 9,
       "items": []
     },
     "med-video": {
-      "updated_date": "20260621",
+      "updated_date": "20260622",
       "carryover_days": 9,
-      "items": [
-        {
-          "id": "2606.20303v1",
-          "source": "arxiv",
-          "title": "GEN-Guard: Correcting Generalization Failures for Deployable Federated Surgical AI",
-          "abstract": "Federated Learning (FL) in surgical video AI enables collaborative model training without sharing sensitive data. However, standard evaluation practices - selecting the \"best\" global model based only on validation data from participating hospitals - can lead to suboptimal deployment choices. We identify this critical failure mode as performance leakage, where the selected model overfits internal federation data and fails to generalize to unseen institutions. We propose GEN-Guard, a practical post-hoc framework to detect and correct generalization failures in federated surgical AI. It integrates Generalization Detection via Client-Blocked Evaluation (CBE), which validates performance on isolated client distributions to prevent performance leakage, and Generalization Correction through Disagreement-Aware Distillation (DAD), which learns adaptive feature-level corrections for cross-institutional robustness. Both components operate after standard FL convergence while providing robust support for zero-shot adaptation to unseen environments. We first quantify the severity of performance leakage, observing Model Selection Failures (MSFs) exceeding 80% under standard evaluation. GEN-Guard is evaluated on two multi-center clinical challenges: surgical phase recognition in laparoscopic cholecystectomy and polyp segmentation in colonoscopy. Across both datasets, GEN-Guard consistently corrects these failures, improving in-federation F1 scores by up to 2 points, unseen-institution performance by up to 3 points, and worst-case institutional performance by 3-9 points. Performance leakage represents a systematic and previously under-recognized risk in federated surgical AI. GEN-Guard provides a practical solution for detecting and correcting such failures. By improving cross-institutional robustness and zero-shot generalization, it strengthens the reliability of FL for real-world surgical deployment.",
-          "authors": [
-            "Julia Alekseenko",
-            "Pietro Mascagni",
-            "AI4SafeChole Consortium",
-            "Nicolas Padoy"
-          ],
-          "primary_category": "cs.CV",
-          "categories": [
-            "cs.CV"
-          ],
-          "published": "2026-06-18T14:38:27+00:00",
-          "link": "https://arxiv.org/pdf/2606.20303v1",
-          "tags": [
-            "keyword:eye-surgery",
-            "keyword:med-video",
-            "query:eye-surgery",
-            "query:med-video"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "addresses generalization failures in federated surgical video AI",
-          "llm_evidence_cn": "解决联邦手术视频AI中的泛化失败",
-          "llm_evidence": "解决联邦手术视频AI中的泛化失败",
-          "canonical_evidence": "解决联邦手术视频AI中的泛化失败",
-          "llm_tldr_en": "GEN-Guard detects and corrects generalization failures in federated surgical AI using client-blocked evaluation to prevent performance leakage.",
-          "llm_tldr_cn": "联邦学习在手术视频AI中面临标准评估实践导致的性能泄漏问题，即模型过拟合内部联邦数据而无法泛化到新机构。本文提出GEN-Guard，一个实用的事后框架，通过客户端阻塞评估检测泛化失败，并修正模型选择。该方法能识别并纠正泛化失败，确保联邦手术AI的可靠部署。",
-          "llm_tldr": "联邦学习在手术视频AI中面临标准评估实践导致的性能泄漏问题，即模型过拟合内部联邦数据而无法泛化到新机构。本文提出GEN-Guard，一个实用的事后框架，通过客户端阻塞评估检测泛化失败，并修正模型选择。该方法能识别并纠正泛化失败，确保联邦手术AI的可靠部署。",
-          "llm_tags": [
-            "query:med-video"
-          ],
-          "matched_query_tag": "query:med-video",
-          "matched_query_text": "processing and interpretation of surgical procedure videos",
-          "matched_requirement_id": "req-38",
-          "selection_source": "carryover_cache",
-          "paper_id": "2606.20303v1",
-          "carry_days": 1
-        }
-      ]
+      "items": []
     },
     "eye-surgery": {
-      "updated_date": "20260621",
+      "updated_date": "20260622",
       "carryover_days": 9,
       "items": []
     }
