@@ -1,0 +1,1153 @@
+{
+  "mode": "skims",
+  "generated_at": "2026-06-25T07:51:53.675911+00:00",
+  "stats": {
+    "mode": "skims",
+    "forced_all_quick": true,
+    "min_score": 8.0,
+    "deep_divecandidates": 27,
+    "deep_cap": null,
+    "deep_selected": 0,
+    "quick_candidates": 27,
+    "quick_skim_target": null,
+    "quick_selected": 27
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.17798v1",
+      "source": "arxiv",
+      "title": "LiveStarPro: Proactive Streaming Video Understanding with Hierarchical Memory for Long-Horizon Streams",
+      "abstract": "Despite the remarkable progress of Video Large Language Models (Video-LLMs), current online architectures still struggle to simultaneously process continuous video streams, decide autonomously when to respond, and preserve long-horizon contextual memory. These obstacles undermine real-time responsiveness and cause severe forgetting throughout prolonged interactions. In this work, we introduce LiveStarPro, a live streaming assistant that is designed for proactive video understanding over long-horizon streams. The design of LiveStarPro rests on three complementary components. The first component is Streaming Verification Decoding (SVeD), an inference framework that identifies the appropriate response timing through single-pass perplexity verification, thereby eliminating the dependency on explicit silence tokens. The second component is Streaming Causal Attention Masks (SCAM), a training strategy that enforces incremental video-language alignment over variable-length streams. The third component is Tree-Structured Hierarchical Memory (TSHM), a recursive memory architecture that organizes evicted historical information into event chains and consequently enables efficient retrieval from effectively unbounded video streams. To facilitate a comprehensive evaluation under realistic online conditions, we further present OmniStarPro, a large-scale benchmark that spans 15 diverse real-world scenarios and that extends to hour-scale streams for the assessment of long-term recall. Extensive experiments demonstrate that LiveStarPro consistently surpasses existing methods, attaining a 28.9% improvement in semantic correctness and an 18.2% reduction in timing error, while its streaming key-value cache further yields a 1.58x inference speedup over the same model without caching. The model and the code are publicly available at https://github.com/sotayang/LiveStarPro.",
+      "authors": [
+        "Zhenyu Yang",
+        "Kairui Zhang",
+        "Bing Wang",
+        "Shengsheng Qian",
+        "Changsheng Xu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-16T11:18:05+00:00",
+      "link": "https://arxiv.org/pdf/2606.17798v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proactive streaming video understanding agent with hierarchical memory",
+      "llm_evidence_cn": "具有分层记忆的主动流式视频理解智能体",
+      "llm_evidence": "具有分层记忆的主动流式视频理解智能体",
+      "canonical_evidence": "具有分层记忆的主动流式视频理解智能体",
+      "llm_tldr_en": "LiveStarPro proposes a proactive streaming video assistant with hierarchical memory and streaming verification decoding to autonomously decide response timing in long-horizon streams.",
+      "llm_tldr_cn": "现有在线视频语言模型难以同时处理流式输入、自主决定响应时机并保持长期记忆。LiveStarPro提出三层互补组件：流式验证解码（SVeD）识别响应时机、分层记忆缓存关键历史、以及主动理解策略。实验表明该智能体在长时间流式交互任务中显著减少了遗忘并提升了实时响应质量，为流视频助手提供了新架构。",
+      "llm_tldr": "现有在线视频语言模型难以同时处理流式输入、自主决定响应时机并保持长期记忆。LiveStarPro提出三层互补组件：流式验证解码（SVeD）识别响应时机、分层记忆缓存关键历史、以及主动理解策略。实验表明该智能体在长时间流式交互任务中显著减少了遗忘并提升了实时响应质量，为流视频助手提供了新架构。",
+      "llm_tags": [
+        "query:stream-agent"
+      ],
+      "matched_query_tag": "query:stream-agent",
+      "matched_query_text": "streaming video understanding with agent",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.00620v1",
+      "source": "arxiv",
+      "title": "FlowNar: Scalable Streaming Narration for Long-Form Videos",
+      "abstract": "Recent Large Multimodal Models (LMMs), primarily designed for offline settings, are ill-suited for the dynamic requirements of streaming video. While recent online adaptations improve real-time processing, they still face critical scalability challenges, with resource demands typically growing at least linearly with video duration. To overcome this bottleneck, we propose FlowNar, a novel framework for scalable streaming video narration. The core of FlowNar is a dynamic context management strategy for historical visual context removal, combined with our CLAM (Cross Linear Attentive Memory) module for streaming visual history retention, ensuring bounded visual memory usage and computational complexity, crucial for efficient streaming. We also introduce a realistic self-conditioned evaluation protocol and complementary evaluation metrics to assess streaming narration models under deployment-like conditions. Experiments on the Ego4D, EgoExo4D, and EpicKitchens100 datasets demonstrate that FlowNar substantially improves narration quality over strong baselines while being highly efficient, supporting processing of 10$\\times$ longer videos and achieving 3$\\times$ higher throughput (FPS). The code is available at https://github.com/zeyun-zhong/FlowNar.",
+      "authors": [
+        "Zeyun Zhong",
+        "Manuel Martin",
+        "Chengzhi Wu",
+        "David Schneider",
+        "Frederik Diederichs",
+        "Juergen Gall",
+        "Juergen Beyerer"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-30T08:51:28+00:00",
+      "link": "https://arxiv.org/pdf/2606.00620v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "scalable streaming narration with bounded memory and computation",
+      "llm_evidence_cn": "可扩展流式叙述，有界内存和计算",
+      "llm_evidence": "可扩展流式叙述，有界内存和计算",
+      "canonical_evidence": "可扩展流式叙述，有界内存和计算",
+      "llm_tldr_en": "FlowNar proposes dynamic context management and CLAM module for scalable streaming video narration with bounded resource usage.",
+      "llm_tldr_cn": "针对现有流式大模型资源消耗随视频时长线性增长的问题，FlowNar提出动态历史视觉上下文移除策略和Cross Linear Attentive Memory模块，实现有界视觉内存使用和计算复杂度，适用于长视频的持续流式叙述。实验证明其高效性和可扩展性。",
+      "llm_tldr": "针对现有流式大模型资源消耗随视频时长线性增长的问题，FlowNar提出动态历史视觉上下文移除策略和Cross Linear Attentive Memory模块，实现有界视觉内存使用和计算复杂度，适用于长视频的持续流式叙述。实验证明其高效性和可扩展性。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01933v1",
+      "source": "arxiv",
+      "title": "3rd Place at CVPR 2026 CASTLE Challenge: Agentic Multi-View Long-Context Video Understanding via Hierarchical Knowledge Graph Retrieval",
+      "abstract": "This paper presents our winning methodology for the CASTLE 2026 Challenge at the CVPR 2026 EgoVis Workshop, where our team secured third place globally. The challenge tasks participants with answering highly complex visual, spatiotemporal, and verbal questions, including visual counting, action localization, multi-view tracking and speaker temporal reasoning, within massive, multimodal video streams. The underlying dataset consists of over 600 hours synchronized footage captured by 15 ego and exo camera sources. To tackle the extreme scale and long-context demands of this environment, we introduce a training-free agentic framework optimized for long-form video understanding. Our framework introduces two core architectural components: i) a Video Knowledge Graph that maps static and dynamic entities, their temporal relationships, and intersecting events to enable multi-hop relational reasoning, and ii) an adaptive agentic workflow that resolves complex queries through a hierarchical retrieval and indexing. Empirical results demonstrate that our framework achieves high zero-shot reasoning accuracy on long-context multi-view streams. Our code will be released at https://github.com/RaghadKhaled/CASTLE-Challenge-Framework.",
+      "authors": [
+        "Raghad Albusayes",
+        "Munirah Alyahya"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-01T09:01:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.01933v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Training-free agentic framework for long-form video understanding in multi-view streams",
+      "llm_evidence_cn": "多视角视频流中免训练的智能体长视频理解框架",
+      "llm_evidence": "多视角视频流中免训练的智能体长视频理解框架",
+      "canonical_evidence": "多视角视频流中免训练的智能体长视频理解框架",
+      "llm_tldr_en": "A training-free agentic framework for multi-view long-context video understanding, using hierarchical knowledge graph retrieval, achieving third place in CASTLE 2026.",
+      "llm_tldr_cn": "提出一种免训练的智能体框架用于多视角长上下文视频理解，通过层次化知识图谱检索处理大规模视频流，在CVPR 2026 CASTLE挑战赛中获得第三名。",
+      "llm_tldr": "提出一种免训练的智能体框架用于多视角长上下文视频理解，通过层次化知识图谱检索处理大规模视频流，在CVPR 2026 CASTLE挑战赛中获得第三名。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.02246v1",
+      "source": "arxiv",
+      "title": "Ego-METAS: Egocentric online Multimodal Energy-efficient Temporal Action Segmentation benchmark",
+      "abstract": "To operate in the physical world, embodied agents must perceive their environment in an \"always-on\" fashion, selectively accessing the most informative sensors to balance energy constraints and task accuracy. Despite its importance for resource-constrained devices, energy-aware perception remains under-explored, with most prior work assuming unlimited compute. To address this, we introduce Ego-METAS: the first Egocentric online Multimodal Energy-efficient Temporal Action Segmentation benchmark. Ego-METAS provides a unified testbed of more than 100 hours of untrimmed egocentric video from EgoExo4D, CMU-MMAC, and CaptainCook4D, spanning 5 modalities (RGB, audio, gaze, IMU, and monochrome camera). We formulate an online temporal action segmentation task where models must dynamically select which sensors to activate at each timestep while strictly adhering to hardware-representative energy budgets. Alongside the benchmark, we release unified splits, cleaned annotations, pre-extracted features, and a diverse suite of baseline routing policies. Our evaluations show that optimal routing is highly scenario-dependent, and that existing policy-learning methods, designed primarily for trimmed clips, struggle to adapt to continuous, untrimmed environments. However, even simple dynamic fusion of complementary modalities (e.g., via random routing) proves critical for balancing predictive accuracy against strict energy budgets. Ultimately, Ego-METAS provides a standardized foundation to develop robust, cost-aware policies for autonomous, always-on embodied AI.",
+      "authors": [
+        "Maria Santos-Villafranca",
+        "Jesus Bermudez-cameo",
+        "Alejandro Perez-Yus",
+        "Giovanni Maria Farinella",
+        "Antonino Furnari"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-29T17:36:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.02246v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "egocentric online temporal action segmentation benchmark",
+      "llm_evidence_cn": "第一视角在线时间动作分割基准",
+      "llm_evidence": "第一视角在线时间动作分割基准",
+      "canonical_evidence": "第一视角在线时间动作分割基准",
+      "llm_tldr_en": "Ego-METAS is the first egocentric online multimodal energy-efficient temporal action segmentation benchmark with over 100 hours of video, enabling energy-aware perception for embodied agents.",
+      "llm_tldr_cn": "Ego-METAS是首个第一视角在线多模态节能时间动作分割基准，包含100多小时视频。该基准将在线时间动作分割公式化为节能问题，支持5种模态，为资源受限的具身智能体提供评估平台。",
+      "llm_tldr": "Ego-METAS是首个第一视角在线多模态节能时间动作分割基准，包含100多小时视频。该基准将在线时间动作分割公式化为节能问题，支持5种模态，为资源受限的具身智能体提供评估平台。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.03890v1",
+      "source": "arxiv",
+      "title": "OVO-S-Bench: A Hierarchical Benchmark for Streaming Spatial Intelligence in Multimodal LLMs",
+      "abstract": "Multimodal agents in robotics, AR, and autonomous driving must reason about places and layouts from continuous egocentric streams, often using evidence outside the current view. Existing benchmarks either evaluate offline over full videos or target events rather than spatial structure. We introduce OVO-S-Bench, a fully human-annotated benchmark for streaming spatial intelligence, comprising 1,680 questions over 348 source videos. Annotation involves 12 trained annotators, each also serving as a blind cross-reviewer, across roughly 804 person-hours of multi-round quality assurance. Each question carries a query timestamp and an evidence interval, and at evaluation, the model sees only the prefix preceding the query. Questions span four levels of increasing abstraction: instantaneous egocentric perception, spatiotemporal context tracking, spatial simulation and reasoning, and allocentric mapping. Across 38 proprietary and open-source MLLMs, Gemini-3.1-Pro trails human experts by 27 points, 59.2 vs. 86.6, with allocentric mapping as the dominant bottleneck. Notably, streaming and spatially fine-tuned MLLMs underperform their own backbones. We further find that chain-of-thought reasoning amplifies spatial errors when ungrounded in the stream. By exposing these limitations, OVO-S-Bench establishes a demanding testbed for next-generation streaming spatial MLLMs.",
+      "authors": [
+        "Yifei Li",
+        "Pengyiang Liu",
+        "Yuhang Zang",
+        "Zhongyue Shi",
+        "Qi Fu",
+        "Hongye Hao",
+        "Jiwen Lu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-02T16:51:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.03890v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Streaming spatial intelligence benchmark for multimodal LLMs",
+      "llm_evidence_cn": "多模态LLM的流式空间智能基准",
+      "llm_evidence": "多模态LLM的流式空间智能基准",
+      "canonical_evidence": "多模态LLM的流式空间智能基准",
+      "llm_tldr_en": "OVO-S-Bench is a human-annotated benchmark for streaming spatial intelligence, with 1680 questions over 348 videos, requiring models to reason from continuous egocentric streams.",
+      "llm_tldr_cn": "OVO-S-Bench是一个完全人工标注的流式空间智能基准，包含1680个问题、348个视频，每个问题有查询时间戳和证据区间，模型只能看到查询前的视频前缀，评估多模态LLM的流式空间推理能力。",
+      "llm_tldr": "OVO-S-Bench是一个完全人工标注的流式空间智能基准，包含1680个问题、348个视频，每个问题有查询时间戳和证据区间，模型只能看到查询前的视频前缀，评估多模态LLM的流式空间推理能力。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06991v1",
+      "source": "arxiv",
+      "title": "Don't Pause: Streaming Video-Language Synchrony for Online Video Understanding",
+      "abstract": "Online Video Large Language Models (Video-LLMs) have advanced toward seamless human-AI interaction through frame-by-frame processing and proactive responding. However, a critical challenge remains in streaming scenarios: existing models typically pause video perception while generating responses, breaking real-time video-language synchrony and causing stutters. To address this, we introduce a novel paradigm for online video understanding: Streaming Video-Language Synchrony (SVLS), and present LyraV, a live streaming assistant built upon a hierarchical control framework with two core innovations. First, the Frame-Driven Transition Controller (FDTC), a training-free verification-based finite-state machine, makes high-level semantic decisions on when to continue speaking, start a new response, or stay silent. Second, the Streaming Token Pacer (SToP), a plug-and-play lightweight predictive module, dynamically adapts the language generation rate to match the pace of the visual content. Concretely, LyraV performs \\emph{per-frame incremental, sub-budget decoding}: within each frame interval it emits only a small chunk of tokens that fits the real-time budget, so perception is never blocked for a full sentence. Together, these components enable LyraV to seamlessly interleave incoming video frames with generated word tokens, achieving a fine-grained synchrony. Extensive experiments conducted on five online and three offline benchmarks demonstrate that LyraV preserves the backbone's general understanding ability while substantially improving streaming synchrony and narrative fluency, delivering a 98.29\\% synchrony with video playback and a real-time processing speed of 3.89 FPS. Interestingly, we observe an empirical capability in LyraV: dynamic reasoning over streaming tokens, enabling continuous interpretation and \"thinking\" alongside visual input.",
+      "authors": [
+        "Zhenyu Yang",
+        "Kairui Zhang",
+        "Shengsheng Qian",
+        "Weiming Dong",
+        "Changsheng Xu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-05T07:29:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.06991v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Streaming video-language synchrony for online video understanding",
+      "llm_evidence_cn": "用于在线视频理解的流式视频语言同步",
+      "llm_evidence": "用于在线视频理解的流式视频语言同步",
+      "canonical_evidence": "用于在线视频理解的流式视频语言同步",
+      "llm_tldr_en": "LyraV introduces Streaming Video-Language Synchrony (SVLS) for online video understanding, with a Frame-Driven Transition Controller for real-time perception without pauses.",
+      "llm_tldr_cn": "提出流式视频语言同步（SVLS）范式，构建LyraV实时辅助系统，通过帧驱动转换控制器实现视频感知与语音生成的无缝同步，避免了传统模型处理时的暂停问题。",
+      "llm_tldr": "提出流式视频语言同步（SVLS）范式，构建LyraV实时辅助系统，通过帧驱动转换控制器实现视频感知与语音生成的无缝同步，避免了传统模型处理时的暂停问题。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07512v1",
+      "source": "arxiv",
+      "title": "MemDreamer: Decoupling Perception and Reasoning for Long Video Understanding via Hierarchical Graph Memory and Agentic Retrieval Mechanism",
+      "abstract": "Current Vision-Language Models struggle with hours-long videos because processing full-length visual sequences induces prohibitive token explosion and attention dilution. To overcome this, we introduce MemDreamer to decouple perception and reasoning, shifting long-video understanding into an agentic exploration process. As a plug-and-play framework, it incrementally streams videos to construct a Hierarchical Graph Memory, a top-down three-tier architecture for semantic abstraction, anchored by a foundational graph capturing spatiotemporal and causal relations. During inference, the reasoning model employs agentic tool-augmented retrieval, navigating hierarchies, searching nodes, and traversing logical edges via an Observation-Reason-Action loop. Experiments show MemDreamer achieves SOTA results across four mainstream benchmarks, narrowing the gap with human experts to only 3.7 points. It constrains the reasoning context window to merely 2% of full-context ingestion while delivering a 12.5 point absolute accuracy gain. Furthermore, statistical analysis uncovers a strong positive linear correlation between an VLM's performance on logic reasoning and long-video understanding benchmarks, establishing agentic capability scaling as a new paradigm for multimodal comprehension.",
+      "authors": [
+        "Cong Chen",
+        "Guo Gan",
+        "Kaixiang Ji",
+        "ChaoYang Zhang",
+        "Zhen Yang",
+        "Guangming Yao",
+        "Hao Chen",
+        "Jingdong Chen",
+        "Yi Yuan",
+        "Chunhua Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-05T17:59:21+00:00",
+      "link": "https://arxiv.org/pdf/2606.07512v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agentic retrieval and hierarchical graph memory for streaming long video understanding",
+      "llm_evidence_cn": "智能体检索与分层图记忆实现流式长视频理解",
+      "llm_evidence": "智能体检索与分层图记忆实现流式长视频理解",
+      "canonical_evidence": "智能体检索与分层图记忆实现流式长视频理解",
+      "llm_tldr_en": "MemDreamer decouples perception and reasoning, incrementally streaming videos into a hierarchical graph memory and using agentic tool-augmented retrieval for long video understanding.",
+      "llm_tldr_cn": "针对现有时长视频理解中token爆炸和注意力稀释问题，MemDreamer解耦感知与推理，将长视频以增量流式方式构建为分层图记忆，推理时通过智能体增强检索导航层次结构，有效实现长视频的细粒度理解，是一种即插即用的框架。",
+      "llm_tldr": "针对现有时长视频理解中token爆炸和注意力稀释问题，MemDreamer解耦感知与推理，将长视频以增量流式方式构建为分层图记忆，推理时通过智能体增强检索导航层次结构，有效实现长视频的细粒度理解，是一种即插即用的框架。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07639v1",
+      "source": "arxiv",
+      "title": "MOSS-Video-Preview: Toward Real-Time Video Understanding via Cross-Attention",
+      "abstract": "Video understanding is shifting from the offline paradigm -- taking a fully recorded video as input and producing a single answer after it ends -- toward real-time interaction, in which the model perceives new frames while still replying, revises its answer as new evidence appears, and remains silent when there is nothing to say. We present MOSS-Video-Preview to validate this paradigm. Our central claim is that perception must not be blocked by generation; its natural realization is a two-channel architecture. We argue that a cross-attention backbone is better suited to real-time vision-language fusion than the prevailing decoder-only design: visual features enter through a side channel rather than joining the autoregressive sequence, so perception and generation run on separate, non-blocking pathways -- reducing the frequency of visual processing and exposing a clean channel-wise interface for independent compression. We complement this with a data synthesis pipeline that converts dense captions into real-time understanding QA whose answers are revised to match what the model has perceived so far, and we specialize an offline model on these data to elicit real-time behavior. Our model trails the strong Qwen2.5-VL-7B baseline overall -- a gap we attribute primarily to data and scale rather than the architecture -- yet attains competitive offline video and multimodal understanding, remains robust on the spatial and fine-grained temporal reasoning central to real-time use, and acquires behaviors that offline models lack: continuous perception, answer revision, and timely silence. On a single H200 with 256 frames per video, it achieves about a 5x speedup in time to first token and 2.7x higher decoding throughput, with negligible degradation in offline ability. Our study of paradigm, architecture, and data outlines a viable path toward real-time video understanding.",
+      "authors": [
+        "Pengyu Wang",
+        "Chenkun Tan",
+        "Shaojun Zhou",
+        "Wei Huang",
+        "Qirui Zhou",
+        "Zhan Huang",
+        "Zhen Ye",
+        "Jijun Cheng",
+        "Xiaomeng Qian",
+        "Yanxin Chen",
+        "Xingyang He",
+        "Huazheng Zeng",
+        "Chenghao Wang",
+        "Pengfei Wang",
+        "Hongkai Wang",
+        "Shanqing Gao",
+        "Yixian Tian",
+        "Chenghao Liu",
+        "Xinghao Wang",
+        "Botian Jiang",
+        "Xipeng Qiu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-01T09:07:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.07639v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "real-time video understanding via cross-attention two-channel architecture",
+      "llm_evidence_cn": "通过交叉注意力双通道架构实现实时视频理解",
+      "llm_evidence": "通过交叉注意力双通道架构实现实时视频理解",
+      "canonical_evidence": "通过交叉注意力双通道架构实现实时视频理解",
+      "llm_tldr_en": "MOSS-Video-Preview proposes a two-channel cross-attention architecture for real-time video understanding, allowing perception to continue during generation.",
+      "llm_tldr_cn": "MOSS-Video-Preview提出一种双通道交叉注意力架构，实现实时视频理解。核心是感知不阻塞生成：视觉特征通过侧通道输入，使模型能在回答过程中持续感知新帧。实验验证了该范式在实时交互场景的有效性。",
+      "llm_tldr": "MOSS-Video-Preview提出一种双通道交叉注意力架构，实现实时视频理解。核心是感知不阻塞生成：视觉特征通过侧通道输入，使模型能在回答过程中持续感知新帧。实验验证了该范式在实时交互场景的有效性。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15200v1",
+      "source": "arxiv",
+      "title": "Keep It in Mind: User Centric Continual Spatial Intelligence Reasoning in Egocentric Video Streams",
+      "abstract": "We introduce UCS-Bench, a dataset spanning 170+ hours of egocentric visual observations with 8.1K+ timestamped questions for diagnosing User-Centric Continual Spatial intelligence in egocentric video streams. UCS-Bench targets a new problem that emphasizes dynamic spatial reasoning, long-term memory, and their alignment with users' real-time locations. We propose DirectMe, a framework that incrementally constructs and maintains a structured spatial memory from streaming egocentric observations. DirectMe enables robust tracking and recall of object locations, all relative to the user's movement over time. By tightly coupling visual perception with memory updates and spatial reasoning, our approach supports long-horizon queries that require recalling interactions, resolving viewpoint-induced ambiguities, and adapting to dynamic scenes. Our experiments show that DirectMe significantly improves the spatial reasoning of leading multimodal LLMs; it also surpasses many spatially aware and long-form streaming video models. We hope our benchmark and solution will advance spatial intelligence research for egocentric AI assistants. Data and code are available at https://github.com/cocowy1/UCS-Bench.",
+      "authors": [
+        "Yun Wang",
+        "Junbin Xiao",
+        "Han Lyu",
+        "Yifan Wang",
+        "Jing Zuo",
+        "Zhanjie Zhang",
+        "Hong Huang",
+        "Dapeng Wu",
+        "Angela Yao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-13T08:50:49+00:00",
+      "link": "https://arxiv.org/pdf/2606.15200v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "egocentric video stream spatial reasoning benchmark and framework",
+      "llm_evidence_cn": "第一视角流式视频的空间持续推理数据集和框架",
+      "llm_evidence": "第一视角流式视频的空间持续推理数据集和框架",
+      "canonical_evidence": "第一视角流式视频的空间持续推理数据集和框架",
+      "llm_tldr_en": "UCS-Bench diagnoses user-centric continual spatial intelligence in egocentric video streams, and DirectMe constructs spatial memory from streaming observations.",
+      "llm_tldr_cn": "第一视角视频中动态空间推理与长期记忆对齐是一个尚未充分研究的问题。本文构建UCS-Bench数据集，包含170多小时第一视角观察和8100+时间戳问题，用于诊断用户中心的持续空间智能。提出DirectMe框架，从流式第一视角观察中增量构建结构化空间记忆，实现相对于用户移动的物体位置跟踪与回忆。实验表明该方法在长时程空间查询上表现优异。",
+      "llm_tldr": "第一视角视频中动态空间推理与长期记忆对齐是一个尚未充分研究的问题。本文构建UCS-Bench数据集，包含170多小时第一视角观察和8100+时间戳问题，用于诊断用户中心的持续空间智能。提出DirectMe框架，从流式第一视角观察中增量构建结构化空间记忆，实现相对于用户移动的物体位置跟踪与回忆。实验表明该方法在长时程空间查询上表现优异。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.16353v1",
+      "source": "arxiv",
+      "title": "What Should a Streaming Video Model Remember?",
+      "abstract": "Streaming video understanding models must answer queries at any moment during an ongoing stream, using only what they have observed so far and under fixed memory and computation budgets. Existing methods address this by adding memory banks, retrieval modules, or visual token compression to preserve long-range history. However, strong recent-window baselines show that indiscriminate history injection can dilute current-scene perception, suggesting that the key challenge is not whether to use memory, but how to allocate it selectively. We formulate this as budgeted online latent evidence allocation and propose \\textbf{SelectStream}, a selective latent-memory framework that keeps the current observation directly visible to a frozen VLM while exposing historical information only through a compact, query-conditioned evidence budget. Three coordinated mechanisms govern when to write, what to preserve, and how to retrieve: surprise-driven adaptive windowing, priority-preserving consolidation, and query-conditioned graph reasoning over a fixed-capacity latent memory graph. Retrieved evidence is calibrated and injected as latent tokens for answer generation, without replaying frames or growing the context with stream length. Experimental results show that SelectStream achieves strong online streaming performance and preserves general video understanding, reaching 82.67\\% on StreamingBench, 67.03\\% on OVO-Bench, and 74.4\\% average accuracy on offline video benchmarks, while outperforming strong recent-window baselines and prior streaming memory methods.",
+      "authors": [
+        "Haonan Ge",
+        "Yiwei Wang",
+        "Hang Wu",
+        "Yujun Cai"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-15T07:50:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.16353v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Streaming video understanding with selective memory framework",
+      "llm_evidence_cn": "流式视频理解的选择性记忆框架",
+      "llm_evidence": "流式视频理解的选择性记忆框架",
+      "canonical_evidence": "流式视频理解的选择性记忆框架",
+      "llm_tldr_en": "SelectStream proposes budgeted online latent evidence allocation for streaming video understanding, selectively exposing historical information to a frozen VLM while keeping current observation dominant, improving accuracy under fixed compute.",
+      "llm_tldr_cn": "流式视频理解模型面临记忆预算有限的问题。SelectStream将选择性记忆分配建模为在线潜在证据分配问题，通过仅暴露关键历史信息给冻结的视觉语言模型，在保持当前场景感知的同时高效利用记忆。实验表明该方法在多个流式理解任务上以更少计算量超越强基线，揭示了选择性记忆的重要性。",
+      "llm_tldr": "流式视频理解模型面临记忆预算有限的问题。SelectStream将选择性记忆分配建模为在线潜在证据分配问题，通过仅暴露关键历史信息给冻结的视觉语言模型，在保持当前场景感知的同时高效利用记忆。实验表明该方法在多个流式理解任务上以更少计算量超越强基线，揭示了选择性记忆的重要性。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.17627v1",
+      "source": "arxiv",
+      "title": "Divide, Deliberate, Decide: A Multi-Agent Framework for Fine-Grained Egocentric Action Recognition",
+      "abstract": "Fine-grained action recognition in egocentric video is challenging for Vision-Language Models (VLMs): actions often differ only in small visual cues, and a single model tends to be biased toward a subset of these cues. We propose Divide, Deliberate, Decide, a fully-local, zero-shot multi-agent framework in which (i) a VLM orchestrator chunks the video and proposes a top-k candidate label list per segment, (ii) an ensemble of heterogeneous VLM specialists, drawn from different open model families, engages in a structured deliberation that includes a peer-consultation round of questions, and (iii) agent rankings are aggregated with a Borda count and the orchestrator re-ranks its own prediction in light of the specialists' evidence. The entire pipeline runs locally with no fine-tuning. Experiments show that our method positively improves zero-shot action recognition performance over the baseline, highlighting the influence of a heterogeneous deliberation step, showing that the gain stems from decorrelated model priors rather than from additional compute.",
+      "authors": [
+        "Alessandro Sottovia",
+        "Alessandro Torcinovich",
+        "Oswald Lanz"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-16T07:31:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.17627v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Multi-agent framework for egocentric action recognition",
+      "llm_evidence_cn": "用于自我中心动作识别的多智能体框架",
+      "llm_evidence": "用于自我中心动作识别的多智能体框架",
+      "canonical_evidence": "用于自我中心动作识别的多智能体框架",
+      "llm_tldr_en": "Divide, Deliberate, Decide is a zero-shot multi-agent framework for fine-grained egocentric action recognition, using heterogeneous VLM specialists and deliberation.",
+      "llm_tldr_cn": "提出Divide, Deliberate, Decide多智能体框架，用于零样本细粒度自我中心动作识别，通过VLM编排器分块候选，异构专家模型审议，最后融合排名，有效提升细粒度识别能力。",
+      "llm_tldr": "提出Divide, Deliberate, Decide多智能体框架，用于零样本细粒度自我中心动作识别，通过VLM编排器分块候选，异构专家模型审议，最后融合排名，有效提升细粒度识别能力。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.19341v1",
+      "source": "arxiv",
+      "title": "Native Active Perception as Reasoning for Omni-Modal Understanding",
+      "abstract": "Passive models for long video understanding typically rely on a \"watch-it-all\" paradigm, processing frames uniformly regardless of query difficulty, causing computational cost to grow with video duration. Although interactive frameworks have emerged, they often rely on global pre-scanning, and their context cost still scales with video length. We propose OmniAgent, the first native omni-modal agent that formulates video understanding as a POMDP-based iterative Observation-Thought-Action cycle. OmniAgent executes on-demand actions to selectively distill audio-visual cues into a persistent textual memory, effectively decoupling reasoning complexity from raw video duration. To operationalize this, we introduce (1) Agentic Supervised Fine-Tuning to bootstrap native active perception via best-of-N trajectory synthesis with dual-stage quality control, and (2) Agentic Reinforcement Learning with TAURA (Turn-aware Adaptive Uncertainty Rescaled Advantage), which leverages turn-level entropy to steer credit assignment toward pivotal discovery turns. Crucially, OmniAgent exhibits positive test-time scaling, where performance improves as the number of reasoning turns increases, validating the efficacy of active perception. Empirical results across ten benchmarks (e.g., VideoMME, LVBench) demonstrate that OmniAgent achieves state-of-the-art performance among open-source models. Notably, on LVBench, our 7B agent outperforms the 10$\\times$ larger Qwen2.5-VL-72B (50.5% vs. 47.3%).",
+      "authors": [
+        "Zhenghao Xing",
+        "Ruiyang Xu",
+        "Yuxuan Wang",
+        "Jinzheng He",
+        "Ziyang Ma",
+        "Qize Yang",
+        "Yunfei Chu",
+        "Jin Xu",
+        "Junyang Lin",
+        "Chi-Wing Fu",
+        "Pheng-Ann Heng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL",
+        "cs.SD"
+      ],
+      "published": "2026-06-17T17:59:56+00:00",
+      "link": "https://arxiv.org/pdf/2606.19341v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "streaming video understanding with agent using POMDP cycle",
+      "llm_evidence_cn": "基于POMDP的流式视频理解智能体",
+      "llm_evidence": "基于POMDP的流式视频理解智能体",
+      "canonical_evidence": "基于POMDP的流式视频理解智能体",
+      "llm_tldr_en": "Proposes OmniAgent, a native omni-modal agent that formulates video understanding as a POMDP-based iterative Observation-Thought-Action cycle, enabling on-demand selective distillation to decouple reasoning from video duration.",
+      "llm_tldr_cn": "现有被动长视频理解模型计算成本随时长增长，交互式框架仍需全局预扫描。本文提出OmniAgent，首个原生全模态智能体，将视频理解建模为基于POMDP的迭代观察-思考-行动循环，通过按需执行动作选择性提取音视频线索到持久文本记忆，从而将推理复杂度与原始视频时长解耦。实验表明该方法在长视频推理任务上显著优于基线，且推理成本不随视频长度增加。",
+      "llm_tldr": "现有被动长视频理解模型计算成本随时长增长，交互式框架仍需全局预扫描。本文提出OmniAgent，首个原生全模态智能体，将视频理解建模为基于POMDP的迭代观察-思考-行动循环，通过按需执行动作选择性提取音视频线索到持久文本记忆，从而将推理复杂度与原始视频时长解耦。实验表明该方法在长视频推理任务上显著优于基线，且推理成本不随视频长度增加。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.19849v1",
+      "source": "arxiv",
+      "title": "ViCoStream: Streaming VideoLLMs Can Run Beyond 100 FPS with Stage-Wise Coordinated Inference",
+      "abstract": "Streaming VideoLLMs must continuously process incoming video while maintaining low query latency, making both video-ingestion throughput and query-time responsiveness critical for real-time deployment. Existing methods largely focus on accelerating individual modules, such as visual encoding, token pruning, or KV-cache compression, but provide limited insight into whether the resulting system can sustain real-time streaming performance. We formulate streaming VideoLLM inference as a coordinated pipeline spanning visual preprocessing, visual encoding, token dropping, and LLM prefilling/decoding. Building on this formulation, we propose ViCoStream (Video Coordinated Streaming), a stage-wise coordinated streaming framework that combines chunk-wise execution, CUDA-stream overlap, visual token control, bounded visual attention, and query-side retrieval to bound per-chunk computation and memory costs. We further provide a systematic study of bottleneck migration, revealing how chunk size, token retention, attention locality, and retrieval scope shape the throughput-accuracy trade-off. Experiments with Qwen2.5-VL-3B/7B-Instruct across multiple streaming benchmarks show that ViCoStream achieves 134 FPS video throughput and less than 50 ms TTFT on a single A100 GPU while maintaining accuracy close to full-history baselines.",
+      "authors": [
+        "Yang Tan",
+        "Junlong Tong",
+        "Linan Yue",
+        "Hao Wu",
+        "Pengfei Fang",
+        "Xiaoyu Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-18T06:57:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.19849v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "streaming VideoLLM inference acceleration for real-time video understanding",
+      "llm_evidence_cn": "流式VideoLLM推理加速，实现实时视频理解",
+      "llm_evidence": "流式VideoLLM推理加速，实现实时视频理解",
+      "canonical_evidence": "流式VideoLLM推理加速，实现实时视频理解",
+      "llm_tldr_en": "Proposes ViCoStream, a stage-wise coordinated streaming framework for VideoLLM inference that achieves over 100 FPS by orchestrating visual preprocessing, encoding, token pruning, and LLM prefilling/decoding.",
+      "llm_tldr_cn": "流式VideoLLM需要持续处理视频并保持低查询延迟，现有方法各自加速但缺乏整体协调。本文提出ViCoStream，将流式推理建模为阶段协调流水线，涵盖视觉预处理、编码、令牌丢弃和LLM预填充/解码，通过全局协调实现超过100 FPS的处理速度，显著提升实时流式视频理解性能。",
+      "llm_tldr": "流式VideoLLM需要持续处理视频并保持低查询延迟，现有方法各自加速但缺乏整体协调。本文提出ViCoStream，将流式推理建模为阶段协调流水线，涵盖视觉预处理、编码、令牌丢弃和LLM预填充/解码，通过全局协调实现超过100 FPS的处理速度，显著提升实时流式视频理解性能。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.23327v1",
+      "source": "arxiv",
+      "title": "VideoAgent: All-in-One Framework for Video Understanding and Editing",
+      "abstract": "Video editing has become essential in digital media creation, yet existing automated systems are restricted to short segment processing and domain-specific tasks. They face two critical limitations: i) inability to handle diverse video comprehension and editing operations, and ii) lack of long-video understanding for coherent narrative creation. We propose VideoAgent, an all-in-one agentic framework addressing these challenges through two key innovations. First, we develop automated video shot creation with shot planning agents for coherent narratives and cross-modal retrieval for aligned visual content. Second, we design a multi-agent orchestration framework integrating over thirty specialized editing agents. Intent parsing filters relevant tools while textual-gradient graph optimization assembles complex editing pipelines. Extensive experiments on our newly-proposed VideoEdit benchmark and public datasets demonstrate VideoAgent's superiority over existing multimodal LLMs and agentic systems. VideoAgent achieves 87-95% orchestration success rates while reducing API costs by 60%. Human evaluation across six video categories shows VideoAgent produces professional-quality content approaching human-level performance, with ratings only 4% below human-created videos. We release our code at https://github.com/HKUDS/VideoAgent.",
+      "authors": [
+        "Hengji Zhou",
+        "Lingxuan Huang",
+        "Jian Wang",
+        "Bing Zhou",
+        "Si Wu",
+        "Lianghao Xia",
+        "Chao Huang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-22T13:37:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.23327v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agent-based video understanding and editing framework",
+      "llm_evidence_cn": "基于智能体的视频理解与编辑框架",
+      "llm_evidence": "基于智能体的视频理解与编辑框架",
+      "canonical_evidence": "基于智能体的视频理解与编辑框架",
+      "llm_tldr_en": "Proposes VideoAgent, an all-in-one agentic framework for video understanding and editing with multi-agent orchestration and intent parsing.",
+      "llm_tldr_cn": "现有视频编辑系统局限于短片段和领域特定任务，缺乏长视频理解和多样化操作能力。本文提出VideoAgent全合一智能体框架，通过自动镜头创建解决长叙事连贯性，并设计多智能体编排集成三十多个专业编辑智能体，实现意图解析和工具选择。该框架显著提升了视频理解与编辑的自动化水平。",
+      "llm_tldr": "现有视频编辑系统局限于短片段和领域特定任务，缺乏长视频理解和多样化操作能力。本文提出VideoAgent全合一智能体框架，通过自动镜头创建解决长叙事连贯性，并设计多智能体编排集成三十多个专业编辑智能体，实现意图解析和工具选择。该框架显著提升了视频理解与编辑的自动化水平。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.25658v1",
+      "source": "arxiv",
+      "title": "Towards a Dynamic and Fixed-budget Memory Bank for Efficient Streaming Video Understanding",
+      "abstract": "Currently, streaming video understanding is still a daunting task for existing \\emph{multimodal large language models} (MLLMs). Its difficulties not only lie in handling the ever-increasing video frames, but also in the unpredictability of future video content and input instructions. In this paper, we study this task from the perspective of constructing a dynamic but fixed-budget memory bank, and propose a novel and training-free approach termed \\emph{\\textbf{CausalMem}}. CausalMem is dedicated to constructing a dynamic visual memory update mechanism, thereby maximizing the amount of information in streaming video within a limited memory space, much like the human brain. In practice, CausalMem estimates the redundancy of visual tokens and updates the memory bank via an online semantic basis, which models the principal semantics of the observed video stream. To validate CausalMem, we apply it to two representative MLLMs, namely LLaVA-OneVision and Qwen2.5-VL respectively, and conduct extensive experiments on both streaming and offline video understanding benchmarks. The experimental results not only show the great advantages than existing methods under both streaming and offline settings, \\emph{e.g.}, $+3.2\\%$ and $+3.0\\%$ average accuracy gains respectively, but also witness the superior semantic preservation for streaming videos, \\emph{e.g.}, using 12$k$ token budgets to memorize hour-long streaming videos, which achieves more than \\textbf{20$\\times$} visual token compression ratio and only occupies about \\textbf{82 MB} storage. \\textbf{Our code} is given in \\href{https://github.com/hktk07/CausalMem}{CausalMem}.",
+      "authors": [
+        "Baiyang Song",
+        "Yuli Lin",
+        "Qiong Wu",
+        "Tao Chen",
+        "Jun Peng",
+        "Xiao Chen",
+        "Yiyi Zhou",
+        "Rongrong Ji"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-24T10:11:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.25658v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "dynamic fixed-budget memory bank for streaming video understanding",
+      "llm_evidence_cn": "提出CausalMem动态固定预算记忆库，高效处理流式视频",
+      "llm_evidence": "提出CausalMem动态固定预算记忆库，高效处理流式视频",
+      "canonical_evidence": "提出CausalMem动态固定预算记忆库，高效处理流式视频",
+      "llm_tldr_en": "CausalMem proposes a training-free dynamic memory bank for streaming video understanding that maximizes information within a fixed budget.",
+      "llm_tldr_cn": "流式视频理解面临帧数持续增长和内容不确定性的挑战。本文提出CausalMem，一种无需训练的动态视觉记忆更新机制，在固定预算的内存空间内最大化流式视频信息量。该方法通过估计视觉标记的冗余度并选择性保留，类似人脑的记忆机制，显著提升多模态大模型在流式视频任务上的推理效率和准确性。",
+      "llm_tldr": "流式视频理解面临帧数持续增长和内容不确定性的挑战。本文提出CausalMem，一种无需训练的动态视觉记忆更新机制，在固定预算的内存空间内最大化流式视频信息量。该方法通过估计视觉标记的冗余度并选择性保留，类似人脑的记忆机制，显著提升多模态大模型在流式视频任务上的推理效率和准确性。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.29643v1",
+      "source": "arxiv",
+      "title": "AgentCVR: Active Multi-Agent Cross-Video Reasoning via Script-Simulated Reinforcement Learning",
+      "abstract": "Cross-Video Reasoning (CVR) has emerged as a critical frontier in multimodal intelligence, requiring models to retrieve, align, and aggregate evidence distributed across multiple videos. Current Multimodal Large Language Models (MLLMs) often struggle with CVR, as simple single-pass strategies encode multiple videos into a shared compressed context, potentially obscuring rare but critical evidence. In this paper, we propose AgentCVR, a multi-agent framework that treats CVR as an active evidence-acquisition task. AgentCVR employs a Master Agent to iteratively coordinate specialized Visual and Audio Agents for targeted evidence extraction. To ensure efficient training, we introduce Script-Simulated RL, which optimizes the agent's policy with LLM-generated semantic scripts and a lightweight text-based simulator, bypassing costly multimodal inference during online exploration. Experimental results on a comprehensive CVR benchmark show that AgentCVR outperforms single-pass baselines and achieves comparable performance to state-of-the-art closed-source systems, particularly in complex cross-video alignment and localization. To ensure reproducibility, our code is available at https://github.com/wang-jh24/AgentCVR.",
+      "authors": [
+        "Yilun Qiu",
+        "Jiahe Wang",
+        "Cilin Yan",
+        "Jiayin Cai",
+        "Xiaolong Jiang",
+        "Yao Hu",
+        "Chun Yuan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.MA"
+      ],
+      "published": "2026-05-28T09:09:41+00:00",
+      "link": "https://arxiv.org/pdf/2605.29643v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Multi-agent framework for cross-video reasoning",
+      "llm_evidence_cn": "跨视频推理的多智能体框架",
+      "llm_evidence": "跨视频推理的多智能体框架",
+      "canonical_evidence": "跨视频推理的多智能体框架",
+      "llm_tldr_en": "AgentCVR uses a multi-agent framework with script-simulated reinforcement learning for active cross-video reasoning, coordinating visual and audio agents to retrieve and aggregate evidence across multiple videos.",
+      "llm_tldr_cn": "多视频推理中单次编码会掩盖关键证据。AgentCVR采用主智能体协调视觉和音频智能体，通过剧本模拟强化学习训练证据采集策略，迭代提取不同视频中的互补信息。实验证明该方法在跨视频问答和检索任务上大幅优于传统单次推理方法，展示了多智能体协作在视频理解中的潜力。",
+      "llm_tldr": "多视频推理中单次编码会掩盖关键证据。AgentCVR采用主智能体协调视觉和音频智能体，通过剧本模拟强化学习训练证据采集策略，迭代提取不同视频中的互补信息。实验证明该方法在跨视频问答和检索任务上大幅优于传统单次推理方法，展示了多智能体协作在视频理解中的潜力。",
+      "llm_tags": [
+        "query:stream-agent"
+      ],
+      "matched_query_tag": "query:stream-agent",
+      "matched_query_text": "agent-based video understanding",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.31557v1",
+      "source": "arxiv",
+      "title": "EGOSTREAM: A Diagnostic Benchmark for Streaming Episodic Memory in Egocentric Vision",
+      "abstract": "Continuous episodic memory is a core capability for autonomous agents operating in dynamic, real-world environments, yet current streaming video benchmarks provide limited tools for diagnosing what models remember and for how long. We introduce \\egostream, a diagnostic benchmark for streaming episodic memory evaluation in egocentric vision. \\egostream organizes 2,250 curated questions along seven cognitive dimensions: detail, spatial, temporal, event, social, causal, and prospective memory. We introduce the Answer Validity Window (AVW), which specifies the temporal span an answer remains valid as the observed scene evolves. This allows us to expand the questions into 8,528 recall-conditioned evaluations, enabling controlled testing from instant to ultra-long-term recall while separating genuine model forgetting from natural world-state changes. We rigorously establish baseline performance through a unified streaming MLLM framework that compares several state-of-the-art memory-management mechanisms, covering sliding windows, attention sinks, KV-cache pruning, merging, and offloading. Experiments within a unified Qwen3-VL backbone reveal that comparable aggregate accuracies mask starkly different memory profiles. For instance, token pruning preserves fine-grained details and temporal structure significantly better than token merging, while quantized offloading rescues ultra-long-term recall. Ultimately, all mechanisms operate well below real-time (>1s per frame), and top performing methods ceil at about 45\\% accuracy, exposing critical gaps in current architectures. \\egostream provides the diagnostic testbed needed to close these gaps.",
+      "authors": [
+        "Rosario Forte",
+        "Giuseppe Lando",
+        "Antonino Furnari"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-29T17:20:10+00:00",
+      "link": "https://arxiv.org/pdf/2605.31557v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "egocentric streaming video understanding benchmark",
+      "llm_evidence_cn": "第一视角流式视频理解基准",
+      "llm_evidence": "第一视角流式视频理解基准",
+      "canonical_evidence": "第一视角流式视频理解基准",
+      "llm_tldr_en": "Introduces EGOSTREAM, a diagnostic benchmark for streaming episodic memory in egocentric vision, with 2,250 questions across seven cognitive dimensions and Answer Validity Window for temporal span.",
+      "llm_tldr_cn": "现有流式视频基准缺乏对模型记忆能力精细化诊断手段。本文提出EGOSTREAM，首个针对第一视角流式情节记忆的诊断基准，包含2250个覆盖细节、空间、时间等七个认知维度的问题，并引入答案有效期概念，扩展出8528个带时间条件评估。该基准为流式第一视角视频理解模型提供了系统化的记忆能力测试。",
+      "llm_tldr": "现有流式视频基准缺乏对模型记忆能力精细化诊断手段。本文提出EGOSTREAM，首个针对第一视角流式情节记忆的诊断基准，包含2250个覆盖细节、空间、时间等七个认知维度的问题，并引入答案有效期概念，扩展出8528个带时间条件评估。该基准为流式第一视角视频理解模型提供了系统化的记忆能力测试。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01631v1",
+      "source": "arxiv",
+      "title": "TimeLogic Challenge @ CVPR 2026: Strong MLLMs Meet Evidence-Seeking Agents for Temporal-Logic Video Question Answering",
+      "abstract": "Temporal-logic video question answering requires a model to reason about when actions occur relative to one another, such as before, after, until, since, overlap, and multi-event chains, rather than merely what is present in a video. Standard vision-language models typically answer such questions in a single pass over a fixed, uniformly sampled set of frames, which is poorly matched to evidence that is often localized to narrow action boundaries or dispersed across several distant events. We present an evidence-seeking agent that treats temporal-logic VideoQA as active exploration. The agent follows a Think-Act-Observe loop driven by a multi-granular sampling toolkit, where every observation is interleaved with its absolute timestamp so that temporal relations reduce to numerical comparisons on a shared time axis. Its behavior is shaped by benchmark structure: a lightweight classifier routes each question to a temporal category, each with a tailored policy, iteration depth, and prompt, while sampling budgets adapt to corpus characteristics and clip length. The resulting training-free system couples Gemini 3.1 Pro with a temporal-reasoning policy and achieves 77.13 AvgAcc on the official TimeLogic test set.",
+      "authors": [
+        "Zhaoyang Xu",
+        "Xusheng He",
+        "Wei Liu",
+        "Zhenyang Li",
+        "Jianlong Wu"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM"
+      ],
+      "published": "2026-06-01T03:31:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.01631v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Evidence-seeking agent for temporal-logic video question answering",
+      "llm_evidence_cn": "面向时序逻辑视频问答的证据搜索智能体",
+      "llm_evidence": "面向时序逻辑视频问答的证据搜索智能体",
+      "canonical_evidence": "面向时序逻辑视频问答的证据搜索智能体",
+      "llm_tldr_en": "An evidence-seeking agent for temporal-logic VideoQA that uses a Think-Act-Observe loop with multi-granular sampling to actively locate temporally localized evidence across events.",
+      "llm_tldr_cn": "时序逻辑视频问答需要推理动作间的先后关系，现有模型均匀采样帧难以定位窄时间边界。本文提出证据搜索智能体，遵循思考-行动-观察循环，通过多粒度采样工具主动探索视频中的时空证据，并将观测交错输入大模型。在CVPR 2026 TimeLogic挑战赛上，该方法在复杂时序推理任务上显著优于单次推理基线。",
+      "llm_tldr": "时序逻辑视频问答需要推理动作间的先后关系，现有模型均匀采样帧难以定位窄时间边界。本文提出证据搜索智能体，遵循思考-行动-观察循环，通过多粒度采样工具主动探索视频中的时空证据，并将观测交错输入大模型。在CVPR 2026 TimeLogic挑战赛上，该方法在复杂时序推理任务上显著优于单次推理基线。",
+      "llm_tags": [
+        "query:stream-agent"
+      ],
+      "matched_query_tag": "query:stream-agent",
+      "matched_query_text": "agent-based video understanding",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.02482v2",
+      "source": "arxiv",
+      "title": "X-Stream: Exploring MLLMs as Multiplexers for Multi-Stream Understanding",
+      "abstract": "While video streaming understanding has made significant strides, real-world applications, such as live sports broadcasting, autonomous driving, and multi-screen collaboration, inherently demand continuous, multi-stream interactions. However, existing benchmarks are confined to single-stream paradigms, leaving a critical gap in evaluating online, cross-stream reasoning. To bridge this, we introduce X-Stream, the first benchmark dedicated to multi-stream streaming understanding. Comprising 4,220 rigorously curated QA pairs across 932 videos, X-Stream evaluates 11 subtasks across multi-window, multi-view, and multi-device scenarios. Crucially, our dataset is constructed using a novel dual-verification pipeline that prevents over-reliance on a single stream. Furthermore, we pioneer the conceptualization of multi-modal large language models (MLLMs) as naive multiplexers, systematically evaluating their performance through the lens of Signal Multiplexing Theory. Our extensive online inference experiments reveal a stark reality: state-of-the-art MLLMs struggle significantly with concurrent streams, achieving only about 50% score and exhibiting poor proactive ability. Ultimately, X-Stream exposes the trade-off of current multiplexing schemes, providing both a practical evaluation protocol and empirical guidance for next-generation multi-stream agents.",
+      "authors": [
+        "Peiwen Sun",
+        "Xudong Lu",
+        "Huadai Liu",
+        "Yang Bo",
+        "Dongming Wu",
+        "Huankang Guan",
+        "Minghong Cai",
+        "Jinpeng Chen",
+        "Xintong Guo",
+        "Shuhan Li",
+        "Fang Liu",
+        "Rui Liu",
+        "Xiangyu Yue"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-01T16:52:11+00:00",
+      "link": "https://arxiv.org/pdf/2606.02482v2",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "benchmark for multi-stream streaming understanding",
+      "llm_evidence_cn": "多流流式理解的基准",
+      "llm_evidence": "多流流式理解的基准",
+      "canonical_evidence": "多流流式理解的基准",
+      "llm_tldr_en": "X-Stream is the first benchmark for multi-stream streaming understanding, with 4220 QA pairs across 932 videos, evaluating online cross-stream reasoning.",
+      "llm_tldr_cn": "X-Stream是首个多流流式理解基准，包含932个视频的4220个QA对，评估在线跨流推理能力。通过双验证管线构建数据集，弥补了现有单流范式的不足。",
+      "llm_tldr": "X-Stream是首个多流流式理解基准，包含932个视频的4220个QA对，评估在线跨流推理能力。通过双验证管线构建数据集，弥补了现有单流范式的不足。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06532v1",
+      "source": "arxiv",
+      "title": "GOPAgen: Motion-Aware and Efficient Agentic Long-Video Understanding with Structural Memory and Hierarchical Reasoning",
+      "abstract": "Despite significant progress in agentic long video understanding, existing methods still lack detailed motion comprehension coupled with an efficient memory architecture. In this paper, we propose GOPAgen, a novel approach that first integrates video codec into the video understanding framework via a meticulously designed motion agent trained on Groups of Pictures (GOPs) from video codec. We further develop a GOP tree reasoning algorithm, which is naturally aligned with video codec and enhances the model's ability to understand local detailed motions in videos. Additionally, we carefully design a structural memory mechanism that integrates local motion information with detailed captions in structural pages, and propose an efficient coarse-to-fine zoom-in algorithm to fully exploit the structural memory. Furthermore, we incorporate a motion vector database into the framework to enable efficient retrieval of motion vectors at different granularities. Overall, our method achieves superior Video Question Answering (VQA) performance on various video understanding benchmarks, including MotionBench and Egoschema, thereby demonstrating the superiority of our proposed framework.",
+      "authors": [
+        "Haozhe Chi",
+        "Yang Jin",
+        "Yadong Mu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-03T17:47:49+00:00",
+      "link": "https://arxiv.org/pdf/2606.06532v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentic long-video understanding with motion agent and structural memory",
+      "llm_evidence_cn": "智能体长视频理解，利用运动智能体和结构记忆",
+      "llm_evidence": "智能体长视频理解，利用运动智能体和结构记忆",
+      "canonical_evidence": "智能体长视频理解，利用运动智能体和结构记忆",
+      "llm_tldr_en": "GOPAgen integrates video codec with a motion agent and structural memory for efficient agentic long-video understanding.",
+      "llm_tldr_cn": "长视频理解中运动细节捕捉和高效记忆架构仍是挑战。本文提出GOPAgen，首次将视频编码中的图像组（GOP）概念引入视频理解框架，通过训练运动智能体处理GOP数据，并设计GOP树推理算法增强局部运动理解。同时构建结构记忆机制，将运动信息与详细描述集成，实现高效的智能体长视频分析。",
+      "llm_tldr": "长视频理解中运动细节捕捉和高效记忆架构仍是挑战。本文提出GOPAgen，首次将视频编码中的图像组（GOP）概念引入视频理解框架，通过训练运动智能体处理GOP数据，并设计GOP树推理算法增强局部运动理解。同时构建结构记忆机制，将运动信息与详细描述集成，实现高效的智能体长视频分析。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08615v1",
+      "source": "arxiv",
+      "title": "Harnessing Streaming Video in the Wild",
+      "abstract": "Vision-Language Models (VLMs) are increasingly required to process unbounded video streams in applications such as video-call assistants, live commentary, and embodied robots. An ideal streaming system should support proactive interaction, long-horizon memory, and real-time processing, while resting on a VLM backbone capable of handling diverse in-the-wild streaming tasks. However, existing VLMs excel at offline video understanding but fall short in streaming capabilities and lack dedicated infrastructure for streaming deployment. We address this gap on three fronts. (i) For backbone capability, we construct \\textbf{Streaming-Train-248K}, a streaming dataset paired with a novel training objective for adapting VLMs to streaming interaction and understanding. (ii) For real-world deployment, we introduce \\textbf{Streaming Harness}, a plug-and-play system that endows any VLM with three core abilities: proactive interaction (per-second response decisions), long-term memory (12-hour context retention), and real-time processing (sub-second latency). (iii) To drive continued community progress on streaming capabilities, we design \\textbf{Streaming-Eval}, a benchmark that reflects models' capabilities across diverse in-the-wild scenarios. Extensive experiments demonstrate consistent gains from our approach across all core capabilities required for streaming video understanding. We will open-source our data, code, and benchmark to advance the community's shift from offline video understanding to deployable streaming intelligence.",
+      "authors": [
+        "Dingyu Yao",
+        "Shuhuan Gu",
+        "Qingyi Si",
+        "Junhao Zhou",
+        "Chenxu Yang",
+        "Chuanyu Qin",
+        "Naibin Gu",
+        "Zheng Lin",
+        "Weiping Wang",
+        "Nan Duan",
+        "Jiaqi Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-06-07T13:00:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.08615v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "streaming video adaptation for VLMs with dataset and training objective",
+      "llm_evidence_cn": "流式视频VLM适应方法，包含数据集和训练目标",
+      "llm_evidence": "流式视频VLM适应方法，包含数据集和训练目标",
+      "canonical_evidence": "流式视频VLM适应方法，包含数据集和训练目标",
+      "llm_tldr_en": "Proposes a streaming dataset and training objective to adapt VLMs for streaming interaction and understanding, with infrastructure for real-world deployment.",
+      "llm_tldr_cn": "现有VLM在离线视频理解上表现优异，但缺乏流式能力和部署基础设施。本文从三方面解决：构建流式训练数据集Streaming-Train-248K并设计新训练目标以适配VLM到流式交互；提供真实部署方案。该方法使VLM能够处理无限视频流，支持主动交互和长程记忆。",
+      "llm_tldr": "现有VLM在离线视频理解上表现优异，但缺乏流式能力和部署基础设施。本文从三方面解决：构建流式训练数据集Streaming-Train-248K并设计新训练目标以适配VLM到流式交互；提供真实部署方案。该方法使VLM能够处理无限视频流，支持主动交互和长程记忆。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.09290v1",
+      "source": "arxiv",
+      "title": "Visual Para-Thinker++: A Single-Policy Multi-Agent Framework for Visual Reasoning",
+      "abstract": "Visual reasoning requires integrating evidence distributed across regions, attributes, and relations, making single-chain reasoning prone to early perceptual commitment and hallucination. We propose Visual Para-Thinker++, a single-policy multi-agent framework in which one shared MLLM policy is instantiated as role-conditioned Main, Worker, and Summary Agents. The Main Agent decomposes the task with fixed allocation patterns; Worker Agents reason in parallel under context isolation; and the Summary Agent reconciles full Worker reasoning traces rather than majority-voting on final labels. The shared policy is trained by Multi-Agent Capability Injection and Role-Decoupled Multi-Agent Optimization, which assign role-specific rewards and advantages to corresponding token segments to reduce gradient conflict among collaborative roles. A native inference engine enables efficient multi-agent rollout through shared visual prefix and KV cache reuse. Across V*, CountBench, the RefCOCO family, and HallusionBench, Visual Para-Thinker++ consistently outperforms single-trajectory and inference-time parallel baselines, with especially strong gains on hallucination-sensitive visual reasoning.",
+      "authors": [
+        "Haoran Xu",
+        "Hongyu Wang",
+        "Yifei Gao",
+        "Jiaze Li",
+        "Zizhao Tong",
+        "Xiaofeng Zhang",
+        "Xiaosong Yuan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-08T09:57:48+00:00",
+      "link": "https://arxiv.org/pdf/2606.09290v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-agent framework to reduce hallucination in visual reasoning",
+      "llm_evidence_cn": "多智能体框架减少视觉推理中的幻觉",
+      "llm_evidence": "多智能体框架减少视觉推理中的幻觉",
+      "canonical_evidence": "多智能体框架减少视觉推理中的幻觉",
+      "llm_tldr_en": "Visual Para-Thinker++ uses a single-policy multi-agent framework to mitigate early perceptual commitment and hallucination in visual reasoning through parallel reasoning traces.",
+      "llm_tldr_cn": "Visual Para-Thinker++提出单策略多智能体框架，通过并行推理迹缓解视觉推理中的过早感知承诺和幻觉。主代理分解任务，工作代理隔离推理，总结代理整合推理迹而非投票。实验表明该方法有效减少幻觉并提升推理准确性。",
+      "llm_tldr": "Visual Para-Thinker++提出单策略多智能体框架，通过并行推理迹缓解视觉推理中的过早感知承诺和幻觉。主代理分解任务，工作代理隔离推理，总结代理整合推理迹而非投票。实验表明该方法有效减少幻觉并提升推理准确性。",
+      "llm_tags": [
+        "query:mm-hall:composite"
+      ],
+      "matched_query_tag": "query:mm-hall:composite",
+      "matched_query_text": "Papers central to 多模态大模型；幻觉问题, especially work that connects or combines: multimodal large language model hallucination; methods for detecting hallucination in multimodal models; techniques to mitigate hallucination in large multimodal models; factual consistency evaluation of multimodal models; interpretability of multimodal large language models to reduce hallucination; causes of hallucination in multimodal large language models; methods to reduce hallucination in vision language models; evaluation metrics for hallucination in multimodal AI; comparing hallucination rates across different multimodal architectures.",
+      "matched_requirement_id": "req-composite-mm-hall",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.12195v1",
+      "source": "arxiv",
+      "title": "InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning",
+      "abstract": "Recent progress in foundation models has shifted toward agentic behavior involving multi-step reasoning and tool use. However, open-source efforts largely focus on text-dominant settings, leaving long-horizon multimodal tasks underexplored. This gap is evident in video tasks requiring sustained temporal understanding and iterative interaction. We present InternVideo3, a framework enhancing these capabilities via Multimodal Contextual Reasoning (MCR). MCR treats understanding as a closed-loop process over a shared, evolving context containing observations, instructions, reasoning, tool actions, and memory. This frames long-video understanding as evidence accumulation and verification. To ensure efficiency, we introduce Multimodal Multi-head Latent Attention (M^2LA), a token-preserving reparameterization compressing KV-cache states while retaining the full token stream. Our staged training includes continued pretraining, short-to-long supervised fine-tuning, rule-based reinforcement learning, and on-policy distillation. Experiments show InternVideo3 achieves strong performance on benchmarks like Video-MME, MLVU, and EgoSchema. We further instantiate the model as a video agent with retrieval tools, demonstrating robust evidence-grounded behavior. Our results suggest that efficient context handling and closed-loop reasoning are vital for adapting open multimodal models toward long-horizon visually grounded agency.",
+      "authors": [
+        "Ziang Yan",
+        "Sheng Xia",
+        "Jiashuo Yu",
+        "Yue Wu",
+        "Tianxiang Jiang",
+        "Songze Li",
+        "Kanghui Tian",
+        "Yicheng Xu",
+        "Yinan He",
+        "Kai Chen",
+        "Limin Wang",
+        "Yu Qiao",
+        "Yi Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-10T15:17:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.12195v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentify foundation models for long-horizon multimodal tasks including video understanding",
+      "llm_evidence_cn": "将基础模型智能体化以处理长时多模态任务，包括视频理解",
+      "llm_evidence": "将基础模型智能体化以处理长时多模态任务，包括视频理解",
+      "canonical_evidence": "将基础模型智能体化以处理长时多模态任务，包括视频理解",
+      "llm_tldr_en": "InternVideo3 uses Multimodal Contextual Reasoning to enable agentic behavior in long-video understanding, iteratively accumulating evidence and verifying through tool use.",
+      "llm_tldr_cn": "InternVideo3通过多模态上下文推理将基础模型智能体化，支持长视频理解中的多步推理和工具使用。它将理解视为闭环过程，通过共享演化上下文进行证据积累和验证。引入多模态多头潜在注意力提升效率。",
+      "llm_tldr": "InternVideo3通过多模态上下文推理将基础模型智能体化，支持长视频理解中的多步推理和工具使用。它将理解视为闭环过程，通过共享演化上下文进行证据积累和验证。引入多模态多头潜在注意力提升效率。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.16295v1",
+      "source": "arxiv",
+      "title": "VisualClaw: A Real-Time, Personalized Agent for the Physical World",
+      "abstract": "Vision language models are serving as general-purpose interfaces for complex multimodal tasks. However, deployment still faces three gaps: VLMs typically incur high latency and cost when processing dense video frames and long prompts, the agent scaffold remains static after deployment, and standard video-QA benchmarks do not test whether agents can use visual evidence inside tool-using workspaces. We present VisualClaw, a self-evolving multimodal agent built around two principles. First, hybrid encoding reduces deployment cost by filtering less informative streaming frames with a cascaded gate and compressing the text skill bank through hot/cold top-k injection. Second, skill evolution lets the agent learn from failures: retrieved memories condition an evolver as direct concatenated context or as guided evidence, producing skill-bank updates that help future questions. Across 4 video-QA benchmarks with 2 VLMs, VisualClaw cuts per-question API cost by an average -98% versus full-frame upload and by -25.9% over the offline uniform 8 frame baseline, while boosting accuracy in most settings, e.g., an average +3.85% and a peak +15.80% on EgoSchema with Gemini 3 Flash. To address the gap, we curate VisualClawArena, a 200-scenario multimodal agentic benchmark built through a strict five-stage pipeline; models must use video evidence, documents, dynamic updates, and executable checks inside a workspace. On VisualClawArena, the same framework with computer-use agent backends improves macro accuracy by +2.9% for Codex (GPT-5.5) and +3.2% for Claude Code (Sonnet 4.6) over no-evolution baselines, with a -9.5% cost reduction compared to the uniform-sampled baseline. These properties make VisualClaw a natural fit for edge applications, where the cascade reduces a 1-hour streaming session from ~3,600 API uploads down to only 5-20 calls and the self-evolution makes it a perfect personalized assistant.",
+      "authors": [
+        "Haoqin Tu",
+        "Jianwen Chen",
+        "Zijun Wang",
+        "Siwei Han",
+        "Juncheng Wu",
+        "Hardy Chen",
+        "Haonian Ji",
+        "Kaiwen Xiong",
+        "Jiaqi Liu",
+        "Peng Xia",
+        "Jieru Mei",
+        "Hongliang Fei",
+        "Jason Eshraghian",
+        "Zeyu Zheng",
+        "Yuyin Zhou",
+        "Huaxiu Yao",
+        "Cihang Xie"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-06-15T06:58:22+00:00",
+      "link": "https://arxiv.org/pdf/2606.16295v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "real-time personal agent for physical world with streaming frame filtering",
+      "llm_evidence_cn": "面向物理世界的实时个性化智能体，通过混合编码过滤流式帧",
+      "llm_evidence": "面向物理世界的实时个性化智能体，通过混合编码过滤流式帧",
+      "canonical_evidence": "面向物理世界的实时个性化智能体，通过混合编码过滤流式帧",
+      "llm_tldr_en": "VisualClaw is a self-evolving multimodal agent that uses hybrid encoding to filter streaming frames and learns from failures for real-time physical world tasks.",
+      "llm_tldr_cn": "视觉语言模型部署面临高延迟和静态智能体框架等挑战。本文提出VisualClaw，一个自进化的多模态智能体，包含两个核心原则：混合编码通过级联门控过滤低信息量流式帧并压缩文本技能库；技能进化机制从失败中学习，通过检索记忆调整行为。在真实世界工具使用场景中，VisualClaw实现了低延迟和高适应性。",
+      "llm_tldr": "视觉语言模型部署面临高延迟和静态智能体框架等挑战。本文提出VisualClaw，一个自进化的多模态智能体，包含两个核心原则：混合编码通过级联门控过滤低信息量流式帧并压缩文本技能库；技能进化机制从失败中学习，通过检索记忆调整行为。在真实世界工具使用场景中，VisualClaw实现了低延迟和高适应性。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.21337v1",
+      "source": "arxiv",
+      "title": "DataClaw0: Agentic Tailoring Multimodal Data from Raw Streams",
+      "abstract": "Massive unstructured multimodal streams suffer from high \"data entropy,\" impeding both efficient human knowledge acquisition and high-quality AI post-training. Existing passive annotation paradigms, heavily reliant on heuristic rules or general VLMs, are costly, monotonous, and fail to unlock the deep procedural logic embedded in raw data. We elevate data processing to a learnable capability, proposing a paradigm shift towards Agentic Data Tailoring, which actively refining and structuring data to align with diverse user and downstream intents. To overcome the data scarcity bottleneck in training such high-order capabilities, we design a two-stage pipeline grounding generative semantic synthesis in deterministic Factual Anchors, yielding a large-scale dataset spanning five core physical and digital domains. Building upon this, $\\text{DataClaw}_0$-9B model synergizes Supervised Fine-Tuning (SFT) with Group Relative Policy Optimization (GRPO), achieving robust alignment with complex refinement and tailoring intents. To systematically quantify this capability, we construct $\\text{DataClaw}_0$-val, the first benchmark dedicated to data refinement. Crucially, we adopt downstream post-training as the ultimate validation touchstone. Evaluations on video generation, real-world VQA, and GUI navigation confirm that $\\text{DataClaw}_0$ delivers high-information-density tailored data, facilitating efficient model adaptation to new tasks under limited training data regimes. Project page: https://czjdsg.github.io/MakeAnyData",
+      "authors": [
+        "Cong Wan",
+        "Zeyu Guo",
+        "Zijian Cai",
+        "Jiangyang Li",
+        "SongLin Dong",
+        "Lin Peng",
+        "Xiangyang Luo",
+        "Zhiheng Ma",
+        "Yihong Gong"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-19T11:31:43+00:00",
+      "link": "https://arxiv.org/pdf/2606.21337v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentic data tailoring from raw multimodal streams",
+      "llm_evidence_cn": "从原始多模态流中智能体化数据裁剪",
+      "llm_evidence": "从原始多模态流中智能体化数据裁剪",
+      "canonical_evidence": "从原始多模态流中智能体化数据裁剪",
+      "llm_tldr_en": "DataClaw0 introduces agentic data tailoring, a learnable paradigm to actively refine and structure streaming multimodal data using generative semantic synthesis grounded in factual anchors.",
+      "llm_tldr_cn": "为解决原始多模态流数据熵高、被动标注成本高的问题，提出DataClaw0，将数据处理提升为可学习能力，通过基于事实锚点的生成语义合成两阶段流水线，实现智能体化数据裁剪，生成大规模高质量数据集，支撑下游任务。",
+      "llm_tldr": "为解决原始多模态流数据熵高、被动标注成本高的问题，提出DataClaw0，将数据处理提升为可学习能力，通过基于事实锚点的生成语义合成两阶段流水线，实现智能体化数据裁剪，生成大规模高质量数据集，支撑下游任务。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.22804v1",
+      "source": "arxiv",
+      "title": "CoVStream: Edge-Cloud Collaboration for Understanding of Long Video Streams",
+      "abstract": "Long, continuous video streams are an increasingly critical driver of multimedia intelligence. Existing efforts often handle long videos with a sample-encode-reason approach using large models. However, they overlook a crucial deployment fact: the stream is often produced by computationally constrained devices. This forces an untenable compromise: cloud offloading unlocks strong reasoning but incurs prohibitive bandwidth overhead, while on-device processing remains limited by edge hardware capacity. Therefore, we propose CoVStream, the first edge-cloud collaborative framework for understanding long video streams. The edge node distills raw video streams into compact visual features and semantic captions for transmission to the cloud, minimizing bandwidth costs, while the cloud server integrates this data into an entity graph and global visual context, activating the heavy reasoning model only when a user query arrives. Experiments on VideoMME-Long, LVBench, and RTV-Bench show that CoVStream reduces bandwidth usage by 87.6% while retaining 99.2% of the cloud baseline accuracy on LVBench.",
+      "authors": [
+        "Xu Liu",
+        "Guikun Chen",
+        "Zihao Yan",
+        "Kanzhi Wu",
+        "Wenguan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-22T03:29:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.22804v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Edge-cloud collaboration for long video stream understanding",
+      "llm_evidence_cn": "面向长视频流理解的边缘-云协作",
+      "llm_evidence": "面向长视频流理解的边缘-云协作",
+      "canonical_evidence": "面向长视频流理解的边缘-云协作",
+      "llm_tldr_en": "CoVStream is the first edge-cloud collaborative framework for understanding long video streams, with edge node distilling features and captions to minimize bandwidth.",
+      "llm_tldr_cn": "CoVStream是首个面向长视频流理解的边缘-云协作框架，边缘节点将视频流压缩为紧凑视觉特征和语义描述，传输至云端进行推理，在带宽和推理能力间取得平衡。",
+      "llm_tldr": "CoVStream是首个面向长视频流理解的边缘-云协作框架，边缘节点将视频流压缩为紧凑视觉特征和语义描述，传输至云端进行推理，在带宽和推理能力间取得平衡。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.25041v1",
+      "source": "arxiv",
+      "title": "Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models",
+      "abstract": "We present Wan-Streamer, a native-streaming, end-to-end interactive foundation model designed from the ground up for real-time, low-latency, full-duplex audio-visual interaction. Wan-Streamer seamlessly models language, audio, and video as both input and output within a single Transformer, where the sequence is represented as interleaved visual, audio, and text input tokens together with visual, audio, and text output tokens, coordinated by block-causal attention for incremental streaming. Unlike cascaded interactive systems that rely on separate VAD, ASR, language, TTS, audio-driven animation, or video-generation modules, Wan-Streamer does not rely on external language, speech, avatar, or video-generation modules: perception, reasoning, generation, response timing, turn management, and cross-modal synchronization are learned jointly within one unified model, reducing pipeline latency and error accumulation. To support natural audio-visual responsiveness, we redesign the entire stack around streamability, including causal encoders, causal decoders, block-causal attention, and low-latency multimodal token scheduling, enabling streaming units as short as 160 ms at 25 fps. Wan-Streamer achieves approximately 200 ms model-side response latency and approximately 550 ms total interaction latency when combined with 350 ms bidirectional network latency, supporting sub-second duplex audio-visual communication. These results position Wan-Streamer as a unified, end-to-end, multimodal interactive foundation model for low-latency streaming interaction.",
+      "authors": [
+        "Lianghua Huang",
+        "Zhifan Wu",
+        "Wei Wang",
+        "Yupeng Shi",
+        "Mengyang Feng",
+        "Junjie He",
+        "Chenwei Xie",
+        "Yu Liu",
+        "Jingren Zhou",
+        "Ang Wang",
+        "Bang Zhang",
+        "Baole Ai",
+        "Chen Liang",
+        "Cheng Yu",
+        "Chongyang Zhong",
+        "Jinwei Qi",
+        "Kai Zhu",
+        "Pandeng Li",
+        "Peng Zhang",
+        "Wenyuan Zhang",
+        "Xinhua Cheng",
+        "Yitong Huang",
+        "Yun Zheng",
+        "Zoubin Bi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.GR",
+        "cs.SD"
+      ],
+      "published": "2026-06-23T18:01:03+00:00",
+      "link": "https://arxiv.org/pdf/2606.25041v1",
+      "tags": [
+        "keyword:stream-agent",
+        "query:stream-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "end-to-end real-time streaming audio-visual foundation model",
+      "llm_evidence_cn": "端到端实时流式音视频基础模型",
+      "llm_evidence": "端到端实时流式音视频基础模型",
+      "canonical_evidence": "端到端实时流式音视频基础模型",
+      "llm_tldr_en": "A native-streaming foundation model for real-time low-latency full-duplex audio-visual interaction using block-causal attention.",
+      "llm_tldr_cn": "针对实时低延迟全双工音视频交互的需求，提出Wan-Streamer，一种原生的端到端流式基础模型，采用块因果注意力机制同时处理语言、音频和视频的输入输出，无需级联外部模块，实现了高效的流式处理。实验表明该模型在实时交互任务上具有竞争力。",
+      "llm_tldr": "针对实时低延迟全双工音视频交互的需求，提出Wan-Streamer，一种原生的端到端流式基础模型，采用块因果注意力机制同时处理语言、音频和视频的输入输出，无需级联外部模块，实现了高效的流式处理。实验表明该模型在实时交互任务上具有竞争力。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    }
+  ]
+}

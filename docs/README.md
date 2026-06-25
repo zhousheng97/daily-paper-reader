@@ -6,82 +6,106 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-22
-- 运行时间：2026-06-22 23:02:19 UTC
+- 最新运行日期：2026-05-27 ~ 2026-06-25
+- 运行时间：2026-06-25 08:04:43 UTC
 - 运行状态：成功
-- 本次总论文数：20
-- 精读区：7
-- 速读区：13
+- 本次总论文数：27
+- 精读区：0
+- 速读区：27
 
 ### 今日简报（AI）
-今日精读聚焦多智能体框架与强化学习驱动的视觉对齐，高评分论文紧扣细粒度动作识别与“先见后答”策略。  
-最值得关注的是自我中心动作识别的多智能体协同机制，以及视觉预对齐的充分性驱动强化学习路径。  
-建议优先精读这两篇高分论文，再速读多模态LLM的层级视觉概念学习与扩散链式推理。
-- 详情：[/202606/22/README](/202606/22/README)
+今日速览27篇流式视频理解与长视频分析的前沿研究，重点聚焦主动式理解和可扩展叙述生成。
+
+最值得关注的两项工作：满分论文《LiveStarPro》提出分级记忆实现主动流式视频理解，以及《FlowNar》实现长视频的流式叙述生成。
+
+建议普通读者从这两篇入手，了解如何将长视频拆解为实时可理解的片段，提升视频内容分析和自动解说能力。
+- 详情：[/20260527-20260625/README](/20260527-20260625/README)
 
 ### 精读区论文标签
-1. [Divide, Deliberate, Decide: A Multi-Agent Framework for Fine-Grained Egocentric Action Recognition](/202606/22/2606.17627v1-divide-deliberate-decide-a-multi-agent-framework-for-fine-grained-egocentric-action-recognition)  
-   标签：评分：9.0/10、query:ego-video
-   evidence：面向细粒度第一视角动作识别的多智能体框架
-2. [See First, Answer Later: Visual Evidence Pre-Alignment via Sufficiency-Driven RL](/202606/22/2606.17678v1-see-first-answer-later-visual-evidence-pre-alignment-via-sufficiency-driven-rl)  
-   标签：评分：9.0/10、query:mm-hall
-   evidence：视觉证据预对齐以减少多模态大语言模型的幻觉
-3. [The Hidden Evolution of Disguised Visual Context inside the VLM](/202606/22/2606.20077v1-the-hidden-evolution-of-disguised-visual-context-inside-the-vlm)  
-   标签：评分：9.0/10、query:vlm-vg
-   evidence：在视频基准上比较VLM架构
-4. [LOCUS: Local Visual Cue Search for Enhancing Fine-Grained Perception in Multimodal Large Language Models](/202606/22/2606.16586v1-locus-local-visual-cue-search-for-enhancing-fine-grained-perception-in-multimodal-large-language-models)  
-   标签：评分：8.0/10、query:vlm-vg
-   evidence：通过局部线索搜索增强多模态大模型的细粒度视觉感知以支持视觉定位
-5. [Gaussian Process Prior Variational Autoencoder for Endoscopic Videos](/202606/22/2606.19908v1-gaussian-process-prior-variational-autoencoder-for-endoscopic-videos)  
-   标签：评分：8.0/10、query:med-video
-   evidence：内窥镜视频恢复中的时序高斯过程先验
-6. [Confidence Calibration for Multimodal LLMs: An Empirical Study through Medical VQA](/202606/22/2606.19950v1-confidence-calibration-for-multimodal-llms-an-empirical-study-through-medical-vqa)  
-   标签：评分：8.0/10、query:video-med-qa
-   evidence：医疗视觉问答中多模态大模型的置信度校准
-7. [GEN-Guard: Correcting Generalization Failures for Deployable Federated Surgical AI](/202606/22/2606.20303v1-gen-guard-correcting-generalization-failures-for-deployable-federated-surgical-ai)  
-   标签：评分：8.0/10、query:med-video
-   evidence：解决联邦手术视频AI中的泛化失败
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Cascaded Sparse Autoencoders Learn Multi-Level Visual Concepts in Multimodal LLMs](/202606/22/2606.16193v1-cascaded-sparse-autoencoders-learn-multi-level-visual-concepts-in-multimodal-llms)  
-   标签：评分：7.0/10、query:mm-hall
-   evidence：多模态大语言模型的可解释性
-2. [Gen-VCoT: Generative Visual Chain-of-Thought Reasoning via Diffusion-Based RGB Intermediate Representations](/202606/22/2606.16783v1-gen-vcot-generative-visual-chain-of-thought-reasoning-via-diffusion-based-rgb-intermediate-representations)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：使用SAM分割作为视觉推理的一部分，涉及视觉定位
-3. [SkillMoV: Mixture-of-View Routing with Prototype-Conditioned Gating for Unified Multi-View Proficiency Estimation](/202606/22/2606.17615v1-skillmov-mixture-of-view-routing-with-prototype-conditioned-gating-for-unified-multi-view-proficiency-estimation)  
-   标签：评分：7.0/10、query:med-video
-   evidence：多视角视频熟练度估计，应用于手术培训，属于医疗视频理解
-4. [From Bounding Boxes to Visual Reasoning: An On-Policy Data Annotation Tool for Vision-Language Models](/202606/22/2606.18846v1-from-bounding-boxes-to-visual-reasoning-an-on-policy-data-annotation-tool-for-vision-language-models)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：为视觉语言模型统一空间坐标与接地推理的标注工具
-5. [DREAM: Extending Vision-Language Models with Dual-Objective Encoding for Cross-Modal Retrieval](/202606/22/2606.19062v1-dream-extending-vision-language-models-with-dual-objective-encoding-for-cross-modal-retrieval)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：用于视频语言检索的双目标编码，含时序建模
-6. [ReSiReg: Towards Spatially Consistent Semantics in Language-Conditioned Robotic Tasks](/202606/22/2606.19088v1-resireg-towards-spatially-consistent-semantics-in-language-conditioned-robotic-tasks)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：视觉语言模型中的视觉定位
-7. [OneCanvas: 3D Scene Understanding via Panoramic Reprojection](/202606/22/2606.19253v1-onecanvas-3d-scene-understanding-via-panoramic-reprojection)  
-   标签：评分：7.0/10、query:vlm-vg
-   evidence：视觉语言模型中的空间定位
-8. [A Unified Framework for Efficient Remote Sensing Visual Question Answering: Adapting Dual, Hybrid, and Encoder-Decoder Architectures](/202606/22/2606.19277v1-a-unified-framework-for-efficient-remote-sensing-visual-question-answering-adapting-dual-hybrid-and-encoder-decoder-architectures)  
-   标签：评分：7.0/10、query:video-med-qa
-   evidence：高效VQA框架适配多种架构用于遥感领域
-9. [Neural Events: Discrete Asynchronous Autoencoders for Event-Based Vision](/202606/22/2606.19835v1-neural-events-discrete-asynchronous-autoencoders-for-event-based-vision)  
-   标签：评分：7.0/10、query:video-stream
-   evidence：从事件流中提取时空上下文
-10. [Open-World Video Segmentation](/202606/22/2606.15632v2-open-world-video-segmentation)  
-   标签：评分：6.0/10、query:ego-video
-   evidence：动态自我运动下的开放世界长视频分割
-11. [Attention Alignment Between Humans and Vision-Language Models](/202606/22/2606.17410v1-attention-alignment-between-humans-and-vision-language-models)  
-   标签：评分：6.0/10、query:mm-hall
-   evidence：人类与视觉语言模型注意力对齐用于可解释性
-12. [Unified Multimodal Autoregressive Modeling with Shared Context-Visual Tokenizer is Key to Unification](/202606/22/2606.18249v2-unified-multimodal-autoregressive-modeling-with-shared-context-visual-tokenizer-is-key-to-unification)  
-   标签：评分：6.0/10、query:vlm-vg
-   evidence：共享视觉分词器的统一多模态自回归框架
-13. [Triangular Consistency as a Universal Constraint for Learning Optical Flow](/202606/22/2606.19938v1-triangular-consistency-as-a-universal-constraint-for-learning-optical-flow)  
-   标签：评分：6.0/10、query:video-stream
-   evidence：用于视频序列时间建模的光流三角一致性约束
+1. [LiveStarPro: Proactive Streaming Video Understanding with Hierarchical Memory for Long-Horizon Streams](/20260527-20260625/2606.17798v1-livestarpro-proactive-streaming-video-understanding-with-hierarchical-memory-for-long-horizon-streams)  
+   标签：评分：10.0/10、query:stream-agent
+   evidence：具有分层记忆的主动流式视频理解智能体
+2. [FlowNar: Scalable Streaming Narration for Long-Form Videos](/20260527-20260625/2606.00620v1-flownar-scalable-streaming-narration-for-long-form-videos)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：可扩展流式叙述，有界内存和计算
+3. [3rd Place at CVPR 2026 CASTLE Challenge: Agentic Multi-View Long-Context Video Understanding via Hierarchical Knowledge Graph Retrieval](/20260527-20260625/2606.01933v1-3rd-place-at-cvpr-2026-castle-challenge-agentic-multi-view-long-context-video-understanding-via-hierarchical-knowledge-graph-retrieval)  
+   标签：评分：9.0/10、query:stream-agent
+   evidence：多视角视频流中免训练的智能体长视频理解框架
+4. [Ego-METAS: Egocentric online Multimodal Energy-efficient Temporal Action Segmentation benchmark](/20260527-20260625/2606.02246v1-ego-metas-egocentric-online-multimodal-energy-efficient-temporal-action-segmentation-benchmark)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：第一视角在线时间动作分割基准
+5. [OVO-S-Bench: A Hierarchical Benchmark for Streaming Spatial Intelligence in Multimodal LLMs](/20260527-20260625/2606.03890v1-ovo-s-bench-a-hierarchical-benchmark-for-streaming-spatial-intelligence-in-multimodal-llms)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：多模态LLM的流式空间智能基准
+6. [Don't Pause: Streaming Video-Language Synchrony for Online Video Understanding](/20260527-20260625/2606.06991v1-dont-pause-streaming-video-language-synchrony-for-online-video-understanding)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：用于在线视频理解的流式视频语言同步
+7. [MemDreamer: Decoupling Perception and Reasoning for Long Video Understanding via Hierarchical Graph Memory and Agentic Retrieval Mechanism](/20260527-20260625/2606.07512v1-memdreamer-decoupling-perception-and-reasoning-for-long-video-understanding-via-hierarchical-graph-memory-and-agentic-retrieval-mechanism)  
+   标签：评分：9.0/10、query:stream-agent
+   evidence：智能体检索与分层图记忆实现流式长视频理解
+8. [MOSS-Video-Preview: Toward Real-Time Video Understanding via Cross-Attention](/20260527-20260625/2606.07639v1-moss-video-preview-toward-real-time-video-understanding-via-cross-attention)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：通过交叉注意力双通道架构实现实时视频理解
+9. [Keep It in Mind: User Centric Continual Spatial Intelligence Reasoning in Egocentric Video Streams](/20260527-20260625/2606.15200v1-keep-it-in-mind-user-centric-continual-spatial-intelligence-reasoning-in-egocentric-video-streams)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：第一视角流式视频的空间持续推理数据集和框架
+10. [What Should a Streaming Video Model Remember?](/20260527-20260625/2606.16353v1-what-should-a-streaming-video-model-remember)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：流式视频理解的选择性记忆框架
+11. [Divide, Deliberate, Decide: A Multi-Agent Framework for Fine-Grained Egocentric Action Recognition](/20260527-20260625/2606.17627v1-divide-deliberate-decide-a-multi-agent-framework-for-fine-grained-egocentric-action-recognition)  
+   标签：评分：9.0/10、query:ego-video
+   evidence：用于自我中心动作识别的多智能体框架
+12. [Native Active Perception as Reasoning for Omni-Modal Understanding](/20260527-20260625/2606.19341v1-native-active-perception-as-reasoning-for-omni-modal-understanding)  
+   标签：评分：9.0/10、query:stream-agent
+   evidence：基于POMDP的流式视频理解智能体
+13. [ViCoStream: Streaming VideoLLMs Can Run Beyond 100 FPS with Stage-Wise Coordinated Inference](/20260527-20260625/2606.19849v1-vicostream-streaming-videollms-can-run-beyond-100-fps-with-stage-wise-coordinated-inference)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：流式VideoLLM推理加速，实现实时视频理解
+14. [VideoAgent: All-in-One Framework for Video Understanding and Editing](/20260527-20260625/2606.23327v1-videoagent-all-in-one-framework-for-video-understanding-and-editing)  
+   标签：评分：9.0/10、query:stream-agent
+   evidence：基于智能体的视频理解与编辑框架
+15. [Towards a Dynamic and Fixed-budget Memory Bank for Efficient Streaming Video Understanding](/20260527-20260625/2606.25658v1-towards-a-dynamic-and-fixed-budget-memory-bank-for-efficient-streaming-video-understanding)  
+   标签：评分：9.0/10、query:video-stream
+   evidence：提出CausalMem动态固定预算记忆库，高效处理流式视频
+16. [AgentCVR: Active Multi-Agent Cross-Video Reasoning via Script-Simulated Reinforcement Learning](/20260527-20260625/2605.29643v1-agentcvr-active-multi-agent-cross-video-reasoning-via-script-simulated-reinforcement-learning)  
+   标签：评分：8.0/10、query:stream-agent
+   evidence：跨视频推理的多智能体框架
+17. [EGOSTREAM: A Diagnostic Benchmark for Streaming Episodic Memory in Egocentric Vision](/20260527-20260625/2605.31557v1-egostream-a-diagnostic-benchmark-for-streaming-episodic-memory-in-egocentric-vision)  
+   标签：评分：8.0/10、query:ego-video
+   evidence：第一视角流式视频理解基准
+18. [TimeLogic Challenge @ CVPR 2026: Strong MLLMs Meet Evidence-Seeking Agents for Temporal-Logic Video Question Answering](/20260527-20260625/2606.01631v1-timelogic-challenge--cvpr-2026-strong-mllms-meet-evidence-seeking-agents-for-temporal-logic-video-question-answering)  
+   标签：评分：8.0/10、query:stream-agent
+   evidence：面向时序逻辑视频问答的证据搜索智能体
+19. [X-Stream: Exploring MLLMs as Multiplexers for Multi-Stream Understanding](/20260527-20260625/2606.02482v2-x-stream-exploring-mllms-as-multiplexers-for-multi-stream-understanding)  
+   标签：评分：8.0/10、query:video-stream
+   evidence：多流流式理解的基准
+20. [GOPAgen: Motion-Aware and Efficient Agentic Long-Video Understanding with Structural Memory and Hierarchical Reasoning](/20260527-20260625/2606.06532v1-gopagen-motion-aware-and-efficient-agentic-long-video-understanding-with-structural-memory-and-hierarchical-reasoning)  
+   标签：评分：8.0/10、query:stream-agent
+   evidence：智能体长视频理解，利用运动智能体和结构记忆
+21. [Harnessing Streaming Video in the Wild](/20260527-20260625/2606.08615v1-harnessing-streaming-video-in-the-wild)  
+   标签：评分：8.0/10、query:video-stream
+   evidence：流式视频VLM适应方法，包含数据集和训练目标
+22. [Visual Para-Thinker++: A Single-Policy Multi-Agent Framework for Visual Reasoning](/20260527-20260625/2606.09290v1-visual-para-thinker-a-single-policy-multi-agent-framework-for-visual-reasoning)  
+   标签：评分：8.0/10、query:mm-hall
+   evidence：多智能体框架减少视觉推理中的幻觉
+23. [InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning](/20260527-20260625/2606.12195v1-internvideo3-agentify-foundation-models-with-multimodal-contextual-reasoning)  
+   标签：评分：8.0/10、query:stream-agent
+   evidence：将基础模型智能体化以处理长时多模态任务，包括视频理解
+24. [VisualClaw: A Real-Time, Personalized Agent for the Physical World](/20260527-20260625/2606.16295v1-visualclaw-a-real-time-personalized-agent-for-the-physical-world)  
+   标签：评分：8.0/10、query:stream-agent
+   evidence：面向物理世界的实时个性化智能体，通过混合编码过滤流式帧
+25. [DataClaw0: Agentic Tailoring Multimodal Data from Raw Streams](/20260527-20260625/2606.21337v1-dataclaw0-agentic-tailoring-multimodal-data-from-raw-streams)  
+   标签：评分：8.0/10、query:stream-agent
+   evidence：从原始多模态流中智能体化数据裁剪
+26. [CoVStream: Edge-Cloud Collaboration for Understanding of Long Video Streams](/20260527-20260625/2606.22804v1-covstream-edge-cloud-collaboration-for-understanding-of-long-video-streams)  
+   标签：评分：8.0/10、query:video-stream
+   evidence：面向长视频流理解的边缘-云协作
+27. [Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models](/20260527-20260625/2606.25041v1-wan-streamer-v01-end-to-end-real-time-interactive-foundation-models)  
+   标签：评分：8.0/10、query:video-stream
+   evidence：端到端实时流式音视频基础模型
 
 
 <div class="dpr-home-promo-card">
