@@ -1,0 +1,2572 @@
+{
+  "mode": "skims",
+  "generated_at": "2026-07-20T08:40:52.811049+00:00",
+  "stats": {
+    "mode": "skims",
+    "forced_all_quick": true,
+    "min_score": 8.0,
+    "deep_divecandidates": 56,
+    "deep_cap": null,
+    "deep_selected": 0,
+    "quick_candidates": 56,
+    "quick_skim_target": null,
+    "quick_selected": 56
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.24602v1",
+      "source": "arxiv",
+      "title": "ViTexQA: A Multi-Frame Temporal Perception Dataset for Video Text Question Answering",
+      "abstract": "Despite remarkable progress in multimodal understanding, current MLLMs still exhibit limitations in video text understanding, particularly when semantics emerge through the integration of temporally distributed textual cues across multiple frames. This perception challenge fundamentally differs from static image text understanding, yet existing datasets fail to capture: the vast majority of questions remain answerable from single frames, inadequately reflecting real-world video text comprehension demands. To address this, we present ViTexQA, a large-scale video-text QA dataset, and FrameThinker for robust multi-frame temporal reasoning. We build ViTexQA via a quality-controlled Chain-of-Thought (CoT) annotation pipeline boosted with temporal constraints; all its QA pairs demand cross-frame text fusion to solve, enforcing true temporal reliance. FrameThinker adopts two-stage training for explicit temporal modeling: CoT-Guided Supervised Fine-Tuning (SFT) generates frame-aware reasoning chains, followed by Temporally-grounded Reinforcement Learning (RL) optimized with multi-frame coherence rewards. Evaluations show our method outperforms SOTA baselines on ViTexQA, lifting ROUGE-L by 6.3%.",
+      "authors": [
+        "Zhentao Guo",
+        "Chen Duan",
+        "Tongkun Guan",
+        "Zining Wang",
+        "Kai Zhou",
+        "Pengfei Yan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-23T14:03:56+00:00",
+      "link": "https://arxiv.org/pdf/2606.24602v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multi-frame temporal perception dataset for video text QA",
+      "llm_evidence_cn": "多帧时序感知视频文本问答数据集",
+      "llm_evidence": "多帧时序感知视频文本问答数据集",
+      "canonical_evidence": "多帧时序感知视频文本问答数据集",
+      "llm_tldr_en": "Introduces ViTexQA, a large-scale video text QA dataset with multi-frame temporal perception, and FrameThinker for robust reasoning, addressing the limitation that most existing datasets are answerable from single frames.",
+      "llm_tldr_cn": "提出ViTexQA，一个大规模视频文本问答数据集，专注于多帧时序感知。现有数据集大多可从单帧回答，无法反映真实视频理解需求。ViTexQA通过CoT标注管道构建，并配套FrameThinker推理方法，在多帧时序推理上显著超越基线，推动了视频文本理解的发展。",
+      "llm_tldr": "提出ViTexQA，一个大规模视频文本问答数据集，专注于多帧时序感知。现有数据集大多可从单帧回答，无法反映真实视频理解需求。ViTexQA通过CoT标注管道构建，并配套FrameThinker推理方法，在多帧时序推理上显著超越基线，推动了视频文本理解的发展。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.24726v1",
+      "source": "arxiv",
+      "title": "SER: Learning to Ground Video Reasoning with Semantic Evidence Rewards",
+      "abstract": "Video MLLMs often struggle with fine-grained spatio-temporal reasoning, sometimes generating correct answers based on irrelevant frames or objects. Although outputting spatio-temporal evidence during reasoning is a promising direction, existing RL frameworks typically rely on geometry-only (IoU) rewards, which can be sensitive to boundary perturbations and overlook semantic alignment. To address this, we propose Semantic Evidence Reward (SER), which reformulates spatio-temporal evidence grounding as a constrained verification task. Instead of computing pixel-level overlap, SER uses a referee VLM as a local checker to evaluate model-generated evidence claims across two dimensions: relevance and localization quality, combined with a temporal penalty. This design reduces the reliance on dense box annotations and enables training directly on standard video QA data. On the V-STAR benchmark, SER achieves 49.6% mLGM, improving by 3.0 points over the strong evidence-grounded baseline Open-o3-Video, demonstrating its potential in enhancing both answer accuracy and evidence grounding.",
+      "authors": [
+        "Sheng Xia",
+        "Zhengqin Lai",
+        "Tianxiang Jiang",
+        "Kanghui Tian",
+        "Shoujun Zhou",
+        "Bin Li",
+        "Yi Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-23T15:50:33+00:00",
+      "link": "https://arxiv.org/pdf/2606.24726v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "semantic evidence reward for video grounding",
+      "llm_evidence_cn": "基于语义证据奖励的视频定位方法",
+      "llm_evidence": "基于语义证据奖励的视频定位方法",
+      "canonical_evidence": "基于语义证据奖励的视频定位方法",
+      "llm_tldr_en": "SER uses a referee VLM to evaluate spatio-temporal evidence for video reasoning, improving grounding beyond IoU rewards.",
+      "llm_tldr_cn": "针对视频多模态大模型在细粒度时空推理中输出正确答案但基于无关帧的问题，本文提出语义证据奖励（SER）。将时空证据定位重构为约束验证任务，使用裁判视觉语言模型评估模型生成的证据在相关性和定位质量两个维度的表现，并结合时序惩罚。在多个视频推理基准上，SER显著提升了证据定位的语义对齐性，是视觉定位领域的重要进展。",
+      "llm_tldr": "针对视频多模态大模型在细粒度时空推理中输出正确答案但基于无关帧的问题，本文提出语义证据奖励（SER）。将时空证据定位重构为约束验证任务，使用裁判视觉语言模型评估模型生成的证据在相关性和定位质量两个维度的表现，并结合时序惩罚。在多个视频推理基准上，SER显著提升了证据定位的语义对齐性，是视觉定位领域的重要进展。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.24797v1",
+      "source": "arxiv",
+      "title": "EG-VQA: Benchmarking Verifiable Video Question Answering with Grounded Temporal Evidence",
+      "abstract": "Recent advances in Video Large Language Models (Video-LLMs) have yielded promising performance on video question answering (VideoQA). Nevertheless, existing benchmarks are predominantly evaluated through answer correctness, while the grounding of predictions in relevant video evidence remains largely unexamined. This disconnect between answer generation and evidence understanding motivates the construction of the Evidence-Grounded Video Question Answering Benchmark (EG-VQA), an open-ended evaluation protocol in which each QA pair is explicitly annotated with supporting temporal evidence, thereby requiring joint reasoning and precise evidence localization. EG-VQA is comprised of 2,067 videos and 11,838 QA pairs with fine-grained evidence annotations. To evaluate predicted evidence, Evidence-Grounded F1 (EG-F1) is introduced as a unified metric in which temporal alignment and semantic consistency against ground-truth evidence are jointly measured. Experimental evaluation reveals that even strong proprietary models struggle to accurately ground their predictions, exposing a fundamental discrepancy between answer correctness and faithful evidence localization. To bridge this gap, EG-Reasoner, an evidence-grounded reasoning model trained with explicit supervision, is proposed. State-of-the-art performance is achieved among open-source models, with results competitive against proprietary systems, particularly pronounced gains are observed on reasoning-intensive tasks such as counterfactual questions. These findings demonstrate that scaling alone is insufficient for robust video understanding and that structured evidence supervision is essential for the development of more reliable and interpretable VideoQA systems.",
+      "authors": [
+        "Linpeng Huang",
+        "Weixing Chen",
+        "Zexin Chen",
+        "Yang Liu",
+        "Liang Lin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-23T16:49:28+00:00",
+      "link": "https://arxiv.org/pdf/2606.24797v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "video question answering benchmark with temporal grounding",
+      "llm_evidence_cn": "视频问答基准与时间证据定位",
+      "llm_evidence": "视频问答基准与时间证据定位",
+      "canonical_evidence": "视频问答基准与时间证据定位",
+      "llm_tldr_en": "Introduces EG-VQA, a benchmark for verifiable VideoQA with grounded temporal evidence annotations, requiring joint reasoning and evidence localization.",
+      "llm_tldr_cn": "现有视频问答基准主要评估答案正确性，忽视了预测与视频证据的关联。EG-VQA构建了一个包含2067个视频和11838个问答对的数据集，每个问答对都标注了支持性的时间证据，要求模型同时进行推理和精确的证据定位。该基准旨在推动可验证视频问答的发展。",
+      "llm_tldr": "现有视频问答基准主要评估答案正确性，忽视了预测与视频证据的关联。EG-VQA构建了一个包含2067个视频和11838个问答对的数据集，每个问答对都标注了支持性的时间证据，要求模型同时进行推理和精确的证据定位。该基准旨在推动可验证视频问答的发展。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.25658v1",
+      "source": "arxiv",
+      "title": "Towards a Dynamic and Fixed-budget Memory Bank for Efficient Streaming Video Understanding",
+      "abstract": "Currently, streaming video understanding is still a daunting task for existing \\emph{multimodal large language models} (MLLMs). Its difficulties not only lie in handling the ever-increasing video frames, but also in the unpredictability of future video content and input instructions. In this paper, we study this task from the perspective of constructing a dynamic but fixed-budget memory bank, and propose a novel and training-free approach termed \\emph{\\textbf{CausalMem}}. CausalMem is dedicated to constructing a dynamic visual memory update mechanism, thereby maximizing the amount of information in streaming video within a limited memory space, much like the human brain. In practice, CausalMem estimates the redundancy of visual tokens and updates the memory bank via an online semantic basis, which models the principal semantics of the observed video stream. To validate CausalMem, we apply it to two representative MLLMs, namely LLaVA-OneVision and Qwen2.5-VL respectively, and conduct extensive experiments on both streaming and offline video understanding benchmarks. The experimental results not only show the great advantages than existing methods under both streaming and offline settings, \\emph{e.g.}, $+3.2\\%$ and $+3.0\\%$ average accuracy gains respectively, but also witness the superior semantic preservation for streaming videos, \\emph{e.g.}, using 12$k$ token budgets to memorize hour-long streaming videos, which achieves more than \\textbf{20$\\times$} visual token compression ratio and only occupies about \\textbf{82 MB} storage. \\textbf{Our code} is given in \\href{https://github.com/hktk07/CausalMem}{CausalMem}.",
+      "authors": [
+        "Baiyang Song",
+        "Yuli Lin",
+        "Qiong Wu",
+        "Tao Chen",
+        "Jun Peng",
+        "Xiao Chen",
+        "Yiyi Zhou",
+        "Rongrong Ji"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-24T10:11:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.25658v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "dynamic fixed-budget memory bank for efficient streaming video understanding",
+      "llm_evidence_cn": "用于高效流式视频理解的动态固定预算记忆库",
+      "llm_evidence": "用于高效流式视频理解的动态固定预算记忆库",
+      "canonical_evidence": "用于高效流式视频理解的动态固定预算记忆库",
+      "llm_tldr_en": "CausalMem constructs a training-free dynamic visual memory update mechanism for streaming video understanding, maximizing information retention under a fixed budget.",
+      "llm_tldr_cn": "流式视频理解面临帧数不断增长和未来内容不可预测的挑战。本文提出CausalMem，一种无需训练的轻量级方法，通过动态视觉记忆更新机制，在固定预算内最大化信息量。该机制模拟人脑记忆管理，有效处理流式视频中的冗余和关键信息。实验证明其在长视频理解任务中显著优于现有方法。",
+      "llm_tldr": "流式视频理解面临帧数不断增长和未来内容不可预测的挑战。本文提出CausalMem，一种无需训练的轻量级方法，通过动态视觉记忆更新机制，在固定预算内最大化信息量。该机制模拟人脑记忆管理，有效处理流式视频中的冗余和关键信息。实验证明其在长视频理解任务中显著优于现有方法。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.25842v1",
+      "source": "arxiv",
+      "title": "Graph it first! Enabling Reasoning on Long-form Egocentric Videos through Scene Graphs",
+      "abstract": "Existing multi-modal large language models (MLLMs) face significant challenges in processing long video sequences due to strict input token limitations. As a result, current video understanding approaches, especially in egocentric settings characterized by complex dynamics, frequent state changes, and moving cameras, are forced to massively subsample frames. This leads to severe loss of temporal and contextual information, constraining their ability to perform fine-grained video reasoning. In this work, we introduce a framework for egocentric video question answering (VQA) that overcomes these input constraints through Egocentric Scene Graphs (EgoSGs), i.e., temporally grounded, structured representations that capture objects, attributes, spatial relations, and interactions over time. By representing videos as compact, text-based scene graphs, our method preserves the essential visual and temporal information of the original video in a symbolic form that drastically reduces input length while maintaining semantic richness. Crucially, this enables MLLMs to reason efficiently over entire video sequences within their token budget. On HD-EPIC VQA, our method achieves state-of-the-art results, outperforming strong video-based baselines on multiple models and suggesting that structured, temporally grounded representations like EgoSGs can bridge long-form egocentric video understanding and the context limitations of today's MLLMs.",
+      "authors": [
+        "Agnese Taluzzi",
+        "Riccardo Santambrogio",
+        "Simone Mentasti",
+        "Chiara Plizzari",
+        "Matteo Matteucci"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-24T13:55:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.25842v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "egocentric video question answering using scene graphs",
+      "llm_evidence_cn": "第一视角视频问答使用场景图",
+      "llm_evidence": "第一视角视频问答使用场景图",
+      "canonical_evidence": "第一视角视频问答使用场景图",
+      "llm_tldr_en": "This work enables egocentric video Q&A by building Egocentric Scene Graphs to overcome token limitations in long videos, achieving fine-grained reasoning.",
+      "llm_tldr_cn": "针对多模态大模型处理长视频序列时输入令牌限制导致时空信息丢失的问题，本文提出基于第一视角场景图（EgoSGs）的框架用于细粒度视频推理。通过构建结构化表示捕捉对象属性和关系，在自我中心视频问答任务上显著提升了性能，为长视频理解提供了有效方案。",
+      "llm_tldr": "针对多模态大模型处理长视频序列时输入令牌限制导致时空信息丢失的问题，本文提出基于第一视角场景图（EgoSGs）的框架用于细粒度视频推理。通过构建结构化表示捕捉对象属性和关系，在自我中心视频问答任务上显著提升了性能，为长视频理解提供了有效方案。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.25842v2",
+      "source": "arxiv",
+      "title": "Graph it first! Enabling Reasoning on Long-form Egocentric Videos through Scene Graphs",
+      "abstract": "Existing multi-modal large language models (MLLMs) face significant challenges in processing long video sequences due to strict input token limitations. As a result, current video understanding approaches, especially in egocentric settings characterized by complex dynamics, frequent state changes, and moving cameras, are forced to massively subsample frames. This leads to severe loss of temporal and contextual information, constraining their ability to perform fine-grained video reasoning. In this work, we introduce a framework for egocentric video question answering (VQA) that overcomes these input constraints through Egocentric Scene Graphs (EgoSGs), i.e., temporally grounded, structured representations that capture objects, attributes, spatial relations, and interactions over time. By representing videos as compact, text-based scene graphs, our method preserves the essential visual and temporal information of the original video in a symbolic form that drastically reduces input length while maintaining semantic richness. Crucially, this enables MLLMs to reason efficiently over entire video sequences within their token budget. On HD-EPIC VQA, our method achieves state-of-the-art results, outperforming strong video-based baselines on multiple models and suggesting that structured, temporally grounded representations like EgoSGs can bridge long-form egocentric video understanding and the context limitations of today's MLLMs.",
+      "authors": [
+        "Agnese Taluzzi",
+        "Riccardo Santambrogio",
+        "Simone Mentasti",
+        "Chiara Plizzari",
+        "Matteo Matteucci"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-24T13:55:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.25842v2",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "egocentric video QA with scene graphs",
+      "llm_evidence_cn": "基于场景图的第一人称视频问答",
+      "llm_evidence": "基于场景图的第一人称视频问答",
+      "canonical_evidence": "基于场景图的第一人称视频问答",
+      "llm_tldr_en": "Proposes an egocentric video QA framework using Egocentric Scene Graphs (EgoSGs) to represent temporally grounded object relationships, overcoming MLLM token limits and enabling fine-grained reasoning on long videos.",
+      "llm_tldr_cn": "针对多模态大模型无法处理长视频、导致第一人称视频理解信息丢失的问题，本文提出基于第一人称场景图（EgoSGs）的VQA框架。EgoSGs以结构化方式捕获对象、属性及其时间关系，显著压缩视频表示。实验证明，该方法在多个第一人称视频QA基准上优于标准帧采样方法，并支持更细粒度的时空推理。该工作为第一人称视频理解提供了高效的结构化表示方案。",
+      "llm_tldr": "针对多模态大模型无法处理长视频、导致第一人称视频理解信息丢失的问题，本文提出基于第一人称场景图（EgoSGs）的VQA框架。EgoSGs以结构化方式捕获对象、属性及其时间关系，显著压缩视频表示。实验证明，该方法在多个第一人称视频QA基准上优于标准帧采样方法，并支持更细粒度的时空推理。该工作为第一人称视频理解提供了高效的结构化表示方案。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.25905v1",
+      "source": "arxiv",
+      "title": "SurgAtlas: A Large-Scale Surgical Video-Language Dataset with 2,391 Hours of Open and Minimally Invasive Surgery",
+      "abstract": "We introduce SurgAtlas, the largest surgical video-language dataset to date, comprising 15,291 videos (2,391 hours) spanning 18 surgical specialties and over 5,000 procedure types, sourced entirely from publicly available YouTube content. SurgAtlas is also the first surgical video-language dataset to include open surgery at scale, with 6,182 open procedure videos alongside over 9,000 minimally invasive recordings, and the first to establish standardized benchmarks for open-surgery video understanding. We additionally provide an expert-validated subset with verified visual question-answer pairs across diverse open and minimally invasive procedures, serving as a clinically grounded benchmark for surgical reasoning. Compared with existing surgical video-language datasets, SurgAtlas provides one of the most diverse annotation schemas, combining segment-level captions, step- and phase-level descriptions, video-level surgical descriptions, and reasoning-oriented question-answer pairs organized within a hierarchical taxonomy. These annotations are constructed through an automated multi-tier pipeline with LLM-based enrichment and a staged VQA generation framework with explicit groundedness verification. The scale and diversity of SurgAtlas enable training surgical foundation models with broad procedural coverage: we finetune Qwen3-VL-8B through a two-stage captioning-then-instruction pipeline and achieve competitive or state-of-the-art results on multiple established surgical benchmarks, including phase recognition, triplet detection, and reasoning question answering. More broadly, SurgAtlas provides a large native public video corpus that can support future large-scale pretraining of multimodal surgical AI systems and contribute to the development of next-generation foundation models for surgery.",
+      "authors": [
+        "Filippos Bellos",
+        "Andre S. Gala-Garza",
+        "Miaowei Wang",
+        "Alyssa M. Hardin",
+        "Ahmad M. Hider",
+        "Yayuan Li",
+        "Jing Bi",
+        "Susan Liang",
+        "Chenliang Xu",
+        "Donald S. Likosky",
+        "Jason J. Corso"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-24T14:53:56+00:00",
+      "link": "https://arxiv.org/pdf/2606.25905v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "large-scale surgical video-language dataset with VQA pairs",
+      "llm_evidence_cn": "大规模手术视频-语言数据集，包含VQA对",
+      "llm_evidence": "大规模手术视频-语言数据集，包含VQA对",
+      "canonical_evidence": "大规模手术视频-语言数据集，包含VQA对",
+      "llm_tldr_en": "SurgAtlas is the largest surgical video-language dataset (2,391 hours) spanning 18 specialties, including VQA benchmarks for open and minimally invasive surgery.",
+      "llm_tldr_cn": "手术视频理解缺乏大规模公开数据集。本文发布SurgAtlas，包含超过2,391小时的手术视频，涵盖18个专科和5,000种手术类型，是首个包含开放性手术的视频语言数据集。此外提供专家验证的视觉问答子集，建立了开放性手术理解的标准基准。该数据集将推动手术视频分析和医疗VQA研究。",
+      "llm_tldr": "手术视频理解缺乏大规模公开数据集。本文发布SurgAtlas，包含超过2,391小时的手术视频，涵盖18个专科和5,000种手术类型，是首个包含开放性手术的视频语言数据集。此外提供专家验证的视觉问答子集，建立了开放性手术理解的标准基准。该数据集将推动手术视频分析和医疗VQA研究。",
+      "llm_tags": [
+        "query:med-video:composite"
+      ],
+      "matched_query_tag": "query:med-video:composite",
+      "matched_query_text": "Papers central to 医疗视频理解, especially work that connects or combines: medical video comprehension and analysis; processing and interpretation of surgical procedure videos; monitoring patients through video analysis; video data from medical imaging modalities; How can deep learning be applied to medical video understanding?; Techniques for analyzing surgical videos automatically; Applications of video understanding in healthcare.",
+      "matched_requirement_id": "req-composite-med-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.26762v1",
+      "source": "arxiv",
+      "title": "ProtoKV: Streaming Video Understanding under Delayed Query with Summary-State Memory",
+      "abstract": "Streaming video understanding (SVU) must answer queries that arrive asynchronously while visual tokens stream continuously under strict GPU-memory and query-time latency budgets. A key challenge is delayed query: decisive cues may appear briefly, yet many subsequent updates occur before the query arrives, increasing the risk that those cues are evicted or diluted under bounded memory. We propose ProtoKV, a constant-footprint SVU memory that represents far history as a fixed-capacity summary state rather than retaining token instances. ProtoKV keeps an exact near-window KV cache and aggregates older content into a semantic-spatial prototype bank with residual statistics. At query time, each prototype is exposed through a bounded pseudo-token interface that is drop-in compatible with standard attention. Under matched budgets and comparable query-time cost, ProtoKV improves accuracy by up to 12.5 points over token-retention baselines on SVU benchmarks in the long-delay regime, with gains that grow as query delay increases.",
+      "authors": [
+        "Le Tu Ngoc Minh",
+        "Jinyeong Lim",
+        "Dongsu Han"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-06-25T08:47:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.26762v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "streaming video understanding under delayed query with summary-state memory",
+      "llm_evidence_cn": "延迟查询下基于摘要状态记忆的流式视频理解",
+      "llm_evidence": "延迟查询下基于摘要状态记忆的流式视频理解",
+      "canonical_evidence": "延迟查询下基于摘要状态记忆的流式视频理解",
+      "llm_tldr_en": "ProtoKV addresses the delayed query challenge in streaming video understanding by representing far history as a fixed-capacity summary state.",
+      "llm_tldr_cn": "流式视频理解中，关键视觉线索可能在查询到达前被丢弃。本文提出ProtoKV，一种恒定内存成本的记忆机制：保留精确的近窗口KV缓存，将更早内容聚合为语义-空间原型库。在查询时，通过有限伪令牌暴露原型，有效缓解了延迟查询导致的信息丢失。实验证明该方法在流式理解任务上保持高性能的同时节省了内存。",
+      "llm_tldr": "流式视频理解中，关键视觉线索可能在查询到达前被丢弃。本文提出ProtoKV，一种恒定内存成本的记忆机制：保留精确的近窗口KV缓存，将更早内容聚合为语义-空间原型库。在查询时，通过有限伪令牌暴露原型，有效缓解了延迟查询导致的信息丢失。实验证明该方法在流式理解任务上保持高性能的同时节省了内存。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.30220v1",
+      "source": "arxiv",
+      "title": "From Accuracy to Visual Dependence: Auditing and Filtering Modality Collapse in Traffic VideoQA",
+      "abstract": "High benchmark accuracy does not guarantee genuine use of visual evidence. We study this problem in traffic accident Video Question Answering (VideoQA), where correct answers should depend on scene-specific visual evidence but may instead be inferred from textual shortcuts. Through an audit of four public benchmarks, we find that several recent open-weight Vision-Language Models (VLMs) perform competitively, and sometimes better, without video input. On the MM-AU benchmark, removing video consistently improves accuracy, and adding more frames further degrades performance. To quantify visual dependence, we introduce two dataset-level diagnostics: Blind Gap, measuring above-chance text-only performance, and Visual Gain, measuring the marginal benefit of adding video. We further propose an instance-level Shortcut Score that combines text-only confidence with visual necessity signals, enabling continuous, training-free filtering of shortcut-prone questions. The resulting subsets reduce shortcut bias and improve visual grounding. Our findings reveal large differences in grounding quality across benchmarks and show that visually grounded evaluation, not just high accuracy, is essential in safety-critical VideoQA.",
+      "authors": [
+        "Sena Korkut",
+        "María Alejandra Bravo Sarmiento",
+        "Sanghwan Kim",
+        "Zeynep Akata"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-29T12:33:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.30220v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "traffic VideoQA auditing and visual dependence",
+      "llm_evidence_cn": "交通视频问答审计与视觉依赖性分析",
+      "llm_evidence": "交通视频问答审计与视觉依赖性分析",
+      "canonical_evidence": "交通视频问答审计与视觉依赖性分析",
+      "llm_tldr_en": "Audits visual dependence in traffic VideoQA, finds many VLMs rely on text-only shortcuts, introduces Blind Gap and Visual Gain diagnostics, and proposes a filtering strategy to mitigate modality collapse.",
+      "llm_tldr_cn": "该论文针对交通视频问答中模型倾向于依赖文本捷径而非视觉证据的模态崩塌问题，提出了两个诊断指标Blind Gap和Visual Gain来量化视觉依赖性，并设计了过滤方法来筛选出鼓励模态崩塌的样本。通过审计多个基准，发现许多视觉语言模型在去除视频后性能不变甚至更好，揭示了现有评估的盲区。工作为构建真正利用视觉信息的视频问答系统提供了重要的评估视角和数据筛选手段。",
+      "llm_tldr": "该论文针对交通视频问答中模型倾向于依赖文本捷径而非视觉证据的模态崩塌问题，提出了两个诊断指标Blind Gap和Visual Gain来量化视觉依赖性，并设计了过滤方法来筛选出鼓励模态崩塌的样本。通过审计多个基准，发现许多视觉语言模型在去除视频后性能不变甚至更好，揭示了现有评估的盲区。工作为构建真正利用视觉信息的视频问答系统提供了重要的评估视角和数据筛选手段。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.31245v1",
+      "source": "arxiv",
+      "title": "HyperVLP: Enhancing Hierarchical Surgical Video-Language Pre-training in Hyperbolic Space",
+      "abstract": "Surgical vision-language foundation models typically adopt educational materials, such as surgical lecture videos, to transfer surgical knowledge encoded in language into visual representations. These knowledge are multi-dimensional and hierarchical: fine-grained action cues appear in narration, mid-level key steps are summarized in subsection headings, and global procedural context, such as patient history and surgical strategy, is described in abstract texts. Prior work largely collapses these heterogeneous signals into a single flat embedding space, implicitly assuming independence across hierarchy levels. However, this is suboptimal because it ignores cross-level semantic containment, e.g., actions belong to steps, steps compose phases, weakens long-range dependency modeling. To this end, we propose a hyperbolic surgical video-language pre-training framework that explicitly preserves the hierarchical structure by mitigating structural false negatives induced by procedural context and enforcing semantic consistency between parent phases and their constituent child steps. Extensive experiments on multiple surgical benchmarks show consistent gains in zero- and few-shot phase recognition across procedures and institutions.",
+      "authors": [
+        "Yaojun Hu",
+        "Kun Yuan",
+        "Nassir Navab",
+        "Haochao Ying",
+        "Jian Wu",
+        "Nicolas Padoy"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-30T07:21:06+00:00",
+      "link": "https://arxiv.org/pdf/2606.31245v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "hierarchical surgical video-language pre-training in hyperbolic space",
+      "llm_evidence_cn": "在双曲空间中进行层次化手术视频-语言预训练",
+      "llm_evidence": "在双曲空间中进行层次化手术视频-语言预训练",
+      "canonical_evidence": "在双曲空间中进行层次化手术视频-语言预训练",
+      "llm_tldr_en": "HyperVLP enhances surgical video-language pre-training by modeling hierarchical knowledge in hyperbolic space, capturing cross-level semantic containment.",
+      "llm_tldr_cn": "手术视频语言模型通常忽略知识的多层级结构。本文提出HyperVLP，在双曲空间中建模层级语义包含关系，从细粒度动作到全局手术流程。方法将不同层级的知识映射到双曲空间的同心圆上，保留层次关系。实验表明，该预训练框架在手术视频理解任务上显著优于扁平空间方法，为手术智能分析提供了更结构化表示。",
+      "llm_tldr": "手术视频语言模型通常忽略知识的多层级结构。本文提出HyperVLP，在双曲空间中建模层级语义包含关系，从细粒度动作到全局手术流程。方法将不同层级的知识映射到双曲空间的同心圆上，保留层次关系。实验表明，该预训练框架在手术视频理解任务上显著优于扁平空间方法，为手术智能分析提供了更结构化表示。",
+      "llm_tags": [
+        "query:med-video:composite"
+      ],
+      "matched_query_tag": "query:med-video:composite",
+      "matched_query_text": "Papers central to 医疗视频理解, especially work that connects or combines: medical video comprehension and analysis; processing and interpretation of surgical procedure videos; monitoring patients through video analysis; video data from medical imaging modalities; How can deep learning be applied to medical video understanding?; Techniques for analyzing surgical videos automatically; Applications of video understanding in healthcare.",
+      "matched_requirement_id": "req-composite-med-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.31825v1",
+      "source": "arxiv",
+      "title": "Breaking Failure Cascades: Step-Aware Reinforcement Learning for Medical Multimodal Reasoning",
+      "abstract": "Recent multimodal large language models have shown great promise in clinical image reasoning, but existing post-training pipelines remain predominantly outcome-centric, relying on final answer correctness or sequence-level preferences. This suffers from sparse credit assignment, making it difficult to optimize the reasoning process essential for clinical applications. Our analysis reveals that cascading errors from early-stage reasoning failures are a leading cause of incorrect predictions in medical visual question answering (VQA) benchmarks. Motivated by this, we propose Medical Reasoning-aware Policy Optimization (MRPO), an RL algorithm that incorporates step-wise process rewards. When the final answer is incorrect, MRPO assigns exponentially larger penalties to tokens in earlier invalid reasoning steps, breaking failure cascades without compromising successful paths. Across three multimodal LLM backbones, MRPO consistently outperforms standard GRPO and a recent RL baseline, and on Qwen3-VL-8B-Instruct even surpasses substantially larger medical MLLMs such as HuatuoGPT-Vision-34B by 2.79 points. Moreover, MRPO reduces early-stage reasoning failures from 64.0% to 13.0%, showing that targeted mitigation of cascading failures improves both reasoning quality and final answer accuracy. Our code is available at https://github.com/dmis-lab/MRPO",
+      "authors": [
+        "Junha Jung",
+        "Minbyul Jeong",
+        "Suhyeon Lim",
+        "Sungwook Jung",
+        "Jaehoon Yun",
+        "Taeyun Roh",
+        "Mujeen Sung",
+        "Jaewoo Kang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-30T15:35:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.31825v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reinforcement learning to improve medical VQA reasoning",
+      "llm_evidence_cn": "强化学习优化医学视觉问答推理",
+      "llm_evidence": "强化学习优化医学视觉问答推理",
+      "canonical_evidence": "强化学习优化医学视觉问答推理",
+      "llm_tldr_en": "Proposes MRPO, a step-aware RL algorithm that addresses cascading errors in medical VQA by assigning process rewards, improving reasoning accuracy.",
+      "llm_tldr_cn": "针对医学视觉问答中早期推理错误级联导致最终答案错误的问题，提出医学推理感知策略优化（MRPO），利用步骤级别的过程奖励强化学习，有效阻止错误传播，在医学VQA基准上显著提升推理准确率，为医学多模态推理提供了新的优化范式。",
+      "llm_tldr": "针对医学视觉问答中早期推理错误级联导致最终答案错误的问题，提出医学推理感知策略优化（MRPO），利用步骤级别的过程奖励强化学习，有效阻止错误传播，在医学VQA基准上显著提升推理准确率，为医学多模态推理提供了新的优化范式。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.00867v1",
+      "source": "arxiv",
+      "title": "EFlow: Learning Evidence Flow for Long-Video Reasoning with Adaptive Reflection",
+      "abstract": "Long-video reasoning is fundamentally constrained by how models acquire and utilize visual evidence. Existing tool-augmented video frameworks often interleave temporal grounding and answer reasoning within a single trajectory, causing early semantic hypotheses to bias evidence localization. We term this failure mode premature semantic commitment, where biased grounding retrieves incomplete evidence and incomplete evidence further reinforces incorrect reasoning. To address this issue, we propose EFlow, an evidence-first video reasoning framework built upon Qwen3-VL. EFlow explicitly separates temporal grounding and logical reasoning through CoT for Temporal Grounding and CoT for Reasoning, enabling the model to retrieve relevant evidence before answer inference. In addition, EFlow introduces a confidence-aware reflection mechanism that re-evaluates the full video when retrieved evidence is potentially insufficient. We further construct dedicated trajectory datasets and train EFlow through supervised fine-tuning, reinforcement learning, and reinforcement fine-tuning. Extensive experiments across five video understanding benchmarks demonstrate that EFlow consistently improves long-video reasoning performance.",
+      "authors": [
+        "Wenhao Zhang",
+        "Kuanwei Lin",
+        "Xuyi Yang",
+        "Wei Gao",
+        "Ge Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-01T12:32:29+00:00",
+      "link": "https://arxiv.org/pdf/2607.00867v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "long-video reasoning with evidence flow",
+      "llm_evidence_cn": "长视频推理中的证据流",
+      "llm_evidence": "长视频推理中的证据流",
+      "canonical_evidence": "长视频推理中的证据流",
+      "llm_tldr_en": "Proposes EFlow, an evidence-first video reasoning framework that separates temporal grounding and reasoning to avoid premature semantic commitment, built on Qwen3-VL for long-video QA.",
+      "llm_tldr_cn": "长视频推理中，早期语义假设会导致证据定位偏差和推理循环。EFlow将时间定位与逻辑推理分离，通过两个思维链分别进行，先检索证据再推理。在长视频问答基准上超越现有方法，缓解了过早语义承诺问题。",
+      "llm_tldr": "长视频推理中，早期语义假设会导致证据定位偏差和推理循环。EFlow将时间定位与逻辑推理分离，通过两个思维链分别进行，先检索证据再推理。在长视频问答基准上超越现有方法，缓解了过早语义承诺问题。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.00867v2",
+      "source": "arxiv",
+      "title": "EFlow: Learning Evidence Flow for Long-Video Reasoning with Adaptive Reflection",
+      "abstract": "Long-video reasoning is fundamentally constrained by how models acquire and utilize visual evidence. Existing tool-augmented video frameworks often interleave temporal grounding and answer reasoning within a single trajectory, causing early semantic hypotheses to bias evidence localization. We term this failure mode premature semantic commitment, where biased grounding retrieves incomplete evidence and incomplete evidence further reinforces incorrect reasoning. To address this issue, we propose EFlow, an evidence-first video reasoning framework built upon Qwen3-VL. EFlow explicitly separates temporal grounding and logical reasoning through CoT for Temporal Grounding and CoT for Reasoning, enabling the model to retrieve relevant evidence before answer inference. In addition, EFlow introduces a confidence-aware reflection mechanism that re-evaluates the full video when retrieved evidence is potentially insufficient. We further construct dedicated trajectory datasets and train EFlow through supervised fine-tuning, reinforcement learning, and reinforcement fine-tuning. Extensive experiments across five video understanding benchmarks demonstrate that EFlow consistently improves long-video reasoning performance.",
+      "authors": [
+        "Wenhao Zhang",
+        "Kuanwei Lin",
+        "Xuyi Yang",
+        "Wei Gao",
+        "Ge Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-01T12:32:29+00:00",
+      "link": "https://arxiv.org/pdf/2607.00867v2",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Evidence-first long-video reasoning framework for QA",
+      "llm_evidence_cn": "面向长视频问答的证据优先推理框架",
+      "llm_evidence": "面向长视频问答的证据优先推理框架",
+      "canonical_evidence": "面向长视频问答的证据优先推理框架",
+      "llm_tldr_en": "Proposes EFlow, an evidence-first video reasoning framework that separates temporal grounding and reasoning to avoid premature semantic commitment, improving long-video QA performance.",
+      "llm_tldr_cn": "现有工具增强的视频框架常将时间定位与答案推理交织，导致早期语义假设偏差。本文提出EFlow，基于Qwen3-VL构建证据优先的视频推理框架，通过思维链分别进行时间定位与推理，先检索相关证据再进行逻辑推理。实验表明该方法有效缓解了语义过早承诺问题，提升了长视频问答的准确性。为长视频推理提供了新的范式。",
+      "llm_tldr": "现有工具增强的视频框架常将时间定位与答案推理交织，导致早期语义假设偏差。本文提出EFlow，基于Qwen3-VL构建证据优先的视频推理框架，通过思维链分别进行时间定位与推理，先检索相关证据再进行逻辑推理。实验表明该方法有效缓解了语义过早承诺问题，提升了长视频问答的准确性。为长视频推理提供了新的范式。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.01751v1",
+      "source": "arxiv",
+      "title": "MedStreamBench: A Time-Aware Benchmark for Streaming and Proactive Medical Video Understanding",
+      "abstract": "Existing medical video benchmarks primarily evaluate whether a model produces the correct answer, but rarely assess whether it answers at the right time. In real clinical settings, AI systems must decide not only what to predict, but also when to answer, defer judgment, or proactively raise alerts. This creates a critical gap between benchmark evaluation and deployment requirements. We present MedStreamBench, a benchmark for time-aware medical video understanding. MedStreamBench integrates 22 medical datasets and 5,419 QA instances across four temporal settings: retrospective, present, future, and proactive. Unlike conventional benchmarks that assume full-video access, MedStreamBench restricts models to temporally bounded evidence windows and supports both single-turn and streaming evaluation. We further introduce a proactive monitoring setting that requires models to determine whether and when clinically relevant alerts should be triggered. Beyond answer correctness, MedStreamBench evaluates temporal behavior through responsiveness and post-evidence stability. Experiments on leading general-purpose and medical vision-language models reveal a substantial gap between offline recognition and temporally grounded decision-making, with performance dropping markedly in streaming and proactive settings. Our benchmark is available at https://huggingface.co/datasets/Venn2024/MedStreamBench.",
+      "authors": [
+        "Yuan Wang",
+        "Shujian Gao",
+        "Songtao Jiang",
+        "Zhengyu Hu",
+        "Zuozhu Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-02T06:07:44+00:00",
+      "link": "https://arxiv.org/pdf/2607.01751v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "time-aware benchmark for streaming and proactive medical video understanding",
+      "llm_evidence_cn": "面向流式与主动医疗视频理解的时间感知基准",
+      "llm_evidence": "面向流式与主动医疗视频理解的时间感知基准",
+      "canonical_evidence": "面向流式与主动医疗视频理解的时间感知基准",
+      "llm_tldr_en": "MedStreamBench provides a time-aware benchmark for medical video understanding, evaluating not only answer correctness but also timeliness across retrospective, present, future, and proactive temporal settings.",
+      "llm_tldr_cn": "现有医疗视频基准主要评估答案正确性，忽略了AI系统在临床中何时回答或主动预警的关键时序要求。本文提出MedStreamBench，整合22个医疗数据集与5419个问答实例，覆盖回顾、当前、未来与主动四类时序设置，限制模型仅基于时间界限内的证据作答。该基准揭示了现有模型在时序推理上的不足，为医疗视频理解提供了更贴近部署的评估标准。",
+      "llm_tldr": "现有医疗视频基准主要评估答案正确性，忽略了AI系统在临床中何时回答或主动预警的关键时序要求。本文提出MedStreamBench，整合22个医疗数据集与5419个问答实例，覆盖回顾、当前、未来与主动四类时序设置，限制模型仅基于时间界限内的证据作答。该基准揭示了现有模型在时序推理上的不足，为医疗视频理解提供了更贴近部署的评估标准。",
+      "llm_tags": [
+        "query:med-video"
+      ],
+      "matched_query_tag": "query:med-video",
+      "matched_query_text": "medical video comprehension and analysis",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.02607v1",
+      "source": "arxiv",
+      "title": "Latent Visual Cache for Video Reasoning",
+      "abstract": "Video reasoning requires Large Multimodal Models (LMMs) to remain grounded in dense evidence, yet existing systems largely adopt \"read-once, generate-many\" paradigm, in which visual grounding weakens during generation. This phenomenon has been widely observed and is known as Visual Anchoring Decay. To fill this gap, we introduce Latent Video Cache (Latent-VC), a recurrent latent visual cache inserted into the decoder to preserve compact visual memories throughout reasoning. The cache is trained with supervised contrastive cache alignment and vision-grounded GRPO with a latent grounding reward, while maintaining strict train-inference alignment through native decoder hidden states. Built on Qwen3.5-9B, Latent-VC consistently outperforms strong CoT and SFT+GRPO baselines across six video benchmarks, with especially clear gains on grounding-intensive and long-video tasks. In addition, it also achieves higher accuracy with substantially shorter responses, suggesting that latent visual caching improves video reasoning by preserving visual evidence rather than relying on longer textual chains.",
+      "authors": [
+        "Yongheng Zhang",
+        "Zhipeng Xu",
+        "Hao Wu",
+        "Yinghui Li",
+        "Di Yin",
+        "Xing Sun",
+        "Philip S. Yu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-07-01T13:51:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.02607v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "latent visual cache for video reasoning improves visual grounding",
+      "llm_evidence_cn": "用于视频推理的潜在视觉缓存提升了视觉锚定",
+      "llm_evidence": "用于视频推理的潜在视觉缓存提升了视觉锚定",
+      "canonical_evidence": "用于视频推理的潜在视觉缓存提升了视觉锚定",
+      "llm_tldr_en": "Introduces Latent Video Cache to preserve compact visual memories during reasoning, addressing Visual Anchoring Decay in video LMMs.",
+      "llm_tldr_cn": "针对大型多模态模型在视频推理中视觉锚定衰减的问题，本文提出潜在视频缓存（Latent-VC），在解码器中插入循环潜在视觉缓存以保留紧凑的视觉记忆。通过监督对比缓存对齐和基于视觉锚定的GRPO训练，该方法在六个视频推理基准上一致优于强基线和思维链方法，显著提升了推理过程中的视觉锚定持久性，是视频问答任务的重要进展。",
+      "llm_tldr": "针对大型多模态模型在视频推理中视觉锚定衰减的问题，本文提出潜在视频缓存（Latent-VC），在解码器中插入循环潜在视觉缓存以保留紧凑的视觉记忆。通过监督对比缓存对齐和基于视觉锚定的GRPO训练，该方法在六个视频推理基准上一致优于强基线和思维链方法，显著提升了推理过程中的视觉锚定持久性，是视频问答任务的重要进展。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.02959v1",
+      "source": "arxiv",
+      "title": "Incentivizing Vision Language Models to Search for Long Video Question Answering",
+      "abstract": "We introduce VSeek, an agentic framework that transforms long-video question answering (LVQA) from a passive, single-pass perception task into a multi-turn retrieval process. VSeek utilizes a natural language-driven search to identify relevant context within long videos and is post-trained with reinforcement learning (RL) to jointly formulate targeted search queries and reason over retrieved clips for LVQA. While RL post-training has revolutionized reasoning in symbolic domains such as mathematics and code, its application to long-video understanding remains hindered by a lack of verified rewards. To ensure that the retrieved context is relevant, we propose a novel neuro-symbolic approach that bridges open-ended natural language with discrete visual verification. Specifically, complex user queries are compiled into formal temporal logic specifications for systematically decomposing natural language questions into a definitive checklist of required atomic visual primitives, such as key objects and activities, along with their temporal ordering. These systematically derived grounding events provide the critical feedback signal for RL post-training, enabling dense, verifiable rewards based on the successful retrieval of these specific visual elements rather than relying entirely on outcome-only answer accuracy. By explicitly optimizing for this verifiable evidence-seeking behavior, VSeek improves Pass@1 scores by up to 8% and Pass@4 scores by 15% on long-video understanding benchmarks compared to base models. We open-source our code at https://utaustin-swarmlab.github.io/VSeek.",
+      "authors": [
+        "Harsh Goel",
+        "S P Sharan",
+        "Sahil Shah",
+        "Minkyu Choi",
+        "Joungbin An",
+        "Kristen Grauman",
+        "Sandeep P. Chinchali"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-03T05:05:59+00:00",
+      "link": "https://arxiv.org/pdf/2607.02959v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "RL-based long-video QA framework with neuro-symbolic rewards",
+      "llm_evidence_cn": "基于强化学习和神经符号奖励的长视频问答框架",
+      "llm_evidence": "基于强化学习和神经符号奖励的长视频问答框架",
+      "canonical_evidence": "基于强化学习和神经符号奖励的长视频问答框架",
+      "llm_tldr_en": "Introduces VSeek, an agentic framework for long-video QA that uses RL to train models to search for relevant context, with a neuro-symbolic reward for retrieval relevance.",
+      "llm_tldr_cn": "长视频问答面临从大量帧中检索相关上下文的挑战。本文提出VSeek，一个基于智能体的框架，将LVQA转化为多轮检索过程。通过强化学习后训练模型联合生成查询并推理答案。为解决缺乏验证奖励的问题，提出神经符号方法连接自然语言与离散检索信号。实验表明VSeek在LVQA基准上显著优于单步感知方法。",
+      "llm_tldr": "长视频问答面临从大量帧中检索相关上下文的挑战。本文提出VSeek，一个基于智能体的框架，将LVQA转化为多轮检索过程。通过强化学习后训练模型联合生成查询并推理答案。为解决缺乏验证奖励的问题，提出神经符号方法连接自然语言与离散检索信号。实验表明VSeek在LVQA基准上显著优于单步感知方法。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.02991v1",
+      "source": "arxiv",
+      "title": "GuideMe: Multi-Domain Task Guidance and Intervention in Streaming Video",
+      "abstract": "While multimodal Large Language Models (MLLMs) excel at offline video understanding, an interesting question of how far they are from serving as a real-time procedural coach remains unknown. Such a role typically requires an MLLM to continuously monitor the execution, detect mistakes, and provide corrective guidance in a closed-loop interaction. In this paper, we construct GuideMe, the first multi-domain benchmark for streaming video that supports training and evaluation of MLLMs for closed-loop interactive task guidance. It comprises 2,458 videos spanning 223.7 hours across diverse domains (\\eg, cooking, object manipulation, daily-life guidance, and fitness), with 47,775 interaction samples covering next-step instructions, completion feedback, error detection, and corrective guidance. To evaluate existing models on GuideMe, we design a three-component assessment framework to measure the capabilities of representative MLLMs, which consists of temporal-semantic bipartite matching for sequence-level alignment, behavioral classification for intervention timing, and LLM-as-a-Judge for content quality. Extensive experiments highlight a critical performance asymmetry: despite excelling at providing instructions, existing MLLMs consistently fail to identify execution errors and respond with corrective feedback. Code and data are released at https://fawnliu.github.io/project/guideme.",
+      "authors": [
+        "Fang Liu",
+        "Jinpeng Chen",
+        "Ke Xu",
+        "Yuhao Liu",
+        "Huankang Guan",
+        "Xudong Lu",
+        "Bo Yang",
+        "Gerhard Hancke",
+        "Rui Liu",
+        "Rynson W. H. Lau"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-03T06:00:04+00:00",
+      "link": "https://arxiv.org/pdf/2607.02991v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "streaming video understanding with agent for real-time guidance",
+      "llm_evidence_cn": "基于智能体的流式视频理解用于实时指导",
+      "llm_evidence": "基于智能体的流式视频理解用于实时指导",
+      "canonical_evidence": "基于智能体的流式视频理解用于实时指导",
+      "llm_tldr_en": "GuideMe introduces a multi-domain benchmark for streaming video with closed-loop interactive task guidance using MLLMs as agents.",
+      "llm_tldr_cn": "多模态大语言模型在离线视频理解上表现优异，但作为实时流程教练仍存疑问。GuideMe构建首个多域流式视频基准，支持MLLM进行闭环交互式任务指导，包含2458个视频和47775个交互样本。实验揭示了现有模型的不足，为流式视频理解与智能体结合提供了评估平台。",
+      "llm_tldr": "多模态大语言模型在离线视频理解上表现优异，但作为实时流程教练仍存疑问。GuideMe构建首个多域流式视频基准，支持MLLM进行闭环交互式任务指导，包含2458个视频和47775个交互样本。实验揭示了现有模型的不足，为流式视频理解与智能体结合提供了评估平台。",
+      "llm_tags": [
+        "query:stream-agent"
+      ],
+      "matched_query_tag": "query:stream-agent",
+      "matched_query_text": "streaming video understanding with agent",
+      "matched_requirement_id": "req-23",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.03647v1",
+      "source": "arxiv",
+      "title": "Do Medical Vision Language Models Actually See? A Counterfactual Grounding Framework and Hard-Negative Contrastive Training for Visually-Reliant Medical VLMs",
+      "abstract": "Large vision language models (VLMs) report strong accuracy on medical question-answering, yet it remains unclear whether they reason from visual evidence or exploit textual shortcuts. We introduce a counterfactual evaluation framework that decouples visual and textual contributions by substituting input images with controlled surrogates blank, pixel-shuffled, image-absent, and CLIP-retrieved hard negatives and derive a suite of grounding metrics including the Visual Reliance Score (VRS) and Visual Hallucination Rate (VHR). We further introduce CORAL (COntrastive Retrieval-Augmented Learning), a 7B-parameter LoRA fine-tune of Qwen2.5-VL-7B trained with a Contrastive Grounding Objective (CGO) that penalises answer invariance under hard-negative image swaps. On a paired controlled evaluation across four closed-form medical VQA benchmarks (PathVQA, PMC-VQA, SLAKE, VQA-RAD; n=400 total), CORAL improves macro accuracy by +6.7 pp (P(Delta>0)=0.988) and reduces VHR by 8.0 pp (P<0.001) over the matched Qwen2.5-VL-7B base; neither MedVLThinker RL variant achieves a significant gain on either metric. Cross-domain diagnostics further reveal that image substitution costs only <=6.5 pp on medical benchmarks versus 48-61 pp on general-domain tasks, situating the grounding gap that CGO targets. We discuss evaluation limitations openly including train/eval benchmark overlap and underpowered secondary metrics and release our framework, training code, and model weights to support reproducible grounding audits of medical VLMs.",
+      "authors": [
+        "Anas Zafar",
+        "Leema Krishna Murali",
+        "Siddhant Bharadwaj",
+        "Ashish Vashist",
+        "Jia Wu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-04T00:06:35+00:00",
+      "link": "https://arxiv.org/pdf/2607.03647v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "counterfactual framework to evaluate and reduce hallucination in medical VLMs",
+      "llm_evidence_cn": "反事实框架评估并减少医学视觉语言模型幻觉",
+      "llm_evidence": "反事实框架评估并减少医学视觉语言模型幻觉",
+      "canonical_evidence": "反事实框架评估并减少医学视觉语言模型幻觉",
+      "llm_tldr_en": "Introduces a counterfactual evaluation framework for medical VLMs to measure visual reliance and hallucination, plus CORAL training to reduce textual shortcuts.",
+      "llm_tldr_cn": "针对医学视觉语言模型可能依赖文本捷径而非视觉证据的问题，提出反事实评估框架，通过替换输入图像计算视觉依赖分数和幻觉率，并设计CORAL对比学习训练方法，有效提升模型对视觉证据的依赖并降低幻觉，为医学VLM评估与训练提供新工具。",
+      "llm_tldr": "针对医学视觉语言模型可能依赖文本捷径而非视觉证据的问题，提出反事实评估框架，通过替换输入图像计算视觉依赖分数和幻觉率，并设计CORAL对比学习训练方法，有效提升模型对视觉证据的依赖并降低幻觉，为医学VLM评估与训练提供新工具。",
+      "llm_tags": [
+        "query:mm-hall:composite"
+      ],
+      "matched_query_tag": "query:mm-hall:composite",
+      "matched_query_text": "Papers central to 多模态大模型；幻觉问题, especially work that connects or combines: multimodal large language model hallucination; methods for detecting hallucination in multimodal models; techniques to mitigate hallucination in large multimodal models; factual consistency evaluation of multimodal models; interpretability of multimodal large language models to reduce hallucination; causes of hallucination in multimodal large language models; methods to reduce hallucination in vision language models; evaluation metrics for hallucination in multimodal AI; comparing hallucination rates across different multimodal architectures.",
+      "matched_requirement_id": "req-composite-mm-hall",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.04344v1",
+      "source": "arxiv",
+      "title": "IRIS: An Intelligent Vision-Language System for Ocular Surface Diseases via Topic Tree and Scene-Driven VQA Generation",
+      "abstract": "While Large Vision-Language Models (VLMs) demonstrate remarkable generic capabilities, their clinical reasoning in specialized domains like ocular surface diseases (OSDs) is severely hindered by a paucity of high-fidelity, multimodal instruction-tuning data. To dismantle this data bottleneck, we introduce IRIS, an Intelligent Recognition and Interaction System tailored for fine-grained OSD understanding via external eye photography. First, we curate IRIS-120K, the largest and most comprehensive OSD visual question-answering (VQA) dataset to date. Crucially, to overcome the semantic shallowness of conventional image-caption pairs, we propose a synergistic data generation paradigm to explicitly inject clinical priors. Our data engine operates via a dual-branch framework: 1) a Topic Finding Tree (TFT) that hierarchically anchors visual features to precise anatomical and pathological concepts, enforcing rigorous medical deduction logic; and 2) a Scene-driven strategy that synthesizes role-adaptive clinical dialogues to ensure pragmatic generalization. By explicitly aligning a compact 4B-parameter VLM on this structurally enriched corpus, IRIS achieves state-of-the-art performance, comprehensively outperforming both generalist and specialized medical VLMs with up to 34B parameters. Our findings underscore that structured knowledge injection profoundly prevails over sheer parameter scaling, unlocking the potential for resource-efficient, expert-level AI deployment on mobile edge devices for scalable OSD screening. Code, datasets, and model weights will be publicly released by this repo.",
+      "authors": [
+        "Hao Wei",
+        "Wenjin Qi",
+        "Dasen Dai",
+        "Minqing Zhang",
+        "Wu Yuan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-05T14:59:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.04344v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "vision-language system for ocular surface diseases with VQA generation",
+      "llm_evidence_cn": "面向眼表疾病的视觉语言系统与VQA生成",
+      "llm_evidence": "面向眼表疾病的视觉语言系统与VQA生成",
+      "canonical_evidence": "面向眼表疾病的视觉语言系统与VQA生成",
+      "llm_tldr_en": "IRIS introduces a large-scale OSD VQA dataset and a scene-driven VQA generation paradigm for fine-grained ocular surface disease understanding.",
+      "llm_tldr_cn": "大型视觉语言模型在眼表疾病等专业领域因缺乏高质量指令微调数据而推理能力不足。本文提出IRIS系统，构建了最大规模的OSD VQA数据集IRIS-120K，并设计了一种场景驱动的VQA生成范式，显式注入临床知识。实验表明该方法显著提升了VLM在眼表疾病诊断中的细粒度推理能力，为医疗视觉问答提供了高质量数据生成范例。",
+      "llm_tldr": "大型视觉语言模型在眼表疾病等专业领域因缺乏高质量指令微调数据而推理能力不足。本文提出IRIS系统，构建了最大规模的OSD VQA数据集IRIS-120K，并设计了一种场景驱动的VQA生成范式，显式注入临床知识。实验表明该方法显著提升了VLM在眼表疾病诊断中的细粒度推理能力，为医疗视觉问答提供了高质量数据生成范例。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05093v2",
+      "source": "arxiv",
+      "title": "Video-Text Temporal Localization via Multi-Scale Convolution and Dynamic Routing",
+      "abstract": "Video-text temporal localization requires precise alignment between natural language queries and corresponding video segments, a fundamental challenge in multimodal understanding. We present a novel framework that addresses two critical limitations of existing methods: inadequate modeling of hierarchical temporal structure and inability to handle complex many-to-many correspondences between modalities. Our approach introduces a multi-scale temporal convolutional encoder that captures motion patterns across different temporal granularities - from instantaneous frame transitions to extended action sequences. We further propose a capsule-based dynamic routing mechanism that iteratively refines segment-query associations through structured agreement updates, enabling flexible modeling of non-monotonic alignments. These components are unified through a multi-task learning objective that jointly optimizes temporal boundary regression, cross-modal semantic alignment, and capsule diversity. Extensive experiments on ActivityNet Captions demonstrate significant improvements, achieving 42.9% Recall@0.5 and 41.1% mean IoU, surpassing strong transformer-based baselines while maintaining computational efficiency. Our results validate that combining hierarchical temporal modeling with structured semantic routing provides an effective solution for fine-grained video-language understanding.",
+      "authors": [
+        "Gengtian Shi",
+        "Jinze Yu",
+        "Chenhao Wu",
+        "Shaofei Wang",
+        "Eiji Fukuzawa",
+        "Junjie Tang",
+        "Hiroshi Onoda",
+        "Jiang Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T13:52:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.05093v2",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "temporal action detection in video streams",
+      "llm_evidence_cn": "视频流中的时序动作检测",
+      "llm_evidence": "视频流中的时序动作检测",
+      "canonical_evidence": "视频流中的时序动作检测",
+      "llm_tldr_en": "A novel framework with multi-scale temporal convolution and capsule-based dynamic routing for precise video-text temporal localization.",
+      "llm_tldr_cn": "视频-文本时间定位要求自然语言查询与视频段精确对齐。现有方法对层次化时间结构和多模态多对多对应建模不足。本文提出多尺度时序卷积编码器和胶囊动态路由机制，从瞬时帧过渡到扩展动作序列进行建模。在多个基准上取得最先进性能，尤其适用于流式视频中的动作检测。",
+      "llm_tldr": "视频-文本时间定位要求自然语言查询与视频段精确对齐。现有方法对层次化时间结构和多模态多对多对应建模不足。本文提出多尺度时序卷积编码器和胶囊动态路由机制，从瞬时帧过渡到扩展动作序列进行建模。在多个基准上取得最先进性能，尤其适用于流式视频中的动作检测。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "What are the latest techniques for temporal action detection in video streams?",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05511v1",
+      "source": "arxiv",
+      "title": "Light-Omni: Reflex over Reasoning in Agentic Video Understanding with Long-Term Memory",
+      "abstract": "Agentic video understanding equips models with long-term memory to autonomously process and respond to continuous, long-horizon multimodal streams. However, advanced video agents often rely on ``detective-style'' iterative reasoning for action control (e.g., $\\mathtt{search}$) and evidence aggregation, incurring prohibitive costs and latency. We argue that such heavy reasoning primarily compensates for the lack of global context and semantic misalignment in retrieval. This paper introduces Light-Omni, a multimodal agent framework for reflexive and lightweight video understanding. It achieves this through dual contextual states that instantly build the required context in a single forward pass. First, we maintain a global state, a finite-sized multimodal script continuously consolidated from episodic memory, serving as the global context for Light-Omni. Through hierarchical merging, it preserves recent details while summarizing past events. Second, conditioned on this global context, we generate a parametric latent state that directly drives autonomous actions and produces retrieval embeddings, with minimal latency. Benefiting from this coupled design, Light-Omni achieves semantically aligned retrieval and reflexive responses while avoiding iterative reasoning. Extensive experiments validate the effectiveness of Light-Omni across multiple video benchmarks. Notably, it outperforms M3-Agent with an average 2.4% accuracy gain, a 12.1$\\times$ speedup, and a 2.6$\\times$ improvement in GPU memory efficiency. Furthermore, it serves as a memory system to enhance both the performance and efficiency of existing MLLMs. Project page: https://clare-nie.github.io/Light-Omni.",
+      "authors": [
+        "Chang Nie",
+        "Jiaju Wei",
+        "Junlan Feng",
+        "Chaoyou Fu",
+        "Caifeng Shan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T18:00:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.05511v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reflexive agentic video understanding with long-term memory for streaming",
+      "llm_evidence_cn": "反射式智能体视频理解与长期记忆用于流式处理",
+      "llm_evidence": "反射式智能体视频理解与长期记忆用于流式处理",
+      "canonical_evidence": "反射式智能体视频理解与长期记忆用于流式处理",
+      "llm_tldr_en": "Light-Omni introduces a reflexive multimodal agent framework for streaming video understanding, using dual contextual states to avoid costly iterative reasoning.",
+      "llm_tldr_cn": "针对现有视频智能体依赖繁重迭代推理导致高成本和延迟的问题，本文提出Light-Omni，一个反射式轻量级多模态智能体框架。通过维护全局状态和局部状态，在单次前向传播中构建所需上下文，避免了复杂的搜索和证据聚合。在流式视频理解任务上，该方法在保持高性能的同时大幅降低了计算开销。",
+      "llm_tldr": "针对现有视频智能体依赖繁重迭代推理导致高成本和延迟的问题，本文提出Light-Omni，一个反射式轻量级多模态智能体框架。通过维护全局状态和局部状态，在单次前向传播中构建所需上下文，避免了复杂的搜索和证据聚合。在流式视频理解任务上，该方法在保持高性能的同时大幅降低了计算开销。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.06618v1",
+      "source": "arxiv",
+      "title": "Overview of the NLPCC 2026 Shared Task 1: Difficulty-Aware Multilingual and Multimodal Medical Instructional Video Understanding Evaluation",
+      "abstract": "Following the CMIVQA, MMI-VQA, and M4IVQA challenges in NLPCC 2023--2025, we introduce the Difficulty-Aware Medical Instructional Video Question Answering (DA-MIVQA) shared task for NLPCC 2026. DA-MIVQA extends previous multilingual and multimodal medical video benchmarks by explicitly distinguishing questions according to the type and complexity of evidence required for answering. Specifically, simple questions can often be answered from subtitle-based textual cues, whereas complex questions require visual grounding, procedural understanding, and cross-modal evidence integration. The challenge contains three tracks: Difficulty-Aware Temporal Answer Grounding in Single Video (DA-TAGSV), Difficulty-Aware Video Corpus Retrieval (DA-VCR), and Difficulty-Aware Temporal Answer Grounding in Video Corpus (DA-TAGVC). The dataset is collected from public medical instructional channels, covers diverse scenarios such as first aid, emergency response, rehabilitation, nursing, and general medical education, and is manually verified with difficulty annotations. This paper presents the task motivation, dataset construction, evaluation protocol, participation overview, competition results, and representative systems of DA-MIVQA. DA-MIVQA provides a practical benchmark for evaluating medical instructional video question answering systems under varying textual, visual, temporal, and procedural reasoning requirements.",
+      "authors": [
+        "Shenxi Liu",
+        "Kan Li",
+        "Mingyang Zhao",
+        "Yuhang Tian",
+        "Bin Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-07T09:24:48+00:00",
+      "link": "https://arxiv.org/pdf/2607.06618v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "shared task on medical instructional video QA with difficulty-aware evaluation",
+      "llm_evidence_cn": "医疗教学视频问答共享任务及难度感知评估",
+      "llm_evidence": "医疗教学视频问答共享任务及难度感知评估",
+      "canonical_evidence": "医疗教学视频问答共享任务及难度感知评估",
+      "llm_tldr_en": "Presents the DA-MIVQA shared task at NLPCC 2026, focusing on difficulty-aware medical instructional video QA with three tracks including temporal grounding, extending prior multilingual medical video benchmarks.",
+      "llm_tldr_cn": "介绍NLPCC 2026的DA-MIVQA共享任务，关注难度感知的医疗教学视频问答。任务区分简单问题（基于字幕）和复杂问题（需视觉定位、过程理解等），包含时序定位等三个轨道，为医疗视频理解提供标准化评估基准。",
+      "llm_tldr": "介绍NLPCC 2026的DA-MIVQA共享任务，关注难度感知的医疗教学视频问答。任务区分简单问题（基于字幕）和复杂问题（需视觉定位、过程理解等），包含时序定位等三个轨道，为医疗视频理解提供标准化评估基准。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.09759v1",
+      "source": "arxiv",
+      "title": "ReflectWorld-MM: An Entity-Oriented Multi-Media Memory System for Open-Ended Video Streams",
+      "abstract": "Building assistants that can continually watch the world, remember what they see, and reason over their accumulated experience is a long-standing goal, and recently multimodal agents equipped with long-term memory over video streams have attracted increasing interest. Unfortunately, existing systems either keep their memory inside the model context or in a flat feature store, and organize it around frames rather than around the persistent entities a stream is really about, which confines them to bounded videos and weakens their ability to track who and what reappears over time. In this paper, we propose ReflectWorld-MM, an entity-oriented multi-media memory system for open-ended video streams. It consists of three parts. The first is a perception front-end that turns a streaming video into entity-resolved observations under a bounded short-term memory. The second is a hierarchical long-term memory, grounded in human memory theory, that couples a multi-scale episodic memory, an evolving entity-centric semantic memory, and a procedural memory. The third is a complete realization, built for real-world operation, that ingests arbitrary streams and plugs into off-the-shelf assistants. Across six long-video and lifelong-memory benchmarks, ReflectWorld-MM achieves the best accuracy on all six, outperforming strong memory agents and a frontier model.",
+      "authors": [
+        "Xiaokang Ma",
+        "Yifan Sun",
+        "Zhihong Jin",
+        "Jie Gu",
+        "Yudong Luo",
+        "Shenyi Shao",
+        "Chu Tang",
+        "Jingmin Chen",
+        "Li Pu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-06T13:17:53+00:00",
+      "link": "https://arxiv.org/pdf/2607.09759v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "entity-oriented memory for open-ended video streams",
+      "llm_evidence_cn": "面向实体的开放视频流记忆系统",
+      "llm_evidence": "面向实体的开放视频流记忆系统",
+      "canonical_evidence": "面向实体的开放视频流记忆系统",
+      "llm_tldr_en": "ReflectWorld-MM proposes an entity-oriented multi-media memory system for open-ended video streams, enabling persistent tracking and reasoning.",
+      "llm_tldr_cn": "构建能持续观看世界、记忆并推理的助手是长期目标。现有系统将记忆保存在上下文或扁平特征存储中，且以帧为中心而非实体。ReflectWorld-MM提出面向实体的多模态记忆系统，包含三个模块，在开放视频流中跟踪实体并支持长时间推理。实验表明其在持续视频理解任务上显著优于基线。",
+      "llm_tldr": "构建能持续观看世界、记忆并推理的助手是长期目标。现有系统将记忆保存在上下文或扁平特征存储中，且以帧为中心而非实体。ReflectWorld-MM提出面向实体的多模态记忆系统，包含三个模块，在开放视频流中跟踪实体并支持长时间推理。实验表明其在持续视频理解任务上显著优于基线。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "streaming video understanding techniques",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.11862v1",
+      "source": "arxiv",
+      "title": "Evidence-Backed Video Question Answering",
+      "abstract": "Current Video Large Language Models (Video LLMs) excel in question answering (QA) but largely operate as black boxes, providing textual answers without verifiable visual grounding. Existing explainability efforts rely on textual rationales or sparse bounding boxes, which struggle to capture complex video dynamics such as occlusions and non-rigid deformations. We propose Evidence-Backed Video Question Answering (E-VQA), a novel task requiring models to jointly output a semantic answer and precise spatio-temporal evidence: temporal segments and dense, tracked object segmentation masklets. To support this, we introduce ST-Evidence, the first human-verified benchmark for both discriminative and generative pixel-level grounding. Evaluations of state-of-the-art models reveal a critical decoupling between QA accuracy and true visual perception that scaling alone fails to bridge. To address this, we develop scalable, automated generation pipelines to create ST-Evidence-Instruct, a 160k-scale dataset bridging high-level reasoning with fine-grained grounding. Fine-tuning grounded Video LLMs on this data yields substantial gains over the corresponding size-matched UniPixel baselines (e.g., +27.2 t-mean and +13.8 J&F on a 7B model), establishing a robust baseline for explainable, evidence-backed video understanding. Code and data are available at https://github.com/SalesforceAIResearch/EVQA.",
+      "authors": [
+        "Shijie Wang",
+        "Honglu Zhou",
+        "Ziyang Wang",
+        "Ran Xu",
+        "Caiming Xiong",
+        "Silvio Savarese",
+        "Chen Sun",
+        "Juan Carlos Niebles"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-13T17:49:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.11862v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "evidence-backed VQA with spatio-temporal benchmark",
+      "llm_evidence_cn": "带时空证据的视频问答基准",
+      "llm_evidence": "带时空证据的视频问答基准",
+      "canonical_evidence": "带时空证据的视频问答基准",
+      "llm_tldr_en": "Introduces Evidence-Backed Video Question Answering (E-VQA) task and ST-Evidence benchmark requiring both answer and spatio-temporal evidence, revealing critical gaps in current Video LLMs.",
+      "llm_tldr_cn": "当前视频大语言模型在问答中缺乏可验证的视觉证据。本文提出E-VQA任务，要求模型同时输出语义答案和精确的时空证据（时间片段和密集跟踪分割掩蔽）。并发布首个经人工验证的像素级基准ST-Evidence。评估显示现有模型在提供可信证据方面存在严重不足。",
+      "llm_tldr": "当前视频大语言模型在问答中缺乏可验证的视觉证据。本文提出E-VQA任务，要求模型同时输出语义答案和精确的时空证据（时间片段和密集跟踪分割掩蔽）。并发布首个经人工验证的像素级基准ST-Evidence。评估显示现有模型在提供可信证据方面存在严重不足。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "Datasets and evaluation metrics for video and medical VQA",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.12048v1",
+      "source": "arxiv",
+      "title": "An Empirical Analysis of Continual Learning for Heterogeneous Medical Visual Question Answering",
+      "abstract": "Deploying medical visual question answering (MedVQA) systems in real-world clinical settings requires models that adapt to new clinical tasks without forgetting previously acquired knowledge. Continual learning (CL) provides a practical framework for this setting. Despite rapid progress in medical vision-language models, the behavior of CL methods when training these models across heterogeneous MedVQA tasks remains underexplored. This work presents a systematic evaluation of CL for MedVQA across diverse clinical objectives, including classification, multi-label classification, detection, cell counting, and report generation. Specifically, we explore (1) the ability of existing CL methods to mitigate catastrophic forgetting; (2) their sensitivity to task ordering, analyzing how different task sequences influence performance retention and forgetting; and (3) the evolution of low-rank adaptation parameters as new tasks are learned, revealing patterns of weight drift under different CL methods. Our findings suggest that existing CL methods struggle to maintain stability-plasticity balance when tasks with different objectives and supervision formats are interleaved. Code and full experimental setup will be publicly available.",
+      "authors": [
+        "Mai A. Shaaban",
+        "Tausifa Jan Saleem",
+        "Alaa Mohamed",
+        "Dilnaz Utemissova",
+        "Ufaq Khan",
+        "Mohammad Yaqub"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-07-13T18:08:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.12048v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "directly addresses medical visual question answering with continual learning",
+      "llm_evidence_cn": "直接研究医学视觉问答系统中的持续学习",
+      "llm_evidence": "直接研究医学视觉问答系统中的持续学习",
+      "canonical_evidence": "直接研究医学视觉问答系统中的持续学习",
+      "llm_tldr_en": "Systematic evaluation of continual learning methods for heterogeneous MedVQA tasks, showing existing methods struggle with catastrophic forgetting across diverse clinical objectives.",
+      "llm_tldr_cn": "这篇论文系统评测了持续学习方法在异构医学视觉问答任务中的表现。针对医疗视觉问答系统部署中需要适应新任务而不遗忘旧知识的问题，作者在分类、多标签分类、检测、细胞计数和报告生成等多种临床目标上评估了现有持续学习方法的抗遗忘能力。实验揭示了当前方法在面对多样化医学视觉问答任务时存在严重的灾难性遗忘问题，为开发更鲁棒的医疗视觉问答系统提供了重要基准和方向。",
+      "llm_tldr": "这篇论文系统评测了持续学习方法在异构医学视觉问答任务中的表现。针对医疗视觉问答系统部署中需要适应新任务而不遗忘旧知识的问题，作者在分类、多标签分类、检测、细胞计数和报告生成等多种临床目标上评估了现有持续学习方法的抗遗忘能力。实验揭示了当前方法在面对多样化医学视觉问答任务时存在严重的灾难性遗忘问题，为开发更鲁棒的医疗视觉问答系统提供了重要基准和方向。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "medical visual question answering systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13237v1",
+      "source": "arxiv",
+      "title": "Active Learning for Efficient Annotation of Surgical Videos with Weak Supervision",
+      "abstract": "Precise spatial-temporal annotation of laparoscopic videos is time-consuming and requires expert knowledge. We propose a human-in-the-loop knowledge acquisition framework that combines active learning with dual-loss optimization to significantly reduce the annotation effort needed for automatic localization and segmentation of objects in the surgical field. Our method employs a foundation model to generate temporally consistent class activation maps (CAMs) from video using two complementary training objectives: a weak supervision loss on video-level tool presence labels for weakly annotated data, and an image-level mask loss on human-corrected annotations obtained through active learning. Rather than requiring dense pixel-level annotation upfront, our pipeline iteratively proposes pseudo-masks that guide the expert annotator to refine the knowledge previously captured by the model. We demonstrate that our framework reduces the effort of surgical video annotation by 50% by the end of training in comparison to fully manual annotation. Through eliminating the need for large, fully annotated datasets from the start, this framework enables scalability to the development of surgical tool segmentation models. This iterative human-in-the-loop refinement supports efficient knowledge acquisition with minimal expert input, providing a practical and deployable strategy for expanding tool segmentation to larger, more diverse datasets and real-world clinical settings.",
+      "authors": [
+        "Manasa Dendukuri",
+        "Matjaz Jogan",
+        "Daniel A. Hashimoto",
+        "Guiqiu Liao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-14T19:58:59+00:00",
+      "link": "https://arxiv.org/pdf/2607.13237v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "active learning for surgical video annotation",
+      "llm_evidence_cn": "用于手术视频标注的主动学习",
+      "llm_evidence": "用于手术视频标注的主动学习",
+      "canonical_evidence": "用于手术视频标注的主动学习",
+      "llm_tldr_en": "Proposes a human-in-the-loop framework combining active learning and dual-loss optimization to efficiently annotate surgical videos for object localization and segmentation, reducing expert annotation effort.",
+      "llm_tldr_cn": "针对手术视频时空标注耗时且需要专业知识的问题，本文提出一种结合主动学习和双损失优化的人机回环框架。利用基础模型生成时间一致类激活图，通过弱监督损失和主动学习修正的掩膜损失联合训练，显著减少人工标注量。实验表明，仅需少量像素级标注即可达到全监督方法性能，为手术视频理解提供了高效标注方案。",
+      "llm_tldr": "针对手术视频时空标注耗时且需要专业知识的问题，本文提出一种结合主动学习和双损失优化的人机回环框架。利用基础模型生成时间一致类激活图，通过弱监督损失和主动学习修正的掩膜损失联合训练，显著减少人工标注量。实验表明，仅需少量像素级标注即可达到全监督方法性能，为手术视频理解提供了高效标注方案。",
+      "llm_tags": [
+        "query:med-video"
+      ],
+      "matched_query_tag": "query:med-video",
+      "matched_query_text": "processing and interpretation of surgical procedure videos",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13298v1",
+      "source": "arxiv",
+      "title": "FOLIO: Focused Semantic Memory for Streaming Video Understanding",
+      "abstract": "In online streaming video understanding, a video stream continues to arrive and queries may be issued at any time. Because streaming frames grow without bound, the system must continuously compress and retain information from the observed video prefix while future frames and future queries remain unknown. The core challenge is deciding what information to retain and how to organize the maintained history: as this history grows with the stream, memory cost increases and many redundant visual details are retained, whereas later queries often depend on specific entities, actions, and their temporal changes. To address this challenge, we introduce FOLIO, a training-free focused semantic memory system that records important parts of the stream in higher detail while keeping surrounding context compact. As the stream arrives, FOLIO updates memory at the segment level, guided by a dynamic focus state, combining a short-term visual buffer with a long-term semantic memory organized around observed entities and linked to a visual-evidence cache. At query time, lightweight hybrid retrieval combines direct matching over the structured memory with semantic query expansion. FOLIO achieves state-of-the-art performance, reaching 82.0/69.1 Perception/Backward accuracy on OVO-Bench with Qwen3-VL-8B and 74.5 overall accuracy on StreamingBench, while substantially reducing the cost of maintaining streaming memory by reserving detailed records for focused entities and storing surrounding context compactly.",
+      "authors": [
+        "Haoyang Fan",
+        "Dhruv Parikh",
+        "Anvitha Ramachandran",
+        "Sameh Gobriel",
+        "Nilesh Jain",
+        "Rajgopal Kannan",
+        "Viktor Prasanna"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-14T22:09:48+00:00",
+      "link": "https://arxiv.org/pdf/2607.13298v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "focused semantic memory for streaming video understanding",
+      "llm_evidence_cn": "面向流式视频理解的聚焦语义记忆",
+      "llm_evidence": "面向流式视频理解的聚焦语义记忆",
+      "canonical_evidence": "面向流式视频理解的聚焦语义记忆",
+      "llm_tldr_en": "FOLIO proposes a training-free focused semantic memory system for streaming video understanding, addressing the challenge of deciding what information to retain in an unbounded video stream.",
+      "llm_tldr_cn": "在线流式视频理解面临视频帧无限增长而查询随时提出的挑战，核心是决定保留哪些信息并组织历史。本文提出FOLIO，一种无需训练的聚焦语义记忆系统，以更高细节记录流中的重要部分，实现高效压缩与查询响应。实验表明该方法在多个流式视频基准上取得优异性能，为流式视频理解提供了轻量化记忆方案。",
+      "llm_tldr": "在线流式视频理解面临视频帧无限增长而查询随时提出的挑战，核心是决定保留哪些信息并组织历史。本文提出FOLIO，一种无需训练的聚焦语义记忆系统，以更高细节记录流中的重要部分，实现高效压缩与查询响应。实验表明该方法在多个流式视频基准上取得优异性能，为流式视频理解提供了轻量化记忆方案。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "streaming video understanding techniques",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13421v1",
+      "source": "arxiv",
+      "title": "ScanFocus: A Coarse-to-Fine Framework for Spatio-Temporal Video Grounding",
+      "abstract": "Spatio-Temporal Video Grounding (STVG) aims to retrieve the visual trajectory of a specific object from a video stream as described by a natural language expression. However, most advanced methods struggle to balance global context modeling with precise boundary localization. Due to the prohibitive computational costs of processing long videos, these approaches typically resort to low-rate temporal downsampling and implicit motion modeling. This inevitably suppresses high-frequency boundary cues and neglects the explicit inter-frame dependencies required for precise boundary delineation. To address these limitations, we present \\textbf{ScanFocus}, a novel coarse-to-fine framework that decouples the STVG task into a global spatio-temporal scan and a local boundary focus. Specifically, we utilize a unified vision-language fusion encoder combined with a lightweight Deformable Semantic-Motion Fusion module to efficiently align multimodal features and generate coarse proposals. To recover the suppressed fine-grained details, we introduce the Semantic-Guided Temporal Aggregator (SGTA) in the refinement stage. By densely sampling around coarse boundaries, SGTA explicitly models short-term temporal interactions under semantic guidance, capturing rapid motion changes for precise timestamp regression. Extensive experiments on three widely used benchmarks demonstrate the performance superiority of our proposed method over previous approaches. Code will be released at https://github.com/TenMinutes209/ScanFocus.",
+      "authors": [
+        "Kai Chen",
+        "Ming Dai",
+        "Wenxuan Cheng",
+        "Wankou Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-15T03:50:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.13421v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Coarse-to-fine spatio-temporal video grounding framework",
+      "llm_evidence_cn": "粗到细的时空视频定位框架",
+      "llm_evidence": "粗到细的时空视频定位框架",
+      "canonical_evidence": "粗到细的时空视频定位框架",
+      "llm_tldr_en": "Proposes ScanFocus, a coarse-to-fine framework that decouples spatio-temporal video grounding into global scan and precise boundary localization, addressing computational cost and boundary cues.",
+      "llm_tldr_cn": "时空视频定位（STVG）旨在根据语言描述检索视频中物体的轨迹，但现有方法在全局上下文与边界定位间失衡。本文提出ScanFocus，一种粗到细框架，将STVG解耦为全局时空扫描与精准边界定位两个阶段。通过避免低帧率下采样和隐式运动建模，显式建模帧间依赖，实现了更精确的边界勾勒。在基准上取得了先进结果。",
+      "llm_tldr": "时空视频定位（STVG）旨在根据语言描述检索视频中物体的轨迹，但现有方法在全局上下文与边界定位间失衡。本文提出ScanFocus，一种粗到细框架，将STVG解耦为全局时空扫描与精准边界定位两个阶段。通过避免低帧率下采样和隐式运动建模，显式建模帧间依赖，实现了更精确的边界勾勒。在基准上取得了先进结果。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14711v1",
+      "source": "arxiv",
+      "title": "VideoSEMA: a scalable and efficient Mamba-like attention for video understanding",
+      "abstract": "We present for video understanding (classification) a split space-time attention model, VideoSEMA, consisting of a scalable and efficient Mamba-like attention (SEMA) block in space and a softmax temporal attention in time. In each frame, SEMA attention applies a local window attention in parallel with a global averaging in a Mamba macro-architecture, which is called Mamba-like. Under certain rank conditions, we prove that the computationally cheaper split space-time attention is equivalent to full space-time attention. On benchmark K400 data sets, VideoSEMA out-performs heavier vision transformer and Mamba models. On benchmark SSv2 data, VideoSEMA leads in top-1 accuracy among models of similar parameter sizes. As image resolution scales up from standard $224^2$ to $1024^2$ on K400 and without fine-tuning, VideoSEMA degrades much more gracefully than VideoMamba in accuracy. It is promising to extend VideoSEMA to longer videos with a dilated/sparse temporal attention.",
+      "authors": [
+        "Nhat Thanh Tran",
+        "Fanghui Xue andShuai Zhang",
+        "Jiancheng Lyu",
+        "Yunling Zheng",
+        "Yingyong Qi",
+        "Jack Xin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-16T08:22:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.14711v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "efficient Mamba-like attention for video understanding",
+      "llm_evidence_cn": "高效的类Mamba注意力机制用于视频理解",
+      "llm_evidence": "高效的类Mamba注意力机制用于视频理解",
+      "canonical_evidence": "高效的类Mamba注意力机制用于视频理解",
+      "llm_tldr_en": "VideoSEMA uses split space-time attention with Mamba-like block, achieving SOTA on K400 and SSv2 with fewer parameters.",
+      "llm_tldr_cn": "本文提出VideoSEMA，一种用于视频理解的高效分离时空注意力模型。通过在每个帧中并行应用局部窗口注意力和全局平均池化的类Mamba宏架构，在空间上使用可扩展高效的SEMA模块，时间上使用softmax时序注意力。理论上证明了较廉价的分离时空注意力等价于全时空注意力的条件。在Kinetics-400和Something-Something v2基准上，VideoSEMA以更少的参数超越了更重的视觉Transformer和Mamba模型，适用于流式视频理解等场景。",
+      "llm_tldr": "本文提出VideoSEMA，一种用于视频理解的高效分离时空注意力模型。通过在每个帧中并行应用局部窗口注意力和全局平均池化的类Mamba宏架构，在空间上使用可扩展高效的SEMA模块，时间上使用softmax时序注意力。理论上证明了较廉价的分离时空注意力等价于全时空注意力的条件。在Kinetics-400和Something-Something v2基准上，VideoSEMA以更少的参数超越了更重的视觉Transformer和Mamba模型，适用于流式视频理解等场景。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "deep learning methods for video understanding",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14968v1",
+      "source": "arxiv",
+      "title": "Stitch-Inferencer: Enhance Endoscopic Video Segmentation and Tracking via Panoramic Reconstruction",
+      "abstract": "Surgical video understanding is fundamental to navigation systems. Endoscopic perception is often hindered by a limited field-of-view and frequent instrument occlusions, making spatio-temporal context essential for robust inference. These challenges have motivated video models that aggregate information across frames. However, existing video models typically store past observations implicitly in learned feature representations, often requiring task-specific video training, substantial annotated data, and increased computational cost. We propose Stitch-Inferencer, a real-time, model-agnostic inference framework that replaces implicit feature memory with an explicit image-space panoramic canvas. By stitching valid observations across frames, Stitch-Inferencer preserves previously observed pixels in an online, instrument-free view, expanding the effective field-of-view and providing direct access to regions that are temporarily occluded or absent from the current frame. Downstream segmentation or tracking models are applied to a compact region of interest on the panorama, and their predictions are reprojected to the current frame, enabling existing models to exploit long-range context without retraining. Experiments on anatomy segmentation and point/box tracking demonstrate consistent improvements across diverse baselines while preserving real-time throughput. The stitching module alone runs at over 60 FPS, providing a practical inference-time solution to enhance endoscopic perception in computationally constrained intraoperative environments. Source code will be made publicly available.",
+      "authors": [
+        "Shunsuke Kikuchi",
+        "Atsushi Kouno",
+        "Hiroki Matsuzaki"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-16T13:24:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.14968v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "endoscopic video segmentation and tracking via panoramic reconstruction",
+      "llm_evidence_cn": "通过全景重建增强内窥镜视频分割与跟踪",
+      "llm_evidence": "通过全景重建增强内窥镜视频分割与跟踪",
+      "canonical_evidence": "通过全景重建增强内窥镜视频分割与跟踪",
+      "llm_tldr_en": "Stitch-Inferencer is a real-time model-agnostic framework for surgical video understanding that uses an explicit panoramic canvas instead of implicit feature memory.",
+      "llm_tldr_cn": "内窥镜感知受限于视野狭窄和器械遮挡，现有视频模型依赖隐式特征记忆，需大量标注数据。本文提出Stitch-Inferencer，一种实时、模型无关的推理框架，将隐式记忆替换为显式图像空间全景画布，通过拼接有效观测来增强上下文。该方法无需额外训练，在多个内窥镜视频分割与跟踪任务上显著提升了性能，为手术视频理解提供了轻量级且高效的方案。",
+      "llm_tldr": "内窥镜感知受限于视野狭窄和器械遮挡，现有视频模型依赖隐式特征记忆，需大量标注数据。本文提出Stitch-Inferencer，一种实时、模型无关的推理框架，将隐式记忆替换为显式图像空间全景画布，通过拼接有效观测来增强上下文。该方法无需额外训练，在多个内窥镜视频分割与跟踪任务上显著提升了性能，为手术视频理解提供了轻量级且高效的方案。",
+      "llm_tags": [
+        "query:med-video"
+      ],
+      "matched_query_tag": "query:med-video",
+      "matched_query_text": "processing and interpretation of surgical procedure videos",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15038v1",
+      "source": "arxiv",
+      "title": "Video = World + Event Stream",
+      "abstract": "We present Wan-Streamer v0.3, which reframes our native-streaming interaction model under a single organizing view: a video is a world plus an event stream. The world is the persistent context in which a video unfolds, including the environment, scene, subjects, ambient acoustic conditions, voice characteristics, and other relatively stable conditions. The event stream is everything that changes over time within that world, including scene or environmental changes, subject behavior, speech, and other sounds. This yields a general-purpose pretraining task over large amounts of real video: given a world and incoming input, predict how the world moves, changes, and responds in real time. The resulting competence can be specialized to a broad family of real-time downstream tasks. We instantiate it on real-time full-duplex audio-visual interaction, where the event stream is the agent's speech together with free-form behavior. Functionally, the model's multimodal understanding process is vision-language-action-like: it maps multimodal user input to language-form speech and behavior actions. Wan-Streamer v0.3 preserves the v0.2 operating point: 640x368 video at 25 FPS, a 160 ms streaming unit, approximately 200 ms model-side response latency, and approximately 550 ms total interaction latency under a 350 ms bidirectional network budget.",
+      "authors": [
+        "Lianghua Huang",
+        "Zhi-Fan Wu",
+        "Yupeng Shi",
+        "Wei Wang",
+        "Mengyang Feng",
+        "Cheng Yu",
+        "Chen Liang",
+        "Junjie He",
+        "Chen-Wei Xie",
+        "Yu Liu",
+        "Jingren Zhou",
+        "Ang Wang",
+        "Bang Zhang",
+        "Baole Ai",
+        "Chongyang Zhong",
+        "Jinwei Qi",
+        "Kai Zhu",
+        "Pandeng Li",
+        "Peng Zhang",
+        "Wenyuan Zhang",
+        "Xinhua Cheng",
+        "Yitong Huang",
+        "Yun Zheng",
+        "Yuxiang Bao",
+        "Yuzheng Wang",
+        "Zhiwei Lin",
+        "Zoubin Bi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-16T14:19:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.15038v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reframes streaming video understanding as world + event stream model for real-time prediction",
+      "llm_evidence_cn": "将流式视频理解重定义为世界加事件流模型，用于实时预测",
+      "llm_evidence": "将流式视频理解重定义为世界加事件流模型，用于实时预测",
+      "canonical_evidence": "将流式视频理解重定义为世界加事件流模型，用于实时预测",
+      "llm_tldr_en": "Introduces Wan-Streamer v0.3, which reframes video as world + event stream, enabling general-purpose pretraining for real-time streaming video understanding tasks.",
+      "llm_tldr_cn": "流式视频理解面临保持全局上下文与捕获动态事件的双重挑战。本文提出Wan-Streamer v0.3，将视频统一建模为持久的世界与变化的事件流，通过预训练任务（给定世界和输入预测事件变化）获得实时响应能力。该框架可迁移到多种实时下游任务，为流式视频理解提供了全新的范式。",
+      "llm_tldr": "流式视频理解面临保持全局上下文与捕获动态事件的双重挑战。本文提出Wan-Streamer v0.3，将视频统一建模为持久的世界与变化的事件流，通过预训练任务（给定世界和输入预测事件变化）获得实时响应能力。该框架可迁移到多种实时下游任务，为流式视频理解提供了全新的范式。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15038v2",
+      "source": "arxiv",
+      "title": "Video = World + Event Stream",
+      "abstract": "We present Wan-Streamer v0.3, which reframes our native-streaming interaction model under a single organizing view: a video is a world plus an event stream. The world is the persistent context in which a video unfolds, including the environment, scene, subjects, ambient acoustic conditions, voice characteristics, and other relatively stable conditions. The event stream is everything that changes over time within that world, including scene or environmental changes, subject behavior, speech, and other sounds. This yields a general-purpose pretraining task over large amounts of real video: given a world and incoming input, predict how the world moves, changes, and responds in real time. The resulting competence can be specialized to a broad family of real-time downstream tasks. We instantiate it on real-time full-duplex audio-visual interaction, where the event stream is the agent's speech together with free-form behavior. Functionally, the model's multimodal understanding process is vision-language-action-like: it maps multimodal user input to language-form speech and behavior actions. Wan-Streamer v0.3 preserves the v0.2 operating point: 640x368 video at 25 FPS, a 160 ms streaming unit, approximately 200 ms model-side response latency, and approximately 550 ms total interaction latency under a 350 ms bidirectional network budget.",
+      "authors": [
+        "Lianghua Huang",
+        "Zhi-Fan Wu",
+        "Yupeng Shi",
+        "Wei Wang",
+        "Mengyang Feng",
+        "Cheng Yu",
+        "Chen Liang",
+        "Junjie He",
+        "Chen-Wei Xie",
+        "Yu Liu",
+        "Jingren Zhou",
+        "Ang Wang",
+        "Bang Zhang",
+        "Baole Ai",
+        "Chongyang Zhong",
+        "Jinwei Qi",
+        "Kai Zhu",
+        "Pandeng Li",
+        "Peng Zhang",
+        "Wenyuan Zhang",
+        "Xinhua Cheng",
+        "Yitong Huang",
+        "Yun Zheng",
+        "Yuxiang Bao",
+        "Yuzheng Wang",
+        "Zhiwei Lin",
+        "Zoubin Bi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-16T14:19:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.15038v2",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reframes streaming video understanding as world + event stream model for real-time prediction",
+      "llm_evidence_cn": "将流式视频理解重定义为世界加事件流模型，用于实时预测",
+      "llm_evidence": "将流式视频理解重定义为世界加事件流模型，用于实时预测",
+      "canonical_evidence": "将流式视频理解重定义为世界加事件流模型，用于实时预测",
+      "llm_tldr_en": "Introduces Wan-Streamer v0.3, which reframes video as world + event stream, enabling general-purpose pretraining for real-time streaming video understanding tasks.",
+      "llm_tldr_cn": "流式视频理解面临保持全局上下文与捕获动态事件的双重挑战。本文提出Wan-Streamer v0.3，将视频统一建模为持久的世界与变化的事件流，通过预训练任务（给定世界和输入预测事件变化）获得实时响应能力。该框架可迁移到多种实时下游任务，为流式视频理解提供了全新的范式。",
+      "llm_tldr": "流式视频理解面临保持全局上下文与捕获动态事件的双重挑战。本文提出Wan-Streamer v0.3，将视频统一建模为持久的世界与变化的事件流，通过预训练任务（给定世界和输入预测事件变化）获得实时响应能力。该框架可迁移到多种实时下游任务，为流式视频理解提供了全新的范式。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.16189v1",
+      "source": "arxiv",
+      "title": "Searching Videos as Trees: Self-Correcting Agents for Grounded Long Video QA",
+      "abstract": "Grounded long-video question answering (Grounded LVQA) requires answering a question about a long video while localizing the short evidence interval that supports the answer. Recent agentic methods frame this task as multi-turn exploration with a single crop_video(start, end) action, which supports coarse-to-fine narrowing but provides no primitive for fine-to-coarse backtracking. As a result, these agents typically converge prematurely and cannot recover from an early mistake. We propose VideoTreeSearch (VTS), a framework that casts grounded LVQA as iterative self-correcting search over an adaptive temporal tree. VTS constructs a non-uniform tree from visual scene boundaries so that each node corresponds to a semantically coherent segment, and trains an agent to navigate the tree through four discrete operations: zoom_in, zoom_out, shift, and answer. These operations expose backtracking and recovery as explicit, learnable primitives rather than implicit behaviors. To train this navigation, we introduce a trajectory synthesis pipeline that produces multi-step paths through the tree, including deliberate detours into incorrect branches followed by recovery. We use these trajectories for supervised fine-tuning, followed by reinforcement learning with grounding and answer-accuracy rewards. On three Grounded LVQA benchmarks (CG-Bench, Haystack-LVBench, Haystack-Ego4D), VTS outperforms the strongest prior agentic methods by +12.5 mIoU on CG-Bench and +7.4 T-F1 on Haystack-Ego4D. The learned policy also transfers to general long-video QA, surpassing all prior agentic baselines on Video-MME, MLVU, and LVBench by up to +7.1 accuracy points. Ablations confirm that self-correcting hierarchical search is the central mechanism behind these gains: removing either adaptive descent or explicit backtracking substantially degrades performance. Code is available at https://github.com/CeeZh/VTS.",
+      "authors": [
+        "Ce Zhang",
+        "Ziyang Wang",
+        "Yulu Pan",
+        "Oluwatumininu Oguntola",
+        "Pranav Wagh",
+        "Qiyu Wu",
+        "Hiromi Wakaki",
+        "Mohit Bansal",
+        "Gedas Bertasius"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-17T17:59:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.16189v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-correcting agents for grounded long video QA",
+      "llm_evidence_cn": "基于自纠正智能体的长视频问答",
+      "llm_evidence": "基于自纠正智能体的长视频问答",
+      "canonical_evidence": "基于自纠正智能体的长视频问答",
+      "llm_tldr_en": "Proposes VideoTreeSearch, a self-correcting agent framework for grounded long-video QA that constructs an adaptive temporal tree from scene boundaries, enabling backtracking and iterative search to recover from early mistakes.",
+      "llm_tldr_cn": "针对长视频问答中现有智能体方法过早收敛、无法回溯错误的问题，本文提出VideoTreeSearch框架，通过将视频分割为自适应时间树，每个节点对应语义一致片段，并利用自纠正机制进行迭代搜索。实验表明，该方法在多个长视频QA基准上显著优于基线，有效提升答案准确性。该工作为长视频问答中的智能体设计提供了新思路。",
+      "llm_tldr": "针对长视频问答中现有智能体方法过早收敛、无法回溯错误的问题，本文提出VideoTreeSearch框架，通过将视频分割为自适应时间树，每个节点对应语义一致片段，并利用自纠正机制进行迭代搜索。实验表明，该方法在多个长视频QA基准上显著优于基线，有效提升答案准确性。该工作为长视频问答中的智能体设计提供了新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.22804v1",
+      "source": "arxiv",
+      "title": "CoVStream: Edge-Cloud Collaboration for Understanding of Long Video Streams",
+      "abstract": "Long, continuous video streams are an increasingly critical driver of multimedia intelligence. Existing efforts often handle long videos with a sample-encode-reason approach using large models. However, they overlook a crucial deployment fact: the stream is often produced by computationally constrained devices. This forces an untenable compromise: cloud offloading unlocks strong reasoning but incurs prohibitive bandwidth overhead, while on-device processing remains limited by edge hardware capacity. Therefore, we propose CoVStream, the first edge-cloud collaborative framework for understanding long video streams. The edge node distills raw video streams into compact visual features and semantic captions for transmission to the cloud, minimizing bandwidth costs, while the cloud server integrates this data into an entity graph and global visual context, activating the heavy reasoning model only when a user query arrives. Experiments on VideoMME-Long, LVBench, and RTV-Bench show that CoVStream reduces bandwidth usage by 87.6% while retaining 99.2% of the cloud baseline accuracy on LVBench.",
+      "authors": [
+        "Xu Liu",
+        "Guikun Chen",
+        "Zihao Yan",
+        "Kanzhi Wu",
+        "Wenguan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-22T03:29:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.22804v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "edge-cloud collaboration for streaming video understanding",
+      "llm_evidence_cn": "边缘-云端协同流式视频理解框架",
+      "llm_evidence": "边缘-云端协同流式视频理解框架",
+      "canonical_evidence": "边缘-云端协同流式视频理解框架",
+      "llm_tldr_en": "Proposes CoVStream, an edge-cloud collaborative framework that distills streaming video into compact features and captions on the edge, reducing bandwidth for cloud reasoning.",
+      "llm_tldr_cn": "长视频流通常由计算受限的设备产生，云端卸载带来带宽开销，而边缘处理能力有限。CoVStream提出首个边缘-云端协同框架，在边缘节点将原始视频流蒸馏为紧凑的视觉特征和语义描述，传输至云端进行推理。该方法在降低带宽需求的同时保持强推理能力。",
+      "llm_tldr": "长视频流通常由计算受限的设备产生，云端卸载带来带宽开销，而边缘处理能力有限。CoVStream提出首个边缘-云端协同框架，在边缘节点将原始视频流蒸馏为紧凑的视觉特征和语义描述，传输至云端进行推理。该方法在降低带宽需求的同时保持强推理能力。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "streaming video understanding techniques",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.22804v2",
+      "source": "arxiv",
+      "title": "CoVStream: Edge-Cloud Collaboration for Understanding of Long Video Streams",
+      "abstract": "Long, continuous video streams are an increasingly critical driver of multimedia intelligence. Existing efforts often handle long videos with a sample-encode-reason approach using large models. However, they overlook a crucial deployment fact: the stream is often produced by computationally constrained devices. This forces an untenable compromise: cloud offloading unlocks strong reasoning but incurs prohibitive bandwidth overhead, while on-device processing remains limited by edge hardware capacity. Therefore, we propose CoVStream, the first edge-cloud collaborative framework for understanding long video streams. The edge node distills raw video streams into compact visual features and semantic captions for transmission to the cloud, minimizing bandwidth costs, while the cloud server integrates this data into an entity graph and global visual context, activating the heavy reasoning model only when a user query arrives. Experiments on VideoMME-Long, LVBench, and RTV-Bench show that CoVStream reduces bandwidth usage by 87.6% while retaining 99.2% of the cloud baseline accuracy on LVBench.",
+      "authors": [
+        "Xu Liu",
+        "Guikun Chen",
+        "Zihao Yan",
+        "Kanzhi Wu",
+        "Wenguan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-22T03:29:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.22804v2",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "edge-cloud collaboration for streaming video understanding",
+      "llm_evidence_cn": "边缘-云端协同流式视频理解框架",
+      "llm_evidence": "边缘-云端协同流式视频理解框架",
+      "canonical_evidence": "边缘-云端协同流式视频理解框架",
+      "llm_tldr_en": "Proposes CoVStream, an edge-cloud collaborative framework that distills streaming video into compact features and captions on the edge, reducing bandwidth for cloud reasoning.",
+      "llm_tldr_cn": "长视频流通常由计算受限的设备产生，云端卸载带来带宽开销，而边缘处理能力有限。CoVStream提出首个边缘-云端协同框架，在边缘节点将原始视频流蒸馏为紧凑的视觉特征和语义描述，传输至云端进行推理。该方法在降低带宽需求的同时保持强推理能力。",
+      "llm_tldr": "长视频流通常由计算受限的设备产生，云端卸载带来带宽开销，而边缘处理能力有限。CoVStream提出首个边缘-云端协同框架，在边缘节点将原始视频流蒸馏为紧凑的视觉特征和语义描述，传输至云端进行推理。该方法在降低带宽需求的同时保持强推理能力。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "streaming video understanding techniques",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.22829v1",
+      "source": "arxiv",
+      "title": "DBT-Bleed: Dual-Branch Temporal Modeling with Key-Frame Selection for Surgical Bleeding Detection",
+      "abstract": "Intraoperative Adverse Events (IAEs) detection is critical for improving surgical safety, with bleeding being among the most frequent events across many surgery types. Existing methods struggle to distinguish bleeding IAE from visually similar residual blood due to limited temporal reasoning. Moreover, modeling long surgical videos while preserving fine-grained temporal dynamics remains computationally challenging. We propose DBT-Bleed, a dual-branch multi-scale temporal modeling framework disentangling bleeding and normal representations using layer-wise temporal adapters for short- and long-term bleeding progression. To efficiently process long surgical videos without sacrificing fine-grained temporal information, we introduce HiRED, a Hierarchical Entropy-Driven frame selection strategy that retains temporally informative segments while removing redundancy. Experiments on the MultiBypass dataset demonstrate gains of 6.53% in F1, 5.62% in Recall and 9% in MCC values for bleeding IAE detection, consistently outperforming video-level baselines. Additionally, we evaluate cross-procedure generalization on a newly curated dataset from a different surgical procedure type, where DBT-Bleed demonstrates robust transferability by achieving gain of 6% in F1 and 8% in MCC under zero-shot setting. To support this evaluation, we introduce EndoPit-IAE, an Endonasal Pituitary Surgery dataset annotated for IAEs, representing the first IAE-annotated dataset in neurosurgery. Code will be made publicly available upon acceptance.",
+      "authors": [
+        "Sudhanshu Mishra",
+        "Jialang Xu",
+        "Jensen Ang",
+        "Evangelos B. Mazomenos",
+        "Beng Ti Ang",
+        "Yueming Jin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-22T04:12:38+00:00",
+      "link": "https://arxiv.org/pdf/2606.22829v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "surgical bleeding detection with temporal modeling",
+      "llm_evidence_cn": "手术出血检测中的时间建模",
+      "llm_evidence": "手术出血检测中的时间建模",
+      "canonical_evidence": "手术出血检测中的时间建模",
+      "llm_tldr_en": "Proposes DBT-Bleed, a dual-branch temporal modeling framework for surgical bleeding detection in videos, using key-frame selection and layer-wise temporal adapters to handle long surgical videos efficiently.",
+      "llm_tldr_cn": "现有方法难以区分手术出血与残留血液，且处理长视频时计算代价高。本文提出DBT-Bleed，一个双分支多尺度时间建模框架，通过层式时间适配器分离出血与正常表征，并引入关键帧选择高效处理长视频。在手术视频数据集上展示优于基线方法的性能，有助于术中不良事件实时检测。",
+      "llm_tldr": "现有方法难以区分手术出血与残留血液，且处理长视频时计算代价高。本文提出DBT-Bleed，一个双分支多尺度时间建模框架，通过层式时间适配器分离出血与正常表征，并引入关键帧选择高效处理长视频。在手术视频数据集上展示优于基线方法的性能，有助于术中不良事件实时检测。",
+      "llm_tags": [
+        "query:med-video"
+      ],
+      "matched_query_tag": "query:med-video",
+      "matched_query_text": "processing and interpretation of surgical procedure videos",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.22870v1",
+      "source": "arxiv",
+      "title": "VideoLatent: Video-Language Learning via Latent Self-Forcing",
+      "abstract": "Recent advancements in chain-of-thought (CoT) reasoning have shown promise in enhancing video understanding and reasoning capabilities of multimodal large language models (MLLMs). However, existing CoT-based MLLMs require labor-intensive CoT annotations and incur substantial training and inference overhead. While visual latent reasoning has emerged as a more efficient alternative, existing methods primarily focus on image tasks and heavily rely on additional supervision signals for visual latent generation (e.g., CoT traces, auxiliary images, or fine-grained annotations), limiting their scalability and transferability to video tasks. To bridge this gap, we introduce VideoLatent, a novel MLLM equipped with a latent injection module tailored for video understanding and reasoning. Specifically, VideoLatent learns to perform visual latent reasoning using a new latent self-forcing training paradigm, which comprises latent alignment and latent diversity objectives, and relies solely on standard video-question-answer triplets. Extensive experiments across 14 benchmarks demonstrate that our model consistently outperforms existing standard and latent MLLMs on general video understanding and complex video reasoning. Compared with Video-R1, our VideoLatent achieves superior computational efficiency, reducing training/inference overhead by $\\sim$6$\\times$/$\\sim$68$\\times$. Moreover, experiments demonstrate that our method has strong generalizability to different MLLM backbones and different model scales.",
+      "authors": [
+        "Zi-Yuan Hu",
+        "Zicong Tang",
+        "Shijia Huang",
+        "Yanyang Li",
+        "Michael R. Lyu",
+        "Liwei Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-22T05:29:30+00:00",
+      "link": "https://arxiv.org/pdf/2606.22870v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "video-language learning with latent reasoning for video understanding",
+      "llm_evidence_cn": "潜在推理视频语言学习用于视频理解",
+      "llm_evidence": "潜在推理视频语言学习用于视频理解",
+      "canonical_evidence": "潜在推理视频语言学习用于视频理解",
+      "llm_tldr_en": "Proposes VideoLatent, a multimodal LLM with latent injection for efficient video reasoning, avoiding costly CoT annotations.",
+      "llm_tldr_cn": "针对现有基于链式思维（CoT）的大语言模型视频理解需要大量标注和计算开销的问题，提出VideoLatent，通过潜在注入模块在视频任务中进行视觉潜在推理，无需额外监督信号，在视频问答和理解任务上取得高效率和高性能。",
+      "llm_tldr": "针对现有基于链式思维（CoT）的大语言模型视频理解需要大量标注和计算开销的问题，提出VideoLatent，通过潜在注入模块在视频任务中进行视觉潜在推理，无需额外监督信号，在视频问答和理解任务上取得高效率和高性能。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.23327v1",
+      "source": "arxiv",
+      "title": "VideoAgent: All-in-One Framework for Video Understanding and Editing",
+      "abstract": "Video editing has become essential in digital media creation, yet existing automated systems are restricted to short segment processing and domain-specific tasks. They face two critical limitations: i) inability to handle diverse video comprehension and editing operations, and ii) lack of long-video understanding for coherent narrative creation. We propose VideoAgent, an all-in-one agentic framework addressing these challenges through two key innovations. First, we develop automated video shot creation with shot planning agents for coherent narratives and cross-modal retrieval for aligned visual content. Second, we design a multi-agent orchestration framework integrating over thirty specialized editing agents. Intent parsing filters relevant tools while textual-gradient graph optimization assembles complex editing pipelines. Extensive experiments on our newly-proposed VideoEdit benchmark and public datasets demonstrate VideoAgent's superiority over existing multimodal LLMs and agentic systems. VideoAgent achieves 87-95% orchestration success rates while reducing API costs by 60%. Human evaluation across six video categories shows VideoAgent produces professional-quality content approaching human-level performance, with ratings only 4% below human-created videos. We release our code at https://github.com/HKUDS/VideoAgent.",
+      "authors": [
+        "Hengji Zhou",
+        "Lingxuan Huang",
+        "Jian Wang",
+        "Bing Zhou",
+        "Si Wu",
+        "Lianghao Xia",
+        "Chao Huang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-22T13:37:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.23327v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentic framework for video understanding and editing",
+      "llm_evidence_cn": "智能体框架用于视频理解和编辑",
+      "llm_evidence": "智能体框架用于视频理解和编辑",
+      "canonical_evidence": "智能体框架用于视频理解和编辑",
+      "llm_tldr_en": "VideoAgent is an all-in-one agentic framework for video understanding and editing, using multi-agent orchestration and shot planning for coherent narratives.",
+      "llm_tldr_cn": "针对现有视频编辑系统无法处理多样化操作和长视频理解的问题，本文提出VideoAgent，一个集成的智能体框架。通过镜头规划智能体实现连贯叙事，并整合三十多个专业编辑智能体的多智能体协调机制。在多个视频理解和编辑任务上展示了优异性能，为视频处理提供了一个统一的智能体解决方案。",
+      "llm_tldr": "针对现有视频编辑系统无法处理多样化操作和长视频理解的问题，本文提出VideoAgent，一个集成的智能体框架。通过镜头规划智能体实现连贯叙事，并整合三十多个专业编辑智能体的多智能体协调机制。在多个视频理解和编辑任务上展示了优异性能，为视频处理提供了一个统一的智能体解决方案。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.23593v1",
+      "source": "arxiv",
+      "title": "Real-Time Multimodal Activity-Aware Error Detection in Robot-Assisted Surgery",
+      "abstract": "Robot-assisted minimally invasive surgery improves surgical precision but introduces complexity, making technical error detection essential for ensuring patient safety. Current executional error detection methods using video data often overlook fine-grained contextual descriptions of activities and error types within the hierarchical structure of surgical procedures. They also under-utilize complementary multimodal information. We propose a unified framework for executional error detection that leverages multimodal input, including video, kinematics, and descriptive textual prompts. Through activity prompting, we integrate descriptive language in gesture-level activities, instrument-object interactions, and error definitions. We also introduce activity-aware visual embeddings derived from vision encoders pretrained on surgical activity labels to compare the effectiveness of contrastive language-image embeddings with traditional image-based embeddings for error detection. By seamlessly integrating kinematic data with video and textual modalities, our framework significantly improves error detection performance. Achieving up to 5\\% and 16.6\\% F1 score improvements over state-of-the-art baselines on the JIGSAWS and SAR-RARP50 datasets, respectively, we demonstrate the value of combining curated textual prompts with multimodal data for accurate error detection.",
+      "authors": [
+        "Seyed Hamid Reza Roodabeh",
+        "Zongyu Li",
+        "Homa Alemzadeh"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-06-22T17:01:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.23593v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "real-time multimodal error detection in surgical videos",
+      "llm_evidence_cn": "手术视频中的实时多模态错误检测",
+      "llm_evidence": "手术视频中的实时多模态错误检测",
+      "canonical_evidence": "手术视频中的实时多模态错误检测",
+      "llm_tldr_en": "Proposes a unified framework for real-time executional error detection in robot-assisted surgery using video, kinematics, and textual prompts with activity-aware prompting.",
+      "llm_tldr_cn": "机器人辅助手术中执行错误检测对患者安全至关重要，现有方法忽视了细粒度的活动上下文。本文提出统一框架，融合视频、运动学和描述性文本提示，通过活动提示整合手势级活动、器械-物体交互和错误定义，实现实时多模态错误检测。",
+      "llm_tldr": "机器人辅助手术中执行错误检测对患者安全至关重要，现有方法忽视了细粒度的活动上下文。本文提出统一框架，融合视频、运动学和描述性文本提示，通过活动提示整合手势级活动、器械-物体交互和错误定义，实现实时多模态错误检测。",
+      "llm_tags": [
+        "query:med-video"
+      ],
+      "matched_query_tag": "query:med-video",
+      "matched_query_text": "processing and interpretation of surgical procedure videos",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.24286v1",
+      "source": "arxiv",
+      "title": "AVOC: Enhancing Hour-Level Audio-Video Understanding in Omni-Modal LLMs via Retrieval-Inspired Token Compression",
+      "abstract": "Multimodal Large Language Models have achieved remarkable progress in short-form audio-video understanding, yet long-form audio-video comprehension remains challenged by limited context windows and severe information redundancy. To address these bottlenecks, we propose AVOC, a framework for long-form audio-video understanding in Omni-modal Large Language Models. AVOC introduces a learnable token compression module between the modality encoders and the LLM backbone. We reframe multimodal token compression as a top-$K$ retrieval problem: given a fixed context budget, the module must retrieve a compact subset of tokens that best supports answering the user query. We draw inspiration from three classical Information Retrieval criteria for selecting informative units from a large candidate pool: relevance, importance, and diversity. AVOC instantiates each criterion as a tailored mechanism for audio-video understanding, and integrates them into a unified retrieval-style compression pipeline. Experiments show that AVOC achieves state-of-the-art performance on long-form audio-video benchmarks, surpassing the second-best model by 4.9 and 5.5 points in average accuracy on OmniVideoBench and LVOmniBench, respectively. Moreover, AVOC maintains robust performance on Audio-Video Needle-in-a-Haystack task at durations up to one hour.",
+      "authors": [
+        "Yijing Chen",
+        "Wenhui Tan",
+        "Xiaoyi Yu",
+        "Yuyue Wang",
+        "Xin Cheng",
+        "Kaisi Guan",
+        "Hao Jiang",
+        "Xiangyang Li",
+        "Guojie Zhu",
+        "Ruihua Song"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-06-23T08:06:58+00:00",
+      "link": "https://arxiv.org/pdf/2606.24286v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "long-form audio-video understanding for query answering",
+      "llm_evidence_cn": "长音频-视频理解用于查询回答",
+      "llm_evidence": "长音频-视频理解用于查询回答",
+      "canonical_evidence": "长音频-视频理解用于查询回答",
+      "llm_tldr_en": "AVOC introduces retrieval-inspired token compression for long-form audio-video understanding in omni-modal LLMs, improving QA performance.",
+      "llm_tldr_cn": "多模态大语言模型在长音视频理解上受限于上下文窗口和信息冗余。AVOC提出可学习的令牌压缩模块，将压缩重构为top-K检索问题，从三个经典信息论原理中汲取灵感。在长视频问答任务上，AVOC显著提升了模型在有限预算下的回答准确性，为长视频理解提供了高效方案。",
+      "llm_tldr": "多模态大语言模型在长音视频理解上受限于上下文窗口和信息冗余。AVOC提出可学习的令牌压缩模块，将压缩重构为top-K检索问题，从三个经典信息论原理中汲取灵感。在长视频问答任务上，AVOC显著提升了模型在有限预算下的回答准确性，为长视频理解提供了高效方案。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.26904v1",
+      "source": "arxiv",
+      "title": "Confidence-Aware Tool Orchestration for Robust Video Understanding",
+      "abstract": "Video reasoning language models implicitly assume that every input frame is equally reliable. This leads to what we term the Blind Trust Problem: under realistic perturbations such as motion blur, glare, or occlusion, frontier video reasoning models can suffer 15-30%p accuracy drops on real-world embodied benchmarks, while remaining unaware that their visual evidence has been degraded. To address this challenge, we propose Robust-TO, an agentic video understanding framework that explicitly integrates per-frame trustworthiness into every stage of reasoning. Robust-TO organizes heterogeneous visual perception tools under a unified evidence interface. Each tool receives a sub-query derived from the original question and a set of trustworthy frames selected by the reliability-relevance score. It returns evidence in a shared format: a concrete prediction (e.g., a bounding box, motion trajectory, recognized text, or action label), temporal grounding, and a calibrated reliability score. During reasoning, these calibrated scores guide evidence weighting in a three-tier synthesis process (high/medium/low) and define a confidence-cost GRPO reward that jointly optimizes correctness, evidence reliability, and efficiency. On two video reasoning benchmarks spanning eight tasks, Robust-TO achieves 56.4% average accuracy on clean inputs, surpassing the strongest open-source baseline by 10.6%p and outperforming Gemini-2.5-Pro (46.2%). Under five realistic corruption types, Robust-TO maintains 54.3% average accuracy, 5.8%p above the strongest open-source baseline, while exhibiting the smallest clean-to-corrupted accuracy drop among all compared methods.",
+      "authors": [
+        "Yangfan He",
+        "Yujin Choi",
+        "Jaehong Yoon"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-25T11:37:51+00:00",
+      "link": "https://arxiv.org/pdf/2606.26904v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Agentic video understanding framework with tool orchestration",
+      "llm_evidence_cn": "基于智能体的视频理解框架，集成工具编排",
+      "llm_evidence": "基于智能体的视频理解框架，集成工具编排",
+      "canonical_evidence": "基于智能体的视频理解框架，集成工具编排",
+      "llm_tldr_en": "Proposes Robust-TO, an agentic video understanding framework that integrates per-frame trustworthiness into reasoning and orchestrates visual perception tools under a unified interface.",
+      "llm_tldr_cn": "视频推理语言模型默认输入帧可靠，但实际存在运动模糊等扰动导致精度下降。本文提出Robust-TO，一个基于智能体的视频理解框架，显式将每帧可信度融入推理各阶段。通过统一证据接口编排异构视觉感知工具，每个工具接收子查询和可信帧子集。实验表明在多种扰动下显著提升鲁棒性，揭示了智能体框架在流式视频理解中的潜力。",
+      "llm_tldr": "视频推理语言模型默认输入帧可靠，但实际存在运动模糊等扰动导致精度下降。本文提出Robust-TO，一个基于智能体的视频理解框架，显式将每帧可信度融入推理各阶段。通过统一证据接口编排异构视觉感知工具，每个工具接收子查询和可信帧子集。实验表明在多种扰动下显著提升鲁棒性，揭示了智能体框架在流式视频理解中的潜力。",
+      "llm_tags": [
+        "query:stream-agent"
+      ],
+      "matched_query_tag": "query:stream-agent",
+      "matched_query_text": "streaming video understanding with agent",
+      "matched_requirement_id": "req-23",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.29445v1",
+      "source": "arxiv",
+      "title": "Bridging VideoQA and Video-Guided Agentic Tasks via Generalized Keyframe Extraction",
+      "abstract": "Video understanding is a fundamental capability for multimodal intelligence, and recent Multimodal Large Language Models (MLLMs) have achieved remarkable performance on Video Question Answering (VideoQA) benchmarks. However, existing benchmarks primarily evaluate whether models can perceive shallow visual cues, while rarely examining whether MLLMs can learn deeper knowledge or procedural skills from video tutorials and generalize them to downstream long-horizon agentic tasks. To address this gap, we introduce VG-GUIBench (Video-Guided GUI Benchmark), a new benchmark designed to evaluate whether MLLM-based GUI agents can follow video tutorials to complete corresponding GUI interactive tasks. Furthermore, we observe that the performance of models on both VideoQA and video-guided agentic tasks critically depends on effective keyframe extraction. Based on this observation, we propose TASKER (Task-driven And Scene-aware Keyframe searchER), a keyframe extraction algorithm that jointly considers task relevance and scene dynamics to identify informative frames. Experimental results demonstrate that TASKER achieves significant performance improvements on both VideoQA and video-guided agentic task benchmarks, outperforming the best baseline by 2.0% on the EgoSchema fullset and 1.8% on the NExT-QA dataset, respectively. These results further highlight the potential of generalized keyframe extraction methods for video understanding tasks. Our code and data are available at https://github.com/VG-GUI-TASKER/VG-GUI-TASKER.",
+      "authors": [
+        "Sunqi Fan",
+        "Qingle Liu",
+        "Runqi Yin",
+        "Meng-Hao Guo",
+        "Shuojin Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-28T15:11:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.29445v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "bridging VideoQA and video-guided agentic tasks via keyframe extraction",
+      "llm_evidence_cn": "通过关键帧提取桥接视频问答与视频引导的智能体任务",
+      "llm_evidence": "通过关键帧提取桥接视频问答与视频引导的智能体任务",
+      "canonical_evidence": "通过关键帧提取桥接视频问答与视频引导的智能体任务",
+      "llm_tldr_en": "This work bridges VideoQA and agentic tasks by introducing a benchmark and a generalized keyframe extraction method to evaluate MLLMs' ability to follow video tutorials.",
+      "llm_tldr_cn": "现有视频问答基准主要评估模型感知浅层视觉线索的能力，而忽略了从视频教程学习深层知识并推广到智能体任务的能力。本文提出VG-GUIBench基准，用于评估MLLM GUI智能体跟随视频教程完成任务的能力，并提出一种广义关键帧提取方法。实验表明当前MLLMs在视频引导的智能体任务上表现有限，而关键帧提取能有效提升性能，为视频理解与智能体行为搭建了桥梁。",
+      "llm_tldr": "现有视频问答基准主要评估模型感知浅层视觉线索的能力，而忽略了从视频教程学习深层知识并推广到智能体任务的能力。本文提出VG-GUIBench基准，用于评估MLLM GUI智能体跟随视频教程完成任务的能力，并提出一种广义关键帧提取方法。实验表明当前MLLMs在视频引导的智能体任务上表现有限，而关键帧提取能有效提升性能，为视频理解与智能体行为搭建了桥梁。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.31198v1",
+      "source": "arxiv",
+      "title": "Distilling Temporal Coherence into 2D Networks for Transrectal Ultrasound Prostate Video Segmentation",
+      "abstract": "Real-time video segmentation of the prostate in Transrectal Ultrasound (TRUS) is essential for image-guided interventions. While conventional 2D methods suffer from inter-frame inconsistencies by disregarding temporal context, 3D architectures incur prohibitive latency. To resolve this dilemma, we present a Temporally Consistent Learning Framework that distills temporal coherence into a 2D network during training, preserving single-frame inference efficiency. Our design is driven by a key clinical observation: the prostate exhibits geometric stability, whereas the surrounding acoustic environment fluctuates due to physiological motion and transducer pressure. Because conventional temporal constraints propagate erroneous gradients from these unstable regions, we introduce a Confidence-Weighted Temporal Consistency objective derived from optical flow warping residuals, selectively attenuating contributions from unreliable regions. Complementing this pixel-wise constraint, a Dual-scale Prototype Alignment Module enforces semantic coherence through contrastive optimization of local boundary and global semantic features. Furthermore, to eliminate the need for dense per-frame video annotations, we employ geometric equivariance-based pseudo-labeling with knowledge distillation from a pretrained teacher. Extensive experiments on SUN-SEG and our newly introduced TRUS-V benchmark (2,679 frames) demonstrate state-of-the-art accuracy and temporal consistency at real-time speed. Code and dataset are available at https://github.com/DYDevelop/DTC-TRUS.",
+      "authors": [
+        "Dong Yeong Kim",
+        "JunGyu Lee",
+        "Jaewon Choi",
+        "June Young Seo",
+        "Myeongseop Kim",
+        "Jinwook Choi",
+        "Taek Min Kim",
+        "Young-Gon Kim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-30T06:27:02+00:00",
+      "link": "https://arxiv.org/pdf/2606.31198v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "ultrasound video segmentation with temporal coherence distillation",
+      "llm_evidence_cn": "超声视频分割中的时间一致性蒸馏",
+      "llm_evidence": "超声视频分割中的时间一致性蒸馏",
+      "canonical_evidence": "超声视频分割中的时间一致性蒸馏",
+      "llm_tldr_en": "Proposes a temporally consistent learning framework that distills temporal coherence into a 2D network for real-time prostate video segmentation in transrectal ultrasound.",
+      "llm_tldr_cn": "传统2D方法在超声视频分割中缺乏时序一致性，3D方法延迟高。本文提出时间一致性学习框架，在训练时将时序信息蒸馏到2D网络，保持单帧推理效率。在经直肠超声前列腺分割上实现实时且时序平滑的分割，支持图像引导介入。",
+      "llm_tldr": "传统2D方法在超声视频分割中缺乏时序一致性，3D方法延迟高。本文提出时间一致性学习框架，在训练时将时序信息蒸馏到2D网络，保持单帧推理效率。在经直肠超声前列腺分割上实现实时且时序平滑的分割，支持图像引导介入。",
+      "llm_tags": [
+        "query:med-video:composite"
+      ],
+      "matched_query_tag": "query:med-video:composite",
+      "matched_query_text": "Papers central to 医疗视频理解, especially work that connects or combines: medical video comprehension and analysis; processing and interpretation of surgical procedure videos; monitoring patients through video analysis; video data from medical imaging modalities; How can deep learning be applied to medical video understanding?; Techniques for analyzing surgical videos automatically; Applications of video understanding in healthcare.",
+      "matched_requirement_id": "req-composite-med-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.00446v1",
+      "source": "arxiv",
+      "title": "VideoSearch-R1: Iterative Video Retrieval and Reasoning via Soft Query Refinement",
+      "abstract": "As video corpora continue to expand in both scale and task complexity, there is increasing demand for approaches that retrieve relevant videos from large-scale corpora (inter-video reasoning) and subsequently perform fine-grained, query-conditioned tasks (intra-video reasoning) within the retrieved content, such as temporal grounding. However, existing approaches typically treat retrieval as a preprocessing step, and consequently, when the initial retrieval fails, there is no mechanism to refine the search, leading to the failure of subsequent fine-grained intra-video reasoning. Moreover, while recent agentic frameworks have advanced video understanding, they typically assume that the query-relevant video is already given, focusing exclusively on intra-video reasoning tasks. To address these limitations, we propose VideoSearch-R1, an agentic framework for iterative video retrieval and reasoning through multi-turn interaction with a video search engine. Specifically, we introduce Soft Query Refinement (SQR) to refine search query tokens in a continuous latent space rather than rewriting queries in the discrete text space, enabling more efficient and fine-grained adjustments. SQR and its reasoning process are trained using Group Relative Policy Optimization (GRPO), guided by task-level reward signals derived from retrieval and downstream tasks. Building upon this, VideoSearch-R1 achieves state-of-the-art performance across three datasets on Video Corpus Moment Retrieval (VCMR), iteratively retrieving videos from large-scale corpora, refining search queries, and performing precise query-conditioned temporal grounding within the retrieved content. Our analyses show that SQR effectively refines the original query, requiring significantly fewer generated tokens than explicit text-level query refinement. Code and model checkpoints are publicly available at mlvlab.github.io/VideoSearch-R1.",
+      "authors": [
+        "Seohyun Lee",
+        "Seoung Choi",
+        "Dohwan Ko",
+        "Jongha Kim",
+        "Hyunwoo J. Kim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-01T04:59:24+00:00",
+      "link": "https://arxiv.org/pdf/2607.00446v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "iterative video retrieval and temporal grounding with soft query refinement",
+      "llm_evidence_cn": "基于软查询精化的迭代视频检索与时间定位",
+      "llm_evidence": "基于软查询精化的迭代视频检索与时间定位",
+      "canonical_evidence": "基于软查询精化的迭代视频检索与时间定位",
+      "llm_tldr_en": "Proposes VideoSearch-R1, an agentic framework that interleaves video retrieval and fine-grained intra-video reasoning (e.g., temporal grounding) via iterative soft query refinement, overcoming limitations of separate retrieval and reasoning.",
+      "llm_tldr_cn": "针对现有视频检索与推理分离、检索失败无法恢复的问题，本文提出VideoSearch-R1框架，通过迭代软查询精化实现检索与时间定位的紧密结合。该框架采用智能体机制，在检索和推理阶段交替进行，允许根据中间结果动态调整查询。实验表明，在多个视频检索和定位基准上，该方法显著优于独立检索+推理流水线。该工作为视频理解中的联合检索与推理提供了新范式。",
+      "llm_tldr": "针对现有视频检索与推理分离、检索失败无法恢复的问题，本文提出VideoSearch-R1框架，通过迭代软查询精化实现检索与时间定位的紧密结合。该框架采用智能体机制，在检索和推理阶段交替进行，允许根据中间结果动态调整查询。实验表明，在多个视频检索和定位基准上，该方法显著优于独立检索+推理流水线。该工作为视频理解中的联合检索与推理提供了新范式。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.00622v1",
+      "source": "arxiv",
+      "title": "Learning to Watch: Active Video Anomaly Understanding via Interleaved Policy Optimization",
+      "abstract": "Video anomaly understanding (VAU) relies on sparse, context-dependent cues. However, existing passive paradigms suffer from observational aliasing, where static sampling fails to disambiguate semantically distinct events. To overcome this, we propose $Anom\\text{-}π$, a closed-loop framework that reconceptualizes video understanding as an active sequential decision-making process within a dynamic environment. Inspired by human video-reviewing behavior, this framework unifies internal cognitive reasoning and strategic evidence acquisition into an interleaved policy, utilizing temporal atomic operators such as local backtracking, temporal expansion, and fine-grained sampling to endow the model with perceptual proactivity. To learn such complex interaction strategies under video-level weak supervision, we design Interactive Direct Preference Optimization (iDPO) to achieve trajectory-level policy alignment, guided by an Active Evidence Inquiry (AEI) utility that balances task success, informative evidence acquisition, and interaction cost. This approach enables the agent to learn to actively disambiguate hypotheses while suppressing redundant exploration. Extensive experiments demonstrate that our framework, with only 2B parameters, achieves highly competitive performance, significantly outperforming state-of-the-art large-scale VAU models in complex scenarios.",
+      "authors": [
+        "Mengjingcheng Mo",
+        "Jiaxu Leng",
+        "Xinbo Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-01T08:41:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.00622v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reconceptualizes video understanding as active sequential decision-making using interleaved policy with temporal atomic operators",
+      "llm_evidence_cn": "将视频理解重构为使用时间原子操作的交错策略的主动序列决策过程",
+      "llm_evidence": "将视频理解重构为使用时间原子操作的交错策略的主动序列决策过程",
+      "canonical_evidence": "将视频理解重构为使用时间原子操作的交错策略的主动序列决策过程",
+      "llm_tldr_en": "Proposes Anom-pi, a closed-loop framework for active video anomaly understanding using interleaved policy optimization with temporal atomic operators like backtracking and fine-grained sampling.",
+      "llm_tldr_cn": "现有被动视频理解范式因静态采样无法区分语义不同的事件。本文提出Anom-π，将视频理解重新定义为动态环境中的主动序列决策过程，利用时间原子操作（如回溯、时间扩展、细粒度采样）构成交错策略，模拟人类视频审查行为。实验表明该方法在异常理解任务上优于被动方法，为智能体驱动的流式视频理解开辟了新方向。",
+      "llm_tldr": "现有被动视频理解范式因静态采样无法区分语义不同的事件。本文提出Anom-π，将视频理解重新定义为动态环境中的主动序列决策过程，利用时间原子操作（如回溯、时间扩展、细粒度采样）构成交错策略，模拟人类视频审查行为。实验表明该方法在异常理解任务上优于被动方法，为智能体驱动的流式视频理解开辟了新方向。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.00672v1",
+      "source": "arxiv",
+      "title": "DART: Difficulty-Adaptive Routing for Zero-Shot Video Temporal Grounding",
+      "abstract": "Zero-shot video temporal grounding (VTG) localizes events in untrimmed videos from natural language queries without task-specific training. Existing methods rely on frame-query feature matching, which suffices for simple events but struggles with complex multi-stage queries that require understanding temporal ordering and causal structure -- a disparity we call the reasoning gap. We propose DART (Difficulty-Adaptive Routing for Temporal Grounding), which bridges this gap by coupling difficulty-aware routing with structured reasoning in large vision-language models. A query-conditioned Determinantal Point Process (DPP) serves a dual role: selecting diverse, query-relevant keyframes as temporal evidence, and providing spectral entropy as a difficulty indicator. Simple queries are routed to a Fast path for direct prediction, while complex queries follow a Slow path with Temporal Markup Prompting, which decomposes localization into global event analysis, per-frame temporal role annotation, and boundary extraction. On Charades-STA and ActivityNet Captions, DART achieves state-of-the-art zero-shot performance across both identically distributed and multiple out-of-distribution settings, improving mIoU by up to 3.5 points over the strongest baseline while using over 7 times fewer frames. The project homepage is available at https://dart-vtg.github.io/.",
+      "authors": [
+        "Zhengbo Zhang",
+        "Mark He Huang",
+        "Zhigang Tu",
+        "Ming-Hsuan Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-01T09:18:59+00:00",
+      "link": "https://arxiv.org/pdf/2607.00672v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "zero-shot video temporal grounding with large vision-language models",
+      "llm_evidence_cn": "零样本视频时间定位与大视觉语言模型",
+      "llm_evidence": "零样本视频时间定位与大视觉语言模型",
+      "canonical_evidence": "零样本视频时间定位与大视觉语言模型",
+      "llm_tldr_en": "DART uses difficulty-aware routing and structured reasoning in VLMs for zero-shot video temporal grounding, bridging the reasoning gap for complex queries.",
+      "llm_tldr_cn": "针对零样本视频时间定位中复杂多阶段查询的推理差距问题，本文提出DART，通过查询条件行列式点过程选择关键帧并提供难度信号，结合大视觉语言模型的结构化推理实现自适应路由。实验表明该方法在多个基准上显著提升了复杂查询的定位性能，为视频理解提供了新的思路。",
+      "llm_tldr": "针对零样本视频时间定位中复杂多阶段查询的推理差距问题，本文提出DART，通过查询条件行列式点过程选择关键帧并提供难度信号，结合大视觉语言模型的结构化推理实现自适应路由。实验表明该方法在多个基准上显著提升了复杂查询的定位性能，为视频理解提供了新的思路。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.01469v2",
+      "source": "arxiv",
+      "title": "A Cost-Aware, Paired Protocol for Auditing Dynamic Tool Synthesis in Agentic Video Question Answering",
+      "abstract": "Agentic Video Question Answering (VideoQA) systems invoke tools during inference, but their tool libraries are fixed, so recurring procedures are rebuilt from primitives on every question. Synthesizing composite tools could remove this overhead, but whether such expansion helps is hard to assess: final-answer accuracy, the standard metric, ignores inference effort, so it cannot reveal how a system shifts cost. We propose a cost-aware, paired protocol for auditing tool-augmented video agents. The protocol pairs two complete systems on the same input for each question and reports their net difference across accuracy and cost jointly. For each question, it sorts the paired outcome into one of six groups defined by joint correctness and by the change in visible tool calls, separating accuracy-preserving efficiency gains from harmful regressions. Significance is reported with McNemar's test and paired bootstrap confidence intervals. We instantiate the protocol on Dynamic-SAGE, an agentic VideoQA framework that synthesizes, validates, and persistently registers executable composite tools for reuse on unseen questions, and evaluate it against the SAGE baseline on SAGE-Bench. The audit reveals a multi-axis profile that a scalar accuracy comparison would miss: Dynamic-SAGE improves accuracy by 7.5 points (p < 0.001) and reduces reasoning turns and visible tool calls by roughly 28%, while shifting rather than reducing inference cost, as token usage rises 34% and cost 26%. Gains are largest on visual and open-ended questions and neutral on verbal and multimodal ones, and residual failures concentrate on hard, open-ended questions where the pipeline does the most work. By measuring accuracy and cost jointly, the protocol shows where the pipeline-level difference is reliable and where it is not. The code is available at https://github.com/KurbanIntelligenceLab/Dynamic-SAGE.",
+      "authors": [
+        "Aseel Mohamed",
+        "Rama AlHamidi",
+        "Mohamed Rayan Barhdadi",
+        "Rasul Khanbayov",
+        "Erchin Serpedin",
+        "Hasan Kurban"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-01T21:01:57+00:00",
+      "link": "https://arxiv.org/pdf/2607.01469v2",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentic video question answering with tool synthesis auditing",
+      "llm_evidence_cn": "基于工具合成的智能体视频问答审计",
+      "llm_evidence": "基于工具合成的智能体视频问答审计",
+      "canonical_evidence": "基于工具合成的智能体视频问答审计",
+      "llm_tldr_en": "This paper proposes a cost-aware paired protocol for auditing dynamic tool synthesis in agentic VideoQA, jointly evaluating accuracy and inference cost.",
+      "llm_tldr_cn": "智能体视频问答系统在推理时调用工具，但固定工具库导致重复过程需从原语重建。合成复合工具可减少开销，但难以评估其益处。本文提出一种成本感知的配对审计协议，对每个问题配对两个系统，联合报告准确率与成本的净差异，并划分六类结果。通过实验揭示了工具合成在准确率与成本权衡中的关键作用，为智能体视频QA提供了更全面的评估方法。",
+      "llm_tldr": "智能体视频问答系统在推理时调用工具，但固定工具库导致重复过程需从原语重建。合成复合工具可减少开销，但难以评估其益处。本文提出一种成本感知的配对审计协议，对每个问题配对两个系统，联合报告准确率与成本的净差异，并划分六类结果。通过实验揭示了工具合成在准确率与成本权衡中的关键作用，为智能体视频QA提供了更全面的评估方法。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.01737v1",
+      "source": "arxiv",
+      "title": "ReQuest: Rethinking-based Question-Aware Frame Selection for Long-Form Video QA",
+      "abstract": "Recent multimodal large language models (MLLMs) have substantially advanced video understanding, yet long-form video QA remains challenging under fixed input token budgets, where uniform sampling can be inefficient for evidence localization. We propose ReQuest , an uncertainty-driven, question-adaptive keyframe selection pipeline that aligns question intent with relevant video content through selective computation. ReQuest integrates (i) a lightweight question-aware selector distilled from MLLM-generated supervision, (ii) Re-thinking Routing that triggers additional inference only when the model is uncertain with a length-adaptive criterion, and (iii) uncertainty-guided adaptive non-maximum suppression that selects temporally diverse frames while adjusting spacing based on question difficulty. As a plug-andplay method, ReQuest improves long-video QA without modifying or fine-tuning the underlying MLLM. Experiments on Video-MME, MLVU, and LongVideoBench demonstrate consistent accuracy gains with competitive computational cost, with particularly strong improvements in medium and long video regimes.",
+      "authors": [
+        "Minkuk Kim",
+        "Suyong Yun",
+        "Young Tae Kim",
+        "Jinyoung Moon",
+        "Jinwoo Choi",
+        "Seong Tae Kim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-02T05:46:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.01737v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "long-form video question answering with adaptive frame selection",
+      "llm_evidence_cn": "长视频问答中的自适应帧选择",
+      "llm_evidence": "长视频问答中的自适应帧选择",
+      "canonical_evidence": "长视频问答中的自适应帧选择",
+      "llm_tldr_en": "ReQuest proposes uncertainty-driven question-adaptive keyframe selection for long-form video QA, improving MLLM performance under token budgets.",
+      "llm_tldr_cn": "长视频问答在固定令牌预算下均匀采样效率低下。ReQuest提出不确定性驱动的自适应关键帧选择流水线，包含轻量级问题感知选择器、重思考路由和自适应非极大值抑制。在多个长视频QA数据集上，该方法显著提升了答案准确性，代表了视频问答的最新进展。",
+      "llm_tldr": "长视频问答在固定令牌预算下均匀采样效率低下。ReQuest提出不确定性驱动的自适应关键帧选择流水线，包含轻量级问题感知选择器、重思考路由和自适应非极大值抑制。在多个长视频QA数据集上，该方法显著提升了答案准确性，代表了视频问答的最新进展。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.02425v1",
+      "source": "arxiv",
+      "title": "Learning to Evolve Scenes: Reasoning about Human Activities with Scene Graphs",
+      "abstract": "Understanding human behavior while interacting with the surrounding world is crucial for many applications of embodied AI. First-person videos are particularly informative for this problem, as they well capture how activities reshape the scene over time. However, existing approaches often rely on implicit visual or language-aligned representations, disregarding structured reasoning over the scene dynamic. We argue that explicit, compositional and editable representations of human-environment interactions can play a crucial role for rich grounded activity understanding. To this end, we introduce SG-Ego, a large scale annotation set extending Ego4D with spatio-temporal scene graphs, where relations triplets are consolidated over time into explicit time-evolving descriptions of the scene state. To reason over this representation, we propose GLEN, a graph-based model that operates over scene graph sequences to both align them with textual actions and model their temporal evolution. In addition, we formulate the activity-driven graph-edit forecasting (A-GEF) problem, a novel task that casts scene dynamics as a sequence of structured transformations conditioned on ongoing actions, enabling explicit reasoning about how scenes change over time. We validate our approach across multiple downstream tasks, spanning retrieval benchmarks as EgoMCQ and EgoCVR, as well as long-horizon reasoning benchmarks as EXPLORE-Bench and the newly introduced A-GEF. GLEN achieves strong results compared to raw video baselines and it excels in reasoning settings, typically addressed only with MLLMs, while enabling controllable and structured predictions of scene dynamics driven by human activities. We believe our results establish spatio-temporal scene graphs, together with models that reason over them, as strong compositional and interpretable representations for video understanding and potentially beyond.",
+      "authors": [
+        "Francesca Pistilli",
+        "Simone Alberto Peirone",
+        "Giuseppe Averta"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-02T16:53:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.02425v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reasoning about human activities in first-person video with scene graphs",
+      "llm_evidence_cn": "使用场景图对第一视角视频中的人类活动进行推理",
+      "llm_evidence": "使用场景图对第一视角视频中的人类活动进行推理",
+      "canonical_evidence": "使用场景图对第一视角视频中的人类活动进行推理",
+      "llm_tldr_en": "Introduces SG-Ego, a large-scale spatio-temporal scene graph annotation extending Ego4D for structured reasoning about human activities in first-person videos.",
+      "llm_tldr_cn": "提出SG-Ego，一个大规模扩展Ego4D的时空场景图标注集，用于第一视角视频中人类与环境交互的结构化推理。现有方法依赖隐式表示，忽视场景动态的结构化推理。SG-Ego提供显式可编辑的三元组关系，支持丰富的接地活动理解。实验表明场景图显著提升活动推理能力。",
+      "llm_tldr": "提出SG-Ego，一个大规模扩展Ego4D的时空场景图标注集，用于第一视角视频中人类与环境交互的结构化推理。现有方法依赖隐式表示，忽视场景动态的结构化推理。SG-Ego提供显式可编辑的三元组关系，支持丰富的接地活动理解。实验表明场景图显著提升活动推理能力。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.02922v1",
+      "source": "arxiv",
+      "title": "STAC: Selective Spatiotemporal Aggregation and Compression for Video Reasoning Segmentation",
+      "abstract": "Video reasoning segmentation demands pixel-accurate object tracking across hundreds of frames under complex natural language queries, producing dense spatiotemporal tokens whose quadratic self-attention cost makes long-video processing prohibitive. Existing methods address this through token compression, yet typically operate on encoder features lacking temporal context, constraining selection before content redundancy can be reliably assessed. Informed compression requires contextual awareness, but acquiring that awareness at full resolution incurs the same quadratic cost compression aims to reduce. State-space models resolve this constraint, as their linear recurrence selectively conditions each token on temporal context at $\\mathcal{O}(T)$ cost, producing representations where content redundancy becomes assessable. Building on this, Selective SpatioTemporal Aggregation and Compression (STAC) enriches features via decoupled bidirectional spatial and causal temporal scanning, leveraging recurrence-derived redundancy for hierarchical compression with adaptive thresholds optimised with segmentation objective. STAC achieves 85% token reduction and 1.8$\\times$ speedup while surpassing compression-free baselines on reasoning segmentation benchmarks in a zero-shot streaming-compatible setting. Code is available \\href{https://github.com/MCG-NKU/nku-video}{here}.",
+      "authors": [
+        "Syed Ariff Syed Hesham",
+        "Yun Liu",
+        "Guolei Sun",
+        "Jing Yang",
+        "Henghui Ding",
+        "Xue Geng",
+        "Xudong Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-03T03:28:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.02922v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "spatiotemporal aggregation for video reasoning segmentation",
+      "llm_evidence_cn": "用于视频推理分割的时空聚合与压缩",
+      "llm_evidence": "用于视频推理分割的时空聚合与压缩",
+      "canonical_evidence": "用于视频推理分割的时空聚合与压缩",
+      "llm_tldr_en": "STAC uses state-space models for efficient spatiotemporal token compression in video reasoning segmentation.",
+      "llm_tldr_cn": "针对视频推理分割中数百帧产生密集时空标记导致二次自注意力成本的问题，本文提出选择性时空聚合与压缩（STAC）。利用状态空间模型的线性递归特性，在对每个标记进行上下文感知的选择性压缩，在避免二次成本的同时保留了时序上下文。实验表明该方法在长视频推理分割基准上显著降低了计算开销且保持高精度，为视频理解中的高效标记压缩提供了新思路。",
+      "llm_tldr": "针对视频推理分割中数百帧产生密集时空标记导致二次自注意力成本的问题，本文提出选择性时空聚合与压缩（STAC）。利用状态空间模型的线性递归特性，在对每个标记进行上下文感知的选择性压缩，在避免二次成本的同时保留了时序上下文。实验表明该方法在长视频推理分割基准上显著降低了计算开销且保持高精度，为视频理解中的高效标记压缩提供了新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "video understanding for question answering tasks",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.02927v1",
+      "source": "arxiv",
+      "title": "VideoSearcher: Empowering Video Deep Research with Multi-Tool Agentic Reasoning via Reinforcement Learning",
+      "abstract": "Video understanding is moving beyond closed-context perception toward open-world evidence exploration, a paradigm formalized as Video Deep Research (VDR). However, existing multimodal search agents primarily target static images, and the current VDR benchmark relies on text-centric retrieval that discards crucial visual information. To address these limitations, we propose VideoSearcher, a closed-loop agentic framework that empowers Vision-Language Models with multi-tool reasoning for VDR. VideoSearcher unifies temporal localization, spatial focusing, and multimodal search within a single reasoning trajectory, enabling agents to progressively ground visual clues, retrieve relevant evidence, and synthesize answers. To optimize knowledge-intensive reasoning trajectories, we propose Bi-branch Sequence Policy Optimization (BiSPO), a reinforcement learning algorithm that decouples tool-invocation optimization from answer-accuracy optimization. This design provides stable learning signals for both evidence-grounded reasoning and purposeful tool use. Furthermore, we construct VideoSearch-QA, the first benchmark designed to evaluate open-world video information grounding and multimodal search-based reasoning. Extensive experiments demonstrate that VideoSearcher significantly outperforms prior open-source agentic baselines across various search-oriented and multimodal understanding benchmarks.",
+      "authors": [
+        "Zhenkun Gao",
+        "Yicheng Bao",
+        "Jinlong Peng",
+        "Xueheng Li",
+        "Theo Huang",
+        "Bangwei Liu",
+        "Kunquan Li",
+        "Zhenye Gan",
+        "Tao Hu",
+        "Chengjun Xie",
+        "Mingqian Yang",
+        "Xuanhua He",
+        "Zhizhong Zhang",
+        "Xin Tan",
+        "Chengjie Wang",
+        "Yuan Xie"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-03T03:50:09+00:00",
+      "link": "https://arxiv.org/pdf/2607.02927v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-tool agentic reasoning for video deep research including temporal localization and multimodal search",
+      "llm_evidence_cn": "用于视频深度研究的多工具智能体推理，包括时间定位和多模态搜索",
+      "llm_evidence": "用于视频深度研究的多工具智能体推理，包括时间定位和多模态搜索",
+      "canonical_evidence": "用于视频深度研究的多工具智能体推理，包括时间定位和多模态搜索",
+      "llm_tldr_en": "VideoSearcher unifies temporal localization, spatial focusing, and multimodal search in an agentic framework for video deep research, using reinforcement learning-based tool selection.",
+      "llm_tldr_cn": "现有视频理解方法局限于封闭场景，而开放世界的视频深度研究（VDR）需要智能体进行证据探索。本文提出VideoSearcher，一个闭环智能体框架，通过强化学习统一时间定位、空间聚焦和多模态搜索，使智能体能够逐步定位视觉线索、检索证据并合成答案。该方法在VDR基准上表现出色，推动了视频理解向开放世界推理的范式转变。",
+      "llm_tldr": "现有视频理解方法局限于封闭场景，而开放世界的视频深度研究（VDR）需要智能体进行证据探索。本文提出VideoSearcher，一个闭环智能体框架，通过强化学习统一时间定位、空间聚焦和多模态搜索，使智能体能够逐步定位视觉线索、检索证据并合成答案。该方法在VDR基准上表现出色，推动了视频理解向开放世界推理的范式转变。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.03131v1",
+      "source": "arxiv",
+      "title": "A Multi-Task Deep Learning Framework for Real-Time Intelligent Video Surveillance with Temporal Event Validation",
+      "abstract": "Modern video surveillance systems generate far more video streams than human operators can effectively monitor, making automated analysis essential for timely detection of security events. This paper presents a unified multi-task deep learning framework that simultaneously performs face recognition with zone-based authorization, automatic license plate recognition, weapon detection, fire and smoke detection, and human action recognition on a shared GPU platform. Among the integrated modules, two task-specific deep-learning models are proposed in this work to address scenarios that are insufficiently represented in publicly available datasets: a single-class weapon detector fine-tuned on a merged and relabeled dataset, achieving a mean average precision (mAP@0.5) of 0.947, and a SlowFast-R50 action recognition model trained on a purpose-built vandalism dataset comprising 614 video clips, achieving 94.33% classification accuracy. To improve robustness in continuous video, all detection modules are integrated into a temporal event-validation architecture based on multi-frame confirmation, confidence-weighted voting, and cascaded filtering, transforming frame-level predictions into reliable security events. Each module is evaluated independently on established public datasets (LFW, D-Fire, FIRESENSE, and UCF-Crime), followed by integrated end-to-end system evaluation. The proposed temporal validation strategy reduces the fire and smoke false-alarm rate from 52% to 4% and improves video license plate exact-match accuracy from 66.7% to 81.8%, while the complete framework maintains real-time operation with a per-frame latency below 100 ms on commodity hardware. These results demonstrate that combining specialized deep-learning models with temporal event validation provides an effective and practical solution for reliable real-time intelligent video surveillance.",
+      "authors": [
+        "Estera Dumitru",
+        "Stelian Spînu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-03T09:20:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.03131v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "real-time multi-task deep learning framework for video surveillance with temporal event validation",
+      "llm_evidence_cn": "实时多任务深度学习视频监控框架，包含时间事件验证",
+      "llm_evidence": "实时多任务深度学习视频监控框架，包含时间事件验证",
+      "canonical_evidence": "实时多任务深度学习视频监控框架，包含时间事件验证",
+      "llm_tldr_en": "Presents a unified multi-task deep learning framework for real-time video surveillance performing face recognition, license plate recognition, weapon detection, etc. on shared GPU.",
+      "llm_tldr_cn": "现代视频监控产生大量流媒体，人工难以监管。本文提出统一多任务深度学习框架，在共享GPU上同时进行人脸识别、车牌识别、武器检测、烟火检测与动作识别等任务，并引入时间事件验证。实验表明框架在实时性与多任务准确率上均达到实用水平，为智能监控系统提供了高效方案。",
+      "llm_tldr": "现代视频监控产生大量流媒体，人工难以监管。本文提出统一多任务深度学习框架，在共享GPU上同时进行人脸识别、车牌识别、武器检测、烟火检测与动作识别等任务，并引入时间事件验证。实验表明框架在实时性与多任务准确率上均达到实用水平，为智能监控系统提供了高效方案。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "real-time video analysis algorithms",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.07518v1",
+      "source": "arxiv",
+      "title": "Learning to Unify Deformable Shape and Texture Representations for Cardiac Video Classification",
+      "abstract": "Deformable shape representations have proven to be robust complements to texture features in cardiac image classification, offering geometric priors that are invariant to imaging artifacts and intensity variations. However, existing deep networks perform simple concatenation to combine these distinct feature representations, which neither fully exploits their complementary nature nor learns cross-modal feature dependencies. Furthermore, this results in uniform attention across all timepoints; hence ignoring the varying diagnostic importance across the cardiac phases. In this paper, we propose a novel cardiac video classification model that, for the first time, learns temporal features in an integrated space of deformable shape and image texture representations. In particular, we design a bi-directional cross-attention in the latent space to fuse latent deformable shape and image features, allowing each modality to adaptively weight the other based on spatio-temporal correspondence. In contrast to current methods that apply uniform weighting across all the cardiac phases, our approach learns to dynamically adjust the contributions of shape and texture representations, derived from images, over time. We demonstrate state-of-the-art classification performance on a cine cardiac magnetic resonance (CMR) video dataset, achieving improved interpretability from attention mechanisms that identify diagnostically critical cardiac phases and modality contributions.",
+      "authors": [
+        "Tonmoy Hossain",
+        "Miaomiao Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-08T15:15:16+00:00",
+      "link": "https://arxiv.org/pdf/2607.07518v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "cardiac video classification with shape and texture",
+      "llm_evidence_cn": "心脏视频分类的形状与纹理融合",
+      "llm_evidence": "心脏视频分类的形状与纹理融合",
+      "canonical_evidence": "心脏视频分类的形状与纹理融合",
+      "llm_tldr_en": "Proposes a novel cardiac video classification model that learns temporal features in an integrated space of deformable shape and texture, with adaptive phase-aware attention.",
+      "llm_tldr_cn": "该论文针对心脏视频分类中形状与纹理特征简单拼接无法学习跨模态依赖且忽略心脏周期重要性的问题，提出了一个统一的可变形形状与纹理表征学习框架，首次在集成空间中学习时序特征，并引入自适应相位注意力机制。实验表明该方法能更有效利用形状和纹理的互补信息，提升分类准确率。该工作为医学视频分析中的多模态特征融合提供了新思路。",
+      "llm_tldr": "该论文针对心脏视频分类中形状与纹理特征简单拼接无法学习跨模态依赖且忽略心脏周期重要性的问题，提出了一个统一的可变形形状与纹理表征学习框架，首次在集成空间中学习时序特征，并引入自适应相位注意力机制。实验表明该方法能更有效利用形状和纹理的互补信息，提升分类准确率。该工作为医学视频分析中的多模态特征融合提供了新思路。",
+      "llm_tags": [
+        "query:med-video"
+      ],
+      "matched_query_tag": "query:med-video",
+      "matched_query_text": "medical video comprehension and analysis",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14898v1",
+      "source": "arxiv",
+      "title": "FlashDecoder: Real-Time Latent-to-Pixel Streaming Decoder with Transformers",
+      "abstract": "Real-time video generation demands fast decoding as much as fast denoising, yet current latent video diffusion models rely on 3D convolutional decoders that are slow and memory-intensive at high resolutions or for long video. We introduce FlashDecoder, a fast, memory-efficient pure-Transformer video decoder that decodes latents to pixels frame by frame. At each step, the current frame attends only to a fixed-size window of past frames through a rolling KV cache. The fixed temporal window keeps decoding fast and memory bounded regardless of video length, enabling constant-latency streaming. Because frames are processed sequentially, temporal causality is enforced without explicit attention masks, enabling training at resolutions up to 1080p and matching the reconstruction quality of convolutional decoders. On the Wan2.1 and Wan2.2 latent spaces, FlashDecoder matches each convolutional decoder in reconstruction quality (e.g., 41.55dB vs. 41.49dB PSNR at 1080p) while decoding 3.6x-4.7x faster with up to 11x less memory on a single H100 GPU. With architecture-aware inference optimizations, the speedup widens to 12x.",
+      "authors": [
+        "Minguk Kang",
+        "Suha Kwak"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-16T12:16:12+00:00",
+      "link": "https://arxiv.org/pdf/2607.14898v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "real-time streaming video decoder with Transformers",
+      "llm_evidence_cn": "基于Transformer的实时流式视频解码器",
+      "llm_evidence": "基于Transformer的实时流式视频解码器",
+      "canonical_evidence": "基于Transformer的实时流式视频解码器",
+      "llm_tldr_en": "Introduces FlashDecoder, a pure-Transformer video decoder for real-time streaming, using a rolling KV cache to decode frames sequentially with constant latency regardless of video length.",
+      "llm_tldr_cn": "针对现有视频扩散模型解码器在长视频和高分辨率下速度慢、内存大的问题，本文提出FlashDecoder，一种纯Transformer流式视频解码器。通过滚动KV缓存机制，每帧仅关注固定数量历史帧，实现与视频长度无关的恒定延迟解码。实验表明，FlashDecoder在保持高质量的同时，解码速度比3D卷积解码器快数倍，支持1080p分辨率和长视频实时生成。该工作为流式视频生成和理解提供了高效工具。",
+      "llm_tldr": "针对现有视频扩散模型解码器在长视频和高分辨率下速度慢、内存大的问题，本文提出FlashDecoder，一种纯Transformer流式视频解码器。通过滚动KV缓存机制，每帧仅关注固定数量历史帧，实现与视频长度无关的恒定延迟解码。实验表明，FlashDecoder在保持高质量的同时，解码速度比3D卷积解码器快数倍，支持1080p分辨率和长视频实时生成。该工作为流式视频生成和理解提供了高效工具。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "streaming video understanding techniques",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15689v1",
+      "source": "arxiv",
+      "title": "Efficient Frame Selection for Long Videos at Test Time with Attention-Based MLLM Selectors",
+      "abstract": "Understanding long videos with multimodal large language models (MLLMs) requires selecting a compact set of frames from thousands of candidates, yet identifying the right frames seemingly requires understanding the video first. We resolve this circular dependency with a simple observation: cross-modal attention at validation-selected extraction layers in MLLMs already provides query-relevant frame evidence without requiring autoregressive generation. We exploit this property to build DAFS (Dynamic Attention-based Budget-aware Frame Selection), a training-free frame selector. A lightweight MLLM selector, even with only 2B parameters, can extract frame-level evidence by converting selected-layer attention into relevance scores through query-conditioned aggregation. This enables cross-frame comparison without autoregressive decoding. To handle the selector's own context constraint, we formulate the joint allocation of candidate pool size and per-frame token budget as a discrete optimization problem solved by dynamic programming. Under a 32-frame budget, our selector improves over uniform sampling by up to 6.4 points on Video-MME and outperforms prior training-based selectors under matched frame budgets, while generalizing across selector and answerer backbones, and across tasks, without retraining.",
+      "authors": [
+        "Yilin Wang",
+        "Xiangxi Zheng",
+        "Dongxing Mao",
+        "Linjie Li",
+        "Zhengyuan Yang",
+        "Ping Yu",
+        "Rui Yan",
+        "Yuan Yao",
+        "Alex Jinpeng Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-17T07:04:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.15689v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Attention-based frame selection for long-video QA with MLLMs",
+      "llm_evidence_cn": "基于注意力的长视频问答帧选择方法",
+      "llm_evidence": "基于注意力的长视频问答帧选择方法",
+      "canonical_evidence": "基于注意力的长视频问答帧选择方法",
+      "llm_tldr_en": "Proposes DAFS, a training-free attention-based frame selector that uses cross-modal attention from MLLMs to select query-relevant frames for long-video understanding, enabling efficient QA.",
+      "llm_tldr_cn": "针对长视频理解中需要从大量候选帧中选择紧凑子集的问题，本文提出DAFS，一种无需训练、基于注意力的帧选择器。利用多模态大语言模型中验证层选择的交叉注意力，直接提供与查询相关的帧证据。轻量级选择器（2B参数）即可有效提取帧级别证据，显著提升长视频问答的效率与准确性。该方法为长视频理解中的高效帧选择提供了新思路。",
+      "llm_tldr": "针对长视频理解中需要从大量候选帧中选择紧凑子集的问题，本文提出DAFS，一种无需训练、基于注意力的帧选择器。利用多模态大语言模型中验证层选择的交叉注意力，直接提供与查询相关的帧证据。轻量级选择器（2B参数）即可有效提取帧级别证据，显著提升长视频问答的效率与准确性。该方法为长视频理解中的高效帧选择提供了新思路。",
+      "llm_tags": [
+        "query:video-med-qa"
+      ],
+      "matched_query_tag": "query:video-med-qa",
+      "matched_query_text": "recent advances in video question answering",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15778v1",
+      "source": "arxiv",
+      "title": "Modularized Dynamic-Granularity Video LLM for Multi-Event Long Video Understanding",
+      "abstract": "Video Large Language Models (Video LLMs) have made significant advancements in various video understanding tasks. However, long-video scenarios remain challenging due to the tension between limited visual token budgets and the need to capture multiple key events. Existing approaches typically process long videos in two stages, i.e., i) select keyframes and ii) perform detailed perception, which exhibit limitations: they lack a modular mechanism for adaptive capacity allocation and self-correction, resulting in unreliable modeling. To tackle these challenges, we propose MoD-VLLM, a novel Modularized Dynamic-Granularity Video LLM framework for multi-event long video understanding, which unifies temporal grounding and semantic understanding iteratively and self-reflectively. Specifically, we propose a Positive-Negative Video Segments Grounding module and a Modularized Dynamic-Granularity Reflection module, which form a closed loop to progressively localize the question-related video segments. The grounding module instructs a Video LLM to distinguish relevant from irrelevant video segments based on the video question. The reflection module employs a modularized scheduler that dynamically selects fine-grained encoding for relevant positive segments to capture detailed perception and coarse-grained encoding for negative segments to maintain global context. We further propose a dynamic-granularity reinforcement learning strategy, allowing MoD-VLLM to learn optimal grounding policies and dynamic granularity visual representation jointly. Moreover, we propose MEventBench, a challenging Multi-Event Long Video Benchmark for complex long video reasoning. Extensive experiments on several long video understanding benchmarks and our MEventBench demonstrate that MoD-VLLM significantly outperforms state-of-the-art baselines.",
+      "authors": [
+        "Wei Feng",
+        "Xin Wang",
+        "Yu-Wei Zhan",
+        "Yuwei Zhou",
+        "Wenwu Zhu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-17T09:21:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.15778v1",
+      "tags": [
+        "keyword:med-video",
+        "keyword:stream-agent",
+        "keyword:video-med-qa",
+        "keyword:video-stream",
+        "query:med-video",
+        "query:stream-agent",
+        "query:video-med-qa",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "modularized dynamic-granularity Video LLM unifying temporal grounding and semantic understanding",
+      "llm_evidence_cn": "模块化动态粒度视频大语言模型，统一时间定位与语义理解",
+      "llm_evidence": "模块化动态粒度视频大语言模型，统一时间定位与语义理解",
+      "canonical_evidence": "模块化动态粒度视频大语言模型，统一时间定位与语义理解",
+      "llm_tldr_en": "Proposes MoD-VLLM, a modularized dynamic-granularity Video LLM for multi-event long video understanding, unifying temporal grounding and semantic understanding, addressing limited visual token budgets.",
+      "llm_tldr_cn": "现有视频大语言模型在处理长视频时面临视觉token预算有限与捕获多个关键事件之间的张力。本文提出MoD-VLLM，一种模块化动态粒度视频大语言模型框架，通过自适应容量分配与自我纠正机制，统一了时间定位与语义理解。实验表明，该方法在多种长视频理解基准上达到先进性能，为视频语言模型在复杂场景中的应用提供了新范式。",
+      "llm_tldr": "现有视频大语言模型在处理长视频时面临视觉token预算有限与捕获多个关键事件之间的张力。本文提出MoD-VLLM，一种模块化动态粒度视频大语言模型框架，通过自适应容量分配与自我纠正机制，统一了时间定位与语义理解。实验表明，该方法在多种长视频理解基准上达到先进性能，为视频语言模型在复杂场景中的应用提供了新范式。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    }
+  ]
+}

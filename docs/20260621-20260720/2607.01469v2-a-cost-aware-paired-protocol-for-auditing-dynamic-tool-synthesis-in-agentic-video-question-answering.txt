@@ -1,0 +1,470 @@
+Title: A Cost-Aware, Paired Protocol for Auditing Dynamic Tool Synthesis in Agentic Video Question Answering
+
+URL Source: https://arxiv.org/pdf/2607.01469v2
+
+Published Time: Tue, 07 Jul 2026 00:58:07 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+# A Cost-Aware, Paired Protocol for Auditing Dynamic Tool Synthesis in Agentic Video Question Answering 
+
+## Aseel Mohamed 1∗ Rama AlHamidi 1∗ Mohamed Rayan Barhdadi 1
+
+## Rasul Khanbayov 2 Erchin Serpedin 1 Hasan Kurban 2† 
+
+> 1
+
+Electrical and Computer Engineering, Texas A&M University, TX, United States  
+
+> 2
+
+College of Science and Engineering, Hamad Bin Khalifa University, Doha, Qatar 
+
+## Abstract 
+
+Agentic Video Question Answering (VideoQA) systems in-voke tools during inference, but their tool libraries are fixed, so recurring procedures are rebuilt from primitives on every question. Synthesizing composite tools could re-move this overhead, but whether such expansion helps is hard to assess: final-answer accuracy, the standard met-ric, ignores inference effort, so it cannot reveal how a sys-tem shifts cost. We propose a cost-aware, paired proto-col for auditing tool-augmented video agents. The proto-col pairs two complete systems on the same input for each question and reports their net difference across accuracy and cost jointly. For each question, it sorts the paired outcome into one of six groups defined by joint correct-ness and by the change in visible tool calls, separating accuracy-preserving efficiency gains from harmful regres-sions. Significance is reported with McNemar’s test and paired bootstrap confidence intervals. We instantiate the protocol on Dynamic-SAGE, an agentic VideoQA frame-work that synthesizes, validates, and persistently registers executable composite tools for reuse on unseen questions, and evaluate it against the SAGE baseline on SAGE-Bench. The audit reveals a multi-axis profile that a scalar accuracy comparison would miss: Dynamic-SAGE improves accu-racy by 7.5 points ( p < 0.001 ) and reduces reasoning turns and visible tool calls by roughly 28%, while shifting rather than reducing inference cost, as token usage rises 34% and cost 26%. Gains are largest on visual and open-ended questions and neutral on verbal and multimodal ones, and residual failures concentrate on hard, open-ended ques-tions where the pipeline does the most work. By measur-ing accuracy and cost jointly, the protocol shows where the pipeline-level difference is reliable and where it is not. The code is available at https://github.com/  
+
+> ∗Denotes equal contribution. Preprint. †Corresponding author:
+> hkurban@hbku.edu.qa .
+
+Figure 1. SAGE vs. Dynamic-SAGE. We introduce Dynamic-SAGE , an agentic VideoQA framework that synthesizes reusable composite tools, restructuring how inference cost is spent. 
+
+KurbanIntelligenceLab/Dynamic-SAGE .
+
+## 1. Introduction 
+
+Video Question Answering (VideoQA) tests whether a model can locate and reason over the question-relevant ev-idence in a video [8, 19, 20]. A core challenge is that the evidence needed to answer a question is often sparse and question-dependent [9, 19]. A short clip, a spoken phrase, a visible object, or a brief event may determine the correct answer, while most of the video may be irrelevant. Pro-cessing videos uniformly is therefore inefficient, especially for long-form content, yet aggressive sampling can miss the evidence required for accurate reasoning [19]. An effective 1
+
+> arXiv:2607.01469v2 [cs.CV] 3 Jul 2026
+
+VideoQA system must decide which parts of the video are relevant, which modality to inspect, and which reasoning operations are needed to answer the question. Early VideoQA systems committed to these decisions up front, encoding sampled frames with a vision-language model and answering in a single pass [10, 11, 21]. This leverages the broad visual and linguistic knowledge of mod-ern multimodal models, but places the entire burden on one static video representation. When the relevant evidence is brief or appears far from the sampled frames, uniform or heuristic sampling can omit information needed to an-swer [10, 19]. To recover selectivity, recent modular VideoQA methods decompose answering into intermediate stages [2, 14]. A composite tool could instead expose that recurring sequence as a single reusable action, amortizing repeated planning and tool-selection overhead while preserving the same un-derlying primitive capabilities. More recent agentic VideoQA systems push this further, letting an LLM or multimodal controller iteratively invoke tools during inference [4, 7, 15]. SAGE, for example, in-troduces an any-horizon video reasoning agent that answers simple questions directly and escalates to multi-turn reason-ing for more complex long-video questions [7]. The set of available tools is still specified before inference and remains fixed during evaluation. This distinction is central to our work: existing agentic VideoQA systems are dynamic in 
+
+how they use tools, but static in what tools are available. Motivated by this gap, we propose Dynamic-SAGE , a framework that equips an agentic VideoQA system with a dynamically expandable tool library. Starting from a held-out set of VideoQA questions and an existing primi-tive tool set, an offline pipeline identifies recurring tool-use trajectories and compiles them into executable composite tools: a signature agent proposes candidate tool interfaces, an implementation agent composes existing primitive op-erations into executable functions, and a verification agent removes duplicate, malformed, or unsafe candidates before the rest are registered. Dynamic-SAGE thus extends agen-tic VideoQA from dynamically selecting among predefined tools to dynamically expanding the reusable action space itself. Figure 1 illustrates the key difference between Static-SAGE and Dynamic-SAGE, highlighting how synthesized composite tools restructure inference cost. Final-answer accuracy, the standard VideoQA metric, re-ports only whether the system is correct, not how much in-ference effort the answer cost. It therefore cannot reveal whether enlarging the action space saves effort, shifts it, or trades accuracy for efficiency. To study this question rather than assume it, we pair Dynamic-SAGE against its static baseline on the same questions and audit the two systems jointly across accuracy and cost. The audit shows that the change is not a single number: Dynamic-SAGE improves accuracy and reduces reasoning turns and visible tool calls, yet shifts cost toward per-call token consumption rather than reducing every axis. This is the multi-axis profile a scalar accuracy comparison would miss, and motivating the protocol is as central to our contribution as the system it evaluates. The main contributions of this paper are summarized as follows: • A cost-aware, paired evaluation protocol. Our primary contribution is a protocol for auditing tool-augmented video agents that pairs two complete systems on every question and reports their net difference across accuracy and cost jointly, rather than collapsing performance to a single accuracy number. It sorts each paired outcome into one of six groups defined jointly by correctness and by the change in visible tool calls, and reports significance with McNemar’s test and bootstrap confidence intervals. This separates accuracy-preserving efficiency gains from harmful regressions and provides a reusable practice for studying tool synthesis rather than a single comparison. • Dynamic-SAGE, a testbed for tool synthesis. We build an agentic VideoQA framework that synthesizes, val-idates, and persistently registers executable composite tools for reuse on unseen questions. An offline pipeline of signature, implementation, and verification agents pro-poses candidate tool interfaces, composes them from ex-isting primitives, and rejects invalid, duplicate, unsafe, or non-compositional candidates before registration. The system adds no new models, retrieval sources, or primi-tive capabilities. • A multi-axis audit of a synthesized-tool pipeline on SAGE-Bench. Applying the protocol to Dynamic-SAGE against the SAGE baseline, we find that the redesigned pipeline improves overall accuracy by 7.5 points ( p < 
+
+0.001 ) and reduces reasoning turns and visible tool calls by roughly 28%, while increasing token usage by 34% and monetary cost by 26%, a multi-axis profile that a scalar accuracy comparison would miss. We localize the effect with the protocol: gains are largest and significant on visual and open-ended questions, while verbal and multimodal questions are neutral, and the residual fail-ures concentrate on hard, open-ended questions where the pipeline does the most work. 
+
+## 2. Related Works 
+
+2.1. Video Question Answering 
+
+Video Question Answering (VideoQA) has evolved from answering questions about short clips toward evaluating temporal reasoning, causal action understanding, long-context comprehension, and multimodal evidence ground-ing [8, 12, 19, 20]. Early benchmarks such as TVQA and NExT-QA require models to reason over video events, di-2alogue, object interactions, and temporal relations [8, 20]. Recent benchmarks such as EgoSchema, LongVideoBench, SAGE-Bench, and MINERVA challenge long-form under-standing, multi-step reasoning, and failure analysis [7, 12, 16, 19]. 
+
+2.2. End-to-end MLLMs 
+
+Multimodal large language models extend image-language modeling to video by processing sampled frames or com-pressed visual representations together with text, leverag-ing pretrained visual encoders and large language mod-els [10, 11, 21]. However, extending these models to long videos introduces a difficult efficiency trade-off. Processing more frames increases visual-token and computation costs, while sparse or uniform sampling can omit short answer-bearing moments [10, 19]. 
+
+2.3. Agentic Systems 
+
+To address sparse and question-dependent evidence, recent work has explored modular and agentic VideoQA systems. Modular methods such as MoReVQA and ProViQ decom-pose answering or generate programs over a predefined API of visual modules [2, 14], making intermediate reasoning more explicit but specifying their modules before inference. Agentic systems extend this idea by allowing an LLM or multimodal controller to iteratively invoke tools during in-ference [4, 7, 15]. However, existing VideoQA agents re-main dynamic only in tool selection and sequencing; the tool library itself is fixed. A related line of work lets models create their own callable procedures rather than only selecting from a fixed set. Visual-programming methods such as VisProg and ViperGPT compose vision modules into executable pro-grams per question, generating Python that calls a prede-fined module API [5, 17]. These approaches generate pro-cedures per query : the composed program is discarded af-ter the question is answered and must be regenerated for the next one. VADAR moves toward reusable creation, us-ing collaborative LLM agents to generate a Pythonic API for image-based 3D spatial reasoning [13], but targets static images rather than video. Dynamic-SAGE differs from this literature in three ways. First, its synthesized tools are persistent : they are built once, offline, and registered in the agent’s action space for reuse across unseen questions, rather than regen-erated per query. Second, they are composed only from a video agent’s own primitives, so they add no new exter-nal capability. Third, they are checked offline before use and evaluated under a cost-aware protocol. VideoQA also introduces temporal and multimodal requirements absent from image-based program synthesis, including event lo-calization, frame extraction, speech transcription, and long-context evidence selection. Dynamic-SAGE addresses this gap by extending SAGE with a dynamic synthesis layer that generates, validates, and persistently registers compos-ite tools for reuse on unseen VideoQA questions. 
+
+## 3. Methods 
+
+Dynamic-SAGE is a dynamic tool-synthesis extension of SAGE that combines the original agentic VideoQA infer-ence pipeline with an offline multi-agent tool-generation module. Unlike prior VideoQA agents that dynamically select among fixed tools, Dynamic-SAGE dynamically ex-pands the reusable action space itself while preserving the same underlying primitive capabilities. 
+
+3.1. Overview 
+
+We formulate the task in three layers: standard VideoQA, agentic VideoQA, and dynamic tool synthesis. Let a VideoQA dataset be denoted as 
+
+D = {(Vi, q i, a i)}Ni=1 , (1) where Vi is a video, qi is a natural-language question, and ai
+
+is the ground-truth answer. Some questions include a can-didate answer set Ci = {ci, 1, . . . , c i,K i }, while open-ended questions use Ci = ∅. The standard VideoQA objective is to produce a prediction ˆai = M (Vi, q i, Ci) that matches ai.In agentic VideoQA, the answer is produced through a sequence of reasoning turns and tool calls rather than a sin-gle forward pass: given a tool library T and a reasoning orchestrator O, the agent predicts ˆai = O(Vi, q i, Ci; T ),where O may execute a multi-step tool-use trajectory be-fore producing the final answer. Each tool call receives ar-guments constructed from the question, video context, and previous observations, and returns an intermediate observa-tion used to guide subsequent reasoning. The dynamic tool-synthesis problem is to construct an expanded tool library before evaluation. Let Ts denote the original Static-SAGE ( GPT-4o orchestrator) tool library and let Dh ⊂ D be a held-out synthesis set excluded from evaluation. Dynamic-SAGE learns no new model weights; instead, it applies a synthesis procedure S to generate a set of composite tools: 
+
+Td = S(Dh, Ts). (2) We compare the static and dynamic systems as complete pipelines that share a single, multimodal orchestrator. Each pipeline produces a prediction on the same input: 
+
+ˆasi = O(Vi, q i, Ci; Ts),
+
+ˆadi = O(Vi, q i, Ci; Ts ∪ T d). (3) The two systems differ only in their action space ( Ts versus 
+
+Ts ∪T d). Figure 2 provides an overview of Dynamic-SAGE. 3Figure 2. Overview of Dynamic-SAGE. Dynamic-SAGE comprises three stages: (1) offline dynamic tool synthesis, (2) Context VLM, and (3) Iterative Reasoner. The offline synthesis stage takes held-out queries Dh (excluded from evaluation) and the static tool set Ts as input. The Signature Agent proposes tool signatures, which the Implementation Agent turns into function bodies by composing static tools. The Verification Agent then validates each implementation for safety and contract compliance, returning failures to the Implementation Agent for retry; surviving tools are fingerprinted and deduplicated to form the dynamic tool library Td. Stages 2 and 3 reuse SAGE’s orchestration loop but operate over the augmented library: the Context VLM receives the dynamic and static tools, video metadata (M), up to 64 sampled frames (F), and the query (q) to build video context and decide, based on the query’s reasoning horizon, whether to answer directly or invoke iterative tool use. When the Iterative Reasoner is invoked, context and media from previous steps are injected; tools return observations as evidence, and only the orchestrator commits the final answer. Table 1. Static-SAGE tool library Ts. Dynamic-SAGE composes these primitives without introducing new tools. 
+
+Tool Primitive operation 
+
+web search Retrieve web evidence from query 
+
+parse website Parse content from webpage 
+
+transcribe speech Transcribe video speech 
+
+ground event Identify event timestamps 
+
+extract video parts Extract frames or clips 
+
+analyze Multimodal reasoning over media 
+
+3.2. Dynamic-SAGE 
+
+Dynamic-SAGE consists of two stages: (1) offline tool syn-thesis and (2) inference-time reasoning. Before evaluation, given the held-out synthesis set Dh and the Static-SAGE tool library Ts, a multi-agent synthesis module proposes, implements, and verifies candidate composite tools, produc-ing the dynamic library Td.During inference, the SAGE orchestrator receives the ex-panded library Ts ∪ T d. For each unseen evaluation ques-tion, it follows the same multi-turn reasoning process as the static baseline, but may now invoke either primitive tools or synthesized composite tools. A composite tool appears to the orchestrator as a single action, while internally exe-cuting a fixed composition of primitive operations. Thus, Dynamic-SAGE does not introduce new external models, retrieval sources, or primitive capabilities. Recurring multi-step procedures can be exposed as reusable high-level ac-tions instead of being reconstructed from primitive tools at every inference run. 
+
+3.3. Static and Dynamic Tool Libraries 
+
+Let the Static-SAGE tool library be denoted by Ts, as sum-marized in Table 1. This library contains the primitive tools available to the original SAGE agent, including web search, website parsing, speech transcription, event ground-ing, video-part extraction, and multimodal analysis. Static-SAGE performs adaptive inference by selecting and se-quencing tools from Ts, but the tool inventory itself remains fixed. Dynamic-SAGE augments Ts with a synthesized library 
+
+Td = {g1, g 2, . . . , g K }, (4) where each gk is a persistent composite tool constructed only from primitives in Ts.Dynamic-SAGE uses a three-agent synthesis procedure, consisting of signature, implementation, and verification agents, inspired by VADAR [13]. In contrast to VADAR’s dynamic API for 3D spatial reasoning, Dynamic-SAGE 4synthesizes composite tools over the SAGE VideoQA tool library and registers them in the agent’s reusable action space for unseen questions. A composite tool has the same external form as a primi-tive tool, which includes a name, natural-language descrip-tion, argument schema, return schema, and executable body. The difference is that its body invokes an ordered sequence of existing primitive tools. We represent this internal com-position as 
+
+ρ(gk) = ( tk, 1, t k, 2, . . . , t k,d k ), tk,j ∈ T s, (5) where dk is the depth of gk, defined as the num-ber of primitive operations it encapsulates. For ex-ample, a depth-2 composite tool can express a re-curring speech-based pattern such as ground event 
+
+→ transcribe speech , while a deeper compos-ite tool can express a visual-temporal pattern such as ground event → extract video parts →
+
+analyze .The terminal operation of a composite tool is constrained by an evidence-return contract: when a composition ends in analyze , that step is invoked in observe mode, so it returns intermediate observations rather than a committed answer. Some composites omit a terminal analyze step entirely and return raw evidence directly. In both cases, an-swer commitment is reserved for the orchestrator, and no synthesized tool emits a final verdict to avoid false confi-dent answer verdicts. Finally, synthesized tools are persistent . Once accepted by the verification stage, they are added to the tool registry before evaluation and remain available for all unseen ques-tions. This distinguishes Dynamic-SAGE from per-query program generation. Dynamic-SAGE does not create a tem-porary program for each input; it expands the reusable tool library itself. 
+
+3.4. Offline Dynamic Tool Synthesis 
+
+Dynamic-SAGE constructs Td before evaluation using an offline synthesis pipeline. The synthesis stage takes as input the Static-SAGE tool descriptions and a held-out set Dh of 150 stratified questions, excluded from final evaluation and processed in batches of 15. Algorithm 1 in Appendix S1 summarizes the offline syn-thesis procedure, completed before evaluation. The orches-trator never writes Python at inference time, and the eval-uation runtime differs from Static-SAGE only by the addi-tional registered tools in Td.The pipeline runs three agents. Signature Agent. Given a batch of held-out questions and descriptions of the Static-SAGE tools, it identifies recurring multi-step reasoning pat-terns and proposes between two and five candidate tool in-terfaces, each specifying a name, a short description, the required inputs, the expected output, and the intended se-quence of primitive operations. Implementation Agent. 
+
+For each signature it generates the tool body, a thin Python function calling existing SAGE tools, constrained to use the existing signatures exactly: it cannot add external depen-dencies, call new models, or perform new I/O, and must return a dictionary, handle empty upstream outputs, and route evidence correctly. These constraints keep synthe-sized tools within the same primitive capability set as Static-SAGE while changing the granularity at which those capa-bilities are exposed. Verification Agent. Each implemen-tation is checked by a local verifier combining static checks with a stubbed dry-run that exercises the candidate without invoking the real tools; it enforces the evidence-return con-tract , rejecting tools that take a question-type argument or invoke reasoning in answer (verdict-committing) mode. On failure, the error is returned to the Implementation Agent for up to three retries; candidates that still fail are rejected. Af-ter validation, Dynamic-SAGE removes pure wrappers and duplicate compositions, and registers the accepted tools be-fore evaluation. Prompt-assembly and the full check list are given in Appendix S1. 
+
+3.5. Inference with the Expanded Action Space 
+
+At inference time, Dynamic-SAGE uses the same reason-ing loop as Static-SAGE . Given an evaluation sample 
+
+(Vi, q i, Ci), the orchestrator either emits a final answer or selects a tool to obtain additional evidence. The only differ-ence is the action space: Static-SAGE selects from Ts, while Dynamic-SAGE selects from the expanded library Ts ∪ T d.When Dynamic-SAGE selects a primitive tool t ∈ T s,execution is identical to Static-SAGE . When it selects a synthesized tool gk ∈ T d, the orchestrator issues a single tool call, while gk internally executes its primitive compo-sition ρ(gk) and returns its output in the same format as a primitive tool. This is the efficiency mechanism: a re-curring pattern such as transcription followed by reasoning takes multiple visible orchestration steps in the static setting but a single higher-level action in the dynamic setting. 
+
+3.6. Cost-Aware Evaluation Metric 
+
+Final-answer accuracy alone does not capture the goal of Dynamic-SAGE. A dynamically expanded tool library is useful only if correctness and inference effort are weighed together. We therefore evaluate Static-SAGE and Dynamic-SAGE using paired correctness and paired tool-use reduc-tion on the same question-video pair. For each sample i and method m ∈ { s, d }, where s
+
+denotes Static-SAGE and d denotes Dynamic-SAGE, we define correctness ymi = I[J(ˆ ami , a i)] , where J(ˆ ami , a i)
+
+is a Boolean semantic judge that returns True when the predicted response ˆami is semantically equivalent to the ground-truth answer ai, and False otherwise. In our 5experiments, J is implemented using a GPT-4o judge that compares predicted responses against ground-truth an-swers for semantic equivalence rather than exact string match. Since correctness is determined automatically us-ing an LLM judge, we evaluate the robustness of this proto-col by repeating the complete evaluation using judges from three different model families (Claude [1], Qwen [18], and DeepSeek [3]); all evaluators consistently rank Dynamic-SAGE above Static-SAGE by 5–8%, indicating that the re-ported improvements are not an artifact of using GPT-4o 
+
+as the evaluator (Table S5, Appendix S6). We use visible tool calls as the primary formal efficiency variable because they are directly recoverable from the in-ference trace, independent of API latency and provider pric-ing, and central to the objective of composite-tool synthesis. For each sample i and method m ∈ { s, d }, let nmi, tool denote the number of visible tool calls made by method m before producing its final response. We define the paired tool-call reduction as 
+
+∆ei = nsi, tool − ndi, tool . (6) Thus, ∆ei > 0 indicates that Dynamic-SAGE uses fewer visible tool calls than Static-SAGE on sample i, ∆ei < 0
+
+that it uses more, and ∆ei = 0 is tool-neutral. We report reasoning turns, latency, token usage, and monetary cost separately as descriptive efficiency measures. Each paired comparison is summarized by the tuple zi = ( ysi , y di , ∆ei),recording whether Dynamic-SAGE preserved, improved, or lost correctness and whether the outcome used fewer visible tool calls. We define six outcome groups by joint correctness 
+
+(ysi , y di ) and the sign of ∆ei:
+
+Gsafe : (1 , 1) , ∆ei>0; Gneutral : (1 , 1) , ∆ei=0; 
+
+Goverhead : (1 , 1) , ∆ei<0; Gideal : (0 , 1) , ∆ei>0; 
+
+Gcostly -gain : (0 , 1) , ∆ei≤0; Gloss : (1 , 0) .
+
+(7) 
+
+Gloss treats any correctness regression as a failure regard-less of tool-call count, since we consider accuracy loss un-acceptable irrespective of efficiency gains. Within Gloss , we report the distribution of ∆ei separately to distinguish cases where Dynamic-SAGE loses correctness while also increas-ing tool use from cases where it loses correctness while re-ducing it. Both-failure cases, where ysi = 0 and ydi = 0 , are re-ported separately and are not treated as positive outcomes even when Dynamic-SAGE uses fewer tool calls. 
+
+## 4. Experimental Setup 
+
+4.1. Benchmark and Protocol 
+
+We instantiate the cost-aware paired protocol of Section 3.6 on the SAGE-Bench benchmark, comparing Static-SAGE against Dynamic-SAGE under a fixed orchestrator and primitive tool set so that the comparison isolates the ef-fect of the expanded action space. We evaluate on SAGE-Bench [7], a diverse VideoQA benchmark spanning seven duration buckets (0–60 s to 2400+ s), three modalities (vi-sual, verbal, both), four difficulty levels (easy, medium, hard, very hard), and two question formats (MCQ and open-ended). Following Algorithm 1 (Appendix S1), we stratify-sample H=150 questions as the synthesis holdout Dh,which is excluded from evaluation. SAGE-Bench contains 
+
+1,744 questions ; after setting aside the 150-question syn-thesis holdout and removing 290 samples (about 17% of the remainder) whose source videos were unavailable when we collected the data, the evaluation split contains 1,304 sam-ples (595 MCQ, 709 open-ended). Because the videos are hosted externally, this exact split may be hard to reproduce later. We report in Appendix S8 how the dropped and re-tained samples compare in duration, difficulty, and modality so that the attrition is not silently selective; we also report the distribution of the held-out set. We report overall accu-racy, per-type accuracy (MCQ/open-ended), per-modality accuracy (visual/verbal/both), average visible and primitive tool calls per sample ( ni, tool ), average reasoning turns, wall-clock latency per sample, and GPT-4o tool cost per sample. 
+
+4.2. Models and Implementation Details 
+
+Orchestrator. Both Static-SAGE and Dynamic-SAGE use 
+
+GPT-4o [6] as the reasoning orchestrator, with the same multi-turn reasoning loop, the same iterative reasoning bud-get, and the iterative reasoner supplied with sampled frames from the most recent tool result. The two pipelines dif-fer only in their action space ( Ts for Static-SAGE versus 
+
+Ts ∪ T d for Dynamic-SAGE), so the comparison isolates the effect of the expanded action space. Decoding temper-atures and budgets are listed in Appendix S1, and we re-port an ablation that disables the reasoner’s direct vision there. Static-SAGE ( GPT-4o orchestrator). The base-line system uses the six primitive tools in Ts shown in Ta-ble 1, providing a strong agentic baseline with multi-turn reasoning over video evidence. Dynamic-SAGE. The of-fline synthesis stage also uses GPT-4o , with agent-specific sampling temperatures (listed in Appendix S1) that en-courage diverse candidate interfaces while keeping gen-erated code stable. The verification stage is determinis-tic and rejects invalid, duplicate, unsafe, pure-wrapper, or non-compositional candidates before registration. After verification and deduplication, the synthesis stage yields 
+
+|T d| = 5 ≤ K composite tools from 48 name-unique signature proposals, which are added to the tool registry as Td; the full filtering breakdown is in Table S1 (Ap-pendix S2). During evaluation, Dynamic-SAGE selects from Ts ∪ T d. RL-trained orchestrator. We also eval-uate the RL-trained SAGE-MM-Qwen3-VL-8B-SFT RL 
+
+orchestrator as an additional reference. Because this policy 6Table 2. Dynamic tool library Td synthesized from 150 held-out queries. Tool names are shortened aliases for readability. Compo-sitions list abbreviated primitive calls in execution order; comma-separated calls occur at the same stage, and arrows denote data dependencies. dk denotes composition depth (number of primi-tive operations).                       
+
+> Tool Composition dk
+> visual verbal extract, transcribe 2
+> visual detail extract →reason 2
+> topic speech ground →transcribe 2
+> mcq evidence extract, transcribe →reason 3
+> event detail ground →extract →reason 3
+
+was trained on the original SAGE tool library, it produced 0% synthesized-tool adoption in our dynamic-tool setting. We therefore exclude it from the main paired comparison and use GPT-4o for both conditions. 
+
+4.3. Synthesized Tool Library 
+
+The offline synthesis pipeline (Algorithm 1, Appendix S1) processes the 150 holdout queries and synthesizes K=5 
+
+composite tools, summarised in Table 2. Depths range 2-3 primitive operations; no tool is a pure wrapper ( dk=1 ), and no two tools share a fingerprint. The synthesis completed offline before evaluation. 
+
+## 5. Results 
+
+5.1. Headline Accuracy 
+
+Across the 1,304-sample evaluation split, Dynamic-SAGE improves overall accuracy by +7 .52 points ( p < 0.001 )over Static-SAGE ( GPT-4o orchestrator), from 60 .43% to 
+
+67 .94% . We first establish this headline result and its statis-tical reliability across subgroups; the following subsections then decompose how the gain is achieved and at what cost. Table 3 reports subgroup accuracy together with paired statistical tests. Since Static-SAGE and Dynamic-SAGE are evaluated on the same question–video pairs, we test sig-nificance with McNemar’s test on the Dynamic-only and Static-only correct counts, and compute confidence inter-vals by bootstrap resampling over paired samples. The improvement is broad rather than uniform. By question type, gains are significant for both MCQ ( +5 .55 )and open-ended ( +9 .17 ) questions, with the larger gain on open-ended. By modality, the visual subset shows the largest and most significant gain ( +9 .29 , p < 0.001 ), whereas the verbal ( +5 .26 ,p = 0 .454 ) and mixed-modality (+2 .14 , p = 0 .497 ) subsets show smaller differences whose confidence intervals cross zero, the verbal subset is also small ( N = 76 ). The expanded action space, therefore, helps most when evidence can be captured by visual tool-use patterns and is statistically neutral when answers de-pend on speech or combined evidence. 
+
+Table 3. Subgroup accuracy and paired reliability analysis on SAGE-Bench. ∆ Acc. is Dynamic-SAGE minus Static-SAGE (GPT-4o orchestrator). Confidence intervals are computed by paired bootstrap resampling. McNemar’s test uses paired disagree-ment counts between Dynamic-only correct and Static-only cor-rect samples.                                                                                           
+
+> Subset NStatic Dyn. ∆95% CI p
+> Overall 1304 60.43 67.94 +7 .52 [+5 .1,+10 .1] <0.001
+> MCQ 595 73.78 79.33 +5 .55 [+2 .4,+8 .7] <0.001
+> Open-ended 709 49.22 58.39 +9 .17 [+5 .5,+12 .8] <0.001
+> Visual 947 56.39 65.68 +9 .29 [+6 .3,+12 .3] <0.001
+> Verbal 76 71.05 76.32 +5 .26 [−5.3,+15 .8] 0.454
+> Both 281 71.17 73.31 +2 .14 [−2.9,+7 .1] 0.497
+> Easy 391 76.47 81.59 +5 .12 [+1 .0,+9 .2] 0.021
+> Medium 327 62.08 67.89 +5 .81 [+1 .2,+10 .4] 0.018
+> Hard 535 49.53 59.07 +9 .53 [+5 .2,+13 .8] <0.001
+> Very hard 51 41.18 56.86 +15 .69 [+3 .9,+27 .5] 0.039
+> Short videos 692 67.49 72.69 +5 .20 [+2 .2,+8 .2] 0.001
+> Long videos 612 52.45 62.58 +10 .13 [+6 .1,+14 .2] <0.001
+
+The gains also increase with question difficulty. Ac-curacy improves significantly on easy ( +5 .12 ), medium (+5 .81 ), and hard ( +9 .53 ) questions, with the largest re-liable gain on the hard subset. The very-hard subset shows the largest point estimate ( +15 .69 , p = 0 .039 ), but this should be read cautiously: it contains only 51 samples and its confidence interval is wide ( [+3 .92 , +27 .45] ). Gains are likewise significant for both short ( +5 .20 ) and long (+10 .13 ) videos, and are larger on long videos, consistent with the larger tool-call savings observed below. The gains concentrate on visual, open-ended, hard, and long-video questions, while verbal and mixed-modality questions show no significant pipeline-level difference. 
+
+5.2. Efficiency Decomposition 
+
+Having established the accuracy gain, we turn to its cost. Table 4 reports per-question resource usage for Static-SAGE and Dynamic-SAGE. The tool-call row corresponds directly to the paired efficiency variable from Section 3.6. Since ∆ei is defined as the number of visible tool calls saved by Dynamic-SAGE on sample i, the aggregate sav-ing is obtained by averaging ∆ei over the evaluation set. Dynamic-SAGE obtains a positive mean saving, ∆e =0.88 , indicating that the dynamically expanded tool library reduces visible tool use by nearly one call per question on average. Reductions appear consistently in reasoning turns, visi-ble tool calls, and latency, while token usage and cost in-crease. The visible-call saving, however, does not by itself show what happens to total effort: a composite tool counts as one visible call but executes several primitive operations internally. We therefore also report the number of primi-tive operations per sample, expanding each invoked com-7Table 4. Efficiency comparison on SAGE-Bench. All metrics are reported per sample. Absolute change reports Dynamic-SAGE mi-nus Static-SAGE in the original metric units, while relative change reports this difference normalized by the Static-SAGE value. Neg-ative values indicate reduced resource usage. Visible tool calls                                 
+
+> counts orchestrator-issued calls, where a composite tool counts once; primitive ops counts each underlying primitive invocation, expanding every composite according to its depth.
+> Metric Static Dynamic Abs. ∆Rel. ∆
+> Reasoning turns 3.34 2.40 −0.94 −28%
+> Visible calls 3.16 2.28 −0.88 −28%
+> Primitive ops 3.16 4.14 +0 .98 +31%
+> Latency 57.76s 54.56s −3.20 s−6%
+> Tokens 47.8k 64.0k +16 .1k+34%
+> Cost $0.127 $0.161 +$0 .034 +26%
+
+posite according to its depth. Once composite tools are ex-panded, the total number of primitive operations per sam-ple increases by 31%. Dynamic-SAGE therefore shifts cost from orchestration steps toward per-call token consumption rather than reducing every axis of cost: the multi-axis pro-file the protocol is designed to surface. 
+
+5.3. Paired Decomposition 
+
+We decompose the paired outcomes from Section 3.6 into six correctness–efficiency categories (full counts in Ta-ble S7, Appendix S7), separating cases where Dynamic-SAGE preserves correctness while reducing tool use from cases where compressed reasoning changes the final an-swer. The decomposition exactly explains the overall accuracy change: Dynamic-SAGE gains correctness on 
+
+|Gideal | + |Gcostly-gain | = 188 samples and loses correctness on |Gloss | = 90 , so the net change is ∆Acc = (188 −
+
+90) /N = +7 .52% . The improvement is real but not uni-form: some questions regress even as the aggregate rises. 
+
+5.4. Where Dynamic Tools Help and Hurt 
+
+Breaking the paired outcome groups down by question cat-egory (Table S4 in Appendix S5) localizes these effects. By modality, loss is lowest on visual questions (6.3%) and highest on mixed-modality ones (8.5%), with verbal in be-tween (7.9%, N =76 ), so Dynamic-SAGE is most reliable on visual and least on combined evidence. By format, open-ended questions show both higher ideal (12.7% vs. 7.9%) and higher loss rates (8.3% vs. 5.2%) than MCQ, giving the expanded action space more room to both help and hurt when answers are unconstrained by choices. Long videos also show larger mean savings than short ones ( ∆e = 1 .24 
+
+vs. 0.56 ), where the static agent would otherwise need longer trajectories. Loss rates stay non-negligible across all categories, so while every category improves on net (Sec-tion 5.1), the expansion adds per-category reliability risk rather than a uniformly safe improvement. 
+
+5.5. Compression Failures and Tool Adoption 
+
+Among the 90 Gloss samples, most losses (53%) occur when Dynamic-SAGE uses more tool calls than Static-SAGE, so the dominant failure mode is not premature over-compression but extended trajectories that still reach the wrong answer. Consistent with this, 51.1% of losses fall on hard-to-very-hard questions and 65.6% are open-ended, lo-cating the bottleneck where the expanded action space does the most work rather than in any single tool. Adoption is also non-uniform: two depth-2 tools account for most invo-cations, while deeper tools are rarely used and less accurate when they are, so dynamic synthesis mainly helps on fre-quent, shallow patterns. Full loss-subset and per-tool statis-tics are in Appendices S3 and S4 (Tables S2 and S3). 
+
+## 6. Conclusion 
+
+Inspired by VADAR [13], we introduce Dynamic-SAGE, an offline dynamic tool synthesis extension of the SAGE long-video reasoning framework [7]. Dynamic-SAGE generates reusable composite tools from held-out SAGE-Bench ques-tions and adds them to the agent’s tool library before eval-uation. In addition, we formalize cost evaluation, allowing us to study the accuracy and cost jointly for dynamic com-posite tool synthesis in VideoQA. The protocol lets us answer the question the gap posed, whether enlarging the action space helps once inference ef-fort is accounted for, rather than assume it. Dynamic-SAGE improves overall accuracy by 7.52 points ( p < 0.001 ) on the 1,304-question SAGE-Bench evaluation split while re-ducing reasoning turns and visible tool calls by around 28%, but increasing token usage and monetary cost by 34% and 26%, respectively. The answer is therefore conditional: the expanded action space helps, but it shifts cost from orches-tration steps toward per-call token consumption rather than reducing every axis, a multi-axis profile a scalar accuracy comparison would miss. Our paired comparison and analysis of pure losses lo-calizes the failures to difficult, open-ended questions that demand more effort from the pipeline. This indicates that synthesized tools’ routing and reliability on these difficult questions remain the main bottlenecks. Future work should focus on improving the quality, distinctiveness, and routing of synthesized tools rather than expanding the action space alone. Further evaluation on other benchmarks and orchestra-tors, including fine-tuned RL-trained ones, is needed, and we expect that sampling queries from a more uniform do-main distribution will yield more compositional and novel tools. 8References 
+
+[1] Anthropic. Introducing Claude Opus 4.6. https://www. anthropic.com/news/claude-opus-4-6 , 2026. [2] Rohan Choudhury, Koichiro Niinuma, Kris M Kitani, and L´ aszl´ o A Jeni. Video question answering with procedural programs. In European Conference on Computer Vision ,pages 315–332. Springer, 2024. [3] DeepSeek-AI. Deepseek-v4: Towards highly efficient million-token context intelligence, 2026. [4] Yue Fan, Xiaojian Ma, Rujie Wu, Yuntao Du, Jiaqi Li, Zhi Gao, and Qing Li. Videoagent: A memory-augmented mul-timodal agent for video understanding. In European Confer-ence on Computer Vision , pages 75–92. Springer, 2024. [5] Tanmay Gupta and Aniruddha Kembhavi. Visual program-ming: Compositional visual reasoning without training. In 
+
+Proceedings of the IEEE/CVF Conference on Computer Vi-sion and Pattern Recognition , pages 14953–14962, 2023. [6] Aaron Hurst, Adam Lerer, Adam P Goucher, Adam Perel-man, Aditya Ramesh, Aidan Clark, AJ Ostrow, Akila Weli-hinda, Alan Hayes, Alec Radford, et al. Gpt-4o system card. 
+
+arXiv preprint arXiv:2410.21276 , 2024. [7] Jitesh Jain, Jialuo Li, Zixian Ma, Jieyu Zhang, Chris Dongjoo Kim, Sangho Lee, Rohun Tripathi, Tanmay Gupta, Christopher Clark, Humphrey Shi, et al. Sage: Train-ing smart any-horizon agents for long video reasoning with reinforcement learning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,pages 41478–41488, 2026. [8] Jie Lei, Licheng Yu, Mohit Bansal, and Tamara Berg. Tvqa: Localized, compositional video question answering. In Pro-ceedings of the 2018 Conference on Empirical Methods in Natural Language Processing , pages 1369–1379, 2018. [9] Jie Lei, Licheng Yu, Tamara Berg, and Mohit Bansal. Tvqa+: Spatio-temporal grounding for video question answering. In 
+
+Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 8211–8225, 2020. [10] Yanwei Li, Chengyao Wang, and Jiaya Jia. Llama-vid: An image is worth 2 tokens in large language models. In 
+
+European Conference on Computer Vision , pages 323–340. Springer, 2024. [11] Bin Lin, Yang Ye, Bin Zhu, Jiaxi Cui, Munan Ning, Peng Jin, and Li Yuan. Video-llava: Learning united visual repre-sentation by alignment before projection. In Proceedings of the 2024 Conference on Empirical Methods in Natural Lan-guage Processing , pages 5971–5984, 2024. [12] Karttikeya Mangalam, Raiymbek Akshulakov, and Jitendra Malik. Egoschema: A diagnostic benchmark for very long-form video language understanding. Advances in Neural In-formation Processing Systems , 36:46212–46244, 2023. [13] Damiano Marsili, Rohun Agrawal, Yisong Yue, and Geor-gia Gkioxari. Visual agentic ai for spatial reasoning with a dynamic api. In Proceedings of the Computer Vision and Pattern Recognition Conference , pages 19446–19455, 2025. [14] Juhong Min, Shyamal Buch, Arsha Nagrani, Minsu Cho, and Cordelia Schmid. Morevqa: Exploring modular reason-ing models for video question answering. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 13235–13245, 2024. [15] Tony Montes and Fernando Lozano. Viqagent: Zero-shot video question answering via agent with open-vocabulary grounding validation. arXiv preprint arXiv:2505.15928 ,2025. [16] Arsha Nagrani, Sachit Menon, Ahmet Iscen, Shyamal Buch, Ramin Mehran, Nilpa Jha, Anja Hauth, Yukun Zhu, Carl Vondrick, Mikhail Sirotenko, et al. Minerva: Evaluating complex video reasoning. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 23968– 23978, 2025. [17] D´ ıdac Sur´ ıs, Sachit Menon, and Carl Vondrick. Vipergpt: Visual inference via python execution for reasoning. In 
+
+Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 11888–11898, 2023. [18] Qwen Team. Qwen3 technical report, 2025. [19] Haoning Wu, Dongxu Li, Bei Chen, and Junnan Li. Longvideobench: A benchmark for long-context interleaved video-language understanding. Advances in Neural Informa-tion Processing Systems , 37:28828–28857, 2024. [20] Junbin Xiao, Xindi Shang, Angela Yao, and Tat-Seng Chua. Next-qa: Next phase of question-answering to explaining temporal actions. In Proceedings of the IEEE/CVF Con-ference on Computer Vision and Pattern Recognition , pages 9777–9786, 2021. [21] Hang Zhang, Xin Li, and Lidong Bing. Video-llama: An instruction-tuned audio-visual language model for video un-derstanding. In Proceedings of the 2023 Conference on Em-pirical Methods in Natural Language Processing: System Demonstrations , pages 543–553, 2023. 
+
+9S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 
+
+This appendix is organized around the same multi-axis argument as the main paper: synthesized tools shift, rather than uniformly reduce, inference cost, and the resulting ac-curacy gains are reliable on visual, open-ended, and long-video questions but neutral on verbal and combined evi-dence. Section S1 provides the implementation settings and full offline synthesis procedure. Section S2 reports synthesis filtering, Section S3 analyzes correctness regres-sions, Section S4 examines synthesized-tool adoption, and Section S5 reports paired outcomes by question category. Section S6 evaluates robustness across multiple automatic judges, while Section S7 gives the full paired correctness– efficiency decomposition. Section S8 documents the eval-uation subset, unavailable samples, and synthesis holdout. Section S9 isolates the effect of the iterative reasoner’s in-line vision feed from the effect of expanding the tool li-brary. Finally, Section S10 presents qualitative examples from Gsafe , Gideal , Gloss , and the both-failure category. Ap-pendix section, table, figure, and equation numbers are pre-fixed with “S”. 
+
+## S1. Implementation Details 
+
+This section lists the decoding and budget settings refer-enced in the main paper. Both Static SAGE ( GPT-4o or-chestrator) and Dynamic-SAGE run the GPT-4o orches-trator at temperature 0.0 with an iterative reasoning bud-get of N = 10 steps. Offline tool synthesis processes the held-out synthesis set Dh in batches of 15 and uses agent-specific sampling temperatures: the Signature Agent uses temperature 0.7 to encourage diverse candidate tool inter-faces, while the Implementation Agent uses temperature 0.3
+
+to produce more stable executable code. The verification stage is deterministic. 
+
+Implementation Agent prompt assembly. The Imple-mentation Agent is given the existing tool sources, the pro-posed docstring, the proposed signature, and the sibling sig-natures from the same generation batch. Its output is re-stricted to imports and an implementation body; the genera-tor then assembles the complete function using the signature and docstring produced by the Signature Agent. 
+
+Verification Agent checks. The verifier first performs static checks, including Python syntax validation, banned-import rejection, docstring validation, and broad exception-handler rejection. It then imports the candidate in a con-trolled test module and dry-runs the function using place-holder inputs. To avoid expensive or side-effecting calls during verification, the original SAGE tools are replaced with strict stubs that mimic their runtime signatures and re-turn shapes. This catches common implementation errors 
+
+Algorithm 1 Offline Dynamic Tool Synthesis                                                                                                
+
+> Input: benchmark questions D, static tool library Ts, holdout size H, batch size B, max tools K(non-binding)
+> Output: dynamic tool library Td
+> 1: Dh←STRATIFIED SAMPLE (D, H )
+> 2: Exclude Dhfrom final evaluation
+> 3: P ← [ ]
+> 4: Td← ∅
+> 5: F ← ∅
+> 6: for each batch Qb⊂ D hof size Bdo
+> 7: Pb←SIGNATURE AGENT (Qb,Ts,P)
+> 8: Add name-unique proposals from Pbto P
+> 9: end for
+> 10: for each proposal p∈ P do
+> 11: if |T d|=Kthen
+> 12: break
+> 13: end if
+> 14: c←IMPLEMENT WITH RETRIES (p, Ts,P)
+> 15: if cfails verification then ▷syntax, safety, and evidence-return contract
+> 16: Mark pas rejected
+> 17: continue
+> 18: end if
+> 19: f←FINGERPRINT (c)
+> 20: if PURE WRAPPER (f)then
+> 21: Mark pas skipped wrapper
+> 22: else if f∈ F then
+> 23: Mark pas skipped duplicate
+> 24: else
+> 25: Td← T d∪ { c}
+> 26: F ← F ∪ { f}
+> 27: end if
+> 28: end for
+> 29: Register Tdwith the agent’s tool library
+> 30: return Td
+
+such as invalid keyword arguments, non-dictionary returns, missing docstrings, and passing transcript strings as media paths. The verifier also enforces the evidence-return con-tract , rejecting tools that take a question-type argument or that invoke reasoning in answer (verdict-committing) mode. 
+
+Offline synthesis procedure. Algorithm 1 gives the full offline synthesis procedure referenced in the main paper. It is completed before evaluation; the orchestrator never writes Python at inference time, and the evaluation runtime differs from Static SAGE only by the additional registered tools in Td.
+
+## S2. Offline Synthesis Filtering 
+
+Table S1 details the offline synthesis filtering pipeline sum-marized in the main paper. Starting from 48 name-unique signature proposals, strict-stub validation rejects 6 candi-dates. Of those passing validation, 37 are skipped as dupli-cate composition fingerprints and none as pure wrappers, 10 Table S1. Dynamic-SAGE offline synthesis filtering. Each candidate is implemented and validated first; the composition-fingerprint duplicate check and the pure-wrapper check are applied only to candidates that pass validation. From 48 name-unique signature proposals, the pipeline registers five accepted compos-ite tools. 
+
+Stage Count 
+
+Raw signature proposals 48 Rejected by strict-stub validation 6Skipped as duplicate composition fingerprint 37 Skipped as pure wrapper 0Accepted into library 5                
+
+> Table S2. Analysis of Gloss cases, where Static SAGE ( GPT-4o
+> orchestrator) is correct but Dynamic-SAGE is incorrect. Percent-ages are computed over the 90 loss cases.
+> Loss subset Count % of Gloss Mean ∆e
+> Dynamic-SAGE uses fewer calls 22 24.4 2.50 Dynamic-SAGE uses same calls 20 22.2 0.00 Dynamic-SAGE uses more calls 48 53.3 -3.46
+
+leaving 5 accepted composite tools registered in the dy-namic library Td.
+
+## S3. Compression Failure Analysis 
+
+Table S2 analyzes the 90 samples where Dynamic-SAGE loses correctness relative to Static SAGE ( GPT-4o orches-trator). Most losses (53%) occur when Dynamic-SAGE uses more tool calls than Static SAGE, so the dominant failure mode is not over-compression that terminates evi-dence gathering prematurely, but extended trajectories that still arrive at the wrong answer. Consistent with this, 51.1% of losses concentrate in hard-to-very-hard questions and 65.6% are open-ended, indicating that the reliability bot-tleneck lies where the expanded action space does the most work rather than in any single tool failing. 
+
+## S4. Synthesized Tool Adoption 
+
+Table S3 reports how the synthesized tools are used during Dynamic-SAGE inference. The two most-used tools ac-count for most synthesized-tool invocations, while deeper or more specialized tools are rarely selected. This indicates that dynamic synthesis primarily helps when it captures frequent, shallow reasoning patterns, such as the extract-transcribe composition. The adoption pattern shows that Dynamic-SAGE does not use synthesized tools uniformly. Most synthesized-tool calls come from a depth-2 tool, while the deeper event extraction and reasoning tool is invoked far less of-ten and is associated with lower accuracy when used. The safe/ideal/loss counts also show that synthesized-tool use is mixed: the same tools that produce safe efficiency gains and dynamic-only correct answers can also appear in loss cases. 
+
+## S5. Paired Outcomes by Category 
+
+Table S4 breaks the paired safe, ideal, and loss rates down by modality, answer format, and video length, complement-ing the subgroup-accuracy analysis in the main paper. The conclusions drawn from it, that Dynamic-SAGE is most re-liable on visual evidence and least on combined evidence, that open-ended questions have more room to both help and hurt, and that long videos yield larger tool-call savings, are summarized in the main paper. 
+
+## S6. Judge Robustness 
+
+To confirm that the reported accuracy gains are not an ar-tifact of using GPT-4o as the automatic judge, we repeat the complete evaluation with judges from three additional model families. As shown in Table S5, the absolute accu-racy estimates vary across judges, but all evaluators rank Dynamic-SAGE above Static-SAGE by 5–8 points. 
+
+## S7. Paired Correctness–Efficiency Decomposi-tion 
+
+Table S7 gives the full counts for the six correctness– efficiency outcome groups summarized in the main paper, together with the both-failure cases. The net accuracy change reported in the main paper follows directly from these counts. 
+
+## S8. Dropped and Retained Samples 
+
+Due to restricted access to some YouTube videos, not all SAGE-bench videos were accessible for evaluation. SAGE-Bench contains 1,744 questions. We reserve 150 questions for offline tool synthesis. Of the remaining 1,594 questions, 290 have unavailable source videos, leaving 1,304 evalua-tion questions. Table S6 displays the statistics of our evalu-ation subset compared to the full SAGE-bench. The subset does not skew towards any specific category compared to the original dataset. In addition, we report the distribution of the queries held out for composite tool synthesis in Table S8. 
+
+## S9. Vision Ablation 
+
+In Section 4.2 of the main paper, we mention that the or-chestrator in our experiments uses the same structure as the original SAGE orchestrator, but differs in allowing media from the most recent tool call to be passed to the itera-tive reasoner (vision enabled). In Table S9, we report the main accuracy and cost results comparison with respect to the original SAGE orchestrator capabilities. We note that 11 Table S3. Synthesized-tool adoption and paired outcomes on SAGE-Bench. Invocation percentage is computed over accepted synthesized-tool calls, excluding invalid blocked requests. Accuracy and outcome counts are computed over samples in which the tool is invoked at least once. 
+
+Tool Composition Depth Inv. (%) Acc. Safe/Ideal/Loss 
+
+visual verbal extract, transcribe 2 775 (41.5) 57.1 58 / 70 / 58 
+
+mcq evidence extract, transcribe → reason 3 374 (20.0) 75.3 53 / 35 / 27 
+
+visual detail extract → reason 2 345 (18.5) 56.4 43 / 26 / 33 
+
+topic speech ground → transcribe 2 193 (10.3) 66.9 27 / 19 / 23 
+
+event detail ground → extract → reason 3 180 (9.6) 43.9 18 / 21 / 17 
+
+Table S4. Paired outcomes by question category. The safe, ideal, and loss rates from the paired decomposition, broken down by modality, answer format, and video length. Safe : both methods correct but Dynamic-SAGE uses fewer visible tool calls; Ideal :Dynamic-SAGE fixes a Static-SAGE error while also using fewer calls; Loss : Static-SAGE correct but Dynamic-SAGE incorrect, regardless of efficiency. ∆e is the mean per-sample tool-call sav-ing. This view localizes where the expanded action space helps and where it introduces reliability risk. 
+
+Category N Safe (%) Ideal (%) Loss (%) Mean ∆e
+
+Visual 947 11.3 10.8 6.3 0.79 Verbal 76 11.8 13.2 7.9 0.45 Both 281 23.1 8.9 8.5 1.30 MCQ 595 13.9 7.9 5.2 0.49 Open-ended 709 13.8 12.7 8.3 1.20 Short videos 692 16.2 7.2 5.8 0.56 Long videos 612 11.3 14.2 8.2 1.24 
+
+Table S5. Evaluation robustness across different automatic judges. 
+
+GPT-4o is the primary evaluator used throughout the paper. Re-sults from additional model families show that Dynamic-SAGE consistently outperforms Static-SAGE despite variation in abso-lute accuracy estimates. Bold marks the higher accuracy per row; each ∆ is shown as a greenbadge to indicate a gain. 
+
+Judge Static-SAGE Dynamic SAGE ∆
+
+GPT-4o (primary) 60.43 67.94 +7.52 
+
+Claude Opus 4.6 61.73 66.95 +5.22 
+
+Qwen3-235B 55.98 61.81 +5.83 
+
+DeepSeek V4 Pro 52.61 59.20 +6.59 
+
+the original SAGE pipeline (denoted Static SAGE No Vi-sion) achieves higher accuracy than Static-SAGE with vi-sion enabled, but at the cost of higher token usage due to an increase of tool calls to reach a final answer. Overall, Dynamic-SAGE outperforms both cases while maintaining a middle ground on inference cost. 
+
+## S10. Qualitative Examples 
+
+In this section, we showcase examples from four groups, 
+
+GSafe , GIdeal , Gloss , and both-failure. Figure S1, showcases the ideal case of Dynamic-SAGE answering correctly com-
+
+Table S6. Distribution comparison between full SAGE-Bench and the evaluation subset used in this work. The subset excludes sam-ples whose source videos were unavailable on YouTube at evalua-tion time.                                                              
+
+> Subset SAGE-bench N SAGE-bench % Eval N Eval % ∆(% pts)
+> MCQ 793 45.47 595 45.63 +0.16 Open-ended 951 54.53 709 54.37 -0.16 Visual 1266 72.60 947 72.62 +0.02 Verbal 105 6.02 76 5.83 -0.19 Both 373 21.38 281 21.55 +0.17 Easy 518 29.70 391 29.98 +0.28 Medium 438 25.11 327 25.07 -0.04 Hard 715 41.00 535 41.03 +0.03 Very hard 73 4.19 51 3.91 -0.28 Short videos 920 52.75 692 53.07 +0.32 Long videos 824 47.25 612 46.93 -0.32
+
+Table S7. Paired correctness–efficiency decomposition on SAGE-Bench. Each sample compares Static-SAGE and Dynamic-SAGE on the same question–video pair. Here, cheaper means ∆ei >
+
+0, i.e., Dynamic-SAGE uses fewer visible tool calls than Static-SAGE ( GPT-4o orchestrator).                         
+
+> Group Interpretation Count %
+> Gsafe correct in both; Dynamic-SAGE is cheaper 181 13.9
+> Gneutral correct in both; same tool-call count 302 23.2
+> Goverhead correct in both; Dynamic-SAGE uses more calls 215 16.5
+> Gideal Dynamic-SAGE fixes the answer and is cheaper 137 10.5
+> Gcostly-gain Dynamic-SAGE fixes the answer but is not cheaper 51 3.9
+> Gloss Static-SAGE is correct; Dynamic-SAGE is incorrect 90 6.9 Both wrong neither method answers correctly 328 25.2
+
+pared to Static-SAGE while reducing inference costs. Simi-larly, Figure S2 demonstrates a case where both systems an-swer correctly, but with Dynamic-SAGE reducing latency, reasoning turns, API requests, tokens, and monetary costs. Figures S3 and S4 showcase failure cases of Dynamic-SAGE; in these cases, committing an answer early leads to an incorrect answer. Dynamic-SAGE is not always superior to Static-SAGE; as discussed in Section 5.5, most of the loss cases cluster around difficult, open-ended questions that re-quire surgical reasoning rather than compressed paths. 12 Figure S1. Static vs Dynamic SAGE: case of Gideal . Dynamic immediately commits the correct answer while Static spends the full reasoning budget and commits an incorrect answer. 
+
+Figure S2. Static vs Dynamic SAGE: case of Gsafe . Both pipelines commit the correct answer. Dynamic-SAGE reduces inference cost significantly by reducing latency by 68.6%, reasoning by 55.6%, and tokens by 91.3% 
+
+13 Figure S3. Static vs Dynamic SAGE: case of Gloss . In this case, Dynamic fails quickly while Static eventually succeeds after much more reasoning. 
+
+Figure S4. Static vs Dynamic SAGE: case of Both-failure. An example of graceful failure. Dynamic fails quickly while Static exhausts all of its reasoning budget before also failing. 
+
+14 Table S8. Comparison of the evaluation split and the 150-sample holdout set used for tool synthesis. 
+
+Subset Evaluation (%) Holdout (%) ∆ (%) 
+
+MCQ 45.6 48.0 +2.4 Open-ended 54.4 52.0 −2.4
+
+Visual 72.6 69.3 −3.3
+
+Verbal 5.8 9.3 +3.5 Both 21.5 21.3 −0.2
+
+Easy 30.0 38.7 +8.7 Medium 25.1 27.3 +2.2 Hard 41.0 31.3 −9.7
+
+Very hard 3.9 2.7 −1.2
+
+Short videos 53.1 54.7 +1.6 Long videos 46.9 45.3 −1.6
+
+Table S9. Ablation of the iterative reasoner’s inline vision feed on SAGE-Bench. The two static configurations differ only in whether the reasoner receives decoded frames from the most recent tool call. Dynamic SAGE with vision is included as a reference. For accuracy and turn rows, bold marks the best value and underline the second best. For the Tokens and Cost rows, the lowest (best) and highest (worst) values are badged green and red, respec-tively. 
+
+Static SAGE Dynamic SAGE Metric No Vision With Vision With Vision 
+
+> OVERALL
+
+Accuracy (%) 63.6 60.4 67.9 
+
+Tokens 86 .9M 62 .4M 83.4M Cost $229 $166 $210 Turns per question 4.11 3.34 2.40 
+
+> MODALITY
+
+Both 68.0 71.2 73.3 
+
+Verbal 73.7 71.1 76.3 
+
+Visual 61.5 56.4 65.7 
+
+> QUESTION TYPE
+
+Multiple choice 74.6 73.8 79.3 
+
+Open-ended 54.3 49.2 58.4 
+
+> DIFFICULTY
+
+Easy 78.0 76.5 81.6 
+
+Medium 67.3 62.1 67.9 
+
+Hard 52.5 49.5 59.1 
+
+Very hard 45.1 41.2 56.9 
+
+15
