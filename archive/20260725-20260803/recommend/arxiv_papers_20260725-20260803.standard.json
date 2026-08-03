@@ -1,0 +1,983 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-03T11:48:46.019444+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 23,
+    "deep_cap": 7,
+    "deep_selected": 11,
+    "quick_candidates": 20,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2607.28312v1",
+      "source": "arxiv",
+      "title": "ObjectStream: Latent Objects as Memory Anchors for Streaming Video Understanding",
+      "abstract": "Streaming video understanding requires models to continuously retain useful visual evidence before future questions are known. Existing approaches primarily manage the growing visual context according to token importance, temporal redundancy, or segment-level relevance, but rarely organize evidence around objects that persist and evolve over time. Thus, in this paper, we introduce ObjectStream, a training-free framework that treats latent objects as memory anchors for streaming video understanding. ObjectStream induces spatially coherent latent objects directly from frozen Video-LLM representations, links them across frames into persistent anchors, and maintains their histories under a bounded memory budget, without requiring external object detectors or segmentation models. Built on these anchors, ObjectStream preserves three complementary forms of evidence: persistent object histories, transient object changes, and recent visual context. This design enables existing Video Large Language Models (Video-LLMs) to reason over object identities, interactions, and state changes while leaving the underlying model unchanged. Extensive experiments on online streaming and offline long-video benchmarks demonstrate both effectiveness and efficiency. In online streaming evaluation, ObjectStream improves Qwen2.5-VL-7B by 10.0 points on OVO-Bench Real-Time Visual Perception, while reducing peak GPU mem-ory and TTFT by approximately 50%. On offline long-video benchmarks, it surpasses the full-token baseline while discarding 82.5% of visual tokens. These results highlight latent objects as a practical and effective organizing principle for compact streaming video memory.",
+      "authors": [
+        "Mingkang Dong",
+        "Muxin Pu",
+        "Jie Li",
+        "Bohan Guo",
+        "Songruo Chen",
+        "Bin Ren",
+        "Xu Zheng",
+        "Chen Zhao",
+        "Tianwen Qian",
+        "Mohamed Elhoseiny",
+        "Yuqian Fu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-30T14:47:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.28312v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Streaming video understanding framework using latent object memory anchors with frozen Video-LLM",
+      "llm_evidence_cn": "基于潜在对象记忆锚点的流式视频理解框架，利用冻结视频大模型",
+      "llm_evidence": "基于潜在对象记忆锚点的流式视频理解框架，利用冻结视频大模型",
+      "canonical_evidence": "基于潜在对象记忆锚点的流式视频理解框架，利用冻结视频大模型",
+      "llm_tldr_en": "Introduces ObjectStream, a training-free framework for streaming video understanding that induces latent objects from frozen Video-LLM representations, links them across frames as persistent anchors, and maintains bounded-memory histories without external supervision.",
+      "llm_tldr_cn": "流式视频理解要求模型在未知未来问题时持续保留有效视觉证据，已有方法多按令牌重要性、时间冗余或片段相关性管理上下文，很少围绕随事件持续演化的对象组织证据。ObjectStream提出无需训练的框架，从冻结的Video-LLM表征中归纳空间连贯的潜在对象，跨帧链接成持久锚点，并在有限记忆预算下维护其历史。该方法在不依赖外部目标检测的条件下，以对象为中心组织记忆，提升流式视频理解的持续性和可解释性。",
+      "llm_tldr": "流式视频理解要求模型在未知未来问题时持续保留有效视觉证据，已有方法多按令牌重要性、时间冗余或片段相关性管理上下文，很少围绕随事件持续演化的对象组织证据。ObjectStream提出无需训练的框架，从冻结的Video-LLM表征中归纳空间连贯的潜在对象，跨帧链接成持久锚点，并在有限记忆预算下维护其历史。该方法在不依赖外部目标检测的条件下，以对象为中心组织记忆，提升流式视频理解的持续性和可解释性。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "streaming video understanding techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.23951v1",
+      "source": "arxiv",
+      "title": "TimePLE: Rethinking Temporal Representation for Video Temporal Grounding",
+      "abstract": "Video temporal grounding (VTG) aims to localize the continuous video interval described by a natural-language query. However, current VLM-based methods typically produce this interval indirectly through two endpoint outputs, represented either as discrete timestamp tokens or continuous boundary coordinates. These formulations differ in how endpoints are encoded, but not in what is predicted: the event interval remains a derived object, while interval validity, duration, and interval-level similarity are handled only implicitly. We propose TimePLE, which reformulates VTG from endpoint prediction to interval-native grounding by predicting a single joint distribution over valid temporal intervals. TimePLE maps each interval to a point in a canonical position-duration square, where every support point corresponds to a valid span and neighboring points represent geometrically similar intervals. Given a video and query, the VLM generates a single latent <|TIMESPAN|> token whose hidden state is decoded into a joint interval distribution, refined through duration-aware coordinate correction, and converted into continuous boundaries. The same interval representation is used to encode input temporal anchors, aligning video-side temporal evidence with output-side span prediction. To reliably align the latent span representation with complete event intervals, we curate 90K-scale grounded samples and human-verify 3K-scale benchmark annotations. Experiments across four VTG benchmarks show that TimePLE consistently outperforms endpoint prediction baselines, achieving an average mIoU of 58.9, with clear gains on short-duration and medium-duration events.",
+      "authors": [
+        "Yuhui Zeng",
+        "Xinyu Mao",
+        "Xiaokun Liu",
+        "Xin Tao",
+        "Jinfa Huang",
+        "Jiayi Ji",
+        "Xiawu Zheng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-27T02:56:43+00:00",
+      "link": "https://arxiv.org/pdf/2607.23951v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reformulates video temporal grounding to interval-native prediction",
+      "llm_evidence_cn": "将视频时序定位重新建模为区间本地的联合分布预测",
+      "llm_evidence": "将视频时序定位重新建模为区间本地的联合分布预测",
+      "canonical_evidence": "将视频时序定位重新建模为区间本地的联合分布预测",
+      "llm_tldr_en": "TimePLE reformulates video temporal grounding from endpoint prediction to interval-native grounding, predicting a joint distribution over valid temporal intervals, which improves interval validity, duration, and similarity handling.",
+      "llm_tldr_cn": "视频时序定位旨在用自然语言查询定位视频中的连续时间区间，但现有基于VLM的方法通常通过两个端点（离散时间戳或连续坐标）间接预测区间，忽略了区间的有效性、时长和区间级相似度。TimePLE将任务重构为区间本地定位，直接预测有效时间区间上的联合分布，并将每个区间映射到规范位置空间中的一个点。实验表明这种区间原生表示能更好地处理区间层面的语义，提升时序定位性能，为视频语言模型中的时间接地提供了新思路。",
+      "llm_tldr": "视频时序定位旨在用自然语言查询定位视频中的连续时间区间，但现有基于VLM的方法通常通过两个端点（离散时间戳或连续坐标）间接预测区间，忽略了区间的有效性、时长和区间级相似度。TimePLE将任务重构为区间本地定位，直接预测有效时间区间上的联合分布，并将每个区间映射到规范位置空间中的一个点。实验表明这种区间原生表示能更好地处理区间层面的语义，提升时序定位性能，为视频语言模型中的时间接地提供了新思路。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24098v1",
+      "source": "arxiv",
+      "title": "ReflexTrack: A Feedback-Driven Agent for Training-Free Referring Video Object Segmentation",
+      "abstract": "Referring video object segmentation (RVOS) requires segmenting a target specified by natural language throughout a video. Recent agentic approaches combine multimodal large language models with promptable segmentation models to perform RVOS without task-specific training. However, most pipelines rely on one-shot spatial grounding followed by mask propagation, leaving both the initial prompts and temporal predictions largely unverified. We introduce ReflexTrack, a training-free, feedback-driven agent that closes this loop at both spatial and temporal levels. Mask-guided Spatial Refinement evaluates the mask induced by the current keyframe prompt and iteratively updates the bounding box together with positive and negative points, yielding a more reliable initialization. Video-level Mask Reflection assesses the complete mask sequence, localizes unreliable intervals, selects complementary repair keyframes, and generates candidate predictions through mask-guided re-propagation. Only candidates that provide a verified improvement are used to update the affected intervals, preserving reliable predictions elsewhere. All components remain frozen during inference. ReflexTrack achieves an overall $\\mathcal{Q}$ score of $69.7$ on Ref-VPS and a $\\mathcal{J}\\&\\mathcal{F}$ score of $67.2$ on ReasonVOS. These results demonstrate that prediction-level feedback substantially improves the reliability of training-free RVOS.",
+      "authors": [
+        "Yuanjia Li",
+        "Tianyang Xu",
+        "Tao Zhou",
+        "Zhangyong Tang",
+        "Xiao-Jun Wu",
+        "Josef Kittler"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-27T07:39:20+00:00",
+      "link": "https://arxiv.org/pdf/2607.24098v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "feedback-driven agent for referring video object segmentation with spatial-temporal grounding",
+      "llm_evidence_cn": "反馈驱动的智能体进行指代视频目标分割，实现时空定位",
+      "llm_evidence": "反馈驱动的智能体进行指代视频目标分割，实现时空定位",
+      "canonical_evidence": "反馈驱动的智能体进行指代视频目标分割，实现时空定位",
+      "llm_tldr_en": "ReflexTrack is a training-free feedback-driven agent for referring video object segmentation that iteratively refines spatial prompts and temporal mask propagation, closing the loop for reliable RVOS.",
+      "llm_tldr_cn": "指代视频目标分割（RVOS）通常依赖一次性空间定位加掩码传播，初始提示和时间预测难以验证。ReflexTrack提出一种无需训练、反馈驱动的智能体，在空间和时间两个层面闭环：基于掩码引导的空间细化迭代更新边界框与正负点，并进一步校验时间预测。实验表明该方法能有效提升指代分割的准确性和鲁棒性，为视频语言模型与分割模型的智能体结合提供了新思路。",
+      "llm_tldr": "指代视频目标分割（RVOS）通常依赖一次性空间定位加掩码传播，初始提示和时间预测难以验证。ReflexTrack提出一种无需训练、反馈驱动的智能体，在空间和时间两个层面闭环：基于掩码引导的空间细化迭代更新边界框与正负点，并进一步校验时间预测。实验表明该方法能有效提升指代分割的准确性和鲁棒性，为视频语言模型与分割模型的智能体结合提供了新思路。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24570v1",
+      "source": "arxiv",
+      "title": "The Visual Bottleneck: Sparse-Frame Adaptation of MLLMs for Joint Spatial-Temporal Video Grounding",
+      "abstract": "Large-scale video platforms process millions of uploads hourly, requiring moderation systems that can localize when and where policy violations occur within each video. Processing every frame is infeasible at scale, so systems are constrained to sparse inputs of 8 to 16 frames per video. Yet state-of-the-art multimodal large language models (MLLMs) are pretrained on dense sequences of hundreds of frames, creating a fundamental mismatch between training and deployment conditions. This mismatch causes severe performance collapse: the Qwen3-VL 8B model drops from 56.0% to 22.3% temporal mIoU when frames are reduced to 16, a 60.2% relative degradation.   We present a systematic empirical study of training strategies to close this gap for spatial-temporal video grounding. Our results suggest that visual feature extraction is the dominant bottleneck under sparse-frame inputs. Adapting only the final three ViT layers, 4% of total parameters, achieves 68.8% temporal mIoU and surpasses a zero-shot 8B model using dense inputs by 12.8 points. Language model fine-tuning, by contrast, offers negligible or negative returns. A boundary-aware sampling strategy, Hybrid16, further improves temporal mIoU by 26 points over uniform sampling when temporal boundaries are available. We conclude that for sparse-frame video grounding, training strategy dominates model scale: a fine-tuned 2B model consistently outperforms a zero-shot 8B model, with or without dense frame access.",
+      "authors": [
+        "Jiameng Zhang",
+        "Srikanth Madikeri"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-27T15:36:21+00:00",
+      "link": "https://arxiv.org/pdf/2607.24570v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "sparse-frame adaptation of MLLMs for joint spatial-temporal video grounding",
+      "llm_evidence_cn": "面向稀疏帧的MLLM适配，实现视频联合时空定位",
+      "llm_evidence": "面向稀疏帧的MLLM适配，实现视频联合时空定位",
+      "canonical_evidence": "面向稀疏帧的MLLM适配，实现视频联合时空定位",
+      "llm_tldr_en": "This paper studies sparse-frame adaptation strategies for multimodal large language models to jointly localize where and when in videos, showing performance collapse under sparse input and proposing training strategies to close the gap.",
+      "llm_tldr_cn": "视频审核等应用受限于计算资源只能处理每视频8-16帧，而MLLM预训练于数百帧密集序列，导致性能严重下降（如16帧时time mIoU从56%跌至22%）。论文系统研究稀疏帧条件下的训练适应策略，旨在恢复模型的时空定位能力。结果表明适配策略能有效缓解帧稀疏带来的性能崩溃，为高效视频理解与时空定位提供实用指导。",
+      "llm_tldr": "视频审核等应用受限于计算资源只能处理每视频8-16帧，而MLLM预训练于数百帧密集序列，导致性能严重下降（如16帧时time mIoU从56%跌至22%）。论文系统研究稀疏帧条件下的训练适应策略，旨在恢复模型的时空定位能力。结果表明适配策略能有效缓解帧稀疏带来的性能崩溃，为高效视频理解与时空定位提供实用指导。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24582v1",
+      "source": "arxiv",
+      "title": "CADER: Confidence-Aware Dynamic Evidence Reasoning for Long-Video Understanding",
+      "abstract": "Long-video understanding increasingly relies on large vision-language models and tool-augmented reasoning, but most systems apply the same inference procedure to every example regardless of difficulty. This uniform strategy invokes unnecessary tool-assisted processing for easy questions and provides limited control when difficult questions require fine-grained temporal evidence. We propose CADER (Confidence-Aware Dynamic Evidence Reasoning), a training-free framework for adaptive and reliable long-video reasoning. CADER first performs global reasoning over uniformly sampled frames and estimates answer confidence with a logit-margin signal, allowing high-confidence examples to exit early. For uncertain examples, CADER activates a second-stage tool-augmented loop that combines temporal cropping, lightweight semantic verification, and Relevance-Guided Resampling to progressively localize question-relevant evidence. This design treats tool use as a sample-level decision: a single global pass handles easy cases, while additional reasoning is reserved for examples where uncertainty suggests that more evidence is needed. Experiments on multiple VideoQA benchmarks show that CADER improves long-video reasoning while bypassing Stage~2 for high-confidence samples. Moreover, when applied to a backbone trained only with tool-free chain-of-thought supervision, CADER achieves competitive performance against specialized tool-augmented frameworks, suggesting a practical inference-time route for adaptive long-video reasoning.",
+      "authors": [
+        "Jinlong Yang",
+        "Wenhao Zhang",
+        "Kuanwei Lin",
+        "Sijie Cheng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-27T15:49:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.24582v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Long-video understanding with confidence-aware adaptive reasoning and tool augmentation",
+      "llm_evidence_cn": "基于置信感知自适应推理与工具增强的长视频理解",
+      "llm_evidence": "基于置信感知自适应推理与工具增强的长视频理解",
+      "canonical_evidence": "基于置信感知自适应推理与工具增强的长视频理解",
+      "llm_tldr_en": "CADER adaptively allocates reasoning effort for long-video QA, using a confidence signal from global reasoning to exit easy cases early and trigger second-stage temporal evidence reasoning for difficult ones, without training.",
+      "llm_tldr_cn": "长视频问答系统往往对每个问题使用相同的推理流程，简单问题浪费计算资源，困难问题又缺少细粒度时序证据。CADER提出无训练的自适应推理框架：先对均匀采样帧进行全局推理并用logit margin估计置信度，高置信度样本提前退出，低置信度样本再激活第二阶段的时序证据推理。实验表明该方法在长视频问答上兼顾了准确率和推理效率，尤其适用于工具增强的复杂推理。",
+      "llm_tldr": "长视频问答系统往往对每个问题使用相同的推理流程，简单问题浪费计算资源，困难问题又缺少细粒度时序证据。CADER提出无训练的自适应推理框架：先对均匀采样帧进行全局推理并用logit margin估计置信度，高置信度样本提前退出，低置信度样本再激活第二阶段的时序证据推理。实验表明该方法在长视频问答上兼顾了准确率和推理效率，尤其适用于工具增强的复杂推理。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "deep learning methods for video understanding",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24904v1",
+      "source": "arxiv",
+      "title": "Mage-VL: An Efficient Codec-Native Streaming Multimodal Foundation Model",
+      "abstract": "Standard vision-language models (VLMs) suffer from Moravec's paradox: they excel at complex offline visual reasoning but struggle with simple streaming perception tasks and process them inefficiently. We present Mage-VL, an efficient codec-native streaming foundation model for real-time multimodal understanding and interaction. At its core, our custom tokenizer, Mage-ViT, replaces uniform frame sampling by selectively encoding dynamic, entropy-rich regions using motion vectors and residual energy across sparse anchor (I) and predicted (P) frames. Operating at a 16 x 16 patch level, this reduces visual token consumption by over 75% while preserving spatiotemporal context. Trained from scratch on approximately 560M unlabeled images and 100M unlabeled video frames, Mage-ViT matches or outperforms flagship encoders trained on billions of image-text pairs. We establish AI4AI data pipelines encompassing prompt-code joint optimization for multimodal captioning and AI-driven performance diagnosis to guide training recipes. Furthermore, through a bio-inspired dual-system architecture - a lightweight System 1 event gate and a causal System 2 decoder - Mage-VL enables proactive streaming perception. Extensive evaluations show that Mage-VL-4B matches Qwen3-VL-4B on static tasks while achieving strong gains in video understanding and 2D/3D spatial reasoning, with up to a 3.5x wall-clock inference speedup, and comprehensively surpasses the 15B Phi-4-reasoning-vision baseline. Beyond model artifacts, we deliver seven key empirical findings covering pre-training data efficiency, variable-resolution scaling, codec system acceleration, VideoQA SFT redundancy, motion-spatial synergy, AI4AI data pipelines, and Zero-Vision SFT for multimodal RL.",
+      "authors": [
+        "Senqiao Yang",
+        "Kaichen Zhang",
+        "Zhaoyang Jia",
+        "Jinghao Guo",
+        "Yifei Shen",
+        "Xinjie Zhang",
+        "Xiaoyi Zhang",
+        "Haoqing Wang",
+        "Xiao Li",
+        "Peng Zhang",
+        "Xiang An",
+        "Yin Xie",
+        "Zhening Liu",
+        "Xun Guo",
+        "Jiahao Li",
+        "Shicheng Zheng",
+        "Jinglu Wang",
+        "Zongyu Guo",
+        "Wenxuan Xie",
+        "Zihan Zheng",
+        "Yuxuan Luo",
+        "Bin Li",
+        "Yan Lu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-07-27T17:59:53+00:00",
+      "link": "https://arxiv.org/pdf/2607.24904v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "codec-native streaming multimodal foundation model for real-time multimodal understanding with sparse anchor frame encoding",
+      "llm_evidence_cn": "面向实时多模态理解的codec原生流式基础模型，采用稀疏锚帧编码",
+      "llm_evidence": "面向实时多模态理解的codec原生流式基础模型，采用稀疏锚帧编码",
+      "canonical_evidence": "面向实时多模态理解的codec原生流式基础模型，采用稀疏锚帧编码",
+      "llm_tldr_en": "Mage-VL is an efficient codec-native streaming multimodal foundation model that encodes dynamic entropy-rich regions via motion vectors and residual energy, reducing visual token consumption by 75% while preserving spatiotemporal context for real-time understanding.",
+      "llm_tldr_cn": "现有视觉语言模型擅长离线复杂推理，却在流式感知任务上低效。Mage-VL提出codec原生的流式多模态基础模型，其定制分词器Mage-ViT利用运动向量和残差能量，仅对动态且信息熵高的区域编码，以16x16 patch粒度替代均匀帧采样，视觉令牌开销减少75%以上。该模型从560M图像和100M视频数据上从零训练，支持实时多模态理解与交互，为流式视频理解提供了高效基础模型。",
+      "llm_tldr": "现有视觉语言模型擅长离线复杂推理，却在流式感知任务上低效。Mage-VL提出codec原生的流式多模态基础模型，其定制分词器Mage-ViT利用运动向量和残差能量，仅对动态且信息熵高的区域编码，以16x16 patch粒度替代均匀帧采样，视觉令牌开销减少75%以上。该模型从560M图像和100M视频数据上从零训练，支持实时多模态理解与交互，为流式视频理解提供了高效基础模型。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "streaming video understanding techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.25266v1",
+      "source": "arxiv",
+      "title": "FORGE: Frame Orthogonality in Relevance Geometry for Long-Form Video Understanding",
+      "abstract": "Multimodal large language models (MLLMs) have enabled long-form video understanding at a scale that was not previously possible. However, the density of relevant content decreases sharply as video sequence length increases, and exposing the model to more irrelevant content measurably reduces its accuracy. In this paper, we address the problem of maximizing query-relevant information in a frame subset selected at inference time, without training. FORGE (Frame Orthogonality in Relevance Geometry) is a model-agnostic method that induces a query-conditioned geometry on a pretrained multimodal embedding space, unifying relevance and diversity into a single objective. In this space, frames that cover independent query-relevant directions are far apart, and selecting the subset of maximum information captures diverse query-relevant content within the budget. Experiments on Video-MME and LongVideoBench at budgets of 16, 32, and 64 frames show that FORGE improves the unified keyframe selection score by 11.0-15.3 points over the strongest training-free baseline and up to doubles keyframe recall (0.415 vs. 0.204 at K=64 on Video-MME). The gains extend to question answering, where accuracy improves in every evaluated setting across eight open-source MLLMs spanning 4B to 32B parameters, by up to 8.7 points over uniform sampling and 5.2 points over the strongest baseline. Our findings suggest that aligning the embedding space with the query's high-dimensional structure is a promising direction for inference-time video understanding.",
+      "authors": [
+        "Ghazal Kaviani",
+        "Ghassan AlRegib"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-28T04:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.25266v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Query-relevant frame selection for long-form video understanding",
+      "llm_evidence_cn": "面向长视频理解的查询相关帧选择",
+      "llm_evidence": "面向长视频理解的查询相关帧选择",
+      "canonical_evidence": "面向长视频理解的查询相关帧选择",
+      "llm_tldr_en": "FORGE induces a query-conditioned geometry on a pretrained multimodal embedding space to select diverse and relevant frames for long-form video understanding, improving MLLM accuracy at inference time without training.",
+      "llm_tldr_cn": "长视频理解中，帧数增加使相关内容密度下降，过多无关帧会降低多模态大语言模型的准确率。FORGE提出模型无关的推理时方法，在预训练多模态嵌入空间中构造查询条件几何，将相关性和多样性统一到单一目标，从而选出覆盖独立查询相关方向的帧子集。实验表明它无需训练即可提升长视频问答准确率，可复用于实时视频流理解中的关键帧选择。",
+      "llm_tldr": "长视频理解中，帧数增加使相关内容密度下降，过多无关帧会降低多模态大语言模型的准确率。FORGE提出模型无关的推理时方法，在预训练多模态嵌入空间中构造查询条件几何，将相关性和多样性统一到单一目标，从而选出覆盖独立查询相关方向的帧子集。实验表明它无需训练即可提升长视频问答准确率，可复用于实时视频流理解中的关键帧选择。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.25266v2",
+      "source": "arxiv",
+      "title": "FORGE: Frame Orthogonality in Relevance Geometry for Long-Form Video Understanding",
+      "abstract": "Multimodal large language models (MLLMs) have enabled long-form video understanding at a scale that was not previously possible. However, the density of relevant content decreases sharply as video sequence length increases, and exposing the model to more irrelevant content measurably reduces its accuracy. In this paper, we address the problem of maximizing query-relevant information in a frame subset selected at inference time, without training. FORGE (Frame Orthogonality in Relevance Geometry) is a model-agnostic method that induces a query-conditioned geometry on a pretrained multimodal embedding space, unifying relevance and diversity into a single objective. In this space, frames that cover independent query-relevant directions are far apart, and selecting the subset of maximum information captures diverse query-relevant content within the budget. Experiments on Video-MME and LongVideoBench at budgets of 16, 32, and 64 frames show that FORGE improves the unified keyframe selection score by 11.0-15.3 points over the strongest training-free baseline and up to doubles keyframe recall (0.415 vs. 0.204 at K=64 on Video-MME). The gains extend to question answering, where accuracy improves in every evaluated setting across eight open-source MLLMs spanning 4B to 32B parameters, by up to 8.7 points over uniform sampling and 5.2 points over the strongest baseline. Our findings suggest that aligning the embedding space with the query's high-dimensional structure is a promising direction for inference-time video understanding.",
+      "authors": [
+        "Ghazal Kaviani",
+        "Ghassan AlRegib"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-28T04:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.25266v2",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Deep learning method for long-form video understanding with MLLMs",
+      "llm_evidence_cn": "基于多模态大模型的长视频理解深度学习方法",
+      "llm_evidence": "基于多模态大模型的长视频理解深度学习方法",
+      "canonical_evidence": "基于多模态大模型的长视频理解深度学习方法",
+      "llm_tldr_en": "Long-form video understanding with MLLMs suffers from low relevant-frame density and accuracy drops from irrelevant content. FORGE is a training-free, model-agnostic method that induces a query-conditioned geometry on a pretrained multimodal embedding space, unifying relevance and diversity to select the most informative frame subset at inference, improving video understanding.",
+      "llm_tldr_cn": "长视频理解中，随着序列变长，相关帧密度下降且无关内容会降低多模态大模型精度。为此提出FORGE，一种无需训练的模型无关方法，通过在预训练多模态嵌入空间引入查询条件几何，将相关性与多样性统一为单一目标，用于推理时选择信息量最大的帧子集。实验表明该几何能有效提升查询相关帧的选择质量，改善长视频理解表现。",
+      "llm_tldr": "长视频理解中，随着序列变长，相关帧密度下降且无关内容会降低多模态大模型精度。为此提出FORGE，一种无需训练的模型无关方法，通过在预训练多模态嵌入空间引入查询条件几何，将相关性与多样性统一为单一目标，用于推理时选择信息量最大的帧子集。实验表明该几何能有效提升查询相关帧的选择质量，改善长视频理解表现。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "deep learning methods for video understanding",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.28516v1",
+      "source": "arxiv",
+      "title": "Beyond Frame Selection: Generative Latent Evidence Aggregation for Long-Video Understanding",
+      "abstract": "Long-video understanding commonly compresses videos into a small set of frames or visual tokens for answer generation. Existing compact pipelines focus on retaining relevant visual content as explicit evidence. Yet making evidence available does not ensure that complementary cues across moments are integrated for answering. Our key idea is to organize selected frames into query-relevant cross-frame evidence before generation. We formulate this post-selection stage as a latent evidence interface and instantiate it with GenEvA ($\\textbf{Gen}erative$ $Latent$ $\\textbf{Ev}idence$ $\\textbf{A}ggregation$), a distribution-guided latent evidence aggregation framework. Specifically, GenEvA uses a query-conditioned evidence distribution to focus aggregation on relevant frames, forming compact cross-frame latent evidence from their frame-specific information. Since cross-frame integration is not always needed, the same distribution determines whether to insert this latent complement. Across four benchmarks and two Video-MLLM backbones, GenEvA consistently improves matched-frame baselines. At 8 frames, it raises the four-benchmark LLaVA-Video average by $+5.2$ points and Qwen2.5-VL accuracy on LVBench by $+10.1$ points. These gains require only $0.11\\%$--$0.40\\%$ average video-token overhead; analyses further show task-aware allocation and benefits from Adaptive Evidence Invocation.",
+      "authors": [
+        "Bowen Liu",
+        "Shuning Wang",
+        "Xinpeng Ding",
+        "Zhiheng Wu",
+        "Bodong Du",
+        "Xiaomeng Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-30T16:55:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.28516v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Generative latent evidence aggregation for long-video understanding and question answering",
+      "llm_evidence_cn": "面向长视频理解与问答的生成式潜在证据聚合方法",
+      "llm_evidence": "面向长视频理解与问答的生成式潜在证据聚合方法",
+      "canonical_evidence": "面向长视频理解与问答的生成式潜在证据聚合方法",
+      "llm_tldr_en": "Proposes GenEvA, a distribution-guided latent evidence aggregation framework that organizes selected frames into query-relevant cross-frame evidence before answer generation, improving integration of complementary cues in long-video QA.",
+      "llm_tldr_cn": "长视频理解通常将视频压缩为少量帧或视觉令牌用于答案生成，但仅保留显式证据不能保证跨时刻的互补线索被整合。GenEvA提出将后选择阶段建模为潜在证据接口，利用查询条件的证据分布，将所选帧组织为与查询相关的跨帧证据后再生成答案。该框架能更好地融合多方互补信息，提升长视频问答的准确性和一致性。",
+      "llm_tldr": "长视频理解通常将视频压缩为少量帧或视觉令牌用于答案生成，但仅保留显式证据不能保证跨时刻的互补线索被整合。GenEvA提出将后选择阶段建模为潜在证据接口，利用查询条件的证据分布，将所选帧组织为与查询相关的跨帧证据后再生成答案。该框架能更好地融合多方互补信息，提升长视频问答的准确性和一致性。",
+      "llm_tags": [
+        "query:video-med-qa:composite"
+      ],
+      "matched_query_tag": "query:video-med-qa:composite",
+      "matched_query_text": "Papers central to 视频问答；医学视觉问答, especially work that connects or combines: recent advances in video question answering; medical visual question answering systems; video understanding for question answering tasks; How to build a video question answering model using transformers?; What are the state of the art methods for medical visual question answering?; Datasets and evaluation metrics for video and medical VQA; Challenges in combining video understanding with medical image analysis for VQA.",
+      "matched_requirement_id": "req-composite-video-med-qa",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.28678v1",
+      "source": "arxiv",
+      "title": "ViSAGE: Constructing Self-Correcting Memories for Long-Form Video Understanding",
+      "abstract": "Multimodal agents operating in long-horizon environments must build and continually update multimedia memories to support entity-consistent, temporally grounded reasoning. However, existing agentic memory approaches often discard fine-grained dentity cues under aggressive compression and segment-wise processing. They also rely heavily on vector similarity retrieval, which can surface semantically related yet identity-mismatched evidence, leading to entity confusion, error propagation, and hallucinated answers.   We propose ViSAGE, a multimodal agentic memory framework that constructs self-correcting, entity-centric memories. Specifically, ViSAGE anchors entity identity via cross-modal binding over long temporal ranges. It then applies bidirectional memory refinement to propagate delayed identity evidence, retroactively unifying historical records and improving future reasoning. We also introduce multi-agent cross-verification to assess retrieved evidence under an identity-evidence alignment onstraint, enabling abstention instead of unsupported answers when evidence is missing. Extensive results demonstrate that ViSAGE consistently outperforms the strongest baseline, achieving 5.9% higher accuracy.",
+      "authors": [
+        "Xinkui Zhao",
+        "Enbo Chen",
+        "Yifan Zhang",
+        "Chang Liu",
+        "Guanjie Cheng",
+        "Naibo Wang",
+        "Yueshen Xu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-07-29T10:25:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.28678v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Agentic memory framework for long-form video understanding with self-correcting entity-centric memories",
+      "llm_evidence_cn": "面向长视频理解的多模态智能体记忆框架，构建自纠正的实体中心记忆",
+      "llm_evidence": "面向长视频理解的多模态智能体记忆框架，构建自纠正的实体中心记忆",
+      "canonical_evidence": "面向长视频理解的多模态智能体记忆框架，构建自纠正的实体中心记忆",
+      "llm_tldr_en": "Proposes ViSAGE, a multimodal agentic memory framework that constructs self-correcting, entity-centric memories via cross-modal binding, reducing entity confusion and hallucinated answers in long-form video understanding.",
+      "llm_tldr_cn": "长视频理解中的多模态智能体需要持续更新多媒体记忆以支持实体一致、时间可溯的推理，但现有记忆方法常在压缩和检索中丢失身份线索，导致实体混淆与幻觉。ViSAGE提出跨模态绑定来锚定实体身份，并通过双向过程构建自纠正的实体中心记忆。该方法有效减少了错误传播与幻觉答案，提升了长时间跨度下视频理解的可靠性与一致性。",
+      "llm_tldr": "长视频理解中的多模态智能体需要持续更新多媒体记忆以支持实体一致、时间可溯的推理，但现有记忆方法常在压缩和检索中丢失身份线索，导致实体混淆与幻觉。ViSAGE提出跨模态绑定来锚定实体身份，并通过双向过程构建自纠正的实体中心记忆。该方法有效减少了错误传播与幻觉答案，提升了长时间跨度下视频理解的可靠性与一致性。",
+      "llm_tags": [
+        "query:stream-agent"
+      ],
+      "matched_query_tag": "query:stream-agent",
+      "matched_query_text": "streaming video understanding with agent",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.29181v1",
+      "source": "arxiv",
+      "title": "SERUM: State Extraction and Refinement for User Modeling",
+      "abstract": "Agentic assistants capable of proactive, personalized interactions require structured models of user intent and workflow. However, building these models from raw, unstructured screen activity remains an open challenge. We present SERUM, a multi-pass framework that extracts finite-state behavioral models directly from unstructured egocentric video using hierarchical VLM annotation. Processing screen recordings through a sliding window, SERUM alternates between activity-recognition and intent-inference passes, with each pass refining labels using accumulated prior context to reduce hallucination and temporal conflation seen in single-pass annotation. Synonymous states are then merged via sentence embeddings and human-calibrated thresholds into a compact, coherent taxonomy. We evaluate behavioral structure by fitting first-order Markov models over the resulting label sequences (both actions and intents) and measuring predictive accuracy against frequency baselines. Across 61 egocentric videos in four domains (coding, cooking, physical activities, and daily life), we find: (1) iterative label refinement converges to a stable state vocabulary, which we term schematic equilibrium, after several passes; (2) normalized Markov models achieve substantially lower perplexity and higher action predictions than frequency baselines, with the largest gains on structured tasks like coding; and (3) human annotators rate final-pass labels as accurate and meaningfully improved over first-pass labels. To our knowledge, SERUM is the first system to produce interpretable process models from unstructured egocentric screen video without manual annotation, opening a scalable pathway for user modeling and behavioral understanding in the wild. Our demo, code, and results are publicly available",
+      "authors": [
+        "Andy J. Phu",
+        "James Mooney",
+        "Karin de Langis",
+        "Khanh Chi Le",
+        "Dongyeop Kang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-07-31T09:02:33+00:00",
+      "link": "https://arxiv.org/pdf/2607.29181v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Extracts and refines user behavioral states from egocentric video using hierarchical VLM annotation",
+      "llm_evidence_cn": "利用分层VLM标注从第一视角视频中提取并细化用户行为状态",
+      "llm_evidence": "利用分层VLM标注从第一视角视频中提取并细化用户行为状态",
+      "canonical_evidence": "利用分层VLM标注从第一视角视频中提取并细化用户行为状态",
+      "llm_tldr_en": "Presents SERUM, a multi-pass framework that extracts finite-state behavioral models from egocentric video by alternating activity-recognition and intent-inference passes with hierarchical VLM annotation, reducing hallucination and temporal conflation in user modeling.",
+      "llm_tldr_cn": "智能助手需要从原始屏幕活动等非结构化的第一视角视频中构建用户意图与工作流的结构化模型，但单次标注常产生幻觉和时间混淆。SERUM提出多遍框架，通过滑窗处理屏幕录制，交替进行活动识别和意图推断，并利用累积的先前上下文细化标签，再合并同义状态生成紧凑一致的行为状态模型。该方法有助于减少幻觉与时间混淆，为个性化主动交互提供支持。",
+      "llm_tldr": "智能助手需要从原始屏幕活动等非结构化的第一视角视频中构建用户意图与工作流的结构化模型，但单次标注常产生幻觉和时间混淆。SERUM提出多遍框架，通过滑窗处理屏幕录制，交替进行活动识别和意图推断，并利用累积的先前上下文细化标签，再合并同义状态生成紧凑一致的行为状态模型。该方法有助于减少幻觉与时间混淆，为个性化主动交互提供支持。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.22959v1",
+      "source": "arxiv",
+      "title": "HALLELUAI: A Hallucination-Aware AI System for Ultra-Realistic Image-to-Video Generation at Scale",
+      "abstract": "AI-generated video is increasingly used across marketing, product storytelling, and creative workflows, yet automated; high-precision quality control remains a major constraint to scaling production. We present HALLELUAI, an end-to-end system that moderates and regenerates image-to-video outputs to meet expert-level creative standards and deliver ultra-realistic videos with consistent end-user quality of experience (QoE) at scale. The system integrates a video moderation module that evaluates frame-level aesthetics, temporal motion fidelity, and fine-grained hallucination risks relative to the source image, with an agentic regeneration module that iteratively fixes failures through prompt refinement, controlled camera adjustments, targeted model or image switching, and structured retry strategies. The moderation logic is aligned with domain-specific creative guidelines and produces granular, machine-actionable feedback that directly drives regeneration. In human-in-the-loop evaluations with creative experts, HALLELUAI shows strong alignment and reliably outputs ultra-realistic, production-grade videos suitable for product and marketing placements at scale. This framework advances trustworthy AI generated video content by enforcing visual realism, brand safety, and strict input-image fidelity while enabling image-to-video generation at scale.",
+      "authors": [
+        "Aniket Sakpal",
+        "Yang Jiang",
+        "Rouzbeh Davoudi",
+        "Shayan Hassantabar",
+        "Mani Najmabadi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-25T00:02:37+00:00",
+      "link": "https://arxiv.org/pdf/2607.22959v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Hallucination-aware system for image-to-video generation with moderation and agentic regeneration",
+      "llm_evidence_cn": "面向图像到视频生成的幻觉感知系统，包含审核与智能体再生成",
+      "llm_evidence": "面向图像到视频生成的幻觉感知系统，包含审核与智能体再生成",
+      "canonical_evidence": "面向图像到视频生成的幻觉感知系统，包含审核与智能体再生成",
+      "llm_tldr_en": "HALLELUAI is an end-to-end system that moderates and regenerates image-to-video outputs by evaluating frame aesthetics, temporal motion fidelity, and hallucination risks, using an agentic module to iteratively fix failures at scale.",
+      "llm_tldr_cn": "AI生成视频在营销等场景中广泛应用，但规模化的高质量审核仍是瓶颈。HALLELUAI构建了端到端系统，通过审核模块从帧级美学、时间运动保真度和针对源图像的幻觉风险三个维度评估生成结果，并由智能体再生成模块通过提示改写和相机控制迭代修复失败。该系统能在保持专家级创意标准的同时实现规模化高质量视频输出，是面向视频生成的幻觉检测与缓解的一项系统化方案。",
+      "llm_tldr": "AI生成视频在营销等场景中广泛应用，但规模化的高质量审核仍是瓶颈。HALLELUAI构建了端到端系统，通过审核模块从帧级美学、时间运动保真度和针对源图像的幻觉风险三个维度评估生成结果，并由智能体再生成模块通过提示改写和相机控制迭代修复失败。该系统能在保持专家级创意标准的同时实现规模化高质量视频输出，是面向视频生成的幻觉检测与缓解的一项系统化方案。",
+      "llm_tags": [
+        "query:mm-hall:composite"
+      ],
+      "matched_query_tag": "query:mm-hall:composite",
+      "matched_query_text": "Papers central to 多模态大模型；幻觉问题, especially work that connects or combines: multimodal large language model hallucination; methods for detecting hallucination in multimodal models; techniques to mitigate hallucination in large multimodal models; factual consistency evaluation of multimodal models; interpretability of multimodal large language models to reduce hallucination; causes of hallucination in multimodal large language models; methods to reduce hallucination in vision language models; evaluation metrics for hallucination in multimodal AI; comparing hallucination rates across different multimodal architectures.",
+      "matched_requirement_id": "req-composite-mm-hall",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.25392v1",
+      "source": "arxiv",
+      "title": "RDVSv2: A Large-scale Benchmark for RGB-D Video Salient Object Detection",
+      "abstract": "We introduce RDVSv2, a large-scale benchmark for RGB-D video salient object detection (RGB-D VSOD) with dense frame-level annotations. Existing datasets in this emerging field are often limited in scale and annotation quality, while also relying on less geometry-consistent depth cues. To address these limitations, RDVSv2 is built from publicly accessible stereoscopic online videos and contains 249 video sequences with 29,077 annotated frames. It includes depth maps derived from stereoscopic videos, together with frame-wise salient object masks annotated with eye-tracking guidance. Compared with existing datasets, RDVSv2 is much larger in scale and covers more diverse and challenging scenarios. In addition, we establish a strong baseline for RGB-D VSOD based on Segment Anything Model 2 (SAM2). Specifically, we employ a parameter-efficient fine-tuning (PEFT) strategy to adapt the SAM2 encoder to jointly encode RGB, depth, and optical flow cues. Extensive experiments show that RDVSv2 is substantially more challenging for existing RGB-D VSOD methods. Meanwhile, the proposed baseline achieves state-of-the-art results on RDVSv2 and existing RGB-D VSOD benchmarks. We hope that RDVSv2 and the provided baseline will serve as useful resources for future research on RGB-D VSOD and related multi-modal video understanding tasks. Our dataset and code will be available at https://github.com/ltynick/RDVSv2.",
+      "authors": [
+        "Tianyu Li",
+        "Jiahao He",
+        "Keren Fu",
+        "Qijun Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-28T07:54:03+00:00",
+      "link": "https://arxiv.org/pdf/2607.25392v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Large-scale RGB-D video salient object detection benchmark with dense annotations",
+      "llm_evidence_cn": "大规模RGB-D视频显著目标检测基准，具有密集标注",
+      "llm_evidence": "大规模RGB-D视频显著目标检测基准，具有密集标注",
+      "canonical_evidence": "大规模RGB-D视频显著目标检测基准，具有密集标注",
+      "llm_tldr_en": "RDVSv2 presents a large-scale RGB-D video salient object detection benchmark with 249 sequences and 29,077 densely annotated frames, using eye-tracking guidance and stereoscopic depth, and establishes a strong baseline for the task.",
+      "llm_tldr_cn": "现有RGB-D视频显著目标检测数据集规模小、标注质量参差，且深度线索几何一致性不足。为此构建RDVSv2，从立体在线视频构建249个序列共29077帧的密集标注基准，提供立体视差深度图与眼动引导的帧级显著掩码。相比已有数据集，规模更大且场景更多样。同时在数据集上建立了强基线，为后续研究提供标准评估平台。",
+      "llm_tldr": "现有RGB-D视频显著目标检测数据集规模小、标注质量参差，且深度线索几何一致性不足。为此构建RDVSv2，从立体在线视频构建249个序列共29077帧的密集标注基准，提供立体视差深度图与眼动引导的帧级显著掩码。相比已有数据集，规模更大且场景更多样。同时在数据集上建立了强基线，为后续研究提供标准评估平台。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "spatial-temporal feature extraction",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24424v1",
+      "source": "arxiv",
+      "title": "MAViE: A Multi-scale Adaptive Vision Encoder for Fine-grained Visual Perception and Efficient Multimodal Reasoning",
+      "abstract": "Vision-language models commonly project all tokens produced by a pretrained vision encoder into a large language model. However, final-layer features can discard text, local attributes, and spatial relationships, while high-resolution inputs substantially increase context length and inference latency. We introduce \\method, a Multi-scale Adaptive Vision Encoder. \\method uses position-dependent gates to fuse shallow, intermediate, and deep features from a vision Transformer, preserving global semantics while enhancing edges, text, and local structure. It then performs question-conditioned token routing according to question relevance, local information content, global semantics, and spatial coverage, with a token budget that adapts to image complexity. To mitigate compression loss, we further introduce full-to-compressed representation distillation and a spatial diversity regularizer. In an illustrative simulation under a unified 7B language-model framework, \\method reduces the average number of SigLIP-SO400M visual tokens from 729 to 146 (approximately 80.0\\%) and improves the mean score on VQAv2, GQA, TextVQA, ScienceQA-IMG, and MMBench by 2.2 percentage points, while reducing single-image time to first token from 228\\,ms to 129\\,ms. We provide the full model design and evaluation protocol. All reported numbers currently serve only as placeholders for paper organization and experimental design; formal claims require real training runs, independent replications, and official benchmark evaluation.",
+      "authors": [
+        "Shaofei Lei"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-27T13:36:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.24424v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Multi-scale adaptive vision encoder for fine-grained perception and question-conditioned routing",
+      "llm_evidence_cn": "多尺度自适应视觉编码器，面向细粒度感知与问题条件路由",
+      "llm_evidence": "多尺度自适应视觉编码器，面向细粒度感知与问题条件路由",
+      "canonical_evidence": "多尺度自适应视觉编码器，面向细粒度感知与问题条件路由",
+      "llm_tldr_en": "MAViE introduces a multi-scale adaptive vision encoder for vision-language models, fusing shallow-to-deep features with position-dependent gates and question-conditioned token routing to improve fine-grained visual perception and multimodal reasoning efficiency.",
+      "llm_tldr_cn": "现有视觉语言模型通常只使用编码器最后层特征，容易丢失文本、局部属性与空间关系，而高分辨率输入又带来高计算代价。MAViE提出多尺度自适应视觉编码器，利用位置相关门控融合浅层、中层与深层特征，并基于问题相关性、局部信息量和空间覆盖进行问题条件令牌路由。该方法在保留全局语义的同时增强边缘、文本和局部结构，为视觉定位与多模态推理提供更高效精细的表征。",
+      "llm_tldr": "现有视觉语言模型通常只使用编码器最后层特征，容易丢失文本、局部属性与空间关系，而高分辨率输入又带来高计算代价。MAViE提出多尺度自适应视觉编码器，利用位置相关门控融合浅层、中层与深层特征，并基于问题相关性、局部信息量和空间覆盖进行问题条件令牌路由。该方法在保留全局语义的同时增强边缘、文本和局部结构，为视觉定位与多模态推理提供更高效精细的表征。",
+      "llm_tags": [
+        "query:vlm-vg:composite"
+      ],
+      "matched_query_tag": "query:vlm-vg:composite",
+      "matched_query_text": "Papers central to 视频语言大模型；视觉定位, especially work that connects or combines: video language model; visual grounding; temporal grounding; spatial grounding; video question answering; video language large model for spatial localization; temporal grounding in videos using natural language queries; visual grounding in vision language models for video understanding.",
+      "matched_requirement_id": "req-composite-vlm-vg",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.23265v1",
+      "source": "arxiv",
+      "title": "WaveZip: Wavelet-Driven Space-Time Decoupling for Video Token Condensation",
+      "abstract": "Existing Large Vision-Language Models (LVLMs) struggle with long-form video understanding due to the quadratic computational cost of visual tokens. While recent efficient methods attempt to compress tokens via hard pruning or uniform merging, they operate strictly in the spatial feature domain, where robust structural context and discriminative semantic details are inherently entangled. In this work, we propose WaveZip, a joint signal-frequency-domain framework for efficient video inference. Driven by the insight that temporal redundancy resides in low-pass approximation scales while spatial saliency strongly correlates with high-frequency components, WaveZip leverages Discrete Wavelet Transforms (DWT) to disentangle these signals. Temporally, it employs 1D DWT to analyze query-frame relevance, and the resulting high-frequency coefficients are further gated by inter-frame differences, with both signals jointly driving the dynamic allocation of a precise frame-level token budget. Spatially, a 2D DWT decomposes features into low-frequency approximations and high-frequency detail components, where the high-frequency coefficients are modulated within query-salient regions to regulate spatial reconstruction. Importantly, WaveZip requires no task-specific training and can be seamlessly integrated into off-the-shelf LVLMs to boost inference efficiency. Extensive experiments on long video understanding benchmarks demonstrate that WaveZip retains 99.6% of the full performance under an extreme 10x compression ratio, consistently outperforming state-of-the-art methods.",
+      "authors": [
+        "Yuhui Zeng",
+        "Wang Chen",
+        "Jinfa Huang",
+        "Tianyu Xie",
+        "Yongdong Luo",
+        "Jiayi Ji",
+        "Xiawu Zheng",
+        "jiebo Luo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-25T16:05:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.23265v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "wavelet-driven space-time decoupling for video token condensation in long-form video understanding",
+      "llm_evidence_cn": "小波驱动的时空解耦用于长视频理解中的视频令牌压缩",
+      "llm_evidence": "小波驱动的时空解耦用于长视频理解中的视频令牌压缩",
+      "canonical_evidence": "小波驱动的时空解耦用于长视频理解中的视频令牌压缩",
+      "llm_tldr_en": "WaveZip is a joint signal-frequency-domain framework that uses discrete wavelet transforms to decouple temporal redundancy and spatial saliency, condensing video tokens for efficient long-form video understanding in LVLMs.",
+      "llm_tldr_cn": "长视频理解中视觉令牌数量巨大，导致计算成本二次增长。现有压缩方法常在纯空间域进行，难以区分结构上下文和语义细节。WaveZip提出联合信号-频域框架，利用离散小波变换将时间冗余与空间显著性解耦，从而在保持时空语义的同时显著压缩令牌。实验显示该方法在降低计算量的同时保持了良好的视频理解性能，为流式高效视频推理提供了可行方案。",
+      "llm_tldr": "长视频理解中视觉令牌数量巨大，导致计算成本二次增长。现有压缩方法常在纯空间域进行，难以区分结构上下文和语义细节。WaveZip提出联合信号-频域框架，利用离散小波变换将时间冗余与空间显著性解耦，从而在保持时空语义的同时显著压缩令牌。实验显示该方法在降低计算量的同时保持了良好的视频理解性能，为流式高效视频推理提供了可行方案。",
+      "llm_tags": [
+        "query:video-stream:composite"
+      ],
+      "matched_query_tag": "query:video-stream:composite",
+      "matched_query_text": "Papers central to 流式视频理解, especially work that connects or combines: streaming video understanding techniques; deep learning methods for video understanding; temporal modeling for video sequences; real-time video analysis algorithms; spatial-temporal feature extraction; How to perform real time video understanding on streaming data?; What are the latest techniques for temporal action detection in video streams?; Efficient video understanding models for edge devices handling streaming input?.",
+      "matched_requirement_id": "req-composite-video-stream",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.25465v1",
+      "source": "arxiv",
+      "title": "DensFiLM: Density-Conditioned Video Saliency for Crowd Scenes",
+      "abstract": "Video saliency models typically apply a single fixation strategy across crowd scenes, despite systematic changes in attention with crowd density. Sparse scenes encourage tracking individuals, whereas dense scenes shift attention toward collective motion and scene-level landmarks. We introduce DensFiLM, a density-conditioned video saliency model that inserts a lightweight Feature-wise Linear Modulation layer at the bottleneck of a Video Swin Transformer. A learned density embedding produces channel-wise scale and shift parameters, allowing the decoder to reconstruct saliency from features selected for each density regime. The module adds only ~100K parameters and can use either CrowdFix density labels or the model's own density prediction. On CrowdFix, DensFiLM achieves mean NSS 1.434 and CC 0.517 over four seeds, improving over ACLNet by 14.7% and 14.9%, respectively, while predicted-density conditioning matches oracle-label performance. Ablations show that explicit RAFT optical flow and larger temporal and social-force extensions provide no further improvement in this setting. In a centre-prior-subtraction diagnostic, density conditioning yields an NSS gain of 0.462 over the unconditioned backbone, compared with 0.124 under standard evaluation. These results show that lightweight bottleneck conditioning provides a more effective inductive bias than increasing model capacity for crowd-video saliency. Our code is available at https://github.com/aniskhan25/crowdfix-saliency.",
+      "authors": [
+        "Anis Ur Rahman"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-28T08:57:18+00:00",
+      "link": "https://arxiv.org/pdf/2607.25465v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Deep learning method for video comprehension via density-conditioned saliency",
+      "llm_evidence_cn": "基于密度条件显著性的视频理解深度学习方法",
+      "llm_evidence": "基于密度条件显著性的视频理解深度学习方法",
+      "canonical_evidence": "基于密度条件显著性的视频理解深度学习方法",
+      "llm_tldr_en": "DensFiLM inserts a lightweight Feature-wise Linear Modulation layer into a Video Swin Transformer to make video saliency prediction density-aware, improving crowd-scene saliency with only ~100K extra parameters.",
+      "llm_tldr_cn": "视频显著性模型通常对人群场景采用单一注视策略，忽略了密度变化对注意力的影响。DensFiLM在Video Swin Transformer的瓶颈处插入轻量特征线性调制层，利用密度嵌入产生通道级缩放和平移参数，使解码器能根据密度状态重建显著性。模型仅增加约10万参数，在CrowdFix数据集上提升了人群视频显著性预测精度，有助于视频理解中的注意力建模。",
+      "llm_tldr": "视频显著性模型通常对人群场景采用单一注视策略，忽略了密度变化对注意力的影响。DensFiLM在Video Swin Transformer的瓶颈处插入轻量特征线性调制层，利用密度嵌入产生通道级缩放和平移参数，使解码器能根据密度状态重建显著性。模型仅增加约10万参数，在CrowdFix数据集上提升了人群视频显著性预测精度，有助于视频理解中的注意力建模。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "deep learning methods for video understanding",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24560v1",
+      "source": "arxiv",
+      "title": "EgoPlay: Event-Triggered Video Editing for Egocentric Streams",
+      "abstract": "We introduce EgoPlay, an event-triggered video-to-video editor for egocentric streams, obtained by fine-tuning a pretrained V2V diffusion transformer on event-conditioned data built primarily from Ego4D. Given a monocular video and an event-triggered prompt of the form \"when X happens, do Y,\" EgoPlay infers whether and when event X occurs, preserves pre-event frames, and applies edit Y only to the post-event continuation. Rather than cascading a separate event detector with an editor, EgoPlay learns event recognition, temporal restraint, and pixel-level editing jointly in a single end-to-end model, while also handling negative and multi-event prompts. To support this, we construct a large-scale dataset of 106K event-triggered clip-prompt pairs spanning positive triggers, fabricated-trigger negatives, and multi-event prompts. We then train a bidirectional video diffusion editor with event-triggered supervision and derive a causal variant for chunk-by-chunk streamable inference. We further introduce an event-aware evaluation protocol that separately measures post-trigger editing quality, pre-trigger preservation, and false-trigger robustness. On the Ego4D benchmark, EgoPlay substantially outperforms EgoEdit, the state-of-the-art instruction-based egocentric video editing baseline, with relative gains of 17.7%, 16.9%, and 16.4% in editing quality, visual quality, and background consistency. It also surpasses a VLM-guided detector-editor baseline by 15.7%, 14.5%, and 13.5% on the same metrics, while using less than half the GPU memory.",
+      "authors": [
+        "Jinjie Mai",
+        "Gordon Guocheng Qian",
+        "Willi Menapace",
+        "Arpit Sahni",
+        "Chaoyang Wang",
+        "Ashkan Mirzaei",
+        "Runjia Li",
+        "Sergey Tulyakov",
+        "Bernard Ghanem",
+        "Peter Wonka",
+        "Rameen Abdal"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-27T15:31:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.24560v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Event-triggered video editing for egocentric streams, requiring egocentric video event understanding",
+      "llm_evidence_cn": "面向第一视角视频流的事件触发编辑，需要第一视角视频事件理解",
+      "llm_evidence": "面向第一视角视频流的事件触发编辑，需要第一视角视频事件理解",
+      "canonical_evidence": "面向第一视角视频流的事件触发编辑，需要第一视角视频事件理解",
+      "llm_tldr_en": "EgoPlay is an event-triggered video-to-video editor for egocentric streams, jointly modeling event recognition, temporal restraint, and pixel-level editing in a single end-to-end diffusion transformer.",
+      "llm_tldr_cn": "第一视角视频的按事件编辑通常需要级联事件检测器与编辑器，复杂且难以处理多事件。EgoPlay通过微调预训练的视频到视频扩散Transformer，在单一端到端模型中联合学习事件识别、时序约束和像素级编辑，支持“当X发生时执行Y”的条件编辑。基于Ego4D构建的10.6万条事件触发提示数据，该方法能处理否定提示和多事件提示，显著简化第一视角视频流的可控编辑流程。",
+      "llm_tldr": "第一视角视频的按事件编辑通常需要级联事件检测器与编辑器，复杂且难以处理多事件。EgoPlay通过微调预训练的视频到视频扩散Transformer，在单一端到端模型中联合学习事件识别、时序约束和像素级编辑，支持“当X发生时执行Y”的条件编辑。基于Ego4D构建的10.6万条事件触发提示数据，该方法能处理否定提示和多事件提示，显著简化第一视角视频流的可控编辑流程。",
+      "llm_tags": [
+        "query:ego-video:composite"
+      ],
+      "matched_query_tag": "query:ego-video:composite",
+      "matched_query_text": "Papers central to 第一视角视频理解, especially work that connects or combines: egocentric video understanding; self-centered scene understanding; egocentric video understanding techniques; first person action recognition methods.",
+      "matched_requirement_id": "req-composite-ego-video",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.23445v1",
+      "source": "arxiv",
+      "title": "Omni-Prune: Query-Aware Unified Token Pruning for Efficient Omnimodal Large Language Models",
+      "abstract": "Omnimodal large language models (OmniLLMs) are rapidly extending multimodal reasoning to cover synchronized audio and video. However, the resulting audio-video token sequences are long, leading to high prefill latency and GPU memory usage at inference time. Existing token pruning methods, designed mainly for vision-only inputs, miss both the cross-modal links between audio and video and the user query that decides which content matters. To bridge this gap, we present Omni-Prune, a training-free, query-aware audio-visual token pruning framework that jointly removes redundancy from both modalities while keeping task-relevant cross-modal evidence. Specifically, Omni-Prune first splits the token sequence into adaptive time windows placed at audio saliency peaks, then scores audio and video tokens on a single scale that combines encoder attention with text-query relevance, and pairs related audio-video tokens so that they are kept together. Within each window, a final K-medoids step then selects a few representative tokens, adding diverse cues that score-based selection alone would miss. Extensive experiments demonstrate that Omni-Prune outperforms established baseline methods, delivering up to 3.25x prefill speedup and 1.3x memory reduction while retaining over 99% of full-model performance.",
+      "authors": [
+        "Yiming Zhong",
+        "Chang Nie",
+        "Caifeng Shan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-07-26T03:51:39+00:00",
+      "link": "https://arxiv.org/pdf/2607.23445v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "query-aware audio-visual token pruning to reduce latency and memory for omnimodal LLMs",
+      "llm_evidence_cn": "面向全模态大模型的查询感知音视频令牌剪枝，降低推理延迟与显存占用",
+      "llm_evidence": "面向全模态大模型的查询感知音视频令牌剪枝，降低推理延迟与显存占用",
+      "canonical_evidence": "面向全模态大模型的查询感知音视频令牌剪枝，降低推理延迟与显存占用",
+      "llm_tldr_en": "Omni-Prune is a training-free, query-aware framework that jointly prunes redundant audio-video tokens in OmniLLMs, reducing prefill latency and GPU memory while keeping cross-modal evidence relevant to the user query.",
+      "llm_tldr_cn": "全模态大语言模型在接收同步音视频时会产生很长的令牌序列，导致推理预填充延迟和显存占用过高，而现有剪枝方法多针对纯视觉输入且忽略用户查询。Omni-Prune提出一种无需训练的查询感知音视频令牌剪枝框架，按自适应时间窗口联合去除两个模态的冗余，同时保留与任务相关的跨模态证据。实验表明该方法能在保持任务相关证据的同时有效降低推理开销，为流式多模态理解提供了高效方案。",
+      "llm_tldr": "全模态大语言模型在接收同步音视频时会产生很长的令牌序列，导致推理预填充延迟和显存占用过高，而现有剪枝方法多针对纯视觉输入且忽略用户查询。Omni-Prune提出一种无需训练的查询感知音视频令牌剪枝框架，按自适应时间窗口联合去除两个模态的冗余，同时保留与任务相关的跨模态证据。实验表明该方法能在保持任务相关证据的同时有效降低推理开销，为流式多模态理解提供了高效方案。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "Efficient video understanding models for edge devices handling streaming input?",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.28627v1",
+      "source": "arxiv",
+      "title": "ReToken: One Token to Improve Vision-Language Models for Visual Retrieval",
+      "abstract": "Long visual context poses a challenge for vision-language models: performance degrades as the number of distractors grows, and processing all tokens at once is computationally infeasible under GPU memory constraints. We present ReToken, a single learnable embedding trained as an explicit retrieval target that selects a sparse set of query-relevant visual tokens from a pre-filled visual KV cache. Trained on only a small image-QA dataset, ReToken yields consistent gains across image and video benchmarks: on Visual Haystacks it improves Qwen3VL-8B by 13.4 points and InternVL3.5 by 12.4 points (>20% relative), and on LVBench it transfers zero-shot to long video for an 8.0-point gain with Qwen3VL-8B. Thanks to its lightweight design, both training and long-video inference fit on a single H100. Code is available at: https://github.com/avaxiao/ReToken",
+      "authors": [
+        "Yao Xiao",
+        "Reuben Tan",
+        "Zhen Zhu",
+        "Yuqun Wu",
+        "Jianfeng Gao",
+        "Derek Hoiem"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-07-30T17:59:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.28627v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Learnable retrieval token selecting query-relevant visual tokens for long video understanding",
+      "llm_evidence_cn": "用可学习检索标记为长视频理解选择查询相关视觉标记",
+      "llm_evidence": "用可学习检索标记为长视频理解选择查询相关视觉标记",
+      "canonical_evidence": "用可学习检索标记为长视频理解选择查询相关视觉标记",
+      "llm_tldr_en": "ReToken trains a single learnable embedding as retrieval target to select sparse query-relevant visual tokens from pre-filled KV cache, improving vision-language models on long image and video tasks with minimal training.",
+      "llm_tldr_cn": "长视觉上下文中干扰项增多会导致视觉语言模型性能下降，且海量token难以在GPU内存中处理。ReToken训练一个可学习的检索目标标记，从预填充的视觉KV缓存中挑选稀疏的查询相关视觉标记。仅用小型图像问答数据集训练即可在图像与视频基准上持续提升，并在长视频基准上零样本迁移有效。其轻量设计使训练和推理更加高效，为长视频视觉检索提供了新思路。",
+      "llm_tldr": "长视觉上下文中干扰项增多会导致视觉语言模型性能下降，且海量token难以在GPU内存中处理。ReToken训练一个可学习的检索目标标记，从预填充的视觉KV缓存中挑选稀疏的查询相关视觉标记。仅用小型图像问答数据集训练即可在图像与视频基准上持续提升，并在长视频基准上零样本迁移有效。其轻量设计使训练和推理更加高效，为长视频视觉检索提供了新思路。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "deep learning methods for video understanding",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.26703v1",
+      "source": "arxiv",
+      "title": "Sequence-SOD: Bio-inspired Sequence-aware Spiking ObjectDetection for Event Cameras",
+      "abstract": "Event cameras follow a retina-inspired sensing principle, reporting local intensity changes asynchronously with hightemporal resolution and a wide dynamic range. Spiking Neural Networks (SNNs) complement these sparse event streams through brain-inspired dynamics, using sparse spikes and leaky membrane potentials to integrate information over time. However, many SNN object detectors process isolated event intervals with a single label and reset the network state after each prediction, thereby underusing temporal information in continuous event streams. We introduce Sequence-SOD, a sequence-aware SNN object detector that processes extended event sequences containing labels at multiple time points. Events are accumulated into short intervals, discretized into temporal steps, and fed sequentially to an SSD-style Spiking DenseNet while preserving membrane potentials across intervals within a sequence, so that detection is driven by an evolving neural state instead of independently reset input windows. On the Gen1 Automotive Detection Dataset, sequence-aware training improves mAP from 23.38 for single-interval training to 25.30 without augmentation and to 26.88 withevent-data augmentation. The model achieves a theoretical prediction frequency of 40 Hz. Training and evaluating SNN object detectors on extended event sequences improves their ability to exploit temporal cues while preserving the energy-efficiency benefits of sparse spiking computation. The results highlight sequence-aware training as a complementary direction to architectural improvements for event-based SNN detection.",
+      "authors": [
+        "Katharina Bendig",
+        "René Schuster",
+        "Didier Stricker"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-29T09:49:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.26703v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "sequence-aware spiking object detection for continuous event camera streams with temporal integration",
+      "llm_evidence_cn": "面向连续事件相机流的序列感知脉冲目标检测，具备时间整合能力",
+      "llm_evidence": "面向连续事件相机流的序列感知脉冲目标检测，具备时间整合能力",
+      "canonical_evidence": "面向连续事件相机流的序列感知脉冲目标检测，具备时间整合能力",
+      "llm_tldr_en": "Sequence-SOD is a spiking neural network object detector that processes extended event sequences without resetting state, integrating temporal information from continuous event streams for sequence-aware detection.",
+      "llm_tldr_cn": "脉冲神经网络目标检测器常按孤立事件间隔处理并重置网络状态，未能充分利用连续事件流中的时间信息。Sequence-SOD提出序列感知的SNN检测器，处理包含多个时间点标签的扩展事件序列，通过泄漏膜电位等动力学累积短期事件信息。在事件相机检测任务上，该方法提升了时间维度上的检测连续性，展示了仿生脉冲神经网络在实时视频/事件流分析中的潜力。",
+      "llm_tldr": "脉冲神经网络目标检测器常按孤立事件间隔处理并重置网络状态，未能充分利用连续事件流中的时间信息。Sequence-SOD提出序列感知的SNN检测器，处理包含多个时间点标签的扩展事件序列，通过泄漏膜电位等动力学累积短期事件信息。在事件相机检测任务上，该方法提升了时间维度上的检测连续性，展示了仿生脉冲神经网络在实时视频/事件流分析中的潜力。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "real-time video analysis algorithms",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.23504v1",
+      "source": "arxiv",
+      "title": "MemVLN: Episodic and Procedural Memory for Vision-and-Language Navigation",
+      "abstract": "Vision-and-Language Navigation in Continuous Environments (VLN-CE) requires agents to maintain long-horizon visual history for trajectory consistency while executing actions with low latency. Existing video-based VLN approaches typically struggle to satisfy both demands simultaneously. To address these challenges, we propose MemVLN, a novel VLN framework that achieves state-of-the-art performance with real-time inference efficiency (14 FPS). MemVLN utilizes a visual encoder to process continuous observations and a Large Language Model (LLM) to interpret instructions and generate actions. Central to our approach is an Episodic Memory management that applies pyramidal resolutions. This mechanism concentrates computation on immediate percepts while retaining compressed long-term history. Complementing to this design, we introduce Procedural Memory for fast action with a compact vocabulary of atomic mid-level actions to bypass auto-regressive decoding latency. Experiments on VLN-CE show that MemVLN-4B surpasses the baseline Qwen3-VL-4B architecture by 5.8\\% SR in R2R and 9.7\\% SR in RxR, while achieving a 7$\\times$ speedup in inference latency.",
+      "authors": [
+        "Yuqi Liu",
+        "Shengju Qian",
+        "Tianyuan Qu",
+        "Mingxian Lin",
+        "Zixuan Wang",
+        "Xin Wang",
+        "Bei Yu",
+        "Jiaya Jia"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-26T07:08:30+00:00",
+      "link": "https://arxiv.org/pdf/2607.23504v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "real-time agent navigation with visual encoder and LLM using episodic memory",
+      "llm_evidence_cn": "智能体导航中的实时视觉-语言处理，利用情景记忆平衡长期历史与低延迟",
+      "llm_evidence": "智能体导航中的实时视觉-语言处理，利用情景记忆平衡长期历史与低延迟",
+      "canonical_evidence": "智能体导航中的实时视觉-语言处理，利用情景记忆平衡长期历史与低延迟",
+      "llm_tldr_en": "MemVLN introduces episodic and procedural memory with pyramidal resolutions for VLN-CE, achieving state-of-the-art performance at 14 FPS by combining a visual encoder and an LLM for continuous observation processing.",
+      "llm_tldr_cn": "连续环境下的视觉语言导航要求智能体在低延迟执行动作的同时维护长期视觉历史，现有视频方法难以兼顾。本文提出MemVLN，利用视觉编码器处理连续观测，并借助大语言模型理解指令和生成动作，核心是采用金字塔分辨率的情景记忆管理机制，将计算集中到当前感知同时保留长期信息。实验显示该方法在达到实时推理效率（14 FPS）的同时刷新了导航性能，验证了记忆机制在智能体视频理解中的价值。",
+      "llm_tldr": "连续环境下的视觉语言导航要求智能体在低延迟执行动作的同时维护长期视觉历史，现有视频方法难以兼顾。本文提出MemVLN，利用视觉编码器处理连续观测，并借助大语言模型理解指令和生成动作，核心是采用金字塔分辨率的情景记忆管理机制，将计算集中到当前感知同时保留长期信息。实验显示该方法在达到实时推理效率（14 FPS）的同时刷新了导航性能，验证了记忆机制在智能体视频理解中的价值。",
+      "llm_tags": [
+        "query:stream-agent:composite"
+      ],
+      "matched_query_tag": "query:stream-agent:composite",
+      "matched_query_text": "Papers central to 流式视频理解与智能体, especially work that connects or combines: streaming video understanding with agent; agent-based video understanding; real-time video processing with agents; How to design an agent for streaming video understanding?; Framework for real time video analysis with intelligent agents; Latest approaches in streaming video understanding using agents.",
+      "matched_requirement_id": "req-composite-stream-agent",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.26835v1",
+      "source": "arxiv",
+      "title": "A Low-Power Sparse Convolution Accelerator with Idle-First-Task-Assignment for Edge Vision",
+      "abstract": "In recent years, edge-vision monitoring systems for applications such as smart animal husbandry have faced strict tripartite constraints: maintaining input resolution under extremely limited transmission bandwidth and strict power budgets. Conventional dense convolutional neural networks (CNNs) cannot satisfy the resource limits of such constrained IoT nodes. To address this challenge, this paper presents a low-power sparse convolution accelerator for edge devices, fabricated and validated in a 16 nm process. First, the accelerator adopts a bitmap-based format for compression in both data transmission and computation, effectively reducing memory and bandwidth overhead. Second, to mitigate load imbalance in sparse computation, an Idle-First-Task-Assignment (IFTA) dynamic scheduling strategy is proposed, significantly reducing processing-element (PE) idle time and improving multiplier utilization. In addition, a dedicated dataflow is designed to support and accelerate depthwise separable convolution (DWConv), which is widely used in lightweight networks. Experimental results show that the chip occupies only 0.5~mm$^2$ core area and consumes as little as 12--16~mW. On ImageNet, for sparse VGG16 and MobileNetV2, the proposed accelerator achieves 6.5$\\times$ and 2.8$\\times$ speedups, respectively, over traditional dense accelerators, and also delivers significant performance gains over the existing sparse accelerator.",
+      "authors": [
+        "Jingyue Zhuge",
+        "Johannes Partzsch",
+        "Christian Mayr"
+      ],
+      "primary_category": "cs.AR",
+      "categories": [
+        "cs.AR"
+      ],
+      "published": "2026-07-29T12:26:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.26835v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Low-power sparse CNN accelerator for edge vision, enabling efficient on-device video stream analysis",
+      "llm_evidence_cn": "面向边缘视觉的低功耗稀疏卷积加速器，支撑受限设备上的高效视频流分析",
+      "llm_evidence": "面向边缘视觉的低功耗稀疏卷积加速器，支撑受限设备上的高效视频流分析",
+      "canonical_evidence": "面向边缘视觉的低功耗稀疏卷积加速器，支撑受限设备上的高效视频流分析",
+      "llm_tldr_en": "Edge video monitoring faces tight bandwidth and power budgets; this work presents a 16nm sparse convolution accelerator with bitmap compression and idle-first task assignment for low-power edge vision inference.",
+      "llm_tldr_cn": "边缘视频监控系统同时面临带宽、功耗和输入分辨率的严格约束，稠密CNN难以部署在资源受限的IoT节点上。为此，论文提出一种基于16nm工艺的低功耗稀疏卷积加速器，使用位图格式压缩数据和计算，降低内存与带宽占用，并通过空闲优先任务分配缓解稀疏计算负载不均衡。验证结果表明该设计能够在严格功耗预算下维持边缘视觉处理能力，为实时视频分析类边缘应用提供了高效硬件支持。",
+      "llm_tldr": "边缘视频监控系统同时面临带宽、功耗和输入分辨率的严格约束，稠密CNN难以部署在资源受限的IoT节点上。为此，论文提出一种基于16nm工艺的低功耗稀疏卷积加速器，使用位图格式压缩数据和计算，降低内存与带宽占用，并通过空闲优先任务分配缓解稀疏计算负载不均衡。验证结果表明该设计能够在严格功耗预算下维持边缘视觉处理能力，为实时视频分析类边缘应用提供了高效硬件支持。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "Efficient video understanding models for edge devices handling streaming input?",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.24064v1",
+      "source": "arxiv",
+      "title": "MarineEVT: Advancing Event-Centric Marine Video Understanding via Visual Tool Reasoning",
+      "abstract": "Recent Vision-Language Models (VLMs) have achieved remarkable success in visual understanding, driven by the growing availability of high-quality image-text pairs. However, the performance of VLMs often degrades in the video domain due to the essential need for temporal understanding and the scarcity of large-scale annotated video data. In this work, we focus on marine video understanding, which brings further challenges: first, it requires substantial domain expertise; and video VLMs usually struggle with localizing and interpreting critical information from marine videos, as the informative events are typically sparse, unpredictable, and unevenly distributed. To address these challenges, we carefully curate the first event-centric marine video understanding dataset called MarineEVT, which features 20K multi-task, video-level visual question-answering pairs spanning multiple dimensions of marine understanding and analysis. Meanwhile, based on MarineEVT, we decompose marine video understanding as an Event-centric Visual Tool-integrated Reasoning process EVT-R1 for short, where we leverage powerful visual tools to drive the model to localize and interpret critical information aligned with visual questions and human intent. To demonstrate its effectiveness, we compare EVT-R1 against 11 SOTA VLMs in different settings. EVT-R1 outperforms the top open-source and top commercial models by 5.22 and 11.09, respectively. MarineEVT and EVT-R1 lay the foundation for ecological discovery and marine education, fostering the development of VLMs capable of interpreting marine dynamics, reasoning about ecological interactions, and supporting sustainable ocean video understanding and analysis.",
+      "authors": [
+        "Tuan-An To",
+        "Yuk-Kwan Wong",
+        "Tuan-Anh Vu",
+        "Ziqiang Zheng",
+        "Sai-Kit Yeung"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-27T07:06:14+00:00",
+      "link": "https://arxiv.org/pdf/2607.24064v1",
+      "tags": [
+        "keyword:stream-agent",
+        "keyword:video-stream",
+        "query:stream-agent",
+        "query:video-stream"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "event-centric marine video understanding with VLMs and temporal reasoning",
+      "llm_evidence_cn": "面向海洋视频的事件中心视频理解，结合视觉语言模型与时间推理",
+      "llm_evidence": "面向海洋视频的事件中心视频理解，结合视觉语言模型与时间推理",
+      "canonical_evidence": "面向海洋视频的事件中心视频理解，结合视觉语言模型与时间推理",
+      "llm_tldr_en": "MarineEVT addresses video VLM degradation in marine videos by curating an event-centric marine video dataset and using visual tool reasoning to localize sparse, unpredictable events, advancing domain-specific video understanding.",
+      "llm_tldr_cn": "现有视觉语言模型在视频领域性能下降，海洋视频又存在事件稀疏、分布不均且需要领域知识等挑战。本文构建了首个事件中心的海洋视频数据集，并提出结合视觉工具推理的方法来定位和解释视频中的关键事件。实验表明该方法能够有效应对海洋视频的时序理解难点，推动领域视频理解的进展。",
+      "llm_tldr": "现有视觉语言模型在视频领域性能下降，海洋视频又存在事件稀疏、分布不均且需要领域知识等挑战。本文构建了首个事件中心的海洋视频数据集，并提出结合视觉工具推理的方法来定位和解释视频中的关键事件。实验表明该方法能够有效应对海洋视频的时序理解难点，推动领域视频理解的进展。",
+      "llm_tags": [
+        "query:video-stream"
+      ],
+      "matched_query_tag": "query:video-stream",
+      "matched_query_text": "deep learning methods for video understanding",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-20T08:40:52.814386+00:00",
-  "updated_date": "20260621-20260720",
+  "generated_at": "2026-08-03T11:48:46.021205+00:00",
+  "updated_date": "20260725-20260803",
   "carryover_days": 9,
   "tag_states": {
     "video-med-qa": {
@@ -19,9 +19,184 @@
       "items": []
     },
     "video-stream": {
-      "updated_date": "20260621-20260720",
+      "updated_date": "20260725-20260803",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2607.25125v1",
+          "source": "arxiv",
+          "title": "LENS: Adaptive Spatio-Temporal Zooming for Keyframe Sampling in Long-Form Videos",
+          "abstract": "Despite rapid progress in Multi-modal Large Language Models (MLLMs), understanding long-form videos is still bottlenecked by limited context windows. While recent keyframe sampling methods attempt to mitigate this by distilling video inputs into a compact set of query-relevant frames, navigating the vast spatio-temporal search space remains challenging, as spatial detail and temporal coverage often conflict. To address this, we introduce LENS, a training-free keyframe sampling framework that dynamically decides when to zoom in for fine-grained details and when to zoom out for broader context based on the text query. Concretely, LENS adaptively allocates a limited frame budget between spatial zoom-ins, which highlight query-relevant regions within individual frames, and temporal zoom-outs, which expand the temporal scope through multi-frame aggregation, enabling the model to reason across multiple granularities while capturing both high-fidelity details and long-range context. Across diverse long-form video benchmarks, LENS consistently outperforms prior state-of-the-art keyframe sampling methods and delivers substantial gains over uniform sampling, improving Video-MME accuracy from 53.3% to 60.7% with Qwen2.5-VL.Code is available at https://github.com/zhangce01/LENS.",
+          "authors": [
+            "Ce Zhang",
+            "Jinxi He",
+            "Katia Sycara",
+            "Yaqi Xie"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-07-27T22:36:33+00:00",
+          "link": "https://arxiv.org/pdf/2607.25125v1",
+          "tags": [
+            "keyword:stream-agent",
+            "keyword:video-stream",
+            "query:stream-agent",
+            "query:video-stream"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Adaptive spatio-temporal keyframe sampling for long-form video understanding",
+          "llm_evidence_cn": "面向长视频理解的自适应时空关键帧采样",
+          "llm_evidence": "面向长视频理解的自适应时空关键帧采样",
+          "canonical_evidence": "面向长视频理解的自适应时空关键帧采样",
+          "llm_tldr_en": "LENS introduces a training-free adaptive keyframe sampling framework for long-form video understanding, balancing spatial zoom-in and temporal coverage based on the text query to overcome limited MLLM context windows.",
+          "llm_tldr_cn": "多模态大模型在长视频理解上受限于上下文窗口，现有关键帧采样方法难以兼顾空间细节与时间覆盖。为此提出LENS，一种无需训练的关键帧采样框架，根据文本查询自适应决定空间放大或时间扩展，在有限帧预算内分配帧数。实验表明LENS在长视频基准上显著提升查询相关信息的定位精度和覆盖能力。这项工作为长视频理解提供了一种高效且即插即用的采样方案。",
+          "llm_tldr": "多模态大模型在长视频理解上受限于上下文窗口，现有关键帧采样方法难以兼顾空间细节与时间覆盖。为此提出LENS，一种无需训练的关键帧采样框架，根据文本查询自适应决定空间放大或时间扩展，在有限帧预算内分配帧数。实验表明LENS在长视频基准上显著提升查询相关信息的定位精度和覆盖能力。这项工作为长视频理解提供了一种高效且即插即用的采样方案。",
+          "llm_tags": [
+            "query:video-stream"
+          ],
+          "matched_query_tag": "query:video-stream",
+          "matched_query_text": "deep learning methods for video understanding",
+          "matched_requirement_id": "req-2",
+          "selection_source": "carryover_cache",
+          "paper_id": "2607.25125v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2607.28463v1",
+          "source": "arxiv",
+          "title": "VisualRouter: Query-Grounded Visual Sampling for Long Video Understanding",
+          "abstract": "Large vision-language models (LVLMs) have achieved significant progress in video understanding, yet understanding long videos remains challenging due to the large number of visual tokens and limited context windows. Visual sampling provides a practical solution by selecting an informative subset of frames. However, existing methods typically either rely on relevance-aware sampling, leading to redundant frame selection and insufficient temporal coverage, or adopt a fixed sampling strategy regardless of query type. In this paper, we propose VisualRouter, a training-free and plug-and-play framework for query-grounded visual sampling. VisualRouter first classifies each query as either global or local and then applies the corresponding sampling strategy. For global queries, it employs a relevance-coverage hybrid strategy that preserves temporal coverage while retaining query-relevant visual evidence. For local queries, it adopts an event-aware frame selection strategy that performs event partitioning, segment-level frame allocation, and intra-event frame selection, jointly balancing relevance, coverage, and diversity with a limited number of input frames. Experiments show that VisualRouter consistently improves multiple LVLMs over uniform sampling, achieving gains of 5.2%, 7.7%, and 11.6% on Video-MME, LongVideoBench, and MLVU with Qwen2.5-VL-7B, and outperforming existing training-free visual sampling methods under the same setting.",
+          "authors": [
+            "Haiyue Zhang",
+            "Yi Bin",
+            "Xun Jiang",
+            "Zeyu Ma",
+            "Duo Peng",
+            "Guoqing Wang",
+            "Yang Yang",
+            "Heng Tao Shen"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-07-30T16:23:10+00:00",
+          "link": "https://arxiv.org/pdf/2607.28463v1",
+          "tags": [
+            "keyword:stream-agent",
+            "keyword:video-stream",
+            "query:stream-agent",
+            "query:video-stream"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Query-grounded visual sampling framework for long video understanding",
+          "llm_evidence_cn": "面向长视频理解的查询引导视觉采样框架",
+          "llm_evidence": "面向长视频理解的查询引导视觉采样框架",
+          "canonical_evidence": "面向长视频理解的查询引导视觉采样框架",
+          "llm_tldr_en": "VisualRouter is a training-free query-grounded visual sampling framework that classifies queries as global or local and selects informative frames, stabilizing long video understanding under limited context windows.",
+          "llm_tldr_cn": "长视频理解受限于视觉token数量与上下文窗口，现有采样方法在冗余选择与时间覆盖上折中不佳。VisualRouter提出免训练即插即用的查询引导采样框架，先将查询分为全局或局部，再采用相应采样策略。该方法可适配多种视觉语言模型，提升长视频理解效果并减少token冗余。这项工作为长视频理解提供了简单有效的视觉采样方案。",
+          "llm_tldr": "长视频理解受限于视觉token数量与上下文窗口，现有采样方法在冗余选择与时间覆盖上折中不佳。VisualRouter提出免训练即插即用的查询引导采样框架，先将查询分为全局或局部，再采用相应采样策略。该方法可适配多种视觉语言模型，提升长视频理解效果并减少token冗余。这项工作为长视频理解提供了简单有效的视觉采样方案。",
+          "llm_tags": [
+            "query:video-stream"
+          ],
+          "matched_query_tag": "query:video-stream",
+          "matched_query_text": "deep learning methods for video understanding",
+          "matched_requirement_id": "req-2",
+          "selection_source": "carryover_cache",
+          "paper_id": "2607.28463v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2607.24611v1",
+          "source": "arxiv",
+          "title": "Test-Time Adaptation via Dual Distillation for Videos Under Severe Distribution Shifts",
+          "abstract": "Deep learning models have achieved state-of-the-art performance in several computer vision tasks. However, they experience severe performance degradation when applied to real-world scenarios due to unanticipated distribution shifts. Test-Time Adaptation (TTA) attempts to solve this problem by using unlabeled data from the target domain to dynamically adapt to the test distribution at inference time, without access to the source data. However, TTA remains a challenging problem when adapting to continuous, temporally correlated data, such as videos, and in scenarios where the target domain contains severe domain shifts. For this reason, few works in the literature explore TTA for videos under such extreme conditions. To overcome these limitations, we propose Test-time Adaptation via Dual Distillation (TADD), an online adaptation framework that relies on a lightweight projection adapter to bridge the domain gap. The adapter module is pre-trained on the source domain and then adapted to the target using our proposed complementary losses: (i) zero-shot distillation, which encourages alignment with the domain-agnostic features from a pre-trained vision-language model (VLM); and (ii) target distillation, which retains the source domain discriminative knowledge encoded in the pre-trained adapter. Built upon a frozen CLIP backbone, our method introduces this lightweight projection adapter as the sole updatable component during inference. We conducted extensive evaluations on three well-known video action recognition benchmarks: UCF-HMDB, Daily-DA, and Sports-DA. Our experiments in the closed-set scenario demonstrate that our method consistently outperforms state-of-the-art TTA baselines. Notably, our TTA approach improves upon previous methods by up to +3.81% on UCF-HMDB, +2.63% on Daily-DA, and +3.03% on Sports-DA.",
+          "authors": [
+            "André Sacilotti",
+            "Samuel Felipe dos Santos",
+            "Jurandy Almeida"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-07-27T16:12:11+00:00",
+          "link": "https://arxiv.org/pdf/2607.24611v1",
+          "tags": [
+            "keyword:stream-agent",
+            "keyword:video-stream",
+            "query:stream-agent",
+            "query:video-stream"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Test-time adaptation for videos via dual distillation, a deep learning method for robust video understanding",
+          "llm_evidence_cn": "通过双重蒸馏实现视频测试时自适应，是提升视频理解鲁棒性的深度学习方法",
+          "llm_evidence": "通过双重蒸馏实现视频测试时自适应，是提升视频理解鲁棒性的深度学习方法",
+          "canonical_evidence": "通过双重蒸馏实现视频测试时自适应，是提升视频理解鲁棒性的深度学习方法",
+          "llm_tldr_en": "Addresses test-time adaptation for videos under severe distribution shifts by dual distillation, enabling models to adapt to continuous temporally correlated data without source data access.",
+          "llm_tldr_cn": "深度学习模型在真实场景分布偏移下性能严重下降，视频数据的时间相关性和极端偏移使测试时自适应更难。该工作提出面向视频的双重蒸馏测试时自适应方法，在推理阶段利用无标注目标域数据动态调整模型参数，而无需访问源数据。实验表明该方法能有效缓解连续视频流上的严重分布偏移，提升模型泛化能力。",
+          "llm_tldr": "深度学习模型在真实场景分布偏移下性能严重下降，视频数据的时间相关性和极端偏移使测试时自适应更难。该工作提出面向视频的双重蒸馏测试时自适应方法，在推理阶段利用无标注目标域数据动态调整模型参数，而无需访问源数据。实验表明该方法能有效缓解连续视频流上的严重分布偏移，提升模型泛化能力。",
+          "llm_tags": [
+            "query:video-stream"
+          ],
+          "matched_query_tag": "query:video-stream",
+          "matched_query_text": "deep learning methods for video understanding",
+          "matched_requirement_id": "req-2",
+          "selection_source": "carryover_cache",
+          "paper_id": "2607.24611v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2607.26165v1",
+          "source": "arxiv",
+          "title": "DVPSFormer: Efficient Online Depth-aware Video Panoptic Segmentation for Autonomous Driving",
+          "abstract": "Safe autonomous navigation requires a holistic understanding of dynamic environments, necessitating the simultaneous estimation of metric depth, semantic segmentation, and instance trajectories. While depth-aware video panoptic segmentation (DVPS) unifies these tasks, existing approaches often rely on computationally expensive, multi-stage pipelines or offline tracking, rendering them unsuitable for real-time decision-making. To address this, we propose DVPSFormer, a unified online architecture designed for efficient 4D scene understanding. Central to our approach is explicit scene discretization (ESD), a novel mechanism that leverages segmentation queries to represent foreground and background regions, enabling a discrete-to-continuous (D2C) depth head to decode metric depth in a single pass. This tightly couples semantic and geometric learning while significantly reducing latency. Furthermore, we propose an online majority voting (OMV) mechanism that exploits temporal consistency to refine classification during instance tracking. DVPSFormer establishes a new state-of-the-art on the Cityscapes-DVPS and SemKITTI-DVPS benchmarks, offering a streamlined solution for online robotic perception. Code and models are available at https://royyang0714.github.io/DVPSFormer.",
+          "authors": [
+            "Yung-Hsu Yang",
+            "Luigi Piccinelli",
+            "Siyuan Li",
+            "Mattia Segu",
+            "Lei Ke",
+            "Martin Danelljan",
+            "Yuqian Fu",
+            "Zuria Bauer",
+            "Fisher Yu",
+            "Hermann Blum",
+            "Marc Pollefeys"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-07-28T18:16:00+00:00",
+          "link": "https://arxiv.org/pdf/2607.26165v1",
+          "tags": [
+            "keyword:stream-agent",
+            "keyword:video-stream",
+            "query:stream-agent",
+            "query:video-stream"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Online depth-aware video panoptic segmentation for real-time autonomous driving, a streaming video understanding technique",
+          "llm_evidence_cn": "在线深度感知视频全景分割用于实时自动驾驶，属于流式视频理解技术",
+          "llm_evidence": "在线深度感知视频全景分割用于实时自动驾驶，属于流式视频理解技术",
+          "canonical_evidence": "在线深度感知视频全景分割用于实时自动驾驶，属于流式视频理解技术",
+          "llm_tldr_en": "DVPSFormer is a unified online architecture for depth-aware video panoptic segmentation, using explicit scene discretization with segmentation queries for efficient 4D scene understanding suitable for real-time autonomous driving.",
+          "llm_tldr_cn": "自动驾驶需要同时估计深度、语义分割和实例轨迹，但现有深度感知视频全景分割方法常依赖多阶段流程或离线跟踪，不适用于实时决策。DVPSFormer提出统一在线架构，通过显式场景离散化机制，用分割查询表示前景和背景区域，实现高效4D场景理解。该方法在保持在线处理能力的同时提升计算效率，为自动驾驶实时视觉感知提供了新的解决方案。",
+          "llm_tldr": "自动驾驶需要同时估计深度、语义分割和实例轨迹，但现有深度感知视频全景分割方法常依赖多阶段流程或离线跟踪，不适用于实时决策。DVPSFormer提出统一在线架构，通过显式场景离散化机制，用分割查询表示前景和背景区域，实现高效4D场景理解。该方法在保持在线处理能力的同时提升计算效率，为自动驾驶实时视觉感知提供了新的解决方案。",
+          "llm_tags": [
+            "query:video-stream"
+          ],
+          "matched_query_tag": "query:video-stream",
+          "matched_query_text": "streaming video understanding techniques",
+          "matched_requirement_id": "req-1",
+          "selection_source": "carryover_cache",
+          "paper_id": "2607.26165v1",
+          "carry_days": 1
+        }
+      ]
     },
     "ego-video": {
       "updated_date": "20260622",
@@ -39,9 +214,50 @@
       "items": []
     },
     "stream-agent": {
-      "updated_date": "20260621-20260720",
+      "updated_date": "20260725-20260803",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2607.28156v1",
+          "source": "arxiv",
+          "title": "RRM: Experience-Driven Reflective Retrieval Memory for Long-Horizon Multimodal Reasoning",
+          "abstract": "Existing multimodal long-term memory agents use external memory to overcome the limited context available for long videos. However, most methods emphasize what to store rather than how stored memory should be retrieved. When retrieval becomes inaccurate or repeatedly fails to obtain useful evidence, existing agents lack mechanisms to diagnose failures from previous task trajectories and adapt future search strategies.We introduce Reflective Retrieval Memory (RRM), a reflective memory framework for long-horizon multimodal reasoning. RRM augments an entity-centric multimodal memory graph with reflective experience memory, which distills transferable procedural retrieval knowledge from historical task trajectories. Unlike episodic and semantic memories that preserve factual evidence from the current video, reflective experience memory captures reusable search strategies across tasks. RRM converts retrieved experiences into query-level guidance, while answer generation remains conditioned only on factual evidence newly retrieved from the current video. A lifecycle management mechanism further regulates experience memory through usage frequency, reuse feedback, and temporal decay, thereby reducing redundancy and noise. RRM consistently outperforms previous state-of-the-art approaches on M3-Bench-Robot, M3-Bench-Web, and Video-MME-Long, demonstrating the effectiveness of reflective retrieval memory for long-horizon multimodal reasoning.",
+          "authors": [
+            "Jingxiang Fan",
+            "Junbao Zhuo",
+            "Bochao Zou"
+          ],
+          "primary_category": "cs.CL",
+          "categories": [
+            "cs.CL"
+          ],
+          "published": "2026-07-30T12:58:57+00:00",
+          "link": "https://arxiv.org/pdf/2607.28156v1",
+          "tags": [
+            "keyword:stream-agent",
+            "keyword:video-stream",
+            "query:stream-agent",
+            "query:video-stream"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Agent-based multimodal long-video reasoning with reflective retrieval memory",
+          "llm_evidence_cn": "基于智能体的多模态长视频推理，具备反思性检索记忆",
+          "llm_evidence": "基于智能体的多模态长视频推理，具备反思性检索记忆",
+          "canonical_evidence": "基于智能体的多模态长视频推理，具备反思性检索记忆",
+          "llm_tldr_en": "RRM adds reflective experience memory to multimodal memory agents, distilling procedural retrieval knowledge from past trajectories to improve evidence retrieval for long-horizon video reasoning.",
+          "llm_tldr_cn": "面向长视频的多模态智能体虽然能使用外部记忆突破上下文限制，但检索不准或反复失败时缺乏诊断和调整机制。RRM在实体中心记忆图上引入反思性经验记忆，从历史任务轨迹中提炼可迁移的检索知识，使智能体能够诊断失败并改进后续搜索策略。实验表明，该方法能显著减少无效检索，提升长程多模态推理的证据质量和稳定性，为长视频理解代理提供了一种经验增强的记忆方案。",
+          "llm_tldr": "面向长视频的多模态智能体虽然能使用外部记忆突破上下文限制，但检索不准或反复失败时缺乏诊断和调整机制。RRM在实体中心记忆图上引入反思性经验记忆，从历史任务轨迹中提炼可迁移的检索知识，使智能体能够诊断失败并改进后续搜索策略。实验表明，该方法能显著减少无效检索，提升长程多模态推理的证据质量和稳定性，为长视频理解代理提供了一种经验增强的记忆方案。",
+          "llm_tags": [
+            "query:stream-agent"
+          ],
+          "matched_query_tag": "query:stream-agent",
+          "matched_query_text": "agent-based video understanding",
+          "matched_requirement_id": "req-10",
+          "selection_source": "carryover_cache",
+          "paper_id": "2607.28156v1",
+          "carry_days": 1
+        }
+      ]
     }
   }
 }
